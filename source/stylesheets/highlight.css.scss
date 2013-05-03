@@ -1,0 +1,117 @@
+@import 'compass';
+
+$border-radius: 5px;
+
+$blue:   #1f58ce;
+$gray:   #777777;
+$green:  #007700;
+
+#content .highlight {
+  background-image: url('/images/code_background.gif');
+  border: 1px solid #d1d1d1;
+  @include border-radius($border-radius);
+  font-size: 12px;
+  font-family: Menlo, monospace;
+  line-height: 16px;
+  overflow: hidden;
+  position: relative;
+  margin: 2em 0;
+  @include box-shadow(0 1px #ffffff, inset -1px 1px 4px rgba(0, 0, 0, 0.1));
+
+  .scroller {
+    overflow: auto;
+  }
+
+  table {
+    margin: 0 0;
+  }
+
+  .ribbon {
+    position: absolute;
+    right: 0;
+    bottom: 6px;
+    width: 52px;
+    height: 20px;
+  }
+
+  &.javascript .ribbon, &.js .ribbon {
+    background-image: url('/images/js-ribbon.png');
+  }
+  &.html .ribbon {
+    background-image: url('/images/html-ribbon.png');
+  }
+  &.handlebars .ribbon {
+    background-image: url('/images/handlebars-ribbon.png');
+  }
+}
+
+.CodeRay {
+  width: 100%;
+  td.line-numbers {
+    width: 38px;
+    text-align: center;
+    border-right: 1px solid #d1d1d1;
+    background-color: #f6f6f6;
+    color: #b4b4b4;
+    @include border-top-left-radius($border-radius);
+    @include border-bottom-left-radius($border-radius);
+  }
+
+  td.code {
+    padding: 8px 0 8px 13px;
+  }
+
+  /* HTML */
+
+  .tag {
+    color: $blue;
+  }
+
+  .comment {
+    color: $gray;
+  }
+
+  .attribute-name {
+    color: $blue;
+  }
+
+  .content {
+    color: darken($blue, 15%);
+  }
+
+  .string {
+    color: $blue;
+  }
+
+  .keyword {
+    color: #ce791f;
+  }
+
+  .key, .function {
+    color: #2b1fce;
+  }
+
+  .local-variable {
+    color: #1f58ce;
+  }
+}
+
+.handlebars {
+  .CodeRay {
+    .inline {
+      &,
+      .inline-delimiter,
+      .delimiter {
+        color: lighten($green, 10%);
+      }
+
+      .attribute-name {
+        color: $green;
+      }
+      .attribute-value,
+      .content {
+        color: darken($green, 10%);
+      }
+    }
+  }
+}
