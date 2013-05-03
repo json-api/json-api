@@ -6,7 +6,7 @@ $blue:   #1f58ce;
 $gray:   #777777;
 $green:  #007700;
 
-#content .highlight {
+.highlight {
   background-image: url('/images/code_background.gif');
   border: 1px solid #d1d1d1;
   @include border-radius($border-radius);
