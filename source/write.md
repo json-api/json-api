@@ -1,12 +1,10 @@
 ---
-title: "Updates"
+title: JSON API Updating
 ---
 
 # JSON API Updating
 
-Updates to records obtained via a `GET` request through a JSON API are
-made through `PUT` requests. JSON API servers may also opt into `PATCH`
-updates for more efficient and granular updates.
+See also [JSON API Reading](/).
 
 ## URLs
 
@@ -82,7 +80,7 @@ Content-Type: application/json
   "posts": [{
     "id": "550e8400-e29b-41d4-a716-446655440000",
     "title": "Mustaches on a Stick",
-    "url": "http://example.com/images/mustaches.png"
+    "href": "http://example.com/images/mustaches.png"
   }],
   "meta": {
     "client-ids": true
@@ -130,7 +128,7 @@ Content-Type: application/json
   "posts": [{
     "id": "550e8400-e29b-41d4-a716-446655440000",
     "title": "Mustaches on a Stick",
-    "url": "http://example.com/images/mustaches.png"
+    "href": "http://example.com/images/mustaches.png"
   }],
   "rels": {
     "posts": "http://example.com/posts/{posts.id}"
@@ -153,7 +151,7 @@ If it does so, it **MUST** include a response body that is a valid
 response to a JSON API `GET` request.
 
 If the server is using the URL-based JSON API, it **MUST** include a
-`url` key in the attributes section that is the server location of the
+`href` key in the attributes section that is the server location of the
 newly created document.
 
 ```text
@@ -163,7 +161,7 @@ Content-Type: application/json
 {
   "posts": {
     "id": "550e8400-e29b-41d4-a716-446655440000",
-    "url": "http://example.com/photos/12",
+    "href": "http://example.com/photos/12",
     "title": "Ember Hamster",
     "src": "http://example.com/images/productivity.png"
   }
@@ -227,6 +225,8 @@ time.
 Relationship updates are represented as JSON Patch operations on the
 `rels` document.
 
+#### To-One Relationships
+
 To update a to-one relationship, the client **MUST** issue a `PATCH`
 request that includes a `replace` operation on the relationship
 `rels/<name>`.
@@ -236,7 +236,90 @@ For example, for the following `GET` request:
 ```text
 GET /photos/1
 Content-Type: application/json
+
+{
+  "rels": {
+    "photos.author": "http://example.com/people/{photos.author}"
+  },
+  "photos": {
+    "id": 1,
+    "href": "http://example.com/photos/1",
+    "title": "Hamster",
+    "src": "images/hamster.png",
+    "rels": {
+      "author": 1
+    }
+  }
+}
 ```
+
+To change the author to person 2, issue a `PATCH` request to
+`/photos/1`:
+
+```text
+PATCH /photos/1
+Content-Type: application/json-patch
+Accept: application/json
+
+[
+  { "replace": "rels/author", value: 2 }
+]
+```
+
+#### To-Many Relationships
+
+While to-many relationships are represented as a JSON array in a `GET`
+response, they are updated as if they were a set.
+
+To remove an element from a to-many relationship, use a `remove`
+operation on `rels/<name>/<id>`. To add an element, use an `add`
+operation on `rels/<name>/-`.
+
+For example, for the following `GET` request:
+
+```text
+GET /photos/1
+Content-Type: application/json
+
+{
+  "rels": {
+    "photos.author": "http://example.com/people/{photos.author}"
+  },
+  "photos": {
+    "id": 1,
+    [[]] "http://example.com/photos/1",
+    "title": "Hamster",
+    "src": "images/hamster.png",
+    "rels": {
+      "comments": [ 1, 5, 12, 17 ]
+    }
+  }
+}
+```
+
+You could move comment 30 to this photo by issuing an `add` operation in
+the `PATCH` request:
+
+```text
+PATCH /photos/1
+
+[
+  { "add": "rels/comments/-", "value": 30 }
+]
+```
+
+To remove comment 5 from this photo, issue a `remove` operation:
+
+```text
+PATCH /photos/1
+
+[
+  { "remove": "rels/comments/5" }
+]
+```
+
+Note that to-many relationships have set-like behavior in JSON API to
+limit the damage that can be caused by concurrent modifications.
 
 ### 204 No Content
 
@@ -292,3 +375,5 @@ Whenever a server returns a `200 OK` response in response to a creation,
 update or deletion, it **MAY** include other documents in the JSON
 document. The semantics of these documents are [the same][1] as when
 additional documents are included in response to a `GET`.
+
+See also [JSON API Reading](/).

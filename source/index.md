@@ -4,6 +4,80 @@ title: JSON API
 
 # JSON API
 
+See also [JSON API Updating](/write).
+
+## History
+
+JSON API is extracted from the JSON transport implicitly defined by
+Ember Data's REST adapter.
+
+In general, Ember Data's goal is to eliminate the need for ad-hoc code
+per application to communicate with servers that communicate in a
+well-defined way.
+
+Some servers, like Firebase, Parse and CouchDB already define strict
+communication protocols for clients, and were good fits for Ember Data.
+In contrast, servers written in Rails, Node, and Django tend to be
+written in a "REST-style" but lack the precision necessary for drop-in
+client code.
+
+The REST Adapter in Ember Data implicitly defined a protocol that
+custom servers could implement to get a drop-in client for all of their
+resources. [ActiveModel::Serializers][1] is a proof-of-concept library
+for Rails that implemented the serialization format expected by Ember
+Data.
+
+[1]: https://github.com/rails-api/active_model_serializers
+
+Record creation, update, and deletion was defined implicitly by the
+Ember Data library and was close to conventions already in wide use by
+Rails, Django and Node developers.
+
+The goals of the protocols defined by the Ember Data REST Adapter and
+JSON API are to balance:
+
+* A generic protocol that can work across a broad set of use cases,
+  including the generally used relationship types
+* Similarity to existing server-side framework practices (and human
+  readability for debugging)
+* Ease of implementation on the server side 
+* Ease of implementation on the client side
+
+This protocol is still a work in progress, and we are extremely open to
+feedback and proposals for improvement. That said, implementation work
+has already begun, and we value good working systems over perfect
+vaporware.
+
+## Protocol Improvements
+
+JSON API is an attempt to extract and formalize a protocol that has
+worked well for us, and to simplify areas that hid implicit requirements
+tied to the specific implementations Ember Data users were working with.
+
+In particular:
+
+* JSON API defines a URL-based style that allows servers to provide URLs
+  and URL templates to supplement Ember Data's inflector-based approach.
+  This allows servers to be explicit about where to find related
+  documents instead of having to ensure that their documents were
+  located in a conventional place.
+* JSON API differentiates between attributes and relationships, using a
+  `rels` key to group a document's relationships.
+* JSON API makes heavy use of the `PATCH` verb and [JSON Patch][2]
+  specification, which provides a unified way to modify the attributes
+  and relationships of a document, without requiring that the entire
+  document be updated at once. This helps to solve some thorny issues
+  with relationships that the original proof-of-concept protocol had
+  a lot of trouble with.
+* JSON API defines precise semantics for compound documents and
+  responses from `POST`, `PATCH`, and `DELETE`, while the original
+  protocol had subtle differences in different parts of the
+  implementation.
+
+[2]: http://tools.ietf.org/html/rfc6902 
+
+## Abstract
+
 There are two JSON API styles:
 
 * [The ID Style](#toc_id-based-json-api)
@@ -27,6 +101,17 @@ URLs used for a resource.
 In this specification, the term "document" refers to a single object with a set of attributes and relationships.
 
 A JSON response may include multiple documents, as described below.
+
+## Reserved Attributes
+
+There are three reserved attribute names in JSON API:
+
+* `id`
+* `href`
+* `rels`
+
+Each of these names has a special meaning when included in the
+attributes section and should not be used as attribute names.
 
 ## ID-Based JSON API
 
@@ -78,7 +163,7 @@ Other than the `"rels"` and `"id"` keys, every key in a document represents an a
 ```js
 {
   "posts": {
-    "id": 1,
+    "id": "1",
     "title": "Rails is Omakase"
   }
 }
@@ -91,7 +176,7 @@ The value of the `"rels"` key is a JSON object that represents related documents
 ```js
 {
   "posts": {
-    "id": 1,
+    "id": "1",
     "title": "Rails is Omakase",
     "rels": {
       "author": 9,
@@ -108,7 +193,7 @@ A to-many relationship is represented as a JSON array of IDs.
 ```js
 {
   "posts": {
-    "id": 1,
+    "id": "1",
     "title": "Rails is Omakase",
     "rels": {
       "comments": [ 5, 12, 17, 20 ]
@@ -132,7 +217,7 @@ A to-one relationship is represented as a single string or number value.
 ```js
 {
   "posts": {
-    "id": 1,
+    "id": "1",
     "title": "Rails is Omakase",
     "rels": {
       "author": 17
@@ -156,14 +241,14 @@ To save HTTP requests, it may be convenient to send related documents along with
 ```js
 {
   "posts": {
-    "id": 1,
+    "id": "1",
     "title": "Rails is Omakase",
     "rels": {
       "author": 9
     }
   },
   "people": [{
-    "id": 9,
+    "id": "9",
     "name": "@d2h"
   }]
 }
@@ -228,7 +313,7 @@ Other than the `"rels"` and `"id"` keys, every key in a document represents an a
 ```js
 {
   "posts": {
-    "id": 1,
+    "id": "1",
     "title": "Rails is Omakase"
   }
 }
@@ -241,7 +326,7 @@ The value of the `"rels"` key is a JSON object that represents related documents
 ```js
 {
   "posts": {
-    "id": 1,
+    "id": "1",
     "title": "Rails is Omakase",
     "rels": {
       "author": "http://example.com/people/1",
@@ -258,7 +343,7 @@ A to-many relationship is a string value that represents a URL.
 ```js
 {
   "posts": {
-    "id": 1,
+    "id": "1",
     "title": "Rails is Omakase",
     "rels": {
       "comments": "http://example.com/posts/1/comments"
@@ -278,7 +363,7 @@ A to-one relationship is represented as a string value that represents a URL.
 ```js
 {
   "posts": {
-    "id": 1,
+    "id": "1",
     "title": "Rails is Omakase",
     "rels": {
       "author": "http://example.com/people/17"
@@ -303,10 +388,10 @@ Example:
     "posts.comments": "http://example.com/posts/{post.id}/comments"
   },
   "posts": [{
-    "id": 1,
+    "id": "1",
     "title": "Rails is Omakase"
   }, {
-    "id": 2,
+    "id": "2",
     "title": "The Parley Letter"
   }]
 }
@@ -320,18 +405,20 @@ In this example, fetching `/posts/1/comments` will fetch the comments for `"Rail
     "posts.comments": "http://example.com/comments/{posts.comments}"
   },
   "posts": {
-    "id": 1,
+    "id": "1",
     "title": "Rails is Omakase",
     "rels": {
-      "comments": [ 1, 2, 3, 4 ]
+      "comments": [ "1", "2", "3", "4" ]
     }
   }
 }
 ```
 
-In this example, the `posts.comments` variable is expanded by "exploding" the array specified in the `"rels"` section of each post. The [URL template specification][1] specifies that the default explosion is to join the array members by a comma, so in this example, fetching `/comments/1,2,3,4` will return a list of all comments.
+In this example, the `posts.comments` variable is expanded by
+"exploding" the array specified in the `"rels"` section of each post.
+The [URL template specification][3] specifies that the default explosion is to join the array members by a comma, so in this example, fetching `/comments/1,2,3,4` will return a list of all comments.
 
-[1]: https://tools.ietf.org/html/rfc6570
+[3]: https://tools.ietf.org/html/rfc6570
 
 This example shows how you can start with a list of IDs and then upgrade to specifying a different URL pattern than the default.
 
@@ -349,19 +436,19 @@ Here is another example that uses a has-one relationship:
     "posts.author": "http://example.com/people/{posts.author}"
   },
   "posts": [{
-    "id": 1,
+    "id": "1",
     "title": "Rails is Omakase",
     "rels": {
       "author": 12
     }
   }, {
-    "id": 2,
+    "id": "2",
     "title": "The Parley Letter",
     "rels": {
       "author": 12
     }
   }, {
-    "id": 3,
+    "id": "3",
     "title": "Dependency Injection is Not a Virtue",
     "rels": {
       "author": 12
@@ -384,28 +471,28 @@ In this case, a bit of extra metadata for each relationship can link together th
 {
   "rels": {
     "posts.author": {
-      "url": "http://example.com/people/{post.author}",
+      "href": "http://example.com/people/{post.author}",
       "type": "people"
     },
     "posts.comments": {
-      "url": "http://example.com/comments/{post.comments}",
+      "href": "http://example.com/comments/{post.comments}",
       "type": "comments"
     }
   }
   "posts": [{
-    "id": 1,
+    "id": "1",
     "title": "Rails is Omakase",
     "rels": {
       "author": 9,
       "comments": [ 1, 2, 3 ]
    }, {
-    "id": 2,
+    "id": "2",
     "title": "The Parley Letter",
     "rels": {
       "author": 9,
       "comments": [ 4, 5 ]
    }, {
-    "id": 1,
+    "id": "1",
     "title": "Dependency Injection is Not a Virtue",
     "rels": {
       "author": 9,
@@ -413,26 +500,26 @@ In this case, a bit of extra metadata for each relationship can link together th
     }
   }],
   "people": [{
-    "id": 9,
+    "id": "9",
     "name": "@d2h"
   }],
   "comments": [{
-    "id": 1,
+    "id": "1",
     "body": "Mmmmmakase"
   }, {
-    "id": 2,
+    "id": "2",
     "body": "I prefer unagi"
   }, {
-    "id": 3,
+    "id": "3",
     "body": "What's Omakase?"
   }, {
-    "id": 4,
+    "id": "4",
     "body": "Parley is a discussion, especially one between enemies"
   }, {
-    "id": 5,
+    "id": "5",
     "body": "The parsley letter"
   }, {
-    "id": 6,
+    "id": "6",
     "body": "Dependency Injection is Not a Vice"
   }]
 }
@@ -442,35 +529,38 @@ The benefit of this approach is that when the same document is referenced multip
 
 By always combining documents in this way, a client can consistently extract and wire up references.
 
-JSON API documents **MAY** specify the URL for a document in a compound response by specifying a `"url"` key:
+JSON API documents **MAY** specify the URL for a document in a compound
+response by specifying a `"href"` key:
 
 ```js
 {
   // ...
   "comments": [{
-    "url": "http://example.com/comments/1",
-    "id": 1,
+    "href": "http://example.com/comments/1",
+    "id": "1",
     "body": "Mmmmmakase"
   }, {
-    "url": "http://example.com/comments/2",
-    "id": 2,
+    "href": "http://example.com/comments/2",
+    "id": "2",
     "body": "I prefer unagi"
   }, {
-    "url": "http://example.com/comments/3",
-    "id": 3,
+    "href": "http://example.com/comments/3",
+    "id": "3",
     "body": "What's Omakase?"
   }, {
-    "url": "/comments/1",
-    "id": 4,
+    "href": "/comments/1",
+    "id": "4",
     "body": "Parley is a discussion, especially one between enemies"
   }, {
-    "url": "/comments/1",
-    "id": 5,
+    "href": "/comments/1",
+    "id": "5",
     "body": "The parsley letter"
   }, {
-    "url": "/comments/1",
-    "id": 6,
+    "href": "/comments/1",
+    "id": "6",
     "body": "Dependency Injection is Not a Vice"
   }]
 }
 ```
+
+See also [JSON API Updating](/write).
