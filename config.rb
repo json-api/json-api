@@ -43,6 +43,24 @@
 #   end
 # end
 
+require 'redcarpet'
+require 'active_support/core_ext'
+
+Dir['./lib/*'].each { |f| require f }
+
+# Debugging
+set(:logging, ENV['RACK_ENV'] != 'production')
+
+set :markdown_engine, :redcarpet
+set :markdown, :layout_engine => :erb,
+         :fenced_code_blocks => true,
+         :lax_html_blocks => true,
+         :renderer => Highlighter::HighlightedHTML.new
+
+activate :directory_indexes
+activate :toc
+activate :highlighter
+
 set :css_dir, 'stylesheets'
 
 set :js_dir, 'javascripts'
