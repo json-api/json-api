@@ -15,6 +15,7 @@ GEM
       i18n (~> 0.6)
       multi_json (~> 1.0)
     chunky_png (1.2.8)
+    coderay (1.0.9)
     coffee-script (2.2.0)
       coffee-script-source
       execjs
@@ -94,6 +95,7 @@ GEM
       ffi (>= 0.5.0)
     rb-kqueue (0.2.0)
       ffi (>= 0.5.0)
+    redcarpet (2.2.2)
     sass (3.2.8)
     sinatra (1.4.2)
       rack (~> 1.5, >= 1.5.2)
@@ -119,6 +121,8 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  coderay
   middleman (~> 3.1.0.beta.2)
   middleman-livereload!
   rb-inotify (~> 0.9.0)
+  redcarpet
