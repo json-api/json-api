@@ -9,7 +9,8 @@
     <!-- Use title if it's in the page YAML frontmatter -->
     <title><%= current_page.data.title || "The Middleman" %></title>
     
-    <%= stylesheet_link_tag "normalize", "all" %>
+    <link href='http://fonts.googleapis.com/css?family=Titillium+Web:400,600,700,900' rel='stylesheet' type='text/css'>
+    <%= stylesheet_link_tag "normalize", "highlight", "all" %>
     <%= javascript_include_tag  "all" %>
   </head>
   

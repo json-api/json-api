@@ -47,6 +47,9 @@ $green:  #007700;
 
 .CodeRay {
   width: 100%;
+  font-size: 120%;
+  line-height: 150%;
+
   td.line-numbers {
     width: 38px;
     text-align: center;
@@ -58,7 +61,8 @@ $green:  #007700;
   }
 
   td.code {
-    padding: 8px 0 8px 13px;
+    padding: 0px 0 0px 13px;
+    background-color: #efefef;
   }
 
   /* HTML */

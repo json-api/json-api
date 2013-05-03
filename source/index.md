@@ -2,19 +2,25 @@
 title: JSON API
 ---
 
-
 # JSON API
 
 There are two JSON API styles:
 
-* The ID Style
-* The URL Style
+* [The ID Style](#toc_id-based-json-api)
+* [The URL Style](#toc_url-based-json-api)
 
-The ID style is the easiest to get started with, but requires that your clients be able to guess the URLs for related documents. It also locks your API into a particular URL structure, which may become a problem as your API grows.
+The ID style is the easiest to get started with, but requires that your
+clients be able to guess the URLs for related documents. It also locks
+your API into a particular URL structure, which may become a problem as
+your API grows.
 
-The URL style requires less guessing on the client side, and makes clients more resilient to API changes, but is trickier to use with relationships and compound documents.
+The URL style requires less guessing on the client side, and makes
+clients more resilient to API changes, but is trickier to use with
+relationships and compound documents.
 
-In general, you should be able to start with an ID-based JSON API and upgrade to a URL-based API, if you want.
+In general, you should be able to start with an ID-based JSON API and
+upgrade to a URL-based API, if you want more control over the precise
+URLs used for a resource.
 
 ## Document
 
@@ -35,7 +41,7 @@ The top-level of a JSON API document **MAY** have the following keys:
 
 If the value of a resource key is a JSON object, the value represents a single document.
 
-```js
+```javascript
 {
   "posts": {
     // an individual post document
