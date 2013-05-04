@@ -287,7 +287,7 @@ Content-Type: application/json
   },
   "photos": {
     "id": 1,
-    [[]] "http://example.com/photos/1",
+    "href": "http://example.com/photos/1",
     "title": "Hamster",
     "src": "images/hamster.png",
     "rels": {
