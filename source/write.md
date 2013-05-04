@@ -4,7 +4,10 @@ title: JSON API Updating
 
 # JSON API Updating
 
-See also [JSON API Reading](/).
+See also: 
+
+- [Reading](/reading)
+- [History](/history)
 
 ## URLs
 

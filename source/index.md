@@ -4,7 +4,10 @@ title: JSON API
 
 # JSON API
 
-See also [JSON API Updating](/write).
+See also: 
+
+- [Updating](/write)
+- [History](/history)
 
 ## NOTE
 
