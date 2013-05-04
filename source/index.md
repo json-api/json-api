@@ -16,6 +16,9 @@ details of working with relationships._
 _Please feel free to help flesh it out or if you try to write an
 implementation, tell us where things were ambiguous._
 
+_You can do so by filing an Issue against [our GitHub
+repository.](https://github.com/json-api/json-api/issues)_
+
 ## History
 
 JSON API is extracted from the JSON transport implicitly defined by
