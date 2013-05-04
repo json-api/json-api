@@ -7,6 +7,8 @@ gem "middleman", "~>3.1.0.beta.2"
 # Live-reloading plugin
 gem "middleman-livereload", github: "middleman/middleman-livereload"
 
+gem 'middleman-gh-pages'
+
 # For faster file watcher updates:
 # gem "rb-fsevent", "~> 0.9.3") # OS X
 # gem "rb-inotify", "~> 0.9.0" # Linux
