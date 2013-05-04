@@ -1,5 +1,5 @@
 ---
-title: JSON API: History
+title: "JSON API: History"
 ---
 
 # JSON API: History
