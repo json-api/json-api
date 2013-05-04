@@ -6,6 +6,16 @@ title: JSON API
 
 See also [JSON API Updating](/write).
 
+## NOTE
+
+_This document is a work in progress, and will likely change over the
+next month as implementation work progresses. It is currently missing
+some details about the `meta` attribute and could be more precise about
+details of working with relationships._
+
+_Please feel free to help flesh it out or if you try to write an
+implementation, tell us where things were ambiguous._
+
 ## History
 
 JSON API is extracted from the JSON transport implicitly defined by
