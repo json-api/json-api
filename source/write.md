@@ -80,7 +80,7 @@ Content-Type: application/json
   "posts": [{
     "id": "550e8400-e29b-41d4-a716-446655440000",
     "title": "Mustaches on a Stick",
-    "href": "http://example.com/images/mustaches.png"
+    "src": "http://example.com/images/mustaches.png"
   }],
   "meta": {
     "client-ids": true
