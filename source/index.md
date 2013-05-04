@@ -6,7 +6,7 @@ title: JSON API
 
 See also: 
 
-- [Updating](/write)
+- [Writing](/write)
 - [History](/history)
 
 ## NOTE

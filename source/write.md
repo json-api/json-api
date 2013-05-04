@@ -6,7 +6,7 @@ title: JSON API Updating
 
 See also: 
 
-- [Reading](/reading)
+- [Reading](/)
 - [History](/history)
 
 ## URLs
