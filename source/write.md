@@ -216,7 +216,7 @@ PATCH /photos/1
 Content-Type: application/json-patch
 
 [
-  { "replace": "src", value: "http://example.com/hamster.png" }
+  { "replace": "src", "value": "http://example.com/hamster.png" }
 ]
 ```
 
@@ -265,7 +265,7 @@ Content-Type: application/json-patch
 Accept: application/json
 
 [
-  { "replace": "rels/author", value: 2 }
+  { "replace": "rels/author", "value": 2 }
 ]
 ```
 
