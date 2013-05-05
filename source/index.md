@@ -204,6 +204,19 @@ The related documents are provided as an additional top-level document or docume
 
 The linkage between the key under `"rels"` and the top-level keys is hardcoded into the client.
 
+### Error Responses
+
+An error response is comprised of an error object consisting of a key/values, the values being arrays.
+
+```js
+{
+  "errors": {
+    "title": ["can't be blank", "is too short (minimum is 2 characters)"],
+    "body": ["can't be blank"]
+  }
+}
+```
+
 ## URL-Based JSON API
 
 In the above description of ID-based JSON, there were several places where information about the location of related resources needed to be hardcoded into the client.
