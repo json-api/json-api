@@ -13,6 +13,7 @@ To build
 Make your changes in `source/`, then:
 
 ```
+$ bundle
 $ rake build
 $ open build/index.html
 ```
