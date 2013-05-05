@@ -43,7 +43,7 @@ HTTP/1.1 200 OK
 Content-Type: application/json
 
 {
-  "posts": [{
+  "photos": [{
     "id": 1,
     "title": "Mustaches on a Stick",
     "src": "http://example.com/images/mustaches.png"
