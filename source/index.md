@@ -276,7 +276,8 @@ The value of the `"rels"` key is a JSON object that represents related documents
     "title": "Rails is Omakase",
     "rels": {
       "author": "http://example.com/people/1",
-      "comments": "http://example.com/comments/5,12,17,20"
+      "comments": "http://example.com/comments?ids=5,12,17,20"
+      // or alternatively "comments": "http://example.com/posts/1/comments" 
     }
   }
 }
