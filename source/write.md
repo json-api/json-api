@@ -111,31 +111,82 @@ Accept: application/json
 }
 ```
 
-#### 204 Responses
+### Responses
 
-A server **MAY** respond to a `POST` request with a `204 No Content`
-response. If it does so, they client **MUST** assume that the server has
+A server **MUST** respond to a successful `POST` request with one of the
+following HTTP statuses:
+
+* `201 Created` (preferred)
+* `204 No Content`
+* `200 OK`
+
+The `204 No Content` and `200 OK` statuses are **NOT RECOMMENDED**,
+preferring the `201 Created` status, but are included for compatibility
+with a large number of existing server frameworks.
+
+#### `201 Created`
+
+A server **SHOULD** respond to a `POST` request with the `201 Created`
+status. The response **MUST** include a `Location` HTTP response header
+containing the server location of the newly created document. The server
+**MAY** include a response body.
+
+If the response includes a response body, the response body **MUST** be
+a valid response to a JSON API `GET` request of the URI in the
+`Location` header.
+
+If the response includes a response body, it **MAY** include an `href`
+key in the attributes section; if the server is using the URL-based JSON
+API, this `href` attribute is **REQUIRED**. If present, the value of the
+`href` attribute **MUST** match the URI in the `Location` header.
+
+Example:
+
+```text
+HTTP/1.1 201 Created
+Location: http://example.com/photos/12
+Content-Type: application/json
+
+{
+  "photos": {
+    "id": "550e8400-e29b-41d4-a716-446655440000",
+    "href": "http://example.com/photos/12",
+    "title": "Ember Hamster",
+    "src": "http://example.com/images/productivity.png"
+  }
+}
+```
+
+#### `204 No Content`
+
+A server **MAY** respond to a `POST` request with the `204 No Content`
+status. If it does so, the client **MUST** assume that the server has
 successfully created the document, and accepted all of the attributes as
 is.
 
-Note that if the server is using client-generated IDs, it is possible
-for the client to determine the URL for the newly generated record if
-the collection response included a URL template:
+The server **MUST NOT** respond with `204 No Content` unless it both
+requests client-generated IDs and publishes a URI template in the JSON
+API `GET` response of the collection.
+
+The client **SHOULD** determine the URL of the newly created document by
+combining the URI template of the collection with the `id` attribute
+included in the `POST` request.
+
+For example, given the following response to a JSON API `GET` on the
+collection:
 
 ```text
-GET /photos
-
 HTTP/1.1 200 OK
 Content-Type: application/json
 
 {
-  "posts": [{
+  "photos": [{
     "id": "550e8400-e29b-41d4-a716-446655440000",
     "title": "Mustaches on a Stick",
-    "href": "http://example.com/images/mustaches.png"
+    "src": "http://example.com/images/mustaches.png"
   }],
   "rels": {
-    "posts": "http://example.com/posts/{posts.id}"
+    "photos": "http://example.com/photos/{photos.id}"
   },
   "meta": {
     "client-ids": true
@@ -143,27 +194,32 @@ Content-Type: application/json
 }
 ```
 
-If the client generated a UUID of
-"550e8400-e29b-41d4-a716-446655440001", and it receives a 204 response,
-it knows that the URL for the newly created document is
-`http://example.com/posts/550e8400-e29b-41d4-a716-446655440001`.
+If the client submits a `POST` request to the collection with a UUID of
+`550e8400-e29b-41d4-a716-446655440001` and receives `204 No Content`,
+the expected URL for the newly created document is
+`http://example.com/photos/550e8400-e29b-41d4-a716-446655440001`.
 
-#### 200 Responses
+#### `200 OK`
 
-A server **MAY** respond to a `POST` request with a `200 OK` response.
-If it does so, it **MUST** include a response body that is a valid
-response to a JSON API `GET` request.
+A server **MAY** respond to a `POST` request with the `200 OK` status.
+If it does so, it **MUST** include a response body.
 
-If the server is using the URL-based JSON API, it **MUST** include a
-`href` key in the attributes section that is the server location of the
-newly created document.
+The response body **MUST** be a valid response to a JSON API `GET`
+request of the server location of the newly created document.
+
+The response body **MAY** include an `href` key in the attributes
+section; if the server is using the URL-based JSON API, this `href`
+attribute is **REQUIRED**. If present, the value of the `href` attribute
+**MUST** be the server location of the newly created document.
+
+Example:
 
 ```text
 HTTP/1.1 200 OK
 Content-Type: application/json
 
 {
-  "posts": {
+  "photos": {
     "id": "550e8400-e29b-41d4-a716-446655440000",
     "href": "http://example.com/photos/12",
     "title": "Ember Hamster",
