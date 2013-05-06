@@ -116,32 +116,19 @@ Accept: application/json
 
 ### Responses
 
-A server **MUST** respond to a successful `POST` request with one of the
-following HTTP statuses:
-
-* `201 Created` (preferred)
-* `204 No Content`
-* `200 OK`
-
-The `204 No Content` and `200 OK` statuses are **NOT RECOMMENDED**,
-preferring the `201 Created` status, but are included for compatibility
-with a large number of existing server frameworks.
-
 #### `201 Created`
 
-A server **SHOULD** respond to a `POST` request with the `201 Created`
-status. The response **MUST** include a `Location` HTTP response header
-containing the server location of the newly created document. The server
-**MAY** include a response body.
+A server **SHOULD** respond to a `POST` request with the
+[`201 Created`][2] status, including a request body and `Location` header 
+(see [section 9.5][3] of the HTTP/1.1 specification).
 
-If the response includes a response body, the response body **MUST** be
-a valid response to a JSON API `GET` request of the URI in the
-`Location` header.
+[2]: http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.2.2
+[3]: http://www.w3.org/Protocols/rfc2616/rfc2616-sec9.html#sec9.5
 
-If the response includes a response body, it **MAY** include an `href`
-key in the attributes section; if the server is using the URL-based JSON
-API, this `href` attribute is **REQUIRED**. If present, the value of the
-`href` attribute **MUST** match the URI in the `Location` header.
+The response body **MAY** include an `href` key in the attributes
+section; if the server is using the URL-based JSON API, this `href`
+attribute is **REQUIRED**. If present, the value of the `href` attribute
+**MUST** match the URI in the `Location` header.
 
 Example:
 
@@ -162,10 +149,12 @@ Content-Type: application/json
 
 #### `204 No Content`
 
-A server **MAY** respond to a `POST` request with the `204 No Content`
-status. If it does so, the client **MUST** assume that the server has
-successfully created the document, and accepted all of the attributes as
-is.
+A server **MAY** respond to a `POST` request with the
+[`204 No Content`][4] status. If it does so, the client **MUST** assume
+that the server has successfully created the document, and accepted all
+of the attributes as is.
+
+[4]: http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.2.5
 
 The server **MUST NOT** respond with `204 No Content` unless it both
 requests client-generated IDs and publishes a URI template in the JSON
@@ -204,10 +193,12 @@ the expected URL for the newly created document is
 
 #### `200 OK`
 
-A server **MAY** respond to a `POST` request with the `200 OK` status.
-If it does so, it **MUST** include a response body.
+A server **MAY** respond to a `POST` request with the [`200 OK`][5]
+status, including a response body.
 
-The response body **MUST** be a valid response to a JSON API `GET`
+[5]: http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.2.1
+
+The response body **SHOULD** be a valid response to a JSON API `GET`
 request of the server location of the newly created document.
 
 The response body **MAY** include an `href` key in the attributes
@@ -231,7 +222,22 @@ Content-Type: application/json
 }
 ```
 
+#### `202 Accepted`
+
+A server **MAY** respond with the [`202 Accepted`][6] status if the
+document was not yet created, but may still be created at some future
+point.
+
+[6]: http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.2.3
+
+*TODO*: Specify client handling of `202 Accepted` responses.
+
 #### Other Responses
+
+Other `2xx` responses are permitted but **NOT RECOMMENDED**. If a client
+receives a `2xx` response other than one of those listed above it
+**SHOULD** interpret it as if it were a `200 OK` or a `204 No Content`,
+ depending on whether the response includes a request body.
 
 Servers **MAY** use other HTTP error codes to represent errors.  Clients
 **MUST** interpret those errors in accordance with HTTP semantics.
@@ -241,9 +247,9 @@ Servers **MAY** use other HTTP error codes to represent errors.  Clients
 The body of the `PATCH` request **MUST** be in JSON format with a `Content-Type`
 header of `application/json-patch+json`.
 
-It **MUST** be a valid [JSON Patch (RFC 6902)][2] document.
+It **MUST** be a valid [JSON Patch (RFC 6902)][7] document.
 
-[2]: http://tools.ietf.org/html/rfc6902
+[7]: http://tools.ietf.org/html/rfc6902
 
 ### Attributes
 
