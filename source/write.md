@@ -350,9 +350,6 @@ Servers **MAY** use other HTTP error codes to represent errors.  Clients
 A JSON API document is *deleted* by making a `DELETE` request to the
 document's URL.
 
-It **MUST** contain an `Accept` header with `application/json` as
-the only or highest quality factor.
-
 ```text
 DELETE /photos/1
 ```
