@@ -8,6 +8,7 @@ See also
 
 - [Reading](/)
 - [Writing](/write)
+- [Extending](/extending)
 
 ## NOTE
 
