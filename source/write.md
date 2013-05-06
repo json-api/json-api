@@ -181,9 +181,9 @@ Servers **MAY** use other HTTP error codes to represent errors.  Clients
 The body of the `PATCH` request **MUST** be in JSON format with a `Content-Type`
 header of `application/json-patch`.
 
-It **MUST** be a valid [JSON Patch][2] document.
+It **MUST** be a valid [JSON Patch (RFC 6902)][2] document.
 
-[2]: http://tools.ietf.org/html/draft-ietf-appsawg-json-patch-03
+[2]: http://tools.ietf.org/html/rfc6902
 
 ### Attributes
 
@@ -216,7 +216,7 @@ PATCH /photos/1
 Content-Type: application/json-patch
 
 [
-  { "replace": "src", "value": "http://example.com/hamster.png" }
+  { "op": "replace", "path": "/src", "value": "http://example.com/hamster.png" }
 ]
 ```
 
@@ -265,7 +265,7 @@ Content-Type: application/json-patch
 Accept: application/json
 
 [
-  { "replace": "rels/author", "value": 2 }
+  { "op": "replace", "path": "/rels/author", "value": 2 }
 ]
 ```
 
@@ -307,7 +307,7 @@ the `PATCH` request:
 PATCH /photos/1
 
 [
-  { "add": "rels/comments/-", "value": 30 }
+  { "op": "add", "path": "/rels/comments/-", "value": 30 }
 ]
 ```
 
