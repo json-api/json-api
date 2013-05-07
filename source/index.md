@@ -319,7 +319,7 @@ A to-one relationship is represented as a string value that represents a URL.
 }
 ```
 
-An API that provides a to-one relationship as an ID **MUST** respond to a `GET` request with the specified document with the specified URL.
+An API that provides a to-one relationship as a URL **MUST** respond to a `GET` request with the specified document with the specified URL.
 
 In the above example, a `GET` request to `/people/17` returns a document containing the specified author.
 
