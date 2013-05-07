@@ -26,6 +26,9 @@ tell us where things were ambiguous. The best way to do so is to
 
 ## Abstract
 
+This document describes the 'application/vnd.api+json' media type. It is
+currently going through the process of being registered with IANA.
+
 There are two JSON API styles:
 
 * [The ID Style](#toc_id-based-json-api)
