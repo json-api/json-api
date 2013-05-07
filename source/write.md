@@ -114,7 +114,7 @@ Accept: application/json
 #### 204 Responses
 
 A server **MAY** respond to a `POST` request with a `204 No Content`
-response. If it does so, they client **MUST** assume that the server has
+response. If it does so, the client **MUST** assume that the server has
 successfully created the document, and accepted all of the attributes as
 is.
 
