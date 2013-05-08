@@ -1,27 +1,7 @@
 ---
+layout: page
 title: "JSON API: History"
 ---
-
-# JSON API: History
-
-See also 
-
-- [Reading](/)
-- [Writing](/write)
-- [Extending](/extending)
-
-## NOTE
-
-_This document is a work in progress, and will likely change over the
-next month as implementation work progresses. It is currently missing
-some details about the `meta` attribute and could be more precise about
-details of working with relationships._
-
-_Please feel free to help flesh it out or if you try to write an
-implementation, tell us where things were ambiguous._
-
-_You can do so by filing an Issue against [our GitHub
-repository.](https://github.com/json-api/json-api/issues)_
 
 ## History
 
@@ -64,4 +44,3 @@ This protocol is still a work in progress, and we are extremely open to
 feedback and proposals for improvement. That said, implementation work
 has already begun, and we value good working systems over perfect
 vaporware.
-

@@ -1,14 +1,7 @@
 ---
-title: JSON API Updating
+layout: page
+title: "JSON API: Updating"
 ---
-
-# JSON API Updating
-
-See also: 
-
-- [Reading](/)
-- [Extending](/extending)
-- [History](/history)
 
 ## URLs
 
@@ -376,5 +369,3 @@ Whenever a server returns a `200 OK` response in response to a creation,
 update or deletion, it **MAY** include other documents in the JSON
 document. The semantics of these documents are [the same][1] as when
 additional documents are included in response to a `GET`.
-
-See also [JSON API Reading](/).
