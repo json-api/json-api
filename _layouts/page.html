@@ -10,11 +10,15 @@
     <title><%= current_page.data.title || "The Middleman" %></title>
     
     <link href='http://fonts.googleapis.com/css?family=Titillium+Web:400,600,700,900' rel='stylesheet' type='text/css'>
-    <%= stylesheet_link_tag "normalize", "highlight", "all" %>
-    <%= javascript_include_tag  "all" %>
+    <link href="/stylesheets/normalize.css" media="screen" rel="stylesheet" type="text/css" />
+    <link href="/stylesheets/highlight.css" media="screen" rel="stylesheet" type="text/css" />
+    <link href="/stylesheets/all.css" media="screen" rel="stylesheet" type="text/css" />
+    <script src="/javascripts/all.js" type="text/javascript"></script>
   </head>
-  
+
   <body class="<%= page_classes %>">
-    <%= yield %>
+    {% include header.html %}
+    {{ content }}
+    {% include footer.html %}
   </body>
 </html>
