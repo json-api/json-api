@@ -3,6 +3,8 @@ layout: page
 title: "JSON API: Updating"
 ---
 
+{% include status.md %}
+
 ## URLs
 
 Update URLs are determined [the same way][1] as `GET` URLs. When using the

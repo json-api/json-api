@@ -3,6 +3,8 @@ layout: page
 title: JSON API
 ---
 
+{% include status.md %}
+
 ## Abstract
 
 This document describes the 'application/vnd.api+json' media type. It is

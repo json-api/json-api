@@ -3,6 +3,8 @@ layout: page
 title: "JSON API: Reading"
 ---
 
+{% include status.md %}
+
 ## ID-Based JSON API
 
 ### Top Level

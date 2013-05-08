@@ -3,6 +3,8 @@ layout: page
 title: "JSON API: History"
 ---
 
+{% include status.md %}
+
 ## History
 
 JSON API is extracted from the JSON transport implicitly defined by
