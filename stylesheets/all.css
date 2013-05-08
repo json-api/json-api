@@ -49,3 +49,40 @@ ul {
   padding-left: 0; }
   ul li {
     margin-left: 20px; }
+
+header {
+  margin: 20px 0 0 0;
+  display: block; }
+
+header nav {
+  text-align: left; }
+
+header nav ul {
+  margin: 0;
+  padding-bottom: 2em; }
+
+header nav li {
+  border-left: 1px solid #ccc;
+  display: inline;
+  font-weight: bold;
+  list-style-type: none;
+  margin: 0 0 0 .25em;
+  padding: 0 0 0 .25em;
+  text-align: right;
+  padding: 0 .75em;
+  white-space: pre; }
+
+header nav li:first-child {
+  border: none;
+  padding-right: 0;
+  margin-right: 0; }
+
+header nav li:last-child {
+  padding-right: 0;
+  margin-right: 0; }
+
+header nav li a {
+  padding: .5em; }
+
+footer {
+  border-top: 5px solid #aba; }
