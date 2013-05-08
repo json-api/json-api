@@ -1,28 +1,9 @@
 ---
+layout: page
 title: "JSON API: Extending"
 ---
 
-# JSON API: Extending
-
-See also 
-
-- [Reading](/)
-- [Writing](/write)
-- [Extending](/extending)
-- [History](/history)
-
-## NOTE
-
-_This document is a work in progress, and will likely change over the
-next month as implementation work progresses. It is currently missing
-some details about the `meta` attribute and could be more precise about
-details of working with relationships._
-
-_Please feel free to help flesh it out or if you try to write an
-implementation, tell us where things were ambiguous._
-
-_You can do so by filing an Issue against [our GitHub
-repository.](https://github.com/json-api/json-api/issues)_
+{% include status.md %}
 
 ## Extending
 
