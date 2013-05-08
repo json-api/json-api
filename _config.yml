@@ -5,5 +5,11 @@ source: .
 destination: ./public
 exclude:
   - Rakefile
+  - README.md
+  - Gemfile
+  - Gemfile.lock
+  - CNAME
+  - .gitignore
   - ./public
 markdown: kramdown
+port: 9876
