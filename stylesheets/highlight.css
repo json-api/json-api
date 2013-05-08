@@ -1,0 +1,80 @@
+.highlight {
+  background-image: url("/images/code_background.gif");
+  border: 1px solid #d1d1d1;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -ms-border-radius: 5px;
+  -o-border-radius: 5px;
+  border-radius: 5px;
+  font-size: 12px;
+  font-family: Menlo, monospace;
+  line-height: 16px;
+  overflow: hidden;
+  position: relative;
+  margin: 2em 0;
+  -webkit-box-shadow: 0 1px white, inset -1px 1px 4px rgba(0, 0, 0, 0.1);
+  -moz-box-shadow: 0 1px white, inset -1px 1px 4px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 1px white, inset -1px 1px 4px rgba(0, 0, 0, 0.1); }
+  .highlight .scroller {
+    overflow: auto; }
+  .highlight table {
+    margin: 0 0; }
+  .highlight .ribbon {
+    position: absolute;
+    right: 0;
+    bottom: 6px;
+    width: 52px;
+    height: 20px; }
+  .highlight.javascript .ribbon, .highlight.js .ribbon {
+    background-image: url("/images/js-ribbon.png"); }
+  .highlight.html .ribbon {
+    background-image: url("/images/html-ribbon.png"); }
+  .highlight.handlebars .ribbon {
+    background-image: url("/images/handlebars-ribbon.png"); }
+
+.CodeRay {
+  width: 100%;
+  font-size: 120%;
+  line-height: 150%;
+  /* HTML */ }
+  .CodeRay td.line-numbers {
+    width: 38px;
+    text-align: center;
+    border-right: 1px solid #d1d1d1;
+    background-color: #f6f6f6;
+    color: #b4b4b4;
+    -moz-border-radius-topleft: 5px;
+    -webkit-border-top-left-radius: 5px;
+    border-top-left-radius: 5px;
+    -moz-border-radius-bottomleft: 5px;
+    -webkit-border-bottom-left-radius: 5px;
+    border-bottom-left-radius: 5px; }
+  .CodeRay td.code {
+    padding: 0px 0 0px 13px;
+    background-color: #efefef; }
+  .CodeRay .tag {
+    color: #1f58ce; }
+  .CodeRay .comment {
+    color: #777777; }
+  .CodeRay .attribute-name {
+    color: #1f58ce; }
+  .CodeRay .content {
+    color: #153c8c; }
+  .CodeRay .string {
+    color: #1f58ce; }
+  .CodeRay .keyword {
+    color: #ce791f; }
+  .CodeRay .key, .CodeRay .function {
+    color: #2b1fce; }
+  .CodeRay .local-variable {
+    color: #1f58ce; }
+
+.handlebars .CodeRay .inline,
+.handlebars .CodeRay .inline .inline-delimiter,
+.handlebars .CodeRay .inline .delimiter {
+  color: #00aa00; }
+.handlebars .CodeRay .inline .attribute-name {
+  color: #007700; }
+.handlebars .CodeRay .inline .attribute-value,
+.handlebars .CodeRay .inline .content {
+  color: #004400; }
