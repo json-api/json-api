@@ -2,17 +2,6 @@
 # the following line to use "https"
 source 'http://rubygems.org'
 
-gem "middleman", "~>3.1.0.beta.2"
-
-# Live-reloading plugin
-gem "middleman-livereload", github: "middleman/middleman-livereload"
-
-gem 'middleman-gh-pages'
-
-# For faster file watcher updates:
-# gem "rb-fsevent", "~> 0.9.3") # OS X
-# gem "rb-inotify", "~> 0.9.0" # Linux
-# gem "wdm", "~> 0.1.0") # Windows
-
-gem "redcarpet"
-gem "coderay"
+gem "jekyll", "~> 1.0"
+gem "jekyll-asset-pipeline", "~> 0.1"
+gem "coderay", "~> 1.0"
