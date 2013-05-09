@@ -165,12 +165,12 @@ HTTP/1.1 200 OK
 Content-Type: application/json
 
 {
-  "photos": {
+  "photos": [{
     "id": "550e8400-e29b-41d4-a716-446655440000",
     "href": "http://example.com/photos/12",
     "title": "Ember Hamster",
     "src": "http://example.com/images/productivity.png"
-  }
+  }]
 }
 ```
 
@@ -203,11 +203,11 @@ HTTP/1.1 200 OK
 Content-Type: application/json
 
 {
-  "photos": {
+  "photos": [{
     "id": "1",
     "title": "Productivity",
     "src": "http://example.com/productivity.png"
-  }
+  }]
 }
 ```
 
@@ -247,7 +247,7 @@ Content-Type: application/json
   "links": {
     "photos.author": "http://example.com/people/{photos.author}"
   },
-  "photos": {
+  "photos": [{
     "id": "1",
     "href": "http://example.com/photos/1",
     "title": "Hamster",
@@ -255,7 +255,7 @@ Content-Type: application/json
     "links": {
       "author": "1"
     }
-  }
+  }]
 }
 ```
 
@@ -291,7 +291,7 @@ Content-Type: application/json
   "links": {
     "photos.author": "http://example.com/people/{photos.author}"
   },
-  "photos": {
+  "photos": [{
     "id": "1",
     "href": "http://example.com/photos/1",
     "title": "Hamster",
@@ -299,7 +299,7 @@ Content-Type: application/json
     "links": {
       "comments": [ "1", "5", "12", "17" ]
     }
-  }
+  }]
 }
 ```
 
