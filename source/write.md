@@ -23,7 +23,10 @@ documents, which can be used to fetch **and** update.
 
 A JSON API document is *created* by making a `POST` request to the URL
 that represents a collection of documents that the new document should
-belong to.
+belong to. While this method is preferred, you can always use anything that's
+valid with RFC 2616, as long as it's compliant. For example, PUT can be used
+to create documents if you wish. We believe most people will generally use
+POST, so we'll elaborate on it further below.
 
 In general, this is a collection scoped to the **type** of document.
 
