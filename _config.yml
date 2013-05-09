@@ -13,4 +13,5 @@ exclude:
   - ./public
   - ./stylesheets/*.scss
 markdown: redcarpet
+pygments: false
 port: 9876
