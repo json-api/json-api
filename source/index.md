@@ -526,15 +526,15 @@ response by specifying a `"href"` key:
     "id": "3",
     "body": "What's Omakase?"
   }, {
-    "href": "/comments/1",
+    "href": "http://example.com/comments/4",
     "id": "4",
     "body": "Parley is a discussion, especially one between enemies"
   }, {
-    "href": "/comments/1",
+    "href": "http://example.com/comments/5",
     "id": "5",
     "body": "The parsley letter"
   }, {
-    "href": "/comments/1",
+    "href": "http://example.com/comments/6",
     "id": "6",
     "body": "Dependency Injection is Not a Vice"
   }]
