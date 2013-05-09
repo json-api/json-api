@@ -48,7 +48,7 @@ Content-Type: application/json
 
 {
   "photos": [{
-    "id": 1,
+    "id": "1",
     "title": "Mustaches on a Stick",
     "src": "http://example.com/images/mustaches.png"
   }]
@@ -204,7 +204,7 @@ Content-Type: application/json
 
 {
   "photos": {
-    "id": 1,
+    "id": "1",
     "title": "Productivity",
     "src": "http://example.com/productivity.png"
   }
@@ -248,12 +248,12 @@ Content-Type: application/json
     "photos.author": "http://example.com/people/{photos.author}"
   },
   "photos": {
-    "id": 1,
+    "id": "1",
     "href": "http://example.com/photos/1",
     "title": "Hamster",
     "src": "images/hamster.png",
     "links": {
-      "author": 1
+      "author": "1"
     }
   }
 }
@@ -292,12 +292,12 @@ Content-Type: application/json
     "photos.author": "http://example.com/people/{photos.author}"
   },
   "photos": {
-    "id": 1,
+    "id": "1",
     "href": "http://example.com/photos/1",
     "title": "Hamster",
     "src": "images/hamster.png",
     "links": {
-      "comments": [ 1, 5, 12, 17 ]
+      "comments": [ "1", "5", "12", "17" ]
     }
   }
 }
