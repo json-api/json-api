@@ -175,7 +175,7 @@ Servers **MAY** use other HTTP error codes to represent errors.  Clients
 ## Updating a Document (`PATCH`)
 
 The body of the `PATCH` request **MUST** be in JSON format with a `Content-Type`
-header of `application/json-patch`.
+header of `application/json-patch+json`.
 
 It **MUST** be a valid [JSON Patch (RFC 6902)][2] document.
 
@@ -209,7 +209,7 @@ following request:
 
 ```text
 PATCH /photos/1
-Content-Type: application/json-patch
+Content-Type: application/json-patch+json
 
 [
   { "op": "replace", "path": "/src", "value": "http://example.com/hamster.png" }
@@ -257,7 +257,7 @@ To change the author to person 2, issue a `PATCH` request to
 
 ```text
 PATCH /photos/1
-Content-Type: application/json-patch
+Content-Type: application/json-patch+json
 Accept: application/json
 
 [
