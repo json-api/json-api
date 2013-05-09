@@ -1,14 +1,12 @@
 ---
 layout: page
-title: "JSON API: History"
+title: "JSON API: About"
 ---
-
-{% include status.md %}
 
 ## History
 
 JSON API is extracted from the JSON transport implicitly defined by
-Ember Data's REST adapter.
+[Ember](http://emberjs.com/) Data's REST adapter.
 
 In general, Ember Data's goal is to eliminate the need for ad-hoc code
 per application to communicate with servers that communicate in a
@@ -39,7 +37,7 @@ JSON API are to balance:
   including the generally used relationship types
 * Similarity to existing server-side framework practices (and human
   readability for debugging)
-* Ease of implementation on the server side 
+* Ease of implementation on the server side
 * Ease of implementation on the client side
 
 This protocol is still a work in progress, and we are extremely open to
