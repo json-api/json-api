@@ -165,7 +165,7 @@ HTTP/1.1 200 OK
 Content-Type: application/json
 
 {
-  "posts": {
+  "photos": {
     "id": "550e8400-e29b-41d4-a716-446655440000",
     "href": "http://example.com/photos/12",
     "title": "Ember Hamster",
