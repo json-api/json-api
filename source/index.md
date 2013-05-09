@@ -75,21 +75,26 @@ The top-level of a JSON API document **MAY** have the following keys:
 
 ### Singular Resources
 
-If the value of a resource key is a JSON object, the value represents a single document.
+Singular resources are represented as JSON objects. However, they are still
+wrapped inside an array:
 
 ```javascript
 {
-  "posts": {
+  "posts": [{
     // an individual post document
-  }
+  }]
 }
 ```
+
+This simplifies processing, as you can know that a resource key will always be
+a list.
 
 The document **MUST** contain an `id` key. 
 
 ### Resource Collections
 
-If the value of a resource key is a JSON array, the value represents a list of documents.
+If the length of an array at a resource key is greater than one, the value
+represents a list of documents.
 
 ```js
 {
@@ -113,10 +118,10 @@ Other than the `"links"` and `"id"` keys, every key in a document represents an 
 
 ```js
 {
-  "posts": {
+  "posts": [{
     "id": "1",
     "title": "Rails is Omakase"
-  }
+  }]
 }
 ```
 
@@ -126,14 +131,14 @@ The value of the `"links"` key is a JSON object that represents related document
 
 ```js
 {
-  "posts": {
+  "posts": [{
     "id": "1",
     "title": "Rails is Omakase",
     "links": {
       "author": 9,
       "comments": [ 5, 12, 17, 20 ]
     }
-  }
+  }]
 }
 ```
 
@@ -143,13 +148,13 @@ A to-many relationship is represented as a JSON array of IDs.
 
 ```js
 {
-  "posts": {
+  "posts": [{
     "id": "1",
     "title": "Rails is Omakase",
     "links": {
       "comments": [ 5, 12, 17, 20 ]
     }
-  }
+  }]
 }
 ```
 
@@ -167,13 +172,13 @@ A to-one relationship is represented as a single string or number value.
 
 ```js
 {
-  "posts": {
+  "posts": [{
     "id": "1",
     "title": "Rails is Omakase",
     "links": {
       "author": 17
     }
-  }
+  }]
 }
 ```
 
@@ -191,13 +196,13 @@ To save HTTP requests, it may be convenient to send related documents along with
 
 ```js
 {
-  "posts": {
+  "posts": [{
     "id": "1",
     "title": "Rails is Omakase",
     "links": {
       "author": 9
     }
-  },
+  }],
   "people": [{
     "id": "9",
     "name": "@d2h"
@@ -225,21 +230,26 @@ The top-level of a JSON API document **MAY** have the following keys:
 
 ### Singular Resources
 
-If the value of a resource key is a JSON object, the value represents a single document.
+Singular resources are represented as JSON objects. However, they are still
+wrapped inside an array:
 
 ```js
 {
-  "posts": {
+  "posts": [{
     // an individual post document
-  }
+  }]
 }
 ```
+
+This simplifies processing, as you can know that a resource key will always be
+a list.
 
 The document **MAY** contain an `id` key. 
 
 ### Resource Collections
 
-If the value of a resource key is a JSON array, the value represents a list of documents.
+If the length of an array at a resource key is greater than one, the value
+represents a list of documents.
 
 ```js
 {
@@ -263,10 +273,10 @@ Other than the `"links"` and `"id"` keys, every key in a document represents an 
 
 ```js
 {
-  "posts": {
+  "posts": [{
     "id": "1",
     "title": "Rails is Omakase"
-  }
+  }]
 }
 ```
 
@@ -276,14 +286,14 @@ The value of the `"links"` key is a JSON object that represents related document
 
 ```js
 {
-  "posts": {
+  "posts": [{
     "id": "1",
     "title": "Rails is Omakase",
     "links": {
       "author": "http://example.com/people/1",
       "comments": "http://example.com/comments/5,12,17,20"
     }
-  }
+  }]
 }
 ```
 
@@ -293,13 +303,13 @@ A to-many relationship is a string value that represents a URL.
 
 ```js
 {
-  "posts": {
+  "posts": [{
     "id": "1",
     "title": "Rails is Omakase",
     "links": {
       "comments": "http://example.com/posts/1/comments"
     }
-  }
+  }]
 }
 ```
 
@@ -313,13 +323,13 @@ A to-one relationship is represented as a string value that represents a URL.
 
 ```js
 {
-  "posts": {
+  "posts": [{
     "id": "1",
     "title": "Rails is Omakase",
     "links": {
       "author": "http://example.com/people/17"
     }
-  }
+  }]
 }
 ```
 
@@ -355,13 +365,13 @@ In this example, fetching `/posts/1/comments` will fetch the comments for `"Rail
   "links": {
     "posts.comments": "http://example.com/comments/{posts.comments}"
   },
-  "posts": {
+  "posts": [{
     "id": "1",
     "title": "Rails is Omakase",
     "links": {
       "comments": [ "1", "2", "3", "4" ]
     }
-  }
+  }]
 }
 ```
 
