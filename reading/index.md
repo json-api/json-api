@@ -359,7 +359,7 @@ To save HTTP requests, it may be convenient to send related documents along with
 
 In this case, a bit of extra metadata for each relationship can link together the documents.
 
-```js
+```javascript
 {
   "rels": {
     "posts.author": {
