@@ -24,6 +24,23 @@ free to help flesh it out or, if you try to write an implementation, to
 tell us where things were ambiguous. The best way to do so is to 
 [file an Issue](https://github.com/json-api/json-api/issues).
 
+## Editors
+
+There are two primary editors of this specification:
+
+- [Steve Klabnik](http://twitter.com/steveklabnik)
+- [Yehuda Katz](http://twitter.com/wycats)
+
+> Perhaps most significant to the Web, however, is that the separation [between
+> clients and servers] allows the components to evolve independently, thus
+> supporting the Internet-scale requirement of multiple organizational domains.
+> 
+> - Roy Fielding, "Architectural Styles and the Design of Network-based
+> Software Architectures", Chapter 5.
+
+Steve primarily represents the server side, Yehuda the client side. Both of us
+care about both, but we want to make sure to have a champion on either side.
+
 ## Abstract
 
 This document describes the 'application/vnd.api+json' media type. It is
