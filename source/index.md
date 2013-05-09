@@ -59,7 +59,7 @@ There are three reserved attribute names in JSON API:
 
 * `id`
 * `href`
-* `rels`
+* `links`
 
 Each of these names has a special meaning when included in the
 attributes section and should not be used as attribute names.
@@ -109,7 +109,7 @@ The `"id"` key in a document represents a unique identifier for the document, sc
 
 ### Attributes
 
-Other than the `"rels"` and `"id"` keys, every key in a document represents an attribute. An attribute's value may be any JSON value.
+Other than the `"links"` and `"id"` keys, every key in a document represents an attribute. An attribute's value may be any JSON value.
 
 ```js
 {
@@ -122,14 +122,14 @@ Other than the `"rels"` and `"id"` keys, every key in a document represents an a
 
 ### Relationships
 
-The value of the `"rels"` key is a JSON object that represents related documents.
+The value of the `"links"` key is a JSON object that represents related documents.
 
 ```js
 {
   "posts": {
     "id": "1",
     "title": "Rails is Omakase",
-    "rels": {
+    "links": {
       "author": 9,
       "comments": [ 5, 12, 17, 20 ]
     }
@@ -146,7 +146,7 @@ A to-many relationship is represented as a JSON array of IDs.
   "posts": {
     "id": "1",
     "title": "Rails is Omakase",
-    "rels": {
+    "links": {
       "comments": [ 5, 12, 17, 20 ]
     }
   }
@@ -170,7 +170,7 @@ A to-one relationship is represented as a single string or number value.
   "posts": {
     "id": "1",
     "title": "Rails is Omakase",
-    "rels": {
+    "links": {
       "author": 17
     }
   }
@@ -194,7 +194,7 @@ To save HTTP requests, it may be convenient to send related documents along with
   "posts": {
     "id": "1",
     "title": "Rails is Omakase",
-    "rels": {
+    "links": {
       "author": 9
     }
   },
@@ -207,7 +207,7 @@ To save HTTP requests, it may be convenient to send related documents along with
 
 The related documents are provided as an additional top-level document or document list whose key is a name that represents the document type.
 
-The linkage between the key under `"rels"` and the top-level keys is hardcoded into the client.
+The linkage between the key under `"links"` and the top-level keys is hardcoded into the client.
 
 ## URL-Based JSON API
 
@@ -220,7 +220,7 @@ The goal of the URL-Based JSON API is to eliminate the need for those specific i
 The top-level of a JSON API document **MAY** have the following keys:
 
 * `meta`: meta-information about a resource, such as pagination
-* `rels`: in compound resources, information about relationships that would otherwise need to be repeated
+* `links`: in compound resources, information about relationships that would otherwise need to be repeated
 * Other resource names (`posts`, `comments`, `people`, etc.) 
 
 ### Singular Resources
@@ -259,7 +259,7 @@ The `"id"` key in a document represents a unique identifier for the document, sc
 
 ### Attributes
 
-Other than the `"rels"` and `"id"` keys, every key in a document represents an attribute. An attribute's value may be any JSON value.
+Other than the `"links"` and `"id"` keys, every key in a document represents an attribute. An attribute's value may be any JSON value.
 
 ```js
 {
@@ -272,14 +272,14 @@ Other than the `"rels"` and `"id"` keys, every key in a document represents an a
 
 ### Relationships
 
-The value of the `"rels"` key is a JSON object that represents related documents.
+The value of the `"links"` key is a JSON object that represents related documents.
 
 ```js
 {
   "posts": {
     "id": "1",
     "title": "Rails is Omakase",
-    "rels": {
+    "links": {
       "author": "http://example.com/people/1",
       "comments": "http://example.com/comments/5,12,17,20"
     }
@@ -296,7 +296,7 @@ A to-many relationship is a string value that represents a URL.
   "posts": {
     "id": "1",
     "title": "Rails is Omakase",
-    "rels": {
+    "links": {
       "comments": "http://example.com/posts/1/comments"
     }
   }
@@ -316,7 +316,7 @@ A to-one relationship is represented as a string value that represents a URL.
   "posts": {
     "id": "1",
     "title": "Rails is Omakase",
-    "rels": {
+    "links": {
       "author": "http://example.com/people/17"
     }
   }
@@ -329,13 +329,13 @@ In the above example, a `GET` request to `/people/17` returns a document contain
 
 ### URL Template Shorthands
 
-When returning a list of documents from a response, a top-level `"rels"` object can specify a URL template that should be used for all documents.
+When returning a list of documents from a response, a top-level `"links"` object can specify a URL template that should be used for all documents.
 
 Example:
 
 ```js
 {
-  "rels": {
+  "links": {
     "posts.comments": "http://example.com/posts/{post.id}/comments"
   },
   "posts": [{
@@ -352,13 +352,13 @@ In this example, fetching `/posts/1/comments` will fetch the comments for `"Rail
 
 ```js
 {
-  "rels": {
+  "links": {
     "posts.comments": "http://example.com/comments/{posts.comments}"
   },
   "posts": {
     "id": "1",
     "title": "Rails is Omakase",
-    "rels": {
+    "links": {
       "comments": [ "1", "2", "3", "4" ]
     }
   }
@@ -366,14 +366,14 @@ In this example, fetching `/posts/1/comments` will fetch the comments for `"Rail
 ```
 
 In this example, the `posts.comments` variable is expanded by
-"exploding" the array specified in the `"rels"` section of each post.
+"exploding" the array specified in the `"links"` section of each post.
 The [URL template specification][3] specifies that the default explosion is to join the array members by a comma, so in this example, fetching `/comments/1,2,3,4` will return a list of all comments.
 
 [3]: https://tools.ietf.org/html/rfc6570
 
 This example shows how you can start with a list of IDs and then upgrade to specifying a different URL pattern than the default.
 
-The top-level `"rels"` key has the following behavior:
+The top-level `"links"` key has the following behavior:
 
 * Each key is a dot-separated path that points at a repeated relationship. For example `"posts.comments"` points at the `"comments"` relationship in each repeated document under `"posts"`.
 * The value of each key is interpreted as a URL template.
@@ -383,25 +383,25 @@ Here is another example that uses a has-one relationship:
 
 ```js
 {
-  "rels": {
+  "links": {
     "posts.author": "http://example.com/people/{posts.author}"
   },
   "posts": [{
     "id": "1",
     "title": "Rails is Omakase",
-    "rels": {
+    "links": {
       "author": 12
     }
   }, {
     "id": "2",
     "title": "The Parley Letter",
-    "rels": {
+    "links": {
       "author": 12
     }
   }, {
     "id": "3",
     "title": "Dependency Injection is Not a Virtue",
-    "rels": {
+    "links": {
       "author": 12
     }
   }]
@@ -420,7 +420,7 @@ In this case, a bit of extra metadata for each relationship can link together th
 
 ```js
 {
-  "rels": {
+  "links": {
     "posts.author": {
       "href": "http://example.com/people/{post.author}",
       "type": "people"
@@ -433,19 +433,19 @@ In this case, a bit of extra metadata for each relationship can link together th
   "posts": [{
     "id": "1",
     "title": "Rails is Omakase",
-    "rels": {
+    "links": {
       "author": 9,
       "comments": [ 1, 2, 3 ]
    }, {
     "id": "2",
     "title": "The Parley Letter",
-    "rels": {
+    "links": {
       "author": 9,
       "comments": [ 4, 5 ]
    }, {
     "id": "1",
     "title": "Dependency Injection is Not a Virtue",
-    "rels": {
+    "links": {
       "author": 9,
       "comments": [ 6 ]
     }
