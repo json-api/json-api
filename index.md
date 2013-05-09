@@ -42,7 +42,7 @@ There are three reserved attribute names in JSON API:
 
 * `id`
 * `href`
-* `rels`
+* `links`
 
 Each of these names has a special meaning when included in the
 attributes section and should not be used as attribute names.

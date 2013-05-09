@@ -129,7 +129,7 @@ Content-Type: application/json
     "title": "Mustaches on a Stick",
     "href": "http://example.com/images/mustaches.png"
   }],
-  "rels": {
+  "links": {
     "posts": "http://example.com/posts/{posts.id}"
   },
   "meta": {
@@ -222,13 +222,13 @@ time.
 ### Relationships
 
 Relationship updates are represented as JSON Patch operations on the
-`rels` document.
+`links` document.
 
 #### To-One Relationships
 
 To update a to-one relationship, the client **MUST** issue a `PATCH`
 request that includes a `replace` operation on the relationship
-`rels/<name>`.
+`links/<name>`.
 
 For example, for the following `GET` request:
 
@@ -237,7 +237,7 @@ GET /photos/1
 Content-Type: application/json
 
 {
-  "rels": {
+  "links": {
     "photos.author": "http://example.com/people/{photos.author}"
   },
   "photos": {
@@ -245,7 +245,7 @@ Content-Type: application/json
     "href": "http://example.com/photos/1",
     "title": "Hamster",
     "src": "images/hamster.png",
-    "rels": {
+    "links": {
       "author": 1
     }
   }
@@ -261,7 +261,7 @@ Content-Type: application/json-patch+json
 Accept: application/json
 
 [
-  { "op": "replace", "path": "/rels/author", "value": 2 }
+  { "op": "replace", "path": "/links/author", "value": 2 }
 ]
 ```
 
@@ -271,8 +271,8 @@ While to-many relationships are represented as a JSON array in a `GET`
 response, they are updated as if they were a set.
 
 To remove an element from a to-many relationship, use a `remove`
-operation on `rels/<name>/<id>`. To add an element, use an `add`
-operation on `rels/<name>/-`.
+operation on `links/<name>/<id>`. To add an element, use an `add`
+operation on `links/<name>/-`.
 
 For example, for the following `GET` request:
 
@@ -281,7 +281,7 @@ GET /photos/1
 Content-Type: application/json
 
 {
-  "rels": {
+  "links": {
     "photos.author": "http://example.com/people/{photos.author}"
   },
   "photos": {
@@ -289,7 +289,7 @@ Content-Type: application/json
     "href": "http://example.com/photos/1",
     "title": "Hamster",
     "src": "images/hamster.png",
-    "rels": {
+    "links": {
       "comments": [ 1, 5, 12, 17 ]
     }
   }
@@ -303,7 +303,7 @@ the `PATCH` request:
 PATCH /photos/1
 
 [
-  { "op": "add", "path": "/rels/comments/-", "value": 30 }
+  { "op": "add", "path": "/links/comments/-", "value": 30 }
 ]
 ```
 
@@ -313,7 +313,7 @@ To remove comment 5 from this photo, issue a `remove` operation:
 PATCH /photos/1
 
 [
-  { "remove": "rels/comments/5" }
+  { "remove": "links/comments/5" }
 ]
 ```
 
