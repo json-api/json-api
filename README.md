@@ -1,18 +1,22 @@
 JSON API
 ========
 
-A standard defining media type for APIs that serve JSON. This repository is the
-source code for [http://jsonapi.org](http://jsonapi.org)
+A standard defining a media type for APIs that serve JSON. This repository is
+the source code for [http://jsonapi.org](http://jsonapi.org).
 
 This standard is currently under development. To assist:
 
 1. Get the dependencies:
 
-    $ bundle
+```
+$ bundle
+```
 
 1. Host the site locally while editing:
 
-    $ bundle exec rake preview:browser
+```
+$ bundle exec rake preview:browser
+```
 
 1. Edit the Markdown files.
 1. Commit your changes.
