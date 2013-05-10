@@ -38,9 +38,9 @@ GET http://api.example.com/
     "profile": "http://api.example.com/profile"
   },
 
-  "posts": {
+  "posts": [{
     // an individual post document
-  }
+  }]
 }
 ```
 
