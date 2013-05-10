@@ -47,17 +47,16 @@ Record creation, update, and deletion was defined implicitly by the
 Ember Data library and was close to conventions already in wide use by
 Rails, Django and Node developers.
 
-The goals of the protocols defined by the Ember Data REST Adapter and
-JSON API are to balance:
+The goals of the media type is to balance:
 
-* A generic protocol that can work across a broad set of use cases,
+* A generic media type that can work across a broad set of use cases,
   including the generally used relationship types
 * Similarity to existing server-side framework practices (and human
   readability for debugging)
 * Ease of implementation on the server side
 * Ease of implementation on the client side
 
-This protocol is still a work in progress, and we are extremely open to
+This media type is still a work in progress, and we are extremely open to
 feedback and proposals for improvement. That said, implementation work
 has already begun, and we value good working systems over perfect
 vaporware.
