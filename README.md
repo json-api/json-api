@@ -4,6 +4,17 @@ JSON API
 A standard defining a media type for APIs that serve JSON. This repository is
 the source code for [http://jsonapi.org](http://jsonapi.org).
 
+
+Resources
+---------
+
+* IRC channel: #jsonapi on freenode.net
+* Twitter: @jsonapi
+
+
+Status
+------
+
 This standard is currently under development. To assist:
 
 1. Get the dependencies:
