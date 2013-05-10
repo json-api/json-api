@@ -3,6 +3,14 @@ layout: page
 title: "JSON API: About"
 ---
 
+## Channels
+
+JSON API is:
+
+  * [@jsonapi](http://twitter.com/jsonapi) on
+[Twitter](http://twitter.com)
+  * _#jsonapi_ channel on [Freenode IRC](http://freenode.net)
+
 ## Editors
 
 There are two primary editors of this specification:
