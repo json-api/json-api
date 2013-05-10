@@ -287,7 +287,7 @@ Example:
 ```javascript
 {
   "links": {
-    "posts.comments": "http://example.com/posts/{post.id}/comments"
+    "posts.comments": "http://example.com/posts/{posts.id}/comments"
   },
   "posts": [{
     "id": "1",
