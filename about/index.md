@@ -3,6 +3,23 @@ layout: page
 title: "JSON API: About"
 ---
 
+## Editors
+
+There are two primary editors of this specification:
+
+- [Steve Klabnik](http://twitter.com/steveklabnik)
+- [Yehuda Katz](http://twitter.com/wycats)
+
+> Perhaps most significant to the Web, however, is that the separation [between
+> clients and servers] allows the components to evolve independently, thus
+> supporting the Internet-scale requirement of multiple organizational domains.
+>
+> - Roy Fielding, "Architectural Styles and the Design of Network-based
+> Software Architectures", Chapter 5.
+
+Steve primarily represents the server side, Yehuda the client side. Both of us
+care about both, but we want to make sure to have a champion on either side.
+
 ## History
 
 JSON API is extracted from the JSON transport implicitly defined by
