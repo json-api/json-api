@@ -1,4 +1,4 @@
-
+---
 layout: page
 title: "JSON API: Extending"
 ---
