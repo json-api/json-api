@@ -114,21 +114,28 @@ Accept: application/json
 }
 ```
 
-### Responses
+### Response
 
-#### `201 Created`
+A server **MUST** respond to a successful document creation request with
+the [`201 Created`][2] status. (While [section 4.3.3][3] of the HTTPbis
+specification allows other `2xx` series responses to a `POST` request
+that successfully creates a resource, this specification utilizes `PUT`
+semantics from [section 4.3.4][4] for document creation responses.)
 
-A server **SHOULD** respond to a `POST` request with the
-[`201 Created`][2] status, including a request body and `Location` header 
-(see [section 9.5][3] of the HTTP/1.1 specification).
+[2]: http://tools.ietf.org/html/draft-ietf-httpbis-p2-semantics-22#section-6.3.2
+[3]: http://tools.ietf.org/html/draft-ietf-httpbis-p2-semantics-22#section-4.3.3
+[4]: http://tools.ietf.org/html/draft-ietf-httpbis-p2-semantics-22#section-4.3.4
 
-[2]: http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.2.2
-[3]: http://www.w3.org/Protocols/rfc2616/rfc2616-sec9.html#sec9.5
+The response **MUST** include a `Location` header identifying the
+primary document created by the request. It **SHOULD** also include a
+request body describing that document. If absent, the client **SHOULD**
+treat the transmitted document as accepted without modification.
 
 The response body **MAY** include an `href` key in the attributes
-section; if the server is using the URL-based JSON API, this `href`
-attribute is **REQUIRED**. If present, the value of the `href` attribute
-**MUST** match the URI in the `Location` header.
+section. If a response body is present and the server is using the
+URL-based JSON API, this `href` attribute is **REQUIRED**. When present,
+the value of the `href` attribute **MUST** match the URI in the
+`Location` header.
 
 Example:
 
@@ -147,97 +154,7 @@ Content-Type: application/json
 }
 ```
 
-#### `204 No Content`
-
-A server **MAY** respond to a `POST` request with the
-[`204 No Content`][4] status. If it does so, the client **MUST** assume
-that the server has successfully created the document, and accepted all
-of the attributes as is.
-
-[4]: http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.2.5
-
-The server **MUST NOT** respond with `204 No Content` unless it both
-requests client-generated IDs and publishes a URI template in the JSON
-API `GET` response of the collection.
-
-The client **SHOULD** determine the URL of the newly created document by
-combining the URI template of the collection with the `id` attribute
-included in the `POST` request.
-
-For example, given the following response to a JSON API `GET` on the
-collection:
-
-```text
-HTTP/1.1 200 OK
-Content-Type: application/json
-
-{
-  "photos": [{
-    "id": "550e8400-e29b-41d4-a716-446655440000",
-    "title": "Mustaches on a Stick",
-    "src": "http://example.com/images/mustaches.png"
-  }],
-  "links": {
-    "photos": "http://example.com/photos/{photos.id}"
-  },
-  "meta": {
-    "client-ids": true
-  }
-}
-```
-
-If the client submits a `POST` request to the collection with a UUID of
-`550e8400-e29b-41d4-a716-446655440001` and receives `204 No Content`,
-the expected URL for the newly created document is
-`http://example.com/photos/550e8400-e29b-41d4-a716-446655440001`.
-
-#### `200 OK`
-
-A server **MAY** respond to a `POST` request with the [`200 OK`][5]
-status, including a response body.
-
-[5]: http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.2.1
-
-The response body **SHOULD** be a valid response to a JSON API `GET`
-request of the server location of the newly created document.
-
-The response body **MAY** include an `href` key in the attributes
-section; if the server is using the URL-based JSON API, this `href`
-attribute is **REQUIRED**. If present, the value of the `href` attribute
-**MUST** be the server location of the newly created document.
-
-Example:
-
-```text
-HTTP/1.1 200 OK
-Content-Type: application/json
-
-{
-  "photos": [{
-    "id": "550e8400-e29b-41d4-a716-446655440000",
-    "href": "http://example.com/photos/12",
-    "title": "Ember Hamster",
-    "src": "http://example.com/images/productivity.png"
-  }]
-}
-```
-
-#### `202 Accepted`
-
-A server **MAY** respond with the [`202 Accepted`][6] status if the
-document was not yet created, but may still be created at some future
-point.
-
-[6]: http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.2.3
-
-*TODO*: Specify client handling of `202 Accepted` responses.
-
 #### Other Responses
-
-Other `2xx` responses are permitted but **NOT RECOMMENDED**. If a client
-receives a `2xx` response other than one of those listed above it
-**SHOULD** interpret it as if it were a `200 OK` or a `204 No Content`,
- depending on whether the response includes a request body.
 
 Servers **MAY** use other HTTP error codes to represent errors.  Clients
 **MUST** interpret those errors in accordance with HTTP semantics.
@@ -247,9 +164,9 @@ Servers **MAY** use other HTTP error codes to represent errors.  Clients
 The body of the `PATCH` request **MUST** be in JSON format with a `Content-Type`
 header of `application/json-patch+json`.
 
-It **MUST** be a valid [JSON Patch (RFC 6902)][7] document.
+It **MUST** be a valid [JSON Patch (RFC 6902)][5] document.
 
-[7]: http://tools.ietf.org/html/rfc6902
+[5]: http://tools.ietf.org/html/rfc6902
 
 ### Attributes
 
