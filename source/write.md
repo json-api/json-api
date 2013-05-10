@@ -117,14 +117,9 @@ Accept: application/json
 ### Response
 
 A server **MUST** respond to a successful document creation request with
-the [`201 Created`][2] status. (While [section 4.3.3][3] of the HTTPbis
-specification allows other `2xx` series responses to a `POST` request
-that successfully creates a resource, this specification utilizes `PUT`
-semantics from [section 4.3.4][4] for document creation responses.)
+the [`201 Created`][2] status.
 
 [2]: http://tools.ietf.org/html/draft-ietf-httpbis-p2-semantics-22#section-6.3.2
-[3]: http://tools.ietf.org/html/draft-ietf-httpbis-p2-semantics-22#section-4.3.3
-[4]: http://tools.ietf.org/html/draft-ietf-httpbis-p2-semantics-22#section-4.3.4
 
 The response **MUST** include a `Location` header identifying the
 primary document created by the request. It **SHOULD** also include a
@@ -164,9 +159,9 @@ Servers **MAY** use other HTTP error codes to represent errors.  Clients
 The body of the `PATCH` request **MUST** be in JSON format with a `Content-Type`
 header of `application/json-patch+json`.
 
-It **MUST** be a valid [JSON Patch (RFC 6902)][5] document.
+It **MUST** be a valid [JSON Patch (RFC 6902)][3] document.
 
-[5]: http://tools.ietf.org/html/rfc6902
+[3]: http://tools.ietf.org/html/rfc6902
 
 ### Attributes
 
