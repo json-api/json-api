@@ -37,7 +37,7 @@ The document **MUST** contain an `id` key.
 If the length of an array at a resource key is greater than one, the value
 represents a list of documents.
 
-```js
+```javascript
 {
   "posts": [{
     // an individual post document
@@ -57,7 +57,7 @@ The `"id"` key in a document represents a unique identifier for the document, sc
 
 Other than the `"links"` and `"id"` keys, every key in a document represents an attribute. An attribute's value may be any JSON value.
 
-```js
+```javascript
 {
   "posts": [{
     "id": "1",
@@ -70,7 +70,7 @@ Other than the `"links"` and `"id"` keys, every key in a document represents an 
 
 The value of the `"links"` key is a JSON object that represents related documents.
 
-```js
+```javascript
 {
   "posts": [{
     "id": "1",
@@ -87,7 +87,7 @@ The value of the `"links"` key is a JSON object that represents related document
 
 A to-many relationship is represented as a JSON array of IDs.
 
-```js
+```javascript
 {
   "posts": [{
     "id": "1",
@@ -111,7 +111,7 @@ In the above example, a `GET` request to `/comments?ids=5,12,17,20` returns a do
 
 A to-one relationship is represented as a single string or number value.
 
-```js
+```javascript
 {
   "posts": [{
     "id": "1",
@@ -135,7 +135,7 @@ In the above example, a `GET` request to `/people/17` returns a document contain
 
 To save HTTP requests, it may be convenient to send related documents along with the requested documents.
 
-```js
+```javascript
 {
   "posts": [{
     "id": "1",
@@ -174,7 +174,7 @@ The top-level of a JSON API document **MAY** have the following keys:
 Singular resources are represented as JSON objects. However, they are still
 wrapped inside an array:
 
-```js
+```javascript
 {
   "posts": [{
     // an individual post document
@@ -192,7 +192,7 @@ The document **MAY** contain an `id` key.
 If the length of an array at a resource key is greater than one, the value
 represents a list of documents.
 
-```js
+```javascript
 {
   "posts": [{
     // an individual post document
@@ -212,7 +212,7 @@ The `"id"` key in a document represents a unique identifier for the document, sc
 
 Other than the `"links"` and `"id"` keys, every key in a document represents an attribute. An attribute's value may be any JSON value.
 
-```js
+```javascript
 {
   "posts": [{
     "id": "1",
@@ -225,7 +225,7 @@ Other than the `"links"` and `"id"` keys, every key in a document represents an 
 
 The value of the `"links"` key is a JSON object that represents related documents.
 
-```js
+```javascript
 {
   "posts": [{
     "id": "1",
@@ -242,7 +242,7 @@ The value of the `"links"` key is a JSON object that represents related document
 
 A to-many relationship is a string value that represents a URL.
 
-```js
+```javascript
 {
   "posts": [{
     "id": "1",
@@ -262,7 +262,7 @@ In the above example, a `GET` request to `/posts/1/comments` returns a document 
 
 A to-one relationship is represented as a string value that represents a URL.
 
-```js
+```javascript
 {
   "posts": [{
     "id": "1",
@@ -284,7 +284,7 @@ When returning a list of documents from a response, a top-level `"links"` object
 
 Example:
 
-```js
+```javascript
 {
   "links": {
     "posts.comments": "http://example.com/posts/{post.id}/comments"
@@ -301,7 +301,7 @@ Example:
 
 In this example, fetching `/posts/1/comments` will fetch the comments for `"Rails is Omakase"` and fetching `/posts/2/comments` will fetch the comments for `"The Parley Letter"`.
 
-```js
+```javascript
 {
   "links": {
     "posts.comments": "http://example.com/comments/{posts.comments}"
@@ -332,7 +332,7 @@ The top-level `"links"` key has the following behavior:
 
 Here is another example that uses a has-one relationship:
 
-```js
+```javascript
 {
   "links": {
     "posts.author": "http://example.com/people/{posts.author}"
@@ -369,7 +369,7 @@ To save HTTP requests, it may be convenient to send related documents along with
 
 In this case, a bit of extra metadata for each relationship can link together the documents.
 
-```js
+```javascript
 {
   "links": {
     "posts.author": {
@@ -434,7 +434,7 @@ By always combining documents in this way, a client can consistently extract and
 JSON API documents **MAY** specify the URL for a document in a compound
 response by specifying a `"href"` key:
 
-```js
+```javascript
 {
   // ...
   "comments": [{
