@@ -76,8 +76,8 @@ The value of the `"links"` key is a JSON object that represents related document
     "id": "1",
     "title": "Rails is Omakase",
     "links": {
-      "author": 9,
-      "comments": [ 5, 12, 17, 20 ]
+      "author": "9",
+      "comments": [ "5", "12", "17", "20" ]
     }
   }]
 }
@@ -93,7 +93,7 @@ A to-many relationship is represented as a JSON array of IDs.
     "id": "1",
     "title": "Rails is Omakase",
     "links": {
-      "comments": [ 5, 12, 17, 20 ]
+      "comments": [ "5", "12", "17", "20" ]
     }
   }]
 }
@@ -117,7 +117,7 @@ A to-one relationship is represented as a single string or number value.
     "id": "1",
     "title": "Rails is Omakase",
     "links": {
-      "author": 17
+      "author": "17"
     }
   }]
 }
@@ -141,7 +141,7 @@ To save HTTP requests, it may be convenient to send related documents along with
     "id": "1",
     "title": "Rails is Omakase",
     "links": {
-      "author": 9
+      "author": "9"
     }
   }],
   "people": [{
@@ -341,19 +341,19 @@ Here is another example that uses a has-one relationship:
     "id": "1",
     "title": "Rails is Omakase",
     "links": {
-      "author": 12
+      "author": "12"
     }
   }, {
     "id": "2",
     "title": "The Parley Letter",
     "links": {
-      "author": 12
+      "author": "12"
     }
   }, {
     "id": "3",
     "title": "Dependency Injection is Not a Virtue",
     "links": {
-      "author": 12
+      "author": "12"
     }
   }]
 }
@@ -385,20 +385,20 @@ In this case, a bit of extra metadata for each relationship can link together th
     "id": "1",
     "title": "Rails is Omakase",
     "links": {
-      "author": 9,
-      "comments": [ 1, 2, 3 ]
+      "author": "9",
+      "comments": [ "1", "2", "3" ]
    }, {
     "id": "2",
     "title": "The Parley Letter",
     "links": {
-      "author": 9,
-      "comments": [ 4, 5 ]
+      "author": "9",
+      "comments": [ "4", "5" ]
    }, {
     "id": "1",
     "title": "Dependency Injection is Not a Virtue",
     "links": {
-      "author": 9,
-      "comments": [ 6 ]
+      "author": "9",
+      "comments": [ "6" ]
     }
   }],
   "people": [{
