@@ -1,27 +1,22 @@
-jsonapi
-=======
+JSON API
+========
 
-A media type for APIs that serve JSON.
+A standard defining media type for APIs that serve JSON. This repository is the
+source code for [http://jsonapi.org](http://jsonapi.org)
 
-More details coming to this README soon, but you can read the spec at
+This standard is currently under development. To assist:
 
-[http://jsonapi.org](http://jsonapi.org)
+1. Get the dependencies:
 
-To build
---------
+    $ bundle
 
-Make your changes in `source/`, then:
+1. Host the site locally while editing:
 
-```
-$ bundle
-$ rake build
-$ open build/index.html
-```
+    $ bundle exec rake preview:browser
 
-To deploy:
+1. Edit the Markdown files.
+1. Commit your changes.
+1. Send a Pull Request when finished.
 
-```
-$ git commit
-$ git push origin
-$ rake publish
-```
+The website is automatically built by [GitHub Pages](http://pages.github.com)
+when changes are pushed to the `gh-pages` branch.
