@@ -1,4 +1,4 @@
 ## Status
 
-**This document is a work in progress** and will change implementation work
+**This document is a work in progress** and will change as implementation work
 progresses. See the [Status](/status) page for more information.
