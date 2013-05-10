@@ -12,7 +12,7 @@ ID-based approach, URLs are conventionally formed. When using the
 URL-based approach, every document specifies the URLs for its related
 documents, which can be used to fetch **and** update.
 
-[1]: /
+[1]: /reading
 
 ## Creating a Document
 
