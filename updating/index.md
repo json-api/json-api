@@ -44,8 +44,7 @@ Content-Type: application/json
 {
   "photos": [{
     "id": "1",
-    "title": "Mustaches on a Stick",
-    "src": "http://example.com/images/mustaches.png"
+    "title": "Mustaches on a Stick"
   }]
 }
 ```
