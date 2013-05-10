@@ -1,4 +1,4 @@
----
+
 layout: page
 title: "JSON API: Extending"
 ---
@@ -65,7 +65,7 @@ you need to paginate.
   "cursors": {
     "after": "abcd1234",
     "before": "wxyz0987",
-    "limit": 25
+    "limit": 25,
     "href": "https://api.example.com/whatever{?after,before,limit}"
   }
 }
