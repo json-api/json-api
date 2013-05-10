@@ -114,54 +114,29 @@ Accept: application/json
 }
 ```
 
-#### 204 Responses
+### Response
 
-A server **MAY** respond to a `POST` request with a `204 No Content`
-response. If it does so, the client **MUST** assume that the server has
-successfully created the document, and accepted all of the attributes as
-is.
+A server **MUST** respond to a successful document creation request with
+the [`201 Created`][2] status.
 
-Note that if the server is using client-generated IDs, it is possible
-for the client to determine the URL for the newly generated record if
-the collection response included a URL template:
+[2]: http://tools.ietf.org/html/draft-ietf-httpbis-p2-semantics-22#section-6.3.2
 
-```text
-GET /photos
+The response **MUST** include a `Location` header identifying the
+primary document created by the request. It **SHOULD** also include a
+request body describing that document. If absent, the client **SHOULD**
+treat the transmitted document as accepted without modification.
 
-HTTP/1.1 200 OK
-Content-Type: application/json
+The response body **MAY** include an `href` key in the attributes
+section. If a response body is present and the server is using the
+URL-based JSON API, this `href` attribute is **REQUIRED**. When present,
+the value of the `href` attribute **MUST** match the URI in the
+`Location` header.
 
-{
-  "posts": [{
-    "id": "550e8400-e29b-41d4-a716-446655440000",
-    "title": "Mustaches on a Stick"
-  }],
-  "links": {
-    "posts": "http://example.com/posts/{posts.id}"
-  },
-  "meta": {
-    "client-ids": true
-  }
-}
-```
-
-If the client generated a UUID of
-"550e8400-e29b-41d4-a716-446655440001", and it receives a 204 response,
-it knows that the URL for the newly created document is
-`http://example.com/posts/550e8400-e29b-41d4-a716-446655440001`.
-
-#### 200 Responses
-
-A server **MAY** respond to a `POST` request with a `200 OK` response.
-If it does so, it **MUST** include a response body that is a valid
-response to a JSON API `GET` request.
-
-If the server is using the URL-based JSON API, it **MUST** include a
-`href` key in the attributes section that is the server location of the
-newly created document.
+Example:
 
 ```text
-HTTP/1.1 200 OK
+HTTP/1.1 201 Created
+Location: http://example.com/photos/12
 Content-Type: application/json
 
 {
@@ -184,9 +159,9 @@ Servers **MAY** use other HTTP error codes to represent errors.  Clients
 The body of the `PATCH` request **MUST** be in JSON format with a `Content-Type`
 header of `application/json-patch+json`.
 
-It **MUST** be a valid [JSON Patch (RFC 6902)][2] document.
+It **MUST** be a valid [JSON Patch (RFC 6902)][3] document.
 
-[2]: http://tools.ietf.org/html/rfc6902
+[3]: http://tools.ietf.org/html/rfc6902
 
 ### Attributes
 
