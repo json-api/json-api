@@ -166,7 +166,7 @@ The goal of the URL-Based JSON API is to eliminate the need for those specific i
 The top-level of a JSON API document **MAY** have the following keys:
 
 * `meta`: meta-information about a resource, such as pagination
-* `links`: in compound resources, information about relationships that would otherwise need to be repeated
+* `links`: URL templates to be used for expanding resources' relationships URLs
 * Other resource names (`posts`, `comments`, `people`, etc.)
 
 ### Singular Resources
