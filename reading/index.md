@@ -373,11 +373,11 @@ In this case, a bit of extra metadata for each relationship can link together th
 {
   "links": {
     "posts.author": {
-      "href": "http://example.com/people/{post.author}",
+      "href": "http://example.com/people/{posts.author}",
       "type": "people"
     },
     "posts.comments": {
-      "href": "http://example.com/comments/{post.comments}",
+      "href": "http://example.com/comments/{posts.comments}",
       "type": "comments"
     }
   }
