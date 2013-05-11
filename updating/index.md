@@ -57,10 +57,10 @@ Content-Type: application/json
 Accept: application/json
 
 {
-  "photos": {
+  "photos": [{
     "title": "Ember Hamster",
     "src": "http://example.com/images/productivity.png"
-  }
+  }]
 }
 ```
 
