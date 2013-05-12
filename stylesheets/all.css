@@ -59,6 +59,7 @@ header nav {
 
 header nav ul {
   margin: 0;
+  padding-left: 0;
   padding-bottom: 2em; }
 
 header nav li {
@@ -74,15 +75,15 @@ header nav li {
 
 header nav li:first-child {
   border: none;
-  padding-right: 0;
-  margin-right: 0; }
+  padding-left: 0;
+  margin-left: 0; }
 
 header nav li:last-child {
   padding-right: 0;
   margin-right: 0; }
 
 header nav li a {
-  padding: .5em; }
+  padding: .5em 0 .5em 0; }
 
 footer {
   border-top: 5px solid #aba; }
