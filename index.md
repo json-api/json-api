@@ -12,8 +12,8 @@ currently going through the process of being registered with IANA.
 
 There are two JSON API styles:
 
-* [The ID Style](#toc_id-based-json-api)
-* [The URL Style](#toc_url-based-json-api)
+* [The ID Style](/reading#id-based-json-api)
+* [The URL Style](/reading#url-based-json-api)
 
 The ID style is the easiest to get started with, but requires that your
 clients be able to guess the URLs for related documents. It also locks
