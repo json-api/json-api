@@ -5,6 +5,7 @@ title: "JSON API: Reading"
 
 {% include status.md %}
 
+<a id="id-based-json-api"></a>
 ## ID-Based JSON API
 
 ### Top Level
@@ -155,6 +156,7 @@ The related documents are provided as an additional top-level document or docume
 
 The linkage between the key under `"links"` and the top-level keys is hardcoded into the client.
 
+<a id="url-based-json-api"></a>
 ## URL-Based JSON API
 
 In the above description of ID-based JSON, there were several places where information about the location of related resources needed to be hardcoded into the client.
