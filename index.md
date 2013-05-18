@@ -34,9 +34,6 @@ In general, you should be able to start with an ID-based JSON API and
 upgrade to a URL-based API, if you want more control over the precise
 URLs used for a resource.
 
-## Known implementations
-
-
 ## Update history
 
 - 2013-05-03: Initial release of the draft.
