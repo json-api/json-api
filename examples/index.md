@@ -7,7 +7,6 @@ Examples are excellent learning aids. The following projects implementing JSON
 API are divided into server- and client-side. The server-side is further
 divided by implementation language. If you'd like your project listed, [send a
 Pull Request](https://github.com/json-api/json-api).
-implementations, but they both are slightly out of date at the moment.
 
 ## Client
 
