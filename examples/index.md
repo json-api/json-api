@@ -21,10 +21,11 @@ implementations, but is slightly out of date at the moment.
 
 ### Ruby
 
-[ActiveModel::Serializers](https://github.com/rails-api/active_model_serializers)
+* [ActiveModel::Serializers](https://github.com/rails-api/active_model_serializers)
 is one of the original examplar implementations, but is slightly out of date at
 the moment.
 
-[The rabl wiki](https://github.com/nesquena/rabl/wiki/Conforming-to-jsonapi.org-format)
+* [The rabl wiki](https://github.com/nesquena/rabl/wiki/Conforming-to-jsonapi.org-format)
 has page describing how to emit conformant JSON.
 
+* [RestPack::Serializer](https://github.com/RestPack/restpack_serializer) implements the read elements of json-api. It also supports paging and side-loading.
