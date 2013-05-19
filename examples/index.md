@@ -10,7 +10,7 @@ Pull Request](https://github.com/json-api/json-api).
 
 ## Client
 
-[ember-data](https://github.com/emberjs/data) is one of the original examplar
+[ember-data](https://github.com/emberjs/data) is one of the original exemplar
 implementations, but is slightly out of date at the moment.
 
 ## Server
@@ -22,7 +22,7 @@ implementations, but is slightly out of date at the moment.
 ### Ruby
 
 * [ActiveModel::Serializers](https://github.com/rails-api/active_model_serializers)
-is one of the original examplar implementations, but is slightly out of date at
+is one of the original exemplar implementations, but is slightly out of date at
 the moment.
 
 * [The rabl wiki](https://github.com/nesquena/rabl/wiki/Conforming-to-jsonapi.org-format)
