@@ -635,9 +635,9 @@ Servers **MAY** use other HTTP error codes to represent errors.  Clients
 The body of the `PATCH` request **MUST** be in JSON format with a `Content-Type`
 header of `application/json-patch+json`.
 
-It **MUST** be a valid [JSON Patch (RFC 6902)][3] document.
+It **MUST** be a valid [JSON Patch (RFC 6902)][4] document.
 
-[3]: http://tools.ietf.org/html/rfc6902
+[4]: http://tools.ietf.org/html/rfc6902
 
 ### Attributes
 
