@@ -55,7 +55,7 @@ Record creation, update, and deletion was defined implicitly by the
 Ember Data library and was close to conventions already in wide use by
 Rails, Django and Node developers.
 
-The goals of the media type is to balance:
+The goals of the media type are to balance:
 
 * A generic media type that can work across a broad set of use cases,
   including the generally used relationship types
