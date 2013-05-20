@@ -786,7 +786,7 @@ attributes remain up to date.
 
 ### 200 OK
 
-If the server accepts the updated but also changes the document in other
+If the server accepts the update but also changes the document in other
 ways than those specified by the `PATCH` request (for example, updating
 the `updatedAt` attribute or a computed `sha`), it **MUST** return a
 `200 OK` response.
