@@ -16,14 +16,6 @@ set of attributes and relationships.
 A JSON response may include multiple documents, as described in this
 specification.
 
-## Reserved Attributes
-
-There are three reserved attribute names in JSON API:
-
-* `id`
-* `href`
-* `links`
-
 Each of these names has a special meaning when included in the
 attributes section and should not be used as attribute names.
 
@@ -33,6 +25,14 @@ The top-level of a JSON API document **MAY** have the following keys:
 
 * `meta`: meta-information about a resource, such as pagination
 * Other resource names (`posts`, `comments`, `people`, etc.)
+
+### Reserved Attributes
+
+There are three reserved attribute names in JSON API:
+
+* `id`
+* `href`
+* `links`
 
 ### Singular Resources
 
