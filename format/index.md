@@ -593,10 +593,10 @@ Accept: application/json
 
 ### Response
 
-A server **MUST** respond to a successful document creation request with the
-[`201 Created`][2] status.
+A server **MUST** respond to a successful document creation request
+according to [`HTTP semantics`][2]
 
-[2]: http://tools.ietf.org/html/draft-ietf-httpbis-p2-semantics-22#section-6.3.2
+[2]: http://tools.ietf.org/html/draft-ietf-httpbis-p2-semantics-22#section-6.3
 
 The response **MUST** include a `Location` header identifying the primary
 document created by the request. It **SHOULD** also include a request body
