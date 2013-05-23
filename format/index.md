@@ -771,7 +771,7 @@ To remove comment 5 from this photo, issue a `remove` operation:
 PATCH /photos/1
 
 [
-  { "remove": "links/comments/5" }
+  { "op": "remove", "path": "links/comments/5" }
 ]
 ```
 
