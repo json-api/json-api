@@ -320,7 +320,7 @@ Example:
 }
 ```
 
-In this example, fetching `/posts/1/comments` will fetch the comments for `"Rails is Omakase"` and fetching `/posts/2/comments` will fetch the comments for `"The Parley Letter"`.
+In this example, fetching `http://example.com/posts/1/comments` will fetch the comments for `"Rails is Omakase"` and fetching `http://example.com/posts/2/comments` will fetch the comments for `"The Parley Letter"`.
 
 ```javascript
 {
@@ -339,7 +339,7 @@ In this example, fetching `/posts/1/comments` will fetch the comments for `"Rail
 
 In this example, the `posts.comments` variable is expanded by
 "exploding" the array specified in the `"links"` section of each post.
-The [URL template specification][3] specifies that the default explosion is to join the array members by a comma, so in this example, fetching `/comments/1,2,3,4` will return a list of all comments.
+The [URL template specification][3] specifies that the default explosion is to join the array members by a comma, so in this example, fetching `http://example.com/comments/1,2,3,4` will return a list of all comments.
 
 [3]: https://tools.ietf.org/html/rfc6570
 
