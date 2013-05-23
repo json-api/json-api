@@ -551,8 +551,8 @@ Accept: application/json
 
 A server **MAY** require a client to provide IDs generated on the
 client. If a server wants to request client-generated IDs, it **MUST**
-include a `meta` section in its response with the key `client-ids` and
-the value `true`:
+include a `meta` section in all of its responses with the key
+`client-ids` and the value `true`:
 
 ```text
 GET /photos
