@@ -670,7 +670,7 @@ PATCH /photos/1
 Content-Type: application/json-patch+json
 
 [
-  { "op": "replace", "path": "/src", "value": "http://example.com/hamster.png" }
+  { "op": "replace", "path": "/photos/0/src", "value": "http://example.com/hamster.png" }
 ]
 ```
 
