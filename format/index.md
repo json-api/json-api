@@ -761,7 +761,7 @@ the `PATCH` request:
 PATCH /photos/1
 
 [
-  { "op": "add", "path": "/links/comments/-", "value": 30 }
+  { "op": "add", "path": "/photos/0/links/comments/-", "value": 30 }
 ]
 ```
 
