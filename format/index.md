@@ -380,7 +380,7 @@ Here is another example that uses a has-one relationship:
 }
 ```
 
-In this example, the author URL for all three posts is `/people/12`.
+In this example, the author URL for all three posts is `http://example.com/people/12`.
 
 Top-level URL templates allow you to specify relationships as IDs, but without requiring that clients hard-code information about how to form the URLs.
 
