@@ -719,7 +719,7 @@ Content-Type: application/json-patch+json
 Accept: application/json
 
 [
-  { "op": "replace", "path": "/links/author", "value": 2 }
+  { "op": "replace", "path": "/photos/0/links/author", "value": 2 }
 ]
 ```
 
