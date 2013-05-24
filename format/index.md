@@ -103,6 +103,9 @@ The value of the `"links"` key is a JSON object that represents related document
 }
 ```
 
+NOTE: Given that `"links"` references `"author"` and the url is `"/people/9"`
+clients should hardcode how to relate that reference to that url.
+
 #### To-Many Relationships
 
 A to-many relationship is represented as a JSON array of IDs.
@@ -143,6 +146,9 @@ A to-one relationship is represented as a single string or number value.
 }
 ```
 
+NOTE: Given that `"links"` references `"author"` and the url is `"/people/17"`
+clients should hardcode how to relate that reference to that url.
+
 An API that provides a to-one relationship as an ID **MUST** respond to a `GET` request with the specified document with a URL formed by joining:
 
 * A base URL that represents the type of the related resource (this must be hardcoded in the client)
@@ -170,6 +176,9 @@ To save HTTP requests, it may be convenient to send related documents along with
   }]
 }
 ```
+
+NOTE: Given that `"links"` references `"author"` and the url is `"/people/9"`
+clients should hardcode how to relate that reference to that url.
 
 The related documents are provided as an additional top-level document or document list whose key is a name that represents the document type.
 
