@@ -231,7 +231,7 @@ The `"id"` key in a document represents a unique identifier for the document, sc
 
 ### Attributes
 
-Other than the `"links"` and `"id"` keys, every key in a document represents an attribute. An attribute's value may be any JSON value.
+Other than the `"links"`, `"href"` and `"id"` keys, every key in a document represents an attribute. An attribute's value may be any JSON value.
 
 ```javascript
 {
