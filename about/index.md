@@ -10,6 +10,7 @@ JSON API is:
   * [@jsonapi](http://twitter.com/jsonapi) on
 [Twitter](http://twitter.com)
   * _#jsonapi_ channel on [Freenode IRC](http://freenode.net)
+  * [jsonapi Google group](https://groups.google.com/forum/?fromgroups#!forum/jsonapi)
 
 ## Editors
 
