@@ -838,3 +838,18 @@ Whenever a server returns a `200 OK` response in response to a creation,
 update or deletion, it **MAY** include other documents in the JSON
 document. The semantics of these documents are [the same][1] as when
 additional documents are included in response to a `GET`.
+
+## Appendix A. Examples
+
+A.1.  Requesting an empty collection
+
+```
+GET /photos
+
+HTTP/1.1 200 OK
+Content-Type: application/json
+
+{
+  "photos": []
+}
+```
