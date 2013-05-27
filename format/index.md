@@ -410,7 +410,7 @@ In this case, a bit of extra metadata for each relationship can link together th
       "href": "http://example.com/comments/{posts.comments}",
       "type": "comments"
     }
-  }
+  },
   "posts": [{
     "id": "1",
     "title": "Rails is Omakase",
