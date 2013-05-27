@@ -749,7 +749,7 @@ Content-Type: application/json
 
 {
   "links": {
-    "photos.author": "http://example.com/people/{photos.author}"
+    "photos.comments": "http://example.com/comments/{photos.comments}"
   },
   "photos": [{
     "id": "1",
