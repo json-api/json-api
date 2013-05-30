@@ -1,0 +1,184 @@
+[
+  {
+    "expectedRequest": {
+      "method": "POST",
+      "path":   "/posts",
+      "contentType": "application/json",
+      "body": {
+        "posts": [{
+          "title": "Rails is Omakase",
+          "body":  "body text here"
+        }]
+      }
+    },
+
+    "expectedResponse": {
+      "statusCode": 201,
+      "location": "http://example.com/posts/1",
+      "body": {
+        "posts": [{
+          "id": "1",
+          "title": "Rails is Omakase",
+          "body":  "body text here"
+        }]
+      }
+    }
+  },
+
+  {
+    "config": {
+      "url_based": true
+    },
+
+    "expectedRequest": {
+      "method": "POST",
+      "path":   "/posts",
+      "contentType": "application/json",
+      "body": {
+        "posts": [{
+          "id": "550e8400-e29b-41d4-a716-446655440000",
+          "title": "Rails is Omakase",
+          "body":  "body text here"
+        }]
+      }
+    },
+
+    "expectedResponse": {
+      "statusCode": 201,
+      "location": "http://example.com/posts/1",
+      "body": {
+        "posts": [{
+          "id": "550e8400-e29b-41d4-a716-446655440000",
+          "href": "http://example.com/posts/1",
+          "title": "Rails is Omakase",
+          "body":  "body text here"
+        }]
+      }
+    }
+  },
+
+  {
+    "expectedRequest": {
+      "method": "POST",
+      "path":   "/posts",
+      "contentType": "application/json",
+      "body": {
+        "posts": [{
+          "title": "Rails is not Omakase",
+          "body":  "body text here"
+        }]
+      }
+    },
+
+    "expectedResponse": {
+      "statusCode": 204,
+      "location": "http://example.com/posts/2"
+    }
+  },
+
+  {
+    "expectedRequest": {
+      "method": "POST",
+      "path":   "/posts/1/author",
+      "contentType": "application/json",
+      "body": {
+        "author": [{
+          "name": "d2h"
+        }]
+      }
+    },
+
+    "expectedResponse": {
+      "statusCode": 201,
+      "location": "http://example.com/author/1",
+      "body": {
+        "author": [{
+          "id": "1",
+          "name": "d2h"
+        }]
+      }
+    }
+  },
+
+  {
+    "config": {
+      "url_based": true
+    },
+
+    "expectedRequest": {
+      "method": "POST",
+      "path":   "/posts/1/author",
+      "contentType": "application/json",
+      "body": {
+        "author": [{
+          "name": "d2h"
+        }]
+      }
+    },
+
+    "expectedResponse": {
+      "statusCode": 201,
+      "location": "http://example.com/author/1",
+      "body": {
+        "author": [{
+          "id": "1",
+          "href": "http://example.com/author/1",
+          "name": "d2h"
+        }]
+      }
+    }
+  },
+
+  {
+    "expectedRequest": {
+      "method": "POST",
+      "path":   "/posts/1/comments",
+      "contentType": "application/json",
+      "body": {
+        "comments": [{
+          "body": "Mmmmmakase"
+        }]
+      }
+    },
+
+    "expectedResponse": {
+      "statusCode": 201,
+      "location": "http://example.com/comments/1",
+      "body": {
+        "comments": [{
+          "id": "1",
+          "body": "Mmmmmakase"
+        }]
+      }
+    }
+  },
+
+  {
+    "config": {
+      "url_based": true
+    },
+
+    "expectedRequest": {
+      "method": "POST",
+      "path":   "/posts/1/comments",
+      "contentType": "application/json",
+      "body": {
+        "comments": [{
+          "body": "Mmmmmakase"
+        }]
+      }
+    },
+
+    "expectedResponse": {
+      "statusCode": 201,
+      "location": "http://example.com/comments/1",
+      "body": {
+        "comments": [{
+          "id": "1",
+          "href": "http://example.com/comments/1",
+          "body": "Mmmmmakase"
+        }]
+      }
+    }
+  }
+]

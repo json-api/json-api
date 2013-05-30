@@ -1,0 +1,50 @@
+{
+  "only_posts": {
+    "posts": [{
+      "id": "1",
+      "title": "Rails is Omakase",
+      "body":  "body text here"
+    }, {
+      "id": "2",
+      "title": "Rails is not Omakase",
+      "body":  "body text here"
+    }]
+  },
+  "posts_and_one_author": {
+    "posts": [{
+      "id": "1",
+      "title": "Rails is Omakase",
+      "body":  "body text here"
+    }, {
+      "id": "2",
+      "title": "Rails is not Omakase",
+      "body":  "body text here",
+      "authors": {
+        "id": "1",
+        "name": "d2h"
+      }
+    }]
+  },
+  "posts_one_author_and_comments": {
+    "posts": [{
+      "id": "1",
+      "title": "Rails is Omakase",
+      "body":  "body text here"
+    }, {
+      "id": "2",
+      "title": "Rails is not Omakase",
+      "body":  "body text here",
+      "authors": {
+        "id": "1",
+        "name": "d2h"
+      },
+      "comments": [{
+        "id": "1",
+        "body": "Mmmmmakase"
+      }, {
+        "id": "2",
+        "body": "I prefer unagi"
+      }]
+    }]
+  }
+}
