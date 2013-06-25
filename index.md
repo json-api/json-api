@@ -6,7 +6,7 @@ title: JSON API
 ## Description
 
 "JSON API" is a JSON-based read/write hypermedia-type designed to support
-a smart client who wishes build a data-store of information.
+a smart client who wishes to build a data-store of information.
 
 {% include status.md %}
 
