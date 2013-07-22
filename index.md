@@ -12,7 +12,7 @@ a smart client who wishes to build a data-store of information.
 
 ## MIME Types
 
-- 'application/vnd.api+json' (application pending)
+- [`application/vnd.api+json`](http://www.iana.org/assignments/media-types/application/vnd.api+json)
 
 ## Format documentation
 
@@ -37,5 +37,6 @@ URLs used for a resource.
 ## Update history
 
 - 2013-05-03: Initial release of the draft.
+- 2013-07-22: Media type registration completed with the IANA.
 
 You can subscribe to an RSS feed of individual changes [here](https://github.com/json-api/json-api/commits.atom).

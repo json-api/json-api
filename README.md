@@ -1,8 +1,10 @@
 JSON API
 ========
 
-A standard defining a media type for APIs that serve JSON. This repository is
-the source code for [http://jsonapi.org](http://jsonapi.org).
+Documentation for the [application/vnd.api+json media
+type](http://www.iana.org/assignments/media-types/application/vnd.api+json),
+a standard for APIs that use JSON. This repository is the
+source code for [http://jsonapi.org](http://jsonapi.org).
 
 
 Resources
