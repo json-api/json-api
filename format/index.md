@@ -96,14 +96,14 @@ The value of the `"links"` key is a JSON object that represents related document
     "id": "1",
     "title": "Rails is Omakase",
     "links": {
-      "author": "9",
-      "comments": [ "5", "12", "17", "20" ]
+      "author_id": "9",
+      "comment_ids": [ "5", "12", "17", "20" ]
     }
   }]
 }
 ```
 
-NOTE: Given that `"links"` references `"author"` and the url is `"/people/9"`
+NOTE: Given that `"links"` references `"author_id"` and the url is `"/people/9"`
 clients should hardcode how to relate that reference to that url.
 
 #### To-Many Relationships
@@ -116,7 +116,7 @@ A to-many relationship is represented as a JSON array of IDs.
     "id": "1",
     "title": "Rails is Omakase",
     "links": {
-      "comments": [ "5", "12", "17", "20" ]
+      "comment_ids": [ "5", "12", "17", "20" ]
     }
   }]
 }
@@ -140,13 +140,13 @@ A to-one relationship is represented as a single string or number value.
     "id": "1",
     "title": "Rails is Omakase",
     "links": {
-      "author": "17"
+      "author_id": "17"
     }
   }]
 }
 ```
 
-NOTE: Given that `"links"` references `"author"` and the url is `"/people/17"`
+NOTE: Given that `"links"` references `"author_id"` and the url is `"/people/17"`
 clients should hardcode how to relate that reference to that url.
 
 An API that provides a to-one relationship as an ID **MUST** respond to a `GET` request with the specified document with a URL formed by joining:
@@ -167,7 +167,7 @@ To save HTTP requests, it may be convenient to send related documents along with
     "id": "1",
     "title": "Rails is Omakase",
     "links": {
-      "author": "9"
+      "author_id": "9"
     }
   }],
   "people": [{
@@ -177,7 +177,7 @@ To save HTTP requests, it may be convenient to send related documents along with
 }
 ```
 
-NOTE: Given that `"links"` references `"author"` and the url is `"/people/9"`
+NOTE: Given that `"links"` references `"author_id"` and the url is `"/people/9"`
 clients should hardcode how to relate that reference to that url.
 
 The related documents are provided as an additional top-level document or document list whose key is a name that represents the document type.
@@ -261,8 +261,8 @@ The value of the `"links"` key is a JSON object that represents related document
     "id": "1",
     "title": "Rails is Omakase",
     "links": {
-      "author": "http://example.com/people/1",
-      "comments": "http://example.com/comments/5,12,17,20"
+      "author_url": "http://example.com/people/1",
+      "comments_url": "http://example.com/comments/5,12,17,20"
     }
   }]
 }
@@ -278,7 +278,7 @@ A to-many relationship is a string value that represents a URL.
     "id": "1",
     "title": "Rails is Omakase",
     "links": {
-      "comments": "http://example.com/posts/1/comments"
+      "comments_url": "http://example.com/posts/1/comments"
     }
   }]
 }
@@ -298,7 +298,7 @@ A to-one relationship is represented as a string value that represents a URL.
     "id": "1",
     "title": "Rails is Omakase",
     "links": {
-      "author": "http://example.com/people/17"
+      "author_url": "http://example.com/people/17"
     }
   }]
 }
@@ -334,13 +334,13 @@ In this example, fetching `http://example.com/posts/1/comments` will fetch the c
 ```javascript
 {
   "links": {
-    "posts.comments": "http://example.com/comments/{posts.comments}"
+    "posts.comments": "http://example.com/comments/{posts.comment_ids}"
   },
   "posts": [{
     "id": "1",
     "title": "Rails is Omakase",
     "links": {
-      "comments": [ "1", "2", "3", "4" ]
+      "comment_ids": [ "1", "2", "3", "4" ]
     }
   }]
 }
@@ -365,25 +365,25 @@ Here is another example that uses a has-one relationship:
 ```javascript
 {
   "links": {
-    "posts.author": "http://example.com/people/{posts.author}"
+    "posts.author": "http://example.com/people/{posts.author_id}"
   },
   "posts": [{
     "id": "1",
     "title": "Rails is Omakase",
     "links": {
-      "author": "12"
+      "author_id": "12"
     }
   }, {
     "id": "2",
     "title": "The Parley Letter",
     "links": {
-      "author": "12"
+      "author_id": "12"
     }
   }, {
     "id": "3",
     "title": "Dependency Injection is Not a Virtue",
     "links": {
-      "author": "12"
+      "author_id": "12"
     }
   }]
 }
@@ -403,11 +403,11 @@ In this case, a bit of extra metadata for each relationship can link together th
 {
   "links": {
     "posts.author": {
-      "href": "http://example.com/people/{posts.author}",
+      "href": "http://example.com/people/{posts.author_id}",
       "type": "people"
     },
     "posts.comments": {
-      "href": "http://example.com/comments/{posts.comments}",
+      "href": "http://example.com/comments/{posts.comment_ids}",
       "type": "comments"
     }
   },
@@ -415,20 +415,20 @@ In this case, a bit of extra metadata for each relationship can link together th
     "id": "1",
     "title": "Rails is Omakase",
     "links": {
-      "author": "9",
-      "comments": [ "1", "2", "3" ]
+      "author_id": "9",
+      "comment_ids": [ "1", "2", "3" ]
    }, {
     "id": "2",
     "title": "The Parley Letter",
     "links": {
-      "author": "9",
-      "comments": [ "4", "5" ]
+      "author_id": "9",
+      "comment_ids": [ "4", "5" ]
    }, {
     "id": "1",
     "title": "Dependency Injection is Not a Virtue",
     "links": {
-      "author": "9",
-      "comments": [ "6" ]
+      "author_id": "9",
+      "comment_ids": [ "6" ]
     }
   }],
   "people": [{
@@ -705,7 +705,7 @@ Content-Type: application/json
 
 {
   "links": {
-    "photos.author": "http://example.com/people/{photos.author}"
+    "photos.author": "http://example.com/people/{photos.author_id}"
   },
   "photos": [{
     "id": "1",
@@ -713,7 +713,7 @@ Content-Type: application/json
     "title": "Hamster",
     "src": "images/hamster.png",
     "links": {
-      "author": "1"
+      "author_id": "1"
     }
   }]
 }
@@ -749,7 +749,7 @@ Content-Type: application/json
 
 {
   "links": {
-    "photos.comments": "http://example.com/comments/{photos.comments}"
+    "photos.comments": "http://example.com/comments/{photos.comment_ids}"
   },
   "photos": [{
     "id": "1",
@@ -757,7 +757,7 @@ Content-Type: application/json
     "title": "Hamster",
     "src": "images/hamster.png",
     "links": {
-      "comments": [ "1", "5", "12", "17" ]
+      "comment_ids": [ "1", "5", "12", "17" ]
     }
   }]
 }
