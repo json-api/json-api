@@ -417,13 +417,13 @@ In this case, a bit of extra metadata for each relationship can link together th
     "links": {
       "author": "9",
       "comments": [ "1", "2", "3" ]
-   }, {
+    }}, {
     "id": "2",
     "title": "The Parley Letter",
     "links": {
       "author": "9",
       "comments": [ "4", "5" ]
-   }, {
+   }}, {
     "id": "1",
     "title": "Dependency Injection is Not a Virtue",
     "links": {
@@ -431,7 +431,7 @@ In this case, a bit of extra metadata for each relationship can link together th
       "comments": [ "6" ]
     }
   }],
-  "people": [{
+  "author": [{
     "id": "9",
     "name": "@d2h"
   }],
