@@ -499,12 +499,10 @@ response by specifying a `"href"` key:
 
 ## URLs
 
-Update URLs are determined [the same way][1] as `GET` URLs. When using the
+Update URLs are determined the same way as `GET` URLs. When using the
 ID-based approach, URLs are conventionally formed. When using the
 URL-based approach, every document specifies the URLs for its related
 documents, which can be used to fetch **and** update.
-
-[1]: /reading
 
 ## Creating a Document
 
