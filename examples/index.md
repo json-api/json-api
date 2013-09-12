@@ -10,14 +10,18 @@ Pull Request](https://github.com/json-api/json-api).
 
 ## Client
 
-[ember-data](https://github.com/emberjs/data) is one of the original exemplar
-implementations, but is slightly out of date at the moment.
+* [ember-data](https://github.com/emberjs/data) is one of the original exemplar
+implementations. There is a [custom adapter](https://github.com/daliwali/ember-json-api) to support json-api.
 
 ## Server
 
 ### PHP
 
 * [FriendsOfSymfony / FOSRestBundle](https://github.com/FriendsOfSymfony/FOSRestBundle/issues/452)
+
+### Node.js
+
+* [Fortune.js](http://fortunejs.com) is a framework built to implement json-api.
 
 ### Ruby
 
