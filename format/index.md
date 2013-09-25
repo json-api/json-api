@@ -677,7 +677,7 @@ PATCH /photos/1
 Content-Type: application/json-patch+json
 
 [
-  { "op": "replace", "path": "/photos/0/src", "value": "http://example.com/hamster.png" }
+  { "op": "replace", "path": "/photos/1/src", "value": "http://example.com/hamster.png" }
 ]
 ```
 
@@ -726,7 +726,7 @@ Content-Type: application/json-patch+json
 Accept: application/json
 
 [
-  { "op": "replace", "path": "/photos/0/links/author", "value": 2 }
+  { "op": "replace", "path": "/photos/1/links/author", "value": 2 }
 ]
 ```
 
@@ -768,7 +768,7 @@ the `PATCH` request:
 PATCH /photos/1
 
 [
-  { "op": "add", "path": "/photos/0/links/comments/-", "value": 30 }
+  { "op": "add", "path": "/photos/1/links/comments/-", "value": 30 }
 ]
 ```
 
@@ -778,7 +778,7 @@ To remove comment 5 from this photo, issue a `remove` operation:
 PATCH /photos/1
 
 [
-  { "op": "remove", "path": "/photos/0/links/comments/5" }
+  { "op": "remove", "path": "/photos/1/links/comments/5" }
 ]
 ```
 
