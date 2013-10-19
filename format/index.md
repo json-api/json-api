@@ -431,7 +431,7 @@ In this case, a bit of extra metadata for each relationship can link together th
       "comments": [ "6" ]
     }
   }],
-  "author": [{
+  "people": [{
     "id": "9",
     "name": "@d2h"
   }],
