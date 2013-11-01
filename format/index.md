@@ -160,7 +160,11 @@ In the above example, a `GET` request to `/people/17` returns a document contain
 
 ### Compound Documents
 
-To save HTTP requests, it may be convenient to send related documents along with the requested documents.
+To save HTTP requests, it may be convenient to send related documents along with
+the requested documents.
+
+Related documents **MUST** be included in a top level `"linked"` object, in
+which they are grouped together in arrays according to their type.
 
 ```javascript
 {
@@ -171,19 +175,18 @@ To save HTTP requests, it may be convenient to send related documents along with
       "author": "9"
     }
   }],
-  "people": [{
-    "id": "9",
-    "name": "@d2h"
-  }]
+  "linked": {
+    "people": [{
+      "id": "9",
+      "name": "@d2h"
+    }]
+  }
 }
 ```
 
-NOTE: Given that `"links"` references `"author"` and the url is `"/people/9"`
-clients should hardcode how to relate that reference to that url.
-
-The related documents are provided as an additional top-level document or document list whose key is a name that represents the document type.
-
-The linkage between the key under `"links"` and the top-level keys is hardcoded into the client.
+NOTE: The linkage between the key under `"links"` (`"author"` in this example)
+and the associated document type (`"people"` in this example) is hardcoded into
+the client. The client must also hardcode how to relate that reference to a url.
 
 <a id="url-based-json-api"></a>
 ## URL-Based JSON API
