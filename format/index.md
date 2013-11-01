@@ -510,16 +510,55 @@ response by specifying a `"href"` key:
 }
 ```
 
+## Fetching
+
+### Inclusion of Related Documents
+
+A server **MAY** choose to support returning compound documents that include
+both primary and related documents.
+
+The server **MAY** return documents related to the primary document(s) by
+default.
+
+The server **MAY** also support custom inclusion of related documents based
+upon an `include` request parameter. This parameter should specify the path to
+one or more documents relative to the primary document. If this parameter is
+used, **ONLY** the requested related documents should be returned alongside the
+primary document(s).
+
+For instance, comments could be requested with a post:
+
+```text
+GET /posts/1?include=comments
+```
+
+In order to request documents related to other documents, the dot-separated path
+of each document should be specified:
+
+```text
+GET /posts/1?include=comments.authors
+```
+
+Note: a request for `comments.authors` should not automatically also include
+`comments` in the response (although comments will obviously need to be
+queried in order to fulfill the request for their authors).
+
+Multiple related documents could be requested in a comma-separated list:
+
+```text
+GET /posts/1?include=authors,comments,comments.authors
+```
+
 ## Updating
 
-## URLs
+### URLs
 
 Update URLs are determined the same way as `GET` URLs. When using the
 ID-based approach, URLs are conventionally formed. When using the
 URL-based approach, every document specifies the URLs for its related
 documents, which can be used to fetch **and** update.
 
-## Creating a Document
+### Creating a Document
 
 A JSON API document is *created* by making a `POST` request to the URL that
 represents a collection of documents that the new document should belong to.
@@ -613,7 +652,7 @@ Accept: application/json
 }
 ```
 
-### Response
+#### Response
 
 A server **MUST** respond to a successful document creation request
 according to [`HTTP semantics`][2]
@@ -647,7 +686,7 @@ Content-Type: application/json
 }
 ```
 
-#### Other Responses
+##### Other Responses
 
 Servers **MAY** use other HTTP error codes to represent errors.  Clients
 **MUST** interpret those errors in accordance with HTTP semantics.
