@@ -24,7 +24,8 @@ attributes section and should not be used as attribute names.
 The top-level of a JSON API document **MAY** have the following keys:
 
 * `meta`: meta-information about a resource, such as pagination
-* Other resource names (`posts`, `comments`, `people`, etc.)
+* `linked`: a collection of documents, grouped by type, that are related to the
+   primary document and/or each other
 
 ### Reserved Attributes
 
@@ -197,7 +198,8 @@ The top-level of a JSON API document **MAY** have the following keys:
 
 * `meta`: meta-information about a resource, such as pagination
 * `links`: URL templates to be used for expanding resources' relationships URLs
-* Other resource names (`posts`, `comments`, `people`, etc.)
+* `linked`: a collection of documents, grouped by type, that are related to the
+   primary document and/or each other
 
 ### Singular Resources
 
@@ -397,7 +399,10 @@ Top-level URL templates allow you to specify relationships as IDs, but without r
 
 To save HTTP requests, it may be convenient to send related documents along with the requested documents.
 
-In this case, a bit of extra metadata for each relationship can link together the documents.
+Related documents **MUST** be included in a top level `"linked"` object, in which they are grouped together in arrays according to their type.
+
+The type of each relationship **MAY** be specified in the `"links"` object with
+the `"type"` key. This facilitates lookups of related documents by the client.
 
 ```javascript
 {
@@ -431,35 +436,42 @@ In this case, a bit of extra metadata for each relationship can link together th
       "comments": [ "6" ]
     }
   }],
-  "author": [{
-    "id": "9",
-    "name": "@d2h"
-  }],
-  "comments": [{
-    "id": "1",
-    "body": "Mmmmmakase"
-  }, {
-    "id": "2",
-    "body": "I prefer unagi"
-  }, {
-    "id": "3",
-    "body": "What's Omakase?"
-  }, {
-    "id": "4",
-    "body": "Parley is a discussion, especially one between enemies"
-  }, {
-    "id": "5",
-    "body": "The parsley letter"
-  }, {
-    "id": "6",
-    "body": "Dependency Injection is Not a Vice"
-  }]
+  "linked": {
+    "people": [{
+      "id": "9",
+      "name": "@d2h"
+    }],
+    "comments": [{
+      "id": "1",
+      "body": "Mmmmmakase"
+    }, {
+      "id": "2",
+      "body": "I prefer unagi"
+    }, {
+      "id": "3",
+      "body": "What's Omakase?"
+    }, {
+      "id": "4",
+      "body": "Parley is a discussion, especially one between enemies"
+    }, {
+      "id": "5",
+      "body": "The parsley letter"
+    }, {
+      "id": "6",
+      "body": "Dependency Injection is Not a Vice"
+    }]
+  }
 }
 ```
 
-The benefit of this approach is that when the same document is referenced multiple times (in this example, the author of the three posts), it only needs to be presented a single time in the document.
+This approach ensures that a single canonical representation of each document
+is returned with each response, even when the same document is referenced
+multiple times (in this example, the author of the three posts). Along these
+lines, if a primary document is linked to another primary or related document,
+it should not be duplicated within the `"linked"` object.
 
-By always combining documents in this way, a client can consistently extract and wire up references.
+By always combining documents in this way, a client can consistently extract and
+wire up references.
 
 JSON API documents **MAY** specify the URL for a document in a compound
 response by specifying a `"href"` key:
