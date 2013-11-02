@@ -568,6 +568,10 @@ with a `fields[DOCUMENT_TYPE]` parameter.
 GET /posts?include=authors&fields[posts]=id,title&fields[people]=id,name
 ```
 
+An endpoint SHOULD return a default set of fields for a document if no fields
+have been specified for its type, or if the endpoint does not support use of
+either `fields` or `fields[DOCUMENT_TYPE]`.
+
 Note: `fields` and `fields[DOCUMENT_TYPE]` can not be mixed. If the latter
 format is used, then it must be used for the primary document type as well.
 
