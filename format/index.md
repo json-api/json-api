@@ -549,6 +549,28 @@ Multiple related documents could be requested in a comma-separated list:
 GET /posts/1?include=authors,comments,comments.authors
 ```
 
+### Sparse Fieldsets
+
+A server **MAY** choose to support requests to return only specific fields for
+documents.
+
+A server **MAY** support requests that specify fields for the primary document
+type with a `fields` parameter.
+
+```text
+GET /people?fields=id,name,age
+```
+
+A server **MAY** support requests that specify fields for other document types
+with a `fields[DOCUMENT_TYPE]` parameter.
+
+```text
+GET /posts?include=authors&fields[posts]=id,title&fields[people]=id,name
+```
+
+Note: `fields` and `fields[DOCUMENT_TYPE]` can not be mixed. If the latter
+format is used, then it must be used for the primary document type as well.
+
 ## Updating
 
 ### URLs
