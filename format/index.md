@@ -571,6 +571,51 @@ GET /posts?include=authors&fields[posts]=id,title&fields[people]=id,name
 Note: `fields` and `fields[DOCUMENT_TYPE]` can not be mixed. If the latter
 format is used, then it must be used for the primary document type as well.
 
+### Sorting
+
+A server **MAY** choose to support requests to sort documents according to
+one or more criteria.
+
+An endpoint **MAY** support requests to sort the primary document type with a
+`sort` parameter.
+
+```text
+GET /people?sort=age
+```
+
+An endpoint **MAY** support multiple sort criteria by allowing comma-separated
+fields as the value for `sort`. Sort criteria should be applied in the order
+specified.
+
+```text
+GET /people?sort=age,name
+```
+
+The default sort order should be ascending. A `-` prefix on any sort field
+specifies a descending sort order.
+
+```text
+GET /posts?sort=-created,title
+```
+
+The above example should return the newest posts first. Any posts created on the
+same date will then be sorted by their title in ascending alpabetical order.
+
+An endpoint **MAY** support requests to sort any document type with a
+`sort[DOCUMENT_TYPE]` parameter.
+
+```text
+GET /posts?include=author&sort[posts]=-created,title&sort[people]=name
+```
+
+If no sort order is specified, or if the endpoint does not support use of either
+`sort` or `sort[DOCUMENT_TYPE]`, then the endpoint SHOULD return documents
+sorted with a repeatable algorithm. In other words, documents should always be
+returned in the same order, even if the sort criteria aren't specified.
+
+Note: `sort` and `sort[DOCUMENT_TYPE]` can not be mixed. If the latter
+format is used, then it must be used for the primary document type as well.
+
 ## Updating
 
 ### URLs
