@@ -592,8 +592,8 @@ elaborate on it further below.
 In general, this is a collection scoped to the **type** of document.
 
 The request **MUST** contain a `Content-Type` header whose value is
-`application/json`. It **MUST** also include `application/json` as the
-only or highest quality factor.
+`application/vnd.api+json`. It **MUST** also include `application/vnd.api+json`
+as the only or highest quality factor.
 
 Its root key **MUST** be the same as the root key provided in the
 server's response to `GET` request for the collection.
@@ -605,7 +605,7 @@ photos:
 GET /photos
 
 HTTP/1.1 200 OK
-Content-Type: application/json
+Content-Type: application/vnd.api+json
 
 {
   "photos": [{
@@ -619,8 +619,8 @@ You would create a new photo by `POST`ing to the same URL:
 
 ```text
 POST /photos
-Content-Type: application/json
-Accept: application/json
+Content-Type: application/vnd.api+json
+Accept: application/vnd.api+json
 
 {
   "photos": [{
@@ -641,7 +641,7 @@ include a `meta` section in all of its responses with the key
 GET /photos
 
 HTTP/1.1 200 OK
-Content-Type: application/json
+Content-Type: application/vnd.api+json
 
 {
   "posts": [{
@@ -662,8 +662,8 @@ string.
 
 ```text
 POST /photos
-Content-Type: application/json
-Accept: application/json
+Content-Type: application/vnd.api+json
+Accept: application/vnd.api+json
 
 {
   "photos": [{
@@ -696,7 +696,7 @@ Example:
 ```text
 HTTP/1.1 201 Created
 Location: http://example.com/photos/12
-Content-Type: application/json
+Content-Type: application/vnd.api+json
 
 {
   "photos": [{
@@ -734,7 +734,7 @@ For example, consider this `GET` request:
 GET /photos/1
 
 HTTP/1.1 200 OK
-Content-Type: application/json
+Content-Type: application/vnd.api+json
 
 {
   "photos": [{
@@ -775,7 +775,7 @@ For example, for the following `GET` request:
 
 ```text
 GET /photos/1
-Content-Type: application/json
+Content-Type: application/vnd.api+json
 
 {
   "links": {
@@ -799,7 +799,7 @@ To change the author to person 2, issue a `PATCH` request to
 ```text
 PATCH /photos/1
 Content-Type: application/json-patch+json
-Accept: application/json
+Accept: application/vnd.api+json
 
 [
   { "op": "replace", "path": "/photos/0/links/author", "value": 2 }
@@ -819,7 +819,7 @@ For example, for the following `GET` request:
 
 ```text
 GET /photos/1
-Content-Type: application/json
+Content-Type: application/vnd.api+json
 
 {
   "links": {
