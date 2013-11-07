@@ -517,10 +517,10 @@ response by specifying a `"href"` key:
 A server **MAY** choose to support returning compound documents that include
 both primary and related documents.
 
-The server **MAY** return documents related to the primary document(s) by
+An endpoint **MAY** return documents related to the primary document(s) by
 default.
 
-The server **MAY** also support custom inclusion of related documents based
+An endpoint **MAY** also support custom inclusion of related documents based
 upon an `include` request parameter. This parameter should specify the path to
 one or more documents relative to the primary document. If this parameter is
 used, **ONLY** the requested related documents should be returned alongside the
@@ -554,14 +554,14 @@ GET /posts/1?include=authors,comments,comments.authors
 A server **MAY** choose to support requests to return only specific fields for
 documents.
 
-A server **MAY** support requests that specify fields for the primary document
+An endpoint **MAY** support requests that specify fields for the primary document
 type with a `fields` parameter.
 
 ```text
 GET /people?fields=id,name,age
 ```
 
-A server **MAY** support requests that specify fields for other document types
+An endpoint **MAY** support requests that specify fields for any document type
 with a `fields[DOCUMENT_TYPE]` parameter.
 
 ```text
