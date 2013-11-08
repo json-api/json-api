@@ -536,17 +536,17 @@ In order to request documents related to other documents, the dot-separated path
 of each document should be specified:
 
 ```text
-GET /posts/1?include=comments.authors
+GET /posts/1?include=comments.author
 ```
 
-Note: a request for `comments.authors` should not automatically also include
+Note: a request for `comments.author` should not automatically also include
 `comments` in the response (although comments will obviously need to be
 queried in order to fulfill the request for their authors).
 
 Multiple related documents could be requested in a comma-separated list:
 
 ```text
-GET /posts/1?include=authors,comments,comments.authors
+GET /posts/1?include=author,comments,comments.author
 ```
 
 ### Sparse Fieldsets
@@ -565,7 +565,7 @@ A server **MAY** support requests that specify fields for other document types
 with a `fields[DOCUMENT_TYPE]` parameter.
 
 ```text
-GET /posts?include=authors&fields[posts]=id,title&fields[people]=id,name
+GET /posts?include=author&fields[posts]=id,title&fields[people]=id,name
 ```
 
 An endpoint SHOULD return a default set of fields for a document if no fields
