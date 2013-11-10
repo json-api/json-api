@@ -806,7 +806,7 @@ Content-Type: application/json-patch+json
 Accept: application/vnd.api+json
 
 [
-  { "op": "replace", "path": "/photos/0/links/author", "value": 2 }
+  { "op": "replace", "path": "/photos/0/links/author", "value": "2" }
 ]
 ```
 
@@ -848,7 +848,7 @@ the `PATCH` request:
 PATCH /photos/1
 
 [
-  { "op": "add", "path": "/photos/0/links/comments/-", "value": 30 }
+  { "op": "add", "path": "/photos/0/links/comments/-", "value": "30" }
 ]
 ```
 
