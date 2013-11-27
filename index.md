@@ -5,34 +5,44 @@ title: JSON API
 
 ## Description
 
-"JSON API" is a JSON-based read/write hypermedia media type designed to support
-a smart client who wishes to build a data-store of information.
+"JSON API" is a standard for building APIs in JSON. If you've
+ever argued with your team about the way your JSON responses
+should be formatted, JSON API is your anti-bikeshedding weapon.
+
+Furthermore, clients built around JSON API are able to take
+advantage of its features around efficently caching responses,
+sometimes eliminating network requests entirely.
+
+By following shared conventions, you can increase productivity,
+take advantage of generalized tooling, and focus on what
+matters: your application.
 
 {% include status.md %}
 
 ## MIME Types
 
-- [`application/vnd.api+json`](http://www.iana.org/assignments/media-types/application/vnd.api+json)
+JSON API has been properly registered with the IANA. Its media
+type designation is [`application/vnd.api+json`](http://www.iana.org/assignments/media-types/application/vnd.api+json).
 
 ## Format documentation
 
-There are two JSON API styles:
+To get started with JSON API, check out our documentation. There
+are two styles:
 
 * [The ID Style](/format#id-based-json-api)
 * [The URL Style](/format#url-based-json-api)
 
-The ID style is the easiest to get started with, but requires that your
-clients be able to guess the URLs for related documents. It also locks
-your API into a particular URL structure, which may become a problem as
-your API grows.
+The ID style is easier to get started with, and probably looks
+very close to your already-existing API.
 
-The URL style requires less guessing on the client side, and makes
-clients more resilient to API changes, but is trickier to use with
-relationships and compound documents.
+After you're more comfortable with the format, you may decide
+to upgrade to the URL style. It offers extra flexibility, but
+requires more intelligent client code.
 
-In general, you should be able to start with an ID-based JSON API and
-upgrade to a URL-based API, if you want more control over the precise
-URLs used for a resource.
+We expect most users of JSON API will transition from their
+totally custom API to one based on the ID style, and then later
+to the URL style. This is of course not required, but if you're
+not sure, it's the easiest way to get started.
 
 ## Update history
 
