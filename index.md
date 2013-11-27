@@ -17,8 +17,6 @@ By following shared conventions, you can increase productivity,
 take advantage of generalized tooling, and focus on what
 matters: your application.
 
-{% include status.md %}
-
 Here's what JSON API (in the ID style) looks like:
 
 ```javascript
@@ -50,6 +48,8 @@ and in the URL style:
 ```
 
 JSON API covers creating and updating resources as well, not just responses.
+
+{% include status.md %}
 
 ## MIME Types
 
