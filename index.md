@@ -19,6 +19,38 @@ matters: your application.
 
 {% include status.md %}
 
+Here's what JSON API (in the ID style) looks like:
+
+```javascript
+{
+  "posts": [{
+    "id": "1",
+    "title": "Rails is Omakase",
+    "links": {
+      "author": "9",
+      "comments": [ "5", "12", "17", "20" ]
+    }
+  }]
+}
+```
+
+and in the URL style:
+
+```javascript
+{
+  "posts": [{
+    "id": "1",
+    "title": "Rails is Omakase",
+    "links": {
+      "author": "http://example.com/people/1",
+      "comments": "http://example.com/comments/5,12,17,20"
+    }
+  }]
+}
+```
+
+JSON API covers creating and updating resources as well, not just responses.
+
 ## MIME Types
 
 JSON API has been properly registered with the IANA. Its media
