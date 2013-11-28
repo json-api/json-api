@@ -10,7 +10,7 @@ ever argued with your team about the way your JSON responses
 should be formatted, JSON API is your anti-bikeshedding weapon.
 
 Furthermore, clients built around JSON API are able to take
-advantage of its features around efficently caching responses,
+advantage of its features around efficiently caching responses,
 sometimes eliminating network requests entirely.
 
 By following shared conventions, you can increase productivity,
