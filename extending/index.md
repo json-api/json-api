@@ -47,9 +47,11 @@ GET http://api.example.com/
 That document will de-reference to explain your link relations:
 
 ```text
-GET http://api.example.com/profile
+GET http://api.example.com/profile HTTP/1.1
+```
 
-200 OK
+```text
+HTTP/1.1 200 OK
 Content-Type: text/plain
 
 The Example.com API Profile
