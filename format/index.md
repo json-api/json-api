@@ -614,7 +614,8 @@ Content-Type: application/vnd.api+json
 {
   "photos": [{
     "id": "1",
-    "title": "Mustaches on a Stick"
+    "title": "Mustaches on a Stick",
+    "src": "http://example.com/images/mustache.png"
   }]
 }
 ```
