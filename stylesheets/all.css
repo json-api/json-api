@@ -9,7 +9,7 @@ body {
   border: 1px solid #ccc;
   padding: 20px;
   border-radius: 10px;
-  margin: 10px;
+  margin: 10px auto;
   background-color: #f9f9f9;
   color: #222;
   line-height: 150%;
