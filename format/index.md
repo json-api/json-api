@@ -43,6 +43,7 @@ wrapped inside an array:
 ```javascript
 {
   "posts": [{
+    "id": 1
     // an individual post document
   }]
 }
@@ -61,8 +62,10 @@ represents a list of documents.
 ```javascript
 {
   "posts": [{
+    "id": 1
     // an individual post document
   }, {
+    "id": 2
     // an individual post document
   }]
 }
@@ -212,6 +215,7 @@ wrapped inside an array:
 ```javascript
 {
   "posts": [{
+    "id": 1
     // an individual post document
   }]
 }
@@ -230,8 +234,10 @@ represents a list of documents.
 ```javascript
 {
   "posts": [{
+    "id": 1
     // an individual post document
   }, {
+    "id": 2
     // an individual post document
   }]
 }
