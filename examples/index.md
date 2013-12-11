@@ -34,6 +34,8 @@ has page describing how to emit conformant JSON.
 
 * [RestPack::Serializer](https://github.com/RestPack/restpack_serializer) implements the read elements of json-api. It also supports paging and side-loading.
 
+* [Oat](https://github.com/ismasan/oat#adapters) ships with a JSON API adapter.
+
 ## Messages
 
 * [RestPack::Serializer provides examples](http://restpack-serializer-sample.herokuapp.com/) which demonstrate sample responses.
