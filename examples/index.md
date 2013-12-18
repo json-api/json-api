@@ -13,6 +13,8 @@ Pull Request](https://github.com/json-api/json-api).
 * [ember-data](https://github.com/emberjs/data) is one of the original exemplar
 implementations. There is a [custom adapter](https://github.com/daliwali/ember-json-api) to support json-api.
 
+* [backbone-jsonapi](https://github.com/guillaumervls/backbone-jsonapi) is a Backbone adapter for JSON API. Supports fetching Models & Collections from a JSON API source.
+
 ## Server
 
 ### PHP
