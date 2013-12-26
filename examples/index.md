@@ -10,10 +10,16 @@ Pull Request](https://github.com/json-api/json-api).
 
 ## Client
 
+### JavaScript
+
 * [ember-data](https://github.com/emberjs/data) is one of the original exemplar
 implementations. There is a [custom adapter](https://github.com/daliwali/ember-json-api) to support json-api.
 
 * [backbone-jsonapi](https://github.com/guillaumervls/backbone-jsonapi) is a Backbone adapter for JSON API. Supports fetching Models & Collections from a JSON API source.
+
+### iOS
+
+* [jsonapi-ios](https://github.com/joshdholtz/jsonapi-ios) is a library for loading data from a JSON API datasource. Parses JSON API data into models with support for auto-linking of resources and custom model classes.
 
 ## Server
 
