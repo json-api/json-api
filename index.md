@@ -40,7 +40,7 @@ and in the URL style:
     "id": "1",
     "title": "Rails is Omakase",
     "links": {
-      "author": "http://example.com/people/1",
+      "author": "http://example.com/people/9",
       "comments": "http://example.com/comments/5,12,17,20"
     }
   }]
