@@ -215,7 +215,7 @@ wrapped inside an array:
 ```javascript
 {
   "posts": [{
-    "id": 1
+    "id": "http://example.com/posts/1"
     // an individual post document
   }]
 }
@@ -234,10 +234,10 @@ represents a list of documents.
 ```javascript
 {
   "posts": [{
-    "id": 1
+    "id": "http://example.com/posts/1"
     // an individual post document
   }, {
-    "id": 2
+    "id": "http://example.com/posts/2"
     // an individual post document
   }]
 }
@@ -256,7 +256,7 @@ Other than the `"links"`, `"href"` and `"id"` keys, every key in a document repr
 ```javascript
 {
   "posts": [{
-    "id": "1",
+    "id": "http://example.com/posts/1",
     "title": "Rails is Omakase"
   }]
 }
@@ -269,7 +269,7 @@ The value of the `"links"` key is a JSON object that represents related document
 ```javascript
 {
   "posts": [{
-    "id": "1",
+    "id": "http://example.com/posts/1",
     "title": "Rails is Omakase",
     "links": {
       "author": "http://example.com/people/1",
@@ -286,7 +286,7 @@ A to-many relationship is a string value that represents a URL.
 ```javascript
 {
   "posts": [{
-    "id": "1",
+    "id": "http://example.com/posts/1",
     "title": "Rails is Omakase",
     "links": {
       "comments": "http://example.com/posts/1/comments"
@@ -306,7 +306,7 @@ A to-one relationship is represented as a string value that represents a URL.
 ```javascript
 {
   "posts": [{
-    "id": "1",
+    "id": "http://example.com/posts/1",
     "title": "Rails is Omakase",
     "links": {
       "author": "http://example.com/people/17"
@@ -331,10 +331,10 @@ Example:
     "posts.comments": "http://example.com/posts/{posts.id}/comments"
   },
   "posts": [{
-    "id": "1",
+    "id": "http://example.com/posts/1",
     "title": "Rails is Omakase"
   }, {
-    "id": "2",
+    "id": "http://example.com/posts/2",
     "title": "The Parley Letter"
   }]
 }
@@ -348,7 +348,7 @@ In this example, fetching `http://example.com/posts/1/comments` will fetch the c
     "posts.comments": "http://example.com/comments/{posts.comments}"
   },
   "posts": [{
-    "id": "1",
+    "id": "http://example.com/posts/1",
     "title": "Rails is Omakase",
     "links": {
       "comments": [ "1", "2", "3", "4" ]
@@ -379,19 +379,19 @@ Here is another example that uses a has-one relationship:
     "posts.author": "http://example.com/people/{posts.author}"
   },
   "posts": [{
-    "id": "1",
+    "id": "http://example.com/posts/1",
     "title": "Rails is Omakase",
     "links": {
       "author": "12"
     }
   }, {
-    "id": "2",
+    "id": "http://example.com/posts/2",
     "title": "The Parley Letter",
     "links": {
       "author": "12"
     }
   }, {
-    "id": "3",
+    "id": "http://example.com/posts/3",
     "title": "Dependency Injection is Not a Virtue",
     "links": {
       "author": "12"
@@ -426,19 +426,19 @@ the `"type"` key. This facilitates lookups of related documents by the client.
     }
   },
   "posts": [{
-    "id": "1",
+    "id": "http://example.com/posts/1",
     "title": "Rails is Omakase",
     "links": {
       "author": "9",
       "comments": [ "1", "2", "3" ]
     }}, {
-    "id": "2",
+    "id": "http://example.com/posts/2",
     "title": "The Parley Letter",
     "links": {
       "author": "9",
       "comments": [ "4", "5" ]
    }}, {
-    "id": "1",
+    "id": "http://example.com/posts/3",
     "title": "Dependency Injection is Not a Virtue",
     "links": {
       "author": "9",
