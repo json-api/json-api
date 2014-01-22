@@ -247,7 +247,9 @@ Each document in the list **MAY** contain an `id` key.
 
 ### IDs
 
-The `"id"` key in a document represents a unique identifier for the document, scoped to the document's type. It can be used with URL templates to fetch related records, as described below.
+The `"id"` key in a document represents a unique identifier for the document,
+scoped to the document's type. It can be used with URL templates to fetch
+related records, as described below.
 
 ### Attributes
 
