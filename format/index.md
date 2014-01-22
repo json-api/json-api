@@ -251,6 +251,13 @@ The `"id"` key in a document represents a unique identifier for the document,
 scoped to the document's type. It can be used with URL templates to fetch
 related records, as described below.
 
+NOTE: While an implementation could use the values of `"id"` keys as URLs
+(which are unique string identifiers, after all), it is not generally
+recommended. URLs can change, so they are unreliable for mapping a document to
+any client-side models that represent the same resource. It is recommended that
+URL values be left to the task of linking documents while `"id"` values remain
+opaque to solely provide a unique identity within some type.
+
 ### Attributes
 
 Other than the `"links"`, `"href"` and `"id"` keys, every key in a document represents an attribute. An attribute's value may be any JSON value.
