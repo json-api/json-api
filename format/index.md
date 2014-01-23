@@ -77,6 +77,10 @@ Each document in the list **SHOULD** contain an `id` key.
 
 The `"id"` key in a document represents a unique identifier for the document, scoped to the document's type. The type scope is implicit, and hardcoded into clients of the API.
 
+In scenarios where uniquely identifying information between client and server
+is unnecessary (e.g., read-only, transient entities), JSON API allows for
+omitting the `"id"` key.
+
 ### Attributes
 
 Other than the `"links"`, `"href"` and `"id"` keys, every key in a document represents an attribute. An attribute's value may be any JSON value.
@@ -250,6 +254,10 @@ Each document in the list **SHOULD** contain an `id` key.
 The `"id"` key in a document represents a unique identifier for the document,
 scoped to the document's type. It can be used with URL templates to fetch
 related records, as described below.
+
+In scenarios where uniquely identifying information between client and server
+is unnecessary (e.g., read-only, transient entities), JSON API allows for
+omitting the `"id"` key.
 
 NOTE: While an implementation could use the values of `"id"` keys as URLs
 (which are unique string identifiers, after all), it is not generally
