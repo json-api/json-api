@@ -52,7 +52,7 @@ wrapped inside an array:
 This simplifies processing, as you can know that a resource key will always be
 a list.
 
-The document **MUST** contain an `id` key.
+The document **SHOULD** contain an `id` key.
 
 ### Resource Collections
 
@@ -71,7 +71,7 @@ represents a list of documents.
 }
 ```
 
-Each document in the list **MUST** contain an `id` key.
+Each document in the list **SHOULD** contain an `id` key.
 
 ### IDs
 
@@ -224,7 +224,7 @@ wrapped inside an array:
 This simplifies processing, as you can know that a resource key will always be
 a list.
 
-The document **MAY** contain an `id` key.
+The document **SHOULD** contain an `id` key.
 
 ### Resource Collections
 
@@ -243,7 +243,7 @@ represents a list of documents.
 }
 ```
 
-Each document in the list **MAY** contain an `id` key.
+Each document in the list **SHOULD** contain an `id` key.
 
 ### IDs
 
