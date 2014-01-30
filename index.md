@@ -17,10 +17,20 @@ By following shared conventions, you can increase productivity,
 take advantage of generalized tooling, and focus on what
 matters: your application.
 
-Here's what JSON API (in the ID style) looks like:
+Here's what JSON API looks like:
 
 ```javascript
 {
+  "links": {
+    "posts.author": {
+      "href": "http://example.com/people/{posts.author}",
+      "type": "people"
+    },
+    "posts.comments": {
+      "href": "http://example.com/comments/{posts.comments}",
+      "type": "comments"
+    }
+  },
   "posts": [{
     "id": "1",
     "title": "Rails is Omakase",
@@ -32,20 +42,8 @@ Here's what JSON API (in the ID style) looks like:
 }
 ```
 
-and in the URL style:
-
-```javascript
-{
-  "posts": [{
-    "id": "1",
-    "title": "Rails is Omakase",
-    "links": {
-      "author": "http://example.com/people/9",
-      "comments": "http://example.com/comments/5,12,17,20"
-    }
-  }]
-}
-```
+The top-level `"links"` section is optional, and without it the response probably
+looks very close to your already-existing API.
 
 JSON API covers creating and updating resources as well, not just responses.
 
@@ -58,23 +56,7 @@ type designation is [`application/vnd.api+json`](http://www.iana.org/assignments
 
 ## Format documentation
 
-To get started with JSON API, check out our documentation. There
-are two styles:
-
-* [The ID Style](/format#id-based-json-api)
-* [The URL Style](/format#url-based-json-api)
-
-The ID style is easier to get started with, and probably looks
-very close to your already-existing API.
-
-After you're more comfortable with the format, you may decide
-to upgrade to the URL style. It offers extra flexibility, but
-requires more intelligent client code.
-
-We expect most users of JSON API will transition from their
-totally custom API to one based on the ID style, and then later
-to the URL style. This is of course not required, but if you're
-not sure, it's the easiest way to get started.
+To get started with JSON API, check out our [documentation](/format)
 
 ## Update history
 
