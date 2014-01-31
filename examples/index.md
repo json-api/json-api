@@ -47,3 +47,11 @@ has page describing how to emit conformant JSON.
 ## Messages
 
 * [RestPack::Serializer provides examples](http://restpack-serializer-sample.herokuapp.com/) which demonstrate sample responses.
+
+## Related Tools
+
+### Ruby 
+
+* [json-patch](https://github.com/guillec/json-patch) implementation of JSON Patch (rfc6902) 
+
+* [hana](https://github.com/tenderlove/hana) implementation of the JSON Patch and JSON pointer spec 
