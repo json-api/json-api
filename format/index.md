@@ -157,7 +157,7 @@ corresponds to the ID of a related resource.
 }
 ```
 
-It **MAY** alternatively be represented with a `"link"` object that contains one
+It **MAY** alternatively be represented with a "link" object that contains one
 or more of the attributes: `"id"`, `"href"` and `"type"`.
 
 ```javascript
@@ -199,7 +199,7 @@ corresponding to IDs of related resources.
 }
 ```
 
-It **MAY** alternatively be represented with a `"link"` object that contains one
+It **MAY** alternatively be represented with a "link" object that contains one
 or more of the attributes: `"ids"`, `"href"` and `"type"`.
 
 ```javascript
@@ -226,7 +226,7 @@ In the above example, a `GET` request to
 specified comments.
 
 As another alternative, a to-many relationship **MAY** be represented as an
-array of `"link"` objects that contain one or more of the attributes: `"id"`,
+array of "link" objects that contain one or more of the attributes: `"id"`,
 `"href"`, and `"type"`.
 
 ```javascript
