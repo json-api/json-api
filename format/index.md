@@ -5,9 +5,6 @@ title: "JSON API: Format"
 
 {% include status.md %}
 
-<a id="id-based-json-api"></a>
-## ID-Based JSON API
-
 ## Document
 
 In this specification, the term "document" refers to a single object with a
@@ -16,29 +13,28 @@ set of attributes and relationships.
 A JSON response may include multiple documents, as described in this
 specification.
 
-Each of these names has a special meaning when included in the
-attributes section and should not be used as attribute names.
-
 ### Top Level
 
-The top-level of a JSON API document **MAY** have the following keys:
+The top-level of a JSON response will contain the primary document(s)
+keyed by the plural form of the primary resource type.
 
-* `meta`: meta-information about a resource, such as pagination
-* `linked`: a collection of documents, grouped by type, that are related to the
-   primary document and/or each other
+The top-level of the JSON response **MAY** also have the following keys:
 
-### Reserved Attributes
+* `"meta"`: meta-information about a resource, such as pagination.
+* `"links"`: URL templates to be used for expanding resources' relationships
+  URLs.
+* `"linked"`: a collection of documents, grouped by type, that are related to
+  the primary document(s) and/or each other.
 
-There are three reserved attribute names in JSON API:
+Each of these keys has a special meaning when included in the top level and
+should not be used as a resource type in order to avoid conflicts.
 
-* `id`
-* `href`
-* `links`
+No other keys should be present at the top level of the JSON response.
 
 ### Singular Resources
 
-Singular resources are represented as JSON objects. However, they are still
-wrapped inside an array:
+Documents that represent singular resources are wrapped inside an array
+and keyed by the plural form of the resource type:
 
 ```javascript
 {
@@ -49,15 +45,15 @@ wrapped inside an array:
 }
 ```
 
-This simplifies processing, as you can know that a resource key will always be
-a list.
+This simplifies processing, as you can know that documents will always be
+wrapped in arrays.
 
-The document **SHOULD** contain an `id` key.
+The document **SHOULD** contain an `"id"` key.
 
 ### Resource Collections
 
-If the length of an array at a resource key is greater than one, the value
-represents a list of documents.
+Documents that represent resource collections are also wrapped inside an array
+and keyed by the plural form of the resource type:
 
 ```javascript
 {
@@ -71,189 +67,13 @@ represents a list of documents.
 }
 ```
 
-Each document in the list **SHOULD** contain an `id` key.
+Each document in the array **SHOULD** contain an `"id"` key.
 
 ### IDs
 
-The `"id"` key in a document represents a unique identifier for the document, scoped to the document's type. The type scope is implicit, and hardcoded into clients of the API.
-
-In scenarios where uniquely identifying information between client and server
-is unnecessary (e.g., read-only, transient entities), JSON API allows for
-omitting the `"id"` key.
-
-### Attributes
-
-Other than the `"links"`, `"href"` and `"id"` keys, every key in a document represents an attribute. An attribute's value may be any JSON value.
-
-```javascript
-{
-  "posts": [{
-    "id": "1",
-    "title": "Rails is Omakase"
-  }]
-}
-```
-
-### Relationships
-
-The value of the `"links"` key is a JSON object that represents related documents.
-
-```javascript
-{
-  "posts": [{
-    "id": "1",
-    "title": "Rails is Omakase",
-    "links": {
-      "author": "9",
-      "comments": [ "5", "12", "17", "20" ]
-    }
-  }]
-}
-```
-
-NOTE: Given that `"links"` references `"author"` and the url is `"/people/9"`
-clients should hardcode how to relate that reference to that url.
-
-#### To-Many Relationships
-
-A to-many relationship is represented as a JSON array of IDs.
-
-```javascript
-{
-  "posts": [{
-    "id": "1",
-    "title": "Rails is Omakase",
-    "links": {
-      "comments": [ "5", "12", "17", "20" ]
-    }
-  }]
-}
-```
-
-An API that provides a to-many relationship as an array of IDs **MUST** respond to a `GET` request with a list of the specified documents with a URL formed by joining:
-
-* A base URL that represents the type of the related resource (this must be hardcoded in the client)
-* `?ids=`
-* A comma-separated list of the specified IDs
-
-In the above example, a `GET` request to `/comments?ids=5,12,17,20` returns a document containing the four specified comments.
-
-#### To-One Relationships
-
-A to-one relationship is represented as a single string or number value.
-
-```javascript
-{
-  "posts": [{
-    "id": "1",
-    "title": "Rails is Omakase",
-    "links": {
-      "author": "17"
-    }
-  }]
-}
-```
-
-NOTE: Given that `"links"` references `"author"` and the url is `"/people/17"`
-clients should hardcode how to relate that reference to that url.
-
-An API that provides a to-one relationship as an ID **MUST** respond to a `GET` request with the specified document with a URL formed by joining:
-
-* A base URL that represents the type of the related resource (this must be hardcoded in the client)
-* `/`
-* The specified ID
-
-In the above example, a `GET` request to `/people/17` returns a document containing the specified author.
-
-### Compound Documents
-
-To save HTTP requests, it may be convenient to send related documents along with
-the requested documents.
-
-Related documents **MUST** be included in a top level `"linked"` object, in
-which they are grouped together in arrays according to their type.
-
-```javascript
-{
-  "posts": [{
-    "id": "1",
-    "title": "Rails is Omakase",
-    "links": {
-      "author": "9"
-    }
-  }],
-  "linked": {
-    "people": [{
-      "id": "9",
-      "name": "@d2h"
-    }]
-  }
-}
-```
-
-NOTE: The linkage between the key under `"links"` (`"author"` in this example)
-and the associated document type (`"people"` in this example) is hardcoded into
-the client. The client must also hardcode how to relate that reference to a url.
-
-<a id="url-based-json-api"></a>
-## URL-Based JSON API
-
-In the above description of ID-based JSON, there were several places where information about the location of related resources needed to be hardcoded into the client.
-
-The goal of the URL-Based JSON API is to eliminate the need for those specific instances of hardcoded information.
-
-### Top Level
-
-The top-level of a JSON API document **MAY** have the following keys:
-
-* `meta`: meta-information about a resource, such as pagination
-* `links`: URL templates to be used for expanding resources' relationships URLs
-* `linked`: a collection of documents, grouped by type, that are related to the
-   primary document and/or each other
-
-### Singular Resources
-
-Singular resources are represented as JSON objects. However, they are still
-wrapped inside an array:
-
-```javascript
-{
-  "posts": [{
-    "id": 1
-    // an individual post document
-  }]
-}
-```
-
-This simplifies processing, as you can know that a resource key will always be
-a list.
-
-The document **SHOULD** contain an `id` key.
-
-### Resource Collections
-
-If the length of an array at a resource key is greater than one, the value
-represents a list of documents.
-
-```javascript
-{
-  "posts": [{
-    "id": 1
-    // an individual post document
-  }, {
-    "id": 2
-    // an individual post document
-  }]
-}
-```
-
-Each document in the list **SHOULD** contain an `id` key.
-
-### IDs
-
-The `"id"` key in a document represents a unique identifier for the document,
-scoped to the document's type. It can be used with URL templates to fetch
-related records, as described below.
+The `"id"` key in a document represents a unique identifier for the underlying
+resource, scoped to its type. It can be used with URL templates to fetch related
+resources, as described below.
 
 In scenarios where uniquely identifying information between client and server
 is unnecessary (e.g., read-only, transient entities), JSON API allows for
@@ -268,7 +88,14 @@ opaque to solely provide a unique identity within some type.
 
 ### Attributes
 
-Other than the `"links"`, `"href"` and `"id"` keys, every key in a document represents an attribute. An attribute's value may be any JSON value.
+There are three reserved attribute names in JSON API:
+
+* `id`
+* `href`
+* `links`
+
+Every other key in a document represents an attribute. An attribute's value may
+be any JSON value.
 
 ```javascript
 {
@@ -281,7 +108,8 @@ Other than the `"links"`, `"href"` and `"id"` keys, every key in a document repr
 
 ### Relationships
 
-The value of the `"links"` key is a JSON object that represents related documents.
+The value of the `"links"` key is a JSON object that represents related
+resources.
 
 ```javascript
 {
@@ -289,16 +117,32 @@ The value of the `"links"` key is a JSON object that represents related document
     "id": "1",
     "title": "Rails is Omakase",
     "links": {
-      "author": "http://example.com/people/1",
-      "comments": "http://example.com/comments/5,12,17,20"
+      "author": "9",
+      "comments": [ "5", "12", "17", "20" ]
     }
   }]
 }
 ```
+
+The link to each related resource **MUST** be one of the following:
+
+* a string or number - to represent a single ID.
+* an array of strings or numbers - to represent multiple IDs.
+* an object that contains one or more of the attributes:
+  `"id"`, `"ids"`, `"href"` and `"type"`. Note that `"id"` and `"ids"` should
+  never be present together.
+
+NOTE: Use of a document level `"links"` object is generally discouraged because
+root level URL Templates can usually provide the same data more concisely.
+However, there may be situations where each document will have a URL that isn't
+supported by the rigid structure of a template. In those cases, it may also be
+necessary to include either `"id"` or `"ids"` for the related documents in a
+compound document.
 
 #### To-Many Relationships
 
-A to-many relationship is a string value that represents a URL.
+A to-many relationship **MAY** be represented as an array of strings or numbers
+corresponding to IDs of related resources.
 
 ```javascript
 {
@@ -306,19 +150,42 @@ A to-many relationship is a string value that represents a URL.
     "id": "1",
     "title": "Rails is Omakase",
     "links": {
-      "comments": "http://example.com/posts/1/comments"
+      "comments": [ "5", "12", "17", "20" ]
     }
   }]
 }
 ```
 
-An API that provides a to-many relationship as a URL **MUST** respond to a `GET` request with a list of the specified documents with the specified URL.
+It **MAY** alternatively be represented with a `"link"` object that contains one
+or more of the attributes: `"ids"`, `"href"` and `"type"`.
 
-In the above example, a `GET` request to `/posts/1/comments` returns a document containing the four specified comments.
+```javascript
+{
+  "posts": [{
+    "id": "1",
+    "title": "Rails is Omakase",
+    "links": {
+      "comments": {
+        "href": "http://example.com/comments/5,12,17,20",
+        "ids": [ "5", "12", "17", "20" ],
+        "type": "comments"
+      }
+    }
+  }]
+}
+```
+
+An API that provides a to-many relationship as a URL **MUST** respond to a
+`GET` request with a list of the specified documents with the specified URL.
+
+In the above example, a `GET` request to
+`http://example.com/comments/5,12,17,20` returns a document containing the four
+specified comments.
 
 #### To-One Relationships
 
-A to-one relationship is represented as a string value that represents a URL.
+A to-one relationship **MAY** be represented as a string or number value that
+corresponds to the ID of a related resource.
 
 ```javascript
 {
@@ -326,19 +193,42 @@ A to-one relationship is represented as a string value that represents a URL.
     "id": "1",
     "title": "Rails is Omakase",
     "links": {
-      "author": "http://example.com/people/17"
+      "author": "17"
     }
   }]
 }
 ```
 
-An API that provides a to-one relationship as a URL **MUST** respond to a `GET` request with the specified document with the specified URL.
+It **MAY** alternatively be represented with a `"link"` object that contains one
+or more of the attributes: `"id"`, `"href"` and `"type"`.
 
-In the above example, a `GET` request to `/people/17` returns a document containing the specified author.
+```javascript
+{
+  "posts": [{
+    "id": "1",
+    "title": "Rails is Omakase",
+    "links": {
+      "author": {
+        "href": "http://example.com/people/17",
+        "id": "17",
+        "type": "people"
+      }
+    }
+  }]
+}
+```
+
+An API that provides a to-one relationship as a URL **MUST** respond to a `GET`
+request with the specified document with the specified URL.
+
+In the above example, a `GET` request to `http://example.com/people/17` returns
+a document containing the specified author.
 
 ### URL Template Shorthands
 
-When returning a list of documents from a response, a top-level `"links"` object can specify a URL template that should be used for all documents.
+When returning a list of documents from a response, a top-level `"links"`
+object **MAY** be used to specify a URL template that should be used for all
+documents.
 
 Example:
 
@@ -357,7 +247,9 @@ Example:
 }
 ```
 
-In this example, fetching `http://example.com/posts/1/comments` will fetch the comments for `"Rails is Omakase"` and fetching `http://example.com/posts/2/comments` will fetch the comments for `"The Parley Letter"`.
+In this example, fetching `http://example.com/posts/1/comments` will fetch
+the comments for `"Rails is Omakase"` and fetching `http://example.com/posts/2/comments`
+will fetch the comments for `"The Parley Letter"`.
 
 ```javascript
 {
@@ -376,17 +268,24 @@ In this example, fetching `http://example.com/posts/1/comments` will fetch the c
 
 In this example, the `posts.comments` variable is expanded by
 "exploding" the array specified in the `"links"` section of each post.
-The [URL template specification][3] specifies that the default explosion is to join the array members by a comma, so in this example, fetching `http://example.com/comments/1,2,3,4` will return a list of all comments.
+The [URL template specification][3] specifies that the default explosion is to
+join the array members by a comma, so in this example, fetching
+`http://example.com/comments/1,2,3,4` will return a list of all comments.
 
 [3]: https://tools.ietf.org/html/rfc6570
 
-This example shows how you can start with a list of IDs and then upgrade to specifying a different URL pattern than the default.
+This example shows how you can start with a list of IDs and then upgrade to
+specifying a different URL pattern than the default.
 
 The top-level `"links"` key has the following behavior:
 
-* Each key is a dot-separated path that points at a repeated relationship. For example `"posts.comments"` points at the `"comments"` relationship in each repeated document under `"posts"`.
+* Each key is a dot-separated path that points at a repeated relationship.
+  For example `"posts.comments"` points at the `"comments"` relationship in
+  each repeated document under `"posts"`.
 * The value of each key is interpreted as a URL template.
-* For each document that the path points to, act as if it specified a relationship formed by expanding the URL template with the non-URL value actually specified.
+* For each document that the path points to, act as if it specified a
+  relationship formed by expanding the URL template with the non-URL value
+  actually specified.
 
 Here is another example that uses a has-one relationship:
 
@@ -417,15 +316,22 @@ Here is another example that uses a has-one relationship:
 }
 ```
 
-In this example, the author URL for all three posts is `http://example.com/people/12`.
+In this example, the author URL for all three posts is
+`http://example.com/people/12`.
 
-Top-level URL templates allow you to specify relationships as IDs, but without requiring that clients hard-code information about how to form the URLs.
+Top-level URL templates allow you to specify relationships as IDs, but without
+requiring that clients hard-code information about how to form the URLs.
+
+NOTE: In case of conflict, an individual document's `links` object will take
+precedence over a top-level `links` object.
 
 ### Compound Documents
 
-To save HTTP requests, it may be convenient to send related documents along with the requested documents.
+To save HTTP requests, it may be convenient to send related documents along
+with the requested documents.
 
-Related documents **MUST** be included in a top level `"linked"` object, in which they are grouped together in arrays according to their type.
+Related documents **MUST** be included in a top level `"linked"` object, in
+which they are grouped together in arrays according to their type.
 
 The type of each relationship **MAY** be specified in the `"links"` object with
 the `"type"` key. This facilitates lookups of related documents by the client.
@@ -602,10 +508,7 @@ format is used, then it must be used for the primary document type as well.
 
 ### URLs
 
-Update URLs are determined the same way as `GET` URLs. When using the
-ID-based approach, URLs are conventionally formed. When using the
-URL-based approach, every document specifies the URLs for its related
-documents, which can be used to fetch **and** update.
+Update URLs are determined the same way as `GET` URLs.
 
 ### Creating a Document
 
