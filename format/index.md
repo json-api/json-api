@@ -139,6 +139,48 @@ supported by the rigid structure of a template. In those cases, it may also be
 necessary to include either `"id"` or `"ids"` for the related documents in a
 compound document.
 
+#### To-One Relationships
+
+A to-one relationship **MAY** be represented as a string or number value that
+corresponds to the ID of a related resource.
+
+```javascript
+{
+  "posts": [{
+    "id": "1",
+    "title": "Rails is Omakase",
+    "links": {
+      "author": "17"
+    }
+  }]
+}
+```
+
+It **MAY** alternatively be represented with a `"link"` object that contains one
+or more of the attributes: `"id"`, `"href"` and `"type"`.
+
+```javascript
+{
+  "posts": [{
+    "id": "1",
+    "title": "Rails is Omakase",
+    "links": {
+      "author": {
+        "href": "http://example.com/people/17",
+        "id": "17",
+        "type": "people"
+      }
+    }
+  }]
+}
+```
+
+An API that provides a to-one relationship as a URL **MUST** respond to a `GET`
+request with the specified document with the specified URL.
+
+In the above example, a `GET` request to `http://example.com/people/17` returns
+a document containing the specified author.
+
 #### To-Many Relationships
 
 A to-many relationship **MAY** be represented as an array of strings or numbers
@@ -181,48 +223,6 @@ An API that provides a to-many relationship as a URL **MUST** respond to a
 In the above example, a `GET` request to
 `http://example.com/comments/5,12,17,20` returns a document containing the four
 specified comments.
-
-#### To-One Relationships
-
-A to-one relationship **MAY** be represented as a string or number value that
-corresponds to the ID of a related resource.
-
-```javascript
-{
-  "posts": [{
-    "id": "1",
-    "title": "Rails is Omakase",
-    "links": {
-      "author": "17"
-    }
-  }]
-}
-```
-
-It **MAY** alternatively be represented with a `"link"` object that contains one
-or more of the attributes: `"id"`, `"href"` and `"type"`.
-
-```javascript
-{
-  "posts": [{
-    "id": "1",
-    "title": "Rails is Omakase",
-    "links": {
-      "author": {
-        "href": "http://example.com/people/17",
-        "id": "17",
-        "type": "people"
-      }
-    }
-  }]
-}
-```
-
-An API that provides a to-one relationship as a URL **MUST** respond to a `GET`
-request with the specified document with the specified URL.
-
-In the above example, a `GET` request to `http://example.com/people/17` returns
-a document containing the specified author.
 
 ### URL Template Shorthands
 
