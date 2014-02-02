@@ -128,9 +128,10 @@ The link to each related resource **MUST** be one of the following:
 
 * a string or number - to represent a single ID.
 * an array of strings or numbers - to represent multiple IDs.
-* an object that contains one or more of the attributes:
+* a "link" object that contains one or more of the attributes:
   `"id"`, `"ids"`, `"href"` and `"type"`. Note that `"id"` and `"ids"` should
   never be present together.
+* an array of "link" objects
 
 NOTE: Use of a document level `"links"` object is generally discouraged because
 root level URL Templates can usually provide the same data more concisely.
