@@ -224,6 +224,64 @@ In the above example, a `GET` request to
 `http://example.com/comments/5,12,17,20` returns a document containing the four
 specified comments.
 
+As another alternative, a to-many relationship **MAY** be represented as an
+array of `"link"` objects that contain one or more of the attributes: `"id"`,
+`"href"`, and `"type"`.
+
+```javascript
+{
+  "posts": [{
+    "id": "1",
+    "title": "Rails is Omakase",
+    "links": {
+      "comments": [
+        {
+          "href": "http://example.com/comments/5",
+          "id": "5",
+          "type": "comments"
+        },
+        {
+          "href": "http://example.com/comments/12",
+          "id": "12",
+          "type": "comments"
+        }
+      ]
+    }
+  }]
+}
+```
+
+In the above example, `GET` requests to `http://example.com/comments/5` and
+`http://example.com/comments/12` return the respective comments.
+
+NOTE: Given its verbosity, this third format should be used sparingly, but it
+is helpful when the related resources have a variable `"type"`:
+
+```javascript
+{
+  "posts": [
+    {
+      "id": "1",
+      "title": "One Type Purr Author",
+      "links": {
+        "authors": [
+          {
+            "href": "http://example.com/people/9",
+            "id": "9",
+            "type": "people"
+          },
+          {
+            "href": "http://example.com/cats/1",
+            "id": "1",
+            "type": "cats"
+          }
+        ]
+      }
+    }
+  ]
+}
+```
+
 ### URL Template Shorthands
 
 When returning a list of documents from a response, a top-level `"links"`
