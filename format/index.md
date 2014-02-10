@@ -128,9 +128,10 @@ The link to each related resource **MUST** be one of the following:
 
 * a string or number - to represent a single ID.
 * an array of strings or numbers - to represent multiple IDs.
-* an object that contains one or more of the attributes:
+* a "link" object that contains one or more of the attributes:
   `"id"`, `"ids"`, `"href"` and `"type"`. Note that `"id"` and `"ids"` should
   never be present together.
+* an array of "link" objects
 
 NOTE: Use of a document level `"links"` object is generally discouraged because
 root level URL Templates can usually provide the same data more concisely.
@@ -138,6 +139,48 @@ However, there may be situations where each document will have a URL that isn't
 supported by the rigid structure of a template. In those cases, it may also be
 necessary to include either `"id"` or `"ids"` for the related documents in a
 compound document.
+
+#### To-One Relationships
+
+A to-one relationship **MAY** be represented as a string or number value that
+corresponds to the ID of a related resource.
+
+```javascript
+{
+  "posts": [{
+    "id": "1",
+    "title": "Rails is Omakase",
+    "links": {
+      "author": "17"
+    }
+  }]
+}
+```
+
+It **MAY** alternatively be represented with a "link" object that contains one
+or more of the attributes: `"id"`, `"href"` and `"type"`.
+
+```javascript
+{
+  "posts": [{
+    "id": "1",
+    "title": "Rails is Omakase",
+    "links": {
+      "author": {
+        "href": "http://example.com/people/17",
+        "id": "17",
+        "type": "people"
+      }
+    }
+  }]
+}
+```
+
+An API that provides a to-one relationship as a URL **MUST** respond to a `GET`
+request with the specified document with the specified URL.
+
+In the above example, a `GET` request to `http://example.com/people/17` returns
+a document containing the specified author.
 
 #### To-Many Relationships
 
@@ -156,7 +199,7 @@ corresponding to IDs of related resources.
 }
 ```
 
-It **MAY** alternatively be represented with a `"link"` object that contains one
+It **MAY** alternatively be represented with a "link" object that contains one
 or more of the attributes: `"ids"`, `"href"` and `"type"`.
 
 ```javascript
@@ -182,10 +225,9 @@ In the above example, a `GET` request to
 `http://example.com/comments/5,12,17,20` returns a document containing the four
 specified comments.
 
-#### To-One Relationships
-
-A to-one relationship **MAY** be represented as a string or number value that
-corresponds to the ID of a related resource.
+As another alternative, a to-many relationship **MAY** be represented as an
+array of "link" objects that contain one or more of the attributes: `"id"`,
+`"href"`, and `"type"`.
 
 ```javascript
 {
@@ -193,36 +235,53 @@ corresponds to the ID of a related resource.
     "id": "1",
     "title": "Rails is Omakase",
     "links": {
-      "author": "17"
+      "comments": [
+        {
+          "href": "http://example.com/comments/5",
+          "id": "5",
+          "type": "comments"
+        },
+        {
+          "href": "http://example.com/comments/12",
+          "id": "12",
+          "type": "comments"
+        }
+      ]
     }
   }]
 }
 ```
 
-It **MAY** alternatively be represented with a `"link"` object that contains one
-or more of the attributes: `"id"`, `"href"` and `"type"`.
+In the above example, `GET` requests to `http://example.com/comments/5` and
+`http://example.com/comments/12` return the respective comments.
+
+NOTE: Given its verbosity, this third format should be used sparingly, but it
+is helpful when the related resources have a variable `"type"`:
 
 ```javascript
 {
-  "posts": [{
-    "id": "1",
-    "title": "Rails is Omakase",
-    "links": {
-      "author": {
-        "href": "http://example.com/people/17",
-        "id": "17",
-        "type": "people"
+  "posts": [
+    {
+      "id": "1",
+      "title": "One Type Purr Author",
+      "links": {
+        "authors": [
+          {
+            "href": "http://example.com/people/9",
+            "id": "9",
+            "type": "people"
+          },
+          {
+            "href": "http://example.com/cats/1",
+            "id": "1",
+            "type": "cats"
+          }
+        ]
       }
     }
-  }]
+  ]
 }
 ```
-
-An API that provides a to-one relationship as a URL **MUST** respond to a `GET`
-request with the specified document with the specified URL.
-
-In the above example, a `GET` request to `http://example.com/people/17` returns
-a document containing the specified author.
 
 ### URL Template Shorthands
 
