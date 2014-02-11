@@ -583,7 +583,7 @@ specified.
 GET /people?sort=age,name
 ```
 
-The default sort order should be ascending. A `-` prefix on any sort field
+The default sort order **SHOULD** be ascending. A `-` prefix on any sort field
 specifies a descending sort order.
 
 ```text
@@ -601,12 +601,12 @@ GET /posts?include=author&sort[posts]=-created,title&sort[people]=name
 ```
 
 If no sort order is specified, or if the endpoint does not support use of either
-`sort` or `sort[DOCUMENT_TYPE]`, then the endpoint SHOULD return documents
-sorted with a repeatable algorithm. In other words, documents should always be
-returned in the same order, even if the sort criteria aren't specified.
+`sort` or `sort[DOCUMENT_TYPE]`, then the endpoint **SHOULD** return documents
+sorted with a repeatable algorithm. In other words, documents **SHOULD** always
+be returned in the same order, even if the sort criteria aren't specified.
 
 Note: `sort` and `sort[DOCUMENT_TYPE]` can not be mixed. If the latter
-format is used, then it must be used for the primary document type as well.
+format is used, then it **MUST** be used for the primary document type as well.
 
 ## Updating
 
