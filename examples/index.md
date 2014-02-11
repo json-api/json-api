@@ -54,7 +54,7 @@ has page describing how to emit conformant JSON.
 
 ## Related Tools
 
-### Ruby 
+### Ruby
 
 * [json-patch](https://github.com/guillec/json-patch) implementation of JSON Patch (rfc6902) 
 
