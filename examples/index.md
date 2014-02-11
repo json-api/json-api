@@ -44,6 +44,10 @@ has page describing how to emit conformant JSON.
 
 * [Oat](https://github.com/ismasan/oat#adapters) ships with a JSON API adapter.
 
+### Python
+
+* [Hy](https://github.com/kalasjocke/hy) is a library for creating json-api responses.
+
 ## Messages
 
 * [RestPack::Serializer provides examples](http://restpack-serializer-sample.herokuapp.com/) which demonstrate sample responses.
