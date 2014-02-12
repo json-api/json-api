@@ -46,7 +46,7 @@ has page describing how to emit conformant JSON.
 
 ### Python
 
-* [Hy](https://github.com/kalasjocke/hy) is a library for creating json-api responses.
+* [Hyp](https://github.com/kalasjocke/hyp) is a library for creating json-api responses.
 
 ## Messages
 
