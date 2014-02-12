@@ -926,6 +926,16 @@ document's URL.
 DELETE /photos/1
 ```
 
+A server **MAY** choose to support resource collection *deletion*.
+
+An endpoint that supports it **MUST** respond to a `DELETE` request
+to the resource collection URL by removing every document listed as
+a resource by its corresponding `GET` request.
+
+```text
+DELETE /photos
+```
+
 ### 204 Responses
 
 If a server returns a `204 No Content` in response to a `DELETE`
