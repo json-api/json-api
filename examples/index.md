@@ -59,3 +59,7 @@ has page describing how to emit conformant JSON.
 * [json-patch](https://github.com/guillec/json-patch) implementation of JSON Patch (rfc6902) 
 
 * [hana](https://github.com/tenderlove/hana) implementation of the JSON Patch and JSON pointer spec 
+
+### Node.js
+
+* [json-patch](https://www.npmjs.org/package/json-patch) implementation of JSON Patch (rfc6902)
