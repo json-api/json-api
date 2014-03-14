@@ -969,3 +969,5 @@ The following elements MAY appear as child properties of the error object:
   }
 }
 ```
+
+Implementors **MAY** choose to not use this optional feature and use another media type for errors if they so choose. vnd.error and HTTP Problem are two examples.
