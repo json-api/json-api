@@ -951,7 +951,7 @@ additional documents are included in response to a `GET`.
 
 ## Errors
 
-The error object contains addiitional information on the latest error condition
+The error object contains additional information on the latest error condition
 reported by the server. This is an **OPTIONAL** object and there **MUST NOT** be more
 than one error object in a JSON API document. It is a top-level document property.
 
