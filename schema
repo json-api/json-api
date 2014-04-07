@@ -9,9 +9,9 @@
     "items": {
         "type": "object",
         "properties": {
-        "links": {
-          "type": "object"
-        }
+          "id": { "type":["string", "number"] },
+          "href": { "type":"string" },
+          "links": { "type": "object" }
       },
       "required": ["id"]
     }
