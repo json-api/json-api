@@ -25,6 +25,9 @@
     "meta": {
       "type": "object"
     },
+    "links":{
+      "type": "object"
+    },
     "linked": {
       "type": "object",
       "patternProperties": {
