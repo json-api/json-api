@@ -15,3 +15,6 @@ exclude:
 markdown: redcarpet
 pygments: false
 port: 9876
+redcarpet:
+  extensions:
+    - with_toc_data
