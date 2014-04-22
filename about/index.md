@@ -3,7 +3,7 @@ layout: page
 title: "JSON API: About"
 ---
 
-## Channels
+## Channels <a href="#channels" id="channels" class="headerlink">¶</a>
 
 JSON API is:
 
@@ -12,7 +12,7 @@ JSON API is:
   * _#jsonapi_ channel on [Freenode IRC](http://freenode.net)
   * [jsonapi Google group](https://groups.google.com/forum/?fromgroups#!forum/jsonapi)
 
-## Editors
+## Editors <a href="#editors" id="editors" class="headerlink">¶</a>
 
 There are two primary editors of this specification:
 
@@ -29,7 +29,7 @@ There are two primary editors of this specification:
 Steve primarily represents the server side, Yehuda the client side. Both of us
 care about both, but we want to make sure to have a champion on either side.
 
-## History
+## History <a href="#history" id="history" class="headerlink">¶</a>
 
 JSON API is extracted from the JSON transport implicitly defined by
 [Ember](http://emberjs.com/) Data's REST adapter.

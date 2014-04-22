@@ -3,13 +3,13 @@ layout: page
 title: "JSON API: Frequently Asked Questions"
 ---
 
-### Why is JSON API not versioned?
+### Why is JSON API not versioned? <a href="#why-is-json-api-not-versioned" id="why-is-json-api-not-versioned" class="headerlink">¶</a>
 
 Once JSON API is stable, it will always be backwards compatible using a _never
 remove, only add_ strategy.
 [#46](https://github.com/json-api/json-api/issues/46)
 
-### Why not use the HAL specification?
+### Why not use the HAL specification? <a href="#why-not-use-the-hal-specification" id="why-not-use-the-hal-specification" class="headerlink">¶</a>
 
 There are several reasons:
 
@@ -37,7 +37,7 @@ It is extracted from a real-world library already used by a number of projects,
 which has informed both the request/response aspects (absent from HAL) and the
 interchange format itself.
 
-### How to discover resource possible actions?
+### How to discover resource possible actions? <a href="#how-to-discover-resource-possible-actions" id="how-to-discover-resource-possible-actions" class="headerlink">¶</a>
 
 You should use the OPTIONS HTTP method to discover what can be done with a
 particular resource. The semantics of the methods returned by OPTIONS is defined

@@ -3,7 +3,7 @@ layout: page
 title: JSON API
 ---
 
-## Description
+## Description <a href="#description" id="description" class="headerlink">¶</a>
 
 "JSON API" is a standard for building APIs in JSON. If you've
 ever argued with your team about the way your JSON responses
@@ -49,16 +49,16 @@ JSON API covers creating and updating resources as well, not just responses.
 
 {% include status.md %}
 
-## MIME Types
+## MIME Types <a href="#mime-types" id="mime-types" class="headerlink">¶</a>
 
 JSON API has been properly registered with the IANA. Its media
 type designation is [`application/vnd.api+json`](http://www.iana.org/assignments/media-types/application/vnd.api+json).
 
-## Format documentation
+## Format documentation <a href="#format-documentation" id="format-documentation" class="headerlink">¶</a>
 
 To get started with JSON API, check out our [documentation](/format)
 
-## Update history
+## Update history <a href="#update-history" id="update-history" class="headerlink">¶</a>
 
 - 2013-05-03: Initial release of the draft.
 - 2013-07-22: Media type registration completed with the IANA.
