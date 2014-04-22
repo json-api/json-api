@@ -41,19 +41,42 @@ h1 {
   font-weight: bold;
 }
 
+.headerlink {
+  display: none;
+  text-decoration: none;
+}
+
 
 h2 {
   font-size: 16px;
   color: #676;
   border-bottom: 3px solid #aba;
+
+  &:hover {
+    .headerlink {
+      display: inline-block;
+    }
+  }
 }
 
 h3 {
   color: #898;
+
+  &:hover {
+    .headerlink {
+      display: inline-block;
+    }
+  }
 }
 
 h4 {
   color: #9a9;
+
+  &:hover {
+    .headerlink {
+      display: inline-block;
+    }
+  }
 }
 
 

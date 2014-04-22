@@ -33,16 +33,26 @@ h1 {
   font-family: "Titillium Web", sans-serif;
   font-weight: bold; }
 
+.headerlink {
+  display: none;
+  text-decoration: none; }
+
 h2 {
   font-size: 16px;
   color: #676;
   border-bottom: 3px solid #aba; }
+  h2:hover .headerlink {
+    display: inline-block; }
 
 h3 {
   color: #898; }
+  h3:hover .headerlink {
+    display: inline-block; }
 
 h4 {
   color: #9a9; }
+  h4:hover .headerlink {
+    display: inline-block; }
 
 ul {
   margin-left: 0;

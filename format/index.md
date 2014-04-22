@@ -5,7 +5,7 @@ title: "JSON API: Format"
 
 {% include status.md %}
 
-## Document
+## Document <a href="#document" id="document" class="headerlink">¶</a>
 
 In this specification, the term "document" refers to a single object with a
 set of attributes and relationships.
@@ -13,7 +13,7 @@ set of attributes and relationships.
 A JSON response may include multiple documents, as described in this
 specification.
 
-### Top Level
+### Top Level <a href="#document-top-level" id="document-top-level" class="headerlink">¶</a>
 
 The top-level of a JSON response will contain the primary document(s)
 keyed by the plural form of the primary resource type.
@@ -31,7 +31,7 @@ should not be used as a resource type in order to avoid conflicts.
 
 No other keys should be present at the top level of the JSON response.
 
-### Singular Resources
+### Singular Resources <a href="#document-sigular-resources" id="document-sigular-resources" class="headerlink">¶</a>
 
 Documents that represent singular resources are wrapped inside an array
 and keyed by the plural form of the resource type:
@@ -50,7 +50,7 @@ wrapped in arrays.
 
 The document **SHOULD** contain an `"id"` key.
 
-### Resource Collections
+### Resource Collections <a href="#document-resource-collections" id="document-resource-collections" class="headerlink">¶</a>
 
 Documents that represent resource collections are also wrapped inside an array
 and keyed by the plural form of the resource type:
@@ -69,7 +69,7 @@ and keyed by the plural form of the resource type:
 
 Each document in the array **SHOULD** contain an `"id"` key.
 
-### IDs
+### IDs <a href="#document-ids" id="document-ids" class="headerlink">¶</a>
 
 The `"id"` key in a document represents a unique identifier for the underlying
 resource, scoped to its type. It can be used with URL templates to fetch related
@@ -86,7 +86,7 @@ any client-side models that represent the same resource. It is recommended that
 URL values be left to the task of linking documents while `"id"` values remain
 opaque to solely provide a unique identity within some type.
 
-### Attributes
+### Attributes <a href="#document-attributes" id="document-attributes" class="headerlink">¶</a>
 
 There are three reserved attribute names in JSON API:
 
@@ -106,7 +106,7 @@ be any JSON value.
 }
 ```
 
-### Relationships
+### Relationships <a href="#document-relationships" id="document-relationships" class="headerlink">¶</a>
 
 The value of the `"links"` key is a JSON object that represents related
 resources.
@@ -140,7 +140,7 @@ supported by the rigid structure of a template. In those cases, it may also be
 necessary to include either `"id"` or `"ids"` for the related documents in a
 compound document.
 
-#### To-One Relationships
+#### To-One Relationships <a href="#document-relationships-to-one-relationships" id="document-relationships-to-one-relationships" class="headerlink">¶</a>
 
 A to-one relationship **MAY** be represented as a string or number value that
 corresponds to the ID of a related resource.
@@ -182,7 +182,7 @@ request with the specified document with the specified URL.
 In the above example, a `GET` request to `http://example.com/people/17` returns
 a document containing the specified author.
 
-#### To-Many Relationships
+#### To-Many Relationships <a href="#document-relationships-to-many-relationships" id="document-relationships-to-many-relationships" class="headerlink">¶</a>
 
 A to-many relationship **MAY** be represented as an array of strings or numbers
 corresponding to IDs of related resources.
@@ -283,7 +283,7 @@ is helpful when the related resources have a variable `"type"`:
 }
 ```
 
-### URL Template Shorthands
+### URL Template Shorthands <a href="#document-url-template-shorthands" id="document-url-template-shorthands" class="headerlink">¶</a>
 
 When returning a list of documents from a response, a top-level `"links"`
 object **MAY** be used to specify a URL template that should be used for all
@@ -384,7 +384,7 @@ requiring that clients hard-code information about how to form the URLs.
 NOTE: In case of conflict, an individual document's `links` object will take
 precedence over a top-level `links` object.
 
-### Compound Documents
+### Compound Documents <a href="#document-compound-documents" id="document-compound-documents" class="headerlink">¶</a>
 
 To save HTTP requests, it may be convenient to send related documents along
 with the requested documents.
@@ -498,9 +498,9 @@ response by specifying a `"href"` key:
 }
 ```
 
-## Fetching
+## Fetching <a href="#fetching" id="fetching" class="headerlink">¶</a>
 
-### Inclusion of Related Documents
+### Inclusion of Related Documents <a href="#fetching-inclusion-of-related-documents" id="fetching-inclusion-of-related-documents" class="headerlink">¶</a>
 
 A server **MAY** choose to support returning compound documents that include
 both primary and related documents.
@@ -537,7 +537,7 @@ Multiple related documents could be requested in a comma-separated list:
 GET /posts/1?include=author,comments,comments.author
 ```
 
-### Sparse Fieldsets
+### Sparse Fieldsets <a href="#fetching-sparse-fieldsets" id="fetching-sparse-fieldsets" class="headerlink">¶</a>
 
 A server **MAY** choose to support requests to return only specific fields for
 documents.
@@ -563,7 +563,7 @@ either `fields` or `fields[DOCUMENT_TYPE]`.
 Note: `fields` and `fields[DOCUMENT_TYPE]` can not be mixed. If the latter
 format is used, then it must be used for the primary document type as well.
 
-### Sorting
+### Sorting <a href="#fetching-sorting" id="fetching-sorting" class="headerlink">¶</a>
 
 A server **MAY** choose to support requests to sort documents according to
 one or more criteria.
@@ -608,13 +608,13 @@ be returned in the same order, even if the sort criteria aren't specified.
 Note: `sort` and `sort[DOCUMENT_TYPE]` can not be mixed. If the latter
 format is used, then it **MUST** be used for the primary document type as well.
 
-## Updating
+## Updating <a href="#updating" id="updating" class="headerlink">¶</a>
 
-### URLs
+### URLs <a href="#updating-urls" id="updating-urls" class="headerlink">¶</a>
 
 Update URLs are determined the same way as `GET` URLs.
 
-### Creating a Document
+### Creating a Document <a href="#updating-creating-a-document" id="updating-creating-a-document" class="headerlink">¶</a>
 
 A JSON API document is *created* by making a `POST` request to the URL that
 represents a collection of documents that the new document should belong to.
@@ -665,7 +665,7 @@ Accept: application/vnd.api+json
 }
 ```
 
-#### Client-Side IDs
+#### Client-Side IDs <a href="#updating-creating-a-document-client-side-ids" id="updating-creating-a-document-client-side-ids" class="headerlink">¶</a>
 
 A server **MAY** require a client to provide IDs generated on the
 client. If a server wants to request client-generated IDs, it **MUST**
@@ -709,7 +709,7 @@ Accept: application/vnd.api+json
 }
 ```
 
-#### Response
+#### Response <a href="#updating-creating-a-document-response" id="updating-creating-a-document-response" class="headerlink">¶</a>
 
 A server **MUST** respond to a successful document creation request
 according to [`HTTP semantics`][2]
@@ -743,12 +743,12 @@ Content-Type: application/vnd.api+json
 }
 ```
 
-##### Other Responses
+##### Other Responses <a href="#updating-creating-a-document-response-other-responses" id="updating-creating-a-document-response-other-responses" class="headerlink">¶</a>
 
 Servers **MAY** use other HTTP error codes to represent errors.  Clients
 **MUST** interpret those errors in accordance with HTTP semantics.
 
-## Updating a Document (`PATCH`)
+## Updating a Document (`PATCH`) <a href="#updating-a-document" id="updating-a-document" class="headerlink">¶</a>
 
 The body of the `PATCH` request **MUST** be in JSON format with a `Content-Type`
 header of `application/json-patch+json`.
@@ -757,7 +757,7 @@ It **MUST** be a valid [JSON Patch (RFC 6902)][4] document.
 
 [4]: http://tools.ietf.org/html/rfc6902
 
-### Attributes
+### Attributes <a href="#updating-a-document-attributes" id="updating-a-document-attributes" class="headerlink">¶</a>
 
 To update an attribute, include a `replace` operation in the JSON Patch
 document. The name of the property to replace **MUST** be the same as
@@ -795,12 +795,12 @@ Content-Type: application/json-patch+json
 For attributes, only the `replace` operation is supported at the current
 time.
 
-### Relationships
+### Relationships <a href="#updating-a-document-relationships" id="updating-a-document-relationships" class="headerlink">¶</a>
 
 Relationship updates are represented as JSON Patch operations on the
 `links` document.
 
-#### To-One Relationships
+#### To-One Relationships <a href="#updating-a-document-relationships-to-one-relationships" id="updating-a-document-relationships-to-one-relationships" class="headerlink">¶</a>
 
 To update a to-one relationship, the client **MUST** issue a `PATCH`
 request that includes a `replace` operation on the relationship
@@ -841,7 +841,7 @@ Accept: application/vnd.api+json
 ]
 ```
 
-#### To-Many Relationships
+#### To-Many Relationships <a href="#updating-a-document-relationships-to-many-relationships" id="updating-a-document-relationships-to-many-relationships" class="headerlink">¶</a>
 
 While to-many relationships are represented as a JSON array in a `GET`
 response, they are updated as if they were a set.
@@ -896,13 +896,13 @@ PATCH /photos/1
 Note that to-many relationships have set-like behavior in JSON API to
 limit the damage that can be caused by concurrent modifications.
 
-### 204 No Content
+### 204 No Content <a href="#updating-a-document-204-no-content" id="updating-a-document-204-no-content" class="headerlink">¶</a>
 
 If a server returns a `204 No Content` in response to a `PATCH` request,
 it means that the update was successful, and that the client's current
 attributes remain up to date.
 
-### 200 OK
+### 200 OK <a href="#updating-a-document-200-ok" id="updating-a-document-200-ok" class="headerlink">¶</a>
 
 If the server accepts the update but also changes the document in other
 ways than those specified by the `PATCH` request (for example, updating
@@ -912,12 +912,12 @@ the `updatedAt` attribute or a computed `sha`), it **MUST** return a
 The body of the response **MUST** be a valid JSON API response, as if a
 `GET` request was made to the same URL.
 
-### Other Responses
+### Other Responses <a href="#updating-a-document-other-responses" id="updating-a-document-other-responses" class="headerlink">¶</a>
 
 Servers **MAY** use other HTTP error codes to represent errors.  Clients
 **MUST** interpret those errors in accordance with HTTP semantics.
 
-## Deletions
+## Deletions <a href="#deletions" id="deletions" class="headerlink">¶</a>
 
 A JSON API document is *deleted* by making a `DELETE` request to the
 document's URL.
@@ -926,22 +926,22 @@ document's URL.
 DELETE /photos/1
 ```
 
-### 204 Responses
+### 204 Responses <a href="#deletions-204-responses" id="deletions-204-responses" class="headerlink">¶</a>
 
 If a server returns a `204 No Content` in response to a `DELETE`
 request, it means that the deletion was successful.
 
-### Other Responses
+### Other Responses <a href="#deletions-other-responses" id="deletions-other-responses" class="headerlink">¶</a>
 
 Servers **MAY** use other HTTP error codes to represent errors.  Clients
 **MUST** interpret those errors in accordance with HTTP semantics.
 
-## HTTP Caching
+## HTTP Caching <a href="#http-caching" id="http-caching" class="headerlink">¶</a>
 
 Servers **MAY** use HTTP caching headers (`ETag`, `Last-Modified`) in
 accordance with the semantics described in HTTP 1.1.
 
-## Compound Responses
+## Compound Responses <a href="#compound-responses" id="compound-responses" class="headerlink">¶</a>
 
 Whenever a server returns a `200 OK` response in response to a creation,
 update or deletion, it **MAY** include other documents in the JSON
