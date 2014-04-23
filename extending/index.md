@@ -1,6 +1,6 @@
 ---
 layout: page
-title: "JSON API: Extending"
+title: Extending
 ---
 
 {% include status.md %}

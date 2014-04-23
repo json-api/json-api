@@ -1,6 +1,6 @@
 ---
 layout: page
-title: "JSON API: Examples"
+title: Examples
 ---
 
 Examples are excellent learning aids. The following projects implementing JSON

@@ -1,6 +1,6 @@
 ---
 layout: page
-title: "JSON API: About"
+title: About
 ---
 
 ## Channels <a href="#channels" id="channels" class="headerlink">¶</a>

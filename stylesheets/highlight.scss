@@ -7,7 +7,7 @@ $gray:   #777777;
 $green:  #007700;
 
 .highlight {
-  background-image: url('/images/background.png');
+  background: #f9f9f9;
   border: 1px solid #d1d1d1;
   @include border-radius($border-radius);
   font-size: 12px;

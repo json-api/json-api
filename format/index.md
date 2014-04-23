@@ -1,6 +1,6 @@
 ---
 layout: page
-title: "JSON API: Format"
+title: "Format"
 ---
 
 {% include status.md %}

@@ -7,7 +7,7 @@
     <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
     
     <!-- Use title if it's in the page YAML frontmatter -->
-    <title>{{ page..title }}</title>
+    <title>JSON API :: {{ page..title }}</title>
     
     <link href='http://fonts.googleapis.com/css?family=Titillium+Web:400,600,700,900' rel='stylesheet' type='text/css'>
     <link href="/stylesheets/normalize.css" media="screen" rel="stylesheet" type="text/css" />
@@ -20,7 +20,20 @@
 
   <body>
     {% include header.html %}
-    {{ content }}
+    <article>
+
+      <section>
+        {% if page.show_masthead %}
+        <div class="masthead">
+          <img src="/images/jsonapi@1.3x.png">
+          <h1>{{ page.title }}</h1>
+        </div>
+        {% else %}
+        <h1>{{ page.title }}</h1>
+        {% endif %}
+        {{ content }}
+      </section>
+    </article>
     {% include footer.html %}
   </body>
 </html>
