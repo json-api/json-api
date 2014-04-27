@@ -15,7 +15,7 @@ Clients built around JSON API are able to take
 advantage of its features around efficiently caching responses,
 sometimes eliminating network requests entirely.
 
-Here's what JSON API looks like:
+Here's an example response from JSON API:
 
 ```javascript
 {
@@ -40,8 +40,8 @@ Here's what JSON API looks like:
 }
 ```
 
-The top-level `"links"` section is optional, and without it the response probably
-looks very close to your already-existing API.
+The top-level `"links"` section is optional, and without it the response
+probably looks very close to a response from your already-existing API.
 
 JSON API covers creating and updating resources as well, not just responses.
 
