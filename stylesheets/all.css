@@ -87,6 +87,7 @@ a {
 h1 {
   margin: 1.5em 0 1.2em 0;
   padding: 0;
+  font-size: 1.8em;
   font-weight: bold;
   text-align: center; }
 
@@ -114,15 +115,25 @@ h4:hover .headerlink {
   display: inline-block; }
 
 h2 {
-  font-size: 16px;
+  margin: 1.5em 0 0.9em 0;
+  font-size: 1.4em;
   color: #676;
   border-bottom: 3px solid #aba; }
 
 h3 {
-  color: #898; }
+  margin: 1.5em 0 1em 0;
+  font-size: 1.3em;
+  color: #666; }
 
 h4 {
-  color: #9a9; }
+  margin: 1.2em 0 1em 0;
+  font-size: 1.2em;
+  color: #898; }
+
+h5 {
+  margin: 1.2em 0 1em 0;
+  font-size: 1.1em;
+  color: #777; }
 
 ul {
   margin-left: 0;
