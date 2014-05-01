@@ -15,6 +15,11 @@ Gemfile.lock
 # Ignore Sass' cache
 /.sass-cache
 
+# Ignore css compiled from sass
+/stylesheets/all.css
+/stylesheets/fontello.css
+/stylesheets/highlight.css
+
 /bin
 /b
 .rbx

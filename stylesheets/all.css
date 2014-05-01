@@ -1,58 +1,128 @@
-html {
-  display: -webkit-flex;
-  -webkit-flex-direction: row;
-  -webkit-justify-content: center;
-  background-color: #f0fff0; }
+@charset "UTF-8";
+@font-face {
+  font-family: 'fontello';
+  src: url("../fonts/fontello.eot?60624967");
+  src: url("../fonts/fontello.eot?60624967#iefix") format("embedded-opentype"), url("../fonts/fontello.woff?60624967") format("woff"), url("../fonts/fontello.ttf?60624967") format("truetype"), url("../fonts/fontello.svg?60624967#fontello") format("svg");
+  font-weight: normal;
+  font-style: normal; }
 
+/* Chrome hack: SVG is rendered more smooth in Windozze. 100% magic, uncomment if you need it. */
+/* Note, that will break hinting! In other OS-es font will be not as sharp as it could be */
+/*
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+  @font-face {
+    font-family: 'fontello';
+    src: url('../font/fontello.svg?60624967#fontello') format('svg');
+  }
+}
+*/
+[class^="icon-"]:before, [class*=" icon-"]:before {
+  font-family: "fontello";
+  font-style: normal;
+  font-weight: normal;
+  speak: none;
+  display: inline-block;
+  text-decoration: inherit;
+  width: 1em;
+  margin-right: .2em;
+  text-align: center;
+  /* opacity: .8; */
+  /* For safety - reset parent styles, that can break glyph codes*/
+  font-variant: normal;
+  text-transform: none;
+  /* fix buttons height, for twitter bootstrap */
+  line-height: 1em;
+  /* Animation center compensation - margins should be symmetric */
+  /* remove if not needed */
+  margin-left: .2em;
+  /* you can be more comfortable with increased icons size */
+  /* font-size: 120%; */
+  /* Uncomment for 3D effect */
+  /* text-shadow: 1px 1px 1px rgba(127, 127, 127, 0.3); */ }
+
+.icon-search:before {
+  content: '\e804'; }
+
+/* '' */
+.icon-cancel:before {
+  content: '\e802'; }
+
+/* '' */
+.icon-link:before {
+  content: '\e803'; }
+
+/* '' */
+.icon-pencil:before {
+  content: '\e801'; }
+
+/* '' */
+.icon-fork:before {
+  content: '\e800'; }
+
+/* '' */
+.icon-github:before {
+  content: '\e806'; }
+
+/* '' */
+.icon-gplus:before {
+  content: '\e807'; }
+
+/* '' */
+.icon-twitter:before {
+  content: '\e805'; }
+
+/* '' */
 body {
-  width: 700px;
-  border: 1px solid #ccc;
-  padding: 20px;
-  border-radius: 10px;
-  margin: 10px auto;
-  background-color: #f9f9f9;
-  color: #222;
+  margin: 52px 0 0 0;
   line-height: 150%;
-  box-shadow: 0 0 5px 0px #cec;
-  font-family: "Titillium Web"; }
-
-ul {
-  margin-bottom: 20px; }
+  font-family: "Helvetica";
+  font-family: "Titillium Web", sans-serif;
+  background: #eee; }
 
 a {
   color: #393; }
-
-a:hover {
-  color: #050; }
+  a:hover {
+    color: #050; }
 
 h1 {
-  margin-top: 0;
-  padding: 20px 30px 30px 30px;
-  font-family: "Helvetica";
+  margin: 1.5em 0 1.2em 0;
+  padding: 0;
+  font-weight: bold;
+  text-align: center; }
+
+.masthead {
+  margin: 20px 0;
+  padding: 30px;
   text-align: center;
-  font-family: "Titillium Web", sans-serif;
-  font-weight: bold; }
+  background: #f9f9f9;
+  -webkit-border-radius: 8px;
+  -moz-border-radius: 8px;
+  -ms-border-radius: 8px;
+  -o-border-radius: 8px;
+  border-radius: 8px;
+  border: 1px solid #eee; }
+  .masthead h1 {
+    margin: 0.5em; }
 
 .headerlink {
   display: none;
   text-decoration: none; }
 
+h2:hover .headerlink,
+h3:hover .headerlink,
+h4:hover .headerlink {
+  display: inline-block; }
+
 h2 {
   font-size: 16px;
   color: #676;
   border-bottom: 3px solid #aba; }
-  h2:hover .headerlink {
-    display: inline-block; }
 
 h3 {
   color: #898; }
-  h3:hover .headerlink {
-    display: inline-block; }
 
 h4 {
   color: #9a9; }
-  h4:hover .headerlink {
-    display: inline-block; }
 
 ul {
   margin-left: 0;
@@ -60,40 +130,90 @@ ul {
   ul li {
     margin-left: 20px; }
 
+section {
+  margin: 0 auto;
+  width: 800px; }
+  section:after {
+    clear: both; }
+
 header {
-  margin: 20px 0 0 0;
-  display: block; }
+  position: absolute;
+  width: 100%;
+  min-width: 800px;
+  top: 0;
+  left: 0;
+  height: 52px;
+  border-bottom: 1px solid #aaa;
+  z-index: 100; }
+  header a.logo {
+    margin: 1px 10px 0 0;
+    float: left; }
+  header nav {
+    float: left;
+    margin-top: 13px; }
+    header nav ul {
+      margin: 0;
+      padding-left: 0; }
+    header nav li {
+      display: inline;
+      font-weight: bold;
+      list-style-type: none;
+      margin: 0 0 0.5em 0;
+      padding: 0;
+      text-align: right;
+      white-space: pre; }
+      header nav li a {
+        font-family: monospace, serif;
+        text-decoration: none;
+        padding: 0.3em 0.5em;
+        color: #777; }
+      header nav li.active a {
+        color: #000; }
 
-header nav {
-  text-align: left; }
-
-header nav ul {
-  margin: 0;
-  padding-left: 0;
-  padding-bottom: 2em; }
-
-header nav li {
-  border-left: 1px solid #ccc;
-  display: inline;
-  font-weight: bold;
-  list-style-type: none;
-  margin: 0 0 0 .25em;
-  padding: 0 0 0 .25em;
-  text-align: right;
-  padding: 0 .75em;
-  white-space: pre; }
-
-header nav li:first-child {
-  border: none;
-  padding-left: 0;
-  margin-left: 0; }
-
-header nav li:last-child {
-  padding-right: 0;
-  margin-right: 0; }
-
-header nav li a {
-  padding: .5em 0 .5em 0; }
+article {
+  position: relative;
+  margin: 0 auto;
+  padding: 0 0 40px 0;
+  overflow: hidden;
+  background: #fff; }
 
 footer {
-  border-top: 5px solid #aba; }
+  padding: 15px 0;
+  border-top: 1px solid #aaa; }
+  footer .details {
+    float: left; }
+  footer .links {
+    float: right; }
+
+.links {
+  width: 200px;
+  text-align: right; }
+  .links a {
+    margin: 3px 10px 0;
+    border-bottom: none;
+    opacity: 0.7;
+    /*
+      This is for hiding text from users with normal vision
+      but keeping the text for screen readers
+    */ }
+    .links a:hover {
+      opacity: 1; }
+    .links a i {
+      margin: 0; }
+    .links a span {
+      display: inline-block;
+      width: 1px;
+      text-indent: 200%;
+      white-space: nowrap;
+      overflow: hidden; }
+
+.twitter, .github, .googleplus {
+  font-size: 33px;
+  line-height: 35px;
+  color: #464646;
+  height: 35px;
+  width: 35px;
+  display: inline-block; }
+
+.googleplus {
+  font-size: 29px; }

@@ -1,6 +1,6 @@
 ---
 layout: page
-title: "JSON API: Frequently Asked Questions"
+title: Frequently Asked Questions
 ---
 
 ### Why is JSON API not versioned? <a href="#why-is-json-api-not-versioned" id="why-is-json-api-not-versioned" class="headerlink">¶</a>

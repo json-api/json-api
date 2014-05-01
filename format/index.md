@@ -1,6 +1,6 @@
 ---
 layout: page
-title: "JSON API: Format"
+title: "Format"
 ---
 
 {% include status.md %}
@@ -235,18 +235,16 @@ array of "link" objects that contain one or more of the attributes: `"id"`,
     "id": "1",
     "title": "Rails is Omakase",
     "links": {
-      "comments": [
-        {
-          "href": "http://example.com/comments/5",
-          "id": "5",
-          "type": "comments"
-        },
-        {
-          "href": "http://example.com/comments/12",
-          "id": "12",
-          "type": "comments"
-        }
-      ]
+      "comments": [{
+        "href": "http://example.com/comments/5",
+        "id": "5",
+        "type": "comments"
+      },
+      {
+        "href": "http://example.com/comments/12",
+        "id": "12",
+        "type": "comments"
+      }]
     }
   }]
 }
@@ -260,26 +258,22 @@ is helpful when the related resources have a variable `"type"`:
 
 ```javascript
 {
-  "posts": [
-    {
-      "id": "1",
-      "title": "One Type Purr Author",
-      "links": {
-        "authors": [
-          {
-            "href": "http://example.com/people/9",
-            "id": "9",
-            "type": "people"
-          },
-          {
-            "href": "http://example.com/cats/1",
-            "id": "1",
-            "type": "cats"
-          }
-        ]
-      }
+  "posts": [{
+    "id": "1",
+    "title": "One Type Purr Author",
+    "links": {
+      "authors": [{
+        "href": "http://example.com/people/9",
+        "id": "9",
+        "type": "people"
+      },
+      {
+        "href": "http://example.com/cats/1",
+        "id": "1",
+        "type": "cats"
+      }]
     }
-  ]
+  }]
 }
 ```
 

@@ -1,17 +1,20 @@
-  <a href="https://github.com/json-api/json-api"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_red_aa0000.png" alt="Fork me on GitHub"></a>
+  <a href="https://github.com/json-api/json-api"><img style="position: absolute; top: 0; right: 0; border: 0; z-index: 1000" src="https://s3.amazonaws.com/github/ribbons/forkme_right_red_aa0000.png" alt="Fork me on GitHub"></a>
 
   <header>
-    <nav>
-      <ul>
-        <li><a href="/">Overview</a></li>
-        <li><a href="/format">Format</a></li>
-        <li><a href="/extending">Extending</a></li>
-        <li><a href="/examples">Examples</a></li>
-        <li><a href="/faq">FAQ</a></li>
-        <li><a href="/about">About</a></li>
-      </ul>
-    </nav>
-
-    <h1>{{ page.title }}</h1>
-
+    <section>
+      <a href="/" class="logo" alt="JSON API">
+        <img src="/images/jsonapi@0.7x.png">
+      </a>
+      <nav>
+        <ul>
+          {% assign url = page.url|remove:'index.html' %}
+          {% for link in site.navigation %}
+          <li {% if url == link.url %}class="active"{% endif %}><a
+            href="{{link.url}}"
+            title="{{link.title}}">{{link.title}}</a></li>
+          {% endfor %}
+        </ul>
+      </nav>
+    </section>
   </header>
+
