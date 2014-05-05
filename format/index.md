@@ -39,7 +39,7 @@ and keyed by the plural form of the resource type:
 ```javascript
 {
   "posts": [{
-    "id": 1
+    "id": "1"
     // an individual post document
   }]
 }
@@ -58,10 +58,10 @@ and keyed by the plural form of the resource type:
 ```javascript
 {
   "posts": [{
-    "id": 1
+    "id": "1"
     // an individual post document
   }, {
-    "id": 2
+    "id": "2"
     // an individual post document
   }]
 }
@@ -72,8 +72,10 @@ Each document in the array **SHOULD** contain an `"id"` key.
 ### IDs <a href="#document-ids" id="document-ids" class="headerlink">¶</a>
 
 The `"id"` key in a document represents a unique identifier for the underlying
-resource, scoped to its type. It can be used with URL templates to fetch related
-resources, as described below.
+resource, scoped to its type. It **MUST** be a string which **SHOULD** only
+contain alphanumeric characters, dashes and underscores. It can be used with URL
+templates to fetch related resources, as described below.
+
 
 In scenarios where uniquely identifying information between client and server
 is unnecessary (e.g., read-only, transient entities), JSON API allows for
@@ -322,7 +324,8 @@ will fetch the comments for `"The Parley Letter"`.
 In this example, the `posts.comments` variable is expanded by
 "exploding" the array specified in the `"links"` section of each post.
 The [URL template specification][3] specifies that the default explosion is to
-join the array members by a comma, so in this example, fetching
+percent encode the array members (e.g. via `encodeURIComponent()` in JavaScript)
+and join them by a comma, so in this example, fetching
 `http://example.com/comments/1,2,3,4` will return a list of all comments.
 
 [3]: https://tools.ietf.org/html/rfc6570
