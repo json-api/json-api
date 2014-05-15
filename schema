@@ -9,7 +9,7 @@
     "items": {
         "type": "object",
         "properties": {
-          "id": { "type":["string", "number"] },
+          "id": { "type":["string"] },
           "href": { "type":"string" },
           "links": { "type": "object" }
       },
