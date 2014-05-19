@@ -54,7 +54,11 @@ is still pending to be included in the standard since is still in
 
 ### Is there a JSON Schema describing JSON API? <a href="#is-there-a-json-schema-describing-json-api" id="is-there-a-json-schema-describing-json-api" class="headerlink">¶</a>
 
-Yes, you can find the JSON Schema definition at http://jsonapi.org/schema.
-Please note that this schema is not a perfect document. Just because a JSON
-document may validate against this schema, that does not necessarily mean it is
-a valid JSON API document. The schema is provided for a base level sanity check.
+Yes, you can find the JSON Schema definition at
+[http://jsonapi.org/schema](http://jsonapi.org/schema). Please note that this
+schema is not a perfect document. Just because a JSON document may validate
+against this schema, that does not necessarily mean it is a valid JSON API
+document. The schema is provided for a base level sanity check.
+
+You can find more information about the JSON Schema format at
+[http://json-schema.org](http://json-schema.org).
