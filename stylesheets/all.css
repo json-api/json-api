@@ -106,13 +106,13 @@ h1 {
     margin: 0.5em; }
 
 .headerlink {
-  display: none;
   text-decoration: none; }
 
-h2:hover .headerlink,
-h3:hover .headerlink,
-h4:hover .headerlink {
-  display: inline-block; }
+h2:hover .headerlink:after,
+h3:hover .headerlink:after,
+h4:hover .headerlink:after,
+h5:hover .headerlink:after {
+  content: "¶"; }
 
 h2 {
   margin: 1.5em 0 0.9em 0;

@@ -42,14 +42,14 @@ h1 {
 }
 
 .headerlink {
-  display: none;
   text-decoration: none;
 }
 
-h2:hover .headerlink,
-h3:hover .headerlink,
-h4:hover .headerlink {
-  display: inline-block;
+h2:hover .headerlink:after,
+h3:hover .headerlink:after,
+h4:hover .headerlink:after,
+h5:hover .headerlink:after {
+  content: '¶'
 }
 
 h2 {

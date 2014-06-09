@@ -5,7 +5,7 @@ title: Extending
 
 {% include status.md %}
 
-## Extending <a href="#extending" id="extending" class="headerlink">¶</a>
+## Extending <a href="#extending" id="extending" class="headerlink"></a>
 
 If you would like to extend JSON API, you may do so with the profile link
 relation, defined in [RFC 6906](http://tools.ietf.org/html/rfc6906). See also
@@ -23,7 +23,7 @@ extensions) that are associated with the resource representation, in addition
 to those defined by the media type and possibly other mechanisms.
 ```
 
-## Examples <a href="#examples" id="examples" class="headerlink">¶</a>
+## Examples <a href="#examples" id="examples" class="headerlink"></a>
 
 For example, let's say that you want your API to support a different pagination
 scheme, such as one based on cursors. You would make some sort of profile page
