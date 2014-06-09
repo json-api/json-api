@@ -718,9 +718,7 @@ document created by the request. It **SHOULD** also include a request body
 describing that document. If absent, the client **SHOULD** treat the
 transmitted document as accepted without modification.
 
-The response body **MAY** include an `href` key in the attributes section. If
-a response body is present and the server is using the URL-based JSON API,
-this `href` attribute is **REQUIRED**. When present, the value of the `href`
+The response body **MAY** include an `href` key in the attributes section. When present, the value of the `href`
 attribute **MUST** match the URI in the `Location` header.
 
 Example:
