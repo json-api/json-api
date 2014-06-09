@@ -25,6 +25,7 @@ The top-level of the JSON response **MAY** also have the following keys:
   URLs.
 * `"linked"`: a collection of documents, grouped by type, that are related to
   the primary document(s) and/or each other.
+* `"error"`: errors that may have happened in the request that generated this response.
 
 Each of these keys has a special meaning when included in the top level and
 should not be used as a resource type in order to avoid conflicts.
@@ -942,3 +943,26 @@ Whenever a server returns a `200 OK` response in response to a creation,
 update or deletion, it **MAY** include other documents in the JSON
 document. The semantics of these documents are [the same][1] as when
 additional documents are included in response to a `GET`.
+
+## Errors
+
+The error object contains additional information on the latest error condition
+reported by the server. This is an **OPTIONAL** object and there **MUST NOT** be more
+than one error object in a JSON API document. It is a top-level document property.
+
+The following elements MAY appear as child properties of the error object:
+`code`, `message`, and `title`.
+
+```
+// sample error object
+{
+  "error" :
+  {
+    "title" : STRING,
+    "code" : STRING,
+    "message" : STRING  
+  }
+}
+```
+
+Implementors **MAY** choose to not use this optional feature and use another media type for errors if they so choose. vnd.error and HTTP Problem are two examples.
