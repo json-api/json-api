@@ -589,8 +589,9 @@ For example, a collection of resources of type "photos" will have the URL:
 /photos
 ```
 
-The URL for an individual resource **SHOULD** be formed by appending the
-resource's ID to the collection URL.
+Collections of resources **SHOULD** be treated as sets keyed by resource ID. The
+URL for an individual resource **SHOULD** be formed by appending the resource's
+ID to the collection URL.
 
 For example, a photo with an ID of `"1"` will have the URL:
 
