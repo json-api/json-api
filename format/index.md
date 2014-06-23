@@ -140,33 +140,6 @@ These comments are represented by a single "collection" object:
 }
 ```
 
-#### Variable Type Resource Representations <a href="#document-structure-variable-type-resource-representations" id="document-structure-variable-type-resource-representations" class="headerlink"></a>
-
-Variable type (i.e. "heterogenous") resources can not be keyed by type, so the
-type of each resource **SHOULD** be specified in an alternative manner.
-
-Variable type primary resources **SHOULD** be keyed by `"data"` at the top level
-of a document.
-
-Variable type resources **SHOULD** be represented as objects that contain both a
-type and an ID:
-
-```javascript
-{
-  "data": [{
-    "id": "9",
-    "type": "people",
-    "name": "@tenderlove"
-  }, {
-    "id": "1",
-    "type": "cats",
-    "name": "@gorbypuff"
-  }]
-}
-```
-
-Variable type resources **SHOULD NOT** be represented by string values alone.
-
 ### Resource Objects <a href="#document-structure-resource-objects" id="document-structure-resource-objects" class="headerlink"></a>
 
 Resource objects have the same internal structure, regardless of whether they
@@ -199,10 +172,9 @@ of a full JSON API document.
 
 #### Resource Attributes <a href="#document-structure-resource-object-attributes" id="document-structure-resource-object-attributes" class="headerlink"></a>
 
-There are five reserved keys in resource objects:
+There are four reserved keys in resource objects:
 
 * `"id"`
-* `"clientid"`
 * `"type"`
 * `"href"`
 * `"links"`
@@ -212,19 +184,14 @@ value may be any JSON value.
 
 #### Resource IDs <a href="#document-structure-resource-object-ids" id="document-structure-resource-object-ids" class="headerlink"></a>
 
-Each resource object **SHOULD** contain an ID, which may be represented by an
-`"id"` key, a `"clientid"` key, or both.
+Each resource object **SHOULD** contain a unique identifier, or ID, when
+available. IDs **MAY** be assigned by the server or by the client, as described
+below, and **SHOULD** be unique for a resource when scoped by its type. An ID
+**SHOULD** be represented by an `"id"` key and its value **MUST** be a string
+which **SHOULD** only contain alphanumeric characters, dashes and underscores.
 
-The `"id"` key in a resource object represents a unique identifier for the
-underlying resource, scoped to its type. Its value **MUST** be a string which
-**SHOULD** only contain alphanumeric characters, dashes and underscores. It can
-be used with URL templates to fetch related resources, as described below.
-
-Servers **MAY** optionally support use of a `"clientid"` to correlate a resource
-on the client with a newly created resource on the server. The `"clientid"`
-value has the same requirements as the `"id"` value, with the exception that its
-uniqueness is only scoped to a particular client and resource type. The role of
-`"clientid"` in creating resources is described below.
+IDs can be used with URL templates to fetch related resources, as described
+below.
 
 In scenarios where uniquely identifying information between client and server
 is unnecessary (e.g. read-only, transient entities), JSON API allows for
@@ -241,23 +208,6 @@ type.
 
 The `"type"` key is **REQUIRED** when the type of a resource is not otherwise
 specified in a document.
-
-For example, here's an array of resource objects that might be part of a has-
-many polymorphic relationship:
-
-```javascript
-//...
-  [{
-    "id": "9",
-    "type": "people",
-    "name": "@tenderlove"
-  }, {
-    "id": "1",
-    "type": "cats",
-    "name": "@gorbypuff"
-  }]
-//...
-```
 
 #### Resource URLs <a href="#document-structure-resource-urls" id="document-structure-resource-urls" class="headerlink"></a>
 
@@ -609,21 +559,6 @@ have the URL:
 /photos/1,2,3
 ```
 
-The URL for individual resources within a heterogenous collection **SHOULD** be
-formed by appending the resource's type and ID to the collection URL in the
-format: `<type>:<id>`. For example:
-
-```text
-/favorites/cats:1
-```
-
-The same format **SHOULD** be used to identify multiple individual resources
-within a heterogenous collection:
-
-```text
-/favorites/cats:1,people:9,dogs:123
-```
-
 ### Alternative URLs <a href="#urls-alternative" id="urls-alternative" class="headerlink"></a>
 
 Alternative URLs for resources **MAY** optionally be specified in responses with
@@ -877,8 +812,6 @@ key, the `Location` URL **MUST** match the `href` value.
 If more than one resource is created, the `Location` URL **MUST** locate all 
 created resources.
 
-**MUST** match the URL in the `Location` header.
-
 The response **SHOULD** also include a document that contains the primary
 resource(s) created. If absent, the client **SHOULD** treat the transmitted
 document as accepted without modification.
@@ -907,11 +840,8 @@ Servers **MAY** use other HTTP error codes to represent errors.  Clients
 #### Client-Generated IDs <a href="#crud-creating-client-ids" id="crud-creating-client-ids" class="headerlink"></a>
 
 A server **MAY** accept client-generated IDs along with requests to create one
-or more resources. IDs **MAY** be specified with either an `"id"` or
-`"clientid"` member.
-
-A server **MAY** allow clients to specify canonical IDs with `"id"`. The value
-of `"id"` **MUST** be a properly generated and formatted *UUID*.
+or more resources. IDs **MUST** be specified with an `"id"` key, the value of 
+which **MUST** be a properly generated and formatted *UUID*.
 
 For example:
 
@@ -926,56 +856,6 @@ Accept: application/vnd.api+json
     "title": "Ember Hamster",
     "src": "http://example.com/images/productivity.png"
   }
-}
-```
-
-A server **MAY** alternatively allow clients to specify IDs with `"clientid"`.
-The value of `"clientid"` **SHOULD** be uniquely scoped to the resource type and
-client.
-
-A server that accepts a `"clientid"` member **MUST** return any created
-resources with a matching `"clientid"` member in the response.
-
-For example, the following request creates two people:
-
-```text
-POST /photos
-Content-Type: application/vnd.api+json
-Accept: application/vnd.api+json
-
-{
-  "photos": [{
-    "clientid": "a",
-    "title": "Ember Hamster",
-    "src": "http://example.com/images/productivity.png"
-  }, {
-    "clientid": "b",
-    "title": "Mustaches on a Stick",
-    "src": "http://example.com/images/mustaches.png"
-  }]
-}
-```
-
-An appropriate response includes server-generated `"id"` values as well as the
-client-generated `"clientid"` values.
-
-```text
-HTTP/1.1 201 Created
-Location: http://example.com/photos/123,124
-Content-Type: application/vnd.api+json
-
-{
-  "photos": [{
-    "id": "123",
-    "clientid": "a",
-    "title": "Ember Hamster",
-    "src": "http://example.com/images/productivity.png"
-  }, {
-    "id": "124",
-    "clientid": "b",
-    "title": "Mustaches on a Stick",
-    "src": "http://example.com/images/mustaches.png"
-  }]
 }
 ```
 
@@ -1169,15 +1049,6 @@ to the URL of the relationships:
 
 ```text
 DELETE /articles/1/links/tags/1,2
-```
-
-When deleting to-many heterogenous relationships, it is necessary to represent
-the type of each resource along with its ID when forming the URL of the
-relationship. As discussed above, this **SHOULD** be done by appending the
-resource's type and ID to the collection URL in the format: `<type>:<id>`.
-
-```text
-DELETE /people/1/links/favorites/cats:1
 ```
 
 ### Responses <a href="#crud-updating-responses" id="crud-updating-responses" class="headerlink"></a>
@@ -1420,8 +1291,7 @@ Content-Type: application/json-patch+json
 
 To remove a to-many relationship, perform a `"remove"` operation that targets
 the relationship's URL. Because the operation is targeting a member of a
-collection, the `"path"` **MUST** end with `"/<id>"` (or `"/<type>:<id>"` for
-members of heterogenous collections).
+collection, the `"path"` **MUST** end with `"/<id>"`.
 
 For example, to remove comment 5 from this photo, issue this `"remove"`
 operation:
