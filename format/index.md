@@ -530,6 +530,24 @@ be duplicated within the `"linked"` object.
 
 ## URLs <a href="#urls" id="urls" class="headerlink"></a>
 
+### Reference Document <a href="#urls-reference-document" id="urls-reference-document" class="headerlink"></a>
+
+When determining an API's URL structure, it is helpful to consider that all of
+its resources exist in a single "reference document" in which each resource is
+addressable at a unique path. Resources are grouped by type at the top level of
+this document. Individual resources are keyed by ID within these typed
+collections. Attributes and links within individual resources are uniquely
+addressable according to the resource object structure described above.
+
+This concept of a reference document is used to determine appropriate URLs for
+resources as well as their relationships. It is important to understand that
+this reference document differs slightly in structure from documents used to
+transport resources due to different goals and constraints. For instance,
+resource collections are represented as sets instead of arrays because members
+must be addressable by ID instead of by order.
+
+### URLs for Resource Collections <a href="#urls-resource-collections" id="urls-resource-collections" class="headerlink"></a>
+
 The URL for a collection of resources **SHOULD** be formed from the resource
 type.
 
@@ -538,6 +556,8 @@ For example, a collection of resources of type "photos" will have the URL:
 ```text
 /photos
 ```
+
+### URLs for Individual Resources <a href="#urls-individual-resources" id="urls-individual-resources" class="headerlink"></a>
 
 Collections of resources **SHOULD** be treated as sets keyed by resource ID. The
 URL for an individual resource **SHOULD** be formed by appending the resource's
