@@ -543,8 +543,9 @@ This concept of a reference document is used to determine appropriate URLs for
 resources as well as their relationships. It is important to understand that
 this reference document differs slightly in structure from documents used to
 transport resources due to different goals and constraints. For instance,
-resource collections are represented as sets instead of arrays because members
-must be addressable by ID instead of by order.
+collections in the reference document are represented as sets because members
+must be addressable by ID, while collections are represented as arrays in
+transport documents because order is significant.
 
 ### URLs for Resource Collections <a href="#urls-resource-collections" id="urls-resource-collections" class="headerlink"></a>
 
