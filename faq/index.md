@@ -62,3 +62,20 @@ document. The schema is provided for a base level sanity check.
 
 You can find more information about the JSON Schema format at
 [http://json-schema.org](http://json-schema.org).
+
+### Why are resource collections returned as arrays instead of sets keyed by ID?
+
+A JSON array is naturally ordered while sets require metadata to specify order
+among members. Therefore, arrays allow for more natural sorting by default or
+specified criteria.
+
+In addition, JSON API allows read-only resources to be returned without IDs,
+which would of course be incompatible with a set keyed by IDs.
+
+### Why are related resources nested in a `linked` object in a compound document?
+
+Primary resources should be isolated because their order and number is often
+significant. It's necessary to separate primary and related resources by more
+than type because it's possible that a primary resource may have related
+resources of the same type (e.g. the "parents" of a "person"). Nesting related
+resources in `linked` prevents this possible conflict.
