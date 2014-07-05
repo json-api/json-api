@@ -3,13 +3,13 @@ layout: page
 title: Frequently Asked Questions
 ---
 
-### Why is JSON API not versioned? <a href="#why-is-json-api-not-versioned" id="why-is-json-api-not-versioned" class="headerlink">¶</a>
+### Why is JSON API not versioned? <a href="#why-is-json-api-not-versioned" id="why-is-json-api-not-versioned" class="headerlink"></a>
 
 Once JSON API is stable, it will always be backwards compatible using a _never
 remove, only add_ strategy.
 [#46](https://github.com/json-api/json-api/issues/46)
 
-### Why not use the HAL specification? <a href="#why-not-use-the-hal-specification" id="why-not-use-the-hal-specification" class="headerlink">¶</a>
+### Why not use the HAL specification? <a href="#why-not-use-the-hal-specification" id="why-not-use-the-hal-specification" class="headerlink"></a>
 
 There are several reasons:
 
@@ -37,7 +37,7 @@ It is extracted from a real-world library already used by a number of projects,
 which has informed both the request/response aspects (absent from HAL) and the
 interchange format itself.
 
-### How to discover resource possible actions? <a href="#how-to-discover-resource-possible-actions" id="how-to-discover-resource-possible-actions" class="headerlink">¶</a>
+### How to discover resource possible actions? <a href="#how-to-discover-resource-possible-actions" id="how-to-discover-resource-possible-actions" class="headerlink"></a>
 
 You should use the OPTIONS HTTP method to discover what can be done with a
 particular resource. The semantics of the methods returned by OPTIONS is defined
@@ -52,7 +52,7 @@ and capabilities and use the errors response to let users know. This error featu
 is still pending to be included in the standard since is still in
 [discussion](https://github.com/json-api/json-api/issues/7).
 
-### Is there a JSON Schema describing JSON API? <a href="#is-there-a-json-schema-describing-json-api" id="is-there-a-json-schema-describing-json-api" class="headerlink">¶</a>
+### Is there a JSON Schema describing JSON API? <a href="#is-there-a-json-schema-describing-json-api" id="is-there-a-json-schema-describing-json-api" class="headerlink"></a>
 
 Yes, you can find the JSON Schema definition at
 [http://jsonapi.org/schema](http://jsonapi.org/schema). Please note that this
@@ -62,3 +62,20 @@ document. The schema is provided for a base level sanity check.
 
 You can find more information about the JSON Schema format at
 [http://json-schema.org](http://json-schema.org).
+
+### Why are resource collections returned as arrays instead of sets keyed by ID?
+
+A JSON array is naturally ordered while sets require metadata to specify order
+among members. Therefore, arrays allow for more natural sorting by default or
+specified criteria.
+
+In addition, JSON API allows read-only resources to be returned without IDs,
+which would of course be incompatible with a set keyed by IDs.
+
+### Why are related resources nested in a `linked` object in a compound document?
+
+Primary resources should be isolated because their order and number is often
+significant. It's necessary to separate primary and related resources by more
+than type because it's possible that a primary resource may have related
+resources of the same type (e.g. the "parents" of a "person"). Nesting related
+resources in `linked` prevents this possible conflict.

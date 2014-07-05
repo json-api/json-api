@@ -5,166 +5,282 @@ title: "Format"
 
 {% include status.md %}
 
-## Document <a href="#document" id="document" class="headerlink">¶</a>
+## Introduction <a href="#introduction" id="introduction" class="headerlink"></a>
 
-In this specification, the term "document" refers to a single object with a
-set of attributes and relationships.
+JSON API is a specification for how a client should request that resources be
+fetched or modified and how a server should respond to those requests. 
 
-A JSON response may include multiple documents, as described in this
-specification.
+JSON API is designed to minimize both the number of requests and the amount of
+data transmitted between clients and servers. This efficiency is achieved
+without compromising readability, flexibility, and discoverability.
 
-### Top Level <a href="#document-top-level" id="document-top-level" class="headerlink">¶</a>
+JSON API requires use of the JSON API media type
+([`application/vnd.api+json`](http://www.iana.org/assignments/media-types/application/vnd.api+json)) 
+for exchanging data.
 
-The top-level of a JSON response will contain the primary document(s)
-keyed by the plural form of the primary resource type.
+A JSON API server supports fetching of resources through the HTTP method GET. 
+In order to support creating, updating and deleting resources, it must support 
+use of the HTTP methods POST, PUT and DELETE, respectively.
 
-The top-level of the JSON response **MAY** also have the following keys:
+A JSON API server may also optionally support modification of resources with
+the HTTP PATCH method [[RFC5789](http://tools.ietf.org/html/rfc5789)] and the
+JSON Patch format [[RFC6902](http://tools.ietf.org/html/rfc6902)]. JSON Patch
+support is possible because, conceptually, JSON API represents all of a
+domain's resources as a single JSON document that can act as the target for
+operations. Resources are grouped at the top level of this document according
+to their type. Each resource can be identified at a unique path within this
+document.
+
+## Conventions <a href="#conventions" id="conventions" class="headerlink"></a>
+
+The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD",
+"SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this document are to be
+interpreted as described in RFC 2119
+[[RFC2119](http://tools.ietf.org/html/rfc2119)].
+
+## Document Structure <a href="#document-structure" id="document-structure" class="headerlink"></a>
+
+This section describes the structure of a JSON API document, which is identified
+by the media type [`application/vnd.api+json`](http://www.iana.org/assignments
+/media-types/application/vnd.api+json). JSON API documents are defined in
+JavaScript Object Notation (JSON)
+[[RFC4627](http://tools.ietf.org/html/rfc4627)].
+
+Although the same media type is used for both request and response documents,
+certain aspects are only applicable to one or the other. These differences are
+called out below.
+
+### Top Level <a href="#document-structure-top-level" id="document-structure-top-level" class="headerlink"></a>
+
+A JSON object **MUST** be at the root of every JSON API document. This object
+defines a document's "top level".
+
+A document's top level **SHOULD** contain a representation of the resource or
+collection of resources primarily targeted by a request (i.e. the "primary
+resource(s)").
+
+The primary resource(s) **SHOULD** be keyed either by their resource type or the
+generic key `"data"`.
+
+A document's top level **MAY** also have the following members:
 
 * `"meta"`: meta-information about a resource, such as pagination.
 * `"links"`: URL templates to be used for expanding resources' relationships
   URLs.
-* `"linked"`: a collection of documents, grouped by type, that are related to
-  the primary document(s) and/or each other.
+* `"linked"`: a collection of resource objects, grouped by type, that are linked
+  to the primary resource(s) and/or each other (i.e. "linked resource(s)").
 
-Each of these keys has a special meaning when included in the top level and
-should not be used as a resource type in order to avoid conflicts.
+No other members should be present at the top level of a document.
 
-No other keys should be present at the top level of the JSON response.
+### Resource Representations <a href="#document-structure-resource-representations" id="document-structure-resource-representations" class="headerlink"></a>
 
-### Singular Resources <a href="#document-sigular-resources" id="document-sigular-resources" class="headerlink">¶</a>
+This section describes how resources can be represented throughout a JSON API
+document. It applies to primary as well as linked resources.
 
-Documents that represent singular resources are wrapped inside an array
-and keyed by the plural form of the resource type:
+#### Singular Resource Representations <a href="#document-structure-singular-resource-representations" id="document-structure-singular-resource-representations" class="headerlink"></a>
+
+A singular resource **SHOULD** be represented as a single "resource object"
+(described below) or a string value containing its ID (also described below).
+
+The following post is represented as a resource object:
 
 ```javascript
 {
-  "posts": [{
-    "id": "1"
-    // an individual post document
-  }]
+  "posts": {
+    "id": "1",
+    // ... attributes of this post
+  }
 }
 ```
 
-This simplifies processing, as you can know that documents will always be
-wrapped in arrays.
+This post is represented simply by its ID:
 
-The document **SHOULD** contain an `"id"` key.
+```javascript
+{
+  "posts": "1"
+}
+```
 
-### Resource Collections <a href="#document-resource-collections" id="document-resource-collections" class="headerlink">¶</a>
+#### Plural Resource Representations <a href="#document-structure-plural-resource-representations" id="document-structure-plural-resource-representations" class="headerlink"></a>
 
-Documents that represent resource collections are also wrapped inside an array
-and keyed by the plural form of the resource type:
+A collection of resources **SHOULD** be represented as an array of resource
+objects or IDs, or as a single "collection object" (described below).
+
+The following posts are represented as an array of resource objects:
 
 ```javascript
 {
   "posts": [{
     "id": "1"
-    // an individual post document
+    // ... attributes of this post
   }, {
     "id": "2"
-    // an individual post document
+    // ... attributes of this post
   }]
 }
 ```
 
-Each document in the array **SHOULD** contain an `"id"` key.
-
-### IDs <a href="#document-ids" id="document-ids" class="headerlink">¶</a>
-
-The `"id"` key in a document represents a unique identifier for the underlying
-resource, scoped to its type. It **MUST** be a string which **SHOULD** only
-contain alphanumeric characters, dashes and underscores. It can be used with URL
-templates to fetch related resources, as described below.
-
-
-In scenarios where uniquely identifying information between client and server
-is unnecessary (e.g., read-only, transient entities), JSON API allows for
-omitting the `"id"` key.
-
-NOTE: While an implementation could use the values of `"id"` keys as URLs
-(which are unique string identifiers, after all), it is not generally
-recommended. URLs can change, so they are unreliable for mapping a document to
-any client-side models that represent the same resource. It is recommended that
-URL values be left to the task of linking documents while `"id"` values remain
-opaque to solely provide a unique identity within some type.
-
-### Attributes <a href="#document-attributes" id="document-attributes" class="headerlink">¶</a>
-
-There are three reserved attribute names in JSON API:
-
-* `id`
-* `href`
-* `links`
-
-Every other key in a document represents an attribute. An attribute's value may
-be any JSON value.
+These posts are represented as an array of IDs:
 
 ```javascript
 {
-  "posts": [{
+  "posts": ["1", "2"]
+}
+```
+
+These comments are represented by a single "collection" object:
+
+```javascript
+{
+  "comments": {
+    "href": "http://example.com/comments/5,12,17,20",
+    "ids": [ "5", "12", "17", "20" ],
+    "type": "comments"
+  }
+}
+```
+
+### Resource Objects <a href="#document-structure-resource-objects" id="document-structure-resource-objects" class="headerlink"></a>
+
+Resource objects have the same internal structure, regardless of whether they
+represent primary or linked resources.
+
+Here's how a post (i.e. a resource of type "posts") might appear in a document:
+
+```javascript
+{
+  "posts": {
     "id": "1",
     "title": "Rails is Omakase"
-  }]
+  }
 }
 ```
 
-### Relationships <a href="#document-relationships" id="document-relationships" class="headerlink">¶</a>
-
-The value of the `"links"` key is a JSON object that represents related
-resources.
+In the example above, the post's resource object is simply:
 
 ```javascript
-{
-  "posts": [{
+//...
+  {
+    "id": "1",
+    "title": "Rails is Omakase"
+  }
+//...
+```
+
+This section will focus exclusively on resource objects, outside of the context
+of a full JSON API document.
+
+#### Resource Attributes <a href="#document-structure-resource-object-attributes" id="document-structure-resource-object-attributes" class="headerlink"></a>
+
+There are four reserved keys in resource objects:
+
+* `"id"`
+* `"type"`
+* `"href"`
+* `"links"`
+
+Every other key in a resource object represents an "attribute". An attribute's
+value may be any JSON value.
+
+#### Resource IDs <a href="#document-structure-resource-object-ids" id="document-structure-resource-object-ids" class="headerlink"></a>
+
+Each resource object **SHOULD** contain a unique identifier, or ID, when
+available. IDs **MAY** be assigned by the server or by the client, as described
+below, and **SHOULD** be unique for a resource when scoped by its type. An ID
+**SHOULD** be represented by an `"id"` key and its value **MUST** be a string
+which **SHOULD** only contain alphanumeric characters, dashes and underscores.
+
+IDs can be used with URL templates to fetch related resources, as described
+below.
+
+In scenarios where uniquely identifying information between client and server
+is unnecessary (e.g. read-only, transient entities), JSON API allows for
+omitting IDs.
+
+#### Resource Types <a href="#document-structure-resource-types" id="document-structure-resource-types" class="headerlink"></a>
+
+The type of each resource object can usually be determined from the context in
+which it is contained. As discussed above, resource objects are typically keyed
+by their type in a document.
+
+Each resource object **MAY** contain a `"type"` key to explicitly designate its
+type.
+
+The `"type"` key is **REQUIRED** when the type of a resource is not otherwise
+specified in a document.
+
+#### Resource URLs <a href="#document-structure-resource-urls" id="document-structure-resource-urls" class="headerlink"></a>
+
+The URL of each resource object **MAY** be specified with the `"href"` key.
+Resource URLs **SHOULD** only be specified by the server and therefore are
+typically only included in response documents.
+
+```javascript
+//...
+  [{
+    "id": "1",
+    "href": "http://example.com/comments/1",
+    "body": "Mmmmmakase"
+  }, {
+    "id": "2",
+    "href": "http://example.com/comments/2",
+    "body": "I prefer unagi"
+  }]
+//...
+```
+
+A server **MUST** respond to a `GET` request to the specified URL with a
+response that includes the resource.
+
+It is generally more efficient to specify URL templates at the root level of a
+response document rather than to specify individual URLs per resource.
+
+#### Resource Relationships <a href="#document-structure-resource-relationships" id="document-structure-resource-relationships" class="headerlink"></a>
+
+The value of the `"links"` key is a JSON object that represents linked
+resources, keyed by the name of each association.
+
+For example, the following post is associated with a single `author` and a
+collection of `comments`:
+
+```javascript
+//...
+  {
     "id": "1",
     "title": "Rails is Omakase",
     "links": {
       "author": "9",
       "comments": [ "5", "12", "17", "20" ]
     }
-  }]
-}
+  }
+//...
 ```
 
-The link to each related resource **MUST** be one of the following:
+##### To-One Relationships <a href="#document-structure-resource-relationships-to-one" id="document-structure-resource-relationships-to-one" class="headerlink"></a>
 
-* a string or number - to represent a single ID.
-* an array of strings or numbers - to represent multiple IDs.
-* a "link" object that contains one or more of the attributes:
-  `"id"`, `"ids"`, `"href"` and `"type"`. Note that `"id"` and `"ids"` should
-  never be present together.
-* an array of "link" objects
+To-one relationships **MUST** be represented with one of the formats for
+singular resources described above.
 
-NOTE: Use of a document level `"links"` object is generally discouraged because
-root level URL Templates can usually provide the same data more concisely.
-However, there may be situations where each document will have a URL that isn't
-supported by the rigid structure of a template. In those cases, it may also be
-necessary to include either `"id"` or `"ids"` for the related documents in a
-compound document.
-
-#### To-One Relationships <a href="#document-relationships-to-one-relationships" id="document-relationships-to-one-relationships" class="headerlink">¶</a>
-
-A to-one relationship **MAY** be represented as a string or number value that
-corresponds to the ID of a related resource.
+For example, the following post is associated with a single author, identified
+by ID:
 
 ```javascript
-{
-  "posts": [{
+//...
+  {
     "id": "1",
     "title": "Rails is Omakase",
     "links": {
       "author": "17"
     }
-  }]
-}
+  }
+//...
 ```
 
-It **MAY** alternatively be represented with a "link" object that contains one
-or more of the attributes: `"id"`, `"href"` and `"type"`.
+And here's an example of a linked author represented as a resource object:
 
 ```javascript
-{
-  "posts": [{
+//...
+  {
     "id": "1",
     "title": "Rails is Omakase",
     "links": {
@@ -174,39 +290,35 @@ or more of the attributes: `"id"`, `"href"` and `"type"`.
         "type": "people"
       }
     }
-  }]
-}
+  }
+//...
 ```
 
-An API that provides a to-one relationship as a URL **MUST** respond to a `GET`
-request with the specified document with the specified URL.
+##### To-Many Relationships <a href="#document-structure-resource-relationships-to-many" id="document-structure-resource-relationships-to-many" class="headerlink"></a>
 
-In the above example, a `GET` request to `http://example.com/people/17` returns
-a document containing the specified author.
+To-many relationships **MUST** be represented with one of the formats for plural
+resources described above.
 
-#### To-Many Relationships <a href="#document-relationships-to-many-relationships" id="document-relationships-to-many-relationships" class="headerlink">¶</a>
-
-A to-many relationship **MAY** be represented as an array of strings or numbers
-corresponding to IDs of related resources.
+For example, the following post is associated with several comments, identified
+by their IDs:
 
 ```javascript
-{
-  "posts": [{
+//...
+  {
     "id": "1",
     "title": "Rails is Omakase",
     "links": {
       "comments": [ "5", "12", "17", "20" ]
     }
-  }]
-}
+  }
+//...
 ```
 
-It **MAY** alternatively be represented with a "link" object that contains one
-or more of the attributes: `"ids"`, `"href"` and `"type"`.
+And here's an example of an array of comments linked as a collection object:
 
 ```javascript
-{
-  "posts": [{
+//...
+  {
     "id": "1",
     "title": "Rails is Omakase",
     "links": {
@@ -216,76 +328,30 @@ or more of the attributes: `"ids"`, `"href"` and `"type"`.
         "type": "comments"
       }
     }
-  }]
-}
+  }
+//...
 ```
 
-An API that provides a to-many relationship as a URL **MUST** respond to a
-`GET` request with a list of the specified documents with the specified URL.
+### Collection Objects <a href="#document-structure-collection-objects" id="document-structure-collection-objects" class="headerlink"></a>
 
-In the above example, a `GET` request to
-`http://example.com/comments/5,12,17,20` returns a document containing the four
-specified comments.
+A "collection object" contains one or more of the members: 
 
-As another alternative, a to-many relationship **MAY** be represented as an
-array of "link" objects that contain one or more of the attributes: `"id"`,
-`"href"`, and `"type"`.
+* `"ids"` - an array of IDs for the referenced resources.
+* `"type"` - the resource type.
+* `"href"` - the URL of the referenced resources (applicable to response
+  documents).
 
-```javascript
-{
-  "posts": [{
-    "id": "1",
-    "title": "Rails is Omakase",
-    "links": {
-      "comments": [{
-        "href": "http://example.com/comments/5",
-        "id": "5",
-        "type": "comments"
-      },
-      {
-        "href": "http://example.com/comments/12",
-        "id": "12",
-        "type": "comments"
-      }]
-    }
-  }]
-}
-```
+A server that provides a collection object that contains an `"href"` **MUST**
+respond to a `GET` request to the specified URL with a response that includes
+the referenced objects as a collection of resource objects.
 
-In the above example, `GET` requests to `http://example.com/comments/5` and
-`http://example.com/comments/12` return the respective comments.
 
-NOTE: Given its verbosity, this third format should be used sparingly, but it
-is helpful when the related resources have a variable `"type"`:
+### URL Templates <a href="#document-structure-url-templates" id="document-structure-url-templates" class="headerlink"></a>
 
-```javascript
-{
-  "posts": [{
-    "id": "1",
-    "title": "One Type Purr Author",
-    "links": {
-      "authors": [{
-        "href": "http://example.com/people/9",
-        "id": "9",
-        "type": "people"
-      },
-      {
-        "href": "http://example.com/cats/1",
-        "id": "1",
-        "type": "cats"
-      }]
-    }
-  }]
-}
-```
+A top-level `"links"` object **MAY** be used to specify URL templates that can
+be used to formulate URLs for resources according to their type.
 
-### URL Template Shorthands <a href="#document-url-template-shorthands" id="document-url-template-shorthands" class="headerlink">¶</a>
-
-When returning a list of documents from a response, a top-level `"links"`
-object **MAY** be used to specify a URL template that should be used for all
-documents.
-
-Example:
+For example:
 
 ```javascript
 {
@@ -302,9 +368,12 @@ Example:
 }
 ```
 
-In this example, fetching `http://example.com/posts/1/comments` will fetch
-the comments for `"Rails is Omakase"` and fetching `http://example.com/posts/2/comments`
-will fetch the comments for `"The Parley Letter"`.
+In this example, fetching `http://example.com/posts/1/comments` will fetch the
+comments for `"Rails is Omakase"` and fetching
+`http://example.com/posts/2/comments` will fetch the comments for `"The Parley
+Letter"`.
+
+Here's another example:
 
 ```javascript
 {
@@ -321,25 +390,22 @@ will fetch the comments for `"The Parley Letter"`.
 }
 ```
 
-In this example, the `posts.comments` variable is expanded by
-"exploding" the array specified in the `"links"` section of each post.
-The [URL template specification][3] specifies that the default explosion is to
-percent encode the array members (e.g. via `encodeURIComponent()` in JavaScript)
-and join them by a comma, so in this example, fetching
-`http://example.com/comments/1,2,3,4` will return a list of all comments.
+In this example, the `posts.comments` variable is expanded by "exploding" the
+array specified in the `"links"` section of each post. The URI template
+specification [[RFC6570](https://tools.ietf.org/html/rfc6570)] specifies that
+the default explosion is to percent encode the array members (e.g. via
+`encodeURIComponent()` in JavaScript) and join them by a comma. In this example,
+fetching `http://example.com/comments/1,2,3,4` will return a list of all
+comments.
 
-[3]: https://tools.ietf.org/html/rfc6570
+The top-level `"links"` object has the following behavior:
 
-This example shows how you can start with a list of IDs and then upgrade to
-specifying a different URL pattern than the default.
-
-The top-level `"links"` key has the following behavior:
-
-* Each key is a dot-separated path that points at a repeated relationship.
-  For example `"posts.comments"` points at the `"comments"` relationship in
-  each repeated document under `"posts"`.
+* Each key is a dot-separated path that points at a repeated relationship. Paths
+  start with a particular resource type and can traverse related resources. For
+  example `"posts.comments"` points at the `"comments"` relationship in each
+  resource of type `"posts"`.
 * The value of each key is interpreted as a URL template.
-* For each document that the path points to, act as if it specified a
+* For each resource that the path points to, act as if it specified a
   relationship formed by expanding the URL template with the non-URL value
   actually specified.
 
@@ -372,25 +438,28 @@ Here is another example that uses a has-one relationship:
 }
 ```
 
-In this example, the author URL for all three posts is
+In this example, the URL for the author of all three posts is
 `http://example.com/people/12`.
 
 Top-level URL templates allow you to specify relationships as IDs, but without
 requiring that clients hard-code information about how to form the URLs.
 
-NOTE: In case of conflict, an individual document's `links` object will take
-precedence over a top-level `links` object.
+NOTE: In case of conflict, an individual resource object's `links` object will
+take precedence over a top-level `links` object.
 
-### Compound Documents <a href="#document-compound-documents" id="document-compound-documents" class="headerlink">¶</a>
+### Compound Documents <a href="#document-structure-compound-documents" id="document-structure-compound-documents" class="headerlink"></a>
 
-To save HTTP requests, it may be convenient to send related documents along
-with the requested documents.
+To save HTTP requests, responses may optionally allow for the inclusion of
+linked resources along with the requested primary resources. Such response
+documents are called "compound documents".
 
-Related documents **MUST** be included in a top level `"linked"` object, in
-which they are grouped together in arrays according to their type.
+In a compound document, linked resources **MUST** be included as resource
+objects in a top level `"linked"` object, in which they are grouped together in
+arrays according to their type.
 
-The type of each relationship **MAY** be specified in the `"links"` object with
-the `"type"` key. This facilitates lookups of related documents by the client.
+The type of each relationship **MAY** be specified in a resource-level or top-
+level `"links"` object with the `"type"` key. This facilitates lookups of linked
+resource objects by the client.
 
 ```javascript
 {
@@ -452,64 +521,137 @@ the `"type"` key. This facilitates lookups of related documents by the client.
 }
 ```
 
-This approach ensures that a single canonical representation of each document
-is returned with each response, even when the same document is referenced
-multiple times (in this example, the author of the three posts). Along these
-lines, if a primary document is linked to another primary or related document,
-it should not be duplicated within the `"linked"` object.
+This approach ensures that a single canonical representation of each document is
+returned with each response, even when the same document is referenced multiple
+times (in this example, the author of the three posts). Along these lines, if a
+primary document is linked to another primary or linked document, it should not
+be duplicated within the `"linked"` object.
 
-By always combining documents in this way, a client can consistently extract and
-wire up references.
 
-JSON API documents **MAY** specify the URL for a document in a compound
-response by specifying a `"href"` key:
+## URLs <a href="#urls" id="urls" class="headerlink"></a>
 
-```javascript
-{
-  // ...
-  "comments": [{
-    "href": "http://example.com/comments/1",
-    "id": "1",
-    "body": "Mmmmmakase"
-  }, {
-    "href": "http://example.com/comments/2",
-    "id": "2",
-    "body": "I prefer unagi"
-  }, {
-    "href": "http://example.com/comments/3",
-    "id": "3",
-    "body": "What's Omakase?"
-  }, {
-    "href": "http://example.com/comments/4",
-    "id": "4",
-    "body": "Parley is a discussion, especially one between enemies"
-  }, {
-    "href": "http://example.com/comments/5",
-    "id": "5",
-    "body": "The parsley letter"
-  }, {
-    "href": "http://example.com/comments/6",
-    "id": "6",
-    "body": "Dependency Injection is Not a Vice"
-  }]
-}
+### Reference Document <a href="#urls-reference-document" id="urls-reference-document" class="headerlink"></a>
+
+When determining an API's URL structure, it is helpful to consider that all of
+its resources exist in a single "reference document" in which each resource is
+addressable at a unique path. Resources are grouped by type at the top level of
+this document. Individual resources are keyed by ID within these typed
+collections. Attributes and links within individual resources are uniquely
+addressable according to the resource object structure described above.
+
+This concept of a reference document is used to determine appropriate URLs for
+resources as well as their relationships. It is important to understand that
+this reference document differs slightly in structure from documents used to
+transport resources due to different goals and constraints. For instance,
+collections in the reference document are represented as sets because members
+must be addressable by ID, while collections are represented as arrays in
+transport documents because order is significant.
+
+### URLs for Resource Collections <a href="#urls-resource-collections" id="urls-resource-collections" class="headerlink"></a>
+
+The URL for a collection of resources **SHOULD** be formed from the resource
+type.
+
+For example, a collection of resources of type "photos" will have the URL:
+
+```text
+/photos
 ```
 
-## Fetching <a href="#fetching" id="fetching" class="headerlink">¶</a>
+### URLs for Individual Resources <a href="#urls-individual-resources" id="urls-individual-resources" class="headerlink"></a>
 
-### Inclusion of Related Documents <a href="#fetching-inclusion-of-related-documents" id="fetching-inclusion-of-related-documents" class="headerlink">¶</a>
+Collections of resources **SHOULD** be treated as sets keyed by resource ID. The
+URL for an individual resource **SHOULD** be formed by appending the resource's
+ID to the collection URL.
+
+For example, a photo with an ID of `"1"` will have the URL:
+
+```text
+/photos/1
+```
+
+The URL for multiple individual resources **SHOULD** be formed by appending a
+comma-separated list of resource IDs to the collection URL.
+
+For example, the photos with IDs of `"1"`, `"2"` and `"3"` will collectively
+have the URL:
+
+```text
+/photos/1,2,3
+```
+
+### Alternative URLs <a href="#urls-alternative" id="urls-alternative" class="headerlink"></a>
+
+Alternative URLs for resources **MAY** optionally be specified in responses with
+`"href"` members or URL templates.
+
+### Relationship URLs <a href="#urls-relationships" id="urls-relationships" class="headerlink"></a>
+
+A resource's relationship **MAY** be accessible at a URL formed by appending
+`/links/<relationship-name>` to the resource's URL. This relative path is
+consistent with the internal structure of a resource object.
+
+For example, a photo's collection of linked comments will have the URL:
+
+```text
+/photos/1/links/comments
+```
+
+A photo's reference to an individual linked photographer will have the URL:
+
+```text
+/photos/1/links/photographer
+```
+
+A server **MUST** represent "to-one" relationships as singular resources and
+"to-many" relationships as plural resources.
+
+
+## Fetching Resources <a href="#fetching" id="fetching" class="headerlink"></a>
+
+A resource, or collection of resources, can be fetched by sending a `GET`
+request to the URL described above.
+
+Responses can be further refined with the optional features described below. 
+
+### Filtering <a href="#fetching-filtering" id="fetching-filtering" class="headerlink"></a>
+
+A server **MAY** choose to support requests to filter resources according to
+specific criteria.
+
+Filtering **SHOULD** be supported by appending parameters to the base URL for
+the collection of resources to be filtered.
+
+For example, the following is a request for all comments associated with a
+particular post:
+
+```text
+GET /comments?posts=1
+```
+
+With this approach, multiple filters **MAY** be applied to a single request:
+
+```text
+GET /comments?posts=1&author=12
+```
+
+This specification only supports filtering based upon strict matching.
+Additional filtering allowed by an API should be specified in its profile (see
+[Extending](/extending)).
+
+### Inclusion of Linked Resources <a href="#fetching-includes" id="fetching-includes" class="headerlink"></a>
 
 A server **MAY** choose to support returning compound documents that include
-both primary and related documents.
+both primary and linked resource objects.
 
-An endpoint **MAY** return documents related to the primary document(s) by
+An endpoint **MAY** return resources linked to the primary resource(s) by
 default.
 
-An endpoint **MAY** also support custom inclusion of related documents based
-upon an `include` request parameter. This parameter should specify the path to
-one or more documents relative to the primary document. If this parameter is
-used, **ONLY** the requested related documents should be returned alongside the
-primary document(s).
+An endpoint **MAY** also support custom inclusion of linked resources based upon
+an `include` request parameter. This parameter should specify the path to one or
+more resources relative to the primary resource. If this parameter is used,
+**ONLY** the requested linked resources should be returned alongside the primary
+resource(s).
 
 For instance, comments could be requested with a post:
 
@@ -517,55 +659,55 @@ For instance, comments could be requested with a post:
 GET /posts/1?include=comments
 ```
 
-In order to request documents related to other documents, the dot-separated path
-of each document should be specified:
+In order to request resources linked to other resources, the dot-separated path
+of each relationship should be specified:
 
 ```text
 GET /posts/1?include=comments.author
 ```
 
 Note: a request for `comments.author` should not automatically also include
-`comments` in the response (although comments will obviously need to be
-queried in order to fulfill the request for their authors).
+`comments` in the response (although comments will obviously need to be queried
+in order to fulfill the request for their authors).
 
-Multiple related documents could be requested in a comma-separated list:
+Multiple linked resources could be requested in a comma-separated list:
 
 ```text
 GET /posts/1?include=author,comments,comments.author
 ```
 
-### Sparse Fieldsets <a href="#fetching-sparse-fieldsets" id="fetching-sparse-fieldsets" class="headerlink">¶</a>
+### Sparse Fieldsets <a href="#fetching-sparse-fieldsets" id="fetching-sparse-fieldsets" class="headerlink"></a>
 
-A server **MAY** choose to support requests to return only specific fields for
-documents.
+A server **MAY** choose to support requests to return only specific fields in
+resource object.
 
-An endpoint **MAY** support requests that specify fields for the primary document
-type with a `fields` parameter.
+An endpoint **MAY** support requests that specify fields for the primary
+resource type with a `fields` parameter.
 
 ```text
 GET /people?fields=id,name,age
 ```
 
-An endpoint **MAY** support requests that specify fields for any document type
-with a `fields[DOCUMENT_TYPE]` parameter.
+An endpoint **MAY** support requests that specify fields for any resource type
+with a `fields[TYPE]` parameter.
 
 ```text
 GET /posts?include=author&fields[posts]=id,title&fields[people]=id,name
 ```
 
-An endpoint SHOULD return a default set of fields for a document if no fields
-have been specified for its type, or if the endpoint does not support use of
-either `fields` or `fields[DOCUMENT_TYPE]`.
+An endpoint SHOULD return a default set of fields in a resource object if no
+fields have been specified for its type, or if the endpoint does not support use
+of either `fields` or `fields[TYPE]`.
 
-Note: `fields` and `fields[DOCUMENT_TYPE]` can not be mixed. If the latter
-format is used, then it must be used for the primary document type as well.
+Note: `fields` and `fields[TYPE]` can not be mixed. If the latter format is
+used, then it must be used for the primary resource type as well.
 
-### Sorting <a href="#fetching-sorting" id="fetching-sorting" class="headerlink">¶</a>
+### Sorting <a href="#fetching-sorting" id="fetching-sorting" class="headerlink"></a>
 
-A server **MAY** choose to support requests to sort documents according to
-one or more criteria.
+A server **MAY** choose to support requests to sort resource collections
+according to one or more criteria.
 
-An endpoint **MAY** support requests to sort the primary document type with a
+An endpoint **MAY** support requests to sort the primary resource type with a
 `sort` parameter.
 
 ```text
@@ -590,64 +732,50 @@ GET /posts?sort=-created,title
 The above example should return the newest posts first. Any posts created on the
 same date will then be sorted by their title in ascending alpabetical order.
 
-An endpoint **MAY** support requests to sort any document type with a
-`sort[DOCUMENT_TYPE]` parameter.
+An endpoint **MAY** support requests to sort any resource type with a
+`sort[TYPE]` parameter.
 
 ```text
 GET /posts?include=author&sort[posts]=-created,title&sort[people]=name
 ```
 
 If no sort order is specified, or if the endpoint does not support use of either
-`sort` or `sort[DOCUMENT_TYPE]`, then the endpoint **SHOULD** return documents
-sorted with a repeatable algorithm. In other words, documents **SHOULD** always
+`sort` or `sort[TYPE]`, then the endpoint **SHOULD** return resource objects
+sorted with a repeatable algorithm. In other words, resources **SHOULD** always
 be returned in the same order, even if the sort criteria aren't specified.
 
-Note: `sort` and `sort[DOCUMENT_TYPE]` can not be mixed. If the latter
-format is used, then it **MUST** be used for the primary document type as well.
+Note: `sort` and `sort[TYPE]` can not be mixed. If the latter format is used,
+then it **MUST** be used for the primary resource type as well.
 
-## Updating <a href="#updating" id="updating" class="headerlink">¶</a>
 
-### URLs <a href="#updating-urls" id="updating-urls" class="headerlink">¶</a>
+## Creating, Updating and Deleting Resources <a href="#crud" id="crud" class="headerlink"></a>
 
-Update URLs are determined the same way as `GET` URLs.
+A server **MAY** allow resources that can be fetched to also be created,
+modified and deleted.
 
-### Creating a Document <a href="#updating-creating-a-document" id="updating-creating-a-document" class="headerlink">¶</a>
+A server **MAY** allow multiple resources to be updated in a single request, as
+discussed below. Updates to multiple resources **MUST** completely succeed or
+fail. No partial updates are allowed.
 
-A JSON API document is *created* by making a `POST` request to the URL that
-represents a collection of documents that the new document should belong to.
-While this method is preferred, you can always use anything that's valid with
-RFC 2616, as long as it's compliant. For example, PUT can be used to create
-documents if you wish. We believe most people will generally use POST, so we'll
-elaborate on it further below.
+Any requests that contain content **MUST** include a `Content-Type` header whose
+value is `application/vnd.api+json`.
 
-In general, this is a collection scoped to the **type** of document.
+### Creating Resources <a href="#crud-creating-resources" id="crud-creating-resources" class="headerlink"></a>
 
-The request **MUST** contain a `Content-Type` header whose value is
-`application/vnd.api+json`. It **MUST** also include `application/vnd.api+json`
-as the only or highest quality factor.
+A server that supports creating resources **MUST** support creating individual
+resources and **MAY** optionally support creating multiple resources in a single
+request.
 
-Its root key **MUST** be the same as the root key provided in the
-server's response to `GET` request for the collection.
+One or more resources can be *created* by making a `POST` request to the URL
+that represents a collection of resources to which the new resource should
+belong.
 
-For example, assuming the following request for the collection of
-photos:
+#### Creating an Individual Resource <a href="#crud-creating-individual-resources" id="crud-creating-individual-resources" class="headerlink"></a>
 
-```text
-GET /photos
+A request to create an individual resource **MUST** include a single primary
+resource object.
 
-HTTP/1.1 200 OK
-Content-Type: application/vnd.api+json
-
-{
-  "photos": [{
-    "id": "1",
-    "title": "Mustaches on a Stick",
-    "src": "http://example.com/images/mustache.png"
-  }]
-}
-```
-
-You would create a new photo by `POST`ing to the same URL:
+For instance, a new photo might be created with the following request:
 
 ```text
 POST /photos
@@ -655,42 +783,19 @@ Content-Type: application/vnd.api+json
 Accept: application/vnd.api+json
 
 {
-  "photos": [{
+  "photos": {
     "title": "Ember Hamster",
     "src": "http://example.com/images/productivity.png"
-  }]
-}
-```
-
-#### Client-Side IDs <a href="#updating-creating-a-document-client-side-ids" id="updating-creating-a-document-client-side-ids" class="headerlink">¶</a>
-
-A server **MAY** require a client to provide IDs generated on the
-client. If a server wants to request client-generated IDs, it **MUST**
-include a `meta` section in all of its responses with the key
-`client-ids` and the value `true`:
-
-```text
-GET /photos
-
-HTTP/1.1 200 OK
-Content-Type: application/vnd.api+json
-
-{
-  "posts": [{
-    "id": "550e8400-e29b-41d4-a716-446655440000",
-    "title": "Mustaches on a Stick",
-    "src": "http://example.com/images/mustaches.png"
-  }],
-  "meta": {
-    "client-ids": true
   }
 }
 ```
 
-If the server requests client-generated IDs, the client **MUST** include
-an `id` key in its `POST` request, and the value of the `id` key
-**MUST** be a properly generated and formatted *UUID* provided as a JSON
-string.
+#### Creating Multiple Resources <a href="#crud-creating-multiple-resources" id="crud-creating-multiple-resources" class="headerlink"></a>
+
+A request to create multiple resources **MUST** include a collection of primary
+resource objects.
+
+For instance, multiple photos might be created with the following request:
 
 ```text
 POST /photos
@@ -699,153 +804,479 @@ Accept: application/vnd.api+json
 
 {
   "photos": [{
-    "id": "550e8400-e29b-41d4-a716-446655440000",
     "title": "Ember Hamster",
     "src": "http://example.com/images/productivity.png"
+  }, {
+    "title": "Mustaches on a Stick",
+    "src": "http://example.com/images/mustaches.png"
   }]
 }
 ```
 
-#### Response <a href="#updating-creating-a-document-response" id="updating-creating-a-document-response" class="headerlink">¶</a>
+#### Responses <a href="#crud-creating-responses" id="crud-creating-responses" class="headerlink"></a>
 
-A server **MUST** respond to a successful document creation request
-according to [`HTTP semantics`][2]
+##### 201 Created <a href="#crud-creating-responses-201" id="crud-creating-responses-201" class="headerlink"></a>
 
-[2]: http://tools.ietf.org/html/draft-ietf-httpbis-p2-semantics-22#section-6.3
+A server **MUST** respond to a successful resource creation request according to
+[`HTTP semantics`](http://tools.ietf.org/html/draft-ietf-
+httpbis-p2-semantics-22#section-6.3).
 
-The response **MUST** include a `Location` header identifying the primary
-document created by the request. It **SHOULD** also include a request body
-describing that document. If absent, the client **SHOULD** treat the
-transmitted document as accepted without modification.
+When one or more resources has been created, the server **MUST** return a `201
+Created` status code.
 
-The response body **MAY** include an `href` key in the attributes section. When present, the value of the `href`
-attribute **MUST** match the URI in the `Location` header.
+The response **MUST** include a `Location` header identifying the location of
+the primary resource created by the request.
 
-Example:
+If a single resource is created and that resource's object includes an `href`
+key, the `Location` URL **MUST** match the `href` value.
+
+If more than one resource is created, the `Location` URL **MUST** locate all 
+created resources.
+
+The response **SHOULD** also include a document that contains the primary
+resource(s) created. If absent, the client **SHOULD** treat the transmitted
+document as accepted without modification.
 
 ```text
 HTTP/1.1 201 Created
-Location: http://example.com/photos/12
+Location: http://example.com/photos/550e8400-e29b-41d4-a716-446655440000
 Content-Type: application/vnd.api+json
 
 {
-  "photos": [{
+  "photos": {
     "id": "550e8400-e29b-41d4-a716-446655440000",
-    "href": "http://example.com/photos/12",
+    "href": "http://example.com/photos/550e8400-e29b-41d4-a716-446655440000",
     "title": "Ember Hamster",
     "src": "http://example.com/images/productivity.png"
-  }]
+  }
 }
 ```
 
-##### Other Responses <a href="#updating-creating-a-document-response-other-responses" id="updating-creating-a-document-response-other-responses" class="headerlink">¶</a>
+##### Other Responses <a href="#crud-creating-responses-other" id="crud-creating-responses-other" class="headerlink"></a>
 
 Servers **MAY** use other HTTP error codes to represent errors.  Clients
-**MUST** interpret those errors in accordance with HTTP semantics.
+**MUST** interpret those errors in accordance with HTTP semantics. Error details
+**MAY** also be returned, as discussed below.
 
-## Updating a Document (`PATCH`) <a href="#updating-a-document" id="updating-a-document" class="headerlink">¶</a>
+#### Client-Generated IDs <a href="#crud-creating-client-ids" id="crud-creating-client-ids" class="headerlink"></a>
 
-The body of the `PATCH` request **MUST** be in JSON format with a `Content-Type`
-header of `application/json-patch+json`.
+A server **MAY** accept client-generated IDs along with requests to create one
+or more resources. IDs **MUST** be specified with an `"id"` key, the value of 
+which **MUST** be a properly generated and formatted *UUID*.
 
-It **MUST** be a valid [JSON Patch (RFC 6902)][4] document.
-
-[4]: http://tools.ietf.org/html/rfc6902
-
-### Attributes <a href="#updating-a-document-attributes" id="updating-a-document-attributes" class="headerlink">¶</a>
-
-To update an attribute, include a `replace` operation in the JSON Patch
-document. The name of the property to replace **MUST** be the same as
-the attribute name in the original `GET` request.
-
-For example, consider this `GET` request:
+For example:
 
 ```text
-GET /photos/1
-
-HTTP/1.1 200 OK
+POST /photos
 Content-Type: application/vnd.api+json
+Accept: application/vnd.api+json
 
 {
-  "photos": [{
+  "photos": {
+    "id": "550e8400-e29b-41d4-a716-446655440000",
+    "title": "Ember Hamster",
+    "src": "http://example.com/images/productivity.png"
+  }
+}
+```
+
+### Updating Resources <a href="#crud-updating" id="crud-updating" class="headerlink"></a>
+
+A server that supports updating resources **MUST** support updating individual
+resources and **MAY** optionally support updating multiple resources in a single
+request.
+
+Resources can be updated by making a `PUT` request to the URL that represents
+either the individual or multiple individual resources.
+
+#### Updating an Individual Resource <a href="#crud-updating-individual-resources" id="crud-updating-individual-resources" class="headerlink"></a>
+
+To update an individual resource, send a `PUT` request to the URL that
+represents the resource. The request **MUST** include a single top-level
+resource object.
+
+For example:
+
+```text
+PUT /articles/1
+Content-Type: application/vnd.api+json
+Accept: application/vnd.api+json
+
+{
+  "articles": {
     "id": "1",
-    "title": "Productivity",
-    "src": "http://example.com/productivity.png"
+    "title": "To TDD or Not"
+  }
+}
+```
+
+#### Updating Multiple Resources <a href="#crud-updating-multiple-resources" id="crud-updating-multiple-resources" class="headerlink"></a>
+
+To update multiple resources, send a `PUT` request to the URL that represents
+the multiple individual resources (NOT the entire collection of resources). The
+request **MUST** include a top-level collection of resource objects that each
+contain an `"id"` member.
+
+For example:
+
+```text
+PUT /articles/1,2
+Content-Type: application/vnd.api+json
+Accept: application/vnd.api+json
+
+{
+  "articles": [{
+    "id": "1",
+    "title": "To TDD or Not"
+  }, {
+    "id": "2",
+    "title": "LOL Engineering"
   }]
 }
 ```
 
-To update just the `src` property of the photo at `/photos/1`, make the
-following request:
+#### Updating Attributes <a href="#crud-updating-attributes" id="crud-updating-attributes" class="headerlink"></a>
+
+To update one or more attributes of a resource, the primary resource object
+should include only the attributes to be updated. Attributes ommitted from the
+resource object should not be updated.
+
+For example, the following `PUT` request will only update the `title` and `text`
+attributes of an article:
 
 ```text
-PATCH /photos/1
-Content-Type: application/json-patch+json
-
-[
-  { "op": "replace", "path": "/photos/0/src", "value": "http://example.com/hamster.png" }
-]
-```
-
-For attributes, only the `replace` operation is supported at the current
-time.
-
-### Relationships <a href="#updating-a-document-relationships" id="updating-a-document-relationships" class="headerlink">¶</a>
-
-Relationship updates are represented as JSON Patch operations on the
-`links` document.
-
-#### To-One Relationships <a href="#updating-a-document-relationships-to-one-relationships" id="updating-a-document-relationships-to-one-relationships" class="headerlink">¶</a>
-
-To update a to-one relationship, the client **MUST** issue a `PATCH`
-request that includes a `replace` operation on the relationship
-`links/<name>`.
-
-For example, for the following `GET` request:
-
-```text
-GET /photos/1
+PUT /articles/1
 Content-Type: application/vnd.api+json
+Accept: application/vnd.api+json
 
 {
-  "links": {
-    "photos.author": "http://example.com/people/{photos.author}"
-  },
-  "photos": [{
+  "articles": {
     "id": "1",
-    "href": "http://example.com/photos/1",
-    "title": "Hamster",
-    "src": "images/hamster.png",
+    "title": "To TDD or Not",
+    "text": "TLDR; It's complicated... but check your test coverage regardless."
+  }
+}
+```
+
+#### Updating Relationships <a href="#crud-updating-relationships" id="crud-updating-relationships" class="headerlink"></a>
+
+##### Updating To-One Relationships <a href="#crud-updating-to-one-relationships" id="crud-updating-to-one-relationships" class="headerlink"></a>
+
+To-one relationships **MAY** be updated along with other attributes by including
+them in a `links` object within the resource object in a `PUT` request.
+
+For instance, the following `PUT` request will update the `title` and `author`
+attributes of an article:
+
+```text
+PUT /articles/1
+Content-Type: application/vnd.api+json
+Accept: application/vnd.api+json
+
+{
+  "articles": {
+    "title": "Rails is a Melting Pot",
     "links": {
       "author": "1"
     }
-  }]
+  }
 }
 ```
 
-To change the author to person 2, issue a `PATCH` request to
-`/photos/1`:
+In order to remove a to-one relationship, specify `null` as the value of the
+relationship.
+
+Alternatively, a to-one relationship **MAY** optionally be accessible at its
+relationship URL (see above).
+
+A to-one relationship **MAY** be added by sending a `POST` request with a
+singular primary resource representation to the URL of the relationship. For
+example:
+
+```text
+POST /articles/1/links/author
+Content-Type: application/vnd.api+json
+Accept: application/vnd.api+json
+
+{
+  "people": "12"
+}
+```
+
+A to-one relationship **MAY** be removed by sending a `DELETE` reqest to the URL
+of the relationship. For example:
+
+```text
+DELETE /articles/1/links/author
+```
+
+##### Updating To-Many Relationships <a href="#crud-updating-to-many-relationships" id="crud-updating-to-many-relationships" class="headerlink"></a>
+
+To-many relationships **MAY** optionally be updated with other attributes by
+including them in a `links` object within the document in a `PUT` request.
+
+For instance, the following `PUT` request performs a complete replacement of the
+`tags` for an article:
+
+```text
+PUT /articles/1
+Content-Type: application/vnd.api+json
+Accept: application/vnd.api+json
+
+{
+  "articles": {
+    "id": "1",
+    "title": "Rails is a Melting Pot",
+    "links": {
+      "tags": ["2", "3"]
+    }
+  }
+}
+```
+
+In order to remove every member of a to-many relationship, specify an empty
+array (`[]`) as the value of the relationship.
+
+Replacing a complete set of data is not always appropriate in a distributed
+system which may involve many editors. An alternative is to allow relationships
+to be added and removed individually.
+
+To facilitate fine-grained access, a to-many relationship **MAY** optionally be
+accessible at its relationship URL (see above).
+
+A to-many relationship **MAY** be added by sending a `POST` request with a
+plural primary resource representation to the URL of the relationship. For
+example:
+
+```text
+POST /articles/1/links/comments
+Content-Type: application/vnd.api+json
+Accept: application/vnd.api+json
+
+{
+  "comments": ["1", "2"]
+}
+```
+
+To-many relationships **MAY** be deleted individually by sending a `DELETE`
+request to the URL of the relationship:
+
+```text
+DELETE /articles/1/links/tags/1
+```
+
+Multiple to-many relationships **MAY** be deleted by sending a `DELETE` request
+to the URL of the relationships:
+
+```text
+DELETE /articles/1/links/tags/1,2
+```
+
+### Responses <a href="#crud-updating-responses" id="crud-updating-responses" class="headerlink"></a>
+
+#### 204 No Content <a href="#crud-updating-responses-204" id="crud-updating-responses-204" class="headerlink"></a>
+
+A server **MUST** return a `204 No Content` status code if an update is
+successful and the client's current attributes remain up to date. This applies
+to `PUT` requests as well as `POST` and `DELETE` requests that modify links
+without affecting other attributes of a resource.
+
+#### 200 OK <a href="#crud-updating-responses-200" id="crud-updating-responses-200" class="headerlink"></a>
+
+If a server accepts an update but also changes the resource(s) in other ways
+than those specified by the request (for example, updating the `updatedAt`
+attribute or a computed `sha`), it **MUST** return a `200 OK` response as well
+as a representation of the updated resource(s) as if a `GET` request was made to
+the request URL.
+
+#### Other Responses <a href="#crud-updating-responses-other" id="crud-updating-responses-other" class="headerlink"></a>
+
+Servers **MAY** use other HTTP error codes to represent errors.  Clients
+**MUST** interpret those errors in accordance with HTTP semantics. Error details
+**MAY** also be returned, as discussed below.
+
+### Deleting Resources <a href="#crud-deleting" id="crud-deleting" class="headerlink"></a>
+
+An individual resource can be *deleted* by making a `DELETE` request to the
+resource's URL:
+
+```text
+DELETE /photos/1
+```
+
+A server **MAY** optionally allow multiple resources to be *deleted* with a
+`DELETE` request to their URL:
+
+```text
+DELETE /photos/1,2,3
+```
+
+#### Responses <a href="#crud-deleting-responses" id="crud-deleting-responses" class="headerlink"></a>
+
+##### 204 No Content <a href="#crud-deleting-responses-204" id="crud-deleting-responses-204" class="headerlink"></a>
+
+A server **MUST** return a `204 No Content` status code if a delete request is
+successful.
+
+##### Other Responses <a href="#crud-deleting-responses-other" id="crud-deleting-responses-other" class="headerlink"></a>
+
+Servers **MAY** use other HTTP error codes to represent errors.  Clients
+**MUST** interpret those errors in accordance with HTTP semantics. Error details
+**MAY** also be returned, as discussed below.
+
+## Errors <a href="#errors" id="errors" class="headerlink"></a>
+
+Error objects are specialized resource objects that **MAY** be returned in a
+response to provide additional information about problems encountered while
+performing an operation. Error objects **SHOULD** be returned as a collection
+keyed by `"errors"` in the top level of a JSON API document, and **SHOULD NOT**
+be returned with any other top level resources.
+
+An error object **MAY** have the following members:
+
+* `"id"` - A unique identifier for this particular occurrence of the problem.
+* `"href"` - A URI that **MAY** yield further details about this particular
+  occurrence of the problem.
+* `"status"` - The HTTP status code applicable to this problem, expressed as a
+  string value.
+* `"code"` - An application-specific error code, expressed as a string value.
+* `"title"` - A short, human-readable summary of the problem. It **SHOULD NOT**
+  change from occurrence to occurrence of the problem, except for purposes of
+  localization.
+* `"detail"` - A human-readable explanation specific to this occurrence of the
+  problem.
+* `"links"` - Associated resources which can be dereferenced from the request
+  document.
+* `"path"` - The relative path to the relevant attribute within the associated
+  resource(s). Only appropriate for problems that apply to a single resource or
+  type of resource.
+
+Additional members **MAY** be specified within error objects.
+
+Implementors **MAY** choose to use an alternative media type for errors.
+
+## PATCH Support <a href="#patch" id="patch" class="headerlink"></a>
+
+JSON API servers **MAY** opt to support HTTP `PATCH` requests that conform to
+the JSON Patch format [[RFC6902](http://tools.ietf.org/html/rfc6902)]. There are
+JSON Patch equivalant operations for the operations described above that use
+`POST`, `PUT` and `DELETE`. From here on, JSON Patch operations sent in a
+`PATCH` request will be referred to simply as "`PATCH` operations".
+
+`PATCH` requests **MUST** specify a `Content-Type` header of `application/json-
+patch+json`.
+
+`PATCH` operations **MUST** be sent as an array to conform with the JSON Patch
+format. A server **MAY** limit the type, order and count of operations allowed
+in this top level array.
+
+### Request URLs <a href="#patch-urls" id="patch-urls" class="headerlink"></a>
+
+The URL for each `PATCH` request **SHOULD** map to the resource(s) or
+relationship(s) to be updated.
+
+Every `"path"` within a `PATCH` operation **SHOULD** be relative to the request
+URL. The request URL and the `PATCH` operation's `"path"` are complementary and
+combine to target a particular resource, collection, attribute, or relationship.
+
+`PATCH` operations **MAY** be allowed at the root URL of an API. In this case,
+every `"path"` within a `PATCH` operation **MUST** include the full resource
+URL. This allows for general "fire hose" updates to any resource represented by
+an API. As stated above, a server **MAY** limit the type, order and count of
+bulk operations.
+
+### Creating a Resource with PATCH <a href="#patch-creating" id="patch-creating" class="headerlink"></a>
+
+To create a resource, perform an `"add"` operation with a `"path"` that points
+to the end of its corresponding resource collection (`"/-"`). The `"value"`
+should contain a resource object.
+
+For instance, a new photo might be created with the following request:
+
+```text
+PATCH /photos
+Content-Type: application/json-patch+json
+Accept: application/json
+
+[
+  { 
+    "op": "add", 
+    "path": "/-", 
+    "value": {
+      "title": "Ember Hamster",
+      "src": "http://example.com/images/productivity.png"
+    }
+  }
+]
+```
+
+### Updating Attributes with PATCH <a href="#patch-updating-attributes" id="patch-updating-attributes" class="headerlink"></a>
+
+To update an attribute, perform a `"replace"` operation with the attribute's
+name specified as the `"path"`.
+
+For instance, the following request should update just the `src` property of the
+photo at `/photos/1`:
 
 ```text
 PATCH /photos/1
 Content-Type: application/json-patch+json
-Accept: application/vnd.api+json
 
 [
-  { "op": "replace", "path": "/photos/0/links/author", "value": "2" }
+  { "op": "replace", "path": "/src", "value": "http://example.com/hamster.png" }
 ]
 ```
 
-#### To-Many Relationships <a href="#updating-a-document-relationships-to-many-relationships" id="updating-a-document-relationships-to-many-relationships" class="headerlink">¶</a>
+### Updating Relationships with PATCH <a href="#patch-updating-relationships" id="patch-updating-relationships" class="headerlink"></a>
 
-While to-many relationships are represented as a JSON array in a `GET`
-response, they are updated as if they were a set.
+To update a relationship, send an appropriate `PATCH` operation to the
+corresponding relationship's URL.
 
-To remove an element from a to-many relationship, use a `remove`
-operation on `links/<name>/<id>`. To add an element, use an `add`
-operation on `links/<name>/-`.
+A server **MAY** also support updates at a higher level, such as the resource's
+URL (or even the API's root URL). As discussed above, the request URL and each
+operation's `"path"` must be complementary and combine to target a particular
+relationship's URL.
 
-For example, for the following `GET` request:
+#### Updating To-One Relationships with PATCH <a href="#patch-updating-to-one-relationships" id="patch-updating-to-one-relationships" class="headerlink"></a>
+
+To update a to-one relationship, perform a `"replace"` operation with a URL and
+`"path"` that targets the relationship. The `"value"` should be a singular
+resource representation.
+
+For instance, the following request should update the `author` of an article:
+
+```text
+PATCH /article/1/links/author
+Content-Type: application/json-patch+json
+
+[
+  { "op": "replace", "path": "/", "value": "1" }
+]
+```
+
+To remove a to-one relationship, perform a `remove` operation on the
+relationship. For example:
+
+```text
+PATCH /article/1/links/author
+Content-Type: application/json-patch+json
+
+[
+  { "op": "remove", "path": "/" }
+]
+```
+
+#### Updating To-Many Relationships with PATCH <a href="#patch-updating-to-many-relationships" id="patch-updating-to-many-relationships" class="headerlink"></a>
+
+While to-many relationships are represented as a JSON array in a `GET` response,
+they are updated as if they were a set.
+
+To add an element to a to-many relationship, perform an `"add"` operation that
+targets the relationship's URL. Because the operation is targeting the end of a
+collection, the `"path"` must end with `"/-"`. The `"value"` should be a
+singular or plural resource representation.
+
+For example, consider the following `GET` request:
 
 ```text
 GET /photos/1
@@ -853,9 +1284,9 @@ Content-Type: application/vnd.api+json
 
 {
   "links": {
-    "photos.comments": "http://example.com/comments/{photos.comments}"
+    "comments": "http://example.com/comments/{comments}"
   },
-  "photos": [{
+  "photos": {
     "id": "1",
     "href": "http://example.com/photos/1",
     "title": "Hamster",
@@ -863,82 +1294,156 @@ Content-Type: application/vnd.api+json
     "links": {
       "comments": [ "1", "5", "12", "17" ]
     }
-  }]
+  }
 }
 ```
 
-You could move comment 30 to this photo by issuing an `add` operation in
-the `PATCH` request:
+You could move comment 30 to this photo by issuing an `add` operation in the
+`PATCH` request:
 
 ```text
-PATCH /photos/1
+PATCH /photos/1/links/comments
+Content-Type: application/json-patch+json
 
 [
-  { "op": "add", "path": "/photos/0/links/comments/-", "value": "30" }
+  { "op": "add", "path": "/-", "value": "30" }
 ]
 ```
 
-To remove comment 5 from this photo, issue a `remove` operation:
+To remove a to-many relationship, perform a `"remove"` operation that targets
+the relationship's URL. Because the operation is targeting a member of a
+collection, the `"path"` **MUST** end with `"/<id>"`.
+
+For example, to remove comment 5 from this photo, issue this `"remove"`
+operation:
 
 ```text
-PATCH /photos/1
+PATCH /photos/1/links/comments
+Content-Type: application/json-patch+json
 
 [
-  { "op": "remove", "path": "/photos/0/links/comments/5" }
+  { "op": "remove", "path": "/5" }
 ]
 ```
 
-Note that to-many relationships have set-like behavior in JSON API to
-limit the damage that can be caused by concurrent modifications.
+### Deleting a Resource with PATCH <a href="#patch-deleting" id="patch-deleting" class="headerlink"></a>
 
-### 204 No Content <a href="#updating-a-document-204-no-content" id="updating-a-document-204-no-content" class="headerlink">¶</a>
+To delete a resource, perform an `"remove"` operation with a URL and `"path"`
+that targets the resource.
 
-If a server returns a `204 No Content` in response to a `PATCH` request,
-it means that the update was successful, and that the client's current
-attributes remain up to date.
-
-### 200 OK <a href="#updating-a-document-200-ok" id="updating-a-document-200-ok" class="headerlink">¶</a>
-
-If the server accepts the update but also changes the document in other
-ways than those specified by the `PATCH` request (for example, updating
-the `updatedAt` attribute or a computed `sha`), it **MUST** return a
-`200 OK` response.
-
-The body of the response **MUST** be a valid JSON API response, as if a
-`GET` request was made to the same URL.
-
-### Other Responses <a href="#updating-a-document-other-responses" id="updating-a-document-other-responses" class="headerlink">¶</a>
-
-Servers **MAY** use other HTTP error codes to represent errors.  Clients
-**MUST** interpret those errors in accordance with HTTP semantics.
-
-## Deletions <a href="#deletions" id="deletions" class="headerlink">¶</a>
-
-A JSON API document is *deleted* by making a `DELETE` request to the
-document's URL.
+For instance, photo 1 might be deleted with the following request:
 
 ```text
-DELETE /photos/1
+PATCH /photos/1
+Content-Type: application/json-patch+json
+Accept: application/vnd.api+json
+
+[
+  { "op": "remove", "path": "/" }
+]
 ```
 
-### 204 Responses <a href="#deletions-204-responses" id="deletions-204-responses" class="headerlink">¶</a>
+### Responses <a href="#patch-responses" id="patch-responses" class="headerlink"></a>
 
-If a server returns a `204 No Content` in response to a `DELETE`
-request, it means that the deletion was successful.
+#### 204 No Content <a href="#patch-responses-204" id="patch-responses-204" class="headerlink"></a>
 
-### Other Responses <a href="#deletions-other-responses" id="deletions-other-responses" class="headerlink">¶</a>
+A server **MUST** return a `204 No Content` status code in response to a
+successful `PATCH` request in which the client's current attributes remain up to
+date.
 
-Servers **MAY** use other HTTP error codes to represent errors.  Clients
-**MUST** interpret those errors in accordance with HTTP semantics.
+#### 200 OK <a href="#patch-responses-200" id="patch-responses-200" class="headerlink"></a>
 
-## HTTP Caching <a href="#http-caching" id="http-caching" class="headerlink">¶</a>
+If a server accepts an update but also changes the resource(s) in other ways
+than those specified by the request (for example, updating the `updatedAt`
+attribute or a computed `sha`), it **MUST** return a `200 OK` response as well
+as a representation of the updated resources.
 
-Servers **MAY** use HTTP caching headers (`ETag`, `Last-Modified`) in
-accordance with the semantics described in HTTP 1.1.
+The server **MUST** specify a `Content-Type` header of `application/json`. The
+body of the response **MUST** contain an array of JSON objects, each of which
+**MUST** conform to the JSON API media type (`application/vnd.api+json`).
+Response objects in this array **MUST** be in sequential order and correspond to
+the operations in the request document.
 
-## Compound Responses <a href="#compound-responses" id="compound-responses" class="headerlink">¶</a>
+For instance, a request may create two photos in separate operations:
 
-Whenever a server returns a `200 OK` response in response to a creation,
-update or deletion, it **MAY** include other documents in the JSON
-document. The semantics of these documents are [the same][1] as when
-additional documents are included in response to a `GET`.
+```text
+PATCH /photos
+Content-Type: application/json-patch+json
+Accept: application/json
+
+[
+  { 
+    "op": "add", 
+    "path": "/-", 
+    "value": {
+      "title": "Ember Hamster",
+      "src": "http://example.com/images/productivity.png"
+    }
+  },
+  { 
+    "op": "add", 
+    "path": "/-", 
+    "value": {
+      "title": "Mustaches on a Stick",
+      "src": "http://example.com/images/mustaches.png"
+    }
+  }
+]
+```
+
+The response would then include corresponding JSON API documents contained
+within an array:
+
+```text
+HTTP/1.1 200 OK
+Content-Type: application/json
+
+[
+  {
+    "photos": [{
+      "id": "123",
+      "title": "Ember Hamster",
+      "src": "http://example.com/images/productivity.png"
+    }]
+  }, {
+    "photos": [{
+      "id": "124",
+      "title": "Mustaches on a Stick",
+      "src": "http://example.com/images/mustaches.png"
+    }]
+  }
+]
+```
+
+#### Other Responses <a href="#patch-responses-other" id="patch-responses-other" class="headerlink"></a>
+
+When a server encounters one or more problems while processing a `PATCH`
+request, it **SHOULD** specify the most appropriate HTTP error code in the
+response. Clients **MUST** interpret those errors in accordance with HTTP
+semantics.
+
+A server **MAY** choose to stop processing `PATCH` operations as soon as the
+first problem is encountered, or it **MAY** continue processing operations and
+encounter multiple problems. For instance, a server might process multiple
+attribute updates and then return multiple validation problems in a single
+response.
+
+When a server encounters multiple problems from a single request, the most
+generally applicable HTTP error code should be specified in the response. For
+instance, `400 Bad Request` might be appropriate for multiple 4xx errors or `500
+Internal Server Error` might be appropriate for multiple 5xx errors.
+
+A server **MAY** return error objects that correspond to each operation. The
+server **MUST** specify a `Content-Type` header of `application/json` and the
+body of the response **MUST** contain an array of JSON objects, each of which
+**MUST** conform to the JSON API media type (`application/vnd.api+json`).
+Response objects in this array **MUST** be in sequential order and correspond to
+the operations in the request document. Each response object **SHOULD** contain
+only error objects, since no operations can be completed successfully when any
+errors occur. Error codes for each specific operation **SHOULD** be returned in
+the `"status"` member of each error object.
+
+## HTTP Caching <a href="#http-caching" id="http-caching" class="headerlink"></a>
+
+Servers **MAY** use HTTP caching headers (`ETag`, `Last-Modified`) in accordance
+with the semantics described in HTTP 1.1.
