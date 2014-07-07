@@ -380,13 +380,13 @@ Here's another example:
   "links": {
     "posts.comments": "http://example.com/comments/{posts.comments}"
   },
-  "posts": [{
+  "posts": {
     "id": "1",
     "title": "Rails is Omakase",
     "links": {
       "comments": [ "1", "2", "3", "4" ]
     }
-  }]
+  }
 }
 ```
 
