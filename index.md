@@ -29,14 +29,14 @@ Here's an example response from JSON API:
       "type": "comments"
     }
   },
-  "posts": [{
+  "posts": {
     "id": "1",
     "title": "Rails is Omakase",
     "links": {
       "author": "9",
       "comments": [ "5", "12", "17", "20" ]
     }
-  }]
+  }
 }
 ```
 
