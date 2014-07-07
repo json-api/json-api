@@ -77,9 +77,9 @@ No other members should be present at the top level of a document.
 This section describes how resources can be represented throughout a JSON API
 document. It applies to primary as well as linked resources.
 
-#### Singular Resource Representations <a href="#document-structure-singular-resource-representations" id="document-structure-singular-resource-representations" class="headerlink"></a>
+#### Individual Resource Representations <a href="#document-structure-individual-resource-representations" id="document-structure-individual-resource-representations" class="headerlink"></a>
 
-A singular resource **SHOULD** be represented as a single "resource object"
+An individual resource **SHOULD** be represented as a single "resource object"
 (described below) or a string value containing its ID (also described below).
 
 The following post is represented as a resource object:
@@ -101,10 +101,10 @@ This post is represented simply by its ID:
 }
 ```
 
-#### Plural Resource Representations <a href="#document-structure-plural-resource-representations" id="document-structure-plural-resource-representations" class="headerlink"></a>
+#### Resource Collection Representations <a href="#document-structure-resource-collection-representations" id="document-structure-resource-collection-representations" class="headerlink"></a>
 
-A collection of resources **SHOULD** be represented as an array of resource
-objects or IDs, or as a single "collection object" (described below).
+A collection of any number of resources **SHOULD** be represented as an array of
+resource objects or IDs, or as a single "collection object" (described below).
 
 The following posts are represented as an array of resource objects:
 
@@ -259,7 +259,7 @@ collection of `comments`:
 ##### To-One Relationships <a href="#document-structure-resource-relationships-to-one" id="document-structure-resource-relationships-to-one" class="headerlink"></a>
 
 To-one relationships **MUST** be represented with one of the formats for
-singular resources described above.
+individual resources described above.
 
 For example, the following post is associated with a single author, identified
 by ID:
@@ -296,8 +296,8 @@ And here's an example of a linked author represented as a resource object:
 
 ##### To-Many Relationships <a href="#document-structure-resource-relationships-to-many" id="document-structure-resource-relationships-to-many" class="headerlink"></a>
 
-To-many relationships **MUST** be represented with one of the formats for plural
-resources described above.
+To-many relationships **MUST** be represented with one of the formats for
+resource collections described above.
 
 For example, the following post is associated with several comments, identified
 by their IDs:
@@ -603,8 +603,8 @@ A photo's reference to an individual linked photographer will have the URL:
 /photos/1/links/photographer
 ```
 
-A server **MUST** represent "to-one" relationships as singular resources and
-"to-many" relationships as plural resources.
+A server **MUST** represent "to-one" relationships as individual resources and
+"to-many" relationships as resource collections.
 
 
 ## Fetching Resources <a href="#fetching" id="fetching" class="headerlink"></a>
@@ -989,9 +989,8 @@ relationship.
 Alternatively, a to-one relationship **MAY** optionally be accessible at its
 relationship URL (see above).
 
-A to-one relationship **MAY** be added by sending a `POST` request with a
-singular primary resource representation to the URL of the relationship. For
-example:
+A to-one relationship **MAY** be added by sending a `POST` request with an
+individual primary resource to the URL of the relationship. For example:
 
 ```text
 POST /articles/1/links/author
@@ -1045,8 +1044,7 @@ To facilitate fine-grained access, a to-many relationship **MAY** optionally be
 accessible at its relationship URL (see above).
 
 A to-many relationship **MAY** be added by sending a `POST` request with a
-plural primary resource representation to the URL of the relationship. For
-example:
+primary resource collection to the URL of the relationship. For example:
 
 ```text
 POST /articles/1/links/comments
@@ -1240,7 +1238,7 @@ relationship's URL.
 #### Updating To-One Relationships with PATCH <a href="#patch-updating-to-one-relationships" id="patch-updating-to-one-relationships" class="headerlink"></a>
 
 To update a to-one relationship, perform a `"replace"` operation with a URL and
-`"path"` that targets the relationship. The `"value"` should be a singular
+`"path"` that targets the relationship. The `"value"` should be an individual
 resource representation.
 
 For instance, the following request should update the `author` of an article:
@@ -1274,7 +1272,7 @@ they are updated as if they were a set.
 To add an element to a to-many relationship, perform an `"add"` operation that
 targets the relationship's URL. Because the operation is targeting the end of a
 collection, the `"path"` must end with `"/-"`. The `"value"` should be a
-singular or plural resource representation.
+representation of an individual resource or collection of resources.
 
 For example, consider the following `GET` request:
 
