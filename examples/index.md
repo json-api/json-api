@@ -48,6 +48,8 @@ has page describing how to emit conformant JSON.
 
 * [Hyp](https://github.com/kalasjocke/hyp) is a library for creating json-api responses.
 
+* [SQLAlchemy-JSONAPI](https://github.com/coltonprovias/sqlalchemy-jsonapi) provides JSON API serialization for SQLAlchemy models.
+
 ## Messages <a href="#messages" id="messages" class="headerlink"></a>
 
 * [RestPack::Serializer provides examples](http://restpack-serializer-sample.herokuapp.com/) which demonstrate sample responses.
