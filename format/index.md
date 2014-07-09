@@ -1002,7 +1002,7 @@ Accept: application/vnd.api+json
 }
 ```
 
-A to-one relationship **MAY** be removed by sending a `DELETE` reqest to the URL
+A to-one relationship **MAY** be removed by sending a `DELETE` request to the URL
 of the relationship. For example:
 
 ```text
