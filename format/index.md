@@ -356,7 +356,7 @@ For example:
 ```javascript
 {
   "links": {
-    "posts.comments": "http://example.com/posts/{posts.id}/comments"
+    "posts.comments": "http://example.com/comments?posts={posts.id}"
   },
   "posts": [{
     "id": "1",
@@ -368,9 +368,9 @@ For example:
 }
 ```
 
-In this example, fetching `http://example.com/posts/1/comments` will fetch the
+In this example, fetching `http://example.com/comments?posts=1` will fetch the
 comments for `"Rails is Omakase"` and fetching
-`http://example.com/posts/2/comments` will fetch the comments for `"The Parley
+`http://example.com/comments?posts=2` will fetch the comments for `"The Parley
 Letter"`.
 
 Here's another example:
