@@ -695,7 +695,7 @@ with a `fields[TYPE]` parameter.
 GET /posts?include=author&fields[posts]=id,title&fields[people]=id,name
 ```
 
-An endpoint SHOULD return a default set of fields in a resource object if no
+An endpoint **SHOULD** return a default set of fields in a resource object if no
 fields have been specified for its type, or if the endpoint does not support use
 of either `fields` or `fields[TYPE]`.
 
