@@ -825,7 +825,7 @@ When one or more resources has been created, the server **MUST** return a `201
 Created` status code.
 
 The response **MUST** include a `Location` header identifying the location of
-all resources created by the request.
+_all_ resources created by the request.
 
 If a single resource is created and that resource's object includes an `href`
 key, the `Location` URL **MUST** match the `href` value.
