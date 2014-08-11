@@ -699,6 +699,9 @@ An endpoint **SHOULD** return a default set of fields in a resource object if no
 fields have been specified for its type, or if the endpoint does not support use
 of either `fields` or `fields[TYPE]`.
 
+An endpoint **MAY** also choose to always return a limited set of 
+non-specified fields, such as `id` or `href`.
+
 Note: `fields` and `fields[TYPE]` can not be mixed. If the latter format is
 used, then it must be used for the primary resource type as well.
 
