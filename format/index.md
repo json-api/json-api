@@ -348,8 +348,9 @@ the referenced objects as a collection of resource objects.
 
 ### URL Templates <a href="#document-structure-url-templates" id="document-structure-url-templates" class="headerlink"></a>
 
-A top-level `"links"` object **MAY** be used to specify URL templates that can
-be used to formulate URLs for resources according to their type.
+A top-level `"links"` object **MAY** be used to specify URL templates that can be
+used to formulate URLs for resources. This often allows API responses to be more 
+compact.
 
 For example:
 
@@ -371,14 +372,31 @@ For example:
 In this example, fetching `http://example.com/comments?posts=1` will fetch the
 comments for `"Rails is Omakase"` and fetching
 `http://example.com/comments?posts=2` will fetch the comments for `"The Parley
-Letter"`.
+Letter"`. The use of a URL template obviates the need for each post to specity 
+that it links to a collection of comments and to provide a hardcoded-url for that 
+collection.
+
+Each key in the top-level `"links"` object is a dot-separated path (defined from the 
+point of view of the reference document) that points at a repeated relationship. 
+Paths start with a particular resource type and can traverse related resources. For
+example `"posts.comments"` points at the `"comments"` relationship in each
+resource of type `"posts"`.
+
+By default, each value in the `"links"` object is a URL template, given as a string.
+However, a value in the `"links"` object **MAY** also be an object with two properties: 
+`"href"`and `"type"`. In this case, the `"href"` key holds the URL template while the 
+`"type"` key specifies the type of the linked resource(s), which facilitates lookups of 
+linked resource objects by the client.
 
 Here's another example:
 
 ```javascript
 {
   "links": {
-    "posts.comments": "http://example.com/comments/{posts.comments}"
+    "posts.comments": {
+      "href": "http://example.com/comments/{posts.comments}",
+      "type": "comments"
+    }
   },
   "posts": [{
     "id": "1",
@@ -397,17 +415,6 @@ the default explosion is to percent encode the array members (e.g. via
 `encodeURIComponent()` in JavaScript) and join them by a comma. In this example,
 fetching `http://example.com/comments/1,2,3,4` will return a list of all
 comments.
-
-The top-level `"links"` object has the following behavior:
-
-* Each key is a dot-separated path that points at a repeated relationship. Paths
-  start with a particular resource type and can traverse related resources. For
-  example `"posts.comments"` points at the `"comments"` relationship in each
-  resource of type `"posts"`.
-* The value of each key is interpreted as a URL template.
-* For each resource that the path points to, act as if it specified a
-  relationship formed by expanding the URL template with the non-URL value
-  actually specified.
 
 Here is another example that uses a has-one relationship:
 
@@ -444,6 +451,11 @@ In this example, the URL for the author of all three posts is
 Top-level URL templates allow you to specify relationships as IDs, but without
 requiring that clients hard-code information about how to form the URLs.
 
+For each key/path in the top-level `"links"` object, clients should do as follows. For each 
+resource that the path points to, act as if that resource specified a relationship whose
+liked resource(s) can be found at the URL formed by expanding the URL template with values 
+drawn from the resource.
+
 NOTE: In case of conflict, an individual resource object's `links` object will
 take precedence over a top-level `links` object.
 
@@ -456,10 +468,6 @@ documents are called "compound documents".
 In a compound document, linked resources **MUST** be included as resource
 objects in a top level `"linked"` object, in which they are grouped together in
 arrays according to their type.
-
-The type of each relationship **MAY** be specified in a resource-level or top-
-level `"links"` object with the `"type"` key. This facilitates lookups of linked
-resource objects by the client.
 
 ```javascript
 {
