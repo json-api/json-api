@@ -37,6 +37,8 @@ implementations. There is a [custom adapter](https://github.com/daliwali/ember-j
 is one of the original exemplar implementations, but is slightly out of date at
 the moment.
 
+* [JsonApiClient](https://github.com/chingor13/json_api_client) attempts to give you a query building framework that is easy to understand (similar to ActiveRecord scopes)
+
 * [The rabl wiki](https://github.com/nesquena/rabl/wiki/Conforming-to-jsonapi.org-format)
 has a page describing how to emit conformant JSON.
 
