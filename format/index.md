@@ -383,11 +383,22 @@ example `"posts.comments"` points at the `"comments"` relationship in each
 resource of type `"posts"`.
 
 Each value in the `"links"` object may either be a string or an object. If a value is
-a string, that string represents a URL template that can be used to find the linked
-resource(s), as in the example above. If the value is an object, it must have either
-an `"href"` key, a `"type"`key, or both; the `"href"` key holds the URL template while
-the `"type"` key  specifies the type of the linked resource(s), which facilitates
-lookups of linked resource objects by the client.
+a string, that string represents a URL template. If the value is an object, it must have
+either an `"href"` key, a `"type"`key, or both; the `"href"` key holds a URL template
+while the `"type"` key specifies a resource type.
+
+For each key–value pair in the `"links"` object, the value specifies `"type"` and/or `"href"`
+information about all occurrences of the repeated relationship pointed to by the key. Specifically, 
+if the value holds a URL template (as described above), it is specifying that the `"href"` 
+for the linked resource(s) in a given occurrence of the repeated relationship is the result
+of expanding that URL template, using the resource object in which the occurrence appears as the
+data for the expansion. Similarly, if the value has a `"type"` property, it is specifying that the
+`"type"` of the linked resource(s) in all occcurences of the repeated relationship is the value of
+that property. 
+
+NOTE: any information about a given occurrence of a relationship specified in the resource-level 
+`"links"` object always supersedes information specified by the top-level `"links"` object in case 
+of conflict.
 
 Here's another example:
 
@@ -484,14 +495,6 @@ Finally, here is an example of specifying only the `"type"` key in the `"links"`
 ```
 Above, specifying the type in `"links"` tells the client which collection in the `"linked"` 
 key it should search in to find the linked resource.
-
-A client should process the top-level `"links"` object by iterating over its key–value pairs. On each iteration, it should do as follows. (Below, we'll refer to the current key being processed as the  _current link path_ and its value as the _current link descriptor_.)
-
-1. Split the _current link path_ into two parts by dividing it at the last "." character. We'll call 
-   the resulting parts the _resources segment_ and the _relationship segment_.
-2. Find all resource objects in the response document whose path, from the perspective of the reference
-   document, is under the _resources segment_.
-3. For each such resource object, use the information in the _current link descriptor_ to fill in any information about the relationship at the path specified by the _resources segment_ that **was not provided** in the resource-level `"links"` object. The _current link descriptor_ can provide information about the linked resource(s)' `"type"` and/or their `"href"`. If _current link descriptor_ contains a URL template (as detailed above), it provides an `"href"` for the linked resource(s), which is found by expanding the URL template, using the resource object currently being processed as the data for the expansion. If the _current link descriptor_ is an object with a `"type"` property, it indicates that the type of the linked resource(s) is the value of that property. 
 
 ### Compound Documents <a href="#document-structure-compound-documents" id="document-structure-compound-documents" class="headerlink"></a>
 
