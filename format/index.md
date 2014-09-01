@@ -372,7 +372,7 @@ For example:
 In this example, fetching `http://example.com/comments?posts=1` will fetch the
 comments for `"Rails is Omakase"` and fetching
 `http://example.com/comments?posts=2` will fetch the comments for `"The Parley
-Letter"`. The use of a URL template obviates the need for each post to specity 
+Letter"`. The use of a URL template obviates the need for each post to specify 
 that it links to a collection of comments and to provide a hardcoded-url for that 
 collection.
 
@@ -387,18 +387,18 @@ a string, that string represents a URL template. If the value is an object, it m
 either an `"href"` key, a `"type"`key, or both; the `"href"` key holds a URL template
 while the `"type"` key specifies a resource type.
 
-For each key–value pair in the `"links"` object, the value specifies `"type"` and/or `"href"`
-information about all occurrences of the repeated relationship pointed to by the key. Specifically, 
-if the value holds a URL template (as described above), it is specifying that the `"href"` 
-for the linked resource(s) in a given occurrence of the repeated relationship is the result
-of expanding that URL template, using the resource object in which the occurrence appears as the
-data for the expansion. Similarly, if the value has a `"type"` property, it is specifying that the
-`"type"` of the linked resource(s) in all occcurences of the repeated relationship is the value of
-that property. 
+For each key–value pair in the `"links"` object, the value specifies `"type"` and/or 
+`"href"` information about all occurrences of the repeated relationship pointed to by the key. 
+Specifically, if the value holds a URL template (as described above), it is specifying that 
+the `"href"` for the linked resource(s) in a given occurrence of the repeated relationship is 
+the result of expanding that URL template, using the resource object in which the occurrence 
+appears as the data for the expansion. Similarly, if the value has a `"type"` property, it is 
+specifying that the `"type"` of the linked resource(s) in all occcurences of the repeated 
+relationship is the value of that property.
 
-NOTE: any information about a given occurrence of a relationship specified in the resource-level 
-`"links"` object always supersedes information specified by the top-level `"links"` object in case 
-of conflict.
+However, note that any information about a given occurrence of a relationship specified in the 
+resource-level `"links"` object always supersedes information specified by the top-level `"links"` 
+object in case of conflict.
 
 Here's another example:
 
