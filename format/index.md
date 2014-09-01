@@ -349,8 +349,8 @@ the referenced objects as a collection of resource objects.
 ### URL Templates <a href="#document-structure-url-templates" id="document-structure-url-templates" class="headerlink"></a>
 
 A top-level `"links"` object **MAY** be used to specify URL templates that can be
-used to formulate URLs for resources. This often allows API responses to be more 
-compact.
+used to formulate URLs for resources. This often allows resource representations to
+be more compact.
 
 For example:
 
@@ -382,11 +382,12 @@ Paths start with a particular resource type and can traverse related resources. 
 example `"posts.comments"` points at the `"comments"` relationship in each
 resource of type `"posts"`.
 
-By default, each value in the `"links"` object is a URL template, given as a string.
-However, a value in the `"links"` object **MAY** also be an object with two properties: 
-`"href"`and `"type"`. In this case, the `"href"` key holds the URL template while the 
-`"type"` key specifies the type of the linked resource(s), which facilitates lookups of 
-linked resource objects by the client.
+Each value in the `"links"` object may either be a string or an object. If a value is
+a string, that string represents a URL template that can be used to find the linked
+resource(s), as in the example above. If the value is an object, it must have either
+an `"href"` key, a `"type"`key, or both; the `"href"` key holds the URL template while
+the `"type"` key  specifies the type of the linked resource(s), which facilitates
+lookups of linked resource objects by the client.
 
 Here's another example:
 
@@ -416,7 +417,7 @@ the default explosion is to percent encode the array members (e.g. via
 fetching `http://example.com/comments/1,2,3,4` will return a list of all
 comments.
 
-Here is another example that uses a has-one relationship:
+And here is an example that uses a has-one relationship:
 
 ```javascript
 {
@@ -451,13 +452,46 @@ In this example, the URL for the author of all three posts is
 Top-level URL templates allow you to specify relationships as IDs, but without
 requiring that clients hard-code information about how to form the URLs.
 
-For each key/path in the top-level `"links"` object, clients should do as follows. For each 
-resource that the path points to, act as if that resource specified a relationship whose
-liked resource(s) can be found at the URL formed by expanding the URL template with values 
-drawn from the resource.
+Finally, here is an example of specifying only the `"type"` key in the `"links"` object:
 
-NOTE: In case of conflict, an individual resource object's `links` object will
-take precedence over a top-level `links` object.
+```javascript
+{
+  "links": {
+    "posts.author": {
+      "type": "people"
+    }
+  },
+  "posts": [{
+    "id": "1",
+    "title": "Rails is Omakase",
+    "links": {
+      "author": "12"
+    }
+  }, {
+    "id": "2",
+    "title": "The Parley Letter",
+    "links": {
+      "author": "12"
+    }
+  }],
+  "linked": {
+    "people": [{
+      "id": "12",
+      "name": "The Author"
+    }]
+  }
+}
+```
+Above, specifying the type in `"links"` tells the client which collection in the `"linked"` 
+key it should search in to find the linked resource.
+
+A client should process the top-level `"links"` object by iterating over its key–value pairs. On each iteration, it should do as follows. (Below, we'll refer to the current key being processed as the  _current link path_ and its value as the _current link descriptor_.)
+
+1. Split the _current link path_ into two parts by dividing it at the last "." character. We'll call 
+   the resulting parts the _resources segment_ and the _relationship segment_.
+2. Find all resource objects in the response document whose path, from the perspective of the reference
+   document, is under the _resources segment_.
+3. For each such resource object, use the information in the _current link descriptor_ to fill in any information about the relationship at the path specified by the _resources segment_ that **was not provided** in the resource-level `"links"` object. The _current link descriptor_ can provide information about the linked resource(s)' `"type"` and/or their `"href"`. If _current link descriptor_ contains a URL template (as detailed above), it provides an `"href"` for the linked resource(s), which is found by expanding the URL template, using the resource object currently being processed as the data for the expansion. If the _current link descriptor_ is an object with a `"type"` property, it indicates that the type of the linked resource(s) is the value of that property. 
 
 ### Compound Documents <a href="#document-structure-compound-documents" id="document-structure-compound-documents" class="headerlink"></a>
 
