@@ -52,6 +52,10 @@ has a page describing how to emit conformant JSON.
 
 * [SQLAlchemy-JSONAPI](https://github.com/coltonprovias/sqlalchemy-jsonapi) provides JSON API serialization for SQLAlchemy models.
 
+### Go <a href="#server-go" id="server-go" class="headerlink"></a>
+
+* [api2go](https://github.com/univedo/api2go) is a small library to make it easier to provide a JSON API with your Golang project.
+
 ## Messages <a href="#messages" id="messages" class="headerlink"></a>
 
 * [RestPack::Serializer provides examples](http://restpack-serializer-sample.herokuapp.com/) which demonstrate sample responses.
