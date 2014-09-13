@@ -384,7 +384,7 @@ resource of type `"posts"`.
 
 Each value in the `"links"` object may either be a string or an object. If a value is
 a string, that string represents a URL template. If the value is an object, it must have
-either an `"href"` key, a `"type"`key, or both; the `"href"` key holds a URL template
+either an `"href"` key, a `"type"` key, or both; the `"href"` key holds a URL template
 while the `"type"` key specifies a resource type.
 
 For each key–value pair in the `"links"` object, the value specifies `"type"` and/or 
