@@ -294,6 +294,21 @@ And here's an example of a linked author represented as a resource object:
 //...
 ```
 
+A blank has-one relationship **SHOULD** be represented with a `null` value. For
+example, the following post has no author:
+
+```javascript
+//...
+  {
+    "id": "1",
+    "title": "Rails is Omakase",
+    "links": {
+      "author": null
+    }
+  }
+//...
+```
+
 ##### To-Many Relationships <a href="#document-structure-resource-relationships-to-many" id="document-structure-resource-relationships-to-many" class="headerlink"></a>
 
 To-many relationships **MUST** be represented with one of the formats for
@@ -327,6 +342,21 @@ And here's an example of an array of comments linked as a collection object:
         "ids": [ "5", "12", "17", "20" ],
         "type": "comments"
       }
+    }
+  }
+//...
+```
+
+A blank has-many relationship **SHOULD** be represented with an empty array
+value. For example, the following post has no comments:
+
+```javascript
+//...
+  {
+    "id": "1",
+    "title": "Rails is Omakase",
+    "links": {
+      "comments": []
     }
   }
 //...
