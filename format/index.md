@@ -1152,7 +1152,7 @@ DELETE /articles/1/links/tags/1,2
 
 #### 204 No Content <a href="#crud-updating-responses-204" id="crud-updating-responses-204" class="headerlink"></a>
 
-A server **MUST** return a `204 No Content` status code if an update is
+A server **SHOULD** return a `204 No Content` status code if an update is
 successful and the client's current attributes remain up to date. This applies
 to `PUT` requests as well as `POST` and `DELETE` requests that modify links
 without affecting other attributes of a resource.
