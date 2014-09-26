@@ -8,18 +8,18 @@ title: "Format"
 ## Introduction <a href="#introduction" id="introduction" class="headerlink"></a>
 
 JSON API is a specification for how a client should request that resources be
-fetched or modified and how a server should respond to those requests. 
+fetched or modified and how a server should respond to those requests.
 
 JSON API is designed to minimize both the number of requests and the amount of
 data transmitted between clients and servers. This efficiency is achieved
 without compromising readability, flexibility, and discoverability.
 
 JSON API requires use of the JSON API media type
-([`application/vnd.api+json`](http://www.iana.org/assignments/media-types/application/vnd.api+json)) 
+([`application/vnd.api+json`](http://www.iana.org/assignments/media-types/application/vnd.api+json))
 for exchanging data.
 
-A JSON API server supports fetching of resources through the HTTP method GET. 
-In order to support creating, updating and deleting resources, it must support 
+A JSON API server supports fetching of resources through the HTTP method GET.
+In order to support creating, updating and deleting resources, it must support
 use of the HTTP methods POST, PUT and DELETE, respectively.
 
 A JSON API server may also optionally support modification of resources with
@@ -364,7 +364,7 @@ value. For example, the following post has no comments:
 
 ### Collection Objects <a href="#document-structure-collection-objects" id="document-structure-collection-objects" class="headerlink"></a>
 
-A "collection object" contains one or more of the members: 
+A "collection object" contains one or more of the members:
 
 * `"ids"` - an array of IDs for the referenced resources.
 * `"type"` - the resource type.
@@ -642,7 +642,7 @@ A server **MUST** represent "to-one" relationships as individual resources and
 A resource, or collection of resources, can be fetched by sending a `GET`
 request to the URL described above.
 
-Responses can be further refined with the optional features described below. 
+Responses can be further refined with the optional features described below.
 
 ### Filtering <a href="#fetching-filtering" id="fetching-filtering" class="headerlink"></a>
 
@@ -729,7 +729,7 @@ An endpoint **SHOULD** return a default set of fields in a resource object if no
 fields have been specified for its type, or if the endpoint does not support use
 of either `fields` or `fields[TYPE]`.
 
-An endpoint **MAY** also choose to always return a limited set of 
+An endpoint **MAY** also choose to always return a limited set of
 non-specified fields, such as `id` or `href`.
 
 Note: `fields` and `fields[TYPE]` can not be mixed. If the latter format is
@@ -891,7 +891,7 @@ Servers **MAY** use other HTTP error codes to represent errors.  Clients
 #### Client-Generated IDs <a href="#crud-creating-client-ids" id="crud-creating-client-ids" class="headerlink"></a>
 
 A server **MAY** accept client-generated IDs along with requests to create one
-or more resources. IDs **MUST** be specified with an `"id"` key, the value of 
+or more resources. IDs **MUST** be specified with an `"id"` key, the value of
 which **MUST** be a properly generated and formatted *UUID*.
 
 For example:
@@ -1227,9 +1227,9 @@ Content-Type: application/json-patch+json
 Accept: application/json
 
 [
-  { 
-    "op": "add", 
-    "path": "/-", 
+  {
+    "op": "add",
+    "path": "/-",
     "value": {
       "title": "Ember Hamster",
       "src": "http://example.com/images/productivity.png"
@@ -1400,17 +1400,17 @@ Content-Type: application/json-patch+json
 Accept: application/json
 
 [
-  { 
-    "op": "add", 
-    "path": "/-", 
+  {
+    "op": "add",
+    "path": "/-",
     "value": {
       "title": "Ember Hamster",
       "src": "http://example.com/images/productivity.png"
     }
   },
-  { 
-    "op": "add", 
-    "path": "/-", 
+  {
+    "op": "add",
+    "path": "/-",
     "value": {
       "title": "Mustaches on a Stick",
       "src": "http://example.com/images/mustaches.png"
