@@ -995,8 +995,8 @@ Accept: application/vnd.api+json
 To-one relationships **MAY** be updated along with other attributes by including
 them in a `links` object within the resource object in a `PUT` request.
 
-For instance, the following `PUT` request will update the `title` and `author`
-attributes of an article:
+For instance, the following `PUT` request will update the `title` attribute and
+`author` relationship of an article:
 
 ```text
 PUT /articles/1
@@ -1016,11 +1016,28 @@ Accept: application/vnd.api+json
 In order to remove a to-one relationship, specify `null` as the value of the
 relationship.
 
-Alternatively, a to-one relationship **MAY** optionally be accessible at its
-relationship URL (see above).
+Alternatively, a to-one relationship **MAY** be accessible at its relationship
+URL (see above).
 
-A to-one relationship **MAY** be added by sending a `POST` request with an
-individual primary resource to the URL of the relationship. For example:
+A `PUT` request sent to the URL of a relationship **SHOULD** update the
+relationship. For example:
+
+```text
+PUT /articles/1/links/author
+Content-Type: application/vnd.api+json
+Accept: application/vnd.api+json
+
+{
+  "people": "12"
+}
+```
+
+A `PUT` request **SHOULD** succeed regardless of whether a relationship is
+currently defined.
+
+A to-one relationship **MAY** alternatively be added by sending a `POST`
+request with an individual primary resource to the URL of the relationship.
+For example:
 
 ```text
 POST /articles/1/links/author
@@ -1032,12 +1049,16 @@ Accept: application/vnd.api+json
 }
 ```
 
-A to-one relationship **MAY** be removed by sending a `DELETE` request to the URL
-of the relationship. For example:
+A `POST` request should only succeed if no relationship is currently defined.
+
+A to-one relationship **MAY** be removed by sending a `DELETE` request to
+the URL of the relationship. For example:
 
 ```text
 DELETE /articles/1/links/author
 ```
+
+A `DELETE` request should only succeed if the relationship is currently defined.
 
 ##### Updating To-Many Relationships <a href="#crud-updating-to-many-relationships" id="crud-updating-to-many-relationships" class="headerlink"></a>
 
@@ -1066,15 +1087,42 @@ Accept: application/vnd.api+json
 In order to remove every member of a to-many relationship, specify an empty
 array (`[]`) as the value of the relationship.
 
+Alternatively, a to-many relationship **MAY** optionally be accessible at its
+relationship URL (see above).
+
+A `PUT` request sent to the URL of a relationship **SHOULD** completely replace
+every member of the relationship. For example:
+
+```text
+PUT /articles/1/links/tags
+Content-Type: application/vnd.api+json
+Accept: application/vnd.api+json
+
+{
+  "tags": ["2", "3"]
+}
+```
+
 Replacing a complete set of data is not always appropriate in a distributed
 system which may involve many editors. An alternative is to allow relationships
-to be added and removed individually.
-
-To facilitate fine-grained access, a to-many relationship **MAY** optionally be
-accessible at its relationship URL (see above).
+to be added and removed individually. This can be done by making fine-grained
+requests to the relationship URL.
 
 A to-many relationship **MAY** be added by sending a `POST` request with a
-primary resource collection to the URL of the relationship. For example:
+single resource ID to the URL of the relationship. For example:
+
+```text
+POST /articles/1/links/comments
+Content-Type: application/vnd.api+json
+Accept: application/vnd.api+json
+
+{
+  "comments": "1"
+}
+```
+
+More than one relationship **MAY** be added by sending an array of resource IDs.
+For example:
 
 ```text
 POST /articles/1/links/comments
@@ -1113,9 +1161,20 @@ without affecting other attributes of a resource.
 
 If a server accepts an update but also changes the resource(s) in other ways
 than those specified by the request (for example, updating the `updatedAt`
-attribute or a computed `sha`), it **MUST** return a `200 OK` response as well
-as a representation of the updated resource(s) as if a `GET` request was made to
-the request URL.
+attribute or a computed `sha`), it **SHOULD** return a `200 OK` response.
+
+The response document for a `200 OK` **MUST** include a representation of
+the updated resource(s) as if a `GET` request was made to the request URL.
+
+#### 404 Not Found
+
+A server should return `404 Not Found` when processing a request to modify or
+delete a resource or relationship that does not exist.
+
+#### 409 Conflict
+
+A server should return `409 Conflict` when processing a `POST` request to create
+a resource or relationship that already exists.
 
 #### Other Responses <a href="#crud-updating-responses-other" id="crud-updating-responses-other" class="headerlink"></a>
 
