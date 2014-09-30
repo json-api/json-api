@@ -968,7 +968,7 @@ Accept: application/vnd.api+json
 #### Updating Attributes <a href="#crud-updating-attributes" id="crud-updating-attributes" class="headerlink"></a>
 
 To update one or more attributes of a resource, the primary resource object
-should include only the attributes to be updated. Attributes ommitted from the
+should include only the attributes to be updated. Attributes omitted from the
 resource object should not be updated.
 
 For example, the following `PUT` request will only update the `title` and `text`
