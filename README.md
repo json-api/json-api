@@ -1,35 +1,35 @@
 JSON API
 ========
 
-Documentation for the [application/vnd.api+json media
-type](http://www.iana.org/assignments/media-types/application/vnd.api+json),
-a standard for APIs that use JSON. This repository is the
-source code for [http://jsonapi.org](http://jsonapi.org).
+[application/vnd.api+json 媒体类型](http://www.iana.org/assignments/media-types/application/vnd.api+json) 文档，
+用 JSON 构建 API 的标准。这个 repository 是网站 [http://jsonapi.justjavac.com](http://jsonapi.justjavac.com) 的源码。
+
+英文官方网址：[http://jsonapi.org](http://jsonapi.org).
 
 
-Resources
+资源 Resources
 ---------
 
 * IRC channel: #jsonapi on freenode.net
 * Twitter: @jsonapi
 
 
-Status
+现状 Status
 ------
 
-This standard is currently under development. To assist:
+本标准是目前正在开发中。如需贡献：
 
-1. Get the dependencies:
+1. 获取所有依赖：
 
     `$ bundle`
 
-1. Host the site locally while editing:
+1. 搭建本地站点：
 
     `$ bundle exec rake preview:browser`
 
-1. Edit the Markdown files.
-1. Commit your changes.
-1. Send a Pull Request when finished.
+1. 编辑 Markdown 文件。
+1. 提交更改。
+1. 提交 Pull Request。
 
-The website is automatically built by [GitHub Pages](http://pages.github.com)
-when changes are pushed to the `gh-pages` branch.
+当更改被合并到 `gh-pages` 分支，本站点将由 [GitHub Pages](http://pages.github.com) 自动构建。
+
