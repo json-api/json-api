@@ -17,15 +17,15 @@ pygments: false
 port: 9876
 
 navigation:
-- title: Overview
+- title: 概述
   url: /
-- title: Format
+- title: 格式
   url: /format/
-- title: Extending
+- title: 扩展
   url: /extending/
-- title: Examples
+- title: 示例
   url: /examples/
 - title: FAQ
   url: /faq/
-- title: About
+- title: 关于
   url: /about/
