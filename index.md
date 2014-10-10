@@ -1,6 +1,6 @@
 ---
 layout: page
-title: "A standard for building APIs in JSON."
+title: "用 JSON 构建 API 的标准指南"
 show_masthead: true
 ---
 
