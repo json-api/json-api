@@ -8,18 +8,18 @@ title: "Format"
 ## Introduction <a href="#introduction" id="introduction" class="headerlink"></a>
 
 JSON API is a specification for how a client should request that resources be
-fetched or modified and how a server should respond to those requests. 
+fetched or modified and how a server should respond to those requests.
 
 JSON API is designed to minimize both the number of requests and the amount of
 data transmitted between clients and servers. This efficiency is achieved
 without compromising readability, flexibility, and discoverability.
 
 JSON API requires use of the JSON API media type
-([`application/vnd.api+json`](http://www.iana.org/assignments/media-types/application/vnd.api+json)) 
+([`application/vnd.api+json`](http://www.iana.org/assignments/media-types/application/vnd.api+json))
 for exchanging data.
 
-A JSON API server supports fetching of resources through the HTTP method GET. 
-In order to support creating, updating and deleting resources, it must support 
+A JSON API server supports fetching of resources through the HTTP method GET.
+In order to support creating, updating and deleting resources, it must support
 use of the HTTP methods POST, PUT and DELETE, respectively.
 
 A JSON API server may also optionally support modification of resources with
@@ -364,7 +364,7 @@ value. For example, the following post has no comments:
 
 ### Collection Objects <a href="#document-structure-collection-objects" id="document-structure-collection-objects" class="headerlink"></a>
 
-A "collection object" contains one or more of the members: 
+A "collection object" contains one or more of the members:
 
 * `"ids"` - an array of IDs for the referenced resources.
 * `"type"` - the resource type.
@@ -642,7 +642,7 @@ A server **MUST** represent "to-one" relationships as individual resources and
 A resource, or collection of resources, can be fetched by sending a `GET`
 request to the URL described above.
 
-Responses can be further refined with the optional features described below. 
+Responses can be further refined with the optional features described below.
 
 ### Filtering <a href="#fetching-filtering" id="fetching-filtering" class="headerlink"></a>
 
@@ -729,7 +729,7 @@ An endpoint **SHOULD** return a default set of fields in a resource object if no
 fields have been specified for its type, or if the endpoint does not support use
 of either `fields` or `fields[TYPE]`.
 
-An endpoint **MAY** also choose to always return a limited set of 
+An endpoint **MAY** also choose to always return a limited set of
 non-specified fields, such as `id` or `href`.
 
 Note: `fields` and `fields[TYPE]` can not be mixed. If the latter format is
@@ -891,7 +891,7 @@ Servers **MAY** use other HTTP error codes to represent errors.  Clients
 #### Client-Generated IDs <a href="#crud-creating-client-ids" id="crud-creating-client-ids" class="headerlink"></a>
 
 A server **MAY** accept client-generated IDs along with requests to create one
-or more resources. IDs **MUST** be specified with an `"id"` key, the value of 
+or more resources. IDs **MUST** be specified with an `"id"` key, the value of
 which **MUST** be a properly generated and formatted *UUID*.
 
 For example:
@@ -995,8 +995,8 @@ Accept: application/vnd.api+json
 To-one relationships **MAY** be updated along with other attributes by including
 them in a `links` object within the resource object in a `PUT` request.
 
-For instance, the following `PUT` request will update the `title` and `author`
-attributes of an article:
+For instance, the following `PUT` request will update the `title` attribute and
+`author` relationship of an article:
 
 ```text
 PUT /articles/1
@@ -1016,11 +1016,28 @@ Accept: application/vnd.api+json
 In order to remove a to-one relationship, specify `null` as the value of the
 relationship.
 
-Alternatively, a to-one relationship **MAY** optionally be accessible at its
-relationship URL (see above).
+Alternatively, a to-one relationship **MAY** be accessible at its relationship
+URL (see above).
 
-A to-one relationship **MAY** be added by sending a `POST` request with an
-individual primary resource to the URL of the relationship. For example:
+A `PUT` request sent to the URL of a relationship **SHOULD** update the
+relationship. For example:
+
+```text
+PUT /articles/1/links/author
+Content-Type: application/vnd.api+json
+Accept: application/vnd.api+json
+
+{
+  "people": "12"
+}
+```
+
+A `PUT` request **SHOULD** succeed regardless of whether a relationship is
+currently defined.
+
+A to-one relationship **MAY** alternatively be added by sending a `POST`
+request with an individual primary resource to the URL of the relationship.
+For example:
 
 ```text
 POST /articles/1/links/author
@@ -1032,12 +1049,16 @@ Accept: application/vnd.api+json
 }
 ```
 
-A to-one relationship **MAY** be removed by sending a `DELETE` request to the URL
-of the relationship. For example:
+A `POST` request should only succeed if no relationship is currently defined.
+
+A to-one relationship **MAY** be removed by sending a `DELETE` request to
+the URL of the relationship. For example:
 
 ```text
 DELETE /articles/1/links/author
 ```
+
+A `DELETE` request should only succeed if the relationship is currently defined.
 
 ##### Updating To-Many Relationships <a href="#crud-updating-to-many-relationships" id="crud-updating-to-many-relationships" class="headerlink"></a>
 
@@ -1066,15 +1087,42 @@ Accept: application/vnd.api+json
 In order to remove every member of a to-many relationship, specify an empty
 array (`[]`) as the value of the relationship.
 
+Alternatively, a to-many relationship **MAY** optionally be accessible at its
+relationship URL (see above).
+
+A `PUT` request sent to the URL of a relationship **SHOULD** completely replace
+every member of the relationship. For example:
+
+```text
+PUT /articles/1/links/tags
+Content-Type: application/vnd.api+json
+Accept: application/vnd.api+json
+
+{
+  "tags": ["2", "3"]
+}
+```
+
 Replacing a complete set of data is not always appropriate in a distributed
 system which may involve many editors. An alternative is to allow relationships
-to be added and removed individually.
-
-To facilitate fine-grained access, a to-many relationship **MAY** optionally be
-accessible at its relationship URL (see above).
+to be added and removed individually. This can be done by making fine-grained
+requests to the relationship URL.
 
 A to-many relationship **MAY** be added by sending a `POST` request with a
-primary resource collection to the URL of the relationship. For example:
+single resource ID to the URL of the relationship. For example:
+
+```text
+POST /articles/1/links/comments
+Content-Type: application/vnd.api+json
+Accept: application/vnd.api+json
+
+{
+  "comments": "1"
+}
+```
+
+More than one relationship **MAY** be added by sending an array of resource IDs.
+For example:
 
 ```text
 POST /articles/1/links/comments
@@ -1104,7 +1152,7 @@ DELETE /articles/1/links/tags/1,2
 
 #### 204 No Content <a href="#crud-updating-responses-204" id="crud-updating-responses-204" class="headerlink"></a>
 
-A server **MUST** return a `204 No Content` status code if an update is
+A server **SHOULD** return a `204 No Content` status code if an update is
 successful and the client's current attributes remain up to date. This applies
 to `PUT` requests as well as `POST` and `DELETE` requests that modify links
 without affecting other attributes of a resource.
@@ -1113,9 +1161,20 @@ without affecting other attributes of a resource.
 
 If a server accepts an update but also changes the resource(s) in other ways
 than those specified by the request (for example, updating the `updatedAt`
-attribute or a computed `sha`), it **MUST** return a `200 OK` response as well
-as a representation of the updated resource(s) as if a `GET` request was made to
-the request URL.
+attribute or a computed `sha`), it **SHOULD** return a `200 OK` response.
+
+The response document for a `200 OK` **MUST** include a representation of
+the updated resource(s) as if a `GET` request was made to the request URL.
+
+#### 404 Not Found
+
+A server should return `404 Not Found` when processing a request to modify or
+delete a resource or relationship that does not exist.
+
+#### 409 Conflict
+
+A server should return `409 Conflict` when processing a `POST` request to create
+a resource or relationship that already exists.
 
 #### Other Responses <a href="#crud-updating-responses-other" id="crud-updating-responses-other" class="headerlink"></a>
 
@@ -1227,9 +1286,9 @@ Content-Type: application/json-patch+json
 Accept: application/json
 
 [
-  { 
-    "op": "add", 
-    "path": "/-", 
+  {
+    "op": "add",
+    "path": "/-",
     "value": {
       "title": "Ember Hamster",
       "src": "http://example.com/images/productivity.png"
@@ -1400,17 +1459,17 @@ Content-Type: application/json-patch+json
 Accept: application/json
 
 [
-  { 
-    "op": "add", 
-    "path": "/-", 
+  {
+    "op": "add",
+    "path": "/-",
     "value": {
       "title": "Ember Hamster",
       "src": "http://example.com/images/productivity.png"
     }
   },
-  { 
-    "op": "add", 
-    "path": "/-", 
+  {
+    "op": "add",
+    "path": "/-",
     "value": {
       "title": "Mustaches on a Stick",
       "src": "http://example.com/images/mustaches.png"
