@@ -1,4 +1,3 @@
-## Status <a href="#status" id="status" class="headerlink"></a>
+## 现状 <a href="#status" id="status" class="headerlink"></a>
 
-**This document is a work in progress** and will change as implementation work
-progresses. See the [Status](/status) page for more information.
+**本文档是一个正在进展的工作**，在具体实现过程中将会有所改变。详细信息请查看[现状](/status)页面。
