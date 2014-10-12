@@ -218,13 +218,10 @@ footer {
       white-space: nowrap;
       overflow: hidden; }
 
-.twitter, .github, .googleplus, .weibo {
+ .github, .weibo {
   font-size: 33px;
   line-height: 35px;
   color: #464646;
   height: 35px;
   width: 35px;
   display: inline-block; }
-
-.googleplus {
-  font-size: 29px; }
