@@ -32,9 +32,6 @@ Steve Klabnik 主要是服务器端，而 Yehuda Katz 则是客户端。
 
 ## 历史 <a href="#history" id="history" class="headerlink"></a>
 
-JSON API is extracted from the JSON transport implicitly defined by
-[Ember](http://emberjs.com/) Data's REST adapter.
-
 JSON API 来自 JSON 的数据传输，它被隐式地定义在 [Ember](http://emberjs.com/) 的 REST 风格数据适配器。
 
 一般来说，Ember Data 被设计用来实现这样的目的：消除哪些为不同应用程序与服务器之间通信而写的特殊代码，
