@@ -219,3 +219,10 @@ footer {
   height: 35px;
   width: 35px;
   display: inline-block; }
+  
+blockquote {
+margin: 18px 0 18px;
+border: 1px dashed #CCC;
+padding: 0 12px 8px 36px;
+background: #F4F5F7 url(../images/blockquote.gif) 3px 3px no-repeat;
+}
