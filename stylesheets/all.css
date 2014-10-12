@@ -1,10 +1,12 @@
 @charset "UTF-8";
+/*
 @font-face {
   font-family: 'fontello';
   src: url("../fonts/fontello.eot?60624967");
   src: url("../fonts/fontello.eot?60624967#iefix") format("embedded-opentype"), url("../fonts/fontello.woff?60624967") format("woff"), url("../fonts/fontello.ttf?60624967") format("truetype"), url("../fonts/fontello.svg?60624967#fontello") format("svg");
   font-weight: normal;
   font-style: normal; }
+*/
 
 /* Chrome hack: SVG is rendered more smooth in Windozze. 100% magic, uncomment if you need it. */
 /* Note, that will break hinting! In other OS-es font will be not as sharp as it could be */
@@ -16,6 +18,7 @@
   }
 }
 */
+/*
 [class^="icon-"]:before, [class*=" icon-"]:before {
   font-family: "fontello";
   font-style: normal;
@@ -70,7 +73,7 @@
 /* '' */
 .icon-twitter:before {
   content: '\e805'; }
-
+*/
 /* '' */
 body {
   margin: 52px 0 0 0;
@@ -219,7 +222,7 @@ footer {
   height: 35px;
   width: 35px;
   display: inline-block; }
-  
+
 blockquote {
 margin: 18px 0 18px;
 border: 1px dashed #CCC;
