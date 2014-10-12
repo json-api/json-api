@@ -1,13 +1,10 @@
-url: http://jsonapi.org
+url: http://jsonapi.org.cn
 safe: true
 lsi: false
 source: .
 destination: ./public
 exclude:
-  - Rakefile
   - README.md
-  - Gemfile
-  - Gemfile.lock
   - CNAME
   - .gitignore
   - ./public
