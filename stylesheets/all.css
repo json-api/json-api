@@ -211,12 +211,6 @@ footer {
       opacity: 1; }
     .links a i {
       margin: 0; }
-    .links a span {
-      display: inline-block;
-      width: 1px;
-      text-indent: 200%;
-      white-space: nowrap;
-      overflow: hidden; }
 
  .github, .weibo {
   font-size: 33px;
