@@ -1,15 +1,12 @@
 ---
 layout: page
-title: "JSON API: Specification Status"
+title: "JSON API：规范的现状"
 ---
 
-**This document is a work in progress** and will change as implementation work
-progresses. Implementors should be aware that this specification is not stable.
-It is currently missing some details about the `meta` attribute and could be
-more precise about details of working with relationships.
+**本文档是一个正在进展的工作**，在具体实现过程中将会有所改变。
+实现者应该意识到这个规范是不稳定的。
+目前缺少一些关于 `meta` 属性的细节和更精确的关于**关联**的细节。
 
-Work on this specification is being done at its [GitHub
-repository](https://github.com/json-api/json-api). Please feel free to help
-flesh it out or, if you try to write an implementation, to tell us where things
-were ambiguous. The best way to do so is to [file an
-Issue](https://github.com/json-api/json-api/issues).
+此规范是在 [GitHub repository](https://github.com/justjavac/json-api) 上完成。
+因此您可以帮助我们更新此规范，或者如果您想写一个关于此规范的具体实现，告诉我们哪些地方描述的可能存在歧义。
+最好的方式就是提交 [Issue](https://github.com/justjavac/json-api/issues)。
