@@ -5,8 +5,6 @@ title: About
 
 ## 频道 <a href="#channels" id="channels" class="headerlink"></a>
 
-JSON API：
-
   * [@jsonapi](http://twitter.com/jsonapi) on Twitter
   * _#jsonapi_ channel on [Freenode IRC](http://freenode.net)
   * [jsonapi Google group](https://groups.google.com/forum/?fromgroups#!forum/jsonapi)
@@ -64,4 +62,4 @@ Ember Data 关于记录的创建、更新和删除，
 * 易于在客户端实现
 
 该类媒体仍然是一个进展中的工作，我们是非常开放的反馈和建议改进。
-就是说，该规范的实现工作已经开始，我们的价值在于提供更好的雾件（Vaporware）。
+就是说，该规范的实现工作已经开始，我们的价值在于提供更好的雾件（vaporware）。
