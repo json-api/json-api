@@ -1,20 +1,20 @@
-JSON API
+JSON API：用 JSON 构建 API 的标准指南中文版
 ========
 
-本项目是网站 [http://jsonapi.justjavac.com](http://jsonapi.justjavac.com) 的源码。英文官方网址：[http://jsonapi.org](http://jsonapi.org)。
+本项目是网站 [http://jsonapi.justjavac.com](http://jsonapi.justjavac.com) 的源码。
 
-[application/vnd.api+json 媒体类型](http://www.iana.org/assignments/media-types/application/vnd.api+json) 文档，
-用 JSON 构建 API 的标准。
+英文官方网址：[http://jsonapi.org](http://jsonapi.org)。
 
-资源 Resources
+资源
 ---------
 
 * IRC channel: #jsonapi on freenode.net
 * Twitter: @jsonapi
 
-## 翻译
+翻译
+---------
 
-* 微博： [@justjavac](http://weibo.com/justjavac)
+* [@justjavac](http://weibo.com/justjavac)
 
 
 现状 Status
