@@ -11,6 +11,9 @@ JSON API
 
 * IRC channel: #jsonapi on freenode.net
 * Twitter: @jsonapi
+
+## 翻译
+
 * 微博： [@justjavac](http://weibo.com/justjavac)
 
 
@@ -32,4 +35,3 @@ JSON API
 1. 提交 Pull Request。
 
 当更改被合并到 `gh-pages` 分支，本站点将由 [GitHub Pages](http://pages.github.com) 自动构建。
-
