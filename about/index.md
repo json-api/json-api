@@ -1,6 +1,6 @@
 ---
 layout: page
-title: About
+title: 关于
 ---
 
 ## 频道 <a href="#channels" id="channels" class="headerlink"></a>
