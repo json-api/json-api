@@ -1,7 +1,7 @@
 JSON API：用 JSON 构建 API 的标准指南中文版
 ========
 
-本项目是网站 [http://jsonapi.justjavac.com](http://jsonapi.justjavac.com) 的源码。
+本项目是网站 [http://jsonapi.org.cn](http://jsonapi.org.cn) 的源码。
 
 英文官方网址：[http://jsonapi.org](http://jsonapi.org)。
 
