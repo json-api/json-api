@@ -1,27 +1,28 @@
 ---
 layout: page
-title: Frequently Asked Questions
+title: FAQ
 ---
 
-### Why is JSON API not versioned? <a href="#why-is-json-api-not-versioned" id="why-is-json-api-not-versioned" class="headerlink"></a>
+### 为什么 JSON API 还没有发布版？ <a href="#why-is-json-api-not-versioned" id="why-is-json-api-not-versioned" class="headerlink"></a>
 
-Once JSON API is stable, it will always be backwards compatible using a _never
-remove, only add_ strategy.
+一旦 JSON API 发布稳定版，它将保持向后兼容，它将遵守**永不删除，只是添加**的开发策略。
 [#46](https://github.com/json-api/json-api/issues/46)
 
-### Why not use the HAL specification? <a href="#why-not-use-the-hal-specification" id="why-not-use-the-hal-specification" class="headerlink"></a>
+### 为什么不使用 HAL 规范？ <a href="#why-not-use-the-hal-specification" id="why-not-use-the-hal-specification" class="headerlink"></a>
 
-There are several reasons:
+有几个原因:
 
 * HAL embeds child documents recursively, while JSON API flattens the entire
 graph of objects at the top level. This means that if the same "people" are
 referenced from different kinds of objects (say, the author of both posts and
 comments), this format ensures that there is only a single representation of
 each person document in the payload.
+
 * Similarly, JSON API uses IDs for linkage, which makes it possible to cache
 documents from compound responses and then limit subsequent requests to only
 the documents that aren't already present locally. If you're lucky, this can
 even completely eliminate HTTP requests.
+
 * HAL is a serialization format, but says nothing about how to update
 documents. JSON API thinks through how to update existing records (leaning on
 PATCH and JSON Patch), and how those updates interact with compound documents
