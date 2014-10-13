@@ -1,11 +1,11 @@
 ---
 layout: page
-title: "Format"
+title: "格式"
 ---
 
 {% include status.md %}
 
-## Introduction <a href="#introduction" id="introduction" class="headerlink"></a>
+## 介绍 <a href="#introduction" id="introduction" class="headerlink"></a>
 
 JSON API is a specification for how a client should request that resources be
 fetched or modified and how a server should respond to those requests. 
