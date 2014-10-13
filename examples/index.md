@@ -46,6 +46,8 @@ has a page describing how to emit conformant JSON.
 
 * [Oat](https://github.com/ismasan/oat#adapters) ships with a JSON API adapter.
 
+* [JSONAPI::Resources](https://github.com/cerebris/jsonapi-resources) provides a complete framework for developing a JSON API server. It is designed to work with Rails, and provides routes, controllers, and serializers.
+
 ### Python <a href="#server-python" id="server-python" class="headerlink"></a>
 
 * [Hyp](https://github.com/kalasjocke/hyp) is a library for creating json-api responses.
