@@ -36,8 +36,8 @@ implementations. There is a [custom adapter](https://github.com/daliwali/ember-j
 * [FriendsOfSymfony / FOSRestBundle](https://github.com/FriendsOfSymfony/FOSRestBundle/issues/452)
 
 ### Node.js <a href="#server-node-js" id="server-node-js" class="headerlink"></a>
-
 * [Fortune.js](http://fortunejs.com) is a framework built to implement json-api.
+* [json-api](https://www.npmjs.org/package/json-api) turns an Express + Mongoose app into a JSON-API server. (This package is largely undocumented, but far more compliant than Fortune.js.)
 
 ### Ruby <a href="#server-ruby" id="server-ruby" class="headerlink"></a>
 
