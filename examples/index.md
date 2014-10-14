@@ -37,7 +37,7 @@ implementations. There is a [custom adapter](https://github.com/daliwali/ember-j
 
 ### Node.js <a href="#server-node-js" id="server-node-js" class="headerlink"></a>
 * [Fortune.js](http://fortunejs.com) is a framework built to implement json-api.
-* [json-api](https://www.npmjs.org/package/json-api) turns an Express + Mongoose app into a JSON-API server. (This package is largely undocumented, but far more compliant than Fortune.js.)
+* [json-api](https://www.npmjs.org/package/json-api) turns an Express + Mongoose app into a JSON-API server.
 
 ### Ruby <a href="#server-ruby" id="server-ruby" class="headerlink"></a>
 
