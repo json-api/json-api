@@ -656,13 +656,13 @@ For example, the following is a request for all comments associated with a
 particular post:
 
 ```text
-GET /comments?posts=1
+GET /comments?post=1
 ```
 
 With this approach, multiple filters **MAY** be applied to a single request:
 
 ```text
-GET /comments?posts=1&author=12
+GET /comments?post=1&author=12
 ```
 
 This specification only supports filtering based upon strict matching.
