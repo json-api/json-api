@@ -14,7 +14,7 @@ JSON API：用 JSON 构建 API 的标准指南中文版
 翻译
 ---------
 
-* [@justjavac](http://weibo.com/justjavac)
+* [justjavac(迷渡)](http://github.com/justjavac)
 
 
 现状 Status
