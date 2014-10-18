@@ -15,6 +15,7 @@ JSON API：用 JSON 构建 API 的标准指南中文版
 ---------
 
 * [justjavac(迷渡)](http://github.com/justjavac)
+* [bornkiller](http://github.com/bornkiller)
 
 
 现状 Status
