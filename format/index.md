@@ -7,82 +7,50 @@ title: "格式"
 
 ## 介绍 <a href="#introduction" id="introduction" class="headerlink"></a>
 
-JSON API is a specification for how a client should request that resources be
-fetched or modified and how a server should respond to those requests. 
+JSON API 是数据交互规范，用以定义客户端如何获取与修改资源，以及服务器如何响应对应请求。
 
-JSON API is designed to minimize both the number of requests and the amount of
-data transmitted between clients and servers. This efficiency is achieved
-without compromising readability, flexibility, and discoverability.
+JSON API设计用来最小化请求的数量，以及客户端与服务器间传输的数据量。在高效实现的同时，无需牺牲可读性、灵活性和可发现性。
 
-JSON API requires use of the JSON API media type
-([`application/vnd.api+json`](http://www.iana.org/assignments/media-types/application/vnd.api+json)) 
-for exchanging data.
+JSON API需要使用JSON API媒体类型([`application/vnd.api+json`](http://www.iana.org/assignments/media-types/application/vnd.api+json)) 进行数据交互。
 
-A JSON API server supports fetching of resources through the HTTP method GET. 
-In order to support creating, updating and deleting resources, it must support 
-use of the HTTP methods POST, PUT and DELETE, respectively.
+JSON API服务器支持通过GET方法获取资源。而且必须独立实现HTTP POST, PUT和DELETE方法的请求响应，以支持资源的创建、更新和删除。
 
-A JSON API server may also optionally support modification of resources with
-the HTTP PATCH method [[RFC5789](http://tools.ietf.org/html/rfc5789)] and the
-JSON Patch format [[RFC6902](http://tools.ietf.org/html/rfc6902)]. JSON Patch
-support is possible because, conceptually, JSON API represents all of a
-domain's resources as a single JSON document that can act as the target for
-operations. Resources are grouped at the top level of this document according
-to their type. Each resource can be identified at a unique path within this
-document.
+JSON API服务器也可以选择性支持HTTP PATCH方法 [[RFC5789](http://tools.ietf.org/html/rfc5789)]和JSON Patch格式 [[RFC6902](http://tools.ietf.org/html/rfc6902)]，进行资源修改。JSON Patch支持是可行的，因为理论上来说，JSON API通过单一JSON 文档，反映域下的所有资源，并将JSON文档作为资源操作介质。在文档顶层，依据资源类型分组。每个资源都通过文档下的唯一路径辨识。
 
-## Conventions <a href="#conventions" id="conventions" class="headerlink"></a>
+## 规则约定 <a href="#conventions" id="conventions" class="headerlink"></a>
 
-The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD",
-"SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this document are to be
-interpreted as described in RFC 2119
-[[RFC2119](http://tools.ietf.org/html/rfc2119)].
+文档中的关键字， "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD",
+"SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" 依据RFC 2119
+[[RFC2119](http://tools.ietf.org/html/rfc2119)]规范解释。
 
-## Document Structure <a href="#document-structure" id="document-structure" class="headerlink"></a>
+## 文档结构 <a href="#document-structure" id="document-structure" class="headerlink"></a>
 
-This section describes the structure of a JSON API document, which is identified
-by the media type [`application/vnd.api+json`](http://www.iana.org/assignments
-/media-types/application/vnd.api+json). JSON API documents are defined in
-JavaScript Object Notation (JSON)
-[[RFC4627](http://tools.ietf.org/html/rfc4627)].
+这一章节描述JSON API文档结构，通过媒体类型[`application/vnd.api+json`](http://www.iana.org/assignments/media-types/application/vnd.api+json)标示。JSON API文档使用javascript 对象（JSON）[[RFC4627](http://tools.ietf.org/html/rfc4627)]定义。
 
-Although the same media type is used for both request and response documents,
-certain aspects are only applicable to one or the other. These differences are
-called out below.
+尽管同种媒体类型用以请求和响应文档，但某些特性只适用于其中一种。差异在下面呈现。
 
 ### Top Level <a href="#document-structure-top-level" id="document-structure-top-level" class="headerlink"></a>
 
-A JSON object **MUST** be at the root of every JSON API document. This object
-defines a document's "top level".
+JSON 对象必须位于每个JSON API文档的根级。这个对象定义文档的“top level”。
 
-A document's top level **SHOULD** contain a representation of the resource or
-collection of resources primarily targeted by a request (i.e. the "primary
-resource(s)").
+文档的top level必须包含请求资源或者请求资源集合的实例 (即主要资源)。
 
-The primary resource(s) **SHOULD** be keyed either by their resource type or the
-generic key `"data"`.
+主要资源应该以资源类型或者通用键`"data"`索引.
 
-A document's top level **MAY** also have the following members:
+* `"meta"`: 资源的元信息，比如分页.
+* `"links"`: 扩展资源关联URLs的URL模板.
+* `"linked"`: 资源对象集合，按照类型分组，链接到主要资源或彼此（即链接资源）
 
-* `"meta"`: meta-information about a resource, such as pagination.
-* `"links"`: URL templates to be used for expanding resources' relationships
-  URLs.
-* `"linked"`: a collection of resource objects, grouped by type, that are linked
-  to the primary resource(s) and/or each other (i.e. "linked resource(s)").
+### 资源表示 <a href="#document-structure-resource-representations" id="document-structure-resource-representations" class="headerlink"></a>
 
-No other members should be present at the top level of a document.
+这一章节描述JSON API文档如何表示资源。适用于主要资源和链接资源。
 
-### Resource Representations <a href="#document-structure-resource-representations" id="document-structure-resource-representations" class="headerlink"></a>
+#### 个体资源表示 <a href="#document-structure-individual-resource-representations" id="document-structure-individual-resource-representations" class="headerlink"></a>
 
-This section describes how resources can be represented throughout a JSON API
-document. It applies to primary as well as linked resources.
-
-#### Individual Resource Representations <a href="#document-structure-individual-resource-representations" id="document-structure-individual-resource-representations" class="headerlink"></a>
-
-An individual resource **SHOULD** be represented as a single "resource object"
-(described below) or a string value containing its ID (also described below).
+个体资源使用单一“资源对象”（如下描述）或者包含资源ID（如下描述）的字符串表示。
 
 The following post is represented as a resource object:
+下面的post表示一个资源对象：
 
 ```javascript
 {
@@ -93,7 +61,7 @@ The following post is represented as a resource object:
 }
 ```
 
-This post is represented simply by its ID:
+这个post用ID简单地表示：
 
 ```javascript
 {
@@ -101,12 +69,11 @@ This post is represented simply by its ID:
 }
 ```
 
-#### Resource Collection Representations <a href="#document-structure-resource-collection-representations" id="document-structure-resource-collection-representations" class="headerlink"></a>
+#### 资源集合表示 <a href="#document-structure-resource-collection-representations" id="document-structure-resource-collection-representations" class="headerlink"></a>
 
-A collection of any number of resources **SHOULD** be represented as an array of
-resource objects or IDs, or as a single "collection object" (described below).
+任意数量资源的集合应该使用资源对象数组，或者IDs数组，或者一个简单的”集合对象“表示。
 
-The following posts are represented as an array of resource objects:
+下面这个post使用资源对象数组表示：
 
 ```javascript
 {
@@ -120,7 +87,7 @@ The following posts are represented as an array of resource objects:
 }
 ```
 
-These posts are represented as an array of IDs:
+这个posts使用IDs数组表示：
 
 ```javascript
 {
@@ -128,7 +95,7 @@ These posts are represented as an array of IDs:
 }
 ```
 
-These comments are represented by a single "collection" object:
+这些comments使用单一集合对象表示：
 
 ```javascript
 {
@@ -140,12 +107,11 @@ These comments are represented by a single "collection" object:
 }
 ```
 
-### Resource Objects <a href="#document-structure-resource-objects" id="document-structure-resource-objects" class="headerlink"></a>
+### 多资源对象 <a href="#document-structure-resource-objects" id="document-structure-resource-objects" class="headerlink"></a>
 
-Resource objects have the same internal structure, regardless of whether they
-represent primary or linked resources.
+多个资源对象有相同的内部结构，不管他们表示主要资源还是链接资源。
 
-Here's how a post (i.e. a resource of type "posts") might appear in a document:
+下面是一个可能出现在文档中的post（即”posts"类型的一个资源）：
 
 ```javascript
 {
@@ -156,7 +122,7 @@ Here's how a post (i.e. a resource of type "posts") might appear in a document:
 }
 ```
 
-In the example above, the post's resource object is simply:
+在上面这个例子中，post的资源对象比较简单：
 
 ```javascript
 //...
@@ -167,22 +133,20 @@ In the example above, the post's resource object is simply:
 //...
 ```
 
-This section will focus exclusively on resource objects, outside of the context
-of a full JSON API document.
+这一章节专注于资源对象，在完整JSON API文档上下文环境之外。
 
-#### Resource Attributes <a href="#document-structure-resource-object-attributes" id="document-structure-resource-object-attributes" class="headerlink"></a>
+#### 资源属性 <a href="#document-structure-resource-object-attributes" id="document-structure-resource-object-attributes" class="headerlink"></a>
 
-There are four reserved keys in resource objects:
+资源对象有四个保留字:
 
 * `"id"`
 * `"type"`
 * `"href"`
 * `"links"`
 
-Every other key in a resource object represents an "attribute". An attribute's
-value may be any JSON value.
+资源对象中的其它键表示一个“属性”。一个属性值可以是任何JSON值。
 
-#### Resource IDs <a href="#document-structure-resource-object-ids" id="document-structure-resource-object-ids" class="headerlink"></a>
+####  资源 IDs <a href="#document-structure-resource-object-ids" id="document-structure-resource-object-ids" class="headerlink"></a>
 
 Each resource object **SHOULD** contain a unique identifier, or ID, when
 available. IDs **MAY** be assigned by the server or by the client, as described
@@ -190,30 +154,23 @@ below, and **SHOULD** be unique for a resource when scoped by its type. An ID
 **SHOULD** be represented by an `"id"` key and its value **MUST** be a string
 which **SHOULD** only contain alphanumeric characters, dashes and underscores.
 
-IDs can be used with URL templates to fetch related resources, as described
-below.
+每一个资源对象应该有一个唯一标示符，或者ID。如下所示，IDs可由服务器或者客户端指定，and **SHOULD** be unique for a resource when scoped by its type. ID应该使用 `"id"`键表示，值必须是字符串，且只包含字母，数字，连字符和下划线。
 
-In scenarios where uniquely identifying information between client and server
-is unnecessary (e.g. read-only, transient entities), JSON API allows for
-omitting IDs.
+URL 模板可以使用IDs来获取关联资源，如下所示。
 
-#### Resource Types <a href="#document-structure-resource-types" id="document-structure-resource-types" class="headerlink"></a>
+在特殊场景下，客户端与服务器之间的唯一标识符信息非必要，JSON API允许缺省IDs。
 
-The type of each resource object can usually be determined from the context in
-which it is contained. As discussed above, resource objects are typically keyed
-by their type in a document.
+#### 资源类型 <a href="#document-structure-resource-types" id="document-structure-resource-types" class="headerlink"></a>
 
-Each resource object **MAY** contain a `"type"` key to explicitly designate its
-type.
+每个资源对象的类型通常由它所在的上下文环境决定。如上面讨论，资源对象在文档中通过类型索引。
 
-The `"type"` key is **REQUIRED** when the type of a resource is not otherwise
-specified in a document.
+每一个资源对象可能包含 `"type"` 键来显示指定类型。
 
-#### Resource URLs <a href="#document-structure-resource-urls" id="document-structure-resource-urls" class="headerlink"></a>
+当资源的类型在文档中未声明时，`"type"`键不可缺省。
 
-The URL of each resource object **MAY** be specified with the `"href"` key.
-Resource URLs **SHOULD** only be specified by the server and therefore are
-typically only included in response documents.
+#### 资源 URLs <a href="#document-structure-resource-urls" id="document-structure-resource-urls" class="headerlink"></a>
+
+每一个资源的URL可能使用`"href"`键声明。资源URLs应该由服务器指定，因此通常包含在响应文档中。
 
 ```javascript
 //...
@@ -229,19 +186,15 @@ typically only included in response documents.
 //...
 ```
 
-A server **MUST** respond to a `GET` request to the specified URL with a
-response that includes the resource.
+服务器对特定URL`GET`请求，响应内容必须包含资源。
 
-It is generally more efficient to specify URL templates at the root level of a
-response document rather than to specify individual URLs per resource.
+通常在响应文档的根层级声明URL 模板会更高效，而不是在每一个资源对象内声明独立的URLs。
 
-#### Resource Relationships <a href="#document-structure-resource-relationships" id="document-structure-resource-relationships" class="headerlink"></a>
+#### 资源关联 <a href="#document-structure-resource-relationships" id="document-structure-resource-relationships" class="headerlink"></a>
 
-The value of the `"links"` key is a JSON object that represents linked
-resources, keyed by the name of each association.
+`"linkes"`键的值是一个表示链接资源的JSON对象，通过关联名索引。
 
-For example, the following post is associated with a single `author` and a
-collection of `comments`:
+举例来说，下面的post与一个`author`和一个`comments`集合相关联：
 
 ```javascript
 //...
@@ -256,13 +209,11 @@ collection of `comments`:
 //...
 ```
 
-##### To-One Relationships <a href="#document-structure-resource-relationships-to-one" id="document-structure-resource-relationships-to-one" class="headerlink"></a>
+##### 单对象关联 <a href="#document-structure-resource-relationships-to-one" id="document-structure-resource-relationships-to-one" class="headerlink"></a>
 
-To-one relationships **MUST** be represented with one of the formats for
-individual resources described above.
+单对象关联必须使用上面所述单资源形式的一种来表示。
 
-For example, the following post is associated with a single author, identified
-by ID:
+举例来说，下面的post与一个author相关联，通过ID标示：
 
 ```javascript
 //...
@@ -276,7 +227,7 @@ by ID:
 //...
 ```
 
-And here's an example of a linked author represented as a resource object:
+下面是一个示例，链接的author用一个资源对象表示：
 
 ```javascript
 //...
@@ -294,8 +245,7 @@ And here's an example of a linked author represented as a resource object:
 //...
 ```
 
-A blank has-one relationship **SHOULD** be represented with a `null` value. For
-example, the following post has no author:
+空白的单对象关联应该用`null`值表示。举例来说，下面的post没有关联author:
 
 ```javascript
 //...
@@ -309,13 +259,11 @@ example, the following post has no author:
 //...
 ```
 
-##### To-Many Relationships <a href="#document-structure-resource-relationships-to-many" id="document-structure-resource-relationships-to-many" class="headerlink"></a>
+##### 多对象关联 <a href="#document-structure-resource-relationships-to-many" id="document-structure-resource-relationships-to-many" class="headerlink"></a>
 
-To-many relationships **MUST** be represented with one of the formats for
-resource collections described above.
+多对象关联必须使用上述资源集合形式的一种来表示。
 
-For example, the following post is associated with several comments, identified
-by their IDs:
+举例来说，下面的post与多个comments关联，通过IDs标示：
 
 ```javascript
 //...
@@ -329,7 +277,7 @@ by their IDs:
 //...
 ```
 
-And here's an example of an array of comments linked as a collection object:
+这是一个使用集合对象链接的comments数组：
 
 ```javascript
 //...
@@ -347,8 +295,7 @@ And here's an example of an array of comments linked as a collection object:
 //...
 ```
 
-A blank has-many relationship **SHOULD** be represented with an empty array
-value. For example, the following post has no comments:
+空白的多对象关联应该使用空数组表示。举例来说，下面的post没有comments：
 
 ```javascript
 //...
@@ -362,26 +309,21 @@ value. For example, the following post has no comments:
 //...
 ```
 
-### Collection Objects <a href="#document-structure-collection-objects" id="document-structure-collection-objects" class="headerlink"></a>
+### 集合对象 <a href="#document-structure-collection-objects" id="document-structure-collection-objects" class="headerlink"></a>
 
-A "collection object" contains one or more of the members: 
+“集合对象”包含一个或多个元素：
 
-* `"ids"` - an array of IDs for the referenced resources.
-* `"type"` - the resource type.
-* `"href"` - the URL of the referenced resources (applicable to response
-  documents).
+* `"ids"` - 关联资源的IDs数组。
+* `"type"` - 资源类型
+* `"href"` - 关联资源的URL（适用于响应文档）。
 
-A server that provides a collection object that contains an `"href"` **MUST**
-respond to a `GET` request to the specified URL with a response that includes
-the referenced objects as a collection of resource objects.
+提供包含`href`属性集合对象的服务器，必须响应特定URL `GET` 请求，响应内容包含资源对象集合的关联资源。
 
+### URL模板 <a href="#document-structure-url-templates" id="document-structure-url-templates" class="headerlink"></a>
 
-### URL Templates <a href="#document-structure-url-templates" id="document-structure-url-templates" class="headerlink"></a>
+顶层的 `"links"` 对象可用来声明URL模板，从而依据资源对象类型获取最终URLs。
 
-A top-level `"links"` object **MAY** be used to specify URL templates that can
-be used to formulate URLs for resources according to their type.
-
-For example:
+举例说明:
 
 ```javascript
 {
@@ -398,12 +340,10 @@ For example:
 }
 ```
 
-In this example, fetching `http://example.com/comments?posts=1` will fetch the
-comments for `"Rails is Omakase"` and fetching
-`http://example.com/comments?posts=2` will fetch the comments for `"The Parley
-Letter"`.
+在这个示例中，请求`http://example.com/comments?posts=1` 将会得到`"Rails is Omakase"`的comments，请求`http://example.com/comments?posts=2` 将会得到 `"The Parley
+Letter"`的comments.
 
-Here's another example:
+下面是另外一个示例:
 
 ```javascript
 {
@@ -420,26 +360,15 @@ Here's another example:
 }
 ```
 
-In this example, the `posts.comments` variable is expanded by "exploding" the
-array specified in the `"links"` section of each post. The URI template
-specification [[RFC6570](https://tools.ietf.org/html/rfc6570)] specifies that
-the default explosion is to percent encode the array members (e.g. via
-`encodeURIComponent()` in JavaScript) and join them by a comma. In this example,
-fetching `http://example.com/comments/1,2,3,4` will return a list of all
-comments.
+在这个示例中，处理每个post`"links"`区块内的特定数组，以扩展`posts.comments`变量。URI模板规范 [[RFC6570](https://tools.ietf.org/html/rfc6570)]声明默认处理方式，使用%编码（即`encodeURIComponent()` javascript原生方法）编码每一个元素，然后用逗号连接。在这个示例中，请求`http://example.com/comments/1,2,3,4` ，将会获取一个`comments`列表。
 
-The top-level `"links"` object has the following behavior:
+顶层 `"linkes"`对象具有以下行为:
 
-* Each key is a dot-separated path that points at a repeated relationship. Paths
-  start with a particular resource type and can traverse related resources. For
-  example `"posts.comments"` points at the `"comments"` relationship in each
-  resource of type `"posts"`.
-* The value of each key is interpreted as a URL template.
-* For each resource that the path points to, act as if it specified a
-  relationship formed by expanding the URL template with the non-URL value
-  actually specified.
+* 每个键使用点分隔路径，指向重复的关联。路径以特定资源类型名开头，遍历相关的资源。举例来  说，`"posts.comments"`指向每个`"posts"`对象的`"comments"`关联.
+* 每个键的值作为URL模板处理。
+* 每个path指向的资源，就像是使用实际指定的非URL值扩展URL模板形成的关联。
 
-Here is another example that uses a has-one relationship:
+这是另外一个使用单对象关联的示例：
 
 ```javascript
 {
@@ -468,28 +397,18 @@ Here is another example that uses a has-one relationship:
 }
 ```
 
-In this example, the URL for the author of all three posts is
-`http://example.com/people/12`.
+这个实例中，三个posts指向author的URL都为`http://example.com/people/12`.
 
-Top-level URL templates allow you to specify relationships as IDs, but without
-requiring that clients hard-code information about how to form the URLs.
+顶层URL模板允许指定关联作为IDs，但是不要求客户端硬编码来获取URLs的信息.
 
-NOTE: In case of conflict, an individual resource object's `links` object will
-take precedence over a top-level `links` object.
+注意：为防止冲突，单独资源对象的`links`对象优先级高于顶层的`links`对象。
+### 复合文档 <a href="#document-structure-compound-documents" id="document-structure-compound-documents" class="headerlink"></a>
 
-### Compound Documents <a href="#document-structure-compound-documents" id="document-structure-compound-documents" class="headerlink"></a>
+为减少HTTP请求，响应需要返回所请求的主要资源，同时可以选择性的包含链接资源。这样的响应称作“复合文档”。
 
-To save HTTP requests, responses may optionally allow for the inclusion of
-linked resources along with the requested primary resources. Such response
-documents are called "compound documents".
+在复合文档中，链接资源必须作为资源对象，包含在文档顶层`"linked"`对象中，依据类型，组合到不同数组中。
 
-In a compound document, linked resources **MUST** be included as resource
-objects in a top level `"linked"` object, in which they are grouped together in
-arrays according to their type.
-
-The type of each relationship **MAY** be specified in a resource-level or top-
-level `"links"` object with the `"type"` key. This facilitates lookups of linked
-resource objects by the client.
+每个关联的类型，可以在资源层级，或顶层`"links"`对象层级，使用`"type"`键指定。能够辅助客户端查询链接资源对象。
 
 ```javascript
 {
@@ -551,16 +470,12 @@ resource objects by the client.
 }
 ```
 
-This approach ensures that a single canonical representation of each document is
-returned with each response, even when the same document is referenced multiple
-times (in this example, the author of the three posts). Along these lines, if a
-primary document is linked to another primary or linked document, it should not
-be duplicated within the `"linked"` object.
+这种处理方式，保证随每个响应返回每个文档的单例，即使当相同的文档被多次引用时（这个实例中三个posts的author）。沿着这种方式，如果主要文档链接到另外的主要或链接文档，在`"linked"`对象中也不应该重复。
 
 
 ## URLs <a href="#urls" id="urls" class="headerlink"></a>
 
-### Reference Document <a href="#urls-reference-document" id="urls-reference-document" class="headerlink"></a>
+### 关联文档 <a href="#urls-reference-document" id="urls-reference-document" class="headerlink"></a>
 
 When determining an API's URL structure, it is helpful to consider that all of
 its resources exist in a single "reference document" in which each resource is
@@ -1475,3 +1390,8 @@ the `"status"` member of each error object.
 
 Servers **MAY** use HTTP caching headers (`ETag`, `Last-Modified`) in accordance
 with the semantics described in HTTP 1.1.
+
+
+
+
+
