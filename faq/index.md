@@ -12,71 +12,35 @@ title: FAQ
 
 有几个原因:
 
-* HAL embeds child documents recursively, while JSON API flattens the entire
-graph of objects at the top level. This means that if the same "people" are
-referenced from different kinds of objects (say, the author of both posts and
-comments), this format ensures that there is only a single representation of
-each person document in the payload.
+* HAL 递归嵌套子文档，而 JSON API 在顶层采用扁平化对象结构。意味着不同的对象引用相同的 “people”（例如，posts和comments的author）时，这种规范能够保证每个person document仅存在一个有效实例。
 
-* Similarly, JSON API uses IDs for linkage, which makes it possible to cache
-documents from compound responses and then limit subsequent requests to only
-the documents that aren't already present locally. If you're lucky, this can
-even completely eliminate HTTP requests.
+* 相似的，JSON API使用IDs做链接，使从复合响应中缓存文档成为可能，仅当本地不存在对应文档，才会发出后续请求。如果幸运，甚至可以完全无需HTTP请求。
 
-* HAL is a serialization format, but says nothing about how to update
-documents. JSON API thinks through how to update existing records (leaning on
-PATCH and JSON Patch), and how those updates interact with compound documents
-returned from GET requests. It also describes how to create and delete
-documents, and what 200 and 204 responses from those updates mean.
+* HAL是序列化格式，但完全未定义文档更新操作。JSON API则仔细考虑如何更新已存在文档（依赖PATCH和JSON PATCH），以及更新操作与GET请求返回复合文档交互方式。同时定义如何创建，删除文档，以及更新操作的200,204响应。
 
-In short, JSON API is an attempt to formalize similar ad hoc client-server
-interfaces that use JSON as an interchange format. It is specifically focused
-around using those APIs with a smart client that knows how to cache documents it
-has already seen and avoid asking for them again.
+简单来说，JSON API尝试格式化相似的，特殊的client-server通讯接口，使用JSON作为数据交换格式。专注于使用成熟的客户端来调用相关API，客户端能够缓存已经获取到的文档，避免再次请求已缓存信息。
 
-It is extracted from a real-world library already used by a number of projects,
-which has informed both the request/response aspects (absent from HAL) and the
-interchange format itself.
+JSON API从大量实际项目所使用的库中抽象而出。同时定义请求/响应（HAL未定义），以及对应数据交互格式。
 
-### How to discover resource possible actions? <a href="#how-to-discover-resource-possible-actions" id="how-to-discover-resource-possible-actions" class="headerlink"></a>
+### 如何获取资源可能的行为？ <a href="#how-to-discover-resource-possible-actions" id="how-to-discover-resource-possible-actions" class="headerlink"></a>
+你应该使用OPTIONS HTTP方法来获取当前特定资源的行为。OPTIONS请求返回方法的语义遵循JSON API标准。
 
-You should use the OPTIONS HTTP method to discover what can be done with a
-particular resource. The semantics of the methods returned by OPTIONS is defined
-by the JSON API standard.
+举例来说，如果`"GET,POST"`是URL OPTIONS请求的响应，那么就可以获取该资源信息，以及创建新资源。
 
-For instance, if `"GET,POST"` is the response to an OPTIONS request to an URL,
-then you can get information about the resource and also create new resources.
+如果你想知道特定资源属性作用，你不得不使用应用级别的描述来定义属性的含义与功能，并使用错误响应通知用户。这个特性依旧在讨论中，尚未加入最终标准。[discussion](https://github.com/json-api/json-api/issues/7).
 
-If you want to know what you can do with a specific resource attribute then
-you will have to use an application level profile to define the attribute meaning
-and capabilities and use the errors response to let users know. This error feature
-is still pending to be included in the standard since is still in
-[discussion](https://github.com/json-api/json-api/issues/7).
+### 有没有JSON 规范来定义JSON API?<a href="#is-there-a-json-schema-describing-json-api" id="is-there-a-json-schema-describing-json-api" class="headerlink"></a>
 
-### Is there a JSON Schema describing JSON API? <a href="#is-there-a-json-schema-describing-json-api" id="is-there-a-json-schema-describing-json-api" class="headerlink"></a>
+当然，你可以在[http://jsonapi.org/schema](http://jsonapi.org/schema)找到JSON规范定义。注意这个规范并不完美。 因为JSON文档可能会通过规范检查，但并不意味着是合适的JSON API文档。规范只是为了常规性排错检查。
 
-Yes, you can find the JSON Schema definition at
-[http://jsonapi.org/schema](http://jsonapi.org/schema). Please note that this
-schema is not a perfect document. Just because a JSON document may validate
-against this schema, that does not necessarily mean it is a valid JSON API
-document. The schema is provided for a base level sanity check.
+可以在[http://json-schema.org](http://json-schema.org)找到更多关于JSON 规范格式的信息。
 
-You can find more information about the JSON Schema format at
-[http://json-schema.org](http://json-schema.org).
+### 为什么资源集合作为数组返回，而不是ID索引集合？
 
-### Why are resource collections returned as arrays instead of sets keyed by ID?
+JSON数组是自然排序，而集合需要元数据进行成员排序。因此，默认情况下，数组能够实现更自然的排序或者特殊方式排序。
 
-A JSON array is naturally ordered while sets require metadata to specify order
-among members. Therefore, arrays allow for more natural sorting by default or
-specified criteria.
+除此之外，JSON API 允许返回不包含IDs的只读资源，与IDs索引集合方式不兼容。
 
-In addition, JSON API allows read-only resources to be returned without IDs,
-which would of course be incompatible with a set keyed by IDs.
+### 为什么关联资源嵌套在复合文档的 `linked` 对象中？
 
-### Why are related resources nested in a `linked` object in a compound document?
-
-Primary resources should be isolated because their order and number is often
-significant. It's necessary to separate primary and related resources by more
-than type because it's possible that a primary resource may have related
-resources of the same type (e.g. the "parents" of a "person"). Nesting related
-resources in `linked` prevents this possible conflict.
+主要资源应该相互独立，因为他们的顺序和数量通常比较重要。通过多种方式，分离主要资源和关联资源是必要的，因为主要资源可能会有相同类型的关联资源（e.g. the "parents" of a "person")。关联资源嵌套在 `linked` 中能够防止可能的冲突。
