@@ -477,255 +477,190 @@ Letter"`的comments.
 
 ### 关联文档 <a href="#urls-reference-document" id="urls-reference-document" class="headerlink"></a>
 
-When determining an API's URL structure, it is helpful to consider that all of
-its resources exist in a single "reference document" in which each resource is
-addressable at a unique path. Resources are grouped by type at the top level of
-this document. Individual resources are keyed by ID within these typed
-collections. Attributes and links within individual resources are uniquely
-addressable according to the resource object structure described above.
+确定API的URL结构时，考虑把所有的资源放置于单一“关联文档"是有用的，在关联文档中，每个资源都被分配唯一路径。在文档顶层，资源依据类型分组。在分类资源集合中，单独资源通过ID索引。其属性和links，依据资源对象结构，唯一分配。
 
-This concept of a reference document is used to determine appropriate URLs for
-resources as well as their relationships. It is important to understand that
-this reference document differs slightly in structure from documents used to
-transport resources due to different goals and constraints. For instance,
-collections in the reference document are represented as sets because members
-must be addressable by ID, while collections are represented as arrays in
-transport documents because order is significant.
+关联文档的概念，用于为资源及资源关系确定合适的URLs。重要的一点，出于不同目标和限制，用于传输资源的不同文档中，关联文档的结构有轻微差异。例如，在关联文档中的资源集当做集合处理，因为元素必须通过ID访问，在传输文档中的资源集当做数组处理，因为顺序比较重要。
 
-### URLs for Resource Collections <a href="#urls-resource-collections" id="urls-resource-collections" class="headerlink"></a>
+### 资源集合URLs <a href="#urls-resource-collections" id="urls-resource-collections" class="headerlink"></a>
 
-The URL for a collection of resources **SHOULD** be formed from the resource
-type.
+资源集合的URL应该依据资源类型确定。
 
-For example, a collection of resources of type "photos" will have the URL:
-
+例如，”photos”类型的资源集合应该使用这种URL:
 ```text
 /photos
 ```
 
-### URLs for Individual Resources <a href="#urls-individual-resources" id="urls-individual-resources" class="headerlink"></a>
+### 单独资源URLs <a href="#urls-individual-resources" id="urls-individual-resources" class="headerlink"></a>
 
-Collections of resources **SHOULD** be treated as sets keyed by resource ID. The
-URL for an individual resource **SHOULD** be formed by appending the resource's
-ID to the collection URL.
+资源集应该作为集合，依据资源ID索引。单独资源的URL通过为集合URL添加资源ID生成。
 
-For example, a photo with an ID of `"1"` will have the URL:
+例如，ID为`"1"`的photo使用这种URL:
 
 ```text
 /photos/1
 ```
 
-The URL for multiple individual resources **SHOULD** be formed by appending a
-comma-separated list of resource IDs to the collection URL.
+多个单独资源的URL通过为集合URL添加逗号分隔的资源IDs列表生成。
 
-For example, the photos with IDs of `"1"`, `"2"` and `"3"` will collectively
-have the URL:
-
+例如，IDs为`"1"`, `"2"`, `"3"`的photos使用这种URL:
 ```text
 /photos/1,2,3
 ```
 
-### Alternative URLs <a href="#urls-alternative" id="urls-alternative" class="headerlink"></a>
+### 替代性URLs <a href="#urls-alternative" id="urls-alternative" class="headerlink"></a>
 
-Alternative URLs for resources **MAY** optionally be specified in responses with
-`"href"` members or URL templates.
+资源的替代性URLs可以选择在响应中指定，或者通过`"href"`或URL模板指定。
 
-### Relationship URLs <a href="#urls-relationships" id="urls-relationships" class="headerlink"></a>
+### 关联 URLs <a href="#urls-relationships" id="urls-relationships" class="headerlink"></a>
 
-A resource's relationship **MAY** be accessible at a URL formed by appending
-`/links/<relationship-name>` to the resource's URL. This relative path is
-consistent with the internal structure of a resource object.
+添加`/links/<relationship-name>`到资源URL后面，即得到访问特定资源的关联资源URL。相对路径与资源对象内部结构保持一致。
 
-For example, a photo's collection of linked comments will have the URL:
+例如，photo的comments链接集使用这种URL:
 
 ```text
 /photos/1/links/comments
 ```
 
 A photo's reference to an individual linked photographer will have the URL:
+photo的photographer链接使用这种URL:
 
 ```text
 /photos/1/links/photographer
 ```
 
-A server **MUST** represent "to-one" relationships as individual resources and
-"to-many" relationships as resource collections.
+服务器使用单独资源响应单对象关联，使用资源集合响应多对象关联。
 
+## 资源获取 <a href="#fetching" id="fetching" class="headerlink"></a>
 
-## Fetching Resources <a href="#fetching" id="fetching" class="headerlink"></a>
+资源，或者资源集合，通过向URL发出`GET`请求获取。
 
-A resource, or collection of resources, can be fetched by sending a `GET`
-request to the URL described above.
+响应内容可以使用如下所示的特点，进一步细化。
+### 过滤 <a href="#fetching-filtering" id="fetching-filtering" class="headerlink"></a>
 
-Responses can be further refined with the optional features described below. 
+服务器可以选择性支持，依据指定标准进行资源过滤。
 
-### Filtering <a href="#fetching-filtering" id="fetching-filtering" class="headerlink"></a>
+通过向资源集合的基准URL添加过滤参数，来支持资源过滤。
 
-A server **MAY** choose to support requests to filter resources according to
-specific criteria.
-
-Filtering **SHOULD** be supported by appending parameters to the base URL for
-the collection of resources to be filtered.
-
-For example, the following is a request for all comments associated with a
-particular post:
+例如，下面是请求与特定post关联的所有comments:
 
 ```text
 GET /comments?posts=1
 ```
 
-With this approach, multiple filters **MAY** be applied to a single request:
+使用这种方案，单一请求可以使用多过滤器：
 
 ```text
 GET /comments?posts=1&author=12
 ```
 
-This specification only supports filtering based upon strict matching.
-Additional filtering allowed by an API should be specified in its profile (see
-[Extending](/extending)).
+这种规范仅支持基于严格匹配的资源过滤。API允许使用的额外过滤器应该在它的侧写中指定。 (见
+[Extending](/extending))
 
-### Inclusion of Linked Resources <a href="#fetching-includes" id="fetching-includes" class="headerlink"></a>
+### 内链资源 <a href="#fetching-includes" id="fetching-includes" class="headerlink"></a>
 
-A server **MAY** choose to support returning compound documents that include
-both primary and linked resource objects.
+服务器可以选择性支持，返回包含主要资源和链接资源对象的复合文档。
 
-An endpoint **MAY** return resources linked to the primary resource(s) by
-default.
+默认情况下，后端返回链接主要资源的资源对象。
 
-An endpoint **MAY** also support custom inclusion of linked resources based upon
-an `include` request parameter. This parameter should specify the path to one or
-more resources relative to the primary resource. If this parameter is used,
-**ONLY** the requested linked resources should be returned alongside the primary
-resource(s).
+后端也可以基于请求中`include`的参数，支持自定义链接资源。参数应该指定一个或者多个，相对于主要资源的相对路径。如果指定参数值，只有请求的链接资源，应该随主要资源返回。
 
-For instance, comments could be requested with a post:
-
+例如，comments可以通过post请求:
 ```text
 GET /posts/1?include=comments
 ```
 
-In order to request resources linked to other resources, the dot-separated path
-of each relationship should be specified:
+为请求链接到其他资源的资源，需要指定每个关联的点分隔路径。
 
 ```text
 GET /posts/1?include=comments.author
 ```
 
-Note: a request for `comments.author` should not automatically also include
-`comments` in the response (although comments will obviously need to be queried
-in order to fulfill the request for their authors).
+注意：对`comments.author`的请求，在响应中不应该自动包含`comments`资源（尽管comments也需要显式查询，以获取authors响应请求）。
 
-Multiple linked resources could be requested in a comma-separated list:
+多链接资源可以使用点分隔列表请求：
 
 ```text
 GET /posts/1?include=author,comments,comments.author
 ```
 
-### Sparse Fieldsets <a href="#fetching-sparse-fieldsets" id="fetching-sparse-fieldsets" class="headerlink"></a>
+### 稀疏字段 <a href="#fetching-sparse-fieldsets" id="fetching-sparse-fieldsets" class="headerlink"></a>
 
-A server **MAY** choose to support requests to return only specific fields in
-resource object.
+服务器可以选择性支持，仅返回资源对象的指定字段。
 
-An endpoint **MAY** support requests that specify fields for the primary
-resource type with a `fields` parameter.
+后端可以基于`fields`参数，以支持返回主要资源的指定字段。
 
 ```text
 GET /people?fields=id,name,age
 ```
 
-An endpoint **MAY** support requests that specify fields for any resource type
-with a `fields[TYPE]` parameter.
+后端可以基于`fields[TYPE]`参数，以支持返回任意类型资源的特定字段。
 
 ```text
 GET /posts?include=author&fields[posts]=id,title&fields[people]=id,name
 ```
 
-An endpoint **SHOULD** return a default set of fields in a resource object if no
-fields have been specified for its type, or if the endpoint does not support use
-of either `fields` or `fields[TYPE]`.
+若没有指定类型对象的字段，或者后端不支持`field`或`fields[TYPE]`参数，后端会默认返回资源对象的所有字段。
 
-An endpoint **MAY** also choose to always return a limited set of 
-non-specified fields, such as `id` or `href`.
+后端可以选择总是返回有限的，未指定的字段集，例如`id` or `href`.
 
-Note: `fields` and `fields[TYPE]` can not be mixed. If the latter format is
-used, then it must be used for the primary resource type as well.
+注意： `fields` 和 `fields[TYPE]`不能混合使用。如果使用后者，那么必须与主要资源类型同时使用。 
 
-### Sorting <a href="#fetching-sorting" id="fetching-sorting" class="headerlink"></a>
+### 排序 <a href="#fetching-sorting" id="fetching-sorting" class="headerlink"></a>
 
-A server **MAY** choose to support requests to sort resource collections
-according to one or more criteria.
+服务器可以选择性支持，基于特定标准对资源集合排序。
 
-An endpoint **MAY** support requests to sort the primary resource type with a
-`sort` parameter.
+后端基于`sort`参数，以支持主要资源类型的排序。
 
 ```text
 GET /people?sort=age
 ```
 
-An endpoint **MAY** support multiple sort criteria by allowing comma-separated
-fields as the value for `sort`. Sort criteria should be applied in the order
-specified.
+后端支持多字段排序，将`sort`值设置为点分隔值即可。排序标准用以获取特定顺序。
 
 ```text
 GET /people?sort=age,name
 ```
 
-The default sort order **SHOULD** be ascending. A `-` prefix on any sort field
-specifies a descending sort order.
+默认排序方式为升序排序。任意排序字段，使用`-`前缀指定降序排序。
 
 ```text
 GET /posts?sort=-created,title
 ```
 
-The above example should return the newest posts first. Any posts created on the
-same date will then be sorted by their title in ascending alpabetical order.
+上面的示例应该首先返回最新的posts。同一天创建的posts，依据title值进行字母升序排列。
 
-An endpoint **MAY** support requests to sort any resource type with a
-`sort[TYPE]` parameter.
+后端基于`sort[TYPE]`参数，以支持对任意资源类型排序。
 
 ```text
 GET /posts?include=author&sort[posts]=-created,title&sort[people]=name
 ```
 
-If no sort order is specified, or if the endpoint does not support use of either
-`sort` or `sort[TYPE]`, then the endpoint **SHOULD** return resource objects
-sorted with a repeatable algorithm. In other words, resources **SHOULD** always
-be returned in the same order, even if the sort criteria aren't specified.
+如果没有指定排序方式，或者后端不支持`sort`和`sort[TYPE]`，后端将会返回使用重复算法排序的资源对象。换言之，资源应该总是以相同顺序返回，即使排序规则没有指定。
 
-Note: `sort` and `sort[TYPE]` can not be mixed. If the latter format is used,
-then it **MUST** be used for the primary resource type as well.
+注意：`sort`和`sort[TYPE]`不能混用。如果使用后者，必须与主要资源一同使用。
 
 
-## Creating, Updating and Deleting Resources <a href="#crud" id="crud" class="headerlink"></a>
+## 创建，更新，删除资源 <a href="#crud" id="crud" class="headerlink"></a>
 
-A server **MAY** allow resources that can be fetched to also be created,
-modified and deleted.
+服务器可能支持资源获取，创建，更新和删除。
 
-A server **MAY** allow multiple resources to be updated in a single request, as
-discussed below. Updates to multiple resources **MUST** completely succeed or
-fail. No partial updates are allowed.
+服务器允许单次请求，更新多个资源，如下所述。多个资源更新必须完全成功或者失败，不允许部分更新成功。
 
-Any requests that contain content **MUST** include a `Content-Type` header whose
-value is `application/vnd.api+json`.
+任何包含内容的请求，必须包含`Content-Type:application/vnd.api+json`请求头。 
 
-### Creating Resources <a href="#crud-creating-resources" id="crud-creating-resources" class="headerlink"></a>
+### 创建资源 <a href="#crud-creating-resources" id="crud-creating-resources" class="headerlink"></a>
 
-A server that supports creating resources **MUST** support creating individual
-resources and **MAY** optionally support creating multiple resources in a single
-request.
+支持资源创建的服务器，必须支持创建单独的资源，可以选择性支持一次请求，创建多个资源。
 
-One or more resources can be *created* by making a `POST` request to the URL
-that represents a collection of resources to which the new resource should
-belong.
+向表示待创建资源所属资源集的URL，发出`POST`请求，创建一个或多个资源。
 
-#### Creating an Individual Resource <a href="#crud-creating-individual-resources" id="crud-creating-individual-resources" class="headerlink"></a>
+#### 创建单独资源 <a href="#crud-creating-individual-resources" id="crud-creating-individual-resources" class="headerlink"></a>
 
-A request to create an individual resource **MUST** include a single primary
-resource object.
+创建单独资源的请求必须包含单一主要资源对象。
 
-For instance, a new photo might be created with the following request:
+例如，新photo可以通过如下请求创建：
 
-```text
+```javascript
 POST /photos
 Content-Type: application/vnd.api+json
 Accept: application/vnd.api+json
@@ -738,14 +673,13 @@ Accept: application/vnd.api+json
 }
 ```
 
-#### Creating Multiple Resources <a href="#crud-creating-multiple-resources" id="crud-creating-multiple-resources" class="headerlink"></a>
+#### 创建多个资源 <a href="#crud-creating-multiple-resources" id="crud-creating-multiple-resources" class="headerlink"></a>
 
-A request to create multiple resources **MUST** include a collection of primary
-resource objects.
+创建多个资源的请求必须包含主要主要资源集合。
 
-For instance, multiple photos might be created with the following request:
+例如，多个photos通过如下请求创建：
 
-```text
+```javascript
 POST /photos
 Content-Type: application/vnd.api+json
 Accept: application/vnd.api+json
@@ -761,28 +695,22 @@ Accept: application/vnd.api+json
 }
 ```
 
-#### Responses <a href="#crud-creating-responses" id="crud-creating-responses" class="headerlink"></a>
+#### 响应 <a href="#crud-creating-responses" id="crud-creating-responses" class="headerlink"></a>
 
-##### 201 Created <a href="#crud-creating-responses-201" id="crud-creating-responses-201" class="headerlink"></a>
+##### 201 状态码 <a href="#crud-creating-responses-201" id="crud-creating-responses-201" class="headerlink"></a>
 
-A server **MUST** respond to a successful resource creation request according to
-[`HTTP semantics`](http://tools.ietf.org/html/draft-ietf-
-httpbis-p2-semantics-22#section-6.3).
+服务器依据[`HTTP semantics`](http://tools.ietf.org/html/draft-ietf-
+httpbis-p2-semantics-22#section-6.3)规范，响应成功的资源创建请求。
 
-When one or more resources has been created, the server **MUST** return a `201
-Created` status code.
+当一个或多个资源创建成功，服务器返回`201 Created`状态码。
 
-The response **MUST** include a `Location` header identifying the location of
-_all_ resources created by the request.
+响应必须包含`Location`头，用以标示请求创建所有资源的位置。
 
-If a single resource is created and that resource's object includes an `href`
-key, the `Location` URL **MUST** match the `href` value.
+如果创建了单个资源，且资源对象包含`href`键，`Location` URL必须匹配`href`值。
 
-The response **SHOULD** also include a document that contains the primary
-resource(s) created. If absent, the client **SHOULD** treat the transmitted
-document as accepted without modification.
+响应必须含有一个文档，用以存储所创建的主要资源。如果缺失，客户端则判定资源创建时，传输的文档未经修改。
 
-```text
+```javascript
 HTTP/1.1 201 Created
 Location: http://example.com/photos/550e8400-e29b-41d4-a716-446655440000
 Content-Type: application/vnd.api+json
@@ -797,21 +725,17 @@ Content-Type: application/vnd.api+json
 }
 ```
 
-##### Other Responses <a href="#crud-creating-responses-other" id="crud-creating-responses-other" class="headerlink"></a>
+##### 其它响应 <a href="#crud-creating-responses-other" id="crud-creating-responses-other" class="headerlink"></a>
 
-Servers **MAY** use other HTTP error codes to represent errors.  Clients
-**MUST** interpret those errors in accordance with HTTP semantics. Error details
-**MAY** also be returned, as discussed below.
+服务器可能使用其它HTTP错误状态码反映错误。客户端必须依据HTTP规范处理这些错误信息。如下所述，错误细节可能会一并返回。
 
-#### Client-Generated IDs <a href="#crud-creating-client-ids" id="crud-creating-client-ids" class="headerlink"></a>
+#### 客户端生成 IDs <a href="#crud-creating-client-ids" id="crud-creating-client-ids" class="headerlink"></a>
 
-A server **MAY** accept client-generated IDs along with requests to create one
-or more resources. IDs **MUST** be specified with an `"id"` key, the value of 
-which **MUST** be a properly generated and formatted *UUID*.
+请求创建一个或多个资源时，服务器可能接受客户端生成IDs。IDs必须使用`"id"`键来指定，其值必须正确生成，且为格式化的*UUID*。
 
-For example:
+例如：
 
-```text
+```javascript
 POST /photos
 Content-Type: application/vnd.api+json
 Accept: application/vnd.api+json
@@ -825,24 +749,19 @@ Accept: application/vnd.api+json
 }
 ```
 
-### Updating Resources <a href="#crud-updating" id="crud-updating" class="headerlink"></a>
+### 更新资源 <a href="#crud-updating" id="crud-updating" class="headerlink"></a>
 
-A server that supports updating resources **MUST** support updating individual
-resources and **MAY** optionally support updating multiple resources in a single
-request.
+支持资源更新的服务器必须支持单个资源的更新，可以选择性的支持单次请求更新多个资源。
 
-Resources can be updated by making a `PUT` request to the URL that represents
-either the individual or multiple individual resources.
+向表示单独资源或多个单独资源的URL发出`PUT`请求，即可进行资源更新。
 
-#### Updating an Individual Resource <a href="#crud-updating-individual-resources" id="crud-updating-individual-resources" class="headerlink"></a>
+#### 更新单独资源 <a href="#crud-updating-individual-resources" id="crud-updating-individual-resources" class="headerlink"></a>
 
-To update an individual resource, send a `PUT` request to the URL that
-represents the resource. The request **MUST** include a single top-level
-resource object.
+为更新单独资源，向表示资源的URL发出`PUT`请求。请求必须包含一个顶层资源对象。
 
-For example:
+例如：
 
-```text
+```javascript
 PUT /articles/1
 Content-Type: application/vnd.api+json
 Accept: application/vnd.api+json
@@ -855,16 +774,13 @@ Accept: application/vnd.api+json
 }
 ```
 
-#### Updating Multiple Resources <a href="#crud-updating-multiple-resources" id="crud-updating-multiple-resources" class="headerlink"></a>
+#### 更新多个资源<a href="#crud-updating-multiple-resources" id="crud-updating-multiple-resources" class="headerlink"></a>
 
-To update multiple resources, send a `PUT` request to the URL that represents
-the multiple individual resources (NOT the entire collection of resources). The
-request **MUST** include a top-level collection of resource objects that each
-contain an `"id"` member.
+向表示多个单独资源（不是全部的资源集合）的URL发出`PUT`请求，即可更新多个资源。请求必须包含顶层资源对象集合，且每个资源具有`“id"`元素。
 
-For example:
+例如：
 
-```text
+```javascript
 PUT /articles/1,2
 Content-Type: application/vnd.api+json
 Accept: application/vnd.api+json
@@ -880,16 +796,13 @@ Accept: application/vnd.api+json
 }
 ```
 
-#### Updating Attributes <a href="#crud-updating-attributes" id="crud-updating-attributes" class="headerlink"></a>
+#### 更新属性 <a href="#crud-updating-attributes" id="crud-updating-attributes" class="headerlink"></a>
 
-To update one or more attributes of a resource, the primary resource object
-should include only the attributes to be updated. Attributes omitted from the
-resource object should not be updated.
+要更新资源的一个或多个属性，主要资源对象应该只包括待更新的属性。资源对象缺省的属性将不会更新。
 
-For example, the following `PUT` request will only update the `title` and `text`
-attributes of an article:
+例如，下面的`PUT`请求，仅会更新article的`title`和`text`属性。
 
-```text
+```javascript
 PUT /articles/1
 Content-Type: application/vnd.api+json
 Accept: application/vnd.api+json
@@ -903,17 +816,15 @@ Accept: application/vnd.api+json
 }
 ```
 
-#### Updating Relationships <a href="#crud-updating-relationships" id="crud-updating-relationships" class="headerlink"></a>
+#### 更新关联 <a href="#crud-updating-relationships" id="crud-updating-relationships" class="headerlink"></a>
 
-##### Updating To-One Relationships <a href="#crud-updating-to-one-relationships" id="crud-updating-to-one-relationships" class="headerlink"></a>
+##### 更新单对象关联 <a href="#crud-updating-to-one-relationships" id="crud-updating-to-one-relationships" class="headerlink"></a>
 
-To-one relationships **MAY** be updated along with other attributes by including
-them in a `links` object within the resource object in a `PUT` request.
+单对象关联更新，可以在`PUT`请求资源对象中包含`links`键，从而与其它属性一起更新。
 
-For instance, the following `PUT` request will update the `title` and `author`
-attributes of an article:
+例如，下面的`PUT`请求将会更新article的`title`和`author`属性：
 
-```text
+```javascript
 PUT /articles/1
 Content-Type: application/vnd.api+json
 Accept: application/vnd.api+json
@@ -928,16 +839,15 @@ Accept: application/vnd.api+json
 }
 ```
 
-In order to remove a to-one relationship, specify `null` as the value of the
-relationship.
+若要移除单对象关联，指定`null`作为值即可。
 
-Alternatively, a to-one relationship **MAY** optionally be accessible at its
-relationship URL (see above).
+另外，单对象关联也可以通过它的关联URL访问。
 
-A to-one relationship **MAY** be added by sending a `POST` request with an
-individual primary resource to the URL of the relationship. For example:
+向关联URL发出带有主要资源的`POST`请求，即可添加单对象关联。
 
-```text
+例如：
+
+```javascript
 POST /articles/1/links/author
 Content-Type: application/vnd.api+json
 Accept: application/vnd.api+json
@@ -947,22 +857,19 @@ Accept: application/vnd.api+json
 }
 ```
 
-A to-one relationship **MAY** be removed by sending a `DELETE` request to the URL
-of the relationship. For example:
+向关联URL发出`DELETE`请求，即可删除单对象关联。例如：
 
 ```text
 DELETE /articles/1/links/author
 ```
 
-##### Updating To-Many Relationships <a href="#crud-updating-to-many-relationships" id="crud-updating-to-many-relationships" class="headerlink"></a>
+##### 更新多关联对象 <a href="#crud-updating-to-many-relationships" id="crud-updating-to-many-relationships" class="headerlink"></a>
 
-To-many relationships **MAY** optionally be updated with other attributes by
-including them in a `links` object within the document in a `PUT` request.
+更新多对象关联，可以在`PUT`请求中资源对象包含`links`键，从而与其它属性一起更新。
 
-For instance, the following `PUT` request performs a complete replacement of the
-`tags` for an article:
+例如，下面`PUT`请求完全替换article的`tags`。
 
-```text
+```javascript
 PUT /articles/1
 Content-Type: application/vnd.api+json
 Accept: application/vnd.api+json
@@ -978,18 +885,13 @@ Accept: application/vnd.api+json
 }
 ```
 
-In order to remove every member of a to-many relationship, specify an empty
-array (`[]`) as the value of the relationship.
+若要移除多对象关联，指定空数组`[]`为值即可。
 
-Replacing a complete set of data is not always appropriate in a distributed
-system which may involve many editors. An alternative is to allow relationships
-to be added and removed individually.
+在分布式系统中，完全替换一个数据集合并不总是合适。替换方案是允许单独的添加或移除关联。
 
-To facilitate fine-grained access, a to-many relationship **MAY** optionally be
-accessible at its relationship URL (see above).
+为促进细化访问，多对象关联也可以通过关联URL访问。
 
-A to-many relationship **MAY** be added by sending a `POST` request with a
-primary resource collection to the URL of the relationship. For example:
+向关联URL发出带有主要资源的`POST`请求，即可添加多对象关联。
 
 ```text
 POST /articles/1/links/comments
@@ -1001,142 +903,97 @@ Accept: application/vnd.api+json
 }
 ```
 
-To-many relationships **MAY** be deleted individually by sending a `DELETE`
-request to the URL of the relationship:
-
+向关联URL发出`DELETE`请求，即可删除多对象对象关联。例如：
 ```text
 DELETE /articles/1/links/tags/1
 ```
 
-Multiple to-many relationships **MAY** be deleted by sending a `DELETE` request
-to the URL of the relationships:
+向关联URL发出`DELETE`请求，即可删除多个多对象对象关联。例如：
 
 ```text
 DELETE /articles/1/links/tags/1,2
 ```
 
-### Responses <a href="#crud-updating-responses" id="crud-updating-responses" class="headerlink"></a>
+### 响应 <a href="#crud-updating-responses" id="crud-updating-responses" class="headerlink"></a>
 
 #### 204 No Content <a href="#crud-updating-responses-204" id="crud-updating-responses-204" class="headerlink"></a>
 
-A server **MUST** return a `204 No Content` status code if an update is
-successful and the client's current attributes remain up to date. This applies
-to `PUT` requests as well as `POST` and `DELETE` requests that modify links
-without affecting other attributes of a resource.
+如果更新成功，且客户端属性保持最新，服务器必须返回`204 No Content`状态码。适用于`PUT`请求，以及仅调整links，不涉及其它属性的`POST`, `DELETE`请求。
 
 #### 200 OK <a href="#crud-updating-responses-200" id="crud-updating-responses-200" class="headerlink"></a>
 
-If a server accepts an update but also changes the resource(s) in other ways
-than those specified by the request (for example, updating the `updatedAt`
-attribute or a computed `sha`), it **MUST** return a `200 OK` response as well
-as a representation of the updated resource(s) as if a `GET` request was made to
-the request URL.
+如果服务器接受更新，但是在请求指定内容之外做了资源修改，必须响应`200 OK`以及更新的资源实例，像是向此URL发出`GET`请求。
 
-#### Other Responses <a href="#crud-updating-responses-other" id="crud-updating-responses-other" class="headerlink"></a>
+#### 其它响应 <a href="#crud-updating-responses-other" id="crud-updating-responses-other" class="headerlink"></a>
 
-Servers **MAY** use other HTTP error codes to represent errors.  Clients
-**MUST** interpret those errors in accordance with HTTP semantics. Error details
-**MAY** also be returned, as discussed below.
+服务器使用其它HTTP错误状态码反映错误。客户端必须依据HTTP规范处理这些错误信息。如下所述，错误细节可能会一并返回。
 
-### Deleting Resources <a href="#crud-deleting" id="crud-deleting" class="headerlink"></a>
+### 资源删除 <a href="#crud-deleting" id="crud-deleting" class="headerlink"></a>
 
-An individual resource can be *deleted* by making a `DELETE` request to the
-resource's URL:
+向资源URL发出`DELETE`请求即可删除单个资源。
 
 ```text
 DELETE /photos/1
 ```
 
-A server **MAY** optionally allow multiple resources to be *deleted* with a
-`DELETE` request to their URL:
+服务器可以选择性的支持，在一个请求里删除多个资源。
 
 ```text
 DELETE /photos/1,2,3
 ```
 
-#### Responses <a href="#crud-deleting-responses" id="crud-deleting-responses" class="headerlink"></a>
+#### 响应 <a href="#crud-deleting-responses" id="crud-deleting-responses" class="headerlink"></a>
 
 ##### 204 No Content <a href="#crud-deleting-responses-204" id="crud-deleting-responses-204" class="headerlink"></a>
 
-A server **MUST** return a `204 No Content` status code if a delete request is
-successful.
+如果删除请求成功，服务器必须返回`204 No Content` 状态码。
 
-##### Other Responses <a href="#crud-deleting-responses-other" id="crud-deleting-responses-other" class="headerlink"></a>
+##### 其它响应 <a href="#crud-deleting-responses-other" id="crud-deleting-responses-other" class="headerlink"></a>
 
-Servers **MAY** use other HTTP error codes to represent errors.  Clients
-**MUST** interpret those errors in accordance with HTTP semantics. Error details
-**MAY** also be returned, as discussed below.
+服务器使用其它HTTP错误状态码反映错误。客户端必须依据HTTP规范处理这些错误信息。如下所述，错误细节可能会一并返回。
 
 ## Errors <a href="#errors" id="errors" class="headerlink"></a>
 
-Error objects are specialized resource objects that **MAY** be returned in a
-response to provide additional information about problems encountered while
-performing an operation. Error objects **SHOULD** be returned as a collection
-keyed by `"errors"` in the top level of a JSON API document, and **SHOULD NOT**
-be returned with any other top level resources.
+错误对象是特殊化的资源对象，可能在响应中一并返回，用以提供执行操作遭遇问题的额外信息。在在JSON API文档顶层，`"errors"`对应值即为错误对象集合，此时文档不应该包含其它顶层资源。
 
-An error object **MAY** have the following members:
+错误对象可能有以下元素：
 
-* `"id"` - A unique identifier for this particular occurrence of the problem.
-* `"href"` - A URI that **MAY** yield further details about this particular
-  occurrence of the problem.
-* `"status"` - The HTTP status code applicable to this problem, expressed as a
-  string value.
-* `"code"` - An application-specific error code, expressed as a string value.
-* `"title"` - A short, human-readable summary of the problem. It **SHOULD NOT**
-  change from occurrence to occurrence of the problem, except for purposes of
-  localization.
-* `"detail"` - A human-readable explanation specific to this occurrence of the
-  problem.
-* `"links"` - Associated resources which can be dereferenced from the request
-  document.
-* `"path"` - The relative path to the relevant attribute within the associated
-  resource(s). Only appropriate for problems that apply to a single resource or
-  type of resource.
+* `"id"` - 特定问题的唯一标示符。
+* `"href"` - 提供特定问题更多细节的URI。
+* `"status"` - 适用于这个问题的HTTP状态码，使用字符串表示。
+* `"code"` - 应用特定的错误码，以字符串表示。
+* `"title"` - 简短的，可读性高的问题总结。除了国际化本地化处理之外，不同场景下，相同的问题，值是不应该变动的。
+* `"detail"` - 针对该问题的高可读性解释。
+* `"links"` - 可以在请求文档中取消应用的关联资源。
+* `"path"` - 关联资源中相关属性的相对路径。在单资源或单类型资源中出现的问题，这个值才是合适的。
 
-Additional members **MAY** be specified within error objects.
+额外的元素可以在错误对象中指定。
 
-Implementors **MAY** choose to use an alternative media type for errors.
+实现接口可以选择使用其它的errors媒体类型。
 
 ## PATCH Support <a href="#patch" id="patch" class="headerlink"></a>
 
-JSON API servers **MAY** opt to support HTTP `PATCH` requests that conform to
-the JSON Patch format [[RFC6902](http://tools.ietf.org/html/rfc6902)]. There are
-JSON Patch equivalant operations for the operations described above that use
-`POST`, `PUT` and `DELETE`. From here on, JSON Patch operations sent in a
-`PATCH` request will be referred to simply as "`PATCH` operations".
+JSON API服务器可以选择性支持，遵循JSON Patch规范[[RFC6902](http://tools.ietf.org/html/rfc6902)]的HTTP `PATCH`请求。上面提到使用`POST`, `PUT` 和 `DELETE`进行的操作，JSON Patch都拥有等效操作。从这里开始，`PATCH`请求发出的JSON Patch操作，都被简单的称作“`PATCH`"操作。
 
-`PATCH` requests **MUST** specify a `Content-Type` header of `application/json-
-patch+json`.
+`PATCH`请求必须声明`Content-Type:application/json-patch+json`头。
 
-`PATCH` operations **MUST** be sent as an array to conform with the JSON Patch
-format. A server **MAY** limit the type, order and count of operations allowed
-in this top level array.
+`PATCH`操作必须作为数组发送，以遵循JSON Patch规范。服务器可能会限制顶层数组类型，顺序和操作数量。
 
-### Request URLs <a href="#patch-urls" id="patch-urls" class="headerlink"></a>
+### 请求 URLs <a href="#patch-urls" id="patch-urls" class="headerlink"></a>
 
-The URL for each `PATCH` request **SHOULD** map to the resource(s) or
-relationship(s) to be updated.
+每个`PATCH`请求的URL应该映射待更新的资源或关联。
 
-Every `"path"` within a `PATCH` operation **SHOULD** be relative to the request
-URL. The request URL and the `PATCH` operation's `"path"` are complementary and
-combine to target a particular resource, collection, attribute, or relationship.
+`PATCH`操作内的每个`"path"`应该相对于请求URL。请求URL和`PATCH`操作的`"path"`是附加的，合并后获取特定资源，集合，属性，或者关联目标。
 
-`PATCH` operations **MAY** be allowed at the root URL of an API. In this case,
-every `"path"` within a `PATCH` operation **MUST** include the full resource
-URL. This allows for general "fire hose" updates to any resource represented by
-an API. As stated above, a server **MAY** limit the type, order and count of
-bulk operations.
+`PATCH`操作可以在API的根URL使用。此时，`PATCH`操作的`"path"`必须包含完整的资源URL。API表示的任意资源都可以进行常规的"fire hose"更新。如上所述，服务器可能会限制类型，排序和批量操作数量。
 
-### Creating a Resource with PATCH <a href="#patch-creating" id="patch-creating" class="headerlink"></a>
+### 创建资源with PATCH <a href="#patch-creating" id="patch-creating" class="headerlink"></a>
 
-To create a resource, perform an `"add"` operation with a `"path"` that points
-to the end of its corresponding resource collection (`"/-"`). The `"value"`
-should contain a resource object.
+要创建资源，执行`"add"`操作， `"path"`指向对应资源集合的末尾 (`"/-"`)。`"value"`必须包含一个资源对象。
 
-For instance, a new photo might be created with the following request:
+比如，新photo通过如下请求创建：
 
-```text
+```javascript
 PATCH /photos
 Content-Type: application/json-patch+json
 Accept: application/json
@@ -1153,75 +1010,73 @@ Accept: application/json
 ]
 ```
 
-### Updating Attributes with PATCH <a href="#patch-updating-attributes" id="patch-updating-attributes" class="headerlink"></a>
+### 更新属性with PATCH <a href="#patch-updating-attributes" id="patch-updating-attributes" class="headerlink"></a>
 
-To update an attribute, perform a `"replace"` operation with the attribute's
-name specified as the `"path"`.
+要更新属性，执行`"replace"` 操作，`"path"`值指定属性名。
 
-For instance, the following request should update just the `src` property of the
-photo at `/photos/1`:
+例如，下面请求只更新`/photos/1`的`src`值。
 
-```text
+```javascript
 PATCH /photos/1
 Content-Type: application/json-patch+json
 
 [
-  { "op": "replace", "path": "/src", "value": "http://example.com/hamster.png" }
+  {
+  "op": "replace",
+  "path": "/src",
+  "value": "http://example.com/hamster.png"
+ }
 ]
 ```
 
-### Updating Relationships with PATCH <a href="#patch-updating-relationships" id="patch-updating-relationships" class="headerlink"></a>
+### 更新关联with PATCH <a href="#patch-updating-relationships" id="patch-updating-relationships" class="headerlink"></a>
 
-To update a relationship, send an appropriate `PATCH` operation to the
-corresponding relationship's URL.
+要更新关联，向对应的关联URL发出合适的`PATCH`操作即可。
 
-A server **MAY** also support updates at a higher level, such as the resource's
-URL (or even the API's root URL). As discussed above, the request URL and each
-operation's `"path"` must be complementary and combine to target a particular
-relationship's URL.
+服务器可能支持更高层级的更新，像资源的URL（甚至是API的根URL）。如上所述，请求URL和每个操作的`"path"`是附加的，合并后获得特定关联URL目标。
 
-#### Updating To-One Relationships with PATCH <a href="#patch-updating-to-one-relationships" id="patch-updating-to-one-relationships" class="headerlink"></a>
+#### 关联更新with PATCH <a href="#patch-updating-to-one-relationships" id="patch-updating-to-one-relationships" class="headerlink"></a>
 
-To update a to-one relationship, perform a `"replace"` operation with a URL and
-`"path"` that targets the relationship. The `"value"` should be an individual
-resource representation.
+要更新单对象关联，对指向关联的URL和`"path"` 执行`"replace"`操作。
 
-For instance, the following request should update the `author` of an article:
+例如：下面请求更新article的`author`：
 
-```text
+```javascript
 PATCH /article/1/links/author
 Content-Type: application/json-patch+json
 
 [
-  { "op": "replace", "path": "/", "value": "1" }
+ {
+  "op": "replace",
+  "path": "/",
+  "value": "1"
+ }
 ]
 ```
 
-To remove a to-one relationship, perform a `remove` operation on the
-relationship. For example:
+要移除单对象关联，对关联执行`remove`操作。例如：
 
-```text
+```javascript
 PATCH /article/1/links/author
 Content-Type: application/json-patch+json
 
 [
-  { "op": "remove", "path": "/" }
+  { 
+    "op": "remove", 
+    "path": "/" 
+  }
 ]
 ```
 
-#### Updating To-Many Relationships with PATCH <a href="#patch-updating-to-many-relationships" id="patch-updating-to-many-relationships" class="headerlink"></a>
+#### 更新多对象关联 with PATCH <a href="#patch-updating-to-many-relationships" id="patch-updating-to-many-relationships" class="headerlink"></a>
 
-While to-many relationships are represented as a JSON array in a `GET` response,
-they are updated as if they were a set.
+尽管在`GET`响应中，多对象关联以JSON数组形式表示，但是更新时更像是集合。
 
-To add an element to a to-many relationship, perform an `"add"` operation that
-targets the relationship's URL. Because the operation is targeting the end of a
-collection, the `"path"` must end with `"/-"`. The `"value"` should be a
-representation of an individual resource or collection of resources.
+要添加元素到多对象关联，执行指向关联URL的`"add"` 请求。由于操作指向集合末尾， `"path"` 必须以`"/-"`结尾。
 
-For example, consider the following `GET` request:
+例如，考虑下面的`GET`请求：
 
-```text
+```javascript
 GET /photos/1
 Content-Type: application/vnd.api+json
 
@@ -1241,75 +1096,71 @@ Content-Type: application/vnd.api+json
 }
 ```
 
-You could move comment 30 to this photo by issuing an `add` operation in the
-`PATCH` request:
+向`PATCH`请求执行`add`操作，即可将comment 30 转移到这个photo。
 
-```text
+```javascript
 PATCH /photos/1/links/comments
 Content-Type: application/json-patch+json
 
 [
-  { "op": "add", "path": "/-", "value": "30" }
+  { 
+    "op": "add", 
+    "path": "/-", 
+    "value": "30"
+  }
 ]
 ```
 
-To remove a to-many relationship, perform a `"remove"` operation that targets
-the relationship's URL. Because the operation is targeting a member of a
-collection, the `"path"` **MUST** end with `"/<id>"`.
+要移除多对象关联，对指向关联对象的URL执行`"remove"`操作。因为操作目标是元素集合，`"path"`必须以`"/<id>"`结尾。
 
-For example, to remove comment 5 from this photo, issue this `"remove"`
-operation:
+比如，要移除photo的comment 5，执行`"remove"`操作：
 
-```text
+```javascript
 PATCH /photos/1/links/comments
 Content-Type: application/json-patch+json
 
 [
-  { "op": "remove", "path": "/5" }
+  { 
+    "op": "remove", 
+    "path": "/5" 
+  }
 ]
 ```
 
-### Deleting a Resource with PATCH <a href="#patch-deleting" id="patch-deleting" class="headerlink"></a>
+### 删除资源with PATCH <a href="#patch-deleting" id="patch-deleting" class="headerlink"></a>
 
-To delete a resource, perform an `"remove"` operation with a URL and `"path"`
-that targets the resource.
+要删除资源，对指向资源的 URL 和`"path"`执行 `"remove"` 操作。
 
-For instance, photo 1 might be deleted with the following request:
+例如，photo 1 能使用下面请求删除：
 
-```text
+```javascript
 PATCH /photos/1
 Content-Type: application/json-patch+json
 Accept: application/vnd.api+json
 
 [
-  { "op": "remove", "path": "/" }
+  { 
+    "op": "remove",
+    "path": "/"
+  }
 ]
 ```
 
-### Responses <a href="#patch-responses" id="patch-responses" class="headerlink"></a>
+### 响应 <a href="#patch-responses" id="patch-responses" class="headerlink"></a>
 
 #### 204 No Content <a href="#patch-responses-204" id="patch-responses-204" class="headerlink"></a>
 
-A server **MUST** return a `204 No Content` status code in response to a
-successful `PATCH` request in which the client's current attributes remain up to
-date.
+若`PATCH`请求成功，客户端当前的属性保持最新，服务器必须响应`204 No Content` 状态码。
 
 #### 200 OK <a href="#patch-responses-200" id="patch-responses-200" class="headerlink"></a>
 
-If a server accepts an update but also changes the resource(s) in other ways
-than those specified by the request (for example, updating the `updatedAt`
-attribute or a computed `sha`), it **MUST** return a `200 OK` response as well
-as a representation of the updated resources.
+如果服务器接受更新，但是在请求指定内容之外做了资源修改，必须响应`200 OK`以及更新的资源实例。
 
-The server **MUST** specify a `Content-Type` header of `application/json`. The
-body of the response **MUST** contain an array of JSON objects, each of which
-**MUST** conform to the JSON API media type (`application/vnd.api+json`).
-Response objects in this array **MUST** be in sequential order and correspond to
-the operations in the request document.
+服务器必须指定`Content-Type:application/json`头。响应内容必须包含JSON对象数组，每个对象必须遵循JSON API媒体类型(`application/vnd.api+json`)。数组中的响应对象必须有序，并且对应请求文档操作。
 
-For instance, a request may create two photos in separate operations:
+例如，一个请求以分离操作，创建两个photos。
 
-```text
+```javascript
 PATCH /photos
 Content-Type: application/json-patch+json
 Accept: application/json
@@ -1334,10 +1185,9 @@ Accept: application/json
 ]
 ```
 
-The response would then include corresponding JSON API documents contained
-within an array:
+响应内容在数组中包含对应的JSON API文档。
 
-```text
+```javascript
 HTTP/1.1 200 OK
 Content-Type: application/json
 
@@ -1358,38 +1208,19 @@ Content-Type: application/json
 ]
 ```
 
-#### Other Responses <a href="#patch-responses-other" id="patch-responses-other" class="headerlink"></a>
+#### 其它响应 <a href="#patch-responses-other" id="patch-responses-other" class="headerlink"></a>
 
-When a server encounters one or more problems while processing a `PATCH`
-request, it **SHOULD** specify the most appropriate HTTP error code in the
-response. Clients **MUST** interpret those errors in accordance with HTTP
-semantics.
+当服务器执行`PATCH`请求时出现一个或多个问题，应该在响应中指定最合适的HTTP状态码。客户端依据HTTP规范解析错误。
 
-A server **MAY** choose to stop processing `PATCH` operations as soon as the
-first problem is encountered, or it **MAY** continue processing operations and
-encounter multiple problems. For instance, a server might process multiple
-attribute updates and then return multiple validation problems in a single
-response.
+服务器可以选择在第一个问题出现时，立刻终止`PATCH` 操作，或者继续执行，遇到多个问题。例如，服务器可能多属性更新，然后返回在一个响应里返回多个校验问题。
 
-When a server encounters multiple problems from a single request, the most
-generally applicable HTTP error code should be specified in the response. For
-instance, `400 Bad Request` might be appropriate for multiple 4xx errors or `500
-Internal Server Error` might be appropriate for multiple 5xx errors.
+当服务器单个请求遇到多个问题，响应中应该指定最通用可行的HTTP错误码。例如，`400 Bad Request`适用于多个4xx errors，`500 Internal Server Error`适用于多个5xx errors。 
 
-A server **MAY** return error objects that correspond to each operation. The
-server **MUST** specify a `Content-Type` header of `application/json` and the
-body of the response **MUST** contain an array of JSON objects, each of which
-**MUST** conform to the JSON API media type (`application/vnd.api+json`).
-Response objects in this array **MUST** be in sequential order and correspond to
-the operations in the request document. Each response object **SHOULD** contain
-only error objects, since no operations can be completed successfully when any
-errors occur. Error codes for each specific operation **SHOULD** be returned in
-the `"status"` member of each error object.
+服务器可能会返回与每个操作对应的错误对象。服务器需要指定`Content-Type:application/json`头，响应体必须包含JSON对象数组，每个对象必须遵循JSON API媒体类型 (`application/vnd.api+json`)。数组中的响应对象，必须是有序，且与请求文档中的操作相对应。每个响应对象应该仅包含error对象，当错误发生时，没有操作会完全成功。每个特定操作的错误码，应该在每个error对象 `"status"` 元素反映。
 
-## HTTP Caching <a href="#http-caching" id="http-caching" class="headerlink"></a>
+## HTTP 缓存 <a href="#http-caching" id="http-caching" class="headerlink"></a>
 
-Servers **MAY** use HTTP caching headers (`ETag`, `Last-Modified`) in accordance
-with the semantics described in HTTP 1.1.
+服务器可能会使用遵循HTTP 1.1规范的HTTP 缓存头 (`ETag`, `Last-Modified`)。
 
 
 
