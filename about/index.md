@@ -18,7 +18,8 @@ title: About
 
 翻译者：
 
-- justjavac：新浪微博 [@justjavac](http://weibo.com/justjavac)
+- [justjavac](http://github.com/justjavac)
+- [bornkiller](http://github.com/bornkiller)
 
 > 然而，对于 Web 来说，最重要的是这种关注点的分离允许组件独立地进化，
 > 从而支持多个组织领域的 Internet 规模的需求。
