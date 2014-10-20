@@ -3,7 +3,8 @@
 body {
   margin: 52px 0 0 0;
   line-height: 150%;
-  font-family: "Helvetica", sans-serif;
+  font-family: sans-serif;
+  color: #222;
   background: #eee; }
 
 a {
