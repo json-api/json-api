@@ -44,24 +44,20 @@ h5:hover .headerlink:after {
 
 h2 {
   margin: 1.5em 0 0.9em 0;
-  font-size: 1.4em;
-  color: #676;
-  border-bottom: 3px solid #aba; }
+  font-size: 1.6em;
+  border-bottom: 1px solid #eee; }
 
 h3 {
   margin: 1.5em 0 1em 0;
-  font-size: 1.3em;
-  color: #666; }
+  font-size: 1.4em;}
 
 h4 {
   margin: 1.2em 0 1em 0;
-  font-size: 1.2em;
-  color: #898; }
+  font-size: 1.2em;}
 
 h5 {
   margin: 1.2em 0 1em 0;
-  font-size: 1.1em;
-  color: #777; }
+  font-size: 1.1em;}
 
 ul {
   margin-left: 0;
