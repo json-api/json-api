@@ -45,6 +45,7 @@ h5:hover .headerlink:after {
 h2 {
   margin: 1.5em 0 0.9em 0;
   font-size: 1.6em;
+  line-height: 1.8em;
   border-bottom: 1px solid #eee; }
 
 h3 {
