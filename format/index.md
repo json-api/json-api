@@ -1250,8 +1250,7 @@ JSON Patch equivalant operations for the operations described above that use
 `POST`, `PUT` and `DELETE`. From here on, JSON Patch operations sent in a
 `PATCH` request will be referred to simply as "`PATCH` operations".
 
-`PATCH` requests **MUST** specify a `Content-Type` header of `application/json-
-patch+json`.
+`PATCH` requests **MUST** specify a `Content-Type` header of `application/json-patch+json`.
 
 `PATCH` operations **MUST** be sent as an array to conform with the JSON Patch
 format. A server **MAY** limit the type, order and count of operations allowed
