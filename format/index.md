@@ -1336,7 +1336,7 @@ PATCH /article/1/links/author
 Content-Type: application/json-patch+json
 
 [
-  { "op": "replace", "path": "/", "value": "1" }
+  { "op": "replace", "path": "", "value": "1" }
 ]
 ```
 
@@ -1425,7 +1425,7 @@ Content-Type: application/json-patch+json
 Accept: application/vnd.api+json
 
 [
-  { "op": "remove", "path": "/" }
+  { "op": "remove", "path": "" }
 ]
 ```
 
