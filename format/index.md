@@ -1348,7 +1348,7 @@ PATCH /article/1/links/author
 Content-Type: application/json-patch+json
 
 [
-  { "op": "remove", "path": "/" }
+  { "op": "remove", "path": "" }
 ]
 ```
 
