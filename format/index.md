@@ -1370,7 +1370,7 @@ Content-Type: application/vnd.api+json
 
 {
   "links": {
-    "comments": "http://example.com/comments/{comments}"
+    "photos.comments": "http://example.com/comments/{photos.comments}"
   },
   "photos": {
     "id": "1",
