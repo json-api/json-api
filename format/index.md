@@ -479,7 +479,7 @@ take precedence over a top-level `links` object.
 
 ### Compound Documents <a href="#document-structure-compound-documents" id="document-structure-compound-documents" class="headerlink"></a>
 
-To save HTTP requests, responses may optionally allow for the inclusion of
+To reduce the number of HTTP requests, responses may optionally allow for the inclusion of
 linked resources along with the requested primary resources. Such response
 documents are called "compound documents".
 
