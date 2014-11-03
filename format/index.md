@@ -149,7 +149,7 @@ Here's how a post (i.e. a resource of type "posts") might appear in a document:
 
 ```javascript
 {
-  "posts": {
+  "post": {
     "id": "1",
     "title": "Rails is Omakase"
   }
