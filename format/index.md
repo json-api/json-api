@@ -86,7 +86,7 @@ The following post is represented as a resource object:
 
 ```javascript
 {
-  "posts": {
+  "post": {
     "id": "1",
     // ... attributes of this post
   }
@@ -97,7 +97,7 @@ This post is represented simply by its ID:
 
 ```javascript
 {
-  "posts": "1"
+  "post": "1"
 }
 ```
 
@@ -149,7 +149,7 @@ Here's how a post (i.e. a resource of type "posts") might appear in a document:
 
 ```javascript
 {
-  "posts": {
+  "post": {
     "id": "1",
     "title": "Rails is Omakase"
   }
