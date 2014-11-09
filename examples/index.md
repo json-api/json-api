@@ -57,6 +57,8 @@ has a page describing how to emit conformant JSON.
 
 * [JSONAPI::Resources](https://github.com/cerebris/jsonapi-resources) provides a complete framework for developing a JSON API server. It is designed to work with Rails, and provides routes, controllers, and serializers.
 
+* [Yaks](https://github.com/plexus/yaks) Library for building hypermedia APIs, contains a JSON API output format.
+
 ### Python <a href="#server-python" id="server-python" class="headerlink"></a>
 
 * [Hyp](https://github.com/kalasjocke/hyp) is a library for creating json-api responses.
