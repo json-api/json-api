@@ -65,6 +65,8 @@ has a page describing how to emit conformant JSON.
 
 * [SQLAlchemy-JSONAPI](https://github.com/coltonprovias/sqlalchemy-jsonapi) provides JSON API serialization for SQLAlchemy models.
 
+* [Django REST Framework JSON API](http://drf-json-api.readthedocs.org) provides JSON API parsing and rendering for the Django REST Framework.
+
 ### Go <a href="#server-go" id="server-go" class="headerlink"></a>
 
 * [api2go](https://github.com/univedo/api2go) is a small library to make it easier to provide a JSON API with your Golang project.
