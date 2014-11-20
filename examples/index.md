@@ -86,3 +86,9 @@ has a page describing how to emit conformant JSON.
 ### Node.js <a href="#relted-tools-node-js" id="relted-tools-node-js" class="headerlink"></a>
 
 * [json-patch](https://www.npmjs.org/package/json-patch) implementation of JSON Patch (rfc6902)
+
+### Python <a href="#server-python" id="server-python" class="headerlink"></a>
+
+* [jsonpatch](https://python-json-patch.readthedocs.org) implementation of JSON Patch (rfc6902)
+
+* [drf-json-patch](https://drf-json-patch.readthedocs.org) integrates jsonpatch with Django REST Framework
