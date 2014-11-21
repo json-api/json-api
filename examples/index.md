@@ -71,6 +71,10 @@ has a page describing how to emit conformant JSON.
 
 * [api2go](https://github.com/univedo/api2go) is a small library to make it easier to provide a JSON API with your Golang project.
 
+### .NET <a href="#server-net" id="server-net" class="headerlink"></a>
+
+* [JSONAPI.NET](http://jsonapi.codeplex.com) is a .NET library that integrates with ASP.NET WebAPI, Json.NET, and (optionally) Entity Framework to help you quickly create JSON API compliant web services.
+
 ## Messages <a href="#messages" id="messages" class="headerlink"></a>
 
 * [RestPack::Serializer provides examples](http://restpack-serializer-sample.herokuapp.com/) which demonstrate sample responses.
