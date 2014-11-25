@@ -516,7 +516,7 @@ resource objects by the client.
       "author": "9",
       "comments": [ "4", "5" ]
    }}, {
-    "id": "1",
+    "id": "3",
     "title": "Dependency Injection is Not a Virtue",
     "links": {
       "author": "9",
