@@ -247,7 +247,7 @@ collection of `comments`:
     "title": "Rails is Omakase",
     "author": { // To-One relationship
       "id":9,
-      "type":"people", // Type must be specified if different than the parent attribute
+      "type":"people", // Must be specified if type of the resource is different than the parent key name
       "href":"http://example.com/people/9",
     }
     "comments" : { // To-Many relationship
@@ -274,7 +274,7 @@ Here we associate a post with it's author, and also directly include the author 
     "title": "Rails is Omakase",
     "author": { // To-One relationship
       "id":9,
-      "type":"people", // Type must be specified if different than the parent 
+      "type":"people", // Must be specified if type of the resource is different than the parent key name
       "href":"http://example.com/people/9",
       "name":"railsMaster",
       "other":"AnyOtherAtribute" // Any Other attribute of the author resource you wish to include
