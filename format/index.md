@@ -236,9 +236,6 @@ response document rather than to specify individual URLs per resource.
 
 #### Resource Relationships <a href="#document-structure-resource-relationships" id="document-structure-resource-relationships" class="headerlink"></a>
 
-The value of the `"links"` key is a JSON object that represents linked
-resources, keyed by the name of each association.
-
 For example, the following post is associated with a single `author` and a
 collection of `comments`:
 
@@ -246,7 +243,7 @@ collection of `comments`:
 //...
   {
     "id": "1",
-    "type":"posts"
+    "type":"posts",
     "title": "Rails is Omakase",
     "author": { // To-One relationship
       "id":9,
@@ -267,19 +264,20 @@ To-one relationships **MUST** be represented with one of the formats for
 individual resources described above.
 
 This representation allows us to embed some of the linked resource attributes directly.
-Here we associate a post with it's author, and also directly include the authors name
+Here we associate a post with it's author, and also directly include the author name
 
 ```javascript
 //...
   {
     "id": "1",
-    "type":"posts"
+    "type":"posts",
     "title": "Rails is Omakase",
     "author": { // To-One relationship
       "id":9,
       "type":"people", // Type must be specified if different than the parent 
       "href":"http://example.com/people/9",
-      "name":"chef" // This representation enables us to embed
+      "name":"railsMaster",
+      "other":"AnyOtherAtribute" // Any Other attribute of the author resource you wish to include
     }
   }
 //...
@@ -310,11 +308,11 @@ by their IDs:
 //...
   {
     "id": "1",
+    "type":"posts",
     "title": "Rails is Omakase",
     "comments" : { // To-Many relationship
-      "type":"comments",
       "href": "http://example.com/comments?posts=1", // use of an "opaque url"
-      'ids' :[ "5", "12", "17", "20" ]
+      "ids" :[ "5", "12", "17", "20" ] // Optional list of ids in the case of a many to many relationship
     }
   }
 //...
@@ -326,6 +324,7 @@ And here's an example of an array of comments linked as a collection object:
 //...
   {
     "id": "1",
+    "type":"posts",
     "title": "Rails is Omakase",
     "comments": [
       {
@@ -349,17 +348,16 @@ And here's an example of an array of comments linked as a collection object:
 //...
 ```
 
-A blank has-many relationship **SHOULD** be represented with an empty array
-value. For example, the following post has no comments:
+A blank has-many relationship **SHOULD** also be represented with a `null` value
+value. For example, the following post has no author:
 
 ```javascript
 //...
   {
     "id": "1",
+    "type":"posts",
     "title": "Rails is Omakase",
-    "links": {
-      "comments": []
-    }
+    "comments": null
   }
 //...
 ```
@@ -383,17 +381,20 @@ the referenced objects as a collection of resource objects.
 A top-level `"links"` object **MAY** be used to specify URL templates that can
 be used to formulate URLs for resources according to their type.
 
-For example:
 
+In this example, only comments know to which posts they are linked :
 ```javascript
 {
   "links": {
-    "posts.comments": "http://example.com/comments?posts={posts.id}"
+    "posts.comments": {
+      "href": "http://example.com/comments?posts={posts.id}"
+    }
   },
   "posts": [{
     "id": "1",
     "title": "Rails is Omakase"
-  }, {
+  }, 
+  {
     "id": "2",
     "title": "The Parley Letter"
   }]
@@ -405,25 +406,60 @@ comments for `"Rails is Omakase"` and fetching
 `http://example.com/comments?posts=2` will fetch the comments for `"The Parley
 Letter"`.
 
-Here's another example:
-
+In this example, the post resource also stores the relationship to it's comments :
 ```javascript
 {
   "links": {
-    "posts.comments": "http://example.com/comments/{posts.comments}"
+    "posts.comments": {
+      "href": "http://example.com/comments/{posts.comments}"
+      // Alternative : "href": "http://example.com/comments?posts={posts.id}"
+    }
   },
   "posts": [{
     "id": "1",
     "title": "Rails is Omakase",
-    "links": {
-      "comments": [ "1", "2", "3", "4" ]
+    "comments":{
+       "ids" :[ "5", "12", "17", "20" ]
+    }
+  },
+  {
+    "id": "2",
+    "title": "The Parley Letter",
+    "comments":{
+       "ids" :[ "6", "7", "13"]
     }
   }]
 }
 ```
+Here is the view on the comments side : 
+```javascript
+{
+  "links": {
+    "comments.posts": {
+      "href" : "http://example.com/posts{comments.posts}"
+    }
+  },
+  "comments": [{
+    "id": "5",
+    "title": "Comment 5",
+    "posts" : {
+      "id": 1
+    }
+  },
+  {
+    "id": "6",
+    "title": "Comment 6",
+    "posts" : {
+      "id": 2
+    }
+  }
+  ...
+  ]
+}
+```
 
-In this example, the `posts.comments` variable is expanded by "exploding" the
-array specified in the `"links"` section of each post. The URI template
+In the examples above, the `posts.comments` variable is expanded by "exploding" the
+array specified in the `posts.comments.ids` section of each post. The URI template
 specification [[RFC6570](https://tools.ietf.org/html/rfc6570)] specifies that
 the default explosion is to percent encode the array members (e.g. via
 `encodeURIComponent()` in JavaScript) and join them by a comma. In this example,
@@ -446,25 +482,28 @@ Here is another example that uses a has-one relationship:
 ```javascript
 {
   "links": {
-    "posts.author": "http://example.com/people/{posts.author}"
+    "posts.author": {
+      "href": "http://example.com/people/{posts.author}",
+      "type": "people" // Type must be specified here as the resource does not have the same type as the key name
+    }
   },
   "posts": [{
     "id": "1",
     "title": "Rails is Omakase",
-    "links": {
-      "author": "12"
+    "author": {
+      "id": "12"
     }
   }, {
     "id": "2",
     "title": "The Parley Letter",
-    "links": {
-      "author": "12"
+    "author": {
+      "id": "12"
     }
   }, {
     "id": "3",
     "title": "Dependency Injection is Not a Virtue",
-    "links": {
-      "author": "12"
+    "author": {
+      "id": "12"
     }
   }]
 }
@@ -475,9 +514,6 @@ In this example, the URL for the author of all three posts is
 
 Top-level URL templates allow you to specify relationships as IDs, but without
 requiring that clients hard-code information about how to form the URLs.
-
-NOTE: In case of conflict, an individual resource object's `links` object will
-take precedence over a top-level `links` object.
 
 ### Compound Documents <a href="#document-structure-compound-documents" id="document-structure-compound-documents" class="headerlink"></a>
 
@@ -490,7 +526,7 @@ objects in a top level `"linked"` object, in which they are grouped together in
 arrays according to their type.
 
 The type of each relationship **MAY** be specified in a resource-level or top-
-level `"links"` object with the `"type"` key. This facilitates lookups of linked
+level object with the `"type"` key. This facilitates lookups of linked
 resource objects by the client.
 
 ```javascript
@@ -501,30 +537,38 @@ resource objects by the client.
       "type": "people"
     },
     "posts.comments": {
-      "href": "http://example.com/comments/{posts.comments}",
-      "type": "comments"
+      "href": "http://example.com/comments/{posts.comments}"
     }
   },
   "posts": [{
-    "id": "1",
-    "title": "Rails is Omakase",
-    "links": {
-      "author": "9",
-      "comments": [ "1", "2", "3" ]
-    }}, {
-    "id": "2",
-    "title": "The Parley Letter",
-    "links": {
-      "author": "9",
-      "comments": [ "4", "5" ]
-   }}, {
-    "id": "3",
-    "title": "Dependency Injection is Not a Virtue",
-    "links": {
-      "author": "9",
-      "comments": [ "6" ]
+      "id": "1",
+      "title": "Rails is Omakase",
+      "author": {
+        "id": "9"
+      },
+      "comments": {
+        "ids": [ "1", "2", "3" ]
+      }
+    }, {
+      "id": "2",
+      "title": "The Parley Letter",
+      "author": {
+        "id": "9"
+      },
+      "comments": {
+        "ids": [ "4", "5"]
+      }
+    }, {
+      "id": "3",
+      "title": "Dependency Injection is Not a Virtue",
+      "author": {
+        "id": "9"
+      },
+      "comments": {
+       "ids": [ "6"]
+      }
     }
-  }],
+    ],
   "linked": {
     "people": [{
       "id": "9",
@@ -1008,8 +1052,8 @@ Accept: application/vnd.api+json
 {
   "articles": {
     "title": "Rails is a Melting Pot",
-    "links": {
-      "author": "1"
+    "author": {
+      "id": "1"
     }
   }
 }
@@ -1079,8 +1123,8 @@ Accept: application/vnd.api+json
   "articles": {
     "id": "1",
     "title": "Rails is a Melting Pot",
-    "links": {
-      "tags": ["2", "3"]
+    "tags": {
+      "ids": ["2", "3"]
     }
   }
 }
@@ -1234,8 +1278,6 @@ An error object **MAY** have the following members:
   localization.
 * `"detail"` - A human-readable explanation specific to this occurrence of the
   problem.
-* `"links"` - Associated resources which can be dereferenced from the request
-  document.
 * `"path"` - The relative path to the relevant attribute within the associated
   resource(s). Only appropriate for problems that apply to a single resource or
   type of resource.
@@ -1372,15 +1414,17 @@ Content-Type: application/vnd.api+json
 
 {
   "links": {
-    "photos.comments": "http://example.com/comments/{photos.comments}"
+    "photos.comments": {
+      "href": "http://example.com/comments/{photos.comments}"
+    }
   },
   "photos": {
     "id": "1",
     "href": "http://example.com/photos/1",
     "title": "Hamster",
     "src": "images/hamster.png",
-    "links": {
-      "comments": [ "1", "5", "12", "17" ]
+    "comments": {
+      "ids": [ "1", "5", "12", "17" ]
     }
   }
 }
