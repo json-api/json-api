@@ -172,12 +172,11 @@ of a full JSON API document.
 
 #### Resource Attributes <a href="#document-structure-resource-object-attributes" id="document-structure-resource-object-attributes" class="headerlink"></a>
 
-There are four reserved keys in resource objects:
+Here are the reserved keys in resource objects:
 
-* `"id"`
+* `"id"` & `"ids"`
 * `"type"`
 * `"href"`
-* `"links"`
 
 Every other key in a resource object represents an "attribute". An attribute's
 value may be any JSON value.
@@ -247,10 +246,16 @@ collection of `comments`:
 //...
   {
     "id": "1",
+    "type":"posts"
     "title": "Rails is Omakase",
-    "links": {
-      "author": "9",
-      "comments": [ "5", "12", "17", "20" ]
+    "author": { // To-One relationship
+      "id":9,
+      "type":"people", // Type must be specified if different than the parent attribute
+      "href":"http://example.com/people/9",
+    }
+    "comments" : { // To-Many relationship
+      "ids" :[ "5", "12", "17", "20" ], 
+      "href": "http://example.com/comments?posts=1", // use of an "opaque url"
     }
   }
 //...
@@ -261,34 +266,20 @@ collection of `comments`:
 To-one relationships **MUST** be represented with one of the formats for
 individual resources described above.
 
-For example, the following post is associated with a single author, identified
-by ID:
+This representation allows us to embed some of the linked resource attributes directly.
+Here we associate a post with it's author, and also directly include the authors name
 
 ```javascript
 //...
   {
     "id": "1",
+    "type":"posts"
     "title": "Rails is Omakase",
-    "links": {
-      "author": "17"
-    }
-  }
-//...
-```
-
-And here's an example of a linked author represented as a resource object:
-
-```javascript
-//...
-  {
-    "id": "1",
-    "title": "Rails is Omakase",
-    "links": {
-      "author": {
-        "href": "http://example.com/people/17",
-        "id": "17",
-        "type": "people"
-      }
+    "author": { // To-One relationship
+      "id":9,
+      "type":"people", // Type must be specified if different than the parent 
+      "href":"http://example.com/people/9",
+      "name":"chef" // This representation enables us to embed
     }
   }
 //...
@@ -302,9 +293,7 @@ example, the following post has no author:
   {
     "id": "1",
     "title": "Rails is Omakase",
-    "links": {
-      "author": null
-    }
+    "author": null
   }
 //...
 ```
@@ -322,8 +311,10 @@ by their IDs:
   {
     "id": "1",
     "title": "Rails is Omakase",
-    "links": {
-      "comments": [ "5", "12", "17", "20" ]
+    "comments" : { // To-Many relationship
+      "type":"comments",
+      "href": "http://example.com/comments?posts=1", // use of an "opaque url"
+      'ids' :[ "5", "12", "17", "20" ]
     }
   }
 //...
@@ -336,13 +327,24 @@ And here's an example of an array of comments linked as a collection object:
   {
     "id": "1",
     "title": "Rails is Omakase",
-    "links": {
-      "comments": {
-        "href": "http://example.com/comments/5,12,17,20",
-        "ids": [ "5", "12", "17", "20" ],
-        "type": "comments"
+    "comments": [
+      {
+        "id" : "5",
+        "href": "http://example.com/comments/5",
+      }, 
+      {
+        "id" : "12",
+        "href": "http://example.com/comments/5",
+      },
+      {
+        "id" : "17",
+        "href": "http://example.com/comments/5",
+      },
+      {
+        "id" : "20",
+        "href": "http://example.com/comments/5",
       }
-    }
+    ]
   }
 //...
 ```
