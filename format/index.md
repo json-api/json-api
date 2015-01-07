@@ -892,7 +892,7 @@ Servers **MAY** use other HTTP error codes to represent errors.  Clients
 
 A server **MAY** accept client-generated IDs along with requests to create one
 or more resources. IDs **MUST** be specified with an `"id"` key, the value of
-which **MUST** be a properly generated and formatted *UUID*.
+which **MAY** be a properly generated and formatted *UUID*.
 
 For example:
 
