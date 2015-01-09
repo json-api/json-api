@@ -8,11 +8,11 @@ title: "Format"
 ## Introduction <a href="#introduction" id="introduction" class="headerlink"></a>
 
 JSON API is a specification for how a client should request that resources be
-fetched or modified and how a server should respond to those requests.
+fetched or modified, and how a server should respond to those requests.
 
 JSON API is designed to minimize both the number of requests and the amount of
 data transmitted between clients and servers. This efficiency is achieved
-without compromising readability, flexibility, and discoverability.
+without compromising readability, flexibility, or discoverability.
 
 JSON API requires use of the JSON API media type
 ([`application/vnd.api+json`](http://www.iana.org/assignments/media-types/application/vnd.api+json))
@@ -39,7 +39,7 @@ called out below.
 
 ### Top Level <a href="#document-structure-top-level" id="document-structure-top-level" class="headerlink"></a>
 
-A JSON object **MUST** be at the root of every JSON API document. This object
+A JSON object **MUST** be at the root of every JSON API response. This object
 defines a document's "top level".
 
 The document's "primary data" is a representation of the resource or collection of resources primarily targeted by a request.
@@ -65,7 +65,7 @@ A document's top level **MAY** also have the following members:
 * `"meta"`: meta-information about a resource, such as pagination, or additional non-standard information.
 * `"linked"`: a list of resource objects that are linked to the primary data and/or each other ("linked resources").
 
-If any of these members appears in the top-level, their values **MUST** comply with this specification.
+If any of these members appears in the top-level of a response, their values **MUST** comply with this specification.
 
 The top level of a document **MUST NOT** contain any additional members.
 
@@ -147,7 +147,7 @@ response that includes the resource as the primary data.
 #### Resource Relationships <a href="#document-structure-resource-relationships" id="document-structure-resource-relationships" class="headerlink"></a>
 
 A resource object **MAY** contain references to other resource objects
-("relationships"). Relationships **MAY** be to-one or to-many. Relationships
+("relationships"). Relationships may be to-one or to-many. Relationships
 can be specified by including a member, keyed by the name of the
 relationship (anything but `"self"`), in a resource's links object.
 
@@ -194,8 +194,8 @@ For example, the following post is associated with an `author` and `comments`:
 // ...
 ```
 
-The `author` relationship includes both a URL for the relationship itself, which allows the client to change the related author without deleting the
-`people` object, a URL to fetch the resource objects, and linkage information for the current compound document.
+The `author` relationship includes a URL for the relationship itself (which allows the client to change the related author without deleting the
+`people` object), a URL to fetch the resource objects, and linkage information for the current compound document.
 
 The `comments` relationship is simpler: it just provides a URL to fetch the comments. The following resource object, which provides the
 `comments` relationship as a string value rather than an object, is equivalent:
@@ -224,7 +224,7 @@ The `comments` relationship is simpler: it just provides a URL to fetch the comm
 
 ### Compound Documents <a href="#document-structure-compound-documents" id="document-structure-compound-documents" class="headerlink"></a>
 
-To reduce the number of HTTP requests, responses **MAY** allow for the inclusion of linked resources along with the requested primary resources. Such response documents are called "compound documents".
+To reduce the number of HTTP requests, responses **MAY** allow for the inclusion of linked resources along with the requested primary resources. Such responses are called "compound documents".
 
 In a compound document, linked resources **MUST** be included as an array of resource
 objects in a top level `"linked"` member.
