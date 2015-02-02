@@ -133,7 +133,9 @@ A resource object's `type` and `id` pair **MUST** refer to a single, unique reso
 
 Each resource object **MUST** contain a `type` member, whose value **MUST** be a string. The `type` is used to describe resource objects that share common attributes and relationships.
 
-> TODO: Need note regarding lack of inflection rules in JSON API - `type` can be plural or singular
+> Note: This spec is agnostic about inflection rules, so `type` can be either
+plural or singular. However, the same value should be used consistently
+throughout an implementation.
 
 #### Resource IDs <a href="#document-structure-resource-ids" id="document-structure-resource-ids" class="headerlink"></a>
 
