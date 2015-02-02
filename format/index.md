@@ -81,8 +81,7 @@ resource objects.
 
 A document's top level **MAY** also have the following members:
 
-* `"meta"`: meta-information about a resource, such as pagination, or additional non-standard information.
-* `"linked"`: a list of resource objects that are linked to the primary data and/or each other ("linked resources").
+* `"meta"`: non-standard meta-information about the primary data.
 
 If any of these members appears in the top-level of a response, their values **MUST** comply with this specification.
 
@@ -114,7 +113,8 @@ A resource object **MUST** contain at least the following top-level members:
 In addition, a resource object **MAY** contain any of these top-level members:
 
 * `"links"`, used for relationships (described below)
-* `"meta"`, which can be used for additional non-standard information that does not represent an attribute or relationship
+* `"meta"`: non-standard meta-information about a resource that can not be
+  represented as an attribute or relationship.
 
 Any other member in a resource object represents an "attribute", which may contain any legal JSON value.
 
@@ -183,8 +183,11 @@ If a relationship is provided as a link object, it **MUST** contain at least one
   * `type` and `id` members for to-one relationships.
   * `type` and `ids` members for homogenous to-many relationships.
   * A `data` member whose value is an array of objects each containing `type` and `id` members for heterogenous to-many relationships.
+* A `"meta"` member that contains non-standard meta-information about the
+  relationship.
 
-A link object **MUST NOT** include any other members, except for a member named `meta`. The `meta` member can be used for custom extensions, and may have any value.
+A link object that represents a to-many relationship **MAY** also contain
+pagination links, as described below.
 
 If a link object refers to resource objects included in the same compound document, it **MUST** include object linkage to those resource objects.
 
@@ -290,6 +293,15 @@ A complete example document wth multiple included relationships:
 <!-- </div> -->
 
 A compound document **MUST NOT** include more than one resource object for each `type` and `id` pair.
+### Meta information <a href="#document-structure-meta" id="document-structure-meta" class="headerlink"></a>
+
+As discussed above, the document **MAY** be extended to include
+meta-information in several locations: at the top-level, within resource
+objects, and within link objects.
+
+Any `"meta"` members **MUST** have an object value, the contents of which
+can be used for custom extensions.
+
 
 > Note: In a single document, you can think of the `type` and `id` as a composite key that uniquely references resource objects in another part of the document.
 
