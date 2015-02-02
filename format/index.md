@@ -964,9 +964,3 @@ Additional members **MAY** be specified within error objects.
 Implementors **MAY** choose to use an alternative media type for errors.
 
 
-## HTTP Caching <a href="#http-caching" id="http-caching" class="headerlink"></a>
-
-> TODO - re-evaluate this section
-
-Servers **MAY** use HTTP caching headers (`ETag`, `Last-Modified`) in accordance
-with the semantics described in HTTP 1.1.
