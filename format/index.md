@@ -116,7 +116,12 @@ In addition, a resource object **MAY** contain any of these top-level members:
 * `"meta"`: non-standard meta-information about a resource that can not be
   represented as an attribute or relationship.
 
-Any other member in a resource object represents an "attribute", which may contain any legal JSON value.
+Any other member in a resource object represents an "attribute", which may
+contain any valid JSON value.
+
+Attribute names **MUST** consist of only lower case alphanumeric characters
+and dashes (U+002D: HYPHEN-MINUS, "-"). Attribute names **MUST NOT** begin
+with a dash.
 
 #### Resource Identification <a href="#document-structure-resource-identification" id="document-structure-resource-identification" class="headerlink"></a>
 
@@ -141,6 +146,10 @@ represents linked resources, keyed by the name of each association.
 
 The key `"self"` is reserved within the links object for the resource URL,
 as described below.
+
+Association names **MUST** consist of only lower case alphanumeric
+characters and dashes (U+002D: HYPHEN-MINUS, "-"). Association names **MUST
+NOT** begin with a dash.
 
 #### Resource URLs <a href="#document-structure-resource-urls" id="document-structure-resource-urls" class="headerlink"></a>
 
