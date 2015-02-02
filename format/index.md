@@ -553,10 +553,10 @@ which **MUST** be a universally unique identifier. The client **SHOULD** use
 a properly generated and formatted *UUID* as described in RFC 4122
 [[RFC4122](http://tools.ietf.org/html/rfc4122.html)].
 
-> NOTE: In some use-cases, such as importing data from another source, it may be
-> possible to use something other than a UUID that is still guaranteed to be
-> globally unique. Do not use anything other than a UUID unless you are 100%
-> confident that the strategy you are using is indeed globally unique.
+> NOTE: In some use-cases, such as importing data from another source, it
+may be possible to use something other than a UUID that is still guaranteed
+to be globally unique. Do not use anything other than a UUID unless you are
+100% confident that the strategy you are using is indeed globally unique.
 
 For example:
 
@@ -583,16 +583,19 @@ A server **MUST** respond to a successful resource creation request according to
 [`HTTP semantics`](http://tools.ietf.org/html/draft-ietf-
 httpbis-p2-semantics-22#section-6.3).
 
-The response **MUST** include a `Location` header identifying the location of the newly
-created resource.
+The response **MUST** include a `Location` header identifying the location
+of the newly created resource.
 
-If a `POST` request did not include a [Client-Generated ID](#crud-creating-client-ids), and
-a resource has been created, the server **MUST** return a `201 Created` status code.
+If a `POST` request did not include a [Client-Generated
+ID](#crud-creating-client-ids), and a resource has been created, the server
+**MUST** return a `201 Created` status code.
 
-The response **MUST** also include a document that contains the primary resource created.
+The response **MUST** also include a document that contains the primary
+resource created.
 
-If the data object returned by the response contains a `self` key in its `links` member,
-the value of the `self` member **MUST** match the value of the `Location` header.
+If the data object returned by the response contains a `self` key in its
+`links` member, the value of the `self` member **MUST** match the value of
+the `Location` header.
 
 ```text
 HTTP/1.1 201 Created
@@ -612,24 +615,25 @@ Content-Type: application/vnd.api+json
 }
 ```
 
-If a `POST` request *did* include a [Client-Generated ID](#crud-creating-client-ids), the
-server **MUST** return either a `201 Created` status code and response document
-(as described above) or a `204 No Content` status code with no response document.
+If a `POST` request *did* include a [Client-Generated
+ID](#crud-creating-client-ids), the server **MUST** return either a `201
+Created` status code and response document (as described above) or a `204 No
+Content` status code with no response document.
 
 > Note: If a `204` response is received the client should consider the data
-> object sent in the request to be accepted by the server, as if the server had
-> returned it back in a `201` response.
+object sent in the request to be accepted by the server, as if the server
+had returned it back in a `201` response.
 
 ##### 409 Conflict <a href="#crud-creating-responses-409" id="crud-creating-responses-409" class="headerlink"></a>
 
-A server **MUST** return `409 Conflict` when processing a `POST` request to create
-a resource with a client-generated ID that already exists.
+A server **MUST** return `409 Conflict` when processing a `POST` request to
+create a resource with a client-generated ID that already exists.
 
 ##### Other Responses <a href="#crud-creating-responses-other" id="crud-creating-responses-other" class="headerlink"></a>
 
-Servers **MAY** use other HTTP error codes to represent errors.  Clients
-**MUST** interpret those errors in accordance with HTTP semantics. Error details
-**MAY** also be returned, as discussed below.
+Servers **MAY** use other HTTP error codes to represent errors. Clients
+**MUST** interpret those errors in accordance with HTTP semantics. Error
+details **MAY** also be returned, as discussed below.
 
 ### Updating Resources <a href="#crud-updating" id="crud-updating" class="headerlink"></a>
 
@@ -658,18 +662,19 @@ Accept: application/vnd.api+json
 }
 ```
 
-If a request does not include all of the fields for a resource, the server **MUST**
-interpret the missing fields as if they were included together with their current
-values. It **MUST NOT** interpret them as `null` values.
+If a request does not include all of the fields for a resource, the server
+**MUST** interpret the missing fields as if they were included together with
+their current values. It **MUST NOT** interpret them as `null` values.
 
-> Note: Because the resources represented by JSON API have a list of known fields,
-> the server *must* interpret the missing attributes in some way. Choosing to interpret
-> them as `null` values would be just as arbitrary as choosing to interpret them as
-> containing their current values, and the dominant real-world practice is to interpret
-> such a request as a request for a partial update.
+> Note: Because the resources represented by JSON API have a list of known
+fields, the server *must* interpret the missing attributes in some way.
+Choosing to interpret them as `null` values would be just as arbitrary as
+choosing to interpret them as containing their current values, and the
+dominant real-world practice is to interpret such a request as a request for
+a partial update.
 
-For example, the following `PUT` request is interpreted as a request to update only
-the `title` and `text` attributes of an article:
+For example, the following `PUT` request is interpreted as a request to
+update only the `title` and `text` attributes of an article:
 
 ```text
 PUT /articles/1
@@ -715,9 +720,9 @@ constraints (such as a uniqueness constraint on a field other than `id`).
 
 ##### Other Responses <a href="#crud-updating-responses-other" id="crud-updating-responses-other" class="headerlink"></a>
 
-Servers **MAY** use other HTTP error codes to represent errors.  Clients
-**MUST** interpret those errors in accordance with HTTP semantics. Error details
-**MAY** also be returned, as discussed below.
+Servers **MAY** use other HTTP error codes to represent errors. Clients
+**MUST** interpret those errors in accordance with HTTP semantics. Error
+details **MAY** also be returned, as discussed below.
 
 ### Deleting Resources <a href="#crud-deleting" id="crud-deleting" class="headerlink"></a>
 
@@ -742,41 +747,42 @@ a resource that does not exist.
 
 ##### Other Responses <a href="#crud-deleting-responses-other" id="crud-deleting-responses-other" class="headerlink"></a>
 
-Servers **MAY** use other HTTP error codes to represent errors.  Clients
-**MUST** interpret those errors in accordance with HTTP semantics. Error details
-**MAY** also be returned, as discussed below.
+Servers **MAY** use other HTTP error codes to represent errors. Clients
+**MUST** interpret those errors in accordance with HTTP semantics. Error
+details **MAY** also be returned, as discussed below.
 
 ### Updating Relationships <a href="#crud-updating-relationships" id="crud-updating-relationships" class="headerlink"></a>
 
-JSON API provides a mechanism for updating a relationship without modifying the
-resources involved in the relationship, and without exposing the underlying
-server semantics (for example, foreign keys).
+JSON API provides a mechanism for updating a relationship without modifying
+the resources involved in the relationship, and without exposing the
+underlying server semantics (for example, foreign keys).
 
-> Note: For example, if a post has many authors, it is possible to remove one of the
-> authors from the post without deleting the person itself. Similarly, if a post
-> has many tags, it is possible to add or remove tags. Under the hood on the server,
-> the first of these examples might be implemented with a foreign key, while the
-> second could be implemented with a join table, but the JSON API protocol would
-> be the same in both cases.
+> Note: For example, if a post has many authors, it is possible to remove
+one of the authors from the post without deleting the person itself.
+Similarly, if a post has many tags, it is possible to add or remove tags.
+Under the hood on the server, the first of these examples might be
+implemented with a foreign key, while the second could be implemented with a
+join table, but the JSON API protocol would be the same in both cases.
 
-> Note: A server may choose to delete the underlying resource if a relationship
-> is deleted (as a garbage collection measure).
+> Note: A server may choose to delete the underlying resource if a
+relationship is deleted (as a garbage collection measure).
 
 #### Updating To-One Relationships <a href="#crud-updating-to-one-relationships" id="crud-updating-to-one-relationships" class="headerlink"></a>
 
-A client can update a to-one relationships along with other attributes by including
-them in a `links` object within the resource object in a `PUT` request.
+A client can update a to-one relationships along with other attributes by
+including them in a `links` object within the resource object in a `PUT`
+request.
 
-If a to-one relationship is provided in the `links` section of a resource object
-in a `PUT` request, it **MUST** be one of:
+If a to-one relationship is provided in the `links` section of a resource
+object in a `PUT` request, it **MUST** be one of:
 
 * an object with `type` and `id` members corresponding to the related resource
 * `null`, to remove the relationship
 
 <!-- <div class="example"> -->
 
-For instance, the following `PUT` request will update the `title` attribute and
-`author` relationship of an article:
+For instance, the following `PUT` request will update the `title` attribute
+and `author` relationship of an article:
 
 ```text
 PUT /articles/1
@@ -797,11 +803,11 @@ Accept: application/vnd.api+json
 
 <!-- </div> -->
 
-> TODO: separate subheading?
+> TODO: separate subheading? YES
 
 If a resource object includes a relationship URL in its *link object*, the
-server **MUST** update the relationship if it receives a `PUT` request to that
-URL.
+server **MUST** update the relationship if it receives a `PUT` request to
+that URL.
 
 The `PUT` request **MUST** include a top-level member named `data` containing
 one of:
@@ -826,19 +832,19 @@ Accept: application/vnd.api+json
 A client can update a to-many relationship together with other attributes by
 including them in a `links` object within the document in a `PUT` request.
 
-If a to-many relationship is included in the `links` section of a resource object,
-it **MUST** be an object containing:
+If a to-many relationship is included in the `links` section of a resource
+object, it **MUST** be an object containing:
 
 * `type` and `ids` members for homogenous to-many relationships; to clear the
   relationship, set the `ids` member to `[]`
 * a `data` member whose value is an array of objects each containing `type` and
-  `id` members for heterogenous to-many relationships; to clear the relationship,
-  set the `data` member to `[]`
+  `id` members for heterogenous to-many relationships; to clear the
+  relationship, set the `data` member to `[]`
 
 <!-- <div class="example"> -->
 
-For instance, the following `PUT` request performs a complete replacement of the
-`tags` for an article:
+For instance, the following `PUT` request performs a complete replacement of
+the `tags` for an article:
 
 ```text
 PUT /articles/1
@@ -859,14 +865,14 @@ Accept: application/vnd.api+json
 
 <!-- </div> -->
 
-A server **MAY** reject an attempt to do a full replacement of a to-many relationship.
-In such a case, the server **MUST** reject the entire update, and return a
-`403 Forbidden` response.
+A server **MAY** reject an attempt to do a full replacement of a to-many
+relationship. In such a case, the server **MUST** reject the entire update,
+and return a `403 Forbidden` response.
 
-> Note:  Since full replacement may be a very dangerous operation, a server may choose
-> to disallow it. A server may reject full replacement if it has not provided the client
-> with the full list of associated objects, and does not want to allow deletion
-> of records the client has not seen.
+> Note: Since full replacement may be a very dangerous operation, a server
+may choose to disallow it. A server may reject full replacement if it has
+not provided the client with the full list of associated objects, and does
+not want to allow deletion of records the client has not seen.
 
 If the data object included a relationship URL for the relationship in the
 *link object*, the server **MUST** update the relationship if it receives
@@ -897,10 +903,11 @@ semantics. This means that if a given `type` and `id` is already in the
 relationship, it should not add it again.
 
 > TODO: what is the appropriate response for POSTing a relationship that already exists?
+> 204
 
-> Note: This matches the semantics of databases that use foreign keys
-> for has-many relationships. Document-based storage should check the
-> has-many relationship before appending to avoid duplicates.
+> Note: This matches the semantics of databases that use foreign keys for
+has-many relationships. Document-based storage should check the has-many
+relationship before appending to avoid duplicates.
 
 <!-- <div class="example"> -->
 ```text
@@ -935,9 +942,9 @@ Accept: application/vnd.api+json
 ```
 <!-- </div> -->
 
-> Note: RFC 7231 specifies that a DELETE request may include a body, but that
-> a server may reject the request. This spec defines the semantics of a server,
-> and we are defining its semantics for JSON API.
+> Note: RFC 7231 specifies that a DELETE request may include a body, but
+that a server may reject the request. This spec defines the semantics of a
+server, and we are defining its semantics for JSON API.
 
 #### Responses <a href="#crud-updating-relationship-responses" id="crud-updating-relationship-responses" class="headerlink"></a>
 
@@ -967,23 +974,24 @@ delete a resource or relationship that does not exist.
 
 ##### 409 Conflict <a href="#crud-updating-relationship-responses-409" id="crud-updating-relationship-responses-409" class="headerlink"></a>
 
-A server **MAY** return `409 Conflict` when processing a `POST` or `PUT` request
-to update a resource if that update would violate other server-enforced constraints
-(such as a uniqueness constraint on a field other than `id`).
+A server **MAY** return `409 Conflict` when processing a `POST` or `PUT`
+request to update a resource if that update would violate other
+server-enforced constraints (such as a uniqueness constraint on a field
+other than `id`).
 
 ##### Other Responses <a href="#crud-updating-relationship-responses-other" id="crud-updating-relationship-responses-other" class="headerlink"></a>
 
-Servers **MAY** use other HTTP error codes to represent errors.  Clients
-**MUST** interpret those errors in accordance with HTTP semantics. Error details
-**MAY** also be returned, as discussed below.
+Servers **MAY** use other HTTP error codes to represent errors. Clients
+**MUST** interpret those errors in accordance with HTTP semantics. Error
+details **MAY** also be returned, as discussed below.
 
 ## Errors <a href="#errors" id="errors" class="headerlink"></a>
 
 Error objects are specialized resource objects that **MAY** be returned in a
 response to provide additional information about problems encountered while
 performing an operation. Error objects **MUST** be returned as a collection
-keyed by `"errors"` in the top level of a JSON API document, and **SHOULD NOT**
-be returned with any other top level resources.
+keyed by `"errors"` in the top level of a JSON API document, and **SHOULD
+NOT** be returned with any other top level resources.
 
 An error object **MAY** have the following members:
 
