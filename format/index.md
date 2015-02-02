@@ -25,6 +25,25 @@ The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD",
 interpreted as described in RFC 2119
 [[RFC2119](http://tools.ietf.org/html/rfc2119)].
 
+## Extending <a href="#extending" id="extending" class="headerlink"></a>
+
+The base JSON API specification **MAY** be extended to support additional
+capabilities.
+
+Servers that support one or more extensions to JSON API **SHOULD** return
+those extensions in every response in the `ext` media type parameter of the
+`Content-Type` header. The value of the `ext` parameter **MUST** be a
+comma-separated (U+002C COMMA, ",") list of extension names.
+
+For example: a response that includes the header `Content-Type:
+application/vnd.api+json; ext=bulk,patch` indicates that the server supports
+both the "bulk" and "patch" extensions.
+
+Clients **MAY** request a particular media type extension by including the
+its name in the `ext` media type parameter with the `Accept` header. Servers
+that do not support a requested extension **MUST** return a `415 Unsupported
+Media Type` status code.  
+
 ## Document Structure <a href="#document-structure" id="document-structure" class="headerlink"></a>
 
 This section describes the structure of a JSON API document, which is identified
