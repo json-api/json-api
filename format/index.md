@@ -932,11 +932,9 @@ Servers **MAY** use other HTTP error codes to represent errors.  Clients
 
 ## Errors <a href="#errors" id="errors" class="headerlink"></a>
 
-> TODO - re-evaluate this section
-
 Error objects are specialized resource objects that **MAY** be returned in a
 response to provide additional information about problems encountered while
-performing an operation. Error objects **SHOULD** be returned as a collection
+performing an operation. Error objects **MUST** be returned as a collection
 keyed by `"errors"` in the top level of a JSON API document, and **SHOULD NOT**
 be returned with any other top level resources.
 
@@ -953,14 +951,12 @@ An error object **MAY** have the following members:
   localization.
 * `"detail"` - A human-readable explanation specific to this occurrence of the
   problem.
-* `"links"` - Associated resources which can be dereferenced from the request
-  document.
-* `"path"` - The relative path to the relevant attribute within the associated
-  resource(s). Only appropriate for problems that apply to a single resource or
-  type of resource.
+* `"links"` - An array of JSON Pointers
+  [[RFC6901](https://tools.ietf.org/html/rfc6901)] to the associated resource(s)
+  within the request document.
+* `"paths"` - An array of JSON Pointers to the relevant attribute(s) within the
+  associated resource(s) in the request document. Each path **MUST** be relative
+  to the resource path(s) expressed in the error object's `"links"` member
+  [e.g. `"/links/comments/0"`].
 
 Additional members **MAY** be specified within error objects.
-
-Implementors **MAY** choose to use an alternative media type for errors.
-
-
