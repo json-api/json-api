@@ -302,10 +302,14 @@ objects, and within link objects.
 Any `"meta"` members **MUST** have an object value, the contents of which
 can be used for custom extensions.
 
+### Top-level Links <a href="#document-structure-top-level-links" id="document-structure-top-level-links" class="headerlink"></a>
 
 > Note: In a single document, you can think of the `type` and `id` as a composite key that uniquely references resource objects in another part of the document.
+The top-level links object **MAY** contain the following members:
 
 > Note: This approach ensures that a single canonical resource object is returned with each response, even when the same resource is referenced multiple times.
+* `"self"` - a self link for the primary data.
+* Pagination links for the primary data, as described below.
 
 ## Fetching Resources <a href="#fetching" id="fetching" class="headerlink"></a>
 
@@ -405,6 +409,51 @@ GET /posts?sort=-created,title
 
 The above example should return the newest posts first. Any posts created on the
 same date will then be sorted by their title in ascending alphabetical order.
+
+### Pagination <a href="#fetching-pagination" id="fetching-pagination" class="headerlink"></a>
+
+A server **MAY** choose to limit the number of resources returned in a response
+to a subset ("page") of the whole set available.
+
+A server **MAY** provide links to traverse a paginated data set ("pagination
+links").
+
+Pagination links **MUST** appear in the link object that corresponds to a
+collection. To paginate the primary data, include pagination links in the
+top-level `links` object. To paginate a linked collection returned in a
+compound document, include pagination links in the corresponding link
+object.
+
+The following keys **MUST** be used for pagination links:
+
+* `"first"` - the first page of data
+* `"last"` - the last page of data
+* `"prev"` - the previous page of data
+* `"next"` - the next page of data
+
+Keys **MUST** either be omitted or have a `null` value to indicate that a
+particular link is unavailable.
+
+Concepts of order, as expressed in the naming of pagination links, **MUST**
+remain consistent with JSON API's [sorting rules](#fetching-sorting).
+
+The `page` query parameter is reserved for servers to use to specify pagination.
+
+> Note: JSON API is agnostic about the pagination strategy used by a server.
+Effective pagination strategies include (but are not limited to):
+page-based, offset-based, and cursor-based. The `page` query parameter can
+be used as a basis for any of these strategies. For example, a page-based
+strategy might use query parameters such as `page[number]` and `page[size]`,
+an offset-based strategy might use `page[offset]` and `page[limit]`, while a
+cursor-based strategy might use `page[cursor]`.
+
+### Filtering <a href="#fetching-filtering" id="fetching-filtering" class="headerlink"></a>
+
+The `filter` query parameter is reserved for servers to use for filtering data.
+
+> Note: JSON API is agnostic about the filtering strategies supported by a
+server. The `filter` query parameter can be used as the basis for any number of
+filtering strategies.
 
 ## Creating, Updating and Deleting Resources <a href="#crud" id="crud" class="headerlink"></a>
 
