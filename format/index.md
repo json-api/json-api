@@ -61,7 +61,8 @@ called out below.
 A JSON object **MUST** be at the root of every JSON API response. This object
 defines a document's "top level".
 
-The document's "primary data" is a representation of the resource or collection of resources primarily targeted by a request.
+The document's "primary data" is a representation of the resource or
+collection of resources primarily targeted by a request.
 
 The primary data **MUST** appear under a top-level key named `"data"`. The
 primary data **MUST** be either a single resource object or an array of
@@ -82,14 +83,19 @@ resource objects.
 A document's top level **MAY** also have the following members:
 
 * `"meta"`: non-standard meta-information about the primary data.
+* `"links"`: URLs related to the primary data.
+* `"linked"`: a list of resource objects that are linked to the primary data
+  and/or each other ("linked resources").
 
-If any of these members appears in the top-level of a response, their values **MUST** comply with this specification.
+If any of these members appears in the top-level of a response, their values
+**MUST** comply with this specification.
 
 The top level of a document **MUST NOT** contain any additional members.
 
 ### Resource Objects <a href="#document-structure-resource-objects" id="document-structure-resource-objects" class="headerlink"></a>
 
-"Resource objects" appear in a JSON API document to represent primary data and linked resources.
+"Resource objects" appear in a JSON API document to represent primary data
+and linked resources.
 
 Here's how a post (i.e. a resource of type "posts") might appear in a document:
 
@@ -112,7 +118,8 @@ A resource object **MUST** contain at least the following top-level members:
 
 In addition, a resource object **MAY** contain any of these top-level members:
 
-* `"links"`, used for relationships (described below)
+* `"links"`: URLs related to the resource and its relationships (described
+  below).
 * `"meta"`: non-standard meta-information about a resource that can not be
   represented as an attribute or relationship.
 
@@ -125,13 +132,19 @@ with a dash.
 
 #### Resource Identification <a href="#document-structure-resource-identification" id="document-structure-resource-identification" class="headerlink"></a>
 
-Every JSON API resource object is uniquely identified by a combination of its `type` and `id` members. This identification is used for linkage in compound documents and batch operations that modify multiple resources at a time.
+Every JSON API resource object is uniquely identified by a combination of
+its `type` and `id` members. This identification is used for linkage in
+compound documents and batch operations that modify multiple resources at a
+time.
 
-A resource object's `type` and `id` pair **MUST** refer to a single, unique resource.
+A resource object's `type` and `id` pair **MUST** refer to a single, unique
+resource.
 
 #### Resource Types <a href="#document-structure-resource-types" id="document-structure-resource-types" class="headerlink"></a>
 
-Each resource object **MUST** contain a `type` member, whose value **MUST** be a string. The `type` is used to describe resource objects that share common attributes and relationships.
+Each resource object **MUST** contain a `type` member, whose value **MUST**
+be a string. The `type` is used to describe resource objects that share
+common attributes and relationships.
 
 > Note: This spec is agnostic about inflection rules, so `type` can be either
 plural or singular. However, the same value should be used consistently
@@ -139,7 +152,8 @@ throughout an implementation.
 
 #### Resource IDs <a href="#document-structure-resource-ids" id="document-structure-resource-ids" class="headerlink"></a>
 
-Each resource object **MUST** contain an `id` member, whose value **MUST** be a string.
+Each resource object **MUST** contain an `id` member, whose value **MUST**
+be a string.
 
 #### Links
 
@@ -183,24 +197,37 @@ relationship (anything but `"self"`), in a resource's links object.
 
 The value of a relationship **MUST** be one of the following:
 
-* A string, which represents a URL for the related resource(s) (a "related resource URL"). When fetched, it returns the related resource object(s) as the response's primary data. For example, a `post`'s `comments` could specify a URL that returns a list of comment resource objects when retrieved through a `GET` request.
+* A string, which represents a URL for the related resource(s) (a "related
+  resource URL"). When fetched, it returns the related resource object(s) as the
+  response's primary data. For example, a `post`'s `comments` could specify a
+  URL that returns a list of comment resource objects when retrieved through a
+  `GET` request.
 * An object (a "link object").
 
-If a relationship is provided as a link object, it **MUST** contain at least one of the following:
+If a relationship is provided as a link object, it **MUST** contain at least
+one of the following:
 
-* A `self` member, whose value is a URL for the relationship itself (a "relationship URL"). This URL allows the client to directly manipulate the relationship. For example, it would allow a client to remove an `author` from a `post` without deleting the `people` resource itself.
+* A `self` member, whose value is a URL for the relationship itself (a
+  "relationship URL"). This URL allows the client to directly manipulate the
+  relationship. For example, it would allow a client to remove an `author` from
+  a `post` without deleting the `people` resource itself.
 * A `resource` member, whose value is a related resource URL (as defined above).
-* Linkage to other resource objects ("object linkage") included in a compound document. This allows a client to link together all of the resource objects included in a compound document without having to `GET` one of the relationship URLs. Linkage **MUST** be expressed as:
+* Linkage to other resource objects ("object linkage") included in a compound
+  document. This allows a client to link together all of the resource objects
+  included in a compound document without having to `GET` one of the
+  relationship URLs. Linkage **MUST** be expressed as:
   * `type` and `id` members for to-one relationships.
   * `type` and `ids` members for homogenous to-many relationships.
-  * A `data` member whose value is an array of objects each containing `type` and `id` members for heterogenous to-many relationships.
+  * A `data` member whose value is an array of objects each containing `type`
+    and `id` members for heterogenous to-many relationships.
 * A `"meta"` member that contains non-standard meta-information about the
   relationship.
 
 A link object that represents a to-many relationship **MAY** also contain
 pagination links, as described below.
 
-If a link object refers to resource objects included in the same compound document, it **MUST** include object linkage to those resource objects.
+If a link object refers to resource objects included in the same compound
+document, it **MUST** include object linkage to those resource objects.
 
 <!-- <div class="example"> -->
 For example, the following post is associated with an `author` and `comments`:
@@ -227,11 +254,14 @@ For example, the following post is associated with an `author` and `comments`:
 // ...
 ```
 
-The `author` relationship includes a URL for the relationship itself (which allows the client to change the related author without deleting the
-`people` object), a URL to fetch the resource objects, and linkage information for the current compound document.
+The `author` relationship includes a URL for the relationship itself (which
+allows the client to change the related author without deleting the `people`
+object), a URL to fetch the resource objects, and linkage information for
+the current compound document.
 
-The `comments` relationship is simpler: it just provides a URL to fetch the comments. The following resource object, which provides the
-`comments` relationship as a string value rather than an object, is equivalent:
+The `comments` relationship is simpler: it just provides a URL to fetch the
+comments. The following resource object, which provides the `comments`
+relationship as a string value rather than an object, is equivalent:
 
 ```javascript
 // ...
@@ -257,13 +287,15 @@ The `comments` relationship is simpler: it just provides a URL to fetch the comm
 
 ### Compound Documents <a href="#document-structure-compound-documents" id="document-structure-compound-documents" class="headerlink"></a>
 
-To reduce the number of HTTP requests, responses **MAY** allow for the inclusion of linked resources along with the requested primary resources. Such responses are called "compound documents".
+To reduce the number of HTTP requests, responses **MAY** allow for the
+inclusion of linked resources along with the requested primary resources.
+Such responses are called "compound documents".
 
-In a compound document, linked resources **MUST** be included as an array of resource
-objects in a top level `"linked"` member.
+In a compound document, linked resources **MUST** be included as an array of
+resource objects in a top level `"linked"` member.
 
 <!-- <div class="example"> -->
-A complete example document wth multiple included relationships:
+A complete example document with multiple included relationships:
 
 ```json
 {
@@ -303,7 +335,17 @@ A complete example document wth multiple included relationships:
 ```
 <!-- </div> -->
 
-A compound document **MUST NOT** include more than one resource object for each `type` and `id` pair.
+A compound document **MUST NOT** include more than one resource object for
+each `type` and `id` pair.
+
+> Note: In a single document, you can think of the `type` and `id` as a
+composite key that uniquely references resource objects in another part of
+the document.
+
+> Note: This approach ensures that a single canonical resource object is
+returned with each response, even when the same resource is referenced
+multiple times.
+
 ### Meta information <a href="#document-structure-meta" id="document-structure-meta" class="headerlink"></a>
 
 As discussed above, the document **MAY** be extended to include
@@ -315,10 +357,8 @@ can be used for custom extensions.
 
 ### Top-level Links <a href="#document-structure-top-level-links" id="document-structure-top-level-links" class="headerlink"></a>
 
-> Note: In a single document, you can think of the `type` and `id` as a composite key that uniquely references resource objects in another part of the document.
 The top-level links object **MAY** contain the following members:
 
-> Note: This approach ensures that a single canonical resource object is returned with each response, even when the same resource is referenced multiple times.
 * `"self"` - a self link for the primary data.
 * Pagination links for the primary data, as described below.
 
@@ -327,7 +367,8 @@ The top-level links object **MAY** contain the following members:
 A resource, or collection of resources, can be fetched by sending a `GET`
 request to an endpoint.
 
-JSON API requests **MUST** include an `Accept` header specifying the JSON API media type.
+JSON API requests **MUST** include an `Accept` header specifying the JSON
+API media type.
 
 Responses can be further refined with the optional features described below.
 
@@ -339,16 +380,18 @@ An endpoint **MAY** also support custom inclusion of linked resources based
 upon an `include` request parameter. This parameter **MUST** specify the
 relationship using the name used in the `links` section of the primary data.
 
-If a client supplies an `include` parameter, the server **MUST NOT** include other resource objects in the `linked` section of the compound document.
+If a client supplies an `include` parameter, the server **MUST NOT** include
+other resource objects in the `linked` section of the compound document.
 
-> TODO: A **MUST** for what has to be returned, plus a basic pagination spec
+The value of the `include` parameter is a comma-separated (U+002C COMMA,
+",") list of relationship paths. A relationship path is a dot-separated
+(U+002E FULL-STOP, ".") list of relationship names. Each relationship name
+**MUST** be identical to the key in the `links` section of its parent
+resource object.
 
-The value of the `include` parameter is a comma-separated (U+002C COMMA, ",") list of relationship paths. A relationship path is a dot-separated (U+002E FULL-STOP, ".") list of relationship names. Each relationship name **MUST** be identical to the
-key in the `links` section of its parent resource object.
-
-> Note: For example, a relationship path would be something like `comments.author`, where
-> `comments` is a relationship listed under a `posts` resource object, and `author` is a
-> relationship listed under a `comments` resource object.
+> Note: For example, a relationship path could be `comments.author`, where
+`comments` is a relationship listed under a `posts` resource object, and
+`author` is a relationship listed under a `comments` resource object.
 
 <!-- <div class="example"> -->
 For instance, comments could be requested with a post:
@@ -364,9 +407,10 @@ for each relationship name can be specified:
 GET /posts/1?include=comments.author
 ```
 
-> Note: A request for `comments.author` should not automatically also include `comments` in the
-> response. This can happen if the client already has the `comments` locally, and now wants to
-> fetch the associated authors without fetching the comments again.
+> Note: A request for `comments.author` should not automatically also
+include `comments` in the response. This can happen if the client already
+has the `comments` locally, and now wants to fetch the associated authors
+without fetching the comments again.
 
 Multiple linked resources can be requested in a comma-separated list:
 
@@ -378,8 +422,9 @@ GET /posts/1?include=author,comments,comments.author
 
 ### Sparse Fieldsets <a href="#fetching-sparse-fieldsets" id="fetching-sparse-fieldsets" class="headerlink"></a>
 
-A client **MAY** request that an endpoint return only specific fields in the response on a
-per-type basis by including a `fields[TYPE]` parameter. The value of the parameter refers to an attribute name or a relationship name.
+A client **MAY** request that an endpoint return only specific fields in the
+response on a per-type basis by including a `fields[TYPE]` parameter. The
+value of the parameter refers to an attribute name or a relationship name.
 
 ```text
 GET /posts?include=author&fields[posts]=id,title&fields[people]=id,name
@@ -389,9 +434,6 @@ If a client requests a restricted set of fields, an endpoint **MUST NOT** includ
 fields in the response.
 
 ### Sorting <a href="#fetching-sorting" id="fetching-sorting" class="headerlink"></a>
-
-> TODO: Come back to this after pagination
-> TODO: Consider requirement that attributes not begin with a dash
 
 A server **MAY** choose to support requests to sort resource collections
 according to one or more criteria.
