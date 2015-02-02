@@ -549,9 +549,14 @@ Accept: application/vnd.api+json
 
 A server **MAY** accept a client-generated ID along with a request to create
 a resource. An ID **MUST** be specified with an `"id"` key, the value of
-which **MUST** be a properly generated and formatted *UUID*.
+which **MUST** be a universally unique identifier. The client **SHOULD** use
+a properly generated and formatted *UUID* as described in RFC 4122
+[[RFC4122](http://tools.ietf.org/html/rfc4122.html)].
 
-> TODO: do we need to define or link to acceptable UUID formatting?
+> NOTE: In some use-cases, such as importing data from another source, it may be
+> possible to use something other than a UUID that is still guaranteed to be
+> globally unique. Do not use anything other than a UUID unless you are 100%
+> confident that the strategy you are using is indeed globally unique.
 
 For example:
 
