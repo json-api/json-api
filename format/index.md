@@ -131,9 +131,9 @@ and dashes (U+002D: HYPHEN-MINUS, "-"). Attribute names **MUST NOT** begin
 with a dash.
 
 > Note: Although has-one foreign keys are often stored as columns in a
-database alongside other fields, foreign keys **MUST NOT** be included as
-a resource's attributes. Relationship data **MUST** all be represented under a
-resource's `links` object, as described below.
+database alongside other fields, foreign keys **MUST NOT** be included in a
+resource's attributes. All relations **MUST** be represented under a
+resource's links object, as described below.
 
 #### Resource Identification <a href="#document-structure-resource-identification" id="document-structure-resource-identification" class="headerlink"></a>
 
