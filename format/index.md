@@ -118,7 +118,7 @@ A resource object **MUST** contain at least the following top-level members:
 
 In addition, a resource object **MAY** contain any of these top-level members:
 
-* `"links"`: URLs related to the resource and its relationships (described
+* `"links"`: information about a resource's relationships (described
   below).
 * `"meta"`: non-standard meta-information about a resource that can not be
   represented as an attribute or relationship.
@@ -129,6 +129,11 @@ contain any valid JSON value.
 Attribute names **MUST** consist of only lower case alphanumeric characters
 and dashes (U+002D: HYPHEN-MINUS, "-"). Attribute names **MUST NOT** begin
 with a dash.
+
+> Note: Although has-one foreign keys are often stored as columns in a
+database alongside other fields, foreign keys **MUST NOT** be included as
+a resource's attributes. Relationship data **MUST** all be represented under a
+resource's `links` object, as described below.
 
 #### Resource Identification <a href="#document-structure-resource-identification" id="document-structure-resource-identification" class="headerlink"></a>
 
