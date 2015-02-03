@@ -68,7 +68,6 @@ The primary data **MUST** appear under a top-level key named `"data"`. The
 primary data **MUST** be either a single resource object or an array of
 resource objects.
 
-<!-- <div class="example"> -->
 ```javascript
 {
   "data": {
@@ -78,7 +77,6 @@ resource objects.
   }
 }
 ```
-<!-- </div> -->
 
 A document's top level **MAY** also have the following members:
 
@@ -234,7 +232,6 @@ pagination links, as described below.
 If a link object refers to resource objects included in the same compound
 document, it **MUST** include object linkage to those resource objects.
 
-<!-- <div class="example"> -->
 For example, the following post is associated with an `author` and `comments`:
 
 ```javascript
@@ -288,8 +285,6 @@ relationship as a string value rather than an object, is equivalent:
 // ...
 ```
 
-<!-- </div> -->
-
 ### Compound Documents <a href="#document-structure-compound-documents" id="document-structure-compound-documents" class="headerlink"></a>
 
 To reduce the number of HTTP requests, responses **MAY** allow for the
@@ -299,7 +294,6 @@ Such responses are called "compound documents".
 In a compound document, linked resources **MUST** be included as an array of
 resource objects in a top level `"linked"` member.
 
-<!-- <div class="example"> -->
 A complete example document with multiple included relationships:
 
 ```json
@@ -338,7 +332,6 @@ A complete example document with multiple included relationships:
   }]
 }
 ```
-<!-- </div> -->
 
 A compound document **MUST NOT** include more than one resource object for
 each `type` and `id` pair.
@@ -398,7 +391,6 @@ resource object.
 `comments` is a relationship listed under a `posts` resource object, and
 `author` is a relationship listed under a `comments` resource object.
 
-<!-- <div class="example"> -->
 For instance, comments could be requested with a post:
 
 ```text
@@ -422,8 +414,6 @@ Multiple linked resources can be requested in a comma-separated list:
 ```text
 GET /posts/1?include=author,comments,comments.author
 ```
-
-<!-- </div> -->
 
 ### Sparse Fieldsets <a href="#fetching-sparse-fieldsets" id="fetching-sparse-fieldsets" class="headerlink"></a>
 
@@ -784,8 +774,6 @@ object in a `PUT` request, it **MUST** be one of:
 * an object with `type` and `id` members corresponding to the related resource
 * `null`, to remove the relationship
 
-<!-- <div class="example"> -->
-
 For instance, the following `PUT` request will update the `title` attribute
 and `author` relationship of an article:
 
@@ -806,8 +794,6 @@ Accept: application/vnd.api+json
 }
 ```
 
-<!-- </div> -->
-
 > TODO: separate subheading? YES
 
 If a resource object includes a relationship URL in its *link object*, the
@@ -820,7 +806,6 @@ one of:
 * an object with `type` and `id` members corresponding to the related resource
 * `null`, to remove the relationship
 
-<!-- <div class="example"> -->
 ```text
 PUT /articles/1/links/author
 Content-Type: application/vnd.api+json
@@ -830,7 +815,6 @@ Accept: application/vnd.api+json
   "data": { "type": "people", "id": "12" }
 }
 ```
-<!-- </div> -->
 
 #### Updating To-Many Relationships <a href="#crud-updating-to-many-relationships" id="crud-updating-to-many-relationships" class="headerlink"></a>
 
@@ -845,8 +829,6 @@ object, it **MUST** be an object containing:
 * a `data` member whose value is an array of objects each containing `type` and
   `id` members for heterogenous to-many relationships; to clear the
   relationship, set the `data` member to `[]`
-
-<!-- <div class="example"> -->
 
 For instance, the following `PUT` request performs a complete replacement of
 the `tags` for an article:
@@ -868,8 +850,6 @@ Accept: application/vnd.api+json
 }
 ```
 
-<!-- </div> -->
-
 A server **MAY** reject an attempt to do a full replacement of a to-many
 relationship. In such a case, the server **MUST** reject the entire update,
 and return a `403 Forbidden` response.
@@ -890,7 +870,6 @@ a `403 Forbidden` response if complete replacement is not allowed.
 The body of the request **MUST** contain a `data` member, whose value is the
 same as the above-described `links` section.
 
-<!-- <div class="example"> -->
 ```text
 PUT /articles/1/links/tags
 Content-Type: application/vnd.api+json
@@ -900,7 +879,6 @@ Accept: application/vnd.api+json
   "data": { "type": "tags", "ids": ["2", "3"] }
 }
 ```
-<!-- </div> -->
 
 If the client makes a `POST` request to the *relationship URL*, the server
 **MUST** append the specified members to the relationship using set
@@ -914,7 +892,6 @@ relationship, it should not add it again.
 has-many relationships. Document-based storage should check the has-many
 relationship before appending to avoid duplicates.
 
-<!-- <div class="example"> -->
 ```text
 POST /articles/1/links/comments
 Content-Type: application/vnd.api+json
@@ -927,7 +904,6 @@ Accept: application/vnd.api+json
 
 In this example, the comment with id `123` is added to the list of comments
 for the article with id `1`.
-<!-- </div> -->
 
 If the client makes a `DELETE` request to the *relationship URL*, the server
 **MUST** delete the specified members from the relationship or return a
@@ -935,7 +911,6 @@ If the client makes a `DELETE` request to the *relationship URL*, the server
 
 The members are specified in the same way as in the `POST` request.
 
-<!-- <div class="example"> -->
 ```text
 DELETE /articles/1/links/comments
 Content-Type: application/vnd.api+json
@@ -945,7 +920,6 @@ Accept: application/vnd.api+json
   "data": { "type": "comments", "ids": ["1"] }
 }
 ```
-<!-- </div> -->
 
 > Note: RFC 7231 specifies that a DELETE request may include a body, but
 that a server may reject the request. This spec defines the semantics of a
