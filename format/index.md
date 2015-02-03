@@ -287,9 +287,9 @@ relationship as a string value rather than an object, is equivalent:
 
 ### Compound Documents <a href="#document-structure-compound-documents" id="document-structure-compound-documents" class="headerlink"></a>
 
-To reduce the number of HTTP requests, responses **MAY** allow for the
-inclusion of linked resources along with the requested primary resources.
-Such responses are called "compound documents".
+To reduce the number of HTTP requests, servers **MAY** allow responses that
+include linked resources along with the requested primary resources. Such
+responses are called "compound documents".
 
 In a compound document, linked resources **MUST** be included as an array of
 resource objects in a top level `"linked"` member.
