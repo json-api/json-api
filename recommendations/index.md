@@ -111,3 +111,32 @@ And the URL for a photo's `photographer` will be:
 Because these URLs represent resources in relationships, they should not be
 used as `self` links for the resources themselves. Instead the recommendations
 for individual resource URLs should still apply when forming `self` links.
+
+## Recommendations for Filtering <a href="filtering" id="filtering" class="headerlink"></a>
+
+The base specification is agnostic about filtering strategies supported by a
+server. The `filter` query parameter is reserved to be used as the basis for
+any filtering strategy.
+
+It's recommended that servers that wish to support filtering of a resource
+collection based upon associations do so by allowing query parameters that
+combine `filter` with the association name.
+
+For example, the following is a request for all comments associated with a
+particular post:
+
+```text
+GET /comments?filter[post]=1
+```
+
+Multiple filter values can be combined in a comma-separated list. For example:
+
+```text
+GET /comments?filter[post]=1,2
+```
+
+Furthermore, multiple filters can be applied to a single request:
+
+```text
+GET /comments?filter[post]=1,2&filter[author]=12
+```
