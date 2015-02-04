@@ -19,8 +19,8 @@ port: 9876
 navigation:
 - title: Format
   url: /format/
-- title: Extending
-  url: /extending/
+- title: Extensions
+  url: /extensions/
 - title: Recommendations
   url: /recommendations/
 - title: Examples
