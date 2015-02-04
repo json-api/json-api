@@ -542,10 +542,12 @@ A request to create an individual resource **MUST** include a single data
 object. The data object **MUST** contain at least a `type` member.
 
 > Note: The `type` member is required throughout requests and responses in
-JSON API for consistency. Picking and choosing when it is required would be
+JSON API. There are some cases, such as when `POST`ing to an endpoint
+representing heterogenous data, when the `type` could not be inferred from
+the endpoint. However, picking and choosing when it is required would be
 confusing; it would be hard to remember when it was required and when it was
-not. In this case, it may be required when `POST`ing to an endpoint
-representing heterogeneous data.
+not. Therefore, to improve consistency and minimize confusion, `type` is
+always required.
 
 For instance, a new photo might be created with the following request:
 
