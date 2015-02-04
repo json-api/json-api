@@ -1,9 +1,11 @@
 ---
 layout: page
-title: "JSON Patch Support"
+title: "Recommendations"
 ---
 
-> TODO: This entire page has just been extracted from the main Format page. Needs reworking.
+This section contains recommendations for JSON API implementations. These
+recommendations are intended to establish a level of consistency in areas that
+are beyond the scope of the base JSON API specification.
 
 ## Recommendations for URL Design <a href="#urls" id="urls" class="headerlink"></a>
 
@@ -24,12 +26,26 @@ collections in the reference document are represented as sets because members
 must be addressable by ID, while collections are represented as arrays in
 transport documents because order is significant.
 
+### Resource Types <a href="#urls-resource-types" id="urls-resource-types" class="headerlink"></a>
+
+Rules for declaring resource type identifiers are beyond the scope of the
+base JSON API specification. However, because resource types form the basis
+of the URL design recommendations below, it is recommended that type
+identifiers be chosen that directly map to an API's URLs.
+
+Choose lower-case, dasherized, and pluralized names for resource types to
+avoid requiring any translation between types and URLs. This format is also
+consistent with requirements for attribute and association names.
+
+For example, a blog might implement the resource types `"blog-posts"` and
+`"authors"`.
+
 ### URLs for Resource Collections <a href="#urls-resource-collections" id="urls-resource-collections" class="headerlink"></a>
 
-The URL for a collection of resources **SHOULD** be formed from the resource
-type.
+It is recommended that the URL for a collection of resources be formed from
+the resource type.
 
-For example, a collection of resources of type "photos" will have the URL:    <!-- Do you mean type 'photo'? -->
+For example, a collection of resources of type `"photos"` will have the URL:
 
 ```text
 /photos
@@ -37,9 +53,9 @@ For example, a collection of resources of type "photos" will have the URL:    <!
 
 ### URLs for Individual Resources <a href="#urls-individual-resources" id="urls-individual-resources" class="headerlink"></a>
 
-Collections of resources **SHOULD** be treated as sets keyed by resource ID. The
-URL for an individual resource **SHOULD** be formed by appending the resource's
-ID to the collection URL.
+Treat collections of resources as sets keyed by resource ID. The URL for an
+individual resource can be formed by appending the resource's ID to the
+collection URL.
 
 For example, a photo with an ID of `"1"` will have the URL:
 
@@ -47,40 +63,51 @@ For example, a photo with an ID of `"1"` will have the URL:
 /photos/1
 ```
 
-The URL for multiple individual resources **SHOULD** be formed by appending a
-comma-separated list of resource IDs to the collection URL.
+### Relationship URLs and Related Resource URLs <a href="#urls-relationships" id="urls-relationships" class="headerlink"></a>
 
-For example, the photos with IDs of `"1"`, `"2"` and `"3"` will collectively
-have the URL:
+As described in the base specification, there are two URLs that can be exposed
+for each relationship:
 
-```text
-/photos/1,2,3
-```
+* the "relationship URL" - a URL for the relationship itself, which is
+identified with the `"self"` key in a link object. This URL allows the
+client to directly manipulate the relationship. For example, it would allow
+a client to remove an `author` from a `post` without deleting the `people`
+resource itself.
 
-### Alternative URLs <a href="#urls-alternative" id="urls-alternative" class="headerlink"></a>
+* the "related resource URL" - a URL for the related resource(s), which is
+identified with the `"resource"` key within a link object. When fetched, it
+returns the related resource object(s) as the response's primary data.
 
-Alternative URLs for resources **MAY** optionally be specified in responses with
-`"href"` members or URL templates.
+It is recommended that a relationship URL be formed by appending `/links/` and
+the name of the relationship to the resource's URL.
 
-### Relationship URLs <a href="#urls-relationships" id="urls-relationships" class="headerlink"></a>
-
-TODO: Move this to wherever working with relationship URLs is described
-
-A resource's relationship **MAY** be accessible at a URL formed by appending
-`/links/<relationship-name>` to the resource's URL. This relative path is
-consistent with the internal structure of a resource object.
-
-For example, a photo's collection of linked comments will have the URL:
+For example, a photo's `comments` relationship will have the URL:
 
 ```text
 /photos/1/links/comments
 ```
 
-A photo's reference to an individual linked photographer will have the URL:
+And a photo's `photographer` relationship will have the URL:
 
 ```text
 /photos/1/links/photographer
 ```
 
-A server **MUST** represent "to-one" relationships as individual resources and
-"to-many" relationships as resource collections.
+It is recommended that a related resource URL be formed by appending the name
+of the relationship to the resource's URL.
+
+For example, the URL for a photo's `comments` will be:
+
+```text
+/photos/1/comments
+```
+
+And the URL for a photo's `photographer` will be:
+
+```text
+/photos/1/photographer
+```
+
+Because these URLs represent resources in relationships, they should not be
+used as `self` links for the resources themselves. Instead the recommendations
+for individual resource URLs should still apply when forming `self` links.
