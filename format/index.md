@@ -453,23 +453,24 @@ fields in the response.
 A server **MAY** choose to support requests to sort resource collections
 according to one or more criteria.
 
-An endpoint **MAY** support requests to sort the primary resource type with a
-`sort` parameter.
+An endpoint **MAY** support requests to sort the primary data with a `sort`
+query parameter.
 
 ```text
 GET /people?sort=age
 ```
 
-An endpoint **MAY** support multiple sort criteria by allowing comma-separated
-fields as the value for `sort`. Sort criteria should be applied in the order
-specified.
+An endpoint **MAY** support multiple sort criteria by allowing
+comma-separated (U+002C COMMA, ",") fields as the value for `sort`. Sort
+criteria should be applied in the order specified.
 
 ```text
 GET /people?sort=age,name
 ```
 
-The default sort order **SHOULD** be ascending. A `-` prefix on any sort field
-specifies a descending sort order.
+The default sort order **SHOULD** be ascending. A minus (U+002D:
+HYPHEN-MINUS, "-") prefix on any sort field specifies a descending sort
+order.
 
 ```text
 GET /posts?sort=-created,title
