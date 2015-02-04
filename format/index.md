@@ -526,24 +526,25 @@ filtering strategies.
 
 ## Creating, Updating and Deleting Resources <a href="#crud" id="crud" class="headerlink"></a>
 
-A server **MAY** allow resources of a given type to be created. It **MAY** also allow
-existing resources to be modified or deleted.
+A server **MAY** allow resources of a given type to be created. It **MAY**
+also allow existing resources to be modified or deleted.
 
-Any requests that contain content **MUST** include a `Content-Type` header whose
-value is `application/vnd.api+json`.
+Any requests that contain content **MUST** include a `Content-Type` header
+whose value is `application/vnd.api+json`.
 
 A request **MUST** completely succeed or fail (in a single "transaction"). No
 partial updates are allowed.
 
 ### Creating Resources <a href="#crud-creating" id="crud-creating" class="headerlink"></a>
 
-A request to create an individual resource **MUST** include a single data object. The
-data object **MUST** contain at least a `type` member.
+A request to create an individual resource **MUST** include a single data
+object. The data object **MUST** contain at least a `type` member.
 
-> Note: The `type` member is required throughout requests and responses in JSON API
-> for consistency. Picking and choosing when it is required would be confusing; it
-> would be hard to remember when it was required and when it was not. In this case,
-> it may be required when `POST`ing to an endpoint representing heterogeneous data.
+> Note: The `type` member is required throughout requests and responses in
+JSON API for consistency. Picking and choosing when it is required would be
+confusing; it would be hard to remember when it was required and when it was
+not. In this case, it may be required when `POST`ing to an endpoint
+representing heterogeneous data.
 
 For instance, a new photo might be created with the following request:
 
@@ -596,8 +597,8 @@ Accept: application/vnd.api+json
 ##### 201 Created <a href="#crud-creating-responses-201" id="crud-creating-responses-201" class="headerlink"></a>
 
 A server **MUST** respond to a successful resource creation request according to
-[`HTTP semantics`](http://tools.ietf.org/html/draft-ietf-
-httpbis-p2-semantics-22#section-6.3).
+[`HTTP semantics`]
+(http://tools.ietf.org/html/draft-ietf-httpbis-p2-semantics-22#section-6.3).
 
 The response **MUST** include a `Location` header identifying the location
 of the newly created resource.
