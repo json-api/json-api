@@ -530,7 +530,8 @@ A server **MAY** allow resources of a given type to be created. It **MAY**
 also allow existing resources to be modified or deleted.
 
 Any requests that contain content **MUST** include a `Content-Type` header
-whose value is `application/vnd.api+json`.
+whose value is `application/vnd.api+json`. This header value **MUST** also
+include media type extensions relevant to the request.
 
 A request **MUST** completely succeed or fail (in a single "transaction"). No
 partial updates are allowed.
