@@ -349,11 +349,29 @@ multiple times.
 ### Meta information <a href="#document-structure-meta" id="document-structure-meta" class="headerlink"></a>
 
 As discussed above, the document **MAY** be extended to include
-meta-information in several locations: at the top-level, within resource
-objects, and within link objects.
+meta-information as `"meta"` members in several locations: at the top-level,
+within resource objects, and within link objects.
 
-Any `"meta"` members **MUST** have an object value, the contents of which
+All `"meta"` members **MUST** have an object as a value, the contents of which
 can be used for custom extensions.
+
+For example:
+
+```json
+{
+  "meta": {
+    "copyright": "Copyright 2015 Example Corp.",
+    "authors": [
+      "Yehuda Katz",
+      "Steve Klabnik",
+      "Dan Gebhardt"
+    ]
+  }
+  "data": {
+    // ...
+  }
+}
+```
 
 ### Top-level Links <a href="#document-structure-top-level-links" id="document-structure-top-level-links" class="headerlink"></a>
 
