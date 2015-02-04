@@ -603,6 +603,8 @@ A server **MUST** respond to a successful resource creation request according to
 [`HTTP semantics`]
 (http://tools.ietf.org/html/draft-ietf-httpbis-p2-semantics-22#section-6.3).
 
+> TODO: wycats - is the `Location` header still a MUST? How about a top-level `self` link?
+
 The response **MUST** include a `Location` header identifying the location
 of the newly created resource.
 
@@ -635,6 +637,8 @@ Content-Type: application/vnd.api+json
 }
 ```
 
+##### 204 No Content <a href="#crud-creating-responses-204" id="crud-creating-responses-204" class="headerlink"></a>
+
 If a `POST` request *did* include a [Client-Generated
 ID](#crud-creating-client-ids), the server **MUST** return either a `201
 Created` status code and response document (as described above) or a `204 No
@@ -657,14 +661,15 @@ details **MAY** also be returned, as discussed below.
 
 ### Updating Resources <a href="#crud-updating" id="crud-updating" class="headerlink"></a>
 
-To update an individual resource send a `PUT` request to the URL that
-represents the resource. The request **MUST** include a single top-level
-resource object.
+A resource's attributes and relationships can be updated by sending a `PUT`
+request to the URL that represents the resource.
 
 The URL for a resource can be obtained:
 
 * from the `self` link in the resource object
 * for a *data object*, the original URL that was used to `GET` the document
+
+The `PUT` request **MUST** include a single resource object as primary data.
 
 For example:
 
@@ -681,6 +686,8 @@ Accept: application/vnd.api+json
   }
 }
 ```
+
+#### Updating Resource Attributes
 
 If a request does not include all of the fields for a resource, the server
 **MUST** interpret the missing fields as if they were included together with
@@ -711,87 +718,7 @@ Accept: application/vnd.api+json
 }
 ```
 
-#### Responses <a href="#crud-updating-responses" id="crud-updating-responses" class="headerlink"></a>
-
-##### 204 No Content <a href="#crud-updating-responses-204" id="crud-updating-responses-204" class="headerlink"></a>
-
-A server **MAY** return a `204 No Content` status code if an update is
-successful and the client's current attributes remain up to date.
-
-##### 200 OK <a href="#crud-updating-responses-200" id="crud-updating-responses-200" class="headerlink"></a>
-
-If a server accepts an update but also changes the resource(s) in other ways
-than those specified by the request (for example, updating the `updatedAt`
-attribute or a computed `sha`), it **MUST** return a `200 OK` response.
-
-The response document for a `200 OK` **MUST** include a representation of
-the updated resource(s) as if a `GET` request was made to the request URL.
-
-##### 404 Not Found
-
-A server **MUST** return `404 Not Found` when processing a request to modify
-a resource that does not exist.
-
-##### 409 Conflict
-
-A server **MAY** return `409 Conflict` when processing a `PUT` request to
-update a resource if that update would violate other server-enforced
-constraints (such as a uniqueness constraint on a field other than `id`).
-
-##### Other Responses <a href="#crud-updating-responses-other" id="crud-updating-responses-other" class="headerlink"></a>
-
-Servers **MAY** use other HTTP error codes to represent errors. Clients
-**MUST** interpret those errors in accordance with HTTP semantics. Error
-details **MAY** also be returned, as discussed below.
-
-### Deleting Resources <a href="#crud-deleting" id="crud-deleting" class="headerlink"></a>
-
-An individual resource can be *deleted* by making a `DELETE` request to the
-resource's URL:
-
-```text
-DELETE /photos/1
-```
-
-#### Responses <a href="#crud-deleting-responses" id="crud-deleting-responses" class="headerlink"></a>
-
-##### 204 No Content <a href="#crud-deleting-responses-204" id="crud-deleting-responses-204" class="headerlink"></a>
-
-A server **MUST** return a `204 No Content` status code if a delete request is
-successful.
-
-##### 404 Not Found <a href="#crud-deleting-responses-404" id="crud-deleting-responses-404" class="headerlink"></a>
-
-A server **MUST** return `404 Not Found` when processing a request to delete
-a resource that does not exist.
-
-##### Other Responses <a href="#crud-deleting-responses-other" id="crud-deleting-responses-other" class="headerlink"></a>
-
-Servers **MAY** use other HTTP error codes to represent errors. Clients
-**MUST** interpret those errors in accordance with HTTP semantics. Error
-details **MAY** also be returned, as discussed below.
-
-### Updating Relationships <a href="#crud-updating-relationships" id="crud-updating-relationships" class="headerlink"></a>
-
-JSON API provides a mechanism for updating a relationship without modifying
-the resources involved in the relationship, and without exposing the
-underlying server semantics (for example, foreign keys).
-
-> Note: For example, if a post has many authors, it is possible to remove
-one of the authors from the post without deleting the person itself.
-Similarly, if a post has many tags, it is possible to add or remove tags.
-Under the hood on the server, the first of these examples might be
-implemented with a foreign key, while the second could be implemented with a
-join table, but the JSON API protocol would be the same in both cases.
-
-> Note: A server may choose to delete the underlying resource if a
-relationship is deleted (as a garbage collection measure).
-
-#### Updating To-One Relationships <a href="#crud-updating-to-one-relationships" id="crud-updating-to-one-relationships" class="headerlink"></a>
-
-A client can update a to-one relationships along with other attributes by
-including them in a `links` object within the resource object in a `PUT`
-request.
+#### Updating To-One Relationships with a Resource
 
 If a to-one relationship is provided in the `links` section of a resource
 object in a `PUT` request, it **MUST** be one of:
@@ -819,32 +746,7 @@ Accept: application/vnd.api+json
 }
 ```
 
-> TODO: separate subheading? YES
-
-If a resource object includes a relationship URL in its *link object*, the
-server **MUST** update the relationship if it receives a `PUT` request to
-that URL.
-
-The `PUT` request **MUST** include a top-level member named `data` containing
-one of:
-
-* an object with `type` and `id` members corresponding to the related resource
-* `null`, to remove the relationship
-
-```text
-PUT /articles/1/links/author
-Content-Type: application/vnd.api+json
-Accept: application/vnd.api+json
-
-{
-  "data": { "type": "people", "id": "12" }
-}
-```
-
-#### Updating To-Many Relationships <a href="#crud-updating-to-many-relationships" id="crud-updating-to-many-relationships" class="headerlink"></a>
-
-A client can update a to-many relationship together with other attributes by
-including them in a `links` object within the document in a `PUT` request.
+#### Updating Resource To-Many Relationships with a Resource
 
 If a to-many relationship is included in the `links` section of a resource
 object, it **MUST** be an object containing:
@@ -884,16 +786,146 @@ may choose to disallow it. A server may reject full replacement if it has
 not provided the client with the full list of associated objects, and does
 not want to allow deletion of records the client has not seen.
 
-If the data object included a relationship URL for the relationship in the
-*link object*, the server **MUST** update the relationship if it receives
-a `POST`, `PUT` or `DELETE` request to that URL.
+#### Responses <a href="#crud-updating-responses" id="crud-updating-responses" class="headerlink"></a>
 
-If the client makes a `PUT` request to the *relationship URL*, the server
+##### 204 No Content <a href="#crud-updating-responses-204" id="crud-updating-responses-204" class="headerlink"></a>
+
+A server **MAY** return a `204 No Content` status code if an update is
+successful and the client's current attributes remain up to date.
+
+##### 200 OK <a href="#crud-updating-responses-200" id="crud-updating-responses-200" class="headerlink"></a>
+
+If a server accepts an update but also changes the resource(s) in other ways
+than those specified by the request (for example, updating the `updatedAt`
+attribute or a computed `sha`), it **MUST** return a `200 OK` response.
+
+The response document for a `200 OK` **MUST** include a representation of
+the updated resource(s) as if a `GET` request was made to the request URL.
+
+##### 403 Forbidden <a href="#crud-updating-relationship-responses-403" id="crud-updating-relationship-responses-403" class="headerlink"></a>
+
+A server **MAY** return `403 Forbidden` in response to an unsupported request
+to update a resource or relationship.
+
+##### 404 Not Found <a href="#crud-updating-responses-404" id="crud-updating-responses-404" class="headerlink"></a>
+
+A server **MUST** return `404 Not Found` when processing a request to modify
+a resource that does not exist.
+
+A server **MUST** return `404 Not Found` when processing a request that
+references a related resource that does not exist.
+
+##### 409 Conflict <a href="#crud-updating-responses-409" id="crud-updating-responses-409" class="headerlink"></a>
+
+A server **MAY** return `409 Conflict` when processing a `PUT` request to
+update a resource if that update would violate other server-enforced
+constraints (such as a uniqueness constraint on a field other than `id`).
+
+A server **MUST** return `409 Conflict` when processing a `PUT` request in
+which the resource's `type` and `id` do not match the server's endpoint.
+
+##### Other Responses <a href="#crud-updating-responses-other" id="crud-updating-responses-other" class="headerlink"></a>
+
+Servers **MAY** use other HTTP error codes to represent errors. Clients
+**MUST** interpret those errors in accordance with HTTP semantics. Error
+details **MAY** also be returned, as discussed below.
+
+### Deleting Resources <a href="#crud-deleting" id="crud-deleting" class="headerlink"></a>
+
+An individual resource can be *deleted* by making a `DELETE` request to the
+resource's URL:
+
+```text
+DELETE /photos/1
+```
+
+#### Responses <a href="#crud-deleting-responses" id="crud-deleting-responses" class="headerlink"></a>
+
+##### 204 No Content <a href="#crud-deleting-responses-204" id="crud-deleting-responses-204" class="headerlink"></a>
+
+A server **MUST** return a `204 No Content` status code if a delete request is
+successful.
+
+##### 404 Not Found <a href="#crud-deleting-responses-404" id="crud-deleting-responses-404" class="headerlink"></a>
+
+A server **MUST** return `404 Not Found` when processing a request to delete
+a resource that does not exist.
+
+##### Other Responses <a href="#crud-deleting-responses-other" id="crud-deleting-responses-other" class="headerlink"></a>
+
+Servers **MAY** use other HTTP error codes to represent errors. Clients
+**MUST** interpret those errors in accordance with HTTP semantics. Error
+details **MAY** also be returned, as discussed below.
+
+### Updating Relationships <a href="#crud-updating-relationships" id="crud-updating-relationships" class="headerlink"></a>
+
+Although relationships can be modified along with resources (as described
+above), JSON API also supports updating of relationships independently at
+*relationship URLs*.
+
+If a *link object* contains a *relationship URL*, then the server **MUST**
+respond to requests to that URL to update the relationship.
+
+> Note: Relationships are updated without exposing the underlying server
+semantics, such as foreign keys. Furthermore, relationships can be updated
+without necessarily affecting the related resources. For example, if a post
+has many authors, it is possible to remove one of the authors from the post
+without deleting the person itself. Similarly, if a post has many tags, it
+is possible to add or remove tags. Under the hood on the server, the first
+of these examples might be implemented with a foreign key, while the second
+could be implemented with a join table, but the JSON API protocol would be
+the same in both cases.
+
+> Note: A server may choose to delete the underlying resource if a
+relationship is deleted (as a garbage collection measure).
+
+#### Updating To-One Relationships <a href="#crud-updating-to-one-relationships" id="crud-updating-to-one-relationships" class="headerlink"></a>
+
+A server **MUST** respond to `PUT` requests to a *to-one relationship URL* as
+described below.
+
+The `PUT` request **MUST** include a top-level member named `data` containing
+one of:
+
+* an object with `type` and `id` members corresponding to the related resource
+* `null`, to remove the relationship
+
+For example, the following request updates the author of an article:
+
+```text
+PUT /articles/1/links/author
+Content-Type: application/vnd.api+json
+Accept: application/vnd.api+json
+
+{
+  "data": { "type": "people", "id": "12" }
+}
+```
+
+And the following request clears the author of the same article:
+
+```text
+PUT /articles/1/links/author
+Content-Type: application/vnd.api+json
+Accept: application/vnd.api+json
+
+{
+  "data": null
+}
+```
+
+#### Updating To-Many Relationships <a href="#crud-updating-to-many-relationships" id="crud-updating-to-many-relationships" class="headerlink"></a>
+
+A server **MUST** respond to `PUT`, `POST`, and `DELETE` requests to a *to-many
+relationship URL* as described below.
+
+If a client makes a `PUT` request to a *to-many relationship URL*, the server
 **MUST** either completely replace every member of the relationship or return
 a `403 Forbidden` response if complete replacement is not allowed.
 
-The body of the request **MUST** contain a `data` member, whose value is the
-same as the above-described `links` section.
+The body of the request **MUST** contain a `data` member, whose value is a
+link object that contains `type` and `ids`, or an array of objects that each
+contain a `type` and `id`.
 
 ```text
 PUT /articles/1/links/tags
@@ -909,9 +941,6 @@ If the client makes a `POST` request to the *relationship URL*, the server
 **MUST** append the specified members to the relationship using set
 semantics. This means that if a given `type` and `id` is already in the
 relationship, it should not add it again.
-
-> TODO: what is the appropriate response for POSTing a relationship that already exists?
-> 204
 
 > Note: This matches the semantics of databases that use foreign keys for
 has-many relationships. Document-based storage should check the has-many
@@ -956,6 +985,13 @@ server, and we are defining its semantics for JSON API.
 
 A server **MAY** return a `204 No Content` status code if an update is
 successful and the client's current attributes remain up to date.
+
+> Note: This is the appropriate response to a `POST` request sent to a
+*to-many relationship URL* when that relationship already exists. It is also
+the appropriate response to a `DELETE` request sent to a *to-many
+relationship URL* when that relationship does not exist.
+
+> TODO: wycats - unclear if the above is true for `DELETE` requests
 
 ##### 200 OK <a href="#crud-updating-relationship-responses-200" id="crud-updating-relationship-responses-200" class="headerlink"></a>
 
