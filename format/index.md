@@ -204,7 +204,9 @@ The value of a relationship **MUST** be one of the following:
   resource URL"). When fetched, it returns the related resource object(s) as the
   response's primary data. For example, a `post`'s `comments` could specify a
   URL that returns a list of comment resource objects when retrieved through a
-  `GET` request.
+  `GET` request. A related resource URL **SHOULD** remain constant even when the
+  resource(s) it represents mutate.
+
 * An object (a "link object").
 
 If a relationship is provided as a link object, it **MUST** contain at least
