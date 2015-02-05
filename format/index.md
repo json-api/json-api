@@ -830,33 +830,6 @@ Servers **MAY** use other HTTP error codes to represent errors. Clients
 **MUST** interpret those errors in accordance with HTTP semantics. Error
 details **MAY** also be returned, as discussed below.
 
-### Deleting Resources <a href="#crud-deleting" id="crud-deleting" class="headerlink"></a>
-
-An individual resource can be *deleted* by making a `DELETE` request to the
-resource's URL:
-
-```text
-DELETE /photos/1
-```
-
-#### Responses <a href="#crud-deleting-responses" id="crud-deleting-responses" class="headerlink"></a>
-
-##### 204 No Content <a href="#crud-deleting-responses-204" id="crud-deleting-responses-204" class="headerlink"></a>
-
-A server **MUST** return a `204 No Content` status code if a delete request is
-successful.
-
-##### 404 Not Found <a href="#crud-deleting-responses-404" id="crud-deleting-responses-404" class="headerlink"></a>
-
-A server **MUST** return `404 Not Found` when processing a request to delete
-a resource that does not exist.
-
-##### Other Responses <a href="#crud-deleting-responses-other" id="crud-deleting-responses-other" class="headerlink"></a>
-
-Servers **MAY** use other HTTP error codes to represent errors. Clients
-**MUST** interpret those errors in accordance with HTTP semantics. Error
-details **MAY** also be returned, as discussed below.
-
 ### Updating Relationships <a href="#crud-updating-relationships" id="crud-updating-relationships" class="headerlink"></a>
 
 Although relationships can be modified along with resources (as described
@@ -1020,6 +993,33 @@ server-enforced constraints (such as a uniqueness constraint on a field
 other than `id`).
 
 ##### Other Responses <a href="#crud-updating-relationship-responses-other" id="crud-updating-relationship-responses-other" class="headerlink"></a>
+
+Servers **MAY** use other HTTP error codes to represent errors. Clients
+**MUST** interpret those errors in accordance with HTTP semantics. Error
+details **MAY** also be returned, as discussed below.
+
+### Deleting Resources <a href="#crud-deleting" id="crud-deleting" class="headerlink"></a>
+
+An individual resource can be *deleted* by making a `DELETE` request to the
+resource's URL:
+
+```text
+DELETE /photos/1
+```
+
+#### Responses <a href="#crud-deleting-responses" id="crud-deleting-responses" class="headerlink"></a>
+
+##### 204 No Content <a href="#crud-deleting-responses-204" id="crud-deleting-responses-204" class="headerlink"></a>
+
+A server **MUST** return a `204 No Content` status code if a delete request is
+successful.
+
+##### 404 Not Found <a href="#crud-deleting-responses-404" id="crud-deleting-responses-404" class="headerlink"></a>
+
+A server **MUST** return `404 Not Found` when processing a request to delete
+a resource that does not exist.
+
+##### Other Responses <a href="#crud-deleting-responses-other" id="crud-deleting-responses-other" class="headerlink"></a>
 
 Servers **MAY** use other HTTP error codes to represent errors. Clients
 **MUST** interpret those errors in accordance with HTTP semantics. Error
