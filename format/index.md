@@ -538,8 +538,9 @@ partial updates are allowed.
 
 ### Creating Resources <a href="#crud-creating" id="crud-creating" class="headerlink"></a>
 
-A request to create an individual resource **MUST** include a single data
-object. The data object **MUST** contain at least a `type` member.
+A resource can be created by sending a `POST` request to a URL that represents
+a collection of resources. The request **MUST** include a single resource object
+as primary data. The resource object **MUST** contain at least a `type` member.
 
 > Note: The `type` member is required throughout requests and responses in
 JSON API. There are some cases, such as when `POST`ing to an endpoint
