@@ -894,15 +894,15 @@ Accept: application/vnd.api+json
 A server **MUST** respond to `PUT`, `POST`, and `DELETE` requests to a *to-many
 relationship URL* as described below.
 
+For all request types, the body **MUST** contain a `data` member whose
+value is a link object that contains `type` and `ids`, or an array of
+objects that each contain a `type` and `id`.
+
 If a client makes a `PUT` request to a *to-many relationship URL*, the
 server **MUST** either completely replace every member of the relationship,
 return an appropriate error response if some resources can not be found or
 accessed, or return a `403 Forbidden` response if complete replacement is
 not allowed by the server.
-
-The body of the request **MUST** contain a `data` member, whose value is a
-link object that contains `type` and `ids`, or an array of objects that each
-contain a `type` and `id`.
 
 ```text
 PUT /articles/1/links/tags
