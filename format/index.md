@@ -603,8 +603,6 @@ A server **MUST** respond to a successful resource creation request according to
 [`HTTP semantics`]
 (http://tools.ietf.org/html/draft-ietf-httpbis-p2-semantics-22#section-6.3).
 
-> TODO: wycats - is the `Location` header still a MUST? How about a top-level `self` link?
-
 The response **MUST** include a `Location` header identifying the location
 of the newly created resource.
 
@@ -687,7 +685,10 @@ Accept: application/vnd.api+json
 }
 ```
 
-#### Updating Resource Attributes
+#### Updating a Resource's Attributes <a href="#crud-updating-resource-attributes" id="crud-updating-resource-attributes" class="headerlink"></a>
+
+Any or all of a resource's attributes **MAY** be included in the resource
+object included in a `PUT` request.
 
 If a request does not include all of the fields for a resource, the server
 **MUST** interpret the missing fields as if they were included together with
@@ -718,7 +719,7 @@ Accept: application/vnd.api+json
 }
 ```
 
-#### Updating To-One Relationships with a Resource
+#### Updating a Resource's To-One Relationships <a href="#crud-updating-resource-to-one-relationships" id="crud-updating-resource-to-one-relationships" class="headerlink"></a>
 
 If a to-one relationship is provided in the `links` section of a resource
 object in a `PUT` request, it **MUST** be one of:
@@ -746,7 +747,7 @@ Accept: application/vnd.api+json
 }
 ```
 
-#### Updating Resource To-Many Relationships with a Resource
+#### Updating a Resource's To-Many Relationships <a href="#crud-updating-resource-to-many-relationships" id="crud-updating-resource-to-many-relationships" class="headerlink"></a>
 
 If a to-many relationship is included in the `links` section of a resource
 object, it **MUST** be an object containing:
@@ -892,9 +893,11 @@ Accept: application/vnd.api+json
 A server **MUST** respond to `PUT`, `POST`, and `DELETE` requests to a *to-many
 relationship URL* as described below.
 
-If a client makes a `PUT` request to a *to-many relationship URL*, the server
-**MUST** either completely replace every member of the relationship or return
-a `403 Forbidden` response if complete replacement is not allowed.
+If a client makes a `PUT` request to a *to-many relationship URL*, the
+server **MUST** either completely replace every member of the relationship,
+return an appropriate error response if some resources can not be found or
+accessed, or return a `403 Forbidden` response if complete replacement is
+not allowed by the server.
 
 The body of the request **MUST** contain a `data` member, whose value is a
 link object that contains `type` and `ids`, or an array of objects that each
@@ -910,14 +913,25 @@ Accept: application/vnd.api+json
 }
 ```
 
-If the client makes a `POST` request to the *relationship URL*, the server
+If a client makes a `POST` request to a *relationship URL*, the server
 **MUST** append the specified members to the relationship using set
 semantics. This means that if a given `type` and `id` is already in the
-relationship, it should not add it again.
+relationship, the server **MUST NOT** add it again.
 
 > Note: This matches the semantics of databases that use foreign keys for
 has-many relationships. Document-based storage should check the has-many
 relationship before appending to avoid duplicates.
+
+If all of the specified resources can be added to, or are already present
+in, the relationship then the server **MUST** return a successful `204 No
+Content` response.
+
+> Note: This approach ensures that a request is successful if the server's
+state matches the requested state, and helps avoid pointless race conditions
+caused by multiple clients making the same changes to a relationship.
+
+In the following example, the comment with ID `123` is added to the list of
+comments for the article with ID `1`:
 
 ```text
 POST /articles/1/links/comments
@@ -929,14 +943,19 @@ Accept: application/vnd.api+json
 }
 ```
 
-In this example, the comment with id `123` is added to the list of comments
-for the article with id `1`.
+If the client makes a `DELETE` request to a *relationship URL*, the server
+**MUST** delete the specified members from the relationship or return a `403
+Forbidden` response. If all of the specified resources are able to be
+removed from, or are already missing from, the relationship then the server
+**MUST** return a successful `204 No Content` response.
 
-If the client makes a `DELETE` request to the *relationship URL*, the server
-**MUST** delete the specified members from the relationship or return a
-`403 Forbidden` response.
+> Note: As described above for `POST` requests, this approach helps avoid
+pointless race conditions between multiple clients making the same changes.
 
-The members are specified in the same way as in the `POST` request.
+Relationship members are specified in the same way as in the `POST` request.
+
+In the following example, comments with IDs of `12` and `13` are removed
+from the list of comments for the article with ID `1`:
 
 ```text
 DELETE /articles/1/links/comments
@@ -944,7 +963,7 @@ Content-Type: application/vnd.api+json
 Accept: application/vnd.api+json
 
 {
-  "data": { "type": "comments", "ids": ["1"] }
+  "data": { "type": "comments", "ids": ["12", "13"] }
 }
 ```
 
@@ -963,8 +982,6 @@ successful and the client's current attributes remain up to date.
 *to-many relationship URL* when that relationship already exists. It is also
 the appropriate response to a `DELETE` request sent to a *to-many
 relationship URL* when that relationship does not exist.
-
-> TODO: wycats - unclear if the above is true for `DELETE` requests
 
 ##### 200 OK <a href="#crud-updating-relationship-responses-200" id="crud-updating-relationship-responses-200" class="headerlink"></a>
 
