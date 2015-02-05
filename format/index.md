@@ -39,8 +39,8 @@ For example: a response that includes the header `Content-Type:
 application/vnd.api+json; ext=bulk,patch` indicates that the server supports
 both the "bulk" and "patch" extensions.
 
-Clients **MAY** request a particular media type extension by including the
-its name in the `ext` media type parameter with the `Accept` header. Servers
+Clients **MAY** request a particular media type extension by including its
+name in the `ext` media type parameter with the `Accept` header. Servers
 that do not support a requested extension **MUST** return a `415 Unsupported
 Media Type` status code.  
 
