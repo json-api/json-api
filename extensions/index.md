@@ -18,12 +18,14 @@ JSON API can be extended in several ways:
 
 JSON API currently supports the following official extensions:
 
-* [`bulk`](/extensions/bulk/) - provides support for performing multiple
+* [Bulk extension](/extensions/bulk/) - provides support for performing multiple
   operations in a request, including adding and removing multiple resources.
+  The Bulk extension is referenced with the media type parameter `ext=bulk`.
 
-* [`patch`](/extensions/patch/) - provides support for modification of resources
+* [Patch extension](/extensions/patch/) - provides support for modification of resources
   with the HTTP PATCH method [[RFC5789](http://tools.ietf.org/html/rfc5789)]
   and the JSON Patch format [[RFC6902](http://tools.ietf.org/html/rfc6902)].
+  The Patch extension is referenced with the media type parameter `ext=patch`.
 
 ## Custom Extensions <a href="#custom-extensions" id="custom-extensions" class="headerlink"></a>
 
