@@ -1,30 +1,26 @@
 ---
 layout: page
-title: "JSON Patch Support"
+title: "Patch Extension"
 ---
-
-> TODO: This entire page has just been extracted from the main Format page. Needs reworking.
 
 ## Introduction <a href="#introduction" id="introduction" class="headerlink"></a>
 
-A JSON API server **MAY** support modification of resources with
-the HTTP PATCH method [[RFC5789](http://tools.ietf.org/html/rfc5789)] and the
-JSON Patch format [[RFC6902](http://tools.ietf.org/html/rfc6902)]. JSON Patch
-support is possible because, conceptually, JSON API represents all of a
-domain's resources as a single JSON document that can act as the target for
-operations. Resources are grouped at the top level of this document according
-to their type. Each resource can be identified at a unique path within this
-document.
+The "Patch extension" is an [official
+extension](/extensions/#official-extensions) of the JSON API specification.
+It provides support for modification of resources with the HTTP PATCH method
+[[RFC5789](http://tools.ietf.org/html/rfc5789)] and the JSON Patch format
+[[RFC6902](http://tools.ietf.org/html/rfc6902)].  
 
-## PATCH Support <a href="#patch" id="patch" class="headerlink"></a>
+Servers **SHOULD** indicate support for the JSON API media type's Patch
+extension by including the header `Content-Type: application/vnd.api+json;
+ext=patch` in every response.
 
-JSON API servers **MAY** opt to support HTTP `PATCH` requests that conform to
-the JSON Patch format [[RFC6902](http://tools.ietf.org/html/rfc6902)]. There are
-JSON Patch equivalant operations for the operations described above that use
-`POST`, `PUT` and `DELETE`. From here on, JSON Patch operations sent in a
-`PATCH` request will be referred to simply as "`PATCH` operations".
+Clients **MAY** request the JSON API media type's Patch extension by
+specifying the header `Accept: application/vnd.api+json; ext=patch`. Servers
+that do not support the Patch extension **MUST** return a `415 Unsupported
+Media Type` status code.
 
-`PATCH` requests **MUST** specify a `Content-Type` header of `application/json-patch+json`.
+## Patch Operations <a href="#patch-operations" id="patch-operations" class="headerlink"></a>
 
 `PATCH` operations **MUST** be sent as an array to conform with the JSON Patch
 format. A server **MAY** limit the type, order and count of operations allowed
@@ -45,7 +41,7 @@ URL. This allows for general "fire hose" updates to any resource represented by
 an API. As stated above, a server **MAY** limit the type, order and count of
 bulk operations.
 
-### Creating a Resource with PATCH <a href="#patch-creating" id="patch-creating" class="headerlink"></a>
+### Creating Resources <a href="#patch-creating" id="patch-creating" class="headerlink"></a>
 
 To create a resource, perform an `"add"` operation with a `"path"` that points
 to the end of its corresponding resource collection (`"/-"`). The `"value"`
@@ -55,14 +51,15 @@ For instance, a new photo might be created with the following request:
 
 ```text
 PATCH /photos
-Content-Type: application/json-patch+json
-Accept: application/json
+Content-Type: application/vnd.api+json; ext=patch
+Accept: application/vnd.api+json; ext=patch
 
 [
   {
     "op": "add",
     "path": "/-",
     "value": {
+      "type": "photos",
       "title": "Ember Hamster",
       "src": "http://example.com/images/productivity.png"
     }
@@ -70,7 +67,7 @@ Accept: application/json
 ]
 ```
 
-### Updating Attributes with PATCH <a href="#patch-updating-attributes" id="patch-updating-attributes" class="headerlink"></a>
+### Updating Attributes <a href="#patch-updating-attributes" id="patch-updating-attributes" class="headerlink"></a>
 
 To update an attribute, perform a `"replace"` operation with the attribute's
 name specified as the `"path"`.
@@ -80,14 +77,15 @@ photo at `/photos/1`:
 
 ```text
 PATCH /photos/1
-Content-Type: application/json-patch+json
+Content-Type: application/vnd.api+json; ext=patch
+Accept: application/vnd.api+json; ext=patch
 
 [
   { "op": "replace", "path": "/src", "value": "http://example.com/hamster.png" }
 ]
 ```
 
-### Updating Relationships with PATCH <a href="#patch-updating-relationships" id="patch-updating-relationships" class="headerlink"></a>
+### Updating Relationships <a href="#patch-updating-relationships" id="patch-updating-relationships" class="headerlink"></a>
 
 To update a relationship, send an appropriate `PATCH` operation to the
 corresponding relationship's URL.
@@ -97,7 +95,7 @@ URL (or even the API's root URL). As discussed above, the request URL and each
 operation's `"path"` must be complementary and combine to target a particular
 relationship's URL.
 
-#### Updating To-One Relationships with PATCH <a href="#patch-updating-to-one-relationships" id="patch-updating-to-one-relationships" class="headerlink"></a>
+#### Updating To-One Relationships <a href="#patch-updating-to-one-relationships" id="patch-updating-to-one-relationships" class="headerlink"></a>
 
 To update a to-one relationship, perform a `"replace"` operation with a URL and
 `"path"` that targets the relationship. The `"value"` should be an individual
@@ -107,26 +105,28 @@ For instance, the following request should update the `author` of an article:
 
 ```text
 PATCH /article/1/links/author
-Content-Type: application/json-patch+json
+Content-Type: application/vnd.api+json; ext=patch
+Accept: application/vnd.api+json; ext=patch
 
 [
-  { "op": "replace", "path": "", "value": "1" }
+  { "op": "replace", "path": "", "value": {"type": "people", "id": "1"} }
 ]
 ```
 
-To remove a to-one relationship, perform a `remove` operation on the
-relationship. For example:
+To remove a to-one relationship, perform a `replace` operation on the
+relationship to change its value to `null`. For example:
 
 ```text
 PATCH /article/1/links/author
-Content-Type: application/json-patch+json
+Content-Type: application/vnd.api+json; ext=patch
+Accept: application/vnd.api+json; ext=patch
 
 [
-  { "op": "remove", "path": "" }
+  { "op": "replace", "path": "", "value": null }
 ]
 ```
 
-#### Updating To-Many Relationships with PATCH <a href="#patch-updating-to-many-relationships" id="patch-updating-to-many-relationships" class="headerlink"></a>
+#### Updating To-Many Relationships <a href="#patch-updating-to-many-relationships" id="patch-updating-to-many-relationships" class="headerlink"></a>
 
 While to-many relationships are represented as a JSON array in a `GET` response,
 they are updated as if they were a set.
@@ -140,19 +140,20 @@ For example, consider the following `GET` request:
 
 ```text
 GET /photos/1
-Content-Type: application/vnd.api+json
+Accept: application/vnd.api+json
 
 {
-  "links": {
-    "photos.comments": "http://example.com/comments/{photos.comments}"
-  },
-  "photos": {
+  "data": {
     "id": "1",
-    "href": "http://example.com/photos/1",
+    "type": "photos",
     "title": "Hamster",
     "src": "images/hamster.png",
     "links": {
-      "comments": [ "1", "5", "12", "17" ]
+      "self": "/photos/1",
+      "comments": {
+        "self": "/photos/1/links/comments",
+        "resource": "/photos/1/comments"
+      }
     }
   }
 }
@@ -163,30 +164,31 @@ You could move comment 30 to this photo by issuing an `add` operation in the
 
 ```text
 PATCH /photos/1/links/comments
-Content-Type: application/json-patch+json
+Content-Type: application/vnd.api+json; ext=patch
+Accept: application/vnd.api+json; ext=patch
 
 [
-  { "op": "add", "path": "/-", "value": "30" }
+  { "op": "add", "path": "/-", "value": { "type": "comments", "id": "30" } }
 ]
 ```
 
 To remove a to-many relationship, perform a `"remove"` operation that targets
-the relationship's URL. Because the operation is targeting a member of a
-collection, the `"path"` **MUST** end with `"/<id>"`.
+the relationship's URL.
 
 For example, to remove comment 5 from this photo, issue this `"remove"`
 operation:
 
 ```text
 PATCH /photos/1/links/comments
-Content-Type: application/json-patch+json
+Content-Type: application/vnd.api+json; ext=patch
+Accept: application/vnd.api+json; ext=patch
 
 [
-  { "op": "remove", "path": "/5" }
+  { "op": "remove", "path": "", "value": {"type": "comments", "id": "5"} }
 ]
 ```
 
-### Deleting a Resource with PATCH <a href="#patch-deleting" id="patch-deleting" class="headerlink"></a>
+### Deleting a Resource <a href="#patch-deleting" id="patch-deleting" class="headerlink"></a>
 
 To delete a resource, perform an `"remove"` operation with a URL and `"path"`
 that targets the resource.
@@ -195,8 +197,8 @@ For instance, photo 1 might be deleted with the following request:
 
 ```text
 PATCH /photos/1
-Content-Type: application/json-patch+json
-Accept: application/vnd.api+json
+Content-Type: application/vnd.api+json; ext=patch
+Accept: application/vnd.api+json; ext=patch
 
 [
   { "op": "remove", "path": "" }
@@ -228,14 +230,15 @@ For instance, a request may create two photos in separate operations:
 
 ```text
 PATCH /photos
-Content-Type: application/json-patch+json
-Accept: application/json
+Content-Type: application/vnd.api+json; ext=patch
+Accept: application/vnd.api+json; ext=patch
 
 [
   {
     "op": "add",
     "path": "/-",
     "value": {
+      "type": "photos",
       "title": "Ember Hamster",
       "src": "http://example.com/images/productivity.png"
     }
@@ -244,6 +247,7 @@ Accept: application/json
     "op": "add",
     "path": "/-",
     "value": {
+      "type": "photos",
       "title": "Mustaches on a Stick",
       "src": "http://example.com/images/mustaches.png"
     }
@@ -256,17 +260,19 @@ within an array:
 
 ```text
 HTTP/1.1 200 OK
-Content-Type: application/json
+Content-Type: application/vnd.api+json; ext=patch
 
 [
   {
-    "photos": [{
+    "data": [{
+      "type": "photos",
       "id": "123",
       "title": "Ember Hamster",
       "src": "http://example.com/images/productivity.png"
     }]
   }, {
-    "photos": [{
+    "data": [{
+      "type": "photos",
       "id": "124",
       "title": "Mustaches on a Stick",
       "src": "http://example.com/images/mustaches.png"
