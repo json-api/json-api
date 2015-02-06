@@ -303,31 +303,43 @@ A complete example document with multiple included relationships:
   "data": [{
     "type": "posts",
     "id": "1",
-    "title": "Rails is Omakase",
+    "title": "JSON API paints my bikeshed!",
     "links": {
       "self": "http://example.com/posts/1",
-      "author": { "resource": "http://example.com/posts/1/author", "type": "people", "id": "9" },
-      "comments": { "resource": "http://example.com/posts/1/comments", "type": "comments", "ids": ["5", "12"] },
+      "author": {
+        "self": "http://example.com/posts/1/links/author",
+        "resource": "http://example.com/posts/1/author",
+        "type": "people",
+        "id": "9"
+      },
+      "comments": {
+        "self": "http://example.com/posts/1/links/comments",
+        "resource": "http://example.com/posts/1/comments",
+        "type": "comments",
+        "ids": ["5", "12"]
+      }
     }
   }],
   "linked": [{
     "type": "people",
     "id": "9",
-    "name": "dgeb"
+    "first-name": "Dan",
+    "last-name": "Gebhardt",
+    "twitter": "dgeb",
     "links": {
       "self": "http://example.com/people/9"
     }
   }, {
     "type": "comments",
-    "id": "5"
+    "id": "5",
     "body": "First!",
     "links": {
       "self": "http://example.com/comments/5"
     }
   }, {
     "type": "comments",
-    "id": "12"
-    "body": "Second!",
+    "id": "12",
+    "body": "I like XML better",
     "links": {
       "self": "http://example.com/comments/12"
     }
