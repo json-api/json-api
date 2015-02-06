@@ -596,6 +596,9 @@ Accept: application/vnd.api+json
 }
 ```
 
+A server **MUST** return `403 Forbidden` in response to an unsupported request
+to create a resource with a client-generated ID.
+
 #### Responses <a href="#crud-creating-responses" id="crud-creating-responses" class="headerlink"></a>
 
 ##### 201 Created <a href="#crud-creating-responses-201" id="crud-creating-responses-201" class="headerlink"></a>
@@ -647,10 +650,18 @@ Content` status code with no response document.
 object sent in the request to be accepted by the server, as if the server
 had returned it back in a `201` response.
 
+##### 403 Forbidden <a href="#crud-creating-responses-403" id="crud-creating-responses-403" class="headerlink"></a>
+
+A server **MAY** return `403 Forbidden` in response to an unsupported request
+to create a resource.
+
 ##### 409 Conflict <a href="#crud-creating-responses-409" id="crud-creating-responses-409" class="headerlink"></a>
 
 A server **MUST** return `409 Conflict` when processing a `POST` request to
 create a resource with a client-generated ID that already exists.
+
+A server **MUST** return `409 Conflict` when processing a `POST` request in
+which the resource's `type` does not match the server's endpoint.
 
 ##### Other Responses <a href="#crud-creating-responses-other" id="crud-creating-responses-other" class="headerlink"></a>
 
@@ -792,7 +803,7 @@ not want to allow deletion of records the client has not seen.
 
 ##### 204 No Content <a href="#crud-updating-responses-204" id="crud-updating-responses-204" class="headerlink"></a>
 
-A server **MAY** return a `204 No Content` status code if an update is
+A server **MUST** return a `204 No Content` status code if an update is
 successful and the client's current attributes remain up to date.
 
 ##### 200 OK <a href="#crud-updating-responses-200" id="crud-updating-responses-200" class="headerlink"></a>
@@ -806,7 +817,7 @@ the updated resource(s) as if a `GET` request was made to the request URL.
 
 ##### 403 Forbidden <a href="#crud-updating-relationship-responses-403" id="crud-updating-relationship-responses-403" class="headerlink"></a>
 
-A server **MAY** return `403 Forbidden` in response to an unsupported request
+A server **MUST** return `403 Forbidden` in response to an unsupported request
 to update a resource or relationship.
 
 ##### 404 Not Found <a href="#crud-updating-responses-404" id="crud-updating-responses-404" class="headerlink"></a>
@@ -889,20 +900,25 @@ Accept: application/vnd.api+json
 }
 ```
 
+If the relationship is updated successfully then the server **MUST** return
+a `204 No Content` response.
+
 #### Updating To-Many Relationships <a href="#crud-updating-to-many-relationships" id="crud-updating-to-many-relationships" class="headerlink"></a>
 
 A server **MUST** respond to `PUT`, `POST`, and `DELETE` requests to a *to-many
 relationship URL* as described below.
 
-For all request types, the body **MUST** contain a `data` member whose
-value is a link object that contains `type` and `ids`, or an array of
-objects that each contain a `type` and `id`.
+For all request types, the body **MUST** contain a `data` member whose value
+is an object that contains `type` and `ids` members, or an array of objects
+that each contain `type` and `id` members.
 
 If a client makes a `PUT` request to a *to-many relationship URL*, the
 server **MUST** either completely replace every member of the relationship,
 return an appropriate error response if some resources can not be found or
 accessed, or return a `403 Forbidden` response if complete replacement is
 not allowed by the server.
+
+For example, the following request replaces every tag for an article:
 
 ```text
 PUT /articles/1/links/tags
@@ -976,7 +992,7 @@ server, and we are defining its semantics for JSON API.
 
 ##### 204 No Content <a href="#crud-updating-relationship-responses-204" id="crud-updating-relationship-responses-204" class="headerlink"></a>
 
-A server **MAY** return a `204 No Content` status code if an update is
+A server **MUST** return a `204 No Content` status code if an update is
 successful and the client's current attributes remain up to date.
 
 > Note: This is the appropriate response to a `POST` request sent to a
@@ -984,31 +1000,10 @@ successful and the client's current attributes remain up to date.
 the appropriate response to a `DELETE` request sent to a *to-many
 relationship URL* when that relationship does not exist.
 
-##### 200 OK <a href="#crud-updating-relationship-responses-200" id="crud-updating-relationship-responses-200" class="headerlink"></a>
-
-If a server accepts an update but also changes the resource(s) in other ways
-than those specified by the request (for example, updating the `updatedAt`
-attribute or a computed `sha`), it **MUST** return a `200 OK` response.
-
-The response document for a `200 OK` **MUST** include a representation of
-the updated resource(s) as if a `GET` request was made to the request URL.
-
 ##### 403 Forbidden <a href="#crud-updating-relationship-responses-403" id="crud-updating-relationship-responses-403" class="headerlink"></a>
 
-A server **MAY** return `403 Forbidden` in response to an unsupported request
-to update a resource or relationship.
-
-##### 404 Not Found <a href="#crud-updating-relationship-responses-404" id="crud-updating-relationship-responses-404" class="headerlink"></a>
-
-A server **MUST** return `404 Not Found` when processing a request to modify or
-delete a resource or relationship that does not exist.
-
-##### 409 Conflict <a href="#crud-updating-relationship-responses-409" id="crud-updating-relationship-responses-409" class="headerlink"></a>
-
-A server **MAY** return `409 Conflict` when processing a `POST` or `PUT`
-request to update a resource if that update would violate other
-server-enforced constraints (such as a uniqueness constraint on a field
-other than `id`).
+A server **MUST** return `403 Forbidden` in response to an unsupported request
+to update a relationship.
 
 ##### Other Responses <a href="#crud-updating-relationship-responses-other" id="crud-updating-relationship-responses-other" class="headerlink"></a>
 
@@ -1049,7 +1044,7 @@ Error objects are specialized resource objects that **MAY** be returned in a
 response to provide additional information about problems encountered while
 performing an operation. Error objects **MUST** be returned as a collection
 keyed by `"errors"` in the top level of a JSON API document, and **SHOULD
-NOT** be returned with any other top level resources.
+NOT** be returned with any primary data.
 
 An error object **MAY** have the following members:
 
@@ -1066,10 +1061,10 @@ An error object **MAY** have the following members:
   problem.
 * `"links"` - An array of JSON Pointers
   [[RFC6901](https://tools.ietf.org/html/rfc6901)] to the associated resource(s)
-  within the request document.
+  within the request document [e.g. `["/data"]` for a primary data object].
 * `"paths"` - An array of JSON Pointers to the relevant attribute(s) within the
   associated resource(s) in the request document. Each path **MUST** be relative
   to the resource path(s) expressed in the error object's `"links"` member
-  [e.g. `"/links/comments/0"`].
+  [e.g. `["/first-name", "/last-name"]` to reference a couple attributes].
 
 Additional members **MAY** be specified within error objects.
