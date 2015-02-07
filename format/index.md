@@ -378,7 +378,7 @@ For example:
       "Steve Klabnik",
       "Dan Gebhardt"
     ]
-  }
+  },
   "data": {
     // ...
   }
