@@ -124,10 +124,6 @@ In addition, a resource object **MAY** contain any of these top-level members:
 Any other member in a resource object represents an "attribute", which may
 contain any valid JSON value.
 
-Attribute names **MUST** consist of only lower case alphanumeric characters
-and dashes (U+002D: HYPHEN-MINUS, "-"). Attribute names **MUST NOT** begin
-with a dash.
-
 > Note: Although has-one foreign keys are often stored as columns in a
 database alongside other fields, foreign keys **MUST NOT** be included in a
 resource's attributes. All relations **MUST** be represented under a
@@ -165,10 +161,6 @@ represents linked resources, keyed by the name of each association.
 
 The key `"self"` is reserved within the links object for the resource URL,
 as described below.
-
-Association names **MUST** consist of only lower case alphanumeric
-characters and dashes (U+002D: HYPHEN-MINUS, "-"). Association names **MUST
-NOT** begin with a dash.
 
 #### Resource URLs <a href="#document-structure-resource-urls" id="document-structure-resource-urls" class="headerlink"></a>
 
@@ -469,7 +461,7 @@ An endpoint **MAY** support requests to sort the primary data with a `sort`
 query parameter.
 
 ```text
-GET /people?sort=age
+GET /people?sort=+age
 ```
 
 An endpoint **MAY** support multiple sort criteria by allowing
@@ -477,15 +469,21 @@ comma-separated (U+002C COMMA, ",") fields as the value for `sort`. Sort
 criteria should be applied in the order specified.
 
 ```text
-GET /people?sort=age,name
+GET /people?sort=+age,+name
 ```
 
-The default sort order **SHOULD** be ascending. A minus (U+002D:
-HYPHEN-MINUS, "-") prefix on any sort field specifies a descending sort
-order.
+The sort order for each field **MUST** be specified with one of the
+following prefixes:
+
+* Plus (U+002B PLUS SIGN, "+") to request an ascending sort order.
+* Minus (U+002D HYPHEN-MINUS, "-") to request a descending sort order.
+
+> Note: By requiring a sort order prefix instead of allowing a default
+order, JSON API avoids setting requirements for the first character in field
+names. 
 
 ```text
-GET /posts?sort=-created,title
+GET /posts?sort=-created,+title
 ```
 
 The above example should return the newest posts first. Any posts created on the

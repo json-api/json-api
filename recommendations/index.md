@@ -7,6 +7,16 @@ This section contains recommendations for JSON API implementations. These
 recommendations are intended to establish a level of consistency in areas that
 are beyond the scope of the base JSON API specification.
 
+## Recommendations for Naming <a href="#naming" id="naming" class="headerlink"></a>
+
+It is recommended that resource types, attribute names, and association
+names be "dasherized"; i.e. consist of only lower case alphanumeric
+characters and dashes (U+002D HYPHEN-MINUS, "-").
+
+It is also recommended that resource types be pluralized. Dasherized and
+pluralized resource types can be used as URL segments without translation,
+as discussed below.
+
 ## Recommendations for URL Design <a href="#urls" id="urls" class="headerlink"></a>
 
 ### Reference Document <a href="#urls-reference-document" id="urls-reference-document" class="headerlink"></a>
@@ -25,20 +35,6 @@ transport resources due to different goals and constraints. For instance,
 collections in the reference document are represented as sets because members
 must be addressable by ID, while collections are represented as arrays in
 transport documents because order is significant.
-
-### Resource Types <a href="#urls-resource-types" id="urls-resource-types" class="headerlink"></a>
-
-Rules for declaring resource type identifiers are beyond the scope of the
-base JSON API specification. However, because resource types form the basis
-of the URL design recommendations below, it is recommended that type
-identifiers be chosen that directly map to an API's URLs.
-
-Choose lower-case, dasherized, and pluralized names for resource types to
-avoid requiring any translation between types and URLs. This format is also
-consistent with requirements for attribute and association names.
-
-For example, a blog might implement the resource types `"blog-posts"` and
-`"authors"`.
 
 ### URLs for Resource Collections <a href="#urls-resource-collections" id="urls-resource-collections" class="headerlink"></a>
 
