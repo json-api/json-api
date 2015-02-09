@@ -71,9 +71,9 @@ resource objects.
 ```javascript
 {
   "data": {
-    "type": "posts",
+    "type": "articles",
     "id": "1",
-    // ... attributes of this post
+    // ... attributes of this article
   }
 }
 ```
@@ -95,12 +95,12 @@ The top level of a document **MUST NOT** contain any additional members.
 "Resource objects" appear in a JSON API document to represent primary data
 and linked resources.
 
-Here's how a post (i.e. a resource of type "posts") might appear in a document:
+Here's how an article (i.e. a resource of type "articles") might appear in a document:
 
 ```javascript
 // ...
 {
-  "type": "posts",
+  "type": "articles",
   "id": "1",
   "title": "Rails is Omakase"
 }
@@ -170,11 +170,11 @@ A resource object **MAY** include a URL in its links object, keyed by
 ```json
 // ...
 {
-  "type": "posts",
+  "type": "articles",
   "id": "1",
   "title": "Rails is Omakase",
   "links": {
-    "self": "http://example.com/posts/1"
+    "self": "http://example.com/articles/1"
   }
 }
 // ...
@@ -194,7 +194,7 @@ The value of a relationship **MUST** be one of the following:
 
 * A string, which represents a URL for the related resource(s) (a "related
   resource URL"). When fetched, it returns the related resource object(s) as the
-  response's primary data. For example, a `post`'s `comments` could specify a
+  response's primary data. For example, an `article`'s `comments` could specify a
   URL that returns a list of comment resource objects when retrieved through a
   `GET` request. A related resource URL **SHOULD** remain constant even when the
   resource(s) it represents mutate.
@@ -207,7 +207,7 @@ one of the following:
 * A `self` member, whose value is a URL for the relationship itself (a
   "relationship URL"). This URL allows the client to directly manipulate the
   relationship. For example, it would allow a client to remove an `author` from
-  a `post` without deleting the `people` resource itself.
+  an `article` without deleting the `people` resource itself.
 * A `resource` member, whose value is a related resource URL (as defined above).
 * Linkage to other resource objects ("object linkage") included in a compound
   document. This allows a client to link together all of the resource objects
@@ -226,24 +226,24 @@ pagination links, as described below.
 If a link object refers to resource objects included in the same compound
 document, it **MUST** include object linkage to those resource objects.
 
-For example, the following post is associated with an `author` and `comments`:
+For example, the following article is associated with an `author` and `comments`:
 
 ```javascript
 // ...
 {
-  "type": "posts",
+  "type": "articles",
   "id": "1",
   "title": "Rails is Omakase",
   "links": {
-    "self": "http://example.com/posts/1",
+    "self": "http://example.com/articles/1",
     "author": {
-      "self": "http://example.com/posts/1/links/author"
-      "resource": "http://example.com/posts/1/author",
+      "self": "http://example.com/articles/1/links/author"
+      "resource": "http://example.com/articles/1/author",
       "type": "people",
       "id": "9"
     },
     "comments": {
-      "resource": "http://example.com/posts/1/comments"
+      "resource": "http://example.com/articles/1/comments"
     }
   }
 }
@@ -262,18 +262,18 @@ relationship as a string value rather than an object, is equivalent:
 ```javascript
 // ...
 {
-  "type": "posts",
+  "type": "articles",
   "id": "1",
   "title": "Rails is Omakase",
   "links": {
-    "self": "http://example.com/posts/1",
+    "self": "http://example.com/articles/1",
     "author": {
-      "self": "http://example.com/posts/1/links/author"
-      "resource": "http://example.com/posts/1/author",
+      "self": "http://example.com/articles/1/links/author"
+      "resource": "http://example.com/articles/1/author",
       "type": "people",
       "id": "9"
     },
-    "comments": "http://example.com/posts/1/comments"
+    "comments": "http://example.com/articles/1/comments"
   }
 }
 // ...
@@ -293,20 +293,20 @@ A complete example document with multiple included relationships:
 ```json
 {
   "data": [{
-    "type": "posts",
+    "type": "articles",
     "id": "1",
     "title": "JSON API paints my bikeshed!",
     "links": {
-      "self": "http://example.com/posts/1",
+      "self": "http://example.com/articles/1",
       "author": {
-        "self": "http://example.com/posts/1/links/author",
-        "resource": "http://example.com/posts/1/author",
+        "self": "http://example.com/articles/1/links/author",
+        "resource": "http://example.com/articles/1/author",
         "type": "people",
         "id": "9"
       },
       "comments": {
-        "self": "http://example.com/posts/1/links/comments",
-        "resource": "http://example.com/posts/1/comments",
+        "self": "http://example.com/articles/1/links/comments",
+        "resource": "http://example.com/articles/1/comments",
         "type": "comments",
         "ids": ["5", "12"]
       }
@@ -412,20 +412,20 @@ The value of the `include` parameter is a comma-separated (U+002C COMMA,
 resource object.
 
 > Note: For example, a relationship path could be `comments.author`, where
-`comments` is a relationship listed under a `posts` resource object, and
+`comments` is a relationship listed under a `articles` resource object, and
 `author` is a relationship listed under a `comments` resource object.
 
-For instance, comments could be requested with a post:
+For instance, comments could be requested with an article:
 
 ```text
-GET /posts/1?include=comments
+GET /articles/1?include=comments
 ```
 
 In order to request resources linked to other resources, a dot-separated path
 for each relationship name can be specified:
 
 ```text
-GET /posts/1?include=comments.author
+GET /articles/1?include=comments.author
 ```
 
 > Note: A request for `comments.author` should not automatically also
@@ -436,7 +436,7 @@ without fetching the comments again.
 Multiple linked resources can be requested in a comma-separated list:
 
 ```text
-GET /posts/1?include=author,comments,comments.author
+GET /articles/1?include=author,comments,comments.author
 ```
 
 ### Sparse Fieldsets <a href="#fetching-sparse-fieldsets" id="fetching-sparse-fieldsets" class="headerlink"></a>
@@ -446,7 +446,7 @@ response on a per-type basis by including a `fields[TYPE]` parameter. The
 value of the parameter refers to an attribute name or a relationship name.
 
 ```text
-GET /posts?include=author&fields[posts]=id,title&fields[people]=id,name
+GET /articles?include=author&fields[articles]=id,title&fields[people]=id,name
 ```
 
 If a client requests a restricted set of fields, an endpoint **MUST NOT** include other
@@ -483,10 +483,10 @@ order, JSON API avoids setting requirements for the first character in field
 names. 
 
 ```text
-GET /posts?sort=-created,+title
+GET /articles?sort=-created,+title
 ```
 
-The above example should return the newest posts first. Any posts created on the
+The above example should return the newest articles first. Any articles created on the
 same date will then be sorted by their title in ascending alphabetical order.
 
 ### Pagination <a href="#fetching-pagination" id="fetching-pagination" class="headerlink"></a>
@@ -864,9 +864,9 @@ respond to requests to that URL to update the relationship.
 
 > Note: Relationships are updated without exposing the underlying server
 semantics, such as foreign keys. Furthermore, relationships can be updated
-without necessarily affecting the related resources. For example, if a post
-has many authors, it is possible to remove one of the authors from the post
-without deleting the person itself. Similarly, if a post has many tags, it
+without necessarily affecting the related resources. For example, if an article
+has many authors, it is possible to remove one of the authors from the article
+without deleting the person itself. Similarly, if an article has many tags, it
 is possible to add or remove tags. Under the hood on the server, the first
 of these examples might be implemented with a foreign key, while the second
 could be implemented with a join table, but the JSON API protocol would be
