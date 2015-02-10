@@ -29,6 +29,10 @@ implementations. There is a [custom adapter](https://github.com/daliwali/ember-j
 
 * [jsonapi-ios](https://github.com/joshdholtz/jsonapi-ios) is a library for loading data from a JSON API datasource. Parses JSON API data into models with support for auto-linking of resources and custom model classes.
 
+### Ruby <a href="#client-ruby" id="client-ruby" class="headerlink"></a>
+
+* [jsonapi-consumer](https://github.com/jsmestad/jsonapi-consumer) a ruby library for consuming JSONAPI payloads. 
+
 ## Server <a href="#server" id="server" class="headerlink"></a>
 
 ### PHP <a href="#server-php" id="server-php" class="headerlink"></a>
