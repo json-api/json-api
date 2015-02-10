@@ -87,6 +87,8 @@ has a page describing how to emit conformant JSON.
 
 * [hana](https://github.com/tenderlove/hana) implementation of the JSON Patch and JSON pointer spec
 
+* [jsonapi-consumer](https://github.com/jsmestad/jsonapi-consumer) a ruby library for consuming JSONAPI payloads. 
+
 ### Node.js <a href="#relted-tools-node-js" id="relted-tools-node-js" class="headerlink"></a>
 
 * [json-patch](https://www.npmjs.org/package/json-patch) implementation of JSON Patch (rfc6902)
