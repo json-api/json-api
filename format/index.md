@@ -145,9 +145,9 @@ Each resource object **MUST** contain a `type` member, whose value **MUST**
 be a string. The `type` is used to describe resource objects that share
 common attributes and relationships.
 
-> Note: This spec is agnostic about inflection rules, so `type` can be either
-plural or singular. However, the same value should be used consistently
-throughout an implementation.
+> Note: This spec is agnostic about inflection rules, so the value of `type`
+can be either plural or singular. However, the same value should be used
+consistently throughout an implementation.
 
 #### Resource IDs <a href="#document-structure-resource-ids" id="document-structure-resource-ids" class="headerlink"></a>
 
@@ -481,7 +481,7 @@ following prefixes:
 
 > Note: By requiring a sort order prefix instead of allowing a default
 order, JSON API avoids setting requirements for the first character in field
-names. 
+names.
 
 ```text
 GET /articles?sort=-created,+title
