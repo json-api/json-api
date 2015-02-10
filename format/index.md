@@ -467,7 +467,7 @@ GET /people?sort=+age
 
 An endpoint **MAY** support multiple sort criteria by allowing
 comma-separated (U+002C COMMA, ",") fields as the value for `sort`. Sort
-criteria should be applied in the order specified.
+criteria **SHOULD** be applied in the order specified.
 
 ```text
 GET /people?sort=+age,+name
