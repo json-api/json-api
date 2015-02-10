@@ -29,6 +29,10 @@ implementations. There is a [custom adapter](https://github.com/daliwali/ember-j
 
 * [jsonapi-ios](https://github.com/joshdholtz/jsonapi-ios) is a library for loading data from a JSON API datasource. Parses JSON API data into models with support for auto-linking of resources and custom model classes.
 
+### Ruby <a href="#client-ruby" id="client-ruby" class="headerlink"></a>
+
+* [jsonapi-consumer](https://github.com/jsmestad/jsonapi-consumer) a ruby library for consuming JSONAPI payloads. 
+
 ## Server <a href="#server" id="server" class="headerlink"></a>
 
 ### PHP <a href="#server-php" id="server-php" class="headerlink"></a>
@@ -86,8 +90,6 @@ has a page describing how to emit conformant JSON.
 * [json-patch](https://github.com/guillec/json-patch) implementation of JSON Patch (rfc6902)
 
 * [hana](https://github.com/tenderlove/hana) implementation of the JSON Patch and JSON pointer spec
-
-* [jsonapi-consumer](https://github.com/jsmestad/jsonapi-consumer) a ruby library for consuming JSONAPI payloads. 
 
 ### Node.js <a href="#relted-tools-node-js" id="relted-tools-node-js" class="headerlink"></a>
 
