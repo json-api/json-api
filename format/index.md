@@ -557,6 +557,70 @@ times (in this example, the author of the three posts). Along these lines, if a
 primary document is linked to another primary or linked document, it should not
 be duplicated within the `"linked"` object.
 
+Here's another example:
+```javascript
+{
+  "links": {
+    "posts.author": {
+      "href": "http://example.com/people/{posts.author}",
+      "type": "people"
+    },
+    "posts.comments": {
+      "href": "http://example.com/comments/{posts.comments}",
+      "type": "comments"
+    },
+    "comments.author": {
+      "href": "http://example.com/people/{comments.author}",
+      "type": "people"
+    }
+  },
+  "posts": [{
+      "id": "1",
+      "title": "Rails is Omakase",
+      "links": {
+        "author": "9",
+        "comments": [ "1", "2", "3" ]
+      }
+  }],
+  "linked": {
+    "people": [{
+      "id": "8",
+      "name": "@ninja"
+    }, {
+      "id": "9",
+      "name": "@d2h"
+    }, {
+      "id": "12",
+      "name": "@joe"
+    }, {
+      "id": "17",
+      "name": "@ross"
+    }],
+    "comments": [{
+      "id": "1",
+      "body": "Mmmmmakase",
+      "links": {
+        "author": "8"
+      }
+    }, {
+      "id": "2",
+      "body": "I prefer unagi",
+      "links": {
+        "author": "17"
+      }
+    }, {
+      "id": "3",
+      "body": "What's Omakase?",
+      "links": {
+        "author": "12"
+      }
+    }]
+  }
+}
+```
+In this example linked resources include `"links"` object. Linked resources
+have the same structure as primary resources so all of its advantages may be
+used, allowing to retrieve complicated relations in one request.
 
 ## URLs <a href="#urls" id="urls" class="headerlink"></a>
 
