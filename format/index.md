@@ -652,17 +652,20 @@ specific criteria.
 Filtering **SHOULD** be supported by appending parameters to the base URL for
 the collection of resources to be filtered.
 
+The filter fields **SHOULD** be wrapped in parentheses and prepended by the 
+filter keyword, for example: `filter[age]=23`
+
 For example, the following is a request for all comments associated with a
 particular post:
 
 ```text
-GET /comments?post=1
+GET /comments?filter[post]=1
 ```
 
 With this approach, multiple filters **MAY** be applied to a single request:
 
 ```text
-GET /comments?post=1&author=12
+GET /comments?filter[post]=1&filter[author]=12
 ```
 
 This specification only supports filtering based upon strict matching.
