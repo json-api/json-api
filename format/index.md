@@ -47,9 +47,9 @@ Media Type` status code.
 ## Document Structure <a href="#document-structure" id="document-structure" class="headerlink"></a>
 
 This section describes the structure of a JSON API document, which is identified
-by the media type [`application/vnd.api+json`](http://www.iana.org/assignments
-/media-types/application/vnd.api+json). JSON API documents are defined in
-JavaScript Object Notation (JSON)
+by the media type [`application/vnd.api+json`]
+(http://www.iana.org/assignments/media-types/application/vnd.api+json). 
+JSON API documents are defined in JavaScript Object Notation (JSON)
 [[RFC4627](http://tools.ietf.org/html/rfc4627)].
 
 Although the same media type is used for both request and response documents,
