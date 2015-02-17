@@ -40,11 +40,9 @@ interpreted as described in RFC 2119
 
 ## Document Structure <a href="#document-structure" id="document-structure" class="headerlink"></a>
 
-This section describes the structure of a JSON API document, which is identified
-by the media type [`application/vnd.api+json`](http://www.iana.org/assignments
-/media-types/application/vnd.api+json). JSON API documents are defined in
-JavaScript Object Notation (JSON)
-[[RFC4627](http://tools.ietf.org/html/rfc4627)].
+This section describes the structure of a JSON API document, which is identified by the media type
+[`application/vnd.api+json`](http://www.iana.org/assignments/media-types/application/vnd.api+json).
+JSON API documents are defined in JavaScript Object Notation (JSON) [[RFC4627](http://tools.ietf.org/html/rfc4627)].
 
 Although the same media type is used for both request and response documents,
 certain aspects are only applicable to one or the other. These differences are
@@ -851,8 +849,7 @@ Accept: application/vnd.api+json
 ##### 201 Created <a href="#crud-creating-responses-201" id="crud-creating-responses-201" class="headerlink"></a>
 
 A server **MUST** respond to a successful resource creation request according to
-[`HTTP semantics`](http://tools.ietf.org/html/draft-ietf-
-httpbis-p2-semantics-22#section-6.3).
+[`HTTP semantics`](http://tools.ietf.org/html/draft-ietf-httpbis-p2-semantics-22#section-6.3).
 
 When one or more resources has been created, the server **MUST** return a `201
 Created` status code.
