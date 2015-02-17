@@ -376,8 +376,9 @@ the referenced objects as a collection of resource objects.
 
 ### URL Templates <a href="#document-structure-url-templates" id="document-structure-url-templates" class="headerlink"></a>
 
-A top-level `"links"` object **MAY** be used to specify URL templates that can
-be used to formulate URLs for resources according to their type.
+A top-level `"links"` object **MAY** be used to specify URL templates that can be
+used to formulate URLs for resources. This often allows resource representations to
+be more compact.
 
 For example:
 
@@ -399,14 +400,43 @@ For example:
 In this example, fetching `http://example.com/comments?posts=1` will fetch the
 comments for `"Rails is Omakase"` and fetching
 `http://example.com/comments?posts=2` will fetch the comments for `"The Parley
-Letter"`.
+Letter"`. The use of a URL template obviates the need for each post to specify 
+that it links to a collection of comments and to provide a hardcoded-url for that 
+collection.
+
+Each key in the top-level `"links"` object is a dot-separated path (defined from the 
+point of view of the reference document) that points at a repeated relationship. 
+Paths start with a particular resource type and can traverse related resources. For
+example `"posts.comments"` points at the `"comments"` relationship in each
+resource of type `"posts"`.
+
+Each value in the `"links"` object may either be a string or an object. If a value is
+a string, that string represents a URL template. If the value is an object, it must have
+either an `"href"` key, a `"type"` key, or both; the `"href"` key holds a URL template
+while the `"type"` key specifies a resource type.
+
+For each key–value pair in the `"links"` object, the value specifies `"type"` and/or 
+`"href"` information about all occurrences of the repeated relationship pointed to by the key. 
+Specifically, if the value holds a URL template (as described above), it is specifying that 
+the `"href"` for the linked resource(s) in a given occurrence of the repeated relationship is 
+the result of expanding that URL template, using the resource object in which the occurrence 
+appears as the data for the expansion. Similarly, if the value has a `"type"` property, it is 
+specifying that the `"type"` of the linked resource(s) in all occcurences of the repeated 
+relationship is the value of that property.
+
+However, note that any information about a given occurrence of a relationship specified in the 
+resource-level `"links"` object always supersedes information specified by the top-level `"links"` 
+object in case of conflict.
 
 Here's another example:
 
 ```javascript
 {
   "links": {
-    "posts.comments": "http://example.com/comments/{posts.comments}"
+    "posts.comments": {
+      "href": "http://example.com/comments/{posts.comments}",
+      "type": "comments"
+    }
   },
   "posts": [{
     "id": "1",
@@ -426,18 +456,7 @@ the default explosion is to percent encode the array members (e.g. via
 fetching `http://example.com/comments/1,2,3,4` will return a list of all
 comments.
 
-The top-level `"links"` object has the following behavior:
-
-* Each key is a dot-separated path that points at a repeated relationship. Paths
-  start with a particular resource type and can traverse related resources. For
-  example `"posts.comments"` points at the `"comments"` relationship in each
-  resource of type `"posts"`.
-* The value of each key is interpreted as a URL template.
-* For each resource that the path points to, act as if it specified a
-  relationship formed by expanding the URL template with the non-URL value
-  actually specified.
-
-Here is another example that uses a has-one relationship:
+And here is an example that uses a has-one relationship:
 
 ```javascript
 {
@@ -472,8 +491,38 @@ In this example, the URL for the author of all three posts is
 Top-level URL templates allow you to specify relationships as IDs, but without
 requiring that clients hard-code information about how to form the URLs.
 
-NOTE: In case of conflict, an individual resource object's `links` object will
-take precedence over a top-level `links` object.
+Finally, here is an example of specifying only the `"type"` key in the `"links"` object:
+
+```javascript
+{
+  "links": {
+    "posts.author": {
+      "type": "people"
+    }
+  },
+  "posts": [{
+    "id": "1",
+    "title": "Rails is Omakase",
+    "links": {
+      "author": "12"
+    }
+  }, {
+    "id": "2",
+    "title": "The Parley Letter",
+    "links": {
+      "author": "12"
+    }
+  }],
+  "linked": {
+    "people": [{
+      "id": "12",
+      "name": "The Author"
+    }]
+  }
+}
+```
+Above, specifying the type in `"links"` tells the client which collection in the `"linked"` 
+key it should search in to find the linked resource.
 
 ### Compound Documents <a href="#document-structure-compound-documents" id="document-structure-compound-documents" class="headerlink"></a>
 
@@ -484,10 +533,6 @@ documents are called "compound documents".
 In a compound document, linked resources **MUST** be included as resource
 objects in a top level `"linked"` object, in which they are grouped together in
 arrays according to their type.
-
-The type of each relationship **MAY** be specified in a resource-level or top-
-level `"links"` object with the `"type"` key. This facilitates lookups of linked
-resource objects by the client.
 
 ```javascript
 {
