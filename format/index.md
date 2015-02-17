@@ -461,39 +461,49 @@ fields in the response.
 ### Sorting <a href="#fetching-sorting" id="fetching-sorting" class="headerlink"></a>
 
 A server **MAY** choose to support requests to sort resource collections
-according to one or more criteria.
+according to one or more criteria ("sort fields").
+
+> Note: Although recommended, sort fields do not necessarily need to
+correspond to resource attribute and association names.
+
+> Note: It is recommended that dot-separated (U+002E FULL-STOP, ".") sort
+fields be used to request sorting based upon relationship attributes. For
+example, a sort field of `+author.name` could be used to request that the
+primary data be sorted based upon the `name` attribute of the `author`
+relationship.
 
 An endpoint **MAY** support requests to sort the primary data with a `sort`
-query parameter.
+query parameter. The value for `sort` **MUST** represent sort fields.
 
 ```text
 GET /people?sort=+age
 ```
 
-An endpoint **MAY** support multiple sort criteria by allowing
-comma-separated (U+002C COMMA, ",") fields as the value for `sort`. Sort
-criteria **SHOULD** be applied in the order specified.
+An endpoint **MAY** support multiple sort fields by allowing comma-separated
+(U+002C COMMA, ",") sort fields. Sort fields **SHOULD** be applied in the
+order specified.
 
 ```text
 GET /people?sort=+age,+name
 ```
 
-The sort order for each field **MUST** be specified with one of the
+The sort order for each sort field **MUST** be specified with one of the
 following prefixes:
 
 * Plus (U+002B PLUS SIGN, "+") to request an ascending sort order.
 * Minus (U+002D HYPHEN-MINUS, "-") to request a descending sort order.
 
 > Note: By requiring a sort order prefix instead of allowing a default
-order, JSON API avoids setting requirements for the first character in field
-names.
+order, JSON API avoids setting requirements for the first character in sort
+field names.
 
 ```text
 GET /articles?sort=-created,+title
 ```
 
-The above example should return the newest articles first. Any articles created on the
-same date will then be sorted by their title in ascending alphabetical order.
+The above example should return the newest articles first. Any articles
+created on the same date will then be sorted by their title in ascending
+alphabetical order.
 
 ### Pagination <a href="#fetching-pagination" id="fetching-pagination" class="headerlink"></a>
 
