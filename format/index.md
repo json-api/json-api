@@ -61,12 +61,15 @@ called out below.
 A JSON object **MUST** be at the root of every JSON API response. This object
 defines a document's "top level".
 
-The document's "primary data" is a representation of the resource or
-collection of resources primarily targeted by a request.
+The document's "primary data" is a representation of the resource, collection
+of resources, or resource relationship primarily targeted by a request.
 
-The primary data **MUST** appear under a top-level key named `"data"`. The
-primary data **MUST** be either a single resource object or an array of
-resource objects.
+A document **MUST** contain either primary data or a collection of error
+objects.
+
+Primary data **MUST** appear under a top-level key named `"data"`. Primary
+data **MUST** be either a single resource object, an array of resource
+objects, or a value representing a resource relationship.
 
 ```javascript
 {
@@ -77,6 +80,8 @@ resource objects.
   }
 }
 ```
+
+Error objects **MUST** appear under a top-level key named `"errors"`.
 
 A document's top level **MAY** also have the following members:
 
