@@ -17,12 +17,12 @@ pygments: false
 port: 9876
 
 navigation:
-- title: Overview
-  url: /
 - title: Format
   url: /format/
-- title: Extending
-  url: /extending/
+- title: Extensions
+  url: /extensions/
+- title: Recommendations
+  url: /recommendations/
 - title: Examples
   url: /examples/
 - title: FAQ

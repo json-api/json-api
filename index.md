@@ -15,33 +15,67 @@ Clients built around JSON API are able to take
 advantage of its features around efficiently caching responses,
 sometimes eliminating network requests entirely.
 
-Here's an example response from JSON API:
+Here's an example response from a blog that implements JSON API:
 
-```javascript
+```json
 {
   "links": {
-    "posts.author": {
-      "href": "http://example.com/people/{posts.author}",
-      "type": "people"
-    },
-    "posts.comments": {
-      "href": "http://example.com/comments/{posts.comments}",
-      "type": "comments"
-    }
+    "self": "http://example.com/posts",
+    "next": "http://example.com/posts?page[offset]=2",
+    "last": "http://example.com/posts?page[offset]=10"
   },
-  "posts": [{
+  "data": [{
+    "type": "posts",
     "id": "1",
-    "title": "Rails is Omakase",
+    "title": "JSON API paints my bikeshed!",
     "links": {
-      "author": "9",
-      "comments": [ "5", "12", "17", "20" ]
+      "self": "http://example.com/posts/1",
+      "author": {
+        "self": "http://example.com/posts/1/links/author",
+        "resource": "http://example.com/posts/1/author",
+        "type": "people",
+        "id": "9"
+      },
+      "comments": {
+        "self": "http://example.com/posts/1/links/comments",
+        "resource": "http://example.com/posts/1/comments",
+        "type": "comments",
+        "ids": ["5", "12"]
+      }
+    }
+  }],
+  "linked": [{
+    "type": "people",
+    "id": "9",
+    "first-name": "Dan",
+    "last-name": "Gebhardt",
+    "twitter": "dgeb",
+    "links": {
+      "self": "http://example.com/people/9"
+    }
+  }, {
+    "type": "comments",
+    "id": "5",
+    "body": "First!",
+    "links": {
+      "self": "http://example.com/comments/5"
+    }
+  }, {
+    "type": "comments",
+    "id": "12",
+    "body": "I like XML better",
+    "links": {
+      "self": "http://example.com/comments/12"
     }
   }]
 }
 ```
 
-The top-level `"links"` section is optional, and without it the response
-probably looks very close to a response from your already-existing API.
+The response above contains the first in a collection of "posts", as well as
+links to subsequent members in that collection. It also contains resources
+linked to the post, including its author and comments. Last but not least,
+links are provided that can be used to fetch or update any of these
+resources.
 
 JSON API covers creating and updating resources as well, not just responses.
 
@@ -54,7 +88,15 @@ type designation is [`application/vnd.api+json`](http://www.iana.org/assignments
 
 ## Format documentation <a href="#format-documentation" id="format-documentation" class="headerlink"></a>
 
-To get started with JSON API, check out our [documentation](/format)
+To get started with JSON API, check out [documentation for the base
+specification](/format).
+
+## Extensions <a href="#extensions" id="extensions" class="headerlink"></a>
+
+JSON API can be [extended in several ways](/extensions).
+
+Official extensions are available for [bulk](/extensions/bulk/) and
+[patch](/extensions/patch/) operations.
 
 ## Update history <a href="#update-history" id="update-history" class="headerlink"></a>
 
