@@ -219,8 +219,10 @@ one of the following:
   document. This allows a client to link together all of the resource objects
   included in a compound document without having to `GET` one of the
   relationship URLs. Linkage **MUST** be expressed as:
-  * `type` and `id` members for to-one relationships.
-  * `type` and `ids` members for homogenous to-many relationships.
+  * `type` and `id` members for to-one relationships. `type` is not required
+    if the value of `id` is `null`.
+  * `type` and `ids` members for homogenous to-many relationships. `type` is
+    not required if the value of `ids` is an empty array (`[]`).
   * A `data` member whose value is an array of objects each containing `type`
     and `id` members for heterogenous to-many relationships.
 * A `"meta"` member that contains non-standard meta-information about the
