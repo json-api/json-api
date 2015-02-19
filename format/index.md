@@ -632,8 +632,7 @@ to create a resource with a client-generated ID.
 ##### 201 Created <a href="#crud-creating-responses-201" id="crud-creating-responses-201" class="headerlink"></a>
 
 A server **MUST** respond to a successful resource creation request according to
-[`HTTP semantics`]
-(http://tools.ietf.org/html/draft-ietf-httpbis-p2-semantics-22#section-6.3).
+[`HTTP semantics`](http://tools.ietf.org/html/rfc7231#section-6.3).
 
 The response **MUST** include a `Location` header identifying the location
 of the newly created resource.
