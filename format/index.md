@@ -415,10 +415,10 @@ The top-level links object **MAY** contain the following members:
 * `"self"` - a link for fetching the data in the response document.
 * Pagination links for the primary data, as described below.
 
-## Fetching Resources <a href="#fetching" id="fetching" class="headerlink"></a>
+## Fetching Data <a href="#fetching" id="fetching" class="headerlink"></a>
 
-A resource, or collection of resources, can be fetched by sending a `GET`
-request to an endpoint.
+Data, including resources and relationships, can be fetched by sending a
+`GET` request to an endpoint.
 
 JSON API requests **MUST** include an `Accept` header specifying the JSON
 API media type. Servers **MUST** return a `406 Not Acceptable` status code
@@ -429,6 +429,279 @@ a server may choose to support `text/html` in order to simplify viewing content
 via a web browser.
 
 Responses can be further refined with the optional features described below.
+
+### Fetching Resources <a href="#fetching-resources" id="fetching-resources" class="headerlink"></a>
+
+A server **MUST** support fetching resource data for every URL provided as:
+
+* a `self` link as part of the top-level *links object*
+* a `self` link as part of a *resource object*
+* a `resource` link as part of a *link object*
+
+For example, the following request fetches a collection of articles:
+
+```text
+GET /articles
+```
+
+The following request fetches an article:
+
+```text
+GET /articles/1
+```
+
+And the following request fetches an article's author:
+
+```text
+GET /articles/1/author
+```
+
+#### Responses <a href="#fetching-resources-responses" id="fetching-resources-responses" class="headerlink"></a>
+
+##### 200 OK <a href="#fetching-resources-responses-200" id="fetching-resources-responses-200" class="headerlink"></a>
+
+A server **MUST** respond to a successful request to fetch an individual
+resource or resource collection with a `200 OK` response.
+
+A server **MUST** respond to a successful request to fetch a resource
+collection with an array of *resource objects* or an empty array (`[]`) as
+the response document's primary data.
+
+For example, a `GET` request to a collection of articles could return:
+
+```text
+HTTP/1.1 200 OK
+Content-Type: application/vnd.api+json
+
+{
+  "links": {
+    "self": "http://example.com/articles"
+  },
+  "data": [{
+    "type": "articles",
+    "id": "1",
+    "title": "JSON API paints my bikeshed!"
+  }, {
+    "type": "articles",
+    "id": "2",
+    "title": "Rails is Omakase"
+  }]
+}
+```
+
+A similar response representing an empty collection would be:
+
+```text
+HTTP/1.1 200 OK
+Content-Type: application/vnd.api+json
+
+{
+  "links": {
+    "self": "http://example.com/articles"
+  },
+  "data": []
+}
+```
+
+A server **MUST** respond to a successful request to fetch an individual
+resource with a *resource object* or `null` provided as the response
+document's primary data.
+
+> Note: `null` is only an appropriate response for fetching a to-one
+related resource URL to indicate the absence of a resource in the relationship.
+
+For example, a `GET` request to an individual article could return:
+
+```text
+HTTP/1.1 200 OK
+Content-Type: application/vnd.api+json
+
+{
+  "links": {
+    "self": "http://example.com/articles/1"
+  },
+  "data": {
+    "type": "articles",
+    "id": "1",
+    "title": "JSON API paints my bikeshed!",
+    "links": {
+      "author": {
+        "resource": "http://example.com/articles/1/author"
+      }
+    }
+  }
+}
+```
+
+If the above article's author is missing, then a `GET` request to that related
+resource would return:
+
+```text
+HTTP/1.1 200 OK
+Content-Type: application/vnd.api+json
+
+{
+  "links": {
+    "self": "http://example.com/articles/1/author"
+  },
+  "data": null
+}
+```
+
+##### 404 Not Found <a href="#fetching-resources-responses-404" id="fetching-resources-responses-404" class="headerlink"></a>
+
+A server **MUST** return `404 Not Found` when processing a request to fetch
+a resource that does not exist.
+
+> Note: When requesting a related resource that is not present, a server
+**MUST** respond with `200 OK` and `null` or an empty array (`[]`) as the
+response document's primary data, as described above.
+
+##### Other Responses <a href="#fetching-resources-responses-other" id="fetching-resources-responses-other" class="headerlink"></a>
+
+Servers **MAY** use other HTTP error codes to represent errors. Clients
+**MUST** interpret those errors in accordance with HTTP semantics. Error
+details **MAY** also be returned, as discussed below.
+
+### Fetching Relationships <a href="#fetching-relationships" id="fetching-relationships" class="headerlink"></a>
+
+A server **MUST** support fetching relationship data for every relationship URL
+provided as a `self` link as part of a *link object*.
+
+For example, the following request fetches data about an article's comments:
+
+```text
+GET /articles/1/links/comments
+```
+
+And the following request fetches data about an article's author:
+
+```text
+GET /articles/1/links/author
+```
+
+#### Responses <a href="#fetching-relationships-responses" id="fetching-relationships-responses" class="headerlink"></a>
+
+##### 200 OK <a href="#fetching-relationships-responses-200" id="fetching-relationships-responses-200" class="headerlink"></a>
+
+A server **MUST** respond to a successful request to fetch a relationship
+with a `200 OK` response.
+
+The primary data in the response document **MUST** be one of the following:
+
+* `null` for empty to-one relationships.
+* an object containing `type` and `id` members for non-empty to-one
+  relationships.
+* an empty array (`[]`) for empty to-many relationships
+* an object containing `type` and `ids` members for non-empty homogenous
+  to-many relationships.
+* an array of objects each containing `type` and `id` members for non-empty
+  heterogenous to-many relationships.
+
+The top-level *links object* **MAY** contain `self` and `resource` links,
+as described for link objects.
+
+For example, a `GET` request a to-one relationship URL could return:
+
+```text
+HTTP/1.1 200 OK
+Content-Type: application/vnd.api+json
+
+{
+  "links": {
+    "self": "/articles/1/links/author",
+    "resource": "/articles/1/author"
+  },
+  "data": {
+    "type": "people", "id": "12"
+  }
+}
+```
+
+If the above relationship is empty, then a `GET` request to the same URL would
+return:
+
+```text
+HTTP/1.1 200 OK
+Content-Type: application/vnd.api+json
+
+{
+  "links": {
+    "self": "/articles/1/links/author",
+    "resource": "/articles/1/author"
+  },
+  "data": null
+}
+```
+
+A `GET` request to a homogenous to-many relationship URL could return:
+
+```text
+HTTP/1.1 200 OK
+Content-Type: application/vnd.api+json
+
+{
+  "links": {
+    "self": "/articles/1/links/tags",
+    "resource": "/articles/1/tags"
+  },
+  "data": {
+    "type": "tags",
+    "ids": ["2", "3"]
+  }
+}
+```
+
+If the above relationship is empty, then a `GET` request to the same URL would
+return:
+
+```text
+HTTP/1.1 200 OK
+Content-Type: application/vnd.api+json
+
+{
+  "links": {
+    "self": "/articles/1/links/tags",
+    "resource": "/articles/1/tags"
+  },
+  "data": []
+}
+```
+
+A `GET` request to a heterogenous to-many relationship URL could return:
+
+```text
+HTTP/1.1 200 OK
+Content-Type: application/vnd.api+json
+
+{
+  "links": {
+    "self": "/articles/1/links/tags",
+    "resource": "/articles/1/tags"
+  },
+  "data": [{
+    "type": "system-tags",
+    "id": "2"
+  }, {
+    "type": "user-tags",
+    "id": "5"
+  }]
+}
+```
+
+##### 404 Not Found <a href="#fetching-relationships-responses-404" id="fetching-relationships-responses-404" class="headerlink"></a>
+
+A server **MUST** return `404 Not Found` when processing a request to fetch
+a relationship URL that does not exist.
+
+> Note: If a relationship URL exists but the relationship is empty, then
+`200 OK` **MUST** be returned, as described above.
+
+##### Other Responses <a href="#fetching-relationships-responses-other" id="fetching-relationships-responses-other" class="headerlink"></a>
+
+Servers **MAY** use other HTTP error codes to represent errors. Clients
+**MUST** interpret those errors in accordance with HTTP semantics. Error
+details **MAY** also be returned, as discussed below.
 
 ### Inclusion of Related Resources <a href="#fetching-includes" id="fetching-includes" class="headerlink"></a>
 
