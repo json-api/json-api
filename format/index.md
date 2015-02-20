@@ -398,7 +398,8 @@ A resource, or collection of resources, can be fetched by sending a `GET`
 request to an endpoint.
 
 JSON API requests **MUST** include an `Accept` header specifying the JSON
-API media type.
+API media type. Servers **MUST** return a `406 Not Acceptable` status code
+if this header is missing or specifies an unsupported media type.
 
 Responses can be further refined with the optional features described below.
 
