@@ -30,7 +30,7 @@ interpreted as described in RFC 2119
 The base JSON API specification **MAY** be extended to support additional
 capabilities.
 
-Servers that support one or more extensions to JSON API **SHOULD** return
+Servers that support one or more extensions to JSON API **MUST** return
 those extensions in every response in the `supported-ext` media type
 parameter of the `Content-Type` header. The value of the `supported-ext`
 parameter **MUST** be a comma-separated (U+002C COMMA, ",") list of

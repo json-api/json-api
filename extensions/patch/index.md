@@ -14,7 +14,7 @@ It provides support for modification of resources with the HTTP PATCH method
 For the sake of brevity, operatons requested with `PATCH` and conforming
 with JSON Patch will be called "Patch operations".
 
-Servers **SHOULD** indicate support for the Patch extension by including the
+Servers **MUST** indicate support for the Patch extension by including the
 the media type query parameter `supported-ext=patch` in the `Content-Type`
 header of every response. For example: `Content-Type:
 application/vnd.api+json; supported-ext=patch`.
