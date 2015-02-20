@@ -77,7 +77,7 @@ has a page describing how to emit conformant JSON.
 
 ### .NET <a href="#server-net" id="server-net" class="headerlink"></a>
 
-* [JSONAPI.NET](http://jsonapi.codeplex.com) is a .NET library that integrates with ASP.NET WebAPI, Json.NET, and (optionally) Entity Framework to help you quickly create JSON API compliant web services.
+* [JSONAPI.NET](https://github.com/SphtKr/JSONAPI.NET) is a .NET library that integrates with ASP.NET WebAPI, Json.NET, and (optionally) Entity Framework to help you quickly create JSON API compliant web services.
 
 ## Messages <a href="#messages" id="messages" class="headerlink"></a>
 
