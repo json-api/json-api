@@ -25,6 +25,9 @@ Media Type` status code.
 
 ## Patch Operations <a href="#patch-operations" id="patch-operations" class="headerlink"></a>
 
+Patch operations **MUST** specify a `Content-Type` header of
+`application/vnd.api+json; ext=patch`.
+
 Patch operations **MUST** be sent as an array to conform with the JSON
 Patch format. A server **MAY** limit the type, order, and count of
 operations allowed in this top level array.
@@ -221,11 +224,11 @@ than those specified by the request (for example, updating the `updatedAt`
 attribute or a computed `sha`), it **MUST** return a `200 OK` response as well
 as a representation of the updated resources.
 
-The server **MUST** specify a `Content-Type` header of `application/json`. The
-body of the response **MUST** contain an array of JSON objects, each of which
-**MUST** conform to the JSON API media type (`application/vnd.api+json`).
-Response objects in this array **MUST** be in sequential order and correspond to
-the operations in the request document.
+The server **MUST** specify a `Content-Type` header of `application/vnd.api+json;
+ext=patch`. The body of the response **MUST** contain an array of JSON objects,
+each of which **MUST** conform to the JSON API media type
+(`application/vnd.api+json`). Response objects in this array **MUST** be in
+sequential order and correspond to the operations in the request document.
 
 For instance, a request may create two photos in separate operations:
 
