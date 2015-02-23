@@ -551,11 +551,12 @@ cursor-based strategy might use `page[cursor]`.
 
 ### Filtering <a href="#fetching-filtering" id="fetching-filtering" class="headerlink"></a>
 
-The `filter` query parameter is reserved for servers to use for filtering data.
+The `filter` query parameter is reserved for filtering data. Servers and clients
+**SHOULD** use this key for filtering operations.
 
-> Note: JSON API is agnostic about the filtering strategies supported by a
-server. The `filter` query parameter can be used as the basis for any number of
-filtering strategies.
+> Note: JSON API is agnostic about the strategies supported by a server. The
+`filter` query parameter can be used as the basis for any number of filtering
+strategies.
 
 ## Creating, Updating and Deleting Resources <a href="#crud" id="crud" class="headerlink"></a>
 
