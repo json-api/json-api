@@ -221,10 +221,10 @@ one of the following:
   relationship URLs. Linkage **MUST** be expressed as:
   * `type` and `id` members for to-one relationships. `type` is not required
     if the value of `id` is `null`.
-  * `type` and `ids` members for homogenous to-many relationships. `type` is
+  * `type` and `ids` members for homogeneous to-many relationships. `type` is
     not required if the value of `ids` is an empty array (`[]`).
   * A `data` member whose value is an array of objects each containing `type`
-    and `id` members for heterogenous to-many relationships.
+    and `id` members for heterogeneous to-many relationships.
 * A `"meta"` member that contains non-standard meta-information about the
   relationship.
 
@@ -572,7 +572,7 @@ as primary data. The resource object **MUST** contain at least a `type` member.
 
 > Note: The `type` member is required throughout requests and responses in
 JSON API. There are some cases, such as when `POST`ing to an endpoint
-representing heterogenous data, when the `type` could not be inferred from
+representing heterogeneous data, when the `type` could not be inferred from
 the endpoint. However, picking and choosing when it is required would be
 confusing; it would be hard to remember when it was required and when it was
 not. Therefore, to improve consistency and minimize confusion, `type` is
@@ -791,10 +791,10 @@ Accept: application/vnd.api+json
 If a to-many relationship is included in the `links` section of a resource
 object, it **MUST** be an object containing:
 
-* `type` and `ids` members for homogenous to-many relationships; to clear the
+* `type` and `ids` members for homogeneous to-many relationships; to clear the
   relationship, set the `ids` member to `[]`
 * a `data` member whose value is an array of objects each containing `type` and
-  `id` members for heterogenous to-many relationships; to clear the
+  `id` members for heterogeneous to-many relationships; to clear the
   relationship, set the `data` member to `[]`
 
 For instance, the following `PUT` request performs a complete replacement of
