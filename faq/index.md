@@ -79,3 +79,30 @@ significant. It's necessary to separate primary and related resources by more
 than type because it's possible that a primary resource may have related
 resources of the same type (e.g. the "parents" of a "person"). Nesting related
 resources in `linked` prevents this possible conflict.
+
+### Since HTTP resources are already identified by URIs, why are `ID` and `type` required attributes? <a href="#resources-ids" id="resources-ids" class="headerlink"></a>
+
+*Resource* is a core abstraction in both JSON API and HTTP [[RFC
+7231](https://tools.ietf.org/html/rfc7231)]. The concepts are not equivalent,
+however, and each specification has its own definition for the term.
+
+In HTTP, a resource is simply the service available at an HTTP endpoint. In order
+to interact with it, *representations* are needed. JSON API provides structure
+for those representations.
+
+An HTTP resource can be thought of as an interface (or a mapping) to a set of
+underlying JSON API resources. An HTTP request always targets a single HTTP
+resource but may affect any number of JSON API resources either in full or
+partially.
+
+Importantly, the same JSON API resource may be exposed via several different HTTP
+resources (URIs). An application is free to implement one-to-one correspondence
+between JSON API resources and HTTP resources by always using unique canonical
+URIs. But this is not required, and therefore an ID scheme is necessary.
+
+While JSON API resources often represent persistent objects that have a
+meaningful ID, this need not be the case. For example, a server might provide an
+authentication service (an HTTP resource) that returns instances of
+authentication events (JSON API resources) that do not need an ID. In such a
+situation, it is suggested that a UUID be generated for each resource object
+originating at the server.

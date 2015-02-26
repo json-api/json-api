@@ -7,8 +7,17 @@ title: "Format"
 
 ## Introduction <a href="#introduction" id="introduction" class="headerlink"></a>
 
-JSON API is a specification for how a client should request that resources be
-fetched or modified, and how a server should respond to those requests.
+JSON API is a specification for how an HTTP client should request that
+resources be fetched or modified, and how an HTTP server should respond to
+those requests.
+
+A *resource* is an entity that has *attributes* and may be associated with other
+resources via *relationships*. JSON API does not impose constraints on what a
+resource may represent. For example, a resource could describe an object in a
+database, an event that has occurred, or the state of a service.
+
+> Note: JSON API and the HTTP specification do not share the same definition of
+*resource*. For detailed information, see the [FAQ](/faq/#resources-ids).
 
 JSON API is designed to minimize both the number of requests and the amount of
 data transmitted between clients and servers. This efficiency is achieved
