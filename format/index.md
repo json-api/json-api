@@ -93,7 +93,9 @@ A document's top level **MAY** also have the following members:
 If any of these members appears in the top-level of a response, their values
 **MUST** comply with this specification.
 
-The top level of a document **MUST NOT** contain any additional members.
+The top level of a document **MUST NOT** contain any additional members whose
+names start with alphanumeric characters. Additional members whose names start
+with non-alphanumeric characters are allowed.
 
 ### Resource Objects <a href="#document-structure-resource-objects" id="document-structure-resource-objects" class="headerlink"></a>
 
