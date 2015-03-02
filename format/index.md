@@ -245,7 +245,7 @@ For example, the following article is associated with an `author` and `comments`
   "links": {
     "self": "http://example.com/articles/1",
     "author": {
-      "self": "http://example.com/articles/1/links/author"
+      "self": "http://example.com/articles/1/links/author",
       "resource": "http://example.com/articles/1/author",
       "type": "people",
       "id": "9"
@@ -276,7 +276,7 @@ relationship as a string value rather than an object, is equivalent:
   "links": {
     "self": "http://example.com/articles/1",
     "author": {
-      "self": "http://example.com/articles/1/links/author"
+      "self": "http://example.com/articles/1/links/author",
       "resource": "http://example.com/articles/1/author",
       "type": "people",
       "id": "9"
