@@ -138,7 +138,7 @@ A server **MUST** respond to Patch operations that target a *to-many
 relationship URL* as described below.
 
 For all operations, the `"value"` **MUST** contain an object that contains
-`type` and `ids` members, or an array of objects that each contain `type`
+`type` and `id` members, or an array of objects that each contain `type`
 and `id` members.
 
 If a client requests a `"replace"` operation to a *to-many relationship URL*, the
@@ -155,7 +155,7 @@ Content-Type: application/vnd.api+json; ext=patch
 Accept: application/vnd.api+json; ext=patch
 
 [
-  { "op": "replace", "path": "", "value": {"type": "tags", "ids": ["2", "3"]} }
+  { "op": "replace", "path": "", "value": {"type": "tags", "id": ["2", "3"]} }
 ]
 ```
 
@@ -172,7 +172,7 @@ Content-Type: application/vnd.api+json; ext=patch
 Accept: application/vnd.api+json; ext=patch
 
 [
-  { "op": "add", "path": "/-", "value": { "type": "comments", "ids": ["123"] } }
+  { "op": "add", "path": "/-", "value": { "type": "comments", "id": ["123"] } }
 ]
 ```
 
@@ -188,7 +188,7 @@ Content-Type: application/vnd.api+json; ext=patch
 Accept: application/vnd.api+json; ext=patch
 
 [
-  { "op": "remove", "path": "", "value": {"type": "comments", "ids": ["5", "13"]} }
+  { "op": "remove", "path": "", "value": {"type": "comments", "id": ["5", "13"]} }
 ]
 ```
 

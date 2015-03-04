@@ -221,8 +221,8 @@ one of the following:
   relationship URLs. Linkage **MUST** be expressed as:
   * `type` and `id` members for to-one relationships. `type` is not required
     if the value of `id` is `null`.
-  * `type` and `ids` members for homogeneous to-many relationships. `type` is
-    not required if the value of `ids` is an empty array (`[]`).
+  * `type` and `id` members for homogeneous to-many relationships. `type` is
+    not required if the value of `id` is an empty array (`[]`).
   * A `data` member whose value is an array of objects each containing `type`
     and `id` members for heterogeneous to-many relationships.
 * A `"meta"` member that contains non-standard meta-information about the
@@ -316,7 +316,7 @@ A complete example document with multiple included relationships:
         "self": "http://example.com/articles/1/links/comments",
         "resource": "http://example.com/articles/1/comments",
         "type": "comments",
-        "ids": ["5", "12"]
+        "id": ["5", "12"]
       }
     }
   }],
@@ -798,8 +798,8 @@ Accept: application/vnd.api+json
 If a to-many relationship is included in the `links` section of a resource
 object, it **MUST** be an object containing:
 
-* `type` and `ids` members for homogeneous to-many relationships; to clear the
-  relationship, set the `ids` member to `[]`
+* `type` and `id` members for homogeneous to-many relationships; to clear the
+  relationship, set the `id` member to `[]`
 * a `data` member whose value is an array of objects each containing `type` and
   `id` members for heterogeneous to-many relationships; to clear the
   relationship, set the `data` member to `[]`
@@ -818,7 +818,7 @@ Accept: application/vnd.api+json
     "id": "1",
     "title": "Rails is a Melting Pot",
     "links": {
-      "tags": { "type": "tags", "ids": ["2", "3"] }
+      "tags": { "type": "tags", "id": ["2", "3"] }
     }
   }
 }
@@ -943,7 +943,7 @@ A server **MUST** respond to `PUT`, `POST`, and `DELETE` requests to a *to-many
 relationship URL* as described below.
 
 For all request types, the body **MUST** contain a `data` member whose value
-is an object that contains `type` and `ids` members, or an array of objects
+is an object that contains `type` and `id` members, or an array of objects
 that each contain `type` and `id` members.
 
 If a client makes a `PUT` request to a *to-many relationship URL*, the
@@ -960,7 +960,7 @@ Content-Type: application/vnd.api+json
 Accept: application/vnd.api+json
 
 {
-  "data": { "type": "tags", "ids": ["2", "3"] }
+  "data": { "type": "tags", "id": ["2", "3"] }
 }
 ```
 
@@ -990,7 +990,7 @@ Content-Type: application/vnd.api+json
 Accept: application/vnd.api+json
 
 {
-  "data": { "type": "comments", "ids": ["123"] }
+  "data": { "type": "comments", "id": ["123"] }
 }
 ```
 
@@ -1014,7 +1014,7 @@ Content-Type: application/vnd.api+json
 Accept: application/vnd.api+json
 
 {
-  "data": { "type": "comments", "ids": ["12", "13"] }
+  "data": { "type": "comments", "id": ["12", "13"] }
 }
 ```
 
