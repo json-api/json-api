@@ -40,7 +40,7 @@ Here's an example response from a blog that implements JSON API:
         "self": "http://example.com/posts/1/links/comments",
         "resource": "http://example.com/posts/1/comments",
         "type": "comments",
-        "ids": ["5", "12"]
+        "id": ["5", "12"]
       }
     }
   }],
