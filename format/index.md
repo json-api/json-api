@@ -83,6 +83,11 @@ objects, or a value representing a resource relationship.
 }
 ```
 
+A logical collection of resources (e.g., the target of a to-many relationship)
+**MUST** be represented as an array, even if it only contains one item.
+A logically singular resource (e.g., the target of a to-one relationship)
+**MUST** be represented as a single resource object.
+
 Error objects **MUST** appear under a top-level key named `"errors"`.
 
 A document's top level **MAY** also have the following members:
