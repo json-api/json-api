@@ -114,7 +114,7 @@ Here's how an article (i.e. a resource of type "articles") might appear in a doc
 // ...
 ```
 
-#### Resource Attributes <a href="#document-structure-resource-object-attributes" id="document-structure-resource-object-attributes" class="headerlink"></a>
+#### Resource Objects <a href="#document-structure-resource-objects" id="document-structure-resource-objects" class="headerlink"></a>
 
 A resource object **MUST** contain at least the following top-level members:
 
@@ -456,16 +456,23 @@ GET /articles/1?include=author,comments,comments.author
 
 ### Sparse Fieldsets <a href="#fetching-sparse-fieldsets" id="fetching-sparse-fieldsets" class="headerlink"></a>
 
-A client **MAY** request that an endpoint return only specific fields in the
-response on a per-type basis by including a `fields[TYPE]` parameter. The
-value of the parameter refers to an attribute name or a relationship name.
+A client **MAY** request that an endpoint return only specific fields in the 
+response on a per-type basis by including a `fields[TYPE]` parameter. The 
+value of the parameter refers to the names(s) of the attributes and 
+relationships to be returned.
 
 ```text
-GET /articles?include=author&fields[articles]=id,title&fields[people]=id,name
+GET /articles?include=author&fields[articles]=title,body&fields[people]=name
 ```
 
-If a client requests a restricted set of fields, an endpoint **MUST NOT** include other
-fields in the response.
+If a client requests a restricted set of fields, an endpoint **MUST NOT** 
+include additional attributes or relationships in the response.
+
+Resource object members that are not attributes or relationships are subject
+to the rules stated in the [Resource Objects](#document-structure-resource-objects)
+section. In particular, the `type` and `id` members **MUST** always be included 
+in each resource object, even if they are not specified in the `fields[TYPE]` 
+parameter.
 
 ### Sorting <a href="#fetching-sorting" id="fetching-sorting" class="headerlink"></a>
 
