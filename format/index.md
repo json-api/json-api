@@ -1405,6 +1405,40 @@ An error object **MAY** have the following members:
 
 Additional members **MAY** be specified within error objects.
 
+### Error example – Creating a resource with an empty required field
+
+This request tries to create a resource of type "articles" with a missing field:
+
+```text
+POST /articles
+Content-Type: application/vnd.api+json
+Accept: application/vnd.api+json
+
+{
+  "data": {
+    "type": "articles",
+    "title": "",
+    "body": "This is an article with a missing title"
+  }
+}
+```
+
+The error response could look like this:
+
+```text
+HTTP/1.1 422 Unprocessable Entity
+Content-Type: application/vnd.api+json
+
+{
+  "errors": [{
+    "code": "field_empty",
+    "title": "The title must not be empty",
+    "links": ["/data"],
+    "paths": ["/title"]
+  }]
+}
+```
+
 [attributes]: #document-structure-resource-object-attributes
 [complex attributes]: #document-structure-resource-object-complex-attributes
 [fields]: #document-structure-resource-object-fields
