@@ -205,7 +205,7 @@ The value of a relationship **MUST** be one of the following:
   response's primary data. For example, an `article`'s `comments` could specify a
   URL that returns a list of comment resource objects when retrieved through a
   `GET` request. A related resource URL **SHOULD** remain constant even when the
-  resource(s) it represents mutate.
+  relationship it represents mutates.
 
 * An object (a "link object").
 
