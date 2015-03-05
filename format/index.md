@@ -42,7 +42,7 @@ both the "bulk" and "patch" extensions.
 Clients **MAY** request a particular media type extension by including its
 name in the `ext` media type parameter with the `Accept` header. Servers
 that do not support a requested extension **MUST** return a `415 Unsupported
-Media Type` status code.  
+Media Type` status code.
 
 ## Document Structure <a href="#document-structure" id="document-structure" class="headerlink"></a>
 
@@ -58,8 +58,10 @@ called out below.
 
 ### Top Level <a href="#document-structure-top-level" id="document-structure-top-level" class="headerlink"></a>
 
-A JSON object **MUST** be at the root of every JSON API response. This object
-defines a document's "top level".
+A JSON object **MUST** be at the root of every JSON API response containing
+data. This object defines a document's "top level". The `204 No Content`
+response cannot contain a message body, and so does not include a data
+document.
 
 The document's "primary data" is a representation of the resource, collection
 of resources, or resource relationship primarily targeted by a request.
