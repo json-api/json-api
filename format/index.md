@@ -102,6 +102,18 @@ The top level of a document **MUST NOT** contain any additional members.
 "Resource objects" appear in a JSON API document to represent primary data
 and linked resources.
 
+A resource object **MUST** contain at least the following top-level members:
+
+* `"id"`
+* `"type"`
+
+In addition, a resource object **MAY** contain any of these top-level members:
+
+* `"links"`: information about a resource's relationships (described
+  below).
+* `"meta"`: non-standard meta-information about a resource that can not be
+  represented as an attribute or relationship.
+
 Here's how an article (i.e. a resource of type "articles") might appear in a document:
 
 ```javascript
@@ -114,19 +126,10 @@ Here's how an article (i.e. a resource of type "articles") might appear in a doc
 // ...
 ```
 
-#### Resource Objects <a href="#document-structure-resource-objects" id="document-structure-resource-objects" class="headerlink"></a>
+#### Resource Attributes <a href="#document-structure-resource-object-attributes" id="document-structure-resource-object-attributes" class="headerlink"></a>
 
-A resource object **MUST** contain at least the following top-level members:
 
-* `"id"`
-* `"type"`
 
-In addition, a resource object **MAY** contain any of these top-level members:
-
-* `"links"`: information about a resource's relationships (described
-  below).
-* `"meta"`: non-standard meta-information about a resource that can not be
-  represented as an attribute or relationship.
 
 Any other member in a resource object represents an "attribute", which may
 contain any valid JSON value.
