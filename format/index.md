@@ -66,8 +66,7 @@ document.
 The document's "primary data" is a representation of the resource, collection
 of resources, or resource relationship primarily targeted by a request.
 
-A document **MUST** contain either primary data or a collection of error
-objects.
+A document **MUST** contain either primary data or an array of error objects.
 
 Primary data **MUST** appear under a top-level key named `"data"`. Primary
 data **MUST** be either a single resource object, an array of resource
@@ -1078,7 +1077,7 @@ details **MAY** also be returned, as discussed below.
 
 Error objects are specialized resource objects that **MAY** be returned in a
 response to provide additional information about problems encountered while
-performing an operation. Error objects **MUST** be returned as a collection
+performing an operation. Error objects **MUST** be returned as an array
 keyed by `"errors"` in the top level of a JSON API document, and **SHOULD
 NOT** be returned with any primary data.
 
