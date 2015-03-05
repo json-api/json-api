@@ -845,7 +845,7 @@ successful and the client's current attributes remain up to date.
 ##### 200 OK <a href="#crud-updating-responses-200" id="crud-updating-responses-200" class="headerlink"></a>
 
 If a server accepts an update but also changes the resource(s) in other ways
-than those specified by the request (for example, updating the `updatedAt`
+than those specified by the request (for example, updating the `updated-at`
 attribute or a computed `sha`), it **MUST** return a `200 OK` response.
 
 The response document for a `200 OK` **MUST** include a representation of
