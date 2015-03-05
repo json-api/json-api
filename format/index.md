@@ -101,6 +101,18 @@ The top level of a document **MUST NOT** contain any additional members.
 "Resource objects" appear in a JSON API document to represent primary data
 and linked resources.
 
+A resource object **MUST** contain at least the following top-level members:
+
+* `"id"`
+* `"type"`
+
+In addition, a resource object **MAY** contain any of these top-level members:
+
+* `"links"`: information about a resource's relationships (described
+  below).
+* `"meta"`: non-standard meta-information about a resource that can not be
+  represented as an attribute or relationship.
+
 Here's how an article (i.e. a resource of type "articles") might appear in a document:
 
 ```javascript
@@ -115,17 +127,8 @@ Here's how an article (i.e. a resource of type "articles") might appear in a doc
 
 #### Resource Attributes <a href="#document-structure-resource-object-attributes" id="document-structure-resource-object-attributes" class="headerlink"></a>
 
-A resource object **MUST** contain at least the following top-level members:
 
-* `"id"`
-* `"type"`
 
-In addition, a resource object **MAY** contain any of these top-level members:
-
-* `"links"`: information about a resource's relationships (described
-  below).
-* `"meta"`: non-standard meta-information about a resource that can not be
-  represented as an attribute or relationship.
 
 Any other member in a resource object represents an "attribute", which may
 contain any valid JSON value.
@@ -457,14 +460,21 @@ GET /articles/1?include=author,comments,comments.author
 
 A client **MAY** request that an endpoint return only specific fields in the
 response on a per-type basis by including a `fields[TYPE]` parameter. The
-value of the parameter refers to an attribute name or a relationship name.
+value of the parameter refers to the names(s) of the attributes and
+relationships to be returned.
 
 ```text
-GET /articles?include=author&fields[articles]=id,title&fields[people]=id,name
+GET /articles?include=author&fields[articles]=title,body&fields[people]=name
 ```
 
-If a client requests a restricted set of fields, an endpoint **MUST NOT** include other
-fields in the response.
+If a client requests a restricted set of fields, an endpoint **MUST NOT**
+include additional attributes or relationships in the response.
+
+Resource object members that are not attributes or relationships are subject
+to the rules stated in the [Resource Objects](#document-structure-resource-objects)
+section. In particular, the `type` and `id` members **MUST** always be included
+in each resource object, even if they are not specified in the `fields[TYPE]`
+parameter.
 
 ### Sorting <a href="#fetching-sorting" id="fetching-sorting" class="headerlink"></a>
 
