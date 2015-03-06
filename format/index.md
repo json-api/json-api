@@ -113,6 +113,14 @@ In addition, a resource object **MAY** contain any of these top-level members:
 * `"meta"`: non-standard meta-information about a resource that can not be
   represented as an attribute or relationship.
 
+Any other top-level member in a resource object represents an "attribute".
+An attribute may contain any valid JSON value.
+
+> Note: Although has-one foreign keys are often stored as columns in a
+database alongside other fields, foreign keys **MUST NOT** be included in a
+resource's attributes. All relations **MUST** be represented under a
+resource's links object, as described below.
+
 Here's how an article (i.e. a resource of type "articles") might appear in a document:
 
 ```javascript
@@ -124,19 +132,6 @@ Here's how an article (i.e. a resource of type "articles") might appear in a doc
 }
 // ...
 ```
-
-#### Resource Attributes <a href="#document-structure-resource-object-attributes" id="document-structure-resource-object-attributes" class="headerlink"></a>
-
-
-
-
-Any other member in a resource object represents an "attribute", which may
-contain any valid JSON value.
-
-> Note: Although has-one foreign keys are often stored as columns in a
-database alongside other fields, foreign keys **MUST NOT** be included in a
-resource's attributes. All relations **MUST** be represented under a
-resource's links object, as described below.
 
 #### Resource Identification <a href="#document-structure-resource-identification" id="document-structure-resource-identification" class="headerlink"></a>
 
