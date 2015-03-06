@@ -3,6 +3,8 @@ layout: page
 title: "Bulk Extension"
 ---
 
+{% include wip.md %}
+
 ## Introduction <a href="#introduction" id="introduction" class="headerlink"></a>
 
 The "Bulk extension" is an [official

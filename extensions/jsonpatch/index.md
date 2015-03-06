@@ -3,6 +3,8 @@ layout: page
 title: "JSON Patch Extension"
 ---
 
+{% include wip.md %}
+
 ## Introduction <a href="#introduction" id="introduction" class="headerlink"></a>
 
 The "JSON Patch extension" is an [official

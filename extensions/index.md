@@ -3,6 +3,10 @@ layout: page
 title: Extensions
 ---
 
+{% include wip.md %}
+
+## Introduction <a href="#introduction" id="introduction" class="headerlink"></a>
+
 JSON API can be extended in several ways:
 
 * The `supported-ext` and `ext` media type parameters can be used to negotiate
