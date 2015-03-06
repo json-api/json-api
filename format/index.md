@@ -123,13 +123,15 @@ with non-alphanumeric characters are allowed.
 
 ### Resource Objects <a href="#document-structure-resource-objects" id="document-structure-resource-objects" class="headerlink"></a>
 
-"Resource objects" appear in a JSON API document to represent primary data
-and included resources.
+"Resource objects" appear in a JSON API document to represent resources.
 
 A resource object **MUST** contain at least the following top-level members:
 
 * `"id"`
 * `"type"`
+
+Exception: The `id` member is not required when the resource object originates at
+the client and represents a new resource to be created on the server.
 
 In addition, a resource object **MAY** contain any of these top-level members:
 
