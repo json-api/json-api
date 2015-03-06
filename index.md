@@ -44,7 +44,7 @@ Here's an example response from a blog that implements JSON API:
       }
     }
   }],
-  "linked": [{
+  "included": [{
     "type": "people",
     "id": "9",
     "first-name": "Dan",

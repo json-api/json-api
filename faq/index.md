@@ -65,10 +65,10 @@ specified criteria.
 In addition, JSON API allows read-only resources to be returned without IDs,
 which would of course be incompatible with a set keyed by IDs.
 
-### Why are related resources nested in a `linked` object in a compound document?
+### Why are related resources nested in an `included` object in a compound document?
 
 Primary resources should be isolated because their order and number is often
 significant. It's necessary to separate primary and related resources by more
 than type because it's possible that a primary resource may have related
 resources of the same type (e.g. the "parents" of a "person"). Nesting related
-resources in `linked` prevents this possible conflict.
+resources in `included` prevents this possible conflict.
