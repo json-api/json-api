@@ -118,10 +118,6 @@ A document's top level **MAY** also have the following members:
 If any of these members appears in the top-level of a response, their values
 **MUST** comply with this specification.
 
-The top level of a document **MUST NOT** contain any additional members whose
-names start with alphanumeric characters. Additional members whose names start
-with non-alphanumeric characters are allowed.
-
 ### Resource Objects <a href="#document-structure-resource-objects" id="document-structure-resource-objects" class="headerlink"></a>
 
 "Resource objects" appear in a JSON API document to represent resources.
@@ -283,11 +279,6 @@ without having to `GET` one of the relationship URLs.
 > Note: If present, a *related resource URL* must be a valid URL, even if the
 relationship isn't currently associated with any target resources.
 
-Besides the members described above (`self`, `resource`, `type`, `id`, `meta`,
-and the keys for pagination), a link object **MUST NOT** contain any additional
-members whose names start with alphanumeric characters. Additional members whose
-names start with non-alphanumeric characters are allowed.
-
 For example, the following article is associated with an `author` and `comments`:
 
 ```javascript
@@ -448,9 +439,22 @@ The top-level links object **MAY** contain the following members:
   data represents a resource relationship.
 * Pagination links for the primary data (as described below).
 
-The top-level links object **MUST NOT** contain any additional members whose
-names start with alphanumeric characters. Additional members whose names
-start with non-alphanumeric characters are allowed.
+### Additional Object Members <a href="#document-structure-additional-members" id="document-structure-additional-members" class="headerlink"></a>
+
+This specification describes various JSON objects with a specific purpose and
+format. Each description enumerates a set of *reserved members* that carry a
+special meaning for the object. Additional members are allowed subject to the
+following conditions.
+
+Any additional members are allowed in these objects:
+* resource objects (as *attributes*)
+* `meta` objects
+* error objects.
+
+Other objects **MUST NOT** contain any additional members whose keys start with
+an alphanumeric character. Additional members whose keys start with a
+non-alphanumeric character are allowed. This also applies to the object that
+constitutes the document's top level.
 
 ## Fetching Data <a href="#fetching" id="fetching" class="headerlink"></a>
 
@@ -1427,4 +1431,3 @@ An error object **MAY** have the following members:
   to the resource path(s) expressed in the error object's `"links"` member
   [e.g. `["/first-name", "/last-name"]` to reference a couple attributes].
 
-Additional members **MAY** be specified within error objects.
