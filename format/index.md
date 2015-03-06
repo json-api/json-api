@@ -1365,11 +1365,6 @@ DELETE /photos/1
 A server **MUST** return a `204 No Content` status code if a delete request is
 successful.
 
-##### 404 Not Found <a href="#crud-deleting-responses-404" id="crud-deleting-responses-404" class="headerlink"></a>
-
-A server **MUST** return `404 Not Found` when processing a request to delete
-a resource that does not exist.
-
 ##### Other Responses <a href="#crud-deleting-responses-other" id="crud-deleting-responses-other" class="headerlink"></a>
 
 Servers **MAY** use other HTTP error codes to represent errors. Clients
