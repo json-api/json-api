@@ -419,7 +419,13 @@ For example:
 The top-level links object **MAY** contain the following members:
 
 * `"self"` - a link for fetching the data in the response document.
-* Pagination links for the primary data, as described below.
+* `"resource"` - a related resource URL (as defined above) when the primary
+  data represents a resource relationship.
+* Pagination links for the primary data (as described below).
+
+The top-level links object **MUST NOT** contain any additional members whose
+names start with alphanumeric characters. Additional members whose names
+start with non-alphanumeric characters are allowed.
 
 ## Fetching Data <a href="#fetching" id="fetching" class="headerlink"></a>
 
