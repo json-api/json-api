@@ -1,11 +1,11 @@
 ---
 layout: page
-title: "Patch Extension"
+title: "JSON Patch Extension"
 ---
 
 ## Introduction <a href="#introduction" id="introduction" class="headerlink"></a>
 
-The "Patch extension" is an [official
+The "JSON Patch extension" is an [official
 extension](/extensions/#official-extensions) of the JSON API specification.
 It provides support for modification of resources with the HTTP PATCH method
 [[RFC5789](http://tools.ietf.org/html/rfc5789)] and the JSON Patch format
@@ -14,14 +14,14 @@ It provides support for modification of resources with the HTTP PATCH method
 For the sake of brevity, operatons requested with `PATCH` and conforming
 with JSON Patch will be called "Patch operations".
 
-Servers and clients **MUST** negotiate support for and use of the Patch
+Servers and clients **MUST** negotiate support for and use of the JSON Patch
 extension [as described in the base specification](/format/#extending) using
-`patch` as the name of the extension.
+`jsonpatch` as the name of the extension.
 
 ## Patch Operations <a href="#patch-operations" id="patch-operations" class="headerlink"></a>
 
 Patch operations **MUST** specify a `Content-Type` header of
-`application/vnd.api+json; ext=patch`.
+`application/vnd.api+json; ext=jsonpatch`.
 
 Patch operations **MUST** be sent as an array to conform with the JSON
 Patch format. A server **MAY** limit the type, order, and count of
@@ -52,8 +52,8 @@ For example, a new photo could be created with the following request:
 
 ```text
 PATCH /photos
-Content-Type: application/vnd.api+json; ext=patch
-Accept: application/vnd.api+json; ext=patch
+Content-Type: application/vnd.api+json; ext=jsonpatch
+Accept: application/vnd.api+json; ext=jsonpatch
 
 [
   {
@@ -78,8 +78,8 @@ photo at `/photos/1`:
 
 ```text
 PATCH /photos/1
-Content-Type: application/vnd.api+json; ext=patch
-Accept: application/vnd.api+json; ext=patch
+Content-Type: application/vnd.api+json; ext=jsonpatch
+Accept: application/vnd.api+json; ext=jsonpatch
 
 [
   { "op": "replace", "path": "/src", "value": "http://example.com/hamster.png" }
@@ -106,8 +106,8 @@ For instance, the following request should update the `author` of an article:
 
 ```text
 PATCH /article/1/links/author
-Content-Type: application/vnd.api+json; ext=patch
-Accept: application/vnd.api+json; ext=patch
+Content-Type: application/vnd.api+json; ext=jsonpatch
+Accept: application/vnd.api+json; ext=jsonpatch
 
 [
   { "op": "replace", "path": "", "value": {"type": "people", "id": "1"} }
@@ -119,8 +119,8 @@ relationship to change its value to `null`. For example:
 
 ```text
 PATCH /article/1/links/author
-Content-Type: application/vnd.api+json; ext=patch
-Accept: application/vnd.api+json; ext=patch
+Content-Type: application/vnd.api+json; ext=jsonpatch
+Accept: application/vnd.api+json; ext=jsonpatch
 
 [
   { "op": "replace", "path": "", "value": null }
@@ -146,8 +146,8 @@ For example, the following request replaces every tag for an article:
 
 ```text
 PATCH /photos/1/links/tags
-Content-Type: application/vnd.api+json; ext=patch
-Accept: application/vnd.api+json; ext=patch
+Content-Type: application/vnd.api+json; ext=jsonpatch
+Accept: application/vnd.api+json; ext=jsonpatch
 
 [
   { "op": "replace", "path": "", "value": {"type": "tags", "id": ["2", "3"]} }
@@ -163,8 +163,8 @@ comments for the article with ID `1`:
 
 ```text
 PATCH /articles/1/links/comments
-Content-Type: application/vnd.api+json; ext=patch
-Accept: application/vnd.api+json; ext=patch
+Content-Type: application/vnd.api+json; ext=jsonpatch
+Accept: application/vnd.api+json; ext=jsonpatch
 
 [
   { "op": "add", "path": "/-", "value": { "type": "comments", "id": ["123"] } }
@@ -179,8 +179,8 @@ from the list of comments for the article with ID `1`:
 
 ```text
 PATCH /articles/1/links/comments
-Content-Type: application/vnd.api+json; ext=patch
-Accept: application/vnd.api+json; ext=patch
+Content-Type: application/vnd.api+json; ext=jsonpatch
+Accept: application/vnd.api+json; ext=jsonpatch
 
 [
   { "op": "remove", "path": "", "value": {"type": "comments", "id": ["5", "13"]} }
@@ -196,8 +196,8 @@ For instance, photo `1` might be deleted with the following request:
 
 ```text
 PATCH /photos/1
-Content-Type: application/vnd.api+json; ext=patch
-Accept: application/vnd.api+json; ext=patch
+Content-Type: application/vnd.api+json; ext=jsonpatch
+Accept: application/vnd.api+json; ext=jsonpatch
 
 [
   { "op": "remove", "path": "" }
@@ -220,7 +220,7 @@ attribute or a computed `sha`), it **MUST** return a `200 OK` response as well
 as a representation of the updated resources.
 
 The server **MUST** specify a `Content-Type` header of `application/vnd.api+json;
-ext=patch`. The body of the response **MUST** contain an array of JSON objects,
+ext=jsonpatch`. The body of the response **MUST** contain an array of JSON objects,
 each of which **MUST** conform to the JSON API media type
 (`application/vnd.api+json`). Response objects in this array **MUST** be in
 sequential order and correspond to the operations in the request document.
@@ -229,8 +229,8 @@ For instance, a request may create two photos in separate operations:
 
 ```text
 PATCH /photos
-Content-Type: application/vnd.api+json; ext=patch
-Accept: application/vnd.api+json; ext=patch
+Content-Type: application/vnd.api+json; ext=jsonpatch
+Accept: application/vnd.api+json; ext=jsonpatch
 
 [
   {
@@ -259,7 +259,7 @@ within an array:
 
 ```text
 HTTP/1.1 200 OK
-Content-Type: application/vnd.api+json; ext=patch
+Content-Type: application/vnd.api+json; ext=jsonpatch
 
 [
   {

@@ -40,8 +40,8 @@ parameter **MUST** be a comma-separated (U+002C COMMA, ",") list of
 extension names.
 
 For example: a response that includes the header `Content-Type:
-application/vnd.api+json; supported-ext=bulk,patch` indicates that the
-server supports both the "bulk" and "patch" extensions.
+application/vnd.api+json; supported-ext=bulk,jsonpatch` indicates that the
+server supports both the "bulk" and "jsonpatch" extensions.
 
 If an extension is used to form a particular request or response document,
 then it **MUST** be specified by including its name in the `ext` media type
@@ -49,8 +49,9 @@ parameter with the `Content-Type` header. The `ext` media type parameter
 **MUST NOT** include more than one extension name.
 
 For example: a response that includes the header `Content-Type:
-application/vnd.api+json; ext=patch; supported-ext=bulk,patch` indicates
-that the document is formatted according to the "patch" extension.
+application/vnd.api+json; ext=jsonpatch; supported-ext=bulk,jsonpatch`
+indicates that the document is formatted according to the "jsonpatch"
+extension.
 
 Clients **MAY** request a particular media type extension by including its
 name in the `ext` media type parameter with the `Accept` header. Servers
@@ -1008,7 +1009,7 @@ details **MAY** also be returned, as discussed below.
 
 ### Updating Resources <a href="#crud-updating" id="crud-updating" class="headerlink"></a>
 
-A resource's attributes and relationships can be updated by sending a `PUT`
+A resource's attributes and relationships can be updated by sending a `PATCH`
 request to the URL that represents the resource.
 
 The URL for a resource can be obtained:
@@ -1016,13 +1017,13 @@ The URL for a resource can be obtained:
 * from the `self` link in the resource object
 * for a *data object*, the original URL that was used to `GET` the document
 
-The `PUT` request **MUST** include a single resource object as primary data.
+The `PATCH` request **MUST** include a single resource object as primary data.
 The resource object **MUST** contain a `type` member.
 
 For example:
 
 ```text
-PUT /articles/1
+PATCH /articles/1
 Content-Type: application/vnd.api+json
 Accept: application/vnd.api+json
 
@@ -1038,7 +1039,7 @@ Accept: application/vnd.api+json
 #### Updating a Resource's Attributes <a href="#crud-updating-resource-attributes" id="crud-updating-resource-attributes" class="headerlink"></a>
 
 Any or all of a resource's attributes **MAY** be included in the resource
-object included in a `PUT` request.
+object included in a `PATCH` request.
 
 If a request does not include all of the fields for a resource, the server
 **MUST** interpret the missing fields as if they were included together with
@@ -1051,11 +1052,11 @@ choosing to interpret them as containing their current values, and the
 dominant real-world practice is to interpret such a request as a request for
 a partial update.
 
-For example, the following `PUT` request is interpreted as a request to
+For example, the following `PATCH` request is interpreted as a request to
 update only the `title` and `text` attributes of an article:
 
 ```text
-PUT /articles/1
+PATCH /articles/1
 Content-Type: application/vnd.api+json
 Accept: application/vnd.api+json
 
@@ -1072,16 +1073,16 @@ Accept: application/vnd.api+json
 #### Updating a Resource's To-One Relationships <a href="#crud-updating-resource-to-one-relationships" id="crud-updating-resource-to-one-relationships" class="headerlink"></a>
 
 If a to-one relationship is provided in the `links` section of a resource
-object in a `PUT` request, it **MUST** be one of:
+object in a `PATCH` request, it **MUST** be one of:
 
 * an object with `type` and `id` members corresponding to the related resource
 * `null`, to remove the relationship
 
-For instance, the following `PUT` request will update the `title` attribute
+For instance, the following `PATCH` request will update the `title` attribute
 and `author` relationship of an article:
 
 ```text
-PUT /articles/1
+PATCH /articles/1
 Content-Type: application/vnd.api+json
 Accept: application/vnd.api+json
 
@@ -1108,11 +1109,11 @@ object, it **MUST** be an object containing:
   `id` members for heterogeneous to-many relationships; to clear the
   relationship, set the `data` member to `[]`
 
-For instance, the following `PUT` request performs a complete replacement of
+For instance, the following `PATCH` request performs a complete replacement of
 the `tags` for an article:
 
 ```text
-PUT /articles/1
+PATCH /articles/1
 Content-Type: application/vnd.api+json
 Accept: application/vnd.api+json
 
@@ -1168,11 +1169,11 @@ references a related resource that does not exist.
 
 ##### 409 Conflict <a href="#crud-updating-responses-409" id="crud-updating-responses-409" class="headerlink"></a>
 
-A server **MAY** return `409 Conflict` when processing a `PUT` request to
+A server **MAY** return `409 Conflict` when processing a `PATCH` request to
 update a resource if that update would violate other server-enforced
 constraints (such as a uniqueness constraint on a field other than `id`).
 
-A server **MUST** return `409 Conflict` when processing a `PUT` request in
+A server **MUST** return `409 Conflict` when processing a `PATCH` request in
 which the resource's `type` and `id` do not match the server's endpoint.
 
 ##### Other Responses <a href="#crud-updating-responses-other" id="crud-updating-responses-other" class="headerlink"></a>
@@ -1205,10 +1206,10 @@ relationship is deleted (as a garbage collection measure).
 
 #### Updating To-One Relationships <a href="#crud-updating-to-one-relationships" id="crud-updating-to-one-relationships" class="headerlink"></a>
 
-A server **MUST** respond to `PUT` requests to a *to-one relationship URL* as
+A server **MUST** respond to `PATCH` requests to a *to-one relationship URL* as
 described below.
 
-The `PUT` request **MUST** include a top-level member named `data` containing
+The `PATCH` request **MUST** include a top-level member named `data` containing
 one of:
 
 * an object with `type` and `id` members corresponding to the related resource
@@ -1217,7 +1218,7 @@ one of:
 For example, the following request updates the author of an article:
 
 ```text
-PUT /articles/1/links/author
+PATCH /articles/1/links/author
 Content-Type: application/vnd.api+json
 Accept: application/vnd.api+json
 
@@ -1229,7 +1230,7 @@ Accept: application/vnd.api+json
 And the following request clears the author of the same article:
 
 ```text
-PUT /articles/1/links/author
+PATCH /articles/1/links/author
 Content-Type: application/vnd.api+json
 Accept: application/vnd.api+json
 
@@ -1243,14 +1244,14 @@ a `204 No Content` response.
 
 #### Updating To-Many Relationships <a href="#crud-updating-to-many-relationships" id="crud-updating-to-many-relationships" class="headerlink"></a>
 
-A server **MUST** respond to `PUT`, `POST`, and `DELETE` requests to a *to-many
+A server **MUST** respond to `PATCH`, `POST`, and `DELETE` requests to a *to-many
 relationship URL* as described below.
 
 For all request types, the body **MUST** contain a `data` member whose value
 is an object that contains `type` and `id` members, or an array of objects
 that each contain `type` and `id` members.
 
-If a client makes a `PUT` request to a *to-many relationship URL*, the
+If a client makes a `PATCH` request to a *to-many relationship URL*, the
 server **MUST** either completely replace every member of the relationship,
 return an appropriate error response if some resources can not be found or
 accessed, or return a `403 Forbidden` response if complete replacement is
@@ -1259,7 +1260,7 @@ not allowed by the server.
 For example, the following request replaces every tag for an article:
 
 ```text
-PUT /articles/1/links/tags
+PATCH /articles/1/links/tags
 Content-Type: application/vnd.api+json
 Accept: application/vnd.api+json
 
