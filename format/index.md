@@ -601,7 +601,7 @@ include media type extensions relevant to the request.
 A request **MUST** completely succeed or fail (in a single "transaction"). No
 partial updates are allowed.
 
-The `type` member is required in every resource object throughout requests and
+> Note: The `type` member is required in every resource object throughout requests and
 responses in JSON API. There are some cases, such as when `POST`ing to an
 endpoint representing heterogenous data, when the `type` could not be inferred
 from the endpoint. However, picking and choosing when it is required would be
