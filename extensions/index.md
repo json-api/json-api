@@ -27,7 +27,7 @@ JSON API currently supports the following official extensions:
   modification of resources with the HTTP PATCH method
   [[RFC5789](http://tools.ietf.org/html/rfc5789)] and the JSON Patch format
   [[RFC6902](http://tools.ietf.org/html/rfc6902)]. The JSON Patch extension is
-  referenced with the extension name `ext=jsonpatch`.
+  referenced with the extension name `jsonpatch`.
 
 ## Custom Extensions <a href="#custom-extensions" id="custom-extensions" class="headerlink"></a>
 
