@@ -591,11 +591,9 @@ with a `200 OK` response.
 The primary data in the response document **MUST** be one of the following:
 
 * `null` for empty to-one relationships.
-* an object containing `type` and `id` members for non-empty to-one
-  relationships.
 * an empty array (`[]`) for empty to-many relationships
-* an object containing `type` and `ids` members for non-empty homogenous
-  to-many relationships.
+* an object containing `type` and `id` members for non-empty to-one
+  or homogeneous to-many relationships.
 * an array of objects each containing `type` and `id` members for non-empty
   heterogenous to-many relationships.
 
@@ -648,7 +646,7 @@ Content-Type: application/vnd.api+json
   },
   "data": {
     "type": "tags",
-    "ids": ["2", "3"]
+    "id": ["2", "3"]
   }
 }
 ```
