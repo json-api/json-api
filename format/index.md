@@ -30,6 +30,9 @@ interpreted as described in RFC 2119
 The base JSON API specification **MAY** be extended to support additional
 capabilities.
 
+An extension **MAY** make changes to and deviate from the requirements of the
+base specification apart from this section, which remains binding.
+
 Servers that support one or more extensions to JSON API **SHOULD** return
 those extensions in every response in the `ext` media type parameter of the
 `Content-Type` header. The value of the `ext` parameter **MUST** be a
@@ -43,6 +46,10 @@ Clients **MAY** request a particular media type extension by including its
 name in the `ext` media type parameter with the `Accept` header. Servers
 that do not support a requested extension **MUST** return a `415 Unsupported
 Media Type` status code.
+
+Servers **MUST NOT** provide extended functionality that is incompatible with the
+base specification to clients that do not request the extension in the `ext`
+parameter of the `Content-Type` or the `Accept` header.
 
 ## Document Structure <a href="#document-structure" id="document-structure" class="headerlink"></a>
 
