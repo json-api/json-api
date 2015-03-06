@@ -180,7 +180,7 @@ be a string.
 #### Links
 
 The value of the `"links"` key is a JSON object (a "links object") that
-represents linked resources, keyed by the name of each association.
+represents related resources, keyed by the name of each association.
 
 The key `"self"` is reserved within the links object for the resource URL,
 as described below.
@@ -308,7 +308,7 @@ relationship as a string value rather than an object, is equivalent:
 ### Compound Documents <a href="#document-structure-compound-documents" id="document-structure-compound-documents" class="headerlink"></a>
 
 To reduce the number of HTTP requests, servers **MAY** allow responses that
-include linked resources along with the requested primary resources. Such
+include related resources along with the requested primary resources. Such
 responses are called "compound documents".
 
 In a compound document, all included resources **MUST** be represented as an
@@ -425,11 +425,11 @@ via a web browser.
 
 Responses can be further refined with the optional features described below.
 
-### Inclusion of Linked Resources <a href="#fetching-includes" id="fetching-includes" class="headerlink"></a>
+### Inclusion of Related Resources <a href="#fetching-includes" id="fetching-includes" class="headerlink"></a>
 
-An endpoint **MAY** return resources linked to the primary data by default.
+An endpoint **MAY** return resources related to the primary data by default.
 
-An endpoint **MAY** also support custom inclusion of linked resources based
+An endpoint **MAY** also support custom inclusion of related resources based
 upon an `include` request parameter. This parameter **MUST** specify the
 relationship using the name used in the `links` section of the primary data.
 
@@ -452,7 +452,7 @@ For instance, comments could be requested with an article:
 GET /articles/1?include=comments
 ```
 
-In order to request resources linked to other resources, a dot-separated path
+In order to request resources related to other resources, a dot-separated path
 for each relationship name can be specified:
 
 ```text
@@ -464,7 +464,7 @@ include `comments` in the response. This can happen if the client already
 has the `comments` locally, and now wants to fetch the associated authors
 without fetching the comments again.
 
-Multiple linked resources can be requested in a comma-separated list:
+Multiple related resources can be requested in a comma-separated list:
 
 ```text
 GET /articles/1?include=author,comments,comments.author
