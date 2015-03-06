@@ -33,10 +33,10 @@ The request URL and each Patch operation's `"path"` are complementary and
 MUST combine to target a particular resource, collection, attribute, or
 relationship.
 
-If a server supports the Patch extension, it **MUST** allow PATCH requests at
-any resource or relationship URLs that accept POST, PUT, or DELETE requests.
+If a server supports the Patch extension, it **MUST** allow Patch operations at
+any resource or relationship URLs that accept POST, PATCH, or DELETE requests.
 
-PATCH requests **MAY** also be allowed at the root URL of an API. In this
+Patch operations **MAY** also be allowed at the root URL of an API. In this
 case, every `"path"` within a Patch operation **MUST** include the full
 resource path relative to the root URL. This allows for general "fire hose"
 updates to any resource or relationship represented by an API. As stated
@@ -209,7 +209,7 @@ Accept: application/vnd.api+json; ext=jsonpatch
 #### 204 No Content <a href="#patch-responses-204" id="patch-responses-204" class="headerlink"></a>
 
 A server **MUST** return a `204 No Content` status code in response to a
-successful `PATCH` request in which the client's current attributes remain up to
+successful Patch operation in which the client's current attributes remain up to
 date.
 
 #### 200 OK <a href="#patch-responses-200" id="patch-responses-200" class="headerlink"></a>
@@ -282,8 +282,8 @@ Content-Type: application/vnd.api+json; ext=jsonpatch
 
 #### Other Responses <a href="#patch-responses-other" id="patch-responses-other" class="headerlink"></a>
 
-When a server encounters one or more problems while processing a `PATCH`
-request, it **SHOULD** specify the most appropriate HTTP error code in the
+When a server encounters one or more problems while processing a Patch
+operation, it **SHOULD** specify the most appropriate HTTP error code in the
 response. Clients **MUST** interpret those errors in accordance with HTTP
 semantics.
 
