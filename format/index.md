@@ -40,8 +40,8 @@ parameter **MUST** be a comma-separated (U+002C COMMA, ",") list of
 extension names.
 
 For example: a response that includes the header `Content-Type:
-application/vnd.api+json; supported-ext=bulk,patch` indicates that the
-server supports both the "bulk" and "patch" extensions.
+application/vnd.api+json; supported-ext=bulk,jsonpatch` indicates that the
+server supports both the "bulk" and "jsonpatch" extensions.
 
 If an extension is used to form a particular request or response document,
 then it **MUST** be specified by including its name in the `ext` media type
@@ -49,8 +49,9 @@ parameter with the `Content-Type` header. The `ext` media type parameter
 **MUST NOT** include more than one extension name.
 
 For example: a response that includes the header `Content-Type:
-application/vnd.api+json; ext=patch; supported-ext=bulk,patch` indicates
-that the document is formatted according to the "patch" extension.
+application/vnd.api+json; ext=jsonpatch; supported-ext=bulk,jsonpatch`
+indicates that the document is formatted according to the "jsonpatch"
+extension.
 
 Clients **MAY** request a particular media type extension by including its
 name in the `ext` media type parameter with the `Accept` header. Servers
