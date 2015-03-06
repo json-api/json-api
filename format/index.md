@@ -144,6 +144,9 @@ In addition, a resource object **MAY** contain any of these top-level members:
 Any other top-level member in a resource object represents an "attribute".
 An attribute may contain any valid JSON value.
 
+If the value of an attribute is a JSON object or array, the member is called
+a [complex attribute](#document-structure-complex-attrs).
+
 Although has-one foreign keys (e.g. `author_id`) are often stored internally
 alongside other information to be represented in a resource object, these keys
 *SHOULD NOT* appear as attributes. If relations are provided, they **MUST**
@@ -331,6 +334,47 @@ relationship as a string value rather than an object, is equivalent:
   }
 }
 // ...
+```
+
+#### Complex Attributes <a href="#document-structure-complex-attrs" id="document-structure-complex-attrs" class="headerlink"></a>
+
+The value of a complex attribute is allowed to be any valid JSON structure.
+
+Complex attributes **MAY** contain references to resources. The relationships
+are represented in the same way as links on resource objects. Therefore, any
+JSON object in a complex attribute must reserve the `links` member to hold
+relationship information.
+
+For example, a representation of a `people` resource might include an array of
+addresses embedded as a complex attribute:
+
+```json
+{
+  "type": "people",
+  "id": "789",
+  "name": "Victor Shiroyama",
+  "addresses": [{
+    "label": "Home",
+    "street": "12 Mean Street",
+    "city": "Boston",
+    "links": {
+      "country": {
+        "type": "countries",
+        "id": "1"
+      }
+    }
+  }, {
+    "label": "Headquarters",
+    "street": "3−99−1 Nihonbashi, Chūō-ku",
+    "city": "Tokyo",
+    "links": {
+      "country": {
+        "type": "countries",
+        "id": "81"
+      }
+    }
+  }]
+}
 ```
 
 ### Compound Documents <a href="#document-structure-compound-documents" id="document-structure-compound-documents" class="headerlink"></a>
