@@ -309,8 +309,8 @@ To reduce the number of HTTP requests, servers **MAY** allow responses that
 include linked resources along with the requested primary resources. Such
 responses are called "compound documents".
 
-In a compound document, all linked resources **MUST** be included as an array of
-resource objects in a top level `"included"` member.
+In a compound document, all included resources **MUST** be represented as an
+array of resource objects in a top-level `"included"` member.
 
 A complete example document with multiple included relationships:
 
