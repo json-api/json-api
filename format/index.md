@@ -340,10 +340,10 @@ relationship as a string value rather than an object, is equivalent:
 
 The value of a complex attribute is allowed to be any valid JSON structure.
 
-Complex attributes **MAY** contain references to resources. The relationships
-are represented in the same way as links on resource objects. Therefore, any
-JSON object in a complex attribute must reserve the `links` member to hold
-relationship information.
+A JSON object that constitutes or is contained in a complex attribute **MAY**
+contain references to resources. The relationships are represented in the same
+way as relationships on resource objects. Therefore, any JSON object in a complex
+attribute must reserve the `links` member to hold relationship information.
 
 For example, a representation of a `people` resource might include an array of
 addresses embedded as a complex attribute:
@@ -365,7 +365,7 @@ addresses embedded as a complex attribute:
     }
   }, {
     "label": "Headquarters",
-    "street": "3−99−1 Nihonbashi, Chūō-ku",
+    "street": "3-99-1 Nihonbashi, Chūō-ku",
     "city": "Tokyo",
     "links": {
       "country": {
