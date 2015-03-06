@@ -14,14 +14,9 @@ It provides support for modification of resources with the HTTP PATCH method
 For the sake of brevity, operatons requested with `PATCH` and conforming
 with JSON Patch will be called "Patch operations".
 
-Servers **SHOULD** indicate support for the JSON API media type's Patch
-extension by including the header `Content-Type: application/vnd.api+json;
-ext=patch` in every response.
-
-Clients **MAY** request the JSON API media type's Patch extension by
-specifying the header `Accept: application/vnd.api+json; ext=patch`. Servers
-that do not support the Patch extension **MUST** return a `415 Unsupported
-Media Type` status code.
+Servers and clients **MUST** negotiate support for and use of the Patch
+extension [as described in the base specification](/format/#extending) using
+`patch` as the name of the extension.
 
 ## Patch Operations <a href="#patch-operations" id="patch-operations" class="headerlink"></a>
 
