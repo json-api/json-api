@@ -258,6 +258,11 @@ pagination links, as described below.
 If a link object refers to resource objects included in the same compound
 document, it **MUST** include object linkage to those resource objects.
 
+Besides the members described above (`self`, `resource`, `type`, `id`, `meta`,
+and the keys for pagination), a link object **MUST NOT** contain any additional
+members whose names start with alphanumeric characters. Additional members whose
+names start with non-alphanumeric characters are allowed.
+
 For example, the following article is associated with an `author` and `comments`:
 
 ```javascript
