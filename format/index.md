@@ -105,8 +105,8 @@ A document's top level **MAY** also have the following members:
 
 * `"meta"`: non-standard meta-information about the primary data.
 * `"links"`: URLs related to the primary data.
-* `"linked"`: a list of resource objects that are linked to the primary data
-  and/or each other ("linked resources").
+* `"included"`: a list of resource objects that are related to the primary data
+  and/or each other ("included resources").
 
 If any of these members appears in the top-level of a response, their values
 **MUST** comply with this specification.
@@ -116,7 +116,7 @@ The top level of a document **MUST NOT** contain any additional members.
 ### Resource Objects <a href="#document-structure-resource-objects" id="document-structure-resource-objects" class="headerlink"></a>
 
 "Resource objects" appear in a JSON API document to represent primary data
-and linked resources.
+and included resources.
 
 A resource object **MUST** contain at least the following top-level members:
 
@@ -310,7 +310,7 @@ include linked resources along with the requested primary resources. Such
 responses are called "compound documents".
 
 In a compound document, all linked resources **MUST** be included as an array of
-resource objects in a top level `"linked"` member.
+resource objects in a top level `"included"` member.
 
 A complete example document with multiple included relationships:
 
@@ -336,7 +336,7 @@ A complete example document with multiple included relationships:
       }
     }
   }],
-  "linked": [{
+  "included": [{
     "type": "people",
     "id": "9",
     "first-name": "Dan",
@@ -432,7 +432,7 @@ upon an `include` request parameter. This parameter **MUST** specify the
 relationship using the name used in the `links` section of the primary data.
 
 If a client supplies an `include` parameter, the server **MUST NOT** include
-other resource objects in the `linked` section of the compound document.
+other resource objects in the `included` section of the compound document.
 
 The value of the `include` parameter is a comma-separated (U+002C COMMA,
 ",") list of relationship paths. A relationship path is a dot-separated
@@ -544,9 +544,9 @@ A server **MAY** provide links to traverse a paginated data set ("pagination
 links").
 
 Pagination links **MUST** appear in the link object that corresponds to a
-collection. To paginate the primary data, include pagination links in the
-top-level `links` object. To paginate a linked collection returned in a
-compound document, include pagination links in the corresponding link
+collection. To paginate the primary data, supply pagination links in the
+top-level `included` object. To paginate an included collection returned in
+a compound document, supply pagination links in the corresponding link
 object.
 
 The following keys **MUST** be used for pagination links:
