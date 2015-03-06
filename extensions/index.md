@@ -5,8 +5,9 @@ title: Extensions
 
 JSON API can be extended in several ways:
 
-* The `ext` media type parameter can be used to declare and request support for
-  extensions, [as discussed in the base specification](/format#extending).
+* The `supported-ext` and `ext` media type parameters can be used to negotiate
+  support for extensions,
+  [as discussed in the base specification](/format#extending).
   Official and custom extensions to the specification are discussed below.
 
 * Meta information can be included in several places in a document,
@@ -20,18 +21,19 @@ JSON API currently supports the following official extensions:
 
 * [Bulk extension](/extensions/bulk/) - provides support for performing multiple
   operations in a request, including adding and removing multiple resources.
-  The Bulk extension is referenced with the media type parameter `ext=bulk`.
+  The Bulk extension is referenced with the extension name `bulk`.
 
-* [Patch extension](/extensions/patch/) - provides support for modification of resources
-  with the HTTP PATCH method [[RFC5789](http://tools.ietf.org/html/rfc5789)]
-  and the JSON Patch format [[RFC6902](http://tools.ietf.org/html/rfc6902)].
-  The Patch extension is referenced with the media type parameter `ext=patch`.
+* [JSON Patch extension](/extensions/jsonpatch/) - provides support for
+  modification of resources with the HTTP PATCH method
+  [[RFC5789](http://tools.ietf.org/html/rfc5789)] and the JSON Patch format
+  [[RFC6902](http://tools.ietf.org/html/rfc6902)]. The JSON Patch extension is
+  referenced with the extension name `ext=jsonpatch`.
 
 ## Custom Extensions <a href="#custom-extensions" id="custom-extensions" class="headerlink"></a>
 
 The JSON API media type can be extended for your organization by writing your
 own custom extension. This extension should also be specified using the `ext`
-media type parameter.
+and `supported-ext` media type parameters.
 
 It is strongly recommended that custom extensions be prefixed with a unique
 identifier for your organization to avoid namespace collision. For example,
