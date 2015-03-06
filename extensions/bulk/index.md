@@ -10,9 +10,15 @@ extension](/extensions/#official-extensions) of the JSON API specification.
 It provides support for performing multiple operations in a request,
 including adding and removing multiple resources.
 
-Servers **SHOULD** indicate support for the JSON API media type's Bulk
-extension by including the header `Content-Type: application/vnd.api+json;
-ext=bulk` in every response.
+Servers **MUST** indicate support for the Bulk extension by including the
+the media type query parameter `supported-ext=bulk` in the `Content-Type`
+header of every response. For example: `Content-Type:
+application/vnd.api+json; supported-ext=bulk`.
+
+Servers **MUST** indicate that a response is formatted using the Bulk
+extension by including the the media type query parameter `ext=bulk` in the
+`Content-Type` header. For example: `Content-Type: application/vnd.api+json;
+ext=bulk; supported-ext=bulk,patch`.
 
 Clients **MAY** request the JSON API media type's Bulk extension by
 specifying the header `Accept: application/vnd.api+json; ext=bulk`. Servers

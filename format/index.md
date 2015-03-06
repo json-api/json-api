@@ -30,14 +30,24 @@ interpreted as described in RFC 2119
 The base JSON API specification **MAY** be extended to support additional
 capabilities.
 
-Servers that support one or more extensions to JSON API **SHOULD** return
-those extensions in every response in the `ext` media type parameter of the
-`Content-Type` header. The value of the `ext` parameter **MUST** be a
-comma-separated (U+002C COMMA, ",") list of extension names.
+Servers that support one or more extensions to JSON API **MUST** return
+those extensions in every response in the `supported-ext` media type
+parameter of the `Content-Type` header. The value of the `supported-ext`
+parameter **MUST** be a comma-separated (U+002C COMMA, ",") list of
+extension names.
 
 For example: a response that includes the header `Content-Type:
-application/vnd.api+json; ext=bulk,patch` indicates that the server supports
-both the "bulk" and "patch" extensions.
+application/vnd.api+json; supported-ext=bulk,patch` indicates that the
+server supports both the "bulk" and "patch" extensions.
+
+If an extension is used to form a particular request or response document,
+then it **MUST** be specified by including its name in the `ext` media type
+parameter with the `Content-Type` header. The `ext` media type parameter
+**MUST NOT** include more than one extension name.
+
+For example: a response that includes the header `Content-Type:
+application/vnd.api+json; ext=patch; supported-ext=bulk,patch` indicates
+that the document is formatted according to the "patch" extension.
 
 Clients **MAY** request a particular media type extension by including its
 name in the `ext` media type parameter with the `Accept` header. Servers
