@@ -74,6 +74,12 @@ Although the same media type is used for both request and response documents,
 certain aspects are only applicable to one or the other. These differences are
 called out below.
 
+Unless otherwise noted, objects defined by this specification **MUST NOT**
+contain any additional members whose keys start with an alphanumeric character.
+
+Any object **MAY** contain additional members whose keys start with a
+non-alphanumeric character.
+
 ### Top Level <a href="#document-structure-top-level" id="document-structure-top-level" class="headerlink"></a>
 
 A JSON object **MUST** be at the root of every JSON API response containing
@@ -438,23 +444,6 @@ The top-level links object **MAY** contain the following members:
 * `"related"` - a related resource URL (as defined above) when the primary
   data represents a resource relationship.
 * Pagination links for the primary data (as described below).
-
-### Additional Object Members <a href="#document-structure-additional-members" id="document-structure-additional-members" class="headerlink"></a>
-
-This specification describes various JSON objects with a specific purpose and
-format. Each description enumerates a set of *reserved members* that carry a
-special meaning for the object. Additional members are allowed subject to the
-following conditions.
-
-Any additional members are allowed in these objects:
-* resource objects (as *attributes*)
-* `meta` objects
-* error objects.
-
-Other objects **MUST NOT** contain any additional members whose keys start with
-an alphanumeric character. Additional members whose keys start with a
-non-alphanumeric character are allowed. This also applies to the object that
-constitutes the document's top level.
 
 ## Fetching Data <a href="#fetching" id="fetching" class="headerlink"></a>
 
@@ -1431,3 +1420,4 @@ An error object **MAY** have the following members:
   to the resource path(s) expressed in the error object's `"links"` member
   [e.g. `["/first-name", "/last-name"]` to reference a couple attributes].
 
+Additional members **MAY** be specified within error objects.
