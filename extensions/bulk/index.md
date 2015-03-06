@@ -53,7 +53,7 @@ Accept: application/vnd.api+json; ext=bulk
 
 ## Updating Multiple Resources <a href="#updating-multiple-resources" id="updating-multiple-resources" class="headerlink"></a>
 
-Multiple resources can be updated by sending a `PUT` request to a URL that
+Multiple resources can be updated by sending a `PATCH` request to a URL that
 represents a collection of resources to which they all belong. The request
 **MUST** include an array of resource objects as primary data. Each resource
 object **MUST** contain at least `type` and `id` members.
@@ -61,7 +61,7 @@ object **MUST** contain at least `type` and `id` members.
 For example:
 
 ```text
-PUT /articles
+PATCH /articles
 Content-Type: application/vnd.api+json; ext=bulk
 Accept: application/vnd.api+json; ext=bulk
 
