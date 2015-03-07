@@ -77,9 +77,10 @@ called out below.
 ### Top Level <a href="#document-structure-top-level" id="document-structure-top-level" class="headerlink"></a>
 
 A JSON object **MUST** be at the root of every JSON API response containing
-data. This object defines a document's "top level". The `204 No Content`
-response cannot contain a message body, and so does not include a data
-document.
+data. This object defines a document's "top level".
+
+> Note: Responses that can not contain a message-body, such as `204 No Content`,
+do not include a document with data.
 
 The document's "primary data" is a representation of the resource, collection
 of resources, or resource relationship primarily targeted by a request.
