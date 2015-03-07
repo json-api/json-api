@@ -222,12 +222,16 @@ The name of the relationship declared in the key **SHALL NOT** be `"self"`.
 
 The value of a relationship **MUST** be one of the following:
 
-* A string, which represents a URL for the related resource(s) (a "related
-  resource URL"). When fetched, it returns the related resource object(s) as the
-  response's primary data. For example, an `article`'s `comments` could specify a
-  URL that returns a list of comment resource objects when retrieved through a
-  `GET` request. A related resource URL **SHOULD** remain constant even when the
-  relationship it represents mutates.
+* A URL for the related resource(s) (a "related resource URL"). When fetched, it
+  returns the related resource object(s) as the response's primary data. For
+  example, an `article`'s `comments` relationship could specify a URL that
+  returns a list of comment resource objects when retrieved through a `GET`
+  request.
+
+  A related resource URL **MUST** remain constant even when the relationship (the
+  set of identities of the referenced resources) mutates. That is, the response
+  from a related resource URL always reflects the current state of the
+  relationship.
 
 * An object (a "link object").
 
@@ -239,6 +243,11 @@ one of the following:
   relationship. For example, it would allow a client to remove an `author` from
   an `article` without deleting the `people` resource itself.
 * A `resource` member, whose value is a related resource URL (as defined above).
+* A `canonical` member, whose value is a canonical URL for the related
+  resource(s). A canonical URL **MUST** be permanently tied to the identity of
+  the target resources. That is, a previously retrieved canonical URL
+  continues to point to the same resources even if the original relationship
+  mutates.
 * Linkage to other resource objects ("object linkage") included in a compound
   document. This allows a client to link together all of the resource objects
   included in a compound document without having to `GET` one of the
@@ -257,6 +266,11 @@ pagination links, as described below.
 
 If a link object refers to resource objects included in the same compound
 document, it **MUST** include object linkage to those resource objects.
+
+> Note: If present, a *related resource URL* must be a valid URL, even if the
+relationship isn't currently associated with any target resources. If a
+relationship is empty, the server can indicate this in the link object by
+including an `id: null` or `id: []` member depending on relationship cardinality.
 
 Besides the members described above (`self`, `resource`, `type`, `id`, `meta`,
 and the keys for pagination), a link object **MUST NOT** contain any additional
