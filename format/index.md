@@ -1029,7 +1029,7 @@ The URL for a resource can be obtained:
 * for a *data object*, the original URL that was used to `GET` the document
 
 The `PATCH` request **MUST** include a single resource object as primary data.
-The resource object **MUST** contain a `type` member.
+The resource object **MUST** contain `type` and `id` members.
 
 For example:
 
