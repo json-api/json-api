@@ -964,7 +964,7 @@ ID](#crud-creating-client-ids), and a resource has been created, the server
 The response **MUST** also include a document that contains the primary
 resource created.
 
-If the data object returned by the response contains a `self` key in its
+If the resource object returned by the response contains a `self` key in its
 `links` member, the value of the `self` member **MUST** match the value of
 the `Location` header.
 
@@ -993,7 +993,7 @@ ID](#crud-creating-client-ids), the server **MUST** return either a `201
 Created` status code and response document (as described above) or a `204 No
 Content` status code with no response document.
 
-> Note: If a `204` response is received the client should consider the data
+> Note: If a `204` response is received the client should consider the resource
 object sent in the request to be accepted by the server, as if the server
 had returned it back in a `201` response.
 
@@ -1021,10 +1021,9 @@ details **MAY** also be returned, as discussed below.
 A resource's attributes and relationships can be updated by sending a `PATCH`
 request to the URL that represents the resource.
 
-The URL for a resource can be obtained:
-
-* from the `self` link in the resource object
-* for a *data object*, the original URL that was used to `GET` the document
+The URL for a resource can be obtained in the `self` link of the resource
+object. Alternatively, when a `GET` request returns a single resource object as
+primary data, the same request URL can be used for updates.
 
 The `PATCH` request **MUST** include a single resource object as primary data.
 The resource object **MUST** contain a `type` member.
