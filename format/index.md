@@ -1054,13 +1054,6 @@ If a request does not include all of the fields for a resource, the server
 **MUST** interpret the missing fields as if they were included together with
 their current values. It **MUST NOT** interpret them as `null` values.
 
-> Note: Because the resources represented by JSON API have a list of known
-fields, the server *must* interpret the missing attributes in some way.
-Choosing to interpret them as `null` values would be just as arbitrary as
-choosing to interpret them as containing their current values, and the
-dominant real-world practice is to interpret such a request as a request for
-a partial update.
-
 For example, the following `PATCH` request is interpreted as a request to
 update only the `title` and `text` attributes of an article:
 
