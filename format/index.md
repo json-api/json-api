@@ -836,7 +836,7 @@ links").
 
 Pagination links **MUST** appear in the link object that corresponds to a
 collection. To paginate the primary data, supply pagination links in the
-top-level `included` object. To paginate an included collection returned in
+top-level `links` object. To paginate an included collection returned in
 a compound document, supply pagination links in the corresponding link
 object.
 
