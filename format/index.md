@@ -151,7 +151,7 @@ must reserve the `id`, `type`, `links`, and `meta` members for future use.
 
 Although has-one foreign keys (e.g. `author_id`) are often stored internally
 alongside other information to be represented in a resource object, these keys
-*SHOULD NOT* appear as attributes. If relations are provided, they **MUST**
+**SHOULD NOT** appear as attributes. If relations are provided, they **MUST**
 be represented under the "links object", as described below.
 
 Here's how an article (i.e. a resource of type "articles") might appear in a document:
