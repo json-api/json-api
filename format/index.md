@@ -232,9 +232,8 @@ The value of a relationship **MUST** be one of the following:
   request.
 
   A related resource URL **MUST** remain constant even when the relationship (the
-  set of identities of the referenced resources) mutates. That is, the response
-  from a related resource URL always reflects the current state of the
-  relationship.
+  set of referenced resources) mutates. That is, the response from a related
+  resource URL always reflects the current state of the relationship.
 
 * An object (a "link object").
 
@@ -285,12 +284,12 @@ For example, the following article is associated with an `author` and `comments`
     "self": "http://example.com/articles/1",
     "author": {
       "self": "http://example.com/articles/1/links/author",
-      "resource": "http://example.com/articles/1/author",
+      "related": "http://example.com/articles/1/author",
       "type": "people",
       "id": "9"
     },
     "comments": {
-      "resource": "http://example.com/articles/1/comments"
+      "related": "http://example.com/articles/1/comments"
     }
   }
 }
@@ -316,7 +315,7 @@ relationship as a string value rather than an object, is equivalent:
     "self": "http://example.com/articles/1",
     "author": {
       "self": "http://example.com/articles/1/links/author",
-      "resource": "http://example.com/articles/1/author",
+      "related": "http://example.com/articles/1/author",
       "type": "people",
       "id": "9"
     },
@@ -347,13 +346,13 @@ A complete example document with multiple included relationships:
       "self": "http://example.com/articles/1",
       "author": {
         "self": "http://example.com/articles/1/links/author",
-        "resource": "http://example.com/articles/1/author",
+        "related": "http://example.com/articles/1/author",
         "type": "people",
         "id": "9"
       },
       "comments": {
         "self": "http://example.com/articles/1/links/comments",
-        "resource": "http://example.com/articles/1/comments",
+        "related": "http://example.com/articles/1/comments",
         "type": "comments",
         "id": ["5", "12"]
       }
@@ -429,7 +428,7 @@ For example:
 The top-level links object **MAY** contain the following members:
 
 * `"self"` - a link for fetching the data in the response document.
-* `"resource"` - a related resource URL (as defined above) when the primary
+* `"related"` - a related resource URL (as defined above) when the primary
   data represents a resource relationship.
 * Pagination links for the primary data (as described below).
 
@@ -548,7 +547,7 @@ Content-Type: application/vnd.api+json
     "title": "JSON API paints my bikeshed!",
     "links": {
       "author": {
-        "resource": "http://example.com/articles/1/author"
+        "related": "http://example.com/articles/1/author"
       }
     }
   }
@@ -630,7 +629,7 @@ Content-Type: application/vnd.api+json
 {
   "links": {
     "self": "/articles/1/links/author",
-    "resource": "/articles/1/author"
+    "related": "/articles/1/author"
   },
   "data": {
     "type": "people", "id": "12"
@@ -648,7 +647,7 @@ Content-Type: application/vnd.api+json
 {
   "links": {
     "self": "/articles/1/links/author",
-    "resource": "/articles/1/author"
+    "related": "/articles/1/author"
   },
   "data": null
 }
@@ -663,7 +662,7 @@ Content-Type: application/vnd.api+json
 {
   "links": {
     "self": "/articles/1/links/tags",
-    "resource": "/articles/1/tags"
+    "related": "/articles/1/tags"
   },
   "data": {
     "type": "tags",
@@ -682,7 +681,7 @@ Content-Type: application/vnd.api+json
 {
   "links": {
     "self": "/articles/1/links/tags",
-    "resource": "/articles/1/tags"
+    "related": "/articles/1/tags"
   },
   "data": []
 }
@@ -697,7 +696,7 @@ Content-Type: application/vnd.api+json
 {
   "links": {
     "self": "/articles/1/links/tags",
-    "resource": "/articles/1/tags"
+    "related": "/articles/1/tags"
   },
   "data": [{
     "type": "system-tags",
