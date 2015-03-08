@@ -149,6 +149,9 @@ If the value of an attribute is a JSON object or array, the member is called a
 However, a JSON object that constitutes or is contained in a complex attribute
 must reserve the `id`, `type`, `links`, and `meta` members for future use.
 
+A resource object's attributes and relationships are collectively called its
+"fields". <a href="#document-structure-resource-fields" id="document-structure-resource-fields"></a>
+
 Although has-one foreign keys (e.g. `author_id`) are often stored internally
 alongside other information to be represented in a resource object, these keys
 **SHOULD NOT** appear as attributes. If relations are provided, they **MUST**
@@ -782,23 +785,24 @@ GET /articles/1?include=author,comments,comments.author
 
 ### Sparse Fieldsets <a href="#fetching-sparse-fieldsets" id="fetching-sparse-fieldsets" class="headerlink"></a>
 
-A client **MAY** request that an endpoint return only specific fields in the
-response on a per-type basis by including a `fields[TYPE]` parameter. The
-value of the parameter refers to the names(s) of the attributes and
-relationships to be returned.
+A client **MAY** request that an endpoint return only specific
+[fields](#document-structure-resource-fields) in the response on a per-type basis
+by including a `fields[TYPE]` parameter. The value of the parameter is a
+comma-separated (U+002C COMMA, ",") list that refers to the names(s) of the
+fields to be returned.
 
 ```text
 GET /articles?include=author&fields[articles]=title,body&fields[people]=name
 ```
 
 If a client requests a restricted set of fields, an endpoint **MUST NOT**
-include additional attributes or relationships in the response.
+include additional fields in the response.
 
-Resource object members that are not attributes or relationships are subject
-to the rules stated in the [Resource Objects](#document-structure-resource-objects)
-section. In particular, the `type` and `id` members **MUST** always be included
-in each resource object, even if they are not specified in the `fields[TYPE]`
-parameter.
+Resource object properties that are not fields are not affected by the `fields`
+parameter. As stated in the [Resource
+Objects](#document-structure-resource-objects) section, the `type` and `id`
+members **MUST** always be included in each resource object, and the `self`
+property **MAY** be included.
 
 ### Sorting <a href="#fetching-sorting" id="fetching-sorting" class="headerlink"></a>
 
@@ -1194,7 +1198,7 @@ references a related resource that does not exist.
 
 A server **MAY** return `409 Conflict` when processing a `PATCH` request to
 update a resource if that update would violate other server-enforced
-constraints (such as a uniqueness constraint on a field other than `id`).
+constraints (such as a uniqueness constraint on a property other than `id`).
 
 A server **MUST** return `409 Conflict` when processing a `PATCH` request in
 which the resource's `type` and `id` do not match the server's endpoint.
