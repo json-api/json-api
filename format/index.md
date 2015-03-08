@@ -242,10 +242,8 @@ one of the following:
   relationship. For example, it would allow a client to remove an `author` from
   an `article` without deleting the `people` resource itself.
 * A `resource` member, whose value is a related resource URL (as defined above).
-* Linkage to other resource objects ("object linkage") included in a compound
-  document. This allows a client to link together all of the resource objects
-  included in a compound document without having to `GET` one of the
-  relationship URLs. Linkage **MUST** be expressed as:
+* Linkage to other resources based on their identifying `id` and `type` members
+  ("resource linkage"). Linkage **MUST** be expressed as:
   * `type` and `id` members for to-one relationships. `type` is not required
     if the value of `id` is `null`.
   * `type` and `id` members for homogeneous to-many relationships. `type` is
@@ -259,7 +257,9 @@ A link object that represents a to-many relationship **MAY** also contain
 pagination links, as described below.
 
 If a link object refers to resource objects included in the same compound
-document, it **MUST** include object linkage to those resource objects.
+document, it **MUST** include resource linkage to those resource objects.
+This allows a client to link together all of the included resource objects
+without having to `GET` one of the relationship URLs.
 
 Besides the members described above (`self`, `resource`, `type`, `id`, `meta`,
 and the keys for pagination), a link object **MUST NOT** contain any additional
