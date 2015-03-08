@@ -143,8 +143,9 @@ In addition, a resource object **MAY** contain any of these top-level members:
 * `"meta"`: non-standard meta-information about a resource that can not be
   represented as an attribute or relationship.
 
-Any other top-level member in a resource object represents an "attribute".
-An attribute may contain any valid JSON value.
+A resource object **MAY** contain additional top-level members whose keys begin
+with an alphanumeric character. These members represent "attributes" and may
+contain any valid JSON value.
 
 If the value of an attribute is a JSON object or array, the member is called a
 *complex attribute*. The value is allowed to be any valid JSON structure.
@@ -435,6 +436,8 @@ For example:
   }
 }
 ```
+
+Any members **MAY** be specified within `meta` objects.
 
 ### Top-level Links <a href="#document-structure-top-level-links" id="document-structure-top-level-links" class="headerlink"></a>
 
