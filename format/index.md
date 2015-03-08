@@ -144,6 +144,11 @@ In addition, a resource object **MAY** contain any of these top-level members:
 Any other top-level member in a resource object represents an "attribute".
 An attribute may contain any valid JSON value.
 
+If the value of an attribute is a JSON object or array, the member is called a
+*complex attribute*. The value is allowed to be any valid JSON structure.
+However, a JSON object that constitutes or is contained in a complex attribute
+must reserve the `id`, `type`, `links`, and `meta` members for future use.
+
 Although has-one foreign keys (e.g. `author_id`) are often stored internally
 alongside other information to be represented in a resource object, these keys
 *SHOULD NOT* appear as attributes. If relations are provided, they **MUST**
