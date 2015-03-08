@@ -71,7 +71,7 @@ a client to remove an `author` from a `post` without deleting the `people`
 resource itself.
 
 * the "related resource URL" - a URL for the related resource(s), which is
-identified with the `"resource"` key within a link object. When fetched, it
+identified with the `"related"` key within a link object. When fetched, it
 returns the related resource object(s) as the response's primary data.
 
 It is recommended that a relationship URL be formed by appending `/links/` and

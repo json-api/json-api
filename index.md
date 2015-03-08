@@ -32,13 +32,13 @@ Here's an example response from a blog that implements JSON API:
       "self": "http://example.com/posts/1",
       "author": {
         "self": "http://example.com/posts/1/links/author",
-        "resource": "http://example.com/posts/1/author",
+        "related": "http://example.com/posts/1/author",
         "type": "people",
         "id": "9"
       },
       "comments": {
         "self": "http://example.com/posts/1/links/comments",
-        "resource": "http://example.com/posts/1/comments",
+        "related": "http://example.com/posts/1/comments",
         "type": "comments",
         "id": ["5", "12"]
       }
