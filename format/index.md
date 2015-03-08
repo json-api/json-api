@@ -136,18 +136,18 @@ the client and represents a new resource to be created on the server.
 
 In addition, a resource object **MAY** contain any of these top-level members:
 
-* `"links"`: information about a resource's relationships (described
-  below).
+* `"links"`: a "links object", providing information about a resource's
+  relationships (described below).
 * `"meta"`: non-standard meta-information about a resource that can not be
   represented as an attribute or relationship.
 
 Any other top-level member in a resource object represents an "attribute".
 An attribute may contain any valid JSON value.
 
-> Note: Although has-one foreign keys are often stored as columns in a
-database alongside other fields, foreign keys **MUST NOT** be included in a
-resource's attributes. All relations **MUST** be represented under a
-resource's links object, as described below.
+Although has-one foreign keys (e.g. `author_id`) are often stored internally
+alongside other information to be represented in a resource object, these keys
+*SHOULD NOT* appear as attributes. If relations are provided, they **MUST**
+be represented under the "links object", as described below.
 
 Here's how an article (i.e. a resource of type "articles") might appear in a document:
 
@@ -156,7 +156,15 @@ Here's how an article (i.e. a resource of type "articles") might appear in a doc
 {
   "type": "articles",
   "id": "1",
-  "title": "Rails is Omakase"
+  "title": "Rails is Omakase",
+  "links": {
+    "author": {
+      "self": "/articles/1/links/author",
+      "related": "/articles/1/author",
+      "type": "people",
+      "id": "9"
+    }
+  }
 }
 // ...
 ```
@@ -186,7 +194,7 @@ consistently throughout an implementation.
 Each resource object **MUST** contain an `id` member, whose value **MUST**
 be a string.
 
-#### Links
+#### Links <a href="#document-structure-links" id="document-structure-links" class="headerlink"></a>
 
 The value of the `"links"` key is a JSON object (a "links object") that
 represents related resources, keyed by the name of each association.
