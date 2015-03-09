@@ -14,10 +14,11 @@ JSON API is:
 
 ## Editors <a href="#editors" id="editors" class="headerlink"></a>
 
-There are two primary editors of this specification:
+There are four primary editors of this specification:
 
 - [Steve Klabnik](http://twitter.com/steveklabnik)
 - [Yehuda Katz](http://twitter.com/wycats)
+- [Dan Gebhardt](http://twitter.com/dgeb)
 
 ## History <a href="#history" id="history" class="headerlink"></a>
 
