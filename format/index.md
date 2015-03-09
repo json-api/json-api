@@ -75,10 +75,7 @@ certain aspects are only applicable to one or the other. These differences are
 called out below.
 
 Unless otherwise noted, objects defined by this specification **MUST NOT**
-contain any additional members whose keys start with an alphanumeric character.
-
-Any object **MAY** contain additional members whose keys start with a
-non-alphanumeric character.
+contain any additional members.
 
 ### Top Level <a href="#document-structure-top-level" id="document-structure-top-level" class="headerlink"></a>
 
@@ -143,9 +140,8 @@ In addition, a resource object **MAY** contain any of these top-level members:
 * `"meta"`: non-standard meta-information about a resource that can not be
   represented as an attribute or relationship.
 
-A resource object **MAY** contain additional top-level members whose keys begin
-with an alphanumeric character. These members represent "attributes" and may
-contain any valid JSON value.
+A resource object **MAY** contain additional top-level members. These members
+represent "attributes" and may contain any valid JSON value.
 
 If the value of an attribute is a JSON object or array, the member is called a
 *complex attribute*. The value is allowed to be any valid JSON structure.
