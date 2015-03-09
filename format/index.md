@@ -244,11 +244,10 @@ The value of a relationship **MUST** be one of the following:
   returns the related resource object(s) as the response's primary data. For
   example, an `article`'s `comments` relationship could specify a URL that
   returns a list of comment resource objects when retrieved through a `GET`
-  request.
-
-  A related resource URL **MUST** remain constant even when the relationship (the
-  set of referenced resources) mutates. That is, the response from a related
-  resource URL always reflects the current state of the relationship.
+  request. A related resource URL **MUST** remain constant even when the
+  relationship (the set of referenced resources) mutates. That is, the response
+  from a related resource URL always reflects the current state of the
+  relationship.
 
 * An object (a "link object").
 
