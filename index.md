@@ -95,8 +95,8 @@ specification](/format).
 
 JSON API can be [extended in several ways](/extensions).
 
-Official extensions are available for [bulk](/extensions/bulk/) and
-[patch](/extensions/patch/) operations.
+Official extensions are available for [Bulk](/extensions/bulk/) and
+[JSON Patch](/extensions/jsonpatch/) operations.
 
 ## Update history <a href="#update-history" id="update-history" class="headerlink"></a>
 
