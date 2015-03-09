@@ -639,7 +639,8 @@ Content-Type: application/vnd.api+json
     "related": "/articles/1/author"
   },
   "data": {
-    "type": "people", "id": "12"
+    "type": "people",
+    "id": "12"
   }
 }
 ```
