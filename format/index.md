@@ -261,10 +261,12 @@ one of the following:
 * A `related` member, whose value is a related resource URL (as defined above).
 * Linkage to other resources based on their identifying `id` and `type` members
   ("resource linkage"). Linkage **MUST** be expressed as:
-  * `type` and `id` members for to-one relationships. `type` is not required
-    if the value of `id` is `null`.
-  * `type` and `id` members for homogeneous to-many relationships. `type` is
-    not required if the value of `id` is an empty array (`[]`).
+  * `type` and `id` members for to-one and homogeneous to-many relationships.
+    For a to-one relationship, the value of `id` **MUST** be either a string ID
+    or `null` to indicate an empty relationship. For a to-many relationship,
+    the value of `id` **MUST** be either an array of string IDs or an empty
+    array (`[]`) to indicate an empty relationship. If a relationship is empty,
+    `type` **MAY** be omitted.
   * A `data` member whose value is an array of objects each containing `type`
     and `id` members for heterogeneous to-many relationships.
 * A `"meta"` member that contains non-standard meta-information about the
