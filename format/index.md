@@ -74,6 +74,9 @@ Although the same media type is used for both request and response documents,
 certain aspects are only applicable to one or the other. These differences are
 called out below.
 
+Unless otherwise noted, objects defined by this specification **MUST NOT**
+contain any additional members.
+
 ### Top Level <a href="#document-structure-top-level" id="document-structure-top-level" class="headerlink"></a>
 
 A JSON object **MUST** be at the root of every JSON API response containing
@@ -118,10 +121,6 @@ A document's top level **MAY** also have the following members:
 If any of these members appears in the top-level of a response, their values
 **MUST** comply with this specification.
 
-The top level of a document **MUST NOT** contain any additional members whose
-names start with alphanumeric characters. Additional members whose names start
-with non-alphanumeric characters are allowed.
-
 ### Resource Objects <a href="#document-structure-resource-objects" id="document-structure-resource-objects" class="headerlink"></a>
 
 "Resource objects" appear in a JSON API document to represent resources.
@@ -141,8 +140,8 @@ In addition, a resource object **MAY** contain any of these top-level members:
 * `"meta"`: non-standard meta-information about a resource that can not be
   represented as an attribute or relationship.
 
-Any other top-level member in a resource object represents an "attribute".
-An attribute may contain any valid JSON value.
+A resource object **MAY** contain additional top-level members. These members
+represent "attributes" and may contain any valid JSON value.
 
 If the value of an attribute is a JSON object or array, the member is called a
 *complex attribute*. The value is allowed to be any valid JSON structure.
@@ -282,11 +281,6 @@ without having to `GET` one of the relationship URLs.
 
 > Note: If present, a *related resource URL* must be a valid URL, even if the
 relationship isn't currently associated with any target resources.
-
-Besides the members described above (`self`, `resource`, `type`, `id`, `meta`,
-and the keys for pagination), a link object **MUST NOT** contain any additional
-members whose names start with alphanumeric characters. Additional members whose
-names start with non-alphanumeric characters are allowed.
 
 For example, the following article is associated with an `author` and `comments`:
 
@@ -439,6 +433,8 @@ For example:
 }
 ```
 
+Any members **MAY** be specified within `meta` objects.
+
 ### Top-level Links <a href="#document-structure-top-level-links" id="document-structure-top-level-links" class="headerlink"></a>
 
 The top-level links object **MAY** contain the following members:
@@ -447,10 +443,6 @@ The top-level links object **MAY** contain the following members:
 * `"related"` - a related resource URL (as defined above) when the primary
   data represents a resource relationship.
 * Pagination links for the primary data (as described below).
-
-The top-level links object **MUST NOT** contain any additional members whose
-names start with alphanumeric characters. Additional members whose names
-start with non-alphanumeric characters are allowed.
 
 ## Fetching Data <a href="#fetching" id="fetching" class="headerlink"></a>
 
