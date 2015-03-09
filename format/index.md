@@ -275,8 +275,10 @@ pagination links, as described below.
 
 If a link object refers to resource objects included in the same compound
 document, it **MUST** include resource linkage to those resource objects.
-This allows a client to link together all of the included resource objects
-without having to `GET` one of the relationship URLs.
+
+> Note: Resource linkage in a compound document allows a client to link
+together all of the included resource objects without having to `GET` any
+relationship URLs.
 
 > Note: If present, a *related resource URL* must be a valid URL, even if the
 relationship isn't currently associated with any target resources.
