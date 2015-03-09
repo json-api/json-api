@@ -19,6 +19,7 @@ There are four primary editors of this specification:
 - [Steve Klabnik](http://twitter.com/steveklabnik)
 - [Yehuda Katz](http://twitter.com/wycats)
 - [Dan Gebhardt](http://twitter.com/dgeb)
+- [Tyler Kellen](http://twitter.com/tkellen)
 
 ## History <a href="#history" id="history" class="headerlink"></a>
 
