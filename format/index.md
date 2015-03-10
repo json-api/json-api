@@ -296,42 +296,19 @@ For example, the following article is associated with an `author` and `comments`
       "type": "people",
       "id": "9"
     },
-    "comments": {
-      "related": "http://example.com/articles/1/comments"
-    }
+    "comments": "http://example.com/articles/1/comments"
   }
 }
 // ...
 ```
 
 The `author` relationship includes a URL for the relationship itself (which
-allows the client to change the related author without deleting the `people`
-object), a URL to fetch the resource objects, and linkage information for
-the current compound document.
+allows the client to change the related author directly), a related resource URL
+to fetch the resource objects, and linkage information.
 
-The `comments` relationship is simpler: it just provides a URL to fetch the
-comments. The following resource object, which provides the `comments`
-relationship as a string value rather than an object, is equivalent:
-
-```javascript
-// ...
-{
-  "type": "articles",
-  "id": "1",
-  "title": "Rails is Omakase",
-  "links": {
-    "self": "http://example.com/articles/1",
-    "author": {
-      "self": "http://example.com/articles/1/links/author",
-      "related": "http://example.com/articles/1/author",
-      "type": "people",
-      "id": "9"
-    },
-    "comments": "http://example.com/articles/1/comments"
-  }
-}
-// ...
-```
+The `comments` relationship is simpler: it just provides a related resource URL
+to fetch the comments. The URL can therefore be specified directly as the
+attribute value.
 
 ### Compound Documents <a href="#document-structure-compound-documents" id="document-structure-compound-documents" class="headerlink"></a>
 
