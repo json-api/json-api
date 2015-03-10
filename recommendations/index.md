@@ -108,7 +108,7 @@ Because these URLs represent resources in relationships, they should not be
 used as `self` links for the resources themselves. Instead the recommendations
 for individual resource URLs should still apply when forming `self` links.
 
-## Recommendations for Filtering <a href="filtering" id="filtering" class="headerlink"></a>
+## Recommendations for Filtering <a href="#filtering" id="filtering" class="headerlink"></a>
 
 The base specification is agnostic about filtering strategies supported by a
 server. The `filter` query parameter is reserved to be used as the basis for
