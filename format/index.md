@@ -717,8 +717,8 @@ relationship using the name used in the `links` section of the primary data.
 If a client supplies an `include` parameter, the server **MUST NOT** include
 other resource objects in the `included` section of the compound document.
 
-The value of the `include` parameter is a comma-separated (U+002C COMMA,
-",") list of relationship paths. A relationship path is a dot-separated
+The value of the `include` parameter **MUST** be a comma-separated (U+002C
+COMMA, ",") list of relationship paths. A relationship path is a dot-separated
 (U+002E FULL-STOP, ".") list of relationship names. Each relationship name
 **MUST** be identical to the key in the `links` section of its parent
 resource object.
