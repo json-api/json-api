@@ -82,8 +82,6 @@ contain any additional members.
 A JSON object **MUST** be at the root of every JSON API response containing
 data. This object defines a document's "top level".
 
-Responses which forbid a message-body, such as `204 No Content` can be empty.
-
 The document's "primary data" is a representation of the resource, collection
 of resources, or resource relationship primarily targeted by a request.
 
