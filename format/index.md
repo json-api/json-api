@@ -480,19 +480,19 @@ A server **MUST** support fetching resource data for every URL provided as:
 
 For example, the following request fetches a collection of articles:
 
-```text
+```http
 GET /articles
 ```
 
 The following request fetches an article:
 
-```text
+```http
 GET /articles/1
 ```
 
 And the following request fetches an article's author:
 
-```text
+```http
 GET /articles/1/author
 ```
 
@@ -610,13 +610,13 @@ provided as a `self` link as part of a *link object*.
 
 For example, the following request fetches data about an article's comments:
 
-```text
+```http
 GET /articles/1/links/comments
 ```
 
 And the following request fetches data about an article's author:
 
-```text
+```http
 GET /articles/1/links/author
 ```
 
@@ -742,14 +742,14 @@ resource object.
 
 For instance, comments could be requested with an article:
 
-```text
+```http
 GET /articles/1?include=comments
 ```
 
 In order to request resources related to other resources, a dot-separated path
 for each relationship name can be specified:
 
-```text
+```http
 GET /articles/1?include=comments.author
 ```
 
@@ -760,7 +760,7 @@ without fetching the comments again.
 
 Multiple related resources can be requested in a comma-separated list:
 
-```text
+```http
 GET /articles/1?include=author,comments,comments.author
 ```
 
@@ -778,7 +778,7 @@ COMMA, ",") list that refers to the name(s) of the fields to be returned.
 If a client requests a restricted set of [fields], an endpoint **MUST NOT**
 include additional [fields] in the response.
 
-```text
+```http
 GET /articles?include=author&fields[articles]=title,body&fields[people]=name
 ```
 
@@ -799,7 +799,7 @@ relationship.
 An endpoint **MAY** support requests to sort the primary data with a `sort`
 query parameter. The value for `sort` **MUST** represent sort fields.
 
-```text
+```http
 GET /people?sort=+age
 ```
 
@@ -810,7 +810,7 @@ An endpoint **MAY** support multiple sort fields by allowing comma-separated
 (U+002C COMMA, ",") sort fields. Sort fields **SHOULD** be applied in the
 order specified.
 
-```text
+```http
 GET /people?sort=+age,+name
 ```
 
@@ -824,7 +824,7 @@ following prefixes:
 order, JSON API avoids setting requirements for the first character in sort
 field names.
 
-```text
+```http
 GET /articles?sort=-created,+title
 ```
 
@@ -1386,7 +1386,7 @@ details **MAY** also be returned, as discussed below.
 An individual resource can be *deleted* by making a `DELETE` request to the
 resource's URL:
 
-```text
+```http
 DELETE /photos/1
 ```
 
