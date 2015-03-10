@@ -440,7 +440,7 @@ A server **MUST** support fetching resource data for every URL provided as:
 
 * a `self` link as part of the top-level *links object*
 * a `self` link as part of a *resource object*
-* a `resource` link as part of a *link object*
+* a `related` link as part of a *link object*
 
 For example, the following request fetches a collection of articles:
 
@@ -600,7 +600,7 @@ The primary data in the response document **MUST** be one of the following:
 * an array of objects each containing `type` and `id` members for non-empty
   heterogenous to-many relationships.
 
-The top-level *links object* **MAY** contain `self` and `resource` links,
+The top-level *links object* **MAY** contain `self` and `related` links,
 as described for link objects.
 
 For example, a `GET` request a to-one relationship URL could return:
