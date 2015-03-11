@@ -137,22 +137,6 @@ In addition, a resource object **MAY** contain any of these top-level members:
 * `"meta"`: non-standard meta-information about a resource that can not be
   represented as an attribute or relationship.
 
-A resource object **MAY** contain additional top-level members. These members
-represent "attributes" and may contain any valid JSON value.
-
-If the value of an attribute is a JSON object or array, the member is called a
-*complex attribute*. The value is allowed to be any valid JSON structure.
-However, a JSON object that constitutes or is contained in a complex attribute
-must reserve the `id`, `type`, `links`, and `meta` members for future use.
-
-A resource object's attributes and relationships are collectively called its
-"fields". <a href="#document-structure-resource-fields" id="document-structure-resource-fields"></a>
-
-Although has-one foreign keys (e.g. `author-id`) are often stored internally
-alongside other information to be represented in a resource object, these keys
-**SHOULD NOT** appear as attributes. If relations are provided, they **MUST**
-be represented under the "links object", as described below.
-
 Here's how an article (i.e. a resource of type "articles") might appear in a document:
 
 ```javascript
@@ -171,6 +155,28 @@ Here's how an article (i.e. a resource of type "articles") might appear in a doc
 }
 // ...
 ```
+
+#### Attributes <a href="#document-structure-resource-object-attributes" id="document-structure-resource-object-attributes"></a>
+
+A resource object **MAY** contain additional top-level members. These members
+represent "[attributes]" and may contain any valid JSON value.
+
+Although has-one foreign keys (e.g. `author_id`) are often stored internally
+alongside other information to be represented in a resource object, these keys
+**SHOULD NOT** appear as attributes. If relations are provided, they **MUST**
+be represented under the "links object".
+
+#### Complex Attributes <a href="#document-structure-resource-object-complex-attributes" id="document-structure-resource-object-complex-attributes"></a>
+
+"[Complex attributes]" are [attributes] whose value is an object or array with
+any level of nesting. An object that constitutes or is contained in a complex
+attribute must reserve the `id`, `type`, `links`, and `meta` members for future
+use.
+
+#### Fields <a href="#document-structure-resource-object-fields" id="document-structure-resource-object-fields" class="headerlink"></a>
+
+A resource object's [attributes] and relationships are collectively called its
+"[fields]". <a href="#document-structure-resource-object-fields" id="document-structure-resource-object-fields"></a>
 
 #### Resource Identification <a href="#document-structure-resource-identification" id="document-structure-resource-identification" class="headerlink"></a>
 
@@ -727,24 +733,20 @@ GET /articles/1?include=author,comments,comments.author
 
 ### Sparse Fieldsets <a href="#fetching-sparse-fieldsets" id="fetching-sparse-fieldsets" class="headerlink"></a>
 
-A client **MAY** request that an endpoint return only specific
-[fields](#document-structure-resource-fields) in the response on a per-type basis
-by including a `fields[TYPE]` parameter. The value of the parameter is a
-comma-separated (U+002C COMMA, ",") list that refers to the names(s) of the
-fields to be returned.
+A client **MAY** request that an endpoint return only specific [fields] in the
+response on a per-type basis by including a `fields[TYPE]` parameter.
+
+> Note: Only [fields] are affected; `type`, `id`, and (optionally) `self` are included as normal.
+
+The value of the `fields` parameter **MUST** be a comma-separated (U+002C
+COMMA, ",") list that refers to the name(s) of the fields to be returned.
+
+If a client requests a restricted set of [fields], an endpoint **MUST NOT**
+include additional [fields] in the response.
 
 ```text
 GET /articles?include=author&fields[articles]=title,body&fields[people]=name
 ```
-
-If a client requests a restricted set of fields, an endpoint **MUST NOT**
-include additional fields in the response.
-
-Resource object properties that are not fields are not affected by the `fields`
-parameter. As stated in the [Resource
-Objects](#document-structure-resource-objects) section, the `type` and `id`
-members **MUST** always be included in each resource object, and the `self`
-property **MAY** be included.
 
 ### Sorting <a href="#fetching-sorting" id="fetching-sorting" class="headerlink"></a>
 
@@ -1391,3 +1393,7 @@ An error object **MAY** have the following members:
   [e.g. `["/first-name", "/last-name"]` to reference a couple attributes].
 
 Additional members **MAY** be specified within error objects.
+
+[attributes]: #document-structure-resource-object-attributes
+[complex attributes]: #document-structure-resource-object-complex-attributes
+[fields]: #document-structure-resource-object-fields
