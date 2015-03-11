@@ -165,8 +165,7 @@ Here's how an article (i.e. a resource of type "articles") might appear in a doc
     "author": {
       "self": "/articles/1/links/author",
       "related": "/articles/1/author",
-      "type": "people",
-      "id": "9"
+      "linkage": { "type": "people", "id": "9" }
     }
   }
 }
@@ -256,14 +255,7 @@ one of the following:
   relationship. For example, it would allow a client to remove an `author` from
   an `article` without deleting the `people` resource itself.
 * A `related` member, whose value is a related resource URL (as defined above).
-* Linkage to other resources based on their identifying `id` and `type` members
-  ("resource linkage"). Linkage **MUST** be expressed as:
-  * `type` and `id` members for to-one relationships. `type` is not required
-    if the value of `id` is `null`.
-  * `type` and `id` members for homogeneous to-many relationships. `type` is
-    not required if the value of `id` is an empty array (`[]`).
-  * A `data` member whose value is an array of objects each containing `type`
-    and `id` members for heterogeneous to-many relationships.
+* A `linkage` member, whose value represents "resource linkage".
 * A `"meta"` member that contains non-standard meta-information about the
   relationship.
 
@@ -272,6 +264,15 @@ pagination links, as described below.
 
 If a link object refers to resource objects included in the same compound
 document, it **MUST** include resource linkage to those resource objects.
+
+Resource linkage **MUST** be represented as one of the following:
+
+* `null` for empty to-one relationships.
+* an object containing `type` and `id` members for non-empty to-one
+  relationships.
+* an empty array (`[]`) for empty to-many relationships.
+* an array of objects each containing `type` and `id` members for non-empty
+  to-many relationships.
 
 > Note: Resource linkage in a compound document allows a client to link
 together all of the included resource objects without having to `GET` any
@@ -293,8 +294,7 @@ For example, the following article is associated with an `author` and `comments`
     "author": {
       "self": "http://example.com/articles/1/links/author",
       "related": "http://example.com/articles/1/author",
-      "type": "people",
-      "id": "9"
+      "linkage": { "type": "people", "id": "9" }
     },
     "comments": "http://example.com/articles/1/comments"
   }
@@ -332,14 +332,15 @@ A complete example document with multiple included relationships:
       "author": {
         "self": "http://example.com/articles/1/links/author",
         "related": "http://example.com/articles/1/author",
-        "type": "people",
-        "id": "9"
+        "linkage": { "type": "people", "id": "9" }
       },
       "comments": {
         "self": "http://example.com/articles/1/links/comments",
         "related": "http://example.com/articles/1/comments",
-        "type": "comments",
-        "id": ["5", "12"]
+        "linkage": [
+          { "type": "comments", "id": "5" },
+          { "type": "comments", "id": "12" }
+        ]
       }
     }
   }],
@@ -591,17 +592,11 @@ GET /articles/1/links/author
 A server **MUST** respond to a successful request to fetch a relationship
 with a `200 OK` response.
 
-The primary data in the response document **MUST** be one of the following:
-
-* `null` for empty to-one relationships.
-* an empty array (`[]`) for empty to-many relationships
-* an object containing `type` and `id` members for non-empty to-one
-  or homogeneous to-many relationships.
-* an array of objects each containing `type` and `id` members for non-empty
-  heterogenous to-many relationships.
+The primary data in the response document **MUST** match the appropriate
+value for resource linkage, as described above for link objects.
 
 The top-level *links object* **MAY** contain `self` and `related` links,
-as described for link objects.
+as described above for link objects.
 
 For example, a `GET` request a to-one relationship URL could return:
 
@@ -637,7 +632,7 @@ Content-Type: application/vnd.api+json
 }
 ```
 
-A `GET` request to a homogenous to-many relationship URL could return:
+A `GET` request to a to-many relationship URL could return:
 
 ```text
 HTTP/1.1 200 OK
@@ -648,10 +643,10 @@ Content-Type: application/vnd.api+json
     "self": "/articles/1/links/tags",
     "related": "/articles/1/tags"
   },
-  "data": {
-    "type": "tags",
-    "id": ["2", "3"]
-  }
+  "data": [
+    { "type": "tags", "id": "2" },
+    { "type": "tags", "id": "3" }
+  ]
 }
 ```
 
@@ -668,27 +663,6 @@ Content-Type: application/vnd.api+json
     "related": "/articles/1/tags"
   },
   "data": []
-}
-```
-
-A `GET` request to a heterogenous to-many relationship URL could return:
-
-```text
-HTTP/1.1 200 OK
-Content-Type: application/vnd.api+json
-
-{
-  "links": {
-    "self": "/articles/1/links/tags",
-    "related": "/articles/1/tags"
-  },
-  "data": [{
-    "type": "system-tags",
-    "id": "2"
-  }, {
-    "type": "user-tags",
-    "id": "5"
-  }]
 }
 ```
 
@@ -1068,7 +1042,7 @@ Accept: application/vnd.api+json
 #### Updating a Resource's To-One Relationships <a href="#crud-updating-resource-to-one-relationships" id="crud-updating-resource-to-one-relationships" class="headerlink"></a>
 
 If a to-one relationship is provided in the `links` section of a resource
-object in a `PATCH` request, it **MUST** be one of:
+object in a `PATCH` request, its value **MUST** be either:
 
 * an object with `type` and `id` members corresponding to the related resource
 * `null`, to remove the relationship
@@ -1096,13 +1070,11 @@ Accept: application/vnd.api+json
 #### Updating a Resource's To-Many Relationships <a href="#crud-updating-resource-to-many-relationships" id="crud-updating-resource-to-many-relationships" class="headerlink"></a>
 
 If a to-many relationship is included in the `links` section of a resource
-object, it **MUST** be an object containing:
+object, it **MUST** be either:
 
-* `type` and `id` members for homogeneous to-many relationships; to clear the
-  relationship, set the `id` member to `[]`
-* a `data` member whose value is an array of objects each containing `type` and
-  `id` members for heterogeneous to-many relationships; to clear the
-  relationship, set the `data` member to `[]`
+* an array of objects each containing `type` and `id` members to replace all
+  members of the relationship.
+* an empty array (`[]`) to clear the relationship.
 
 For instance, the following `PATCH` request performs a complete replacement of
 the `tags` for an article:
@@ -1118,7 +1090,10 @@ Accept: application/vnd.api+json
     "id": "1",
     "title": "Rails is a Melting Pot",
     "links": {
-      "tags": { "type": "tags", "id": ["2", "3"] }
+      "tags": [
+        { "type": "tags", "id": "2" },
+        { "type": "tags", "id": "3" }
+      ]
     }
   }
 }
@@ -1207,8 +1182,8 @@ described below.
 The `PATCH` request **MUST** include a top-level member named `data` containing
 one of:
 
-* an object with `type` and `id` members corresponding to the related resource
-* `null`, to remove the relationship
+* an object with `type` and `id` members corresponding to the related resource.
+* `null`, to remove the relationship.
 
 For example, the following request updates the author of an article:
 
@@ -1239,8 +1214,8 @@ a `204 No Content` response.
 
 #### Updating To-Many Relationships <a href="#crud-updating-to-many-relationships" id="crud-updating-to-many-relationships" class="headerlink"></a>
 
-A server **MUST** respond to `PATCH`, `POST`, and `DELETE` requests to a *to-many
-relationship URL* as described below.
+A server **MUST** respond to `PATCH`, `POST`, and `DELETE` requests to a
+*to-many relationship URL* as described below.
 
 For all request types, the body **MUST** contain a `data` member whose value
 is an object that contains `type` and `id` members, or an array of objects
@@ -1260,7 +1235,22 @@ Content-Type: application/vnd.api+json
 Accept: application/vnd.api+json
 
 {
-  "data": { "type": "tags", "id": ["2", "3"] }
+  "data": [
+    { "type": "tags", "id": "2" },
+    { "type": "tags", "id": "3" }
+  ]
+}
+```
+
+And the following request clears every tag for an article:
+
+```text
+PATCH /articles/1/links/tags
+Content-Type: application/vnd.api+json
+Accept: application/vnd.api+json
+
+{
+  "data": []
 }
 ```
 
@@ -1290,7 +1280,9 @@ Content-Type: application/vnd.api+json
 Accept: application/vnd.api+json
 
 {
-  "data": { "type": "comments", "id": ["123"] }
+  "data": [
+    { "type": "comments", "id": "123" }
+  ]
 }
 ```
 
@@ -1314,7 +1306,10 @@ Content-Type: application/vnd.api+json
 Accept: application/vnd.api+json
 
 {
-  "data": { "type": "comments", "id": ["12", "13"] }
+  "data": [
+    { "type": "comments", "id": "12" },
+    { "type": "comments", "id": "13" }
+  ]
 }
 ```
 

@@ -33,14 +33,15 @@ Here's an example response from a blog that implements JSON API:
       "author": {
         "self": "http://example.com/posts/1/links/author",
         "related": "http://example.com/posts/1/author",
-        "type": "people",
-        "id": "9"
+        "linkage": { "type": "people", "id": "9" }
       },
       "comments": {
         "self": "http://example.com/posts/1/links/comments",
         "related": "http://example.com/posts/1/comments",
-        "type": "comments",
-        "id": ["5", "12"]
+        "linkage": [
+          { "type": "comments", "id": "5" },
+          { "type": "comments", "id": "12" }
+        ]
       }
     }
   }],
