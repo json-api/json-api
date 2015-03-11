@@ -256,12 +256,12 @@ The value of a relationship **MUST** be one of the following:
 If a relationship is provided as a link object, it **MUST** contain at least
 one of the following:
 
-* A `self` member, whose value is a URL for the relationship itself (a
+* A `"self"` member, whose value is a URL for the relationship itself (a
   "relationship URL"). This URL allows the client to directly manipulate the
   relationship. For example, it would allow a client to remove an `author` from
   an `article` without deleting the `people` resource itself.
-* A `related` member, whose value is a related resource URL (as defined above).
-* A `linkage` member, whose value represents "resource linkage".
+* A `"related"` member, whose value is a related resource URL (as defined above).
+* A `"linkage"` member, whose value represents "resource linkage".
 * A `"meta"` member that contains non-standard meta-information about the
   relationship.
 
@@ -274,10 +274,10 @@ document, it **MUST** include resource linkage to those resource objects.
 Resource linkage **MUST** be represented as one of the following:
 
 * `null` for empty to-one relationships.
-* an object containing `type` and `id` members for non-empty to-one
+* an object containing `"type"` and `"id"` members for non-empty to-one
   relationships.
 * an empty array (`[]`) for empty to-many relationships.
-* an array of objects each containing `type` and `id` members for non-empty
+* an array of objects each containing `"type"` and `"id"` members for non-empty
   to-many relationships.
 
 > Note: Resource linkage in a compound document allows a client to link
@@ -736,7 +736,8 @@ GET /articles/1?include=author,comments,comments.author
 A client **MAY** request that an endpoint return only specific [fields] in the
 response on a per-type basis by including a `fields[TYPE]` parameter.
 
-> Note: Only [fields] are affected; `type`, `id`, and (optionally) `self` are included as normal.
+> Note: Only [fields] are affected; `type`, `id`, and (optionally) `self` are
+included as normal.
 
 The value of the `fields` parameter **MUST** be a comma-separated (U+002C
 COMMA, ",") list that refers to the name(s) of the fields to be returned.
