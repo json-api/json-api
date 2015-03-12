@@ -440,8 +440,10 @@ Data, including resources and relationships, can be fetched by sending a
 `GET` request to an endpoint.
 
 JSON API requests **MUST** include an `Accept` header specifying the JSON
-API media type. Servers **MUST** return a `406 Not Acceptable` status code
-if this header is missing or specifies an unsupported media type.
+API media type. This header value **MUST** also include media type
+extensions relevant to the request. Servers **MUST** return a `406 Not
+Acceptable` status code if this header is missing or specifies an
+unsupported media type.
 
 > Note: Servers may support multiple media types at any endpoint. For example,
 a server may choose to support `text/html` in order to simplify viewing content
