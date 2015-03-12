@@ -55,8 +55,12 @@ extension.
 
 Clients **MAY** request a particular media type extension by including its
 name in the `ext` media type parameter with the `Accept` header. Servers
-that do not support a requested extension **MUST** return a `415 Unsupported
-Media Type` status code.
+that do not support a requested extension **MUST** return a `406 Not
+Acceptable` status code.
+
+If the media type in the `Accept` header is supported by a server but the
+media type in the `Content-Type` header is unsupported, the server
+**MUST** return a `415 Unsupported Media Type` status code.
 
 Servers **MUST NOT** provide extended functionality that is incompatible with the
 base specification to clients that do not request the extension in the `ext`
