@@ -79,7 +79,11 @@ certain aspects are only applicable to one or the other. These differences are
 called out below.
 
 Unless otherwise noted, objects defined by this specification **MUST NOT**
-contain any additional members.
+contain any additional members. Client and server implementations **MUST**
+ignore object members not recognized by this specification.
+
+> Note: These conditions for object members allow this specification to
+evolve through additive changes.
 
 ### Top Level <a href="#document-structure-top-level" id="document-structure-top-level" class="headerlink"></a>
 
