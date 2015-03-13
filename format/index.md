@@ -261,27 +261,21 @@ can be specified by including a member in a resource's links object.
 
 The name of the relationship declared in the key **SHALL NOT** be `"self"`.
 
-The value of a relationship **MUST** be one of the following:
-
-* A URL for the related resource(s) (a "related resource URL"). When fetched, it
-  returns the related resource object(s) as the response's primary data. For
-  example, an `article`'s `comments` relationship could specify a URL that
-  returns a list of comment resource objects when retrieved through a `GET`
-  request. A related resource URL **MUST** remain constant even when the
-  relationship (the set of referenced resources) mutates. That is, the response
-  from a related resource URL always reflects the current state of the
-  relationship.
-
-* An object (a "link object").
-
-If a relationship is provided as a link object, it **MUST** contain at least
-one of the following:
+The value of a relationship **MUST** be a "link object", and **MUST** contain at
+least one of the following:
 
 * A `"self"` member, whose value is a URL for the relationship itself (a
   "relationship URL"). This URL allows the client to directly manipulate the
   relationship. For example, it would allow a client to remove an `author` from
   an `article` without deleting the `people` resource itself.
-* A `"related"` member, whose value is a related resource URL (as defined above).
+* A `"related"` member, whose value is a URL for the related resource(s)
+  (a "related resource URL"). When fetched, it returns the related resource
+  object(s) as the response's primary data. For example, an `article`'s
+  `comments` relationship could specify a URL that returns a list of comment
+  resource objects when retrieved through a `GET` request. A related resource
+  URL **MUST** remain constant even when the relationship (the set of
+  referenced resources) mutates. That is, the response from a related resource
+  URL always reflects the current state of the relationship.
 * A `"linkage"` member, whose value represents "resource linkage".
 * A `"meta"` member that contains non-standard meta-information about the
   relationship.
