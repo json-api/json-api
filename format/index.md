@@ -261,7 +261,7 @@ can be specified by including a member in a resource's links object.
 
 The name of the relationship declared in the key **SHALL NOT** be `"self"`.
 
-The value of a relationship **MUST** be a "link object", and **MUST** contain at
+The value of a relationship **MUST** be an object (a "link object"), and **MUST** contain at
 least one of the following:
 
 * A `"self"` member, whose value is a URL for the relationship itself (a
@@ -317,7 +317,9 @@ For example, the following article is associated with an `author` and `comments`
       "related": "http://example.com/articles/1/author",
       "linkage": { "type": "people", "id": "9" }
     },
-    "comments": "http://example.com/articles/1/comments"
+    "comments": {
+      "related": "http://example.com/articles/1/comments"
+    }
   }
 }
 // ...
