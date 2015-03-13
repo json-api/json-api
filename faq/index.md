@@ -52,6 +52,14 @@ and capabilities and use the errors response to let users know. This error featu
 is still pending to be included in the standard since is still in
 [discussion](https://github.com/json-api/json-api/issues/7).
 
+### Where's PUT? Can I use method *X* to do *Y*? <a href="#wheres-put" id="wheres-put" class="headerlink"></a>
+
+JSON API does not currently specify the use of the `PUT` method for any purpose.
+
+Servers may complement the base specification by providing extra capabilities and
+alternative ways of requesting certain operations (e.g., resource creation via
+`PUT` in addition to `POST`).
+
 ### Is there a JSON Schema describing JSON API? <a href="#is-there-a-json-schema-describing-json-api" id="is-there-a-json-schema-describing-json-api" class="headerlink"></a>
 
 Not currently, no. JSON Schema cannot fully represent the semantics of JSON API, and so any such schema would be partial anyway.
