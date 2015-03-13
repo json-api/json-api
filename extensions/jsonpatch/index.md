@@ -20,9 +20,6 @@ extension [as described in the base specification](/format/#extending) using
 
 ## Patch Operations <a href="#patch-operations" id="patch-operations" class="headerlink"></a>
 
-Patch operations **MUST** specify a `Content-Type` header of
-`application/vnd.api+json; ext=jsonpatch`.
-
 Patch operations **MUST** be sent as an array to conform with the JSON
 Patch format. A server **MAY** limit the type, order, and count of
 operations allowed in this top level array.
@@ -30,7 +27,7 @@ operations allowed in this top level array.
 ### Request URLs and Patch Paths <a href="#patch-urls" id="patch-urls" class="headerlink"></a>
 
 The request URL and each Patch operation's `"path"` are complementary and
-MUST combine to target a particular resource, collection, attribute, or
+**MUST** combine to target a particular resource, collection, attribute, or
 relationship.
 
 If a server supports the Patch extension, it **MUST** allow Patch operations at
