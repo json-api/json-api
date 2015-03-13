@@ -45,34 +45,35 @@ server supports both the "bulk" and "jsonpatch" extensions.
 
 If an extension is used to form a particular request or response document,
 then it **MUST** be specified by including its name in the `ext` media type
-parameter with the `Content-Type` header. 
-The value of the `ext` media type parameter **MUST** be formatted 
-in the same way as the value of `supported-ext` media type parameter 
-and **MUST** be limited to a subset of extensions listed in `supported-ext`.
+parameter with the `Content-Type` header. The value of the `ext` media type
+parameter **MUST** be formatted as a comma-separated (U+002C COMMA, ",")
+list of extension names and **MUST** be limited to a subset of the
+extensions listed in `supported-ext`.
 
 For example: a response that includes the header `Content-Type:
 application/vnd.api+json; ext=ext1,ext2; supported-ext=ext1,ext2,ext3`
-indicates that the document is formatted according to the 
+indicates that the document is formatted according to the
 extensions "ext1" and "ext2".
 
 Clients **MAY** request a particular media type extension by including its
-name in the `ext` media type parameter with the `Accept` header. 
-Servers that do not support requested extensions or requested combination of 
-extensions **MUST** return a `406 Not Acceptable` status code.
+name in the `ext` media type parameter with the `Accept` header. Servers
+that do not support a requested extension or combination of extensions
+**MUST** return a `406 Not Acceptable` status code.
 
 If the media type in the `Accept` header is supported by a server but the
 media type in the `Content-Type` header is unsupported, the server
 **MUST** return a `415 Unsupported Media Type` status code.
 
-Servers **MUST NOT** provide extended functionality that is incompatible with the
-base specification to clients that do not request the extension in the `ext`
-parameter of the `Content-Type` or the `Accept` header.
+Servers **MUST NOT** provide extended functionality that is incompatible
+with the base specification to clients that do not request the extension in
+the `ext` parameter of the `Content-Type` or the `Accept` header.
 
-> Note: Since extensions can contradict one another or have interactions that 
-can be resolved in many equally plausible ways, it is responsibility of the
-server to decide which extensions are compatible, and it is a responsibility
-of the designer of each implementation of this specification to describe 
-extension interoperability rules which are applicable to that implementation.
+> Note: Since extensions can contradict one another or have interactions
+that can be resolved in many equally plausible ways, it is the
+responsibility of the server to decide which extensions are compatible, and
+it is the responsibility of the designer of each implementation of this
+specification to describe extension interoperability rules which are
+applicable to that implementation.
 
 ## Document Structure <a href="#document-structure" id="document-structure" class="headerlink"></a>
 
