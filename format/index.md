@@ -821,17 +821,11 @@ alphabetical order.
 
 ### Pagination <a href="#fetching-pagination" id="fetching-pagination" class="headerlink"></a>
 
-A server **MAY** choose to limit the number of resources returned in a response
-to a subset ("page") of the whole set available.
+A server **MAY** choose to limit the number of primary resources returned 
+in a response to a subset ("page") of the whole set available.
 
 A server **MAY** provide links to traverse a paginated data set ("pagination
-links").
-
-Pagination links **MUST** appear in the link object that corresponds to a
-collection. To paginate the primary data, supply pagination links in the
-top-level `links` object. To paginate an included collection returned in
-a compound document, supply pagination links in the corresponding link
-object.
+links") links in the top-level `links` object.
 
 The following keys **MUST** be used for pagination links:
 
