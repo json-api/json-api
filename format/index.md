@@ -60,6 +60,23 @@ name in the `ext` media type parameter with the `Accept` header. Servers
 that do not support a requested extension or combination of extensions
 **MUST** return a `406 Not Acceptable` status code.
 
+Servers **MAY** require a particular extensions to be used in every request
+and response. In this case, servers **MUST** return those extensions 
+in every response in the `required-ext` media type parameter of the 
+`Content-Type` header. The value of the `required-ext` parameter 
+**MUST** be a comma-separated (U+002C COMMA, ",") list of extension names
+and must be limited to a subset of the extensions listed in `supported-ext`.
+
+For example: a response that includes the header `Content-Type:
+application/vnd.api+json; ext=ext2; supported-ext=ext1,ext2; required-ext=ext2` 
+indicates that the server supports extensions "ext1" and "ext2" and
+requires use of extension "ext2" in every request and response.
+
+If the server requires a particular extension via `required-ext` 
+media type parameter of the response, but the client does not supply 
+it in the `ext` media type parameter of the request, the server
+**MUST** return a `406 Not Acceptable` status code.
+
 If the media type in the `Accept` header is supported by a server but the
 media type in the `Content-Type` header is unsupported, the server
 **MUST** return a `415 Unsupported Media Type` status code.
