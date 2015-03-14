@@ -48,11 +48,15 @@ then it **MUST** be specified by including its name in the `ext` media type
 parameter with the `Content-Type` header. The value of the `ext` media type
 parameter **MUST** be formatted as a comma-separated (U+002C COMMA, ",")
 list of extension names and **MUST** be limited to a subset of the
-extensions listed in `supported-ext`.
+extensions supported by the server, which are listed in `supported-ext` 
+of every response.
 
 For example: a response that includes the header `Content-Type:
 application/vnd.api+json; ext=ext1,ext2; supported-ext=ext1,ext2,ext3`
-indicates that the document is formatted according to the
+indicates that the response document is formatted according to the
+extensions "ext1" and "ext2". Another example: a request that includes 
+the header `Content-Type: application/vnd.api+json; ext=ext1,ext2`
+indicates that the request document is formatted according to the
 extensions "ext1" and "ext2".
 
 Clients **MAY** request a particular media type extension by including its
