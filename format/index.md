@@ -31,7 +31,8 @@ The base JSON API specification **MAY** be extended to support additional
 capabilities.
 
 An extension **MAY** make changes to and deviate from the requirements of the
-base specification apart from this section, which remains binding.
+base specification in the sections starting from the next one.
+Sections from the first one through this one remain binding.
 
 Servers that support one or more extensions to JSON API **MUST** return
 those extensions in every response in the `supported-ext` media type
