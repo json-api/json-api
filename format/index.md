@@ -191,7 +191,7 @@ be represented under the "links object".
 
 "[Complex attributes]" are [attributes] whose value is an object or array with
 any level of nesting. An object that constitutes or is contained in a complex
-attribute must reserve the `id`, `type`, `links`, and `meta` members for future
+attribute **MUST** reserve the `id`, `type`, `links`, and `meta` members for future
 use.
 
 #### Fields <a href="#document-structure-resource-object-fields" id="document-structure-resource-object-fields" class="headerlink"></a>
