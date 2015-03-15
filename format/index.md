@@ -627,7 +627,7 @@ value for resource linkage, as described above for link objects.
 The top-level *links object* **MAY** contain `self` and `related` links,
 as described above for link objects.
 
-For example, a `GET` request a to-one relationship URL could return:
+For example, a `GET` request to a to-one relationship URL could return:
 
 ```text
 HTTP/1.1 200 OK
