@@ -701,6 +701,10 @@ Content-Type: application/vnd.api+json
 A server **MUST** return `404 Not Found` when processing a request to fetch
 a relationship URL that does not exist.
 
+> Note: This can happen when the parent resource of the relationship 
+does not exist. For example, when `/articles/1` does not exist, request to
+`/articles/1/links/tags` returns `404 Not Found`.
+
 > Note: If a relationship URL exists but the relationship is empty, then
 `200 OK` **MUST** be returned, as described above.
 
