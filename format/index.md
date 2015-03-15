@@ -228,6 +228,9 @@ be a string.
 
 The value of the `"links"` key is a JSON object (a "links object") that
 represents related resources, keyed by the name of each association.
+These associations share namespace with resource attributes:
+associations of a given resource **MUST** be named differently than
+attributes of that resource.
 
 The key `"self"` is reserved within the links object for the resource URL,
 as described below.
