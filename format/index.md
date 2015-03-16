@@ -908,6 +908,33 @@ Accept: application/vnd.api+json
 }
 ```
 
+Resources can be created together with relationships:
+
+```text
+POST /photos
+Content-Type: application/vnd.api+json
+Accept: application/vnd.api+json
+
+{
+  "data": {
+    "type": "photos",
+    "title": "Ember Hamster",
+    "src": "http://example.com/images/productivity.png",
+    "links": {
+      "author": {
+        "linkage": { "type": "people", "id": "12" }
+      },
+      "equipment": {
+        "linkage": [
+          { "type": "cameras", "id": "13" },
+          { "type": "lenses", "id": "14" }
+        ]
+      }
+    }
+  }
+}
+```
+
 #### Client-Generated IDs <a href="#crud-creating-client-ids" id="crud-creating-client-ids" class="headerlink"></a>
 
 A server **MAY** accept a client-generated ID along with a request to create
