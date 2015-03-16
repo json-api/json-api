@@ -302,7 +302,7 @@ relationship URLs.
 > Note: If present, a *related resource URL* must be a valid URL, even if the
 relationship isn't currently associated with any target resources.
 
-For example, the following article is associated with an `author` and `comments`:
+For example, the following article is associated with an `author`:
 
 ```javascript
 // ...
@@ -316,9 +316,6 @@ For example, the following article is associated with an `author` and `comments`
       "self": "http://example.com/articles/1/links/author",
       "related": "http://example.com/articles/1/author",
       "linkage": { "type": "people", "id": "9" }
-    },
-    "comments": {
-      "related": "http://example.com/articles/1/comments"
     }
   }
 }
@@ -328,10 +325,6 @@ For example, the following article is associated with an `author` and `comments`
 The `author` relationship includes a URL for the relationship itself (which
 allows the client to change the related author directly), a related resource URL
 to fetch the resource objects, and linkage information.
-
-The `comments` relationship is simpler: it just provides a related resource URL
-to fetch the comments. The URL can therefore be specified directly as the
-attribute value.
 
 ### Compound Documents <a href="#document-structure-compound-documents" id="document-structure-compound-documents" class="headerlink"></a>
 
