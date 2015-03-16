@@ -903,10 +903,19 @@ Accept: application/vnd.api+json
   "data": {
     "type": "photos",
     "title": "Ember Hamster",
-    "src": "http://example.com/images/productivity.png"
+    "src": "http://example.com/images/productivity.png",
+    "links": {
+      "photographer": {
+        "linkage": { "type": "people", "id": "9" }
+      }
+    }
   }
 }
 ```
+
+If the resource object being sent contains any relationships in its `"links"`
+key, those relationships **MUST** each have a `"linkage"` key that includes the
+linkage the new resource is to have.
 
 #### Client-Generated IDs <a href="#crud-creating-client-ids" id="crud-creating-client-ids" class="headerlink"></a>
 
