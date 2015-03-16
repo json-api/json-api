@@ -287,7 +287,7 @@ one of the following:
   relationship.
 
 A link object that represents a to-many relationship **MAY** also contain
-pagination links, as described below.
+pagination members, as described below.
 
 If a link object refers to resource objects included in the same compound
 document, it **MUST** include resource linkage to those resource objects.
@@ -445,7 +445,7 @@ The top-level links object **MAY** contain the following members:
 * `"self"` - a link for fetching the data in the response document.
 * `"related"` - a related resource URL (as defined above) when the primary
   data represents a resource relationship.
-* Pagination links for the primary data (as described below).
+* Pagination members for the primary data (as described below).
 
 ## Fetching Data <a href="#fetching" id="fetching" class="headerlink"></a>
 
@@ -842,6 +842,13 @@ The following keys **MUST** be used for pagination links:
 
 Keys **MUST** either be omitted or have a `null` value to indicate that a
 particular link is unavailable.
+
+A server **MAY** also return additional members of `links` related to 
+pagination along with the 4 links defined above. 
+These members may contain any valid JSON value.
+
+> Note: For example, a member `"total"` can be returned to communicate
+the total number of pages.
 
 Concepts of order, as expressed in the naming of pagination links, **MUST**
 remain consistent with JSON API's [sorting rules](#fetching-sorting).
