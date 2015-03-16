@@ -3,10 +3,10 @@ layout: page
 title: "JSON API: Specification Status"
 ---
 
-**This document is a work in progress** and will change as implementation work
-progresses. Implementors should be aware that this specification is not stable.
-It is currently missing some details about the `meta` attribute and could be
-more precise about details of working with relationships.
+JSON API is at a third release candidate state. This means that it is not yet
+stable, however, libraries intended to work with 1.0 should implement this
+version of the specification. We may make very small tweaks, but everything is
+basically in place.
 
 Work on this specification is being done at its [GitHub
 repository](https://github.com/json-api/json-api). Please feel free to help
