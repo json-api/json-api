@@ -277,12 +277,15 @@ The value of a relationship **MUST** be one of the following:
 If a relationship is provided as a link object, it **MUST** contain at least
 one of the following:
 
+* A `"related"` member, whose value is a related resource URL (as defined above).
+* A `"linkage"` member, whose value represents "resource linkage".
+
+The link object **MAY** also contain:
 * A `"self"` member, whose value is a URL for the relationship itself (a
   "relationship URL"). This URL allows the client to directly manipulate the
   relationship. For example, it would allow a client to remove an `author` from
   an `article` without deleting the `people` resource itself.
-* A `"related"` member, whose value is a related resource URL (as defined above).
-* A `"linkage"` member, whose value represents "resource linkage".
+
 * A `"meta"` member that contains non-standard meta-information about the
   relationship.
 
