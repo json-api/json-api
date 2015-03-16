@@ -33,51 +33,64 @@ capabilities.
 An extension **MAY** make changes to and deviate from the requirements of the
 base specification apart from this section, which remains binding.
 
-Servers that support one or more extensions to JSON API **MUST** return
-those extensions in every response in the `supported-ext` media type
-parameter of the `Content-Type` header. The value of the `supported-ext`
-parameter **MUST** be a comma-separated (U+002C COMMA, ",") list of
-extension names.
+Servers that support one or more extensions to JSON API **MUST** return their
+names in every response in the `supported-ext` media type parameter of the
+`Content-Type` header.
 
-For example: a response that includes the header `Content-Type:
-application/vnd.api+json; supported-ext=bulk,jsonpatch` indicates that the
-server supports both the "bulk" and "jsonpatch" extensions.
-
-If an extension is used to form a particular request or response document,
-then it **MUST** be specified by including its name in the `ext` media type
-parameter with the `Content-Type` header. The value of the `ext` media type
-parameter **MUST** be formatted as a comma-separated (U+002C COMMA, ",")
-list of extension names and **MUST** be limited to a subset of the
-extensions supported by the server, which are listed in `supported-ext` 
-of every response.
-
-For example: a response that includes the header `Content-Type:
-application/vnd.api+json; ext=ext1,ext2; supported-ext=ext1,ext2,ext3`
-indicates that the response document is formatted according to the
-extensions "ext1" and "ext2". Another example: a request that includes 
-the header `Content-Type: application/vnd.api+json; ext=ext1,ext2`
-indicates that the request document is formatted according to the
-extensions "ext1" and "ext2".
-
-Clients **MAY** request a particular media type extension by including its
-name in the `ext` media type parameter with the `Accept` header. Servers
-that do not support a requested extension or combination of extensions
-**MUST** return a `406 Not Acceptable` status code.
-
-If the media type in the `Accept` header is supported by a server but the
-media type in the `Content-Type` header is unsupported, the server
-**MUST** return a `415 Unsupported Media Type` status code.
+Clients **MAY** request a particular extension by including its name in the
+`ext` media type parameter of the `Accept` header. Servers that do not support
+a requested extension or combination of extensions **MUST** return a `406 Not
+Acceptable` status code.
 
 Servers **MUST NOT** provide extended functionality that is incompatible
 with the base specification to clients that do not request the extension in
-the `ext` parameter of the `Content-Type` or the `Accept` header.
+the `ext` parameter of the `Accept` header.
 
-> Note: Since extensions can contradict one another or have interactions
-that can be resolved in many equally plausible ways, it is the
-responsibility of the server to decide which extensions are compatible, and
-it is the responsibility of the designer of each implementation of this
-specification to describe extension interoperability rules which are
-applicable to that implementation.
+> Note: Extended features that are purely additive to the base specification may
+be enabled even if the client does not explicitly request the extension. For
+example, a server might provide such functionality based on some other
+aspect of the request, such as the HTTP method or a query string parameter.
+
+If an extension is used to form a particular request or response document, then
+the format **MUST** be described by including the extension name in the `ext`
+media type parameter of the `Content-Type` header.
+
+If the extension requested in the `Accept` header is supported by a server but
+the media type in the `Content-Type` header is unsupported, the server **MUST**
+return a `415 Unsupported Media Type` status code.
+
+The value of the `ext` and `supported-ext` parameters **MUST** be expressed a
+comma-separated (U+002C COMMA, ",") list of extension names.
+
+> Note: Since extensions can contradict one another or have interactions that
+may be resolved in multiple ways, it is the responsibility of the designer of
+each JSON API implementation to decide which extensions can be enabled
+simultaneously and to describe any extension interoperability rules.
+
+*Example 1.* Server advertises support for extensions *E1*, *E2*, and *E3*:
+
+```http
+HTTP/1.1 200 OK
+Content-Type: application/vnd.api+json; supported-ext=E1,E2,E3
+```
+
+*Example 2.* Client issues a POST request, invokes extensions *E2* and *E3*,
+and includes a payload formatted according to *E3*:
+
+```http
+POST /some-collection
+Accept: application/vnd.api+json; ext=E2,E3
+Content-Type: application/vnd.api+json; ext=E3
+```
+
+*Example 3.* Server responds to the POST request and sends a `Content-Type`
+header containing both `ext` and `supported-ext` parameters:
+
+```http
+HTTP/1.1 201 Created
+Location: https://example.com/some-collection/50a43929-376a-4490-9015-95243c28ee97
+Content-Type: application/vnd.api+json; ext=E3; supported-ext=E1,E2,E3
+```
 
 ## Document Structure <a href="#document-structure" id="document-structure" class="headerlink"></a>
 
