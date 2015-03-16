@@ -825,6 +825,13 @@ The above example should return the newest articles first. Any articles
 created on the same date will then be sorted by their title in ascending
 alphabetical order.
 
+If sorting is supported by the server and requested by the client via 
+query parameter `sort`, the server **MUST** return elements of the 
+top-level `data` array of the response ordered according to the criteria 
+specified. 
+The server **MAY** apply default sorting rules to top-level `data` 
+if request parameter `sort` is not specified. 
+
 ### Pagination <a href="#fetching-pagination" id="fetching-pagination" class="headerlink"></a>
 
 A server **MAY** choose to limit the number of resources returned in a response
