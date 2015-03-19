@@ -28,6 +28,7 @@ implementations. There is a [custom adapter](https://github.com/daliwali/ember-j
 ### iOS <a href="#client-ios" id="client-ios" class="headerlink"></a>
 
 * [jsonapi-ios](https://github.com/joshdholtz/jsonapi-ios) is a library for loading data from a JSON API datasource. Parses JSON API data into models with support for auto-linking of resources and custom model classes.
+* [Spine](https://github.com/wvteijlingen/spine) is a Swift library for working with JSON:API APIs. It supports mapping to custom model classes, fetching, advanced querying, linking and persisting.
 
 ### Ruby <a href="#client-ruby" id="client-ruby" class="headerlink"></a>
 
