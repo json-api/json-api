@@ -48,13 +48,13 @@ then it **MUST** be specified by including its name in the `ext` media type
 parameter with the `Content-Type` header. The value of the `ext` media type
 parameter **MUST** be formatted as a comma-separated (U+002C COMMA, ",")
 list of extension names and **MUST** be limited to a subset of the
-extensions supported by the server, which are listed in `supported-ext` 
+extensions supported by the server, which are listed in `supported-ext`
 of every response.
 
 For example: a response that includes the header `Content-Type:
 application/vnd.api+json; ext=ext1,ext2; supported-ext=ext1,ext2,ext3`
 indicates that the response document is formatted according to the
-extensions "ext1" and "ext2". Another example: a request that includes 
+extensions "ext1" and "ext2". Another example: a request that includes
 the header `Content-Type: application/vnd.api+json; ext=ext1,ext2`
 indicates that the request document is formatted according to the
 extensions "ext1" and "ext2".
@@ -1132,9 +1132,9 @@ relationship. In such a case, the server **MUST** reject the entire update,
 and return a `403 Forbidden` response.
 
 > Note: Since full replacement may be a very dangerous operation, a server
-may choose to disallow it. A server may reject full replacement if it has
-not provided the client with the full list of associated objects, and does
-not want to allow deletion of records the client has not seen.
+may choose to disallow it. For example, a server may reject full replacement if
+it has not provided the client with the full list of associated objects, and
+does not want to allow deletion of records the client has not seen.
 
 #### Responses <a href="#crud-updating-responses" id="crud-updating-responses" class="headerlink"></a>
 
