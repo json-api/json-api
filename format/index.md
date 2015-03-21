@@ -233,10 +233,11 @@ which **MUST** contain at least one of the following:
 * A `"links"` member that contains at least one of the following:
   * A `"self"` member, whose value is a URL for the relationship itself (a
     "relationship URL"). This URL allows the client to directly manipulate the
-    relationship. For example, it would allow a client to remove an `author`
-    from an `article` without deleting the `people` resource itself.
+    relationship. For example, it would allow a client to add a new comment to an
+    `article` without going through the `article` resource and updating the
+    entire set of `comments` references.
   * A `"related"` member, whose value is a related resource URL, as defined below.
-* A `"data"` member, whose value represents "resource linkage" (defined below).
+* A `"data"` member that contains resource linkage information, as defined below.
 * A `"meta"` member that contains non-standard meta-information about the
   relationship.
 
@@ -256,7 +257,8 @@ resource URL always reflects the current state of the relationship.
 If present, a related resource URL **MUST** be a valid URL, even if the
 relationship isn't currently associated with any target resources.
 
-Resource linkage **MUST** be represented as one of the following:
+"Resource linkage" describes the contents of a relationship and identifies the
+referenced resources. Linkage **MUST** be represented as one of the following:
 
 * `null` for empty to-one relationships.
 * a [resource identifier object] for non-empty to-one relationships.
