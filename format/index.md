@@ -1074,13 +1074,11 @@ Accept: application/vnd.api+json
 }
 ```
 
-#### Updating a Resource's To-One Relationships <a href="#crud-updating-resource-to-one-relationships" id="crud-updating-resource-to-one-relationships" class="headerlink"></a>
+#### Updating a Resource's Relationships <a href="#crud-updating-resource-relationships" id="crud-updating-resource-relationships" class="headerlink"></a>
 
-If a to-one relationship is provided in the `links` section of a resource
-object in a `PATCH` request, its value **MUST** be either:
-
-* an object with `type` and `id` members corresponding to the related resource
-* `null`, to remove the relationship
+If a relationship is provided in the `links` section of a resource object in a
+`PATCH` request, its value **MUST** be a link object with a `linkage` member.
+The relationship's value will be replaced with the value specified in this member.
 
 For instance, the following `PATCH` request will update the `title` attribute
 and `author` relationship of an article:
@@ -1096,22 +1094,15 @@ Accept: application/vnd.api+json
     "id": "1",
     "title": "Rails is a Melting Pot",
     "links": {
-      "author": { "type": "people", "id": "1" }
+      "author": {
+        "linkage": { "type": "people", "id": "1" }
+      }
     }
   }
 }
 ```
 
-#### Updating a Resource's To-Many Relationships <a href="#crud-updating-resource-to-many-relationships" id="crud-updating-resource-to-many-relationships" class="headerlink"></a>
-
-If a to-many relationship is included in the `links` section of a resource
-object, it **MUST** be either:
-
-* an array of objects each containing `type` and `id` members to replace all
-  members of the relationship.
-* an empty array (`[]`) to clear the relationship.
-
-For instance, the following `PATCH` request performs a complete replacement of
+Likewise, the following `PATCH` request performs a complete replacement of
 the `tags` for an article:
 
 ```text
@@ -1125,10 +1116,12 @@ Accept: application/vnd.api+json
     "id": "1",
     "title": "Rails is a Melting Pot",
     "links": {
-      "tags": [
-        { "type": "tags", "id": "2" },
-        { "type": "tags", "id": "3" }
-      ]
+      "tags": {
+        "linkage": [
+          { "type": "tags", "id": "2" },
+          { "type": "tags", "id": "3" }
+        ]
+      }
     }
   }
 }
