@@ -295,11 +295,10 @@ document, it **MUST** include resource linkage to those resource objects.
 Resource linkage **MUST** be represented as one of the following:
 
 * `null` for empty to-one relationships.
-* an object containing `"type"` and `"id"` members for non-empty to-one
-  relationships.
+* a "linkage object", which is an object containing `"type"` and `"id"` members,
+  for non-empty to-one relationships.
 * an empty array (`[]`) for empty to-many relationships.
-* an array of objects each containing `"type"` and `"id"` members for non-empty
-  to-many relationships.
+* an array of linkage objects for non-empty to-many relationships.
 
 > Note: Resource linkage in a compound document allows a client to link
 together all of the included resource objects without having to `GET` any
@@ -1210,7 +1209,7 @@ described below.
 The `PATCH` request **MUST** include a top-level member named `data` containing
 one of:
 
-* an object with `type` and `id` members corresponding to the related resource.
+* a linkage object (defined above) corresponding to the new related resource.
 * `null`, to remove the relationship.
 
 For example, the following request updates the author of an article:
@@ -1246,8 +1245,7 @@ A server **MUST** respond to `PATCH`, `POST`, and `DELETE` requests to a
 *to-many relationship URL* as described below.
 
 For all request types, the body **MUST** contain a `data` member whose value
-is an object that contains `type` and `id` members, or an array of objects
-that each contain `type` and `id` members.
+is a linkage object or an array of linkage objects.
 
 If a client makes a `PATCH` request to a *to-many relationship URL*, the
 server **MUST** either completely replace every member of the relationship,
