@@ -189,10 +189,12 @@ be represented under the "links object".
 
 #### Complex Attributes <a href="#document-structure-resource-object-complex-attributes" id="document-structure-resource-object-complex-attributes"></a>
 
-"[Complex attributes]" are [attributes] whose value is an object or array with
-any level of nesting. An object that constitutes or is contained in a complex
-attribute **MUST** reserve the `id`, `type`, `links`, and `meta` members for future
-use.
+"[Complex attributes]" are [attributes] whose value is an object or array
+([example](/examples/#complex-attributes)).
+
+JSON API permits embedding arbitrary data structures as complex attributes in
+resource objects. However, any object in a complex attribute **MUST** reserve
+the `id`, `type`, `links`, and `meta` members for future use.
 
 #### Fields <a href="#document-structure-resource-object-fields" id="document-structure-resource-object-fields" class="headerlink"></a>
 
