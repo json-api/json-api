@@ -912,9 +912,9 @@ Accept: application/vnd.api+json
 }
 ```
 
-If the resource object being sent contains any relationships in its `"links"`
-key, those relationships **MUST** each have a `"linkage"` key that includes the
-linkage the new resource is to have.
+If a relationship is provided in the `links` section of the resource object, its
+value **MUST** be a link object with a `linkage` member. The value of this key
+represents the linkage the new resource is to have.
 
 #### Client-Generated IDs <a href="#crud-creating-client-ids" id="crud-creating-client-ids" class="headerlink"></a>
 
