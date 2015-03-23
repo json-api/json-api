@@ -1245,7 +1245,7 @@ A server **MUST** respond to `PATCH`, `POST`, and `DELETE` requests to a
 *to-many relationship URL* as described below.
 
 For all request types, the body **MUST** contain a `data` member whose value
-is a linkage object or an array of linkage objects.
+is an empty array or an array of linkage objects.
 
 If a client makes a `PATCH` request to a *to-many relationship URL*, the
 server **MUST** either completely replace every member of the relationship,
