@@ -191,7 +191,7 @@ be represented under the "links object".
 
 "[Complex attributes]" are [attributes] whose value is an object or array with
 any level of nesting. An object that constitutes or is contained in a complex
-attribute must reserve the `id`, `type`, `links`, and `meta` members for future
+attribute **MUST** reserve the `id`, `type`, `links`, and `meta` members for future
 use.
 
 #### Fields <a href="#document-structure-resource-object-fields" id="document-structure-resource-object-fields" class="headerlink"></a>
@@ -442,7 +442,7 @@ Any members **MAY** be specified within `meta` objects.
 
 The top-level links object **MAY** contain the following members:
 
-* `"self"` - a link for fetching the data in the response document.
+* `"self"` - the URL that generated the current response document.
 * `"related"` - a related resource URL (as defined above) when the primary
   data represents a resource relationship.
 * Pagination links for the primary data (as described below).
@@ -627,7 +627,7 @@ value for resource linkage, as described above for link objects.
 The top-level *links object* **MAY** contain `self` and `related` links,
 as described above for link objects.
 
-For example, a `GET` request a to-one relationship URL could return:
+For example, a `GET` request to a to-one relationship URL could return:
 
 ```text
 HTTP/1.1 200 OK
@@ -919,7 +919,8 @@ a properly generated and formatted *UUID* as described in RFC 4122
 > NOTE: In some use-cases, such as importing data from another source, it
 may be possible to use something other than a UUID that is still guaranteed
 to be globally unique. Do not use anything other than a UUID unless you are
-100% confident that the strategy you are using is indeed globally unique.
+100% confident that the strategy you are using indeed generates globally 
+unique indentifiers.
 
 For example:
 
