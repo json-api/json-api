@@ -1245,8 +1245,7 @@ A server **MUST** respond to `PATCH`, `POST`, and `DELETE` requests to a
 *to-many relationship URL* as described below.
 
 For all request types, the body **MUST** contain a `data` member whose value
-is an object that contains `type` and `id` members, or an array of objects
-that each contain `type` and `id` members.
+is an array of objects that each contain `type` and `id` members.
 
 If a client makes a `PATCH` request to a *to-many relationship URL*, the
 server **MUST** either completely replace every member of the relationship,
