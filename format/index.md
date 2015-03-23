@@ -295,10 +295,12 @@ document, it **MUST** include resource linkage to those resource objects.
 Resource linkage **MUST** be represented as one of the following:
 
 * `null` for empty to-one relationships.
-* a "linkage object", which is an object containing `"type"` and `"id"` members,
-  for non-empty to-one relationships.
+* a "linkage object" (defined below) for non-empty to-one relationships.
 * an empty array (`[]`) for empty to-many relationships.
 * an array of linkage objects for non-empty to-many relationships.
+
+A "linkage object" is an object that identifies an individual related resource.
+It **MUST** contain `type` and `id` members.
 
 > Note: Resource linkage in a compound document allows a client to link
 together all of the included resource objects without having to `GET` any
