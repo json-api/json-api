@@ -442,7 +442,7 @@ Any members **MAY** be specified within `meta` objects.
 
 The top-level links object **MAY** contain the following members:
 
-* `"self"` - a link for fetching the data in the response document.
+* `"self"` - the URL that generated the current response document.
 * `"related"` - a related resource URL (as defined above) when the primary
   data represents a resource relationship.
 * Pagination links for the primary data (as described below).
