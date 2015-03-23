@@ -23,6 +23,8 @@ navigation:
   url: /extensions/
 - title: Recommendations
   url: /recommendations/
+- title: Examples
+  url: /examples/
 - title: Implementations
   url: /implementations/
 - title: FAQ
