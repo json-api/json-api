@@ -48,13 +48,13 @@ then it **MUST** be specified by including its name in the `ext` media type
 parameter with the `Content-Type` header. The value of the `ext` media type
 parameter **MUST** be formatted as a comma-separated (U+002C COMMA, ",")
 list of extension names and **MUST** be limited to a subset of the
-extensions supported by the server, which are listed in `supported-ext` 
+extensions supported by the server, which are listed in `supported-ext`
 of every response.
 
 For example: a response that includes the header `Content-Type:
 application/vnd.api+json; ext=ext1,ext2; supported-ext=ext1,ext2,ext3`
 indicates that the response document is formatted according to the
-extensions "ext1" and "ext2". Another example: a request that includes 
+extensions "ext1" and "ext2". Another example: a request that includes
 the header `Content-Type: application/vnd.api+json; ext=ext1,ext2`
 indicates that the request document is formatted according to the
 extensions "ext1" and "ext2".
@@ -295,11 +295,12 @@ document, it **MUST** include resource linkage to those resource objects.
 Resource linkage **MUST** be represented as one of the following:
 
 * `null` for empty to-one relationships.
-* an object containing `"type"` and `"id"` members for non-empty to-one
-  relationships.
+* a "linkage object" (defined below) for non-empty to-one relationships.
 * an empty array (`[]`) for empty to-many relationships.
-* an array of objects each containing `"type"` and `"id"` members for non-empty
-  to-many relationships.
+* an array of linkage objects for non-empty to-many relationships.
+
+A "linkage object" is an object that identifies an individual related resource.
+It **MUST** contain `type` and `id` members.
 
 > Note: Resource linkage in a compound document allows a client to link
 together all of the included resource objects without having to `GET` any
@@ -903,10 +904,19 @@ Accept: application/vnd.api+json
   "data": {
     "type": "photos",
     "title": "Ember Hamster",
-    "src": "http://example.com/images/productivity.png"
+    "src": "http://example.com/images/productivity.png",
+    "links": {
+      "photographer": {
+        "linkage": { "type": "people", "id": "9" }
+      }
+    }
   }
 }
 ```
+
+If a relationship is provided in the `links` section of the resource object, its
+value **MUST** be a link object with a `linkage` member. The value of this key
+represents the linkage the new resource is to have.
 
 #### Client-Generated IDs <a href="#crud-creating-client-ids" id="crud-creating-client-ids" class="headerlink"></a>
 
@@ -1066,13 +1076,11 @@ Accept: application/vnd.api+json
 }
 ```
 
-#### Updating a Resource's To-One Relationships <a href="#crud-updating-resource-to-one-relationships" id="crud-updating-resource-to-one-relationships" class="headerlink"></a>
+#### Updating a Resource's Relationships <a href="#crud-updating-resource-relationships" id="crud-updating-resource-relationships" class="headerlink"></a>
 
-If a to-one relationship is provided in the `links` section of a resource
-object in a `PATCH` request, its value **MUST** be either:
-
-* an object with `type` and `id` members corresponding to the related resource
-* `null`, to remove the relationship
+If a relationship is provided in the `links` section of a resource object in a
+`PATCH` request, its value **MUST** be a link object with a `linkage` member.
+The relationship's value will be replaced with the value specified in this member.
 
 For instance, the following `PATCH` request will update the `title` attribute
 and `author` relationship of an article:
@@ -1088,22 +1096,15 @@ Accept: application/vnd.api+json
     "id": "1",
     "title": "Rails is a Melting Pot",
     "links": {
-      "author": { "type": "people", "id": "1" }
+      "author": {
+        "linkage": { "type": "people", "id": "1" }
+      }
     }
   }
 }
 ```
 
-#### Updating a Resource's To-Many Relationships <a href="#crud-updating-resource-to-many-relationships" id="crud-updating-resource-to-many-relationships" class="headerlink"></a>
-
-If a to-many relationship is included in the `links` section of a resource
-object, it **MUST** be either:
-
-* an array of objects each containing `type` and `id` members to replace all
-  members of the relationship.
-* an empty array (`[]`) to clear the relationship.
-
-For instance, the following `PATCH` request performs a complete replacement of
+Likewise, the following `PATCH` request performs a complete replacement of
 the `tags` for an article:
 
 ```text
@@ -1117,10 +1118,12 @@ Accept: application/vnd.api+json
     "id": "1",
     "title": "Rails is a Melting Pot",
     "links": {
-      "tags": [
-        { "type": "tags", "id": "2" },
-        { "type": "tags", "id": "3" }
-      ]
+      "tags": {
+        "linkage": [
+          { "type": "tags", "id": "2" },
+          { "type": "tags", "id": "3" }
+        ]
+      }
     }
   }
 }
@@ -1131,9 +1134,9 @@ relationship. In such a case, the server **MUST** reject the entire update,
 and return a `403 Forbidden` response.
 
 > Note: Since full replacement may be a very dangerous operation, a server
-may choose to disallow it. A server may reject full replacement if it has
-not provided the client with the full list of associated objects, and does
-not want to allow deletion of records the client has not seen.
+may choose to disallow it. For example, a server may reject full replacement if
+it has not provided the client with the full list of associated objects, and
+does not want to allow deletion of records the client has not seen.
 
 #### Responses <a href="#crud-updating-responses" id="crud-updating-responses" class="headerlink"></a>
 
@@ -1209,7 +1212,7 @@ described below.
 The `PATCH` request **MUST** include a top-level member named `data` containing
 one of:
 
-* an object with `type` and `id` members corresponding to the related resource.
+* a linkage object (defined above) corresponding to the new related resource.
 * `null`, to remove the relationship.
 
 For example, the following request updates the author of an article:
@@ -1245,8 +1248,7 @@ A server **MUST** respond to `PATCH`, `POST`, and `DELETE` requests to a
 *to-many relationship URL* as described below.
 
 For all request types, the body **MUST** contain a `data` member whose value
-is an object that contains `type` and `id` members, or an array of objects
-that each contain `type` and `id` members.
+is an empty array or an array of linkage objects.
 
 If a client makes a `PATCH` request to a *to-many relationship URL*, the
 server **MUST** either completely replace every member of the relationship,
