@@ -17,6 +17,8 @@ pygments: false
 port: 9876
 
 navigation:
+- title: JSON:API
+  url: /
 - title: Format
   url: /format/
 - title: Extensions
@@ -29,3 +31,9 @@ navigation:
   url: /faq/
 - title: About
   url: /about/
+
+quicklinks:
+- title: Documentation
+  url: /format/
+- title: Github
+  url: https://github.com/json-api/json-api

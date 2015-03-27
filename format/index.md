@@ -1,6 +1,7 @@
 ---
 layout: page
 title: "Format"
+show_sidebar: true
 ---
 
 {% include status.md %}
