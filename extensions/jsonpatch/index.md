@@ -96,8 +96,8 @@ target a particular relationship's URL.
 #### Updating To-One Relationships <a href="#patch-updating-to-one-relationships" id="patch-updating-to-one-relationships" class="headerlink"></a>
 
 To update a to-one relationship, perform a `"replace"` operation with a URL and
-`"path"` that targets the relationship. The `"value"` should be a link object
-that contains `"type"` and `"id"` members.
+`"path"` that targets the relationship. The `"value"` **MUST** be a linkage object
+or `null`, to remove the relationship.
 
 For instance, the following request should update the `author` of an article:
 
@@ -130,8 +130,8 @@ A server **MUST** respond to Patch operations that target a *to-many
 relationship URL* as described below.
 
 For all operations, the `"value"` **MUST** contain an object that contains
-`type` and `id` members, or an array of objects that each contain `type`
-and `id` members.
+an array of linkage objects or an empty array, to remove all elements 
+of the relationship.
 
 If a client requests a `"replace"` operation to a *to-many relationship URL*, the
 server **MUST** either completely replace every member of the relationship,
