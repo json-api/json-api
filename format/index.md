@@ -399,7 +399,7 @@ A complete example document with multiple included relationships:
 }
 ```
 
-A compound document **MUST NOT** include more than one resource object for
+A compound document **SHOULD NOT** include more than one resource object for
 each `type` and `id` pair.
 
 > Note: In a single document, you can think of the `type` and `id` as a
@@ -929,7 +929,7 @@ a properly generated and formatted *UUID* as described in RFC 4122
 > NOTE: In some use-cases, such as importing data from another source, it
 may be possible to use something other than a UUID that is still guaranteed
 to be globally unique. Do not use anything other than a UUID unless you are
-100% confident that the strategy you are using indeed generates globally 
+100% confident that the strategy you are using indeed generates globally
 unique indentifiers.
 
 For example:
