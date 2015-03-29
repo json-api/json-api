@@ -40,7 +40,7 @@ parameter **MUST** be a comma-separated (U+002C COMMA, ",") list of
 extension names.
 
 For example: a response that includes the header `Content-Type:
-application/vnd.api+json; supported-ext=bulk,jsonpatch` indicates that the
+application/vnd.api+json; supported-ext="bulk,jsonpatch"` indicates that the
 server supports both the "bulk" and "jsonpatch" extensions.
 
 If an extension is used to form a particular request or response document,
@@ -52,10 +52,10 @@ extensions supported by the server, which are listed in `supported-ext`
 of every response.
 
 For example: a response that includes the header `Content-Type:
-application/vnd.api+json; ext=ext1,ext2; supported-ext=ext1,ext2,ext3`
+application/vnd.api+json; ext="ext1,ext2"; supported-ext="ext1,ext2,ext3"`
 indicates that the response document is formatted according to the
 extensions "ext1" and "ext2". Another example: a request that includes
-the header `Content-Type: application/vnd.api+json; ext=ext1,ext2`
+the header `Content-Type: application/vnd.api+json; ext="ext1,ext2"`
 indicates that the request document is formatted according to the
 extensions "ext1" and "ext2".
 
@@ -78,6 +78,11 @@ responsibility of the server to decide which extensions are compatible, and
 it is the responsibility of the designer of each implementation of this
 specification to describe extension interoperability rules which are
 applicable to that implementation.
+
+When the value of the `ext` or `supported-ext` media type parameter contains
+more than one extension name, the value **MUST** be surrounded with quotation
+marks (U+0022 QUOTATION MARK, """), in accordance with the HTTP specification.
+
 
 ## Document Structure <a href="#document-structure" id="document-structure" class="headerlink"></a>
 
@@ -929,7 +934,7 @@ a properly generated and formatted *UUID* as described in RFC 4122
 > NOTE: In some use-cases, such as importing data from another source, it
 may be possible to use something other than a UUID that is still guaranteed
 to be globally unique. Do not use anything other than a UUID unless you are
-100% confident that the strategy you are using indeed generates globally 
+100% confident that the strategy you are using indeed generates globally
 unique indentifiers.
 
 For example:
