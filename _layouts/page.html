@@ -7,7 +7,7 @@
     <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
     
     <!-- Use title if it's in the page YAML frontmatter -->
-    <title>JSON API :: {{ page..title }}</title>
+    <title>JSON:API - {{ page.title }}</title>
     
     <link href='http://fonts.googleapis.com/css?family=Titillium+Web:400,300,600' rel='stylesheet' type='text/css'>
     <link href="/stylesheets/normalize.css" media="screen" rel="stylesheet" type="text/css" />
@@ -35,7 +35,7 @@
           <h1>JSON:API</h1>
           <div class="quicklinks">
             {% for link in site.quicklinks %}
-              <a href="{{link.url}}">{{link.title}}</a>
+              <a href="{{link.url}}" title="{{link.title}}">{{link.title}}</a>
             {% endfor %}
           </div>
         </div>
@@ -43,13 +43,17 @@
     {% endif %}
     <div class="site-wrapper">
       {% if page.show_sidebar %}
-        <nav class="site-content-nav" id="document-outline">
-          <h2>{{ page.title }}</h2>
-        </nav>
+        <div class="sidebar">
+          <nav class="site-content-nav" id="document-outline">
+            <h2>{{ page.title }}</h2>
+          </nav>
+        </div>
       {% endif %}
-      <section class="site-content">
-        {{ content }}
-      </section>
+      <div class="content">
+        <section>
+          {{ content }}
+        </section>
+      </div>
     </div>
     <footer>
       <span>Built with <a href="http://jekyllrb.com/">Jekyll</a> and <a href="http://softwaremaniacs.org/soft/highlight/en/">Highlight.js</a></span>
