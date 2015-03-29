@@ -1,10 +1,14 @@
-@import 'compass'
-@import 'fontello'
+@import "compass"
+@import "fontello"
 @charset "utf-8"
+
+/** Config */
 
 $page-width: 955px
 $sidebar-width: 250px
-$brand-color: rgb(82, 0, 142)
+$color-main: rgb(82, 0, 142)
+$border-radius-main: 4px
+
 
 /** Mixins */
 
@@ -22,21 +26,27 @@ $brand-color: rgb(82, 0, 142)
 body
   font-family: "Titillium Web", sans-serif
   font-size: 15px
-  color: #000000
   line-height: 1.5
 
 
 /** Typography */
 
-h1, h2, h3
+.headerlink
+  text-decoration: none
+  color: rgba($color-main, 0.35)
+
+h1, h2, h3, h4, h5
   font-weight: 300
 
   &:first-child
     margin-top: 0
 
+  &:hover .headerlink::after
+    content: "¶"
+
 h1, h2
   margin: 50px 0 20px 0
-  color: $brand-color
+  color: $color-main
   font-size: 24px
   line-height: 1.3
 
@@ -52,19 +62,20 @@ p
   margin: 0 0 10px 0
 
 a
-  color: $brand-color
+  color: $color-main
 
 blockquote
   margin: 20px 0
   padding: 10px 15px 0 15px
-  border-radius: 4px
+  +border-radius($border-radius-main)
   font-weight: lighter
-  background: rgba($brand-color, 0.04)
-  border: 1px solid rgba($brand-color, 0.35)
+  background: rgba($color-main, 0.04)
+  border: 1px solid rgba($color-main, 0.35)
 
 p > code
   padding: 1px 4px
   background: rgba(0, 0, 0, 0.06)
+
 
 /** Navigation */
 
@@ -72,24 +83,17 @@ p > code
   padding: 8px 0
   font-weight: 600
   color: #52008E
-  border-bottom: 1px solid $brand-color
+  border-bottom: 1px solid $color-main
 
   ul
-    @include centerbox
-    display: table
-    width: 100%
+    +centerbox
+    +display-flex
+    +justify-content(space-between)
     padding: 0
     list-style: none
 
   li
-    display: table-cell
-    text-align: center
-
-    &:first-child
-      text-align: left
-
-    &:last-child
-      text-align: right
+    +flex(0 1 auto)
 
   a
     text-decoration: none
@@ -101,14 +105,14 @@ p > code
 /** Header */
 
 header
-  background: $brand-color
+  background: $color-main
 
   .content
-    @include centerbox
+    +centerbox
     height: 250px
-    display: -webkit-flex
-    -webkit-align-items: center
-    -webkit-justify-content: center
+    +display-flex
+    +align-items(center)
+    +justify-content(center)
 
   h1
     margin-right: auto
@@ -130,7 +134,7 @@ header
       width: 130px
       margin: 0 0 20px 0
       padding: 6px 30px
-      border-radius: 40px
+      +border-radius($border-radius-main)
       background: white
       text-decoration: none
       text-align: center
@@ -150,16 +154,15 @@ footer
     margin: 0 10px
 
 
-
 /** Content */
 
 .site-wrapper
-  @include centerbox
-  @include clearfix
+  +centerbox
+  +clearfix
   margin-top: 50px
   margin-bottom: 50px
 
-.site-content-nav
+.sidebar
   width: $sidebar-width
   float: left
 
@@ -169,16 +172,54 @@ footer
     padding: 0
 
     li ol
-      padding: 0 0 0 10px
+      margin: 0 0 0 10px
 
   a
     text-decoration: none
     color: inherit
 
+    &:hover
+      color: $color-main
 
-.site-content-nav + .site-content
-  float: left
+
+.sidebar + .content
+  float: right
   width: $page-width - $sidebar-width
 
-.site-content
-  //
+
+/** Code blocks highlighting */
+
+.highlight
+  +border-radius($border-radius-main)
+  position: relative
+  margin: 2em 0
+  background: #f9f9f9
+  border: 1px solid #d1d1d1
+  font-size: 12px
+  font-family: Menlo, monospace
+  line-height: 16px
+
+  .scroller
+    overflow: auto
+
+  table
+    margin: 0 0
+
+  .ribbon
+    position: absolute
+    right: 0
+    bottom: 6px
+    width: 52px
+    height: 20px
+
+  &.javascript .ribbon, &.js .ribbon
+    background-image: url('/images/js-ribbon.png')
+
+  &.html .ribbon
+    background-image: url('/images/html-ribbon.png')
+
+  &.handlebars .ribbon
+    background-image: url('/images/handlebars-ribbon.png')
+
+  pre
+    padding-left: 1em

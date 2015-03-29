@@ -1,13 +1,28 @@
 $(document).ready(function() {
-    var articleOutline = createOutlineFromArticle($('.site-content').eq(0));
+    // Build navigation list
+    var articleOutline = createOutlineFromElement($('.content').eq(0));
     var navList = createArticleNavigationFromOutline(articleOutline);
     $("#document-outline").append(navList);
 
-    $("#document-outline li").click(function(event) {
-        $("#document-outline li").removeClass('active');
-        $(this).toggleClass('active');
-    })
+    // Scroll affix
+    fixElement($(".sidebar"), 50);
 });
+
+function fixElement(element, offset) {
+    var affixWaypoint = element.offset().top - offset;
+
+    $(window).scroll(function(event) {
+        var scrollPosition = $(window).scrollTop();
+
+        if(scrollPosition >= affixWaypoint) {
+            element.css('position', 'fixed');
+            element.css('top', offset + 'px');
+        } else {
+            element.css('position', 'relative');
+            element.css('top', '0');
+        }
+    });
+}
 
 /**
  * Returns an array in the form of:
@@ -20,11 +35,14 @@ $(document).ready(function() {
  *      href: "#anchor",
  *      children: [...]
  *  }];
+ *
+ * @param  {jQuery element} element The HTML element to create the outline from.
+ * @return {array}                  Array in the form described above.
  */
-function createOutlineFromArticle(article) {
+function createOutlineFromElement(element) {
     var outline = [];
 
-    $('h2', article).each(function() {
+    $('h2', element).each(function() {
         var item = {
             title: $(this).not('a').text(),
             href: $(this).find('a').attr('href') || "#",
@@ -48,27 +66,32 @@ function createOutlineFromArticle(article) {
 }
 
 /**
- * Creates a nested list from an array in the form returned by `createOutlineFromArticle`.
+ * Creates a nested list from an array in the form returned by `createOutlineFromElement`.
+ */
+
+/**
+ * Creates a nested list from an array in the form returned by `createOutlineFromElement`.
+ * 
+ * @param  {array}   outline The outline from which to create a navigation list.
+ * @return {element}        The HTML element containing the navigation list.
  */
 function createArticleNavigationFromOutline(outline) {
-    function createListFromItems(items) {
-        var ol = document.createElement('ol');
-        ol.class = "nav"
+    var ol = document.createElement('ol');
+    ol.class = "nav"
 
-        items.forEach(function(item) {
-            var a = document.createElement('a');
-            a.href = item.href;
-            a.appendChild(document.createTextNode(item.title));
+    outline.forEach(function(item) {
+        var a = document.createElement('a');
+        a.href = item.href;
+        a.appendChild(document.createTextNode(item.title));
 
-            var li = document.createElement('li');
-            li.appendChild(a);
-            li.appendChild(createListFromItems(item.children));
+        var li = document.createElement('li');
+        li.appendChild(a);
+        if(item.children.length > 0) {
+            li.appendChild(createArticleNavigationFromOutline(item.children));
+        }
 
-            ol.appendChild(li);
-        });
+        ol.appendChild(li);
+    });
 
-        return ol;
-    }
-
-    return createListFromItems(outline);
+    return ol;
 }
