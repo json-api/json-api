@@ -79,13 +79,10 @@ it is the responsibility of the designer of each implementation of this
 specification to describe extension interoperability rules which are
 applicable to that implementation.
 
-When the value of the `ext` or `supported-ext` media type parameter contains a
-comma (U+002C COMMA, ","), the value **MUST** be surrounded with quotation marks
-(U+0022 QUOTATION MARK, """).
+When the value of the `ext` or `supported-ext` media type parameter contains
+more than one extension name, the value **MUST** be surrounded with quotation
+marks (U+0022 QUOTATION MARK, """), in accordance with the HTTP specification.
 
-> Note: Failing to quote the value of the `ext` or `supported-ext` parameter when
-that value contains a comma is a violation of the HTTP specification and can lead
-the header to be parsed incorrectly.
 
 ## Document Structure <a href="#document-structure" id="document-structure" class="headerlink"></a>
 
