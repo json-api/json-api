@@ -583,6 +583,31 @@ Content-Type: application/vnd.api+json
 }
 ```
 
+##### 202 Accepted <a href="#fetching-resources-responses-202" id="fetching-resources-responses-202" class="headerlink"></a>
+
+A server **MUST** return `202 Accepted` when the resource needs some background processing before the server can respond with the resource.
+
+A server **MUST** include the link to get the resource once the processing is completed in the location header.
+
+A server **MUST** response with null provided as the response document's primary data.
+
+The location header **MAY** be same as self link.
+
+For example, a GET request to comments statistics could return:
+
+```text
+HTTP/1.1 202 OK
+Content-Type: application/vnd.api+json
+location: http://example.com/article/1/stats/comment
+
+{
+  "links": {
+    "self": "http://example.com/article/1/stats/comment"
+  },
+  "data": null
+}
+```
+
 ##### 404 Not Found <a href="#fetching-resources-responses-404" id="fetching-resources-responses-404" class="headerlink"></a>
 
 A server **MUST** return `404 Not Found` when processing a request to fetch
