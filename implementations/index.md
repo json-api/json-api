@@ -11,7 +11,7 @@ pull request](https://github.com/json-api/json-api).
 ### JavaScript <a href="#client-javascript" id="client-libraries-javascript" class="headerlink"></a>
 
 * [ember-data](https://github.com/emberjs/data) is one of the original exemplar
-implementations. There is a [custom adapter](https://github.com/daliwali/ember-json-api) to support json-api.
+implementations. There is a [custom adapter](https://github.com/kurko/ember-json-api) to support json-api.
 * [backbone-jsonapi](https://github.com/guillaumervls/backbone-jsonapi) is a Backbone adapter for JSON API. Supports fetching Models & Collections from a JSON API source.
 * [orbit.js](https://github.com/orbitjs/orbit.js) is a standalone library for
   coordinating access to data sources and keeping their contents synchronized.
