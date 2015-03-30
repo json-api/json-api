@@ -7,11 +7,11 @@ JSON API can be extended in several ways:
 
 * The `supported-ext` and `ext` media type parameters can be used to negotiate
   support for extensions,
-  [as discussed in the base specification](/format#extending).
+  [as discussed in the base specification](/specification#extending).
   Official and custom extensions to the specification are discussed below.
 
 * Meta information can be included in several places in a document,
-  [as discussed in the base specification](/format/#document-structure-meta).
+  [as discussed in the base specification](/specification/#document-structure-meta).
 
 * A profile can be specified in the top-level `meta` object, as discussed below.
 

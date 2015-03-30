@@ -11,12 +11,12 @@ It provides support for performing multiple operations in a request,
 including adding and removing multiple resources.
 
 Servers and clients **MUST** negotiate support for and use of the Bulk extension
-[as described in the base specification](/format/#extending) using `bulk` as the
+[as described in the base specification](/specification/#extending) using `bulk` as the
 name of the extension.
 
 ## Bulk Operations <a href="#bulk-operations" id="bulk-operations" class="headerlink"></a>
 
-[As mentioned in the base specification](/format/#crud), a request **MUST**
+[As mentioned in the base specification](/specification/#crud), a request **MUST**
 completely succeed or fail (in a single "transaction").
 
 Therefore, any request that involves multiple operations **MUST** only

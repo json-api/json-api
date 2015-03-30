@@ -5,7 +5,6 @@
   src: url("../fonts/fontello.eot?60624967#iefix") format("embedded-opentype"), url("../fonts/fontello.woff?60624967") format("woff"), url("../fonts/fontello.ttf?60624967") format("truetype"), url("../fonts/fontello.svg?60624967#fontello") format("svg");
   font-weight: normal;
   font-style: normal; }
-
 /* Chrome hack: SVG is rendered more smooth in Windozze. 100% magic, uncomment if you need it. */
 /* Note, that will break hinting! In other OS-es font will be not as sharp as it could be */
 /*
@@ -72,159 +71,218 @@
   content: '\e805'; }
 
 /* '' */
+/** Config */
+/** Mixins */
 body {
-  margin: 52px 0 0 0;
-  line-height: 150%;
-  font-family: "Helvetica";
-  font-family: "Titillium Web", sans-serif;
-  background: #eee; }
+  font-family: "Helvetica Neue", "Helvetica", "Open Sans", sans-serif;
+  font-size: 15px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased; }
 
-a {
-  color: #393; }
-  a:hover {
-    color: #050; }
-
-h1 {
-  margin: 1.5em 0 1.2em 0;
-  padding: 0;
-  font-size: 1.8em;
-  font-weight: bold;
-  text-align: center; }
-
-.masthead {
-  margin: 20px 0;
-  padding: 30px;
-  text-align: center;
-  background: #f9f9f9;
-  -webkit-border-radius: 8px;
-  -moz-border-radius: 8px;
-  -ms-border-radius: 8px;
-  -o-border-radius: 8px;
-  border-radius: 8px;
-  border: 1px solid #eee; }
-  .masthead h1 {
-    margin: 0.5em; }
-
+/** Typography */
 .headerlink {
-  text-decoration: none; }
+  text-decoration: none;
+  color: rgba(82, 0, 142, 0.35); }
 
-h2:hover .headerlink:after,
-h3:hover .headerlink:after,
-h4:hover .headerlink:after,
-h5:hover .headerlink:after {
-  content: "¶"; }
+h1, h2, h3, h4, h5 {
+  font-weight: 300; }
+  h1:first-child, h2:first-child, h3:first-child, h4:first-child, h5:first-child {
+    margin-top: 0; }
+  h1:hover .headerlink::after, h2:hover .headerlink::after, h3:hover .headerlink::after, h4:hover .headerlink::after, h5:hover .headerlink::after {
+    content: "¶"; }
 
 h2 {
-  margin: 1.5em 0 0.9em 0;
-  font-size: 1.4em;
-  color: #676;
-  border-bottom: 3px solid #aba; }
+  margin: 50px 0 15px 0;
+  color: #52008e;
+  font-size: 22px;
+  line-height: 1.3; }
 
 h3 {
-  margin: 1.5em 0 1em 0;
-  font-size: 1.3em;
-  color: #666; }
+  margin: 30px 0 15px 0;
+  font-size: 18px; }
 
 h4 {
-  margin: 1.2em 0 1em 0;
-  font-size: 1.2em;
-  color: #898; }
+  margin: 20px 0 10px 0;
+  font-size: 16px;
+  font-weight: 400;
+  opacity: 0.6; }
 
 h5 {
-  margin: 1.2em 0 1em 0;
-  font-size: 1.1em;
-  color: #777; }
+  margin: 20px 0 5px 0;
+  font-weight: 500;
+  font-size: inherit; }
 
-ul {
-  margin-left: 0;
-  padding-left: 0; }
-  ul li {
-    margin-left: 20px; }
+p {
+  margin: 0 0 10px 0; }
 
-section {
-  margin: 0 auto;
-  width: 800px; }
-  section:after {
-    clear: both; }
+a {
+  color: #52008e; }
 
+blockquote {
+  margin: 20px 0;
+  padding: 10px 15px 0 15px;
+  -moz-border-radius: 4px;
+  -webkit-border-radius: 4px;
+  border-radius: 4px;
+  font-weight: lighter;
+  background: rgba(82, 0, 142, 0.04);
+  border: 1px solid rgba(82, 0, 142, 0.35); }
+
+p > code {
+  padding: 1px 4px;
+  background: rgba(0, 0, 0, 0.06);
+  -moz-border-radius: 4px;
+  -webkit-border-radius: 4px;
+  border-radius: 4px; }
+
+/** Navigation */
+.site-nav {
+  padding: 8px 0;
+  font-weight: 500;
+  color: #52008E;
+  border-bottom: 1px solid #52008e; }
+  .site-nav ul {
+    display: block;
+    max-width: 955px;
+    margin: 0 auto;
+    padding: 0 20px;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-justify-content: space-between;
+    justify-content: space-between;
+    list-style: none; }
+    @media screen and (max-width: 600px) {
+      .site-nav ul {
+        -webkit-flex-direction: column;
+        flex-direction: column;
+        text-align: center; } }
+  .site-nav li {
+    -webkit-flex: 0 1 auto;
+    flex: 0 1 auto; }
+  .site-nav .logo img {
+    vertical-align: bottom;
+    height: 19px; }
+  .site-nav a {
+    text-decoration: none; }
+  .site-nav .active {
+    opacity: 0.5; }
+
+/** Header */
 header {
-  position: absolute;
-  width: 100%;
-  min-width: 800px;
-  top: 0;
-  left: 0;
-  height: 52px;
-  border-bottom: 1px solid #aaa;
-  z-index: 100; }
-  header a.logo {
-    margin: 1px 10px 0 0;
-    float: left; }
-  header nav {
-    float: left;
-    margin-top: 13px; }
-    header nav ul {
-      margin: 0;
-      padding-left: 0; }
-    header nav li {
-      display: inline;
-      font-weight: bold;
-      list-style-type: none;
-      margin: 0 0 0.5em 0;
-      padding: 0;
-      text-align: right;
-      white-space: pre; }
-      header nav li a {
-        font-family: monospace, serif;
-        text-decoration: none;
-        padding: 0.3em 0.5em;
-        color: #777; }
-      header nav li.active a {
-        color: #000; }
+  background: #52008e; }
+  header .content {
+    display: block;
+    max-width: 955px;
+    margin: 0 auto;
+    padding: 0 20px;
+    padding-top: 50px;
+    padding-bottom: 50px;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-align-items: center;
+    align-items: center;
+    -webkit-justify-content: center;
+    justify-content: center; }
+  header h1 {
+    text-indent: -119988px;
+    overflow: hidden;
+    text-align: left;
+    text-transform: capitalize;
+    width: 321px;
+    height: 107px;
+    margin: 0 auto 0 0;
+    background: url("../images/logo.svg") no-repeat;
+    background-size: contain; }
+  header .quicklinks a {
+    display: block;
+    margin: 15px 0;
+    padding: 6px 30px;
+    -moz-border-radius: 4px;
+    -webkit-border-radius: 4px;
+    border-radius: 4px;
+    background: white;
+    text-decoration: none;
+    text-align: center; }
+  @media screen and (max-width: 600px) {
+    header .content {
+      -webkit-flex-direction: column;
+      flex-direction: column;
+      padding-top: 20px;
+      padding-bottom: 20px; }
+    header h1 {
+      margin: 0 auto 20px auto;
+      max-width: 100%; } }
 
-article {
-  position: relative;
-  margin: 0 auto;
-  padding: 0 0 40px 0;
-  overflow: hidden;
-  background: #fff; }
-
+/** Footer */
 footer {
-  padding: 15px 0;
-  border-top: 1px solid #aaa; }
-  footer .details {
-    float: left; }
-  footer .links {
-    float: right; }
+  padding: 8px 0;
+  border-top: 1px solid #B8B8B8;
+  text-align: center;
+  font-size: 12px;
+  color: #B8B8B8; }
+  footer span {
+    display: inline-block;
+    margin: 0 10px; }
+  footer .social-links span {
+    text-indent: -119988px;
+    overflow: hidden;
+    text-align: left;
+    text-transform: capitalize; }
 
-.links {
-  width: 200px;
-  text-align: right; }
-  .links a {
-    margin: 3px 10px 0;
-    border-bottom: none;
-    opacity: 0.7;
-    /*
-      This is for hiding text from users with normal vision
-      but keeping the text for screen readers
-    */ }
-    .links a:hover {
-      opacity: 1; }
-    .links a i {
-      margin: 0; }
-    .links a span {
-      display: inline-block;
-      width: 1px;
-      text-indent: 200%;
-      white-space: nowrap;
-      overflow: hidden; }
+/** Content */
+.site-wrapper {
+  display: block;
+  max-width: 955px;
+  margin: 0 auto;
+  padding: 0 20px;
+  overflow: hidden;
+  *zoom: 1;
+  margin-top: 50px;
+  margin-bottom: 50px; }
 
-.twitter, .github, .googleplus {
-  font-size: 33px;
-  line-height: 35px;
-  color: #464646;
-  height: 35px;
-  width: 35px;
-  display: inline-block; }
+.sidebar {
+  width: 250px;
+  float: left; }
+  @media screen and (max-width: 995px) {
+    .sidebar {
+      display: none; } }
 
-.googleplus {
-  font-size: 29px; }
+@media screen and (min-width: 995px) {
+  .sidebar + .content {
+    float: right;
+    max-width: 705px; } }
+/** Document outline */
+.document-outline {
+  font-size: 13px; }
+  .document-outline ol {
+    list-style: none;
+    margin: 0;
+    padding: 0; }
+    .document-outline ol li ol {
+      padding: 0 0 0 10px; }
+  .document-outline a {
+    text-decoration: none;
+    color: inherit; }
+    .document-outline a:hover {
+      color: #52008e; }
+
+.document-outline > ol > li {
+  padding: 0 0 5px 0; }
+
+/** Code blocks highlighting */
+.highlight {
+  -moz-border-radius: 4px;
+  -webkit-border-radius: 4px;
+  border-radius: 4px;
+  position: relative;
+  margin: 2em 0;
+  padding: 10px 15px;
+  background: #f9f9f9;
+  border: 1px solid #d1d1d1;
+  font-size: 12px;
+  line-height: 16px; }
+  .highlight pre {
+    margin: 0;
+    font-family: Menlo, monospace; }
+
+/*# sourceMappingURL=all.css.map */
