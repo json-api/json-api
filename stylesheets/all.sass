@@ -6,6 +6,7 @@
 
 $page-width: 955px
 $sidebar-width: 250px
+$page-padding: 20px
 $color-main: rgb(82, 0, 142)
 $border-radius-main: 4px
 
@@ -16,6 +17,7 @@ $border-radius-main: 4px
   display: block
   max-width: $page-width
   margin: 0 auto
+  padding: 0 $page-padding
 
 @mixin clearfix()
   &:after
@@ -89,7 +91,6 @@ p > code
     +centerbox
     +display-flex
     +justify-content(space-between)
-    padding: 0
     list-style: none
 
   li
@@ -131,7 +132,6 @@ header
 
     a
       display: block
-      width: 130px
       margin: 0 0 20px 0
       padding: 6px 30px
       +border-radius($border-radius-main)
@@ -181,10 +181,15 @@ footer
     &:hover
       color: $color-main
 
+  // Hide the sidebar on small viewports
+  @media screen and (max-width: $page-width + ($page-padding * 2))
+    display: none
 
-.sidebar + .content
-  float: right
-  width: $page-width - $sidebar-width
+// Float the content to the right, except on small viewports
+@media screen and (min-width: $page-width + ($page-padding * 2))
+  .sidebar + .content
+    float: right
+    max-width: $page-width - $sidebar-width
 
 
 /** Code blocks highlighting */
@@ -193,11 +198,15 @@ footer
   +border-radius($border-radius-main)
   position: relative
   margin: 2em 0
+  padding: 10px 15px
   background: #f9f9f9
   border: 1px solid #d1d1d1
   font-size: 12px
-  font-family: Menlo, monospace
   line-height: 16px
+
+  pre
+    margin: 0
+    font-family: Menlo, monospace
 
   .scroller
     overflow: auto
@@ -220,6 +229,3 @@ footer
 
   &.handlebars .ribbon
     background-image: url('/images/handlebars-ribbon.png')
-
-  pre
-    padding-left: 1em
