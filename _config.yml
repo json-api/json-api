@@ -33,7 +33,7 @@ navigation:
   url: /about/
 
 quicklinks:
-- title: Documentation
+- title: View the specification
   url: /format/
-- title: Github
+- title: Contribute on Github
   url: https://github.com/json-api/json-api
