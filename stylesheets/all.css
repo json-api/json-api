@@ -203,7 +203,7 @@ header {
       padding-bottom: 20px; }
     header h1 {
       margin: 0 auto 20px auto;
-      width: 100%; } }
+      max-width: 100%; } }
 
 /** Footer */
 footer {
@@ -227,12 +227,10 @@ footer {
   max-width: 955px;
   margin: 0 auto;
   padding: 0 20px;
+  overflow: hidden;
+  *zoom: 1;
   margin-top: 50px;
   margin-bottom: 50px; }
-  .site-wrapper:after {
-    content: "";
-    display: table;
-    clear: both; }
 
 .sidebar {
   width: 250px;

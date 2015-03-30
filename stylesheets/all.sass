@@ -7,6 +7,9 @@
 $page-width: 955px
 $sidebar-width: 250px
 $page-padding: 20px
+
+$mobile-breakpoint: 600px
+
 $color-main: rgb(82, 0, 142)
 $border-radius-main: 4px
 
@@ -18,12 +21,6 @@ $border-radius-main: 4px
   max-width: $page-width
   margin: 0 auto
   padding: 0 $page-padding
-
-@mixin clearfix()
-  &:after
-    content: ""
-    display: table
-    clear: both
 
 body
   font-family: "Helvetica Neue", "Helvetica", "Open Sans", sans-serif
@@ -99,7 +96,7 @@ p > code
     +justify-content(space-between)
     list-style: none
 
-    @media screen and (max-width: 600px)
+    @media screen and (max-width: $mobile-breakpoint)
       +flex-direction(column)
       text-align: center
 
@@ -143,7 +140,7 @@ header
     text-decoration: none
     text-align: center
 
-  @media screen and (max-width: 600px)
+  @media screen and (max-width: $mobile-breakpoint)
     .content 
       +flex-direction(column)
       padding-top: 20px
@@ -151,7 +148,7 @@ header
 
     h1
       margin: 0 auto 20px auto
-      width: 100%
+      max-width: 100%
 
 
 
