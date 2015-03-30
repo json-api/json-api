@@ -1016,6 +1016,10 @@ Content-Type: application/vnd.api+json
 }
 ```
 
+##### 202 Accepted <a href="#creating-resources-responses-202" id="creating-resources-responses-202" class="headerlink"></a>
+
+A server **MUST** return `202 Accepted` when the request needs background processing.
+
 ##### 204 No Content <a href="#crud-creating-responses-204" id="crud-creating-responses-204" class="headerlink"></a>
 
 If a `POST` request *did* include a [Client-Generated
@@ -1178,6 +1182,10 @@ attribute or a computed `sha`), it **MUST** return a `200 OK` response.
 
 The response document for a `200 OK` **MUST** include a representation of
 the updated resource(s) as if a `GET` request was made to the request URL.
+
+##### 202 Accepted <a href="#updating-resources-responses-202" id="updating-resources-responses-202" class="headerlink"></a>
+
+A server **MUST** return `202 Accepted` when the request needs background processing.
 
 ##### 403 Forbidden <a href="#crud-updating-relationship-responses-403" id="crud-updating-relationship-responses-403" class="headerlink"></a>
 
