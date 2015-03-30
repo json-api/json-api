@@ -101,7 +101,7 @@ Official extensions are available for [Bulk](/extensions/bulk/) and
 
 ## Update history <a href="#update-history" id="update-history" class="headerlink"></a>
 
-- 2015-03-16: Release candiate 3 released.
+- 2015-03-16: Release candidate 3 released.
 - 2013-05-03: Initial release of the draft.
 - 2013-07-22: Media type registration completed with the IANA.
 
