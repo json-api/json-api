@@ -8,10 +8,6 @@ $(document).ready(function() {
 
     // Scroll affix  
     fixElement($(".sidebar"), 50);
-
-    $(".highlight").click(function(event) {
-        $(this).toggleClass('collapsed');
-    });
 });
 
 function fixElement(element, offset) {
