@@ -1087,8 +1087,9 @@ If a relationship is provided in the `links` section of a resource object in a
 `PATCH` request, its value **MUST** be a link object with a `linkage` member.
 The relationship's value will be replaced with the value specified in this member.
 
-For instance, the following `PATCH` request will update the `title` attribute
-and `author` relationship of an article:
+A resource's attributes and relationships **MAY** be updated together in a single
+request. For instance, the following `PATCH` request will update the `title`
+attribute and `author` relationship of an article:
 
 ```text
 PATCH /articles/1
@@ -1145,11 +1146,6 @@ does not want to allow deletion of records the client has not seen.
 
 #### Responses <a href="#crud-updating-responses" id="crud-updating-responses" class="headerlink"></a>
 
-##### 204 No Content <a href="#crud-updating-responses-204" id="crud-updating-responses-204" class="headerlink"></a>
-
-A server **MUST** return a `204 No Content` status code if an update is
-successful and the client's current attributes remain up to date.
-
 ##### 200 OK <a href="#crud-updating-responses-200" id="crud-updating-responses-200" class="headerlink"></a>
 
 If a server accepts an update but also changes the resource(s) in other ways
@@ -1158,6 +1154,12 @@ attribute or a computed `sha`), it **MUST** return a `200 OK` response.
 
 The response document for a `200 OK` **MUST** include a representation of
 the updated resource(s) as if a `GET` request was made to the request URL.
+
+##### 204 No Content <a href="#crud-updating-responses-204" id="crud-updating-responses-204" class="headerlink"></a>
+
+If an update is successful and the client's current fields remain up to date,
+the server **MUST** return either a `200 OK` with a representation of the updated
+resource (as described above) or a `204 No Content` status code.
 
 ##### 403 Forbidden <a href="#crud-updating-relationship-responses-403" id="crud-updating-relationship-responses-403" class="headerlink"></a>
 
