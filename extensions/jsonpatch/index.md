@@ -15,7 +15,7 @@ For the sake of brevity, operatons requested with `PATCH` and conforming
 with JSON Patch will be called "Patch operations".
 
 Servers and clients **MUST** negotiate support for and use of the JSON Patch
-extension [as described in the base specification](/format/#extending) using
+extension [as described in the base specification](/specification/#extending) using
 `jsonpatch` as the name of the extension.
 
 ## Patch Operations <a href="#patch-operations" id="patch-operations" class="headerlink"></a>

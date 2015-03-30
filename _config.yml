@@ -20,7 +20,7 @@ navigation:
 - title: JSON:API
   url: /
 - title: Specification
-  url: /format/
+  url: /specification/
 - title: Extensions
   url: /extensions/
 - title: Recommendations
@@ -34,6 +34,6 @@ navigation:
 
 quicklinks:
 - title: View the specification
-  url: /format/
+  url: /specification/
 - title: Contribute on Github
   url: https://github.com/json-api/json-api

@@ -87,10 +87,10 @@ JSON API covers creating and updating resources as well, not just responses.
 JSON API has been properly registered with the IANA. Its media
 type designation is [`application/vnd.api+json`](http://www.iana.org/assignments/media-types/application/vnd.api+json).
 
-## Format documentation <a href="#format-documentation" id="format-documentation" class="headerlink"></a>
+## Specification <a href="#specification" id="specification" class="headerlink"></a>
 
 To get started with JSON API, check out [documentation for the base
-specification](/format).
+specification](/specification).
 
 ## Extensions <a href="#extensions" id="extensions" class="headerlink"></a>
 
