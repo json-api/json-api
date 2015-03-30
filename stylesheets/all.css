@@ -164,14 +164,15 @@ header {
     -webkit-justify-content: center;
     justify-content: center; }
   header h1 {
+    text-indent: -119988px;
+    overflow: hidden;
+    text-align: left;
+    text-transform: capitalize;
     margin-right: auto;
     width: 340px;
     height: 140px;
     background: url("../images/logo.svg") no-repeat;
-    background-size: 340px 140px;
-    text-indent: 100%;
-    white-space: nowrap;
-    overflow: hidden; }
+    background-size: 340px 140px; }
   header .quicklinks {
     margin-left: auto; }
     header .quicklinks a {
@@ -195,6 +196,11 @@ footer {
   footer span {
     display: inline-block;
     margin: 0 10px; }
+  footer .social-links span {
+    text-indent: -119988px;
+    overflow: hidden;
+    text-align: left;
+    text-transform: capitalize; }
 
 /** Content */
 .site-wrapper {

@@ -116,16 +116,12 @@ header
     +justify-content(center)
 
   h1
+    +hide-text
     margin-right: auto
     width: 340px
     height: 140px
     background: url('../images/logo.svg') no-repeat
     background-size: 340px 140px
-
-    // Text replace
-    text-indent: 100%
-    white-space: nowrap
-    overflow: hidden
 
   .quicklinks
     margin-left: auto
@@ -152,6 +148,9 @@ footer
   span
     display: inline-block
     margin: 0 10px
+
+  .social-links span
+    +hide-text
 
 
 /** Content */
