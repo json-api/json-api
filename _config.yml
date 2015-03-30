@@ -19,13 +19,13 @@ port: 9876
 navigation:
 - title: JSON:API
   url: /
-- title: Format
+- title: Specification
   url: /format/
 - title: Extensions
   url: /extensions/
 - title: Recommendations
   url: /recommendations/
-- title: Examples
+- title: Implementations
   url: /examples/
 - title: FAQ
   url: /faq/
@@ -33,7 +33,7 @@ navigation:
   url: /about/
 
 quicklinks:
-- title: Documentation
+- title: View the specification
   url: /format/
-- title: Github
+- title: Contribute on Github
   url: https://github.com/json-api/json-api
