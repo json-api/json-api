@@ -2,11 +2,15 @@
 
 $(document).ready(function() {
     // Build navigation list
-    var articleOutline = createOutlineFromElement($('.content').eq(0));
-    var navList = createArticleNavigationFromOutline(articleOutline);
-    $("#document-outline").append(navList);
+    var documentOutlineElement = $("#document-outline");
 
-    // Scroll affix  
+    if(documentOutlineElement.length) {
+        var articleOutline = createOutlineFromElement($('.content').eq(0));
+        var navList = createArticleNavigationFromOutline(articleOutline);
+        documentOutlineElement.append(navList);
+    }
+
+    // Scroll affix
     fixElement($(".sidebar"), 50);
 });
 
