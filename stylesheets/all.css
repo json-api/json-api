@@ -146,6 +146,11 @@ p > code {
     -webkit-justify-content: space-between;
     justify-content: space-between;
     list-style: none; }
+    @media screen and (max-width: 600px) {
+      .site-nav ul {
+        -webkit-flex-direction: column;
+        flex-direction: column;
+        text-align: center; } }
   .site-nav li {
     -webkit-flex: 0 1 auto;
     flex: 0 1 auto; }
@@ -162,7 +167,8 @@ header {
     max-width: 955px;
     margin: 0 auto;
     padding: 0 20px;
-    height: 250px;
+    padding-top: 50px;
+    padding-bottom: 50px;
     display: -webkit-flex;
     display: flex;
     -webkit-align-items: center;
@@ -174,23 +180,30 @@ header {
     overflow: hidden;
     text-align: left;
     text-transform: capitalize;
-    margin-right: auto;
-    width: 340px;
-    height: 140px;
+    width: 321px;
+    height: 107px;
+    margin: 0 auto 0 0;
     background: url("../images/logo.svg") no-repeat;
-    background-size: 340px 140px; }
-  header .quicklinks {
-    margin-left: auto; }
-    header .quicklinks a {
-      display: block;
-      margin: 0 0 20px 0;
-      padding: 6px 30px;
-      -moz-border-radius: 4px;
-      -webkit-border-radius: 4px;
-      border-radius: 4px;
-      background: white;
-      text-decoration: none;
-      text-align: center; }
+    background-size: contain; }
+  header .quicklinks a {
+    display: block;
+    margin: 0 0 20px 0;
+    padding: 6px 30px;
+    -moz-border-radius: 4px;
+    -webkit-border-radius: 4px;
+    border-radius: 4px;
+    background: white;
+    text-decoration: none;
+    text-align: center; }
+  @media screen and (max-width: 600px) {
+    header .content {
+      -webkit-flex-direction: column;
+      flex-direction: column;
+      padding-top: 20px;
+      padding-bottom: 20px; }
+    header h1 {
+      margin: 0 auto 20px auto;
+      width: 100%; } }
 
 /** Footer */
 footer {

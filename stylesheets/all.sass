@@ -99,6 +99,10 @@ p > code
     +justify-content(space-between)
     list-style: none
 
+    @media screen and (max-width: 600px)
+      +flex-direction(column)
+      text-align: center
+
   li
     +flex(0 1 auto)
 
@@ -116,30 +120,39 @@ header
 
   .content
     +centerbox
-    height: 250px
+    padding-top: 50px
+    padding-bottom: 50px
     +display-flex
     +align-items(center)
     +justify-content(center)
 
   h1
     +hide-text
-    margin-right: auto
-    width: 340px
-    height: 140px
+    width: 321px
+    height: 107px
+    margin: 0 auto 0 0
     background: url('../images/logo.svg') no-repeat
-    background-size: 340px 140px
+    background-size: contain
 
-  .quicklinks
-    margin-left: auto
+  .quicklinks a
+    display: block
+    margin: 0 0 20px 0
+    padding: 6px 30px
+    +border-radius($border-radius-main)
+    background: white
+    text-decoration: none
+    text-align: center
 
-    a
-      display: block
-      margin: 0 0 20px 0
-      padding: 6px 30px
-      +border-radius($border-radius-main)
-      background: white
-      text-decoration: none
-      text-align: center
+  @media screen and (max-width: 600px)
+    .content 
+      +flex-direction(column)
+      padding-top: 20px
+      padding-bottom: 20px
+
+    h1
+      margin: 0 auto 20px auto
+      width: 100%
+
 
 
 /** Footer */
