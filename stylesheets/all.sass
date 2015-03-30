@@ -26,9 +26,10 @@ $border-radius-main: 4px
     clear: both
 
 body
-  font-family: "Titillium Web", sans-serif
+  font-family: "Helvetica Neue", "Helvetica", "Open Sans", sans-serif
   font-size: 15px
   line-height: 1.5
+  -webkit-font-smoothing: antialiased
 
 
 /** Typography */
@@ -46,19 +47,24 @@ h1, h2, h3, h4, h5
   &:hover .headerlink::after
     content: "¶"
 
-h1, h2
-  margin: 50px 0 20px 0
+h2
+  margin: 50px 0 15px 0
   color: $color-main
-  font-size: 24px
+  font-size: 22px
   line-height: 1.3
 
 h3
   margin: 30px 0 15px 0
-  font-size: 20px
+  font-size: 18px
 
 h4
-  margin: 20px 0 8px 0
-  font-size: 15px
+  margin: 20px 0 10px 0
+  font-size: 16px
+
+h5
+  margin: 20px 0 10px 0
+  font-weight: 500
+  font-size: inherit
 
 p
   margin: 0 0 10px 0
@@ -83,7 +89,7 @@ p > code
 
 .site-nav
   padding: 8px 0
-  font-weight: 600
+  font-weight: 500
   color: #52008E
   border-bottom: 1px solid $color-main
 
@@ -165,21 +171,6 @@ footer
   width: $sidebar-width
   float: left
 
-  ol
-    list-style: none
-    margin: 0
-    padding: 0
-
-    li ol
-      margin: 0 0 0 10px
-
-  a
-    text-decoration: none
-    color: inherit
-
-    &:hover
-      color: $color-main
-
   // Hide the sidebar on small viewports
   @media screen and (max-width: $page-width + ($page-padding * 2))
     display: none
@@ -189,6 +180,30 @@ footer
   .sidebar + .content
     float: right
     max-width: $page-width - $sidebar-width
+
+
+/** Document outline */
+
+.document-outline
+  font-size: 13px
+
+  ol
+    list-style: none
+    margin: 0
+    padding: 0
+
+    li ol
+      padding: 0 0 0 10px
+
+  a
+    text-decoration: none
+    color: inherit
+
+    &:hover
+      color: $color-main
+
+.document-outline > ol > li
+  padding: 0 0 5px 0
 
 
 /** Code blocks highlighting */

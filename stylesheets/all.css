@@ -74,9 +74,10 @@
 /** Config */
 /** Mixins */
 body {
-  font-family: "Titillium Web", sans-serif;
+  font-family: "Helvetica Neue", "Helvetica", "Open Sans", sans-serif;
   font-size: 15px;
-  line-height: 1.5; }
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased; }
 
 /** Typography */
 .headerlink {
@@ -90,19 +91,24 @@ h1, h2, h3, h4, h5 {
   h1:hover .headerlink::after, h2:hover .headerlink::after, h3:hover .headerlink::after, h4:hover .headerlink::after, h5:hover .headerlink::after {
     content: "¶"; }
 
-h1, h2 {
-  margin: 50px 0 20px 0;
+h2 {
+  margin: 50px 0 15px 0;
   color: #52008e;
-  font-size: 24px;
+  font-size: 22px;
   line-height: 1.3; }
 
 h3 {
   margin: 30px 0 15px 0;
-  font-size: 20px; }
+  font-size: 18px; }
 
 h4 {
-  margin: 20px 0 8px 0;
-  font-size: 15px; }
+  margin: 20px 0 10px 0;
+  font-size: 16px; }
+
+h5 {
+  margin: 20px 0 10px 0;
+  font-weight: 500;
+  font-size: inherit; }
 
 p {
   margin: 0 0 10px 0; }
@@ -127,7 +133,7 @@ p > code {
 /** Navigation */
 .site-nav {
   padding: 8px 0;
-  font-weight: 600;
+  font-weight: 500;
   color: #52008E;
   border-bottom: 1px solid #52008e; }
   .site-nav ul {
@@ -218,17 +224,6 @@ footer {
 .sidebar {
   width: 250px;
   float: left; }
-  .sidebar ol {
-    list-style: none;
-    margin: 0;
-    padding: 0; }
-    .sidebar ol li ol {
-      margin: 0 0 0 10px; }
-  .sidebar a {
-    text-decoration: none;
-    color: inherit; }
-    .sidebar a:hover {
-      color: #52008e; }
   @media screen and (max-width: 995px) {
     .sidebar {
       display: none; } }
@@ -237,6 +232,24 @@ footer {
   .sidebar + .content {
     float: right;
     max-width: 705px; } }
+/** Document outline */
+.document-outline {
+  font-size: 13px; }
+  .document-outline ol {
+    list-style: none;
+    margin: 0;
+    padding: 0; }
+    .document-outline ol li ol {
+      padding: 0 0 0 10px; }
+  .document-outline a {
+    text-decoration: none;
+    color: inherit; }
+    .document-outline a:hover {
+      color: #52008e; }
+
+.document-outline > ol > li {
+  padding: 0 0 5px 0; }
+
 /** Code blocks highlighting */
 .highlight {
   -moz-border-radius: 4px;
