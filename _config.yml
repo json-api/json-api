@@ -17,8 +17,6 @@ pygments: false
 port: 9876
 
 navigation:
-- title: JSON:API
-  url: /
 - title: Specification
   url: /specification/
 - title: Extensions

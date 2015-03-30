@@ -22,6 +22,7 @@
      <nav class="site-nav">
       <ul>
         {% assign url = page.url|remove:'index.html' %}
+        <li class="logo{% if url == '/' %} active{% endif %}"><a href="/" title="JSON:API"><img src="../images/logo-header.svg"></a></li>
         {% for link in site.navigation %}
           <li {% if url == link.url %}class="active"{% endif %}><a href="{{link.url}}" title="{{link.title}}">{{link.title}}</a></li>
         {% endfor %}

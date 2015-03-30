@@ -159,6 +159,9 @@ p > code {
   .site-nav li {
     -webkit-flex: 0 1 auto;
     flex: 0 1 auto; }
+  .site-nav .logo img {
+    vertical-align: bottom;
+    height: 19px; }
   .site-nav a {
     text-decoration: none; }
   .site-nav .active {
