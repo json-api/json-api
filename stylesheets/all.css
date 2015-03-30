@@ -246,21 +246,5 @@ footer {
   .highlight pre {
     margin: 0;
     font-family: Menlo, monospace; }
-  .highlight .scroller {
-    overflow: auto; }
-  .highlight table {
-    margin: 0 0; }
-  .highlight .ribbon {
-    position: absolute;
-    right: 0;
-    bottom: 6px;
-    width: 52px;
-    height: 20px; }
-  .highlight.javascript .ribbon, .highlight.js .ribbon {
-    background-image: url("/images/js-ribbon.png"); }
-  .highlight.html .ribbon {
-    background-image: url("/images/html-ribbon.png"); }
-  .highlight.handlebars .ribbon {
-    background-image: url("/images/handlebars-ribbon.png"); }
 
 /*# sourceMappingURL=all.css.map */
