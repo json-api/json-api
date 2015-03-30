@@ -187,7 +187,7 @@ header {
     background-size: contain; }
   header .quicklinks a {
     display: block;
-    margin: 0 0 20px 0;
+    margin: 15px 0;
     padding: 6px 30px;
     -moz-border-radius: 4px;
     -webkit-border-radius: 4px;
