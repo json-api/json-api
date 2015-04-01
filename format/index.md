@@ -799,6 +799,9 @@ query parameter. The value for `sort` **MUST** represent sort fields.
 GET /people?sort=+age
 ```
 
+If the server does not support sorting as specified in the query parameter 
+`sort`, it **MUST** return `400 Bad Request`.
+
 An endpoint **MAY** support multiple sort fields by allowing comma-separated
 (U+002C COMMA, ",") sort fields. Sort fields **SHOULD** be applied in the
 order specified.
