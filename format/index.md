@@ -161,7 +161,7 @@ In addition, a resource object **MAY** contain any of these top-level members:
 * `"links"`: a "links object", providing information about a resource's
   relationships (described below).
 * `"meta"`: non-standard meta-information about a resource that can not be
-  represented as an attribute or relationship.
+  represented as a [resource attribute] or relationship.
 
 Here's how an article (i.e. a resource of type "articles") might appear in a document:
 
@@ -182,26 +182,26 @@ Here's how an article (i.e. a resource of type "articles") might appear in a doc
 // ...
 ```
 
-#### Attributes <a href="#document-structure-resource-object-attributes" id="document-structure-resource-object-attributes"></a>
+#### Resource Attributes <a href="#document-structure-resource-object-attributes" id="document-structure-resource-object-attributes"></a>
 
 A resource object **MAY** contain additional top-level members. These members
-represent "[attributes]" and may contain any valid JSON value.
+represent "[resource attributes]" and may contain any valid JSON value.
 
 Although has-one foreign keys (e.g. `author_id`) are often stored internally
 alongside other information to be represented in a resource object, these keys
-**SHOULD NOT** appear as attributes. If relations are provided, they **MUST**
-be represented under the "links object".
+**SHOULD NOT** appear as [resource attributes]. If relations are provided, 
+they **MUST** be represented under the "links object".
 
-#### Complex Attributes <a href="#document-structure-resource-object-complex-attributes" id="document-structure-resource-object-complex-attributes"></a>
+#### Complex Resource Attributes <a href="#document-structure-resource-object-complex-attributes" id="document-structure-resource-object-complex-attributes"></a>
 
-"[Complex attributes]" are [attributes] whose value is an object or array with
-any level of nesting. An object that constitutes or is contained in a complex
-attribute **MUST** reserve the `id`, `type`, `links`, and `meta` members for future
+"[Complex resource attributes]" are [resource attributes] whose value is an object or array with
+any level of nesting. An object that constitutes or is contained in a [complex resource attribute] 
+**MUST** reserve the `id`, `type`, `links`, and `meta` members for future
 use.
 
 #### Fields <a href="#document-structure-resource-object-fields" id="document-structure-resource-object-fields" class="headerlink"></a>
 
-A resource object's [attributes] and relationships are collectively called its
+[Resource attributes] and relationships are collectively called resource's
 "[fields]". <a href="#document-structure-resource-object-fields" id="document-structure-resource-object-fields"></a>
 
 #### Resource Identification <a href="#document-structure-resource-identification" id="document-structure-resource-identification" class="headerlink"></a>
@@ -218,7 +218,7 @@ resource.
 
 Each resource object **MUST** contain a `type` member, whose value **MUST**
 be a string. The `type` is used to describe resource objects that share
-common attributes and relationships.
+common [resource attributes] and relationships.
 
 > Note: This spec is agnostic about inflection rules, so the value of `type`
 can be either plural or singular. However, the same value should be used
@@ -354,7 +354,7 @@ to fetch the resource objects, and linkage information.
 
 The `comments` relationship is simpler: it just provides a related resource URL
 to fetch the comments. The URL can therefore be specified directly as the
-attribute value.
+[resource attribute] value.
 
 ### Compound Documents <a href="#document-structure-compound-documents" id="document-structure-compound-documents" class="headerlink"></a>
 
@@ -1098,7 +1098,7 @@ details **MAY** also be returned, as discussed below.
 
 ### Updating Resources <a href="#crud-updating" id="crud-updating" class="headerlink"></a>
 
-A resource's attributes and relationships can be updated by sending a `PATCH`
+[Resource attributes] and relationships can be updated by sending a `PATCH`
 request to the URL that represents the resource.
 
 The URL for a resource can be obtained in the `self` link of the resource
@@ -1126,8 +1126,8 @@ Accept: application/vnd.api+json
 
 #### Updating a Resource's Attributes <a href="#crud-updating-resource-attributes" id="crud-updating-resource-attributes" class="headerlink"></a>
 
-Any or all of a resource's attributes **MAY** be included in the resource
-object included in a `PATCH` request.
+Any or all of [resource attributes] of a resource **MAY** be included 
+in the resource object included in a `PATCH` request.
 
 If a request does not include all of the fields for a resource, the server
 **MUST** interpret the missing fields as if they were included together with
@@ -1157,7 +1157,7 @@ If a relationship is provided in the `links` section of a resource object in a
 `PATCH` request, its value **MUST** be a link object with a `linkage` member.
 The relationship's value will be replaced with the value specified in this member.
 
-For instance, the following `PATCH` request will update the `title` attribute
+For instance, the following `PATCH` request will update the `title` [resource attribute]
 and `author` relationship of an article:
 
 ```text
@@ -1218,7 +1218,7 @@ does not want to allow deletion of records the client has not seen.
 ##### 204 No Content <a href="#crud-updating-responses-204" id="crud-updating-responses-204" class="headerlink"></a>
 
 A server **MUST** return a `204 No Content` status code if an update is
-successful and the client's current attributes remain up to date.
+successful and the client's current [resource attributes] remain up to date.
 
 ##### 200 OK <a href="#crud-updating-responses-200" id="crud-updating-responses-200" class="headerlink"></a>
 
@@ -1471,7 +1471,7 @@ server, and we are defining its semantics for JSON API.
 ##### 204 No Content <a href="#crud-updating-relationship-responses-204" id="crud-updating-relationship-responses-204" class="headerlink"></a>
 
 A server **MUST** return a `204 No Content` status code if an update is
-successful and the client's current attributes remain up to date.
+successful and the client's current [resource attributes] remain up to date.
 
 > Note: This is the appropriate response to a `POST` request sent to a
 *to-many relationship URL* when that relationship already exists. It is also
@@ -1541,6 +1541,10 @@ An error object **MAY** have the following members:
 
 Additional members **MAY** be specified within error objects.
 
-[attributes]: #document-structure-resource-object-attributes
-[complex attributes]: #document-structure-resource-object-complex-attributes
+[resource attribute]: #document-structure-resource-object-attributes
+[resource attributes]: #document-structure-resource-object-attributes
+[relationship attribute]: #document-structure-resource-relationships
+[relationship attributes]: #document-structure-resource-relationships
+[complex resource attribute]: #document-structure-resource-object-complex-attributes
+[complex resource attributes]: #document-structure-resource-object-complex-attributes
 [fields]: #document-structure-resource-object-fields

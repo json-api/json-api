@@ -27,7 +27,7 @@ operations allowed in this top level array.
 ### Request URLs and Patch Paths <a href="#patch-urls" id="patch-urls" class="headerlink"></a>
 
 The request URL and each Patch operation's `"path"` are complementary and
-**MUST** combine to target a particular resource, collection, attribute, or
+**MUST** combine to target a particular resource, collection, resource attribute, or
 relationship.
 
 If a server supports the Patch extension, it **MUST** allow Patch operations at
@@ -65,9 +65,9 @@ Accept: application/vnd.api+json; ext=jsonpatch
 ]
 ```
 
-### Updating Attributes <a href="#patch-updating-attributes" id="patch-updating-attributes" class="headerlink"></a>
+### Updating Resource Attributes <a href="#patch-updating-attributes" id="patch-updating-attributes" class="headerlink"></a>
 
-To update an attribute, perform a `"replace"` operation with the attribute's
+To update a resource attribute, perform a `"replace"` operation with the attribute's
 name specified by the `"path"`.
 
 For instance, the following request should update just the `src` property of the
@@ -227,8 +227,8 @@ Accept: application/vnd.api+json; ext=jsonpatch
 #### 204 No Content <a href="#patch-responses-204" id="patch-responses-204" class="headerlink"></a>
 
 A server **MUST** return a `204 No Content` status code in response to a
-successful Patch operation in which the client's current attributes remain up to
-date.
+successful Patch operation in which the client's current resource attributes 
+remain up to date.
 
 #### 200 OK <a href="#patch-responses-200" id="patch-responses-200" class="headerlink"></a>
 
