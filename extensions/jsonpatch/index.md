@@ -11,7 +11,7 @@ It provides support for modification of resources with the HTTP PATCH method
 [[RFC5789](http://tools.ietf.org/html/rfc5789)] and the JSON Patch format
 [[RFC6902](http://tools.ietf.org/html/rfc6902)].
 
-For the sake of brevity, operatons requested with `PATCH` and conforming
+For the sake of brevity, operations requested with `PATCH` and conforming
 with JSON Patch will be called "Patch operations".
 
 Servers and clients **MUST** negotiate support for and use of the JSON Patch
