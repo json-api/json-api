@@ -162,11 +162,12 @@ To add an element to a to-many relationship, request an `"add"` operation that
 targets the relationship's URL. Because the operation is targeting the end of a
 collection, the `"path"` must end with `"/-"`.
 
-In the following example, the comment with ID `123` is added to the list of
-comments for the article with ID `1`:
+In the following example, the new reprint with ID `123` is added to the list of
++publications of the article with ID `1` ():
+
 
 ```text
-PATCH /articles/1/links/comments
+PATCH /articles/1/links/publications
 Content-Type: application/vnd.api+json; ext=jsonpatch
 Accept: application/vnd.api+json; ext=jsonpatch
 
@@ -175,7 +176,7 @@ Accept: application/vnd.api+json; ext=jsonpatch
     "op": "add", 
     "path": "/-", 
     "value": [
-      { "type": "comments", "id": "123" }
+      { "type": "magazines", "id": "123", "publication_type": "reprint" }
     ]
   }
 ]

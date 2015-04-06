@@ -308,7 +308,17 @@ Resource linkage **MUST** be represented as one of the following:
 * an array of linkage objects for non-empty to-many relationships.
 
 A "linkage object" is an object that identifies an individual related resource.
-It **MUST** contain `type` and `id` members.
+It **MUST** contain at least the following members:
+
+* `"id"`
+* `"type"`
+
+A linkage object **MAY** contain additional members. If defined, 
+they represent "[relationship attributes]" and may contain any valid JSON value. 
+[Relationship attributes] **MUST** abide by the same constraints as 
+[resource attributes].
+Complex [relationship attributes] **MUST** abide by the same constraints as 
+[complex resource attributes].
 
 > Note: Resource linkage in a compound document allows a client to link
 together all of the included resource objects without having to `GET` any
@@ -377,6 +387,23 @@ A complete example document with multiple included relationships:
           { "type": "comments", "id": "5" },
           { "type": "comments", "id": "12" }
         ]
+      },
+      "publications": {
+        "self": "http://example.com/articles/1/links/publications",
+        "related": "http://example.com/articles/1/publications",
+        "linkage": [{
+          "type": "websites",
+          "id": "6",
+          "publication_type": "original"
+        }, {
+          "type": "magazines",
+          "id": "9",
+          "publication_type": "reprint"
+        }, {
+          "type": "websites",
+          "id": "29",
+          "publication_type": "excerpts"
+        }]
       }
     }
   }],
@@ -402,6 +429,27 @@ A complete example document with multiple included relationships:
     "body": "I like XML better",
     "links": {
       "self": "http://example.com/comments/12"
+    }
+  }, {
+    "type": "websites",
+    "id": "6",
+    "hostname": "the-art-of-bike-shedding.com",
+    "links": {
+      "self": "http://example.com/websites/6"
+    }
+  }, {
+    "type": "magazines",
+    "id": "9",
+    "title": "Bike Shed Reviews",
+    "links": {
+      "self": "http://example.com/magazines/9"
+    }
+  }, {
+    "type": "websites",
+    "id": "29",
+    "hostname": "silver-bullet-news.com",
+    "links": {
+      "self": "http://example.com/websites/29"
     }
   }]
 }
@@ -929,6 +977,12 @@ Accept: application/vnd.api+json
     "links": {
       "photographer": {
         "linkage": { "type": "people", "id": "9" }
+      },
+      "staff": {
+        "linkage": [
+          { "type": "people", "id": "11", "function": "gaffer" },
+          { "type": "people", "id": "12", "function": "make_up_artist" }
+        ]
       }
     }
   }
@@ -1126,7 +1180,7 @@ Accept: application/vnd.api+json
 ```
 
 Likewise, the following `PATCH` request performs a complete replacement of
-the `tags` for an article:
+the `editors` of an article:
 
 ```text
 PATCH /articles/1
@@ -1139,10 +1193,10 @@ Accept: application/vnd.api+json
     "id": "1",
     "title": "Rails is a Melting Pot",
     "links": {
-      "tags": {
+      "editors": {
         "linkage": [
-          { "type": "tags", "id": "2" },
-          { "type": "tags", "id": "3" }
+          { "type": "people", "id": "2", "function": "copy_editor" },
+          { "type": "people", "id": "3", "function": "production_editor" }
         ]
       }
     }
@@ -1304,6 +1358,31 @@ Accept: application/vnd.api+json
 }
 ```
 
+For example, the following request replaces every publication of an article
+(an example for a relationship with [relationship attributes]):
+
+```text
+PATCH /articles/1/links/pubications
+Content-Type: application/vnd.api+json
+Accept: application/vnd.api+json
+
+{
+  "data": [{
+    "type": "websites",
+    "id": "6",
+    "publication_type": "original"
+  }, {
+    "type": "magazines",
+    "id": "9",
+    "publication_type": "reprint"
+  }, {
+    "type": "websites",
+    "id": "29",
+    "publication_type": "excerpts"
+  }]
+}
+```
+
 If a client makes a `POST` request to a *relationship URL*, the server
 **MUST** append the specified members to the relationship using set
 semantics. This means that if a given `type` and `id` is already in the
@@ -1334,6 +1413,24 @@ Accept: application/vnd.api+json
     { "type": "comments", "id": "123" }
   ]
 }
+ ```
+
+In the following example, the new reprint with ID `456` is added to the list of
+publications of the article with ID `2`:
+
+
+```text
+POST /articles/2/links/publications
+Content-Type: application/vnd.api+json
+Accept: application/vnd.api+json
+
+{
+  "data": { 
+    "type": "publications", 
+    "id": "456", 
+    "publication_type": "reprint" 
+  }
+}
 ```
 
 If the client makes a `DELETE` request to a *relationship URL*, the server
@@ -1346,6 +1443,8 @@ removed from, or are already missing from, the relationship then the server
 pointless race conditions between multiple clients making the same changes.
 
 Relationship members are specified in the same way as in the `POST` request.
+[Relationship attributes] **MAY** be specified, but if specified, they **MUST** 
+be ignored by the server.
 
 In the following example, comments with IDs of `12` and `13` are removed
 from the list of comments for the article with ID `1`:
