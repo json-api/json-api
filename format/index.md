@@ -320,6 +320,10 @@ they represent "[relationship attributes]" and may contain any valid JSON value.
 Complex [relationship attributes] **MUST** abide by the same constraints as 
 [complex resource attributes].
 
+A linkage object **MAY** contain `"meta"` member: non-standard meta-information 
+about linkage that can not be represented as a [relationship attribute].
+Linkage objects **MUST** reserve `"links"` member for future use.
+
 > Note: Resource linkage in a compound document allows a client to link
 together all of the included resource objects without having to `GET` any
 relationship URLs.
@@ -817,49 +821,71 @@ GET /articles/1?include=author,comments,comments.author
 
 ### Sparse Fieldsets <a href="#fetching-sparse-fieldsets" id="fetching-sparse-fieldsets" class="headerlink"></a>
 
-A client **MAY** request that an endpoint return only specific [fields] in the
-response on a per-type basis by including a `fields[TYPE]` parameter.
+A client **MAY** request that an endpoint return only specific [fields] and
+[relationship attributes] in the response on a per-type basis 
+by including a `fields[TYPE]` parameter.
 
-> Note: Only [fields] are affected; `type`, `id`, and (optionally) `self` are
-included as normal.
+> Note: Only [fields] and [relationship attributes] are affected; 
+`type`, `id`, and (optionally) `self` are included as normal.
 
 The value of the `fields` parameter **MUST** be a comma-separated (U+002C
-COMMA, ",") list that refers to the name(s) of the fields to be returned.
+COMMA, ",") list that refers to the name(s) of the [fields] and
+[relationship attributes] to be returned.
+[Relationship attributes] **MUST** be specified via dot-separated 
+(U+002E FULL-STOP, ".") path which includes the following elements: 
+`links`, name of the relationship, name of the [relationship attribute].
 
-If a client requests a restricted set of [fields], an endpoint **MUST NOT**
-include additional [fields] in the response.
+If a client requests a restricted set of [fields] and [relationship attributes], 
+an endpoint **MUST NOT** include additional [fields] and 
+[relationship attributes] in the response.
+
+An example for [fields]:
 
 ```http
 GET /articles?include=author&fields[articles]=title,body&fields[people]=name
 ```
 
+An example which includes [relationship attributes]: 
+
+```text
+GET /articles?include=author,publications&fields[articles]=title,links.publications.publication_type&fields[people]=name
+```
+
 ### Sorting <a href="#fetching-sorting" id="fetching-sorting" class="headerlink"></a>
 
-A server **MAY** choose to support requests to sort resource collections
-according to one or more criteria ("sort fields").
+A server **MAY** choose to support requests to sort primary resource collections
+and linkage object arrays according to one or more criteria ("sort fields").
 
 > Note: Although recommended, sort fields do not necessarily need to
-correspond to resource attribute and association names.
+correspond to names of [resource attribute], relationships and 
+[relationship attributes].
 
 > Note: It is recommended that dot-separated (U+002E FULL-STOP, ".") sort
-fields be used to request sorting based upon relationship attributes. For
-example, a sort field of `+author.name` could be used to request that the
-primary data be sorted based upon the `name` attribute of the `author`
-relationship.
+fields be used to request sorting of primary data based upon 
+[resource attributes] of related resources. For example, a sort field of 
+`+author.name` could be used to request that the primary data be sorted 
+based upon the `name` attribute of the `author` relationship.
 
-An endpoint **MAY** support requests to sort the primary data with a `sort`
-query parameter. The value for `sort` **MUST** represent sort fields.
+An endpoint **MAY** support requests to sort objects constituting reposnse
+with a `sort[PATH]` query parameter. The value of `PATH` **MUST** represent 
+path to the object being sorted within the response object. The value of 
+`sort[PATH]` **MUST** represent sort fields. 
 
-```http
-GET /people?sort=+age
+> Note: It is recommended that dot-separated (U+002E FULL-STOP, ".") fields 
+be used to define `PATH` to the object being sorted within the response object.
+
+For example, to sort primary data:
+
+```text
+GET /people?sort[data]=+age
 ```
 
 An endpoint **MAY** support multiple sort fields by allowing comma-separated
 (U+002C COMMA, ",") sort fields. Sort fields **SHOULD** be applied in the
 order specified.
 
-```http
-GET /people?sort=+age,+name
+```text
+GET /people?sort[data]=+age,+name
 ```
 
 The sort order for each sort field **MUST** be specified with one of the
@@ -872,8 +898,8 @@ following prefixes:
 order, JSON API avoids setting requirements for the first character in sort
 field names.
 
-```http
-GET /articles?sort=-created,+title
+```text
+GET /articles?sort[data]=-created,+title
 ```
 
 The above example should return the newest articles first. Any articles
@@ -888,6 +914,23 @@ parameter `sort`, the server **MUST** return elements of the top-level
 `data` array of the response ordered according to the criteria specified.
 The server **MAY** apply default sorting rules to top-level `data` if
 request parameter `sort` is not specified.
+
+> Note: It is recommended that dot-separated (U+002E FULL-STOP, ".") sort
+fields be used to request sorting of relationship linkage object arrays 
+based upon [relationship attributes] or [resource attributes] of related
+resources. It is recommended that mixing of these two criteria be allowed
+in one sort request. 
+
+The following example (referring to the 
+<a href="#document-structure-compound-documents">complete example document 
+with multiple included relationships</a>) should return publications 
+of the article sorted first by publication type ([relationship attribute]) 
+and then by publication name (related [resource attribute]), 
+both in ascending alphabetical order:
+
+```text
+GET /articles?sort[data.links.publications]=+data.links.publications.publication_type,+name
+```
 
 ### Pagination <a href="#fetching-pagination" id="fetching-pagination" class="headerlink"></a>
 
