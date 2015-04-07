@@ -407,7 +407,7 @@ A complete example document with multiple included relationships:
 }
 ```
 
-A compound document **MUST NOT** include more than one resource object for
+A compound document **SHOULD NOT** include more than one resource object for
 each `type` and `id` pair.
 
 > Note: In a single document, you can think of the `type` and `id` as a
