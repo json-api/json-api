@@ -982,7 +982,7 @@ of the newly created resource.
 
 If a `POST` request did not include a [Client-Generated
 ID](#crud-creating-client-ids), and a resource has been created, the server
-**MUST** return a `201 Created` status code.
+**SHOULD** return a `201 Created` status code.
 
 The response **MUST** also include a document that contains the primary
 resource created.
