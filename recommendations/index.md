@@ -121,18 +121,18 @@ combine `filter` with the association name.
 For example, the following is a request for all comments associated with a
 particular post:
 
-```text
+```http
 GET /comments?filter[post]=1
 ```
 
 Multiple filter values can be combined in a comma-separated list. For example:
 
-```text
+```http
 GET /comments?filter[post]=1,2
 ```
 
 Furthermore, multiple filters can be applied to a single request:
 
-```text
+```http
 GET /comments?filter[post]=1,2&filter[author]=12
 ```

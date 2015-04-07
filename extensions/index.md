@@ -88,7 +88,7 @@ GET http://api.example.com/posts
 
 That document will de-reference to explain your link relations:
 
-```text
+```http
 GET http://api.example.com/profile HTTP/1.1
 ```
 
