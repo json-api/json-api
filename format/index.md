@@ -803,9 +803,6 @@ query parameter. The value for `sort` **MUST** represent sort fields.
 GET /people?sort=+age
 ```
 
-If the server does not support sorting as specified in the query parameter 
-`sort`, it **MUST** return `400 Bad Request`.
-
 An endpoint **MAY** support multiple sort fields by allowing comma-separated
 (U+002C COMMA, ",") sort fields. Sort fields **SHOULD** be applied in the
 order specified.
@@ -832,12 +829,14 @@ The above example should return the newest articles first. Any articles
 created on the same date will then be sorted by their title in ascending
 alphabetical order.
 
-If sorting is supported by the server and requested by the client via 
-query parameter `sort`, the server **MUST** return elements of the 
-top-level `data` array of the response ordered according to the criteria 
-specified. 
-The server **MAY** apply default sorting rules to top-level `data` 
-if request parameter `sort` is not specified. 
+If the server does not support sorting as specified in the query parameter
+`sort`, it **MUST** return `400 Bad Request`.
+
+If sorting is supported by the server and requested by the client via query
+parameter `sort`, the server **MUST** return elements of the top-level
+`data` array of the response ordered according to the criteria specified.
+The server **MAY** apply default sorting rules to top-level `data` if
+request parameter `sort` is not specified.
 
 ### Pagination <a href="#fetching-pagination" id="fetching-pagination" class="headerlink"></a>
 
