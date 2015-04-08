@@ -980,12 +980,12 @@ to create a resource with a client-generated ID.
 A server **MUST** respond to a successful resource creation request according to
 [`HTTP semantics`](http://tools.ietf.org/html/rfc7231#section-6.3).
 
-The response **MUST** include a `Location` header identifying the location
+The response **SHOULD** include a `Location` header identifying the location
 of the newly created resource.
 
 If a `POST` request did not include a [Client-Generated
 ID](#crud-creating-client-ids), and a resource has been created, the server
-**SHOULD** return a `201 Created` status code.
+**MUST** return a `201 Created` status code.
 
 The response **MUST** also include a document that contains the primary
 resource created.
