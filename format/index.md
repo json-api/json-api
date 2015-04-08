@@ -1034,7 +1034,8 @@ A server **MUST** return `409 Conflict` when processing a `POST` request to
 create a resource with a client-generated ID that already exists.
 
 A server **MUST** return `409 Conflict` when processing a `POST` request in
-which the resource's `type` does not match the server's endpoint.
+which the resource's `type` does is not among the type(s) that constitute the
+collection represented by the endpoint.
 
 ##### Other Responses <a href="#crud-creating-responses-other" id="crud-creating-responses-other" class="headerlink"></a>
 
