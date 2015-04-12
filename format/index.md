@@ -300,6 +300,11 @@ pagination links, as described below.
 If a link object refers to resource objects included in the same compound
 document, it **MUST** include resource linkage to those resource objects.
 
+> Note: a resource may actually be referring to another resource returned 
+in the same compound document, but this reference may be omitted 
+from the link object of the parent resource because of sparse fieldset 
+restrictions.
+
 Resource linkage **MUST** be represented as one of the following:
 
 * `null` for empty to-one relationships.
@@ -737,7 +742,10 @@ The value of the `include` parameter **MUST** be a comma-separated (U+002C
 COMMA, ",") list of relationship paths. A relationship path is a dot-separated
 (U+002E FULL-STOP, ".") list of relationship names. Each relationship name
 **MUST** be identical to the key in the `links` section of its parent
-resource object.
+resource object, if that key is present. If that key is not present because 
+it has been excluded using sparse fieldsets, the relationship name **MUST** 
+be identical to the key that would appear were the fieldset restriction 
+removed.
 
 > Note: For example, a relationship path could be `comments.author`, where
 `comments` is a relationship listed under a `articles` resource object, and
@@ -784,6 +792,25 @@ include additional [fields] in the response.
 ```http
 GET /articles?include=author&fields[articles]=title,body&fields[people]=name
 ```
+
+If both query parameters `include` and `fields[TYPE]` are provided by the client, 
+values of `TYPE` **MUST** either refer to the primary data or be listed in 
+`include`, otherwise the server **MUST** return `400 Bad Request`.
+
+> Note: This specification does not impose any restrictions on coordination 
+of values of the query string parameters `include` and `fields[TYPE]`,
+except for the restriction on the value of `TYPE` above.
+This approach makes it possible to return both lean and rich responses, 
+depending on the way the client formulated the request.
+It also makes it possible for specific API implementations to introduce 
+their own conventions, while still using generic JSON API libraries.
+For example, a given API may define default values for an endpoint `/articles`
+as follows: `"author"` is the default for `include`, `"title,author"` is 
+is the default for `fields[articles]`. i.e. `author` is included 
+in the response in both `articles.links` and `included`.
+The client may override that by specifying `fields[articles]=title` 
+in the query string, and the server must return `author` in `included`, 
+but not in `articles.links`.
 
 ### Sorting <a href="#fetching-sorting" id="fetching-sorting" class="headerlink"></a>
 
