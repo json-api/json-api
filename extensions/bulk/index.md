@@ -84,7 +84,7 @@ Multiple resources can be deleted by sending a `DELETE` request to a URL that
 represents a collection of resources to which they all belong.
 
 The body of the request **MUST** contain a `data` member whose value is an
-an array of objects that each contain a `type` and `id`.
+an array of linkage objects.
 
 For example:
 
