@@ -173,8 +173,8 @@ Here's how an article (i.e. a resource of type "articles") might appear in a doc
   "title": "Rails is Omakase",
   "links": {
     "author": {
-      "self": "/articles/1/links/author",
-      "related": "/articles/1/author",
+      "self": "http://example.com/articles/1/links/author",
+      "related": "http://example.com/articles/1/author",
       "linkage": { "type": "people", "id": "9" }
     }
   }
@@ -644,8 +644,8 @@ Content-Type: application/vnd.api+json
 
 {
   "links": {
-    "self": "/articles/1/links/author",
-    "related": "/articles/1/author"
+    "self": "http://example.com/articles/1/links/author",
+    "related": "http://example.com/articles/1/author"
   },
   "data": {
     "type": "people",
@@ -663,8 +663,8 @@ Content-Type: application/vnd.api+json
 
 {
   "links": {
-    "self": "/articles/1/links/author",
-    "related": "/articles/1/author"
+    "self": "http://example.com/articles/1/links/author",
+    "related": "http://example.com/articles/1/author"
   },
   "data": null
 }
@@ -678,8 +678,8 @@ Content-Type: application/vnd.api+json
 
 {
   "links": {
-    "self": "/articles/1/links/tags",
-    "related": "/articles/1/tags"
+    "self": "http://example.com/articles/1/links/tags",
+    "related": "http://example.com/articles/1/tags"
   },
   "data": [
     { "type": "tags", "id": "2" },
@@ -697,8 +697,8 @@ Content-Type: application/vnd.api+json
 
 {
   "links": {
-    "self": "/articles/1/links/tags",
-    "related": "/articles/1/tags"
+    "self": "http://example.com/articles/1/links/tags",
+    "related": "http://example.com/articles/1/tags"
   },
   "data": []
 }
