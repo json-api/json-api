@@ -102,7 +102,9 @@ Official extensions are available for [Bulk](/extensions/bulk/) and
 ## Update history <a href="#update-history" id="update-history" class="headerlink"></a>
 
 - 2015-03-16: Release candidate 3 released.
+- 2015-02-18: Release candidate 2 released.
+- 2014-07-05: Release candidate 1 released.
+- 2013-07-21: Media type registration completed with the IANA.
 - 2013-05-03: Initial release of the draft.
-- 2013-07-22: Media type registration completed with the IANA.
 
 You can subscribe to an RSS feed of individual changes [here](https://github.com/json-api/json-api/commits.atom).
