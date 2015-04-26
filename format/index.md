@@ -327,6 +327,11 @@ pagination links, as described below.
 If a link object refers to resource objects included in the same compound
 document, it **MUST** include resource linkage to those resource objects.
 
+> Note: a resource may actually be referring to another resource returned 
+in the same compound document, but this reference may be omitted 
+from the link object of the parent resource because of sparse fieldset 
+restrictions.
+
 Resource linkage **MUST** be represented as one of the following:
 
 * `null` for empty to-one relationships.
@@ -381,6 +386,10 @@ responses are called "compound documents".
 
 In a compound document, all included resources **MUST** be represented as an
 array of resource objects in a top-level `"included"` member.
+
+In a compound document, any resource which actually references other resources included 
+into the same document (either in top-level `"data"` or `"included"` members)
+**MUST** include references to those resources in its own `"links"` member.
 
 A complete example document with multiple included relationships:
 
@@ -811,6 +820,23 @@ include additional [fields] in the response.
 ```http
 GET /articles?include=author&fields[articles]=title,body&fields[people]=name
 ```
+
+If both query parameters `include` and `fields[TYPE]` are provided by the client, 
+values of `TYPE` **MUST** either refer to the primary data or to resources 
+returned in `include`, otherwise the server **MUST** return `400 Bad Request`.
+
+If all of the following are true:
+
+- the client provides `include` parameter, and the resource of type `A` is referred to in it,
+- the client provides parameter `fields[B]`, requiring sparse fieldsets for the type `B`,
+- resource of type `A` is actually referenced by type `B`, but 
+reference to it is not requested in `fields[B]`, 
+
+the server **MUST** return `400 Bad Request`.
+
+> Note: In two clauses preceding this note, "refer" is assumed to correctly track 
+heterogeneous relationships, where the type of the resource being referred to 
+in the relationship can be different from the name of the relationship itself.
 
 ### Sorting <a href="#fetching-sorting" id="fetching-sorting" class="headerlink"></a>
 
