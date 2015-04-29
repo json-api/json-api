@@ -140,9 +140,14 @@ of resources, or resource relationship primarily targeted by a request.
 
 A document **MUST** contain either primary data or an array of [error objects](#errors).
 
-Primary data **MUST** appear under a top-level key named `"data"`. Primary
-data **MUST** be either a single resource object, an array of resource
-objects, or a value representing a resource relationship.
+Primary data **MUST** appear under a top-level key named `"data"`.
+
+Primary data **MUST** be either:
+
+* a single resource object or `null`, for requests that target single resources
+* an array of resource objects or an empty array ([]), for requests that target
+resource collections
+* resource linkage, for requests that target a resource's relationship
 
 ```javascript
 {
@@ -156,8 +161,6 @@ objects, or a value representing a resource relationship.
 
 A logical collection of resources (e.g., the target of a to-many relationship)
 **MUST** be represented as an array, even if it only contains one item.
-A logically singular resource (e.g., the target of a to-one relationship)
-**MUST** be represented as a single resource object.
 
 Error objects **MUST** appear under a top-level key named `"errors"`.
 
@@ -577,8 +580,13 @@ A server **MUST** respond to a successful request to fetch an individual
 resource with a *resource object* or `null` provided as the response
 document's primary data.
 
-> Note: `null` is only an appropriate response for fetching a to-one
-related resource URL to indicate the absence of a resource in the relationship.
+`null` is only an appropriate response when the requested URL is one that
+might correspond to a single resource, but doesn't currently.
+
+> Note: Consider, for example, a request to fetch a to-one related resource URL.
+This request wold respond with `null` when the relationship is empty (such that
+the URL is corresponding to no resources) but with the single related resource's
+resource object otherwise.
 
 For example, a `GET` request to an individual article could return:
 
@@ -620,12 +628,9 @@ Content-Type: application/vnd.api+json
 
 ##### 404 Not Found <a href="#fetching-resources-responses-404" id="fetching-resources-responses-404" class="headerlink"></a>
 
-A server **MUST** return `404 Not Found` when processing a request to fetch
-a resource that does not exist.
-
-> Note: When requesting a related resource that is not present, a server
-**MUST** respond with `200 OK` and `null` or an empty array (`[]`) as the
-response document's primary data, as described above.
+A server **MUST** respond with `404 Not Found` when processing a request to
+fetch a single resource that does not exist, except when the request warrants a
+`200 OK` response with `null` as the primary data (as described above).
 
 ##### Other Responses <a href="#fetching-resources-responses-other" id="fetching-resources-responses-other" class="headerlink"></a>
 
