@@ -339,6 +339,8 @@ Resource linkage **MUST** be represented as one of the following:
 
 A "linkage object" is an object that identifies an individual related resource.
 It **MUST** contain `type` and `id` members.
+A linkage object **MAY** include a `"meta"` member to contain non-standard 
+meta-information about linkage.
 
 > Note: Resource linkage in a compound document allows a client to link
 together all of the included resource objects without having to `GET` any
