@@ -39,7 +39,8 @@ interchange format itself.
 
 ### How to discover resource possible actions? <a href="#how-to-discover-resource-possible-actions" id="how-to-discover-resource-possible-actions" class="headerlink"></a>
 
-You should use the OPTIONS HTTP method to discover what can be done with a
+If resource-level member `"actions"` is not provided by the server,
+you should use the OPTIONS HTTP method to discover what can be done with a
 particular resource. The semantics of the methods returned by OPTIONS is defined
 by the JSON API standard.
 
