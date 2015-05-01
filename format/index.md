@@ -154,7 +154,9 @@ resource collections
   "data": {
     "type": "articles",
     "id": "1",
-    // ... attributes of this article
+    "attributes": {
+      // ... attributes of this article
+    }
   }
 }
 ```
@@ -188,6 +190,7 @@ the client and represents a new resource to be created on the server.
 
 In addition, a resource object **MAY** contain any of these top-level members:
 
+* `"attributes"`: an "attributes object", providing information about a resource.
 * `"links"`: a "links object", providing information about a resource's
   relationships (described below).
 * `"meta"`: non-standard meta-information about a resource that can not be
@@ -200,7 +203,9 @@ Here's how an article (i.e. a resource of type "articles") might appear in a doc
 {
   "type": "articles",
   "id": "1",
-  "title": "Rails is Omakase",
+  "attributes": {
+    "title": "Rails is Omakase"
+  },
   "links": {
     "author": {
       "self": "/articles/1/links/author",
@@ -212,27 +217,29 @@ Here's how an article (i.e. a resource of type "articles") might appear in a doc
 // ...
 ```
 
+#### Attributes Object <a href="#document-structure-resource-object-attributes-object" id="document-structure-resource-object-attributes"></a>
+
+The value of the `"attributes"` key is a JSON object (an "attributes object")
+that represents information about the resource object it is contained within.
+
+The top level of this object shares a namespace with the members of `links` and
+**MUST** reserve the `id` and `type` keys. Apart from these restrictions this
+object can contain members keyed by any string valid for this specification.
+
 #### Attributes <a href="#document-structure-resource-object-attributes" id="document-structure-resource-object-attributes"></a>
 
-A resource object **MAY** contain additional top-level members. These members
-represent "[attributes]" and may contain any valid JSON value.
+All members which appear in an "attributes object" are considered attributes and
+may contain any valid JSON value.
 
 Although has-one foreign keys (e.g. `author_id`) are often stored internally
 alongside other information to be represented in a resource object, these keys
 **SHOULD NOT** appear as attributes. If relations are provided, they **MUST**
 be represented under the "links object".
 
-#### Complex Attributes <a href="#document-structure-resource-object-complex-attributes" id="document-structure-resource-object-complex-attributes"></a>
-
-"[Complex attributes]" are [attributes] whose value is an object or array with
-any level of nesting. An object that constitutes or is contained in a complex
-attribute **MUST** reserve the `id`, `type`, `links`, and `meta` members for future
-use.
-
 #### Fields <a href="#document-structure-resource-object-fields" id="document-structure-resource-object-fields" class="headerlink"></a>
 
-A resource object's [attributes] and relationships are collectively called its
-"[fields]". <a href="#document-structure-resource-object-fields" id="document-structure-resource-object-fields"></a>
+With the exception of the `self` link, a resource object's [attributes] and
+[links] are collectively called its "[fields]".
 
 #### Resource Identification <a href="#document-structure-resource-identification" id="document-structure-resource-identification" class="headerlink"></a>
 
@@ -263,12 +270,10 @@ be a string.
 
 The value of the `"links"` key is a JSON object (a "links object") that
 represents related resources, keyed by the name of each association.
-These associations share namespace with resource attributes:
-associations of a given resource **MUST** be named differently than
-attributes of that resource.
+These associations share a namespace with [attributes]. Associations of a
+given resource object **MUST** be named differently than its [attributes].
 
-The key `"self"` is reserved within the links object for the resource URL,
-as described below.
+The keys `"id"`, `"type"` and `"self"` are reserved within the links object.
 
 #### Resource URLs <a href="#document-structure-resource-urls" id="document-structure-resource-urls" class="headerlink"></a>
 
@@ -280,7 +285,9 @@ A resource object **MAY** include a URL in its links object, keyed by
 {
   "type": "articles",
   "id": "1",
-  "title": "Rails is Omakase",
+  "attributes": {
+    "title": "Rails is Omakase"
+  },
   "links": {
     "self": "http://example.com/articles/1"
   }
@@ -295,7 +302,7 @@ response that includes the resource as the primary data.
 
 A resource object **MAY** contain references to other resource objects
 ("relationships"). Relationships may be to-one or to-many. Relationships
-can be specified by including a member in a resource's links object.
+can be specified by including a member in a resource's [links] object.
 
 The name of the relationship declared in the key **SHALL NOT** be `"self"`.
 
@@ -339,7 +346,7 @@ Resource linkage **MUST** be represented as one of the following:
 
 A "linkage object" is an object that identifies an individual related resource.
 It **MUST** contain `type` and `id` members.
-A linkage object **MAY** include a `"meta"` member to contain non-standard 
+A linkage object **MAY** include a `"meta"` member to contain non-standard
 meta-information about linkage.
 
 > Note: Resource linkage in a compound document allows a client to link
@@ -356,7 +363,9 @@ For example, the following article is associated with an `author` and `comments`
 {
   "type": "articles",
   "id": "1",
-  "title": "Rails is Omakase",
+  "attributes": {
+    "title": "Rails is Omakase",
+  },
   "links": {
     "self": "http://example.com/articles/1",
     "author": {
@@ -394,7 +403,9 @@ A complete example document with multiple included relationships:
   "data": [{
     "type": "articles",
     "id": "1",
-    "title": "JSON API paints my bikeshed!",
+    "attributes": {
+      "title": "JSON API paints my bikeshed!"
+    },
     "links": {
       "self": "http://example.com/articles/1",
       "author": {
@@ -415,23 +426,29 @@ A complete example document with multiple included relationships:
   "included": [{
     "type": "people",
     "id": "9",
-    "first-name": "Dan",
-    "last-name": "Gebhardt",
-    "twitter": "dgeb",
+    "attributes": {
+      "first-name": "Dan",
+      "last-name": "Gebhardt",
+      "twitter": "dgeb"
+    },
     "links": {
       "self": "http://example.com/people/9"
     }
   }, {
     "type": "comments",
     "id": "5",
-    "body": "First!",
+    "attributes": {
+      "body": "First!"
+    },
     "links": {
       "self": "http://example.com/comments/5"
     }
   }, {
     "type": "comments",
     "id": "12",
-    "body": "I like XML better",
+    "attributes": {
+      "body": "I like XML better"
+    },
     "links": {
       "self": "http://example.com/comments/12"
     }
@@ -555,11 +572,15 @@ Content-Type: application/vnd.api+json
   "data": [{
     "type": "articles",
     "id": "1",
-    "title": "JSON API paints my bikeshed!"
+    "attributes": {
+      "title": "JSON API paints my bikeshed!"
+    }
   }, {
     "type": "articles",
     "id": "2",
-    "title": "Rails is Omakase"
+    "attributes": {
+      "title": "Rails is Omakase"
+    }
   }]
 }
 ```
@@ -603,7 +624,9 @@ Content-Type: application/vnd.api+json
   "data": {
     "type": "articles",
     "id": "1",
-    "title": "JSON API paints my bikeshed!",
+    "attributes": {
+      "title": "JSON API paints my bikeshed!"
+    },
     "links": {
       "author": {
         "related": "http://example.com/articles/1/author"
@@ -806,9 +829,6 @@ GET /articles/1?include=author,comments,comments.author
 A client **MAY** request that an endpoint return only specific [fields] in the
 response on a per-type basis by including a `fields[TYPE]` parameter.
 
-> Note: Only [fields] are affected; `type`, `id`, and (optionally) `self` are
-included as normal.
-
 The value of the `fields` parameter **MUST** be a comma-separated (U+002C
 COMMA, ",") list that refers to the name(s) of the fields to be returned.
 
@@ -958,8 +978,10 @@ Accept: application/vnd.api+json
 {
   "data": {
     "type": "photos",
-    "title": "Ember Hamster",
-    "src": "http://example.com/images/productivity.png",
+    "attributes": {
+      "title": "Ember Hamster",
+      "src": "http://example.com/images/productivity.png"
+    },
     "links": {
       "photographer": {
         "linkage": { "type": "people", "id": "9" }
@@ -998,8 +1020,10 @@ Accept: application/vnd.api+json
   "data": {
     "type": "photos",
     "id": "550e8400-e29b-41d4-a716-446655440000",
-    "title": "Ember Hamster",
-    "src": "http://example.com/images/productivity.png"
+    "attributes": {
+      "title": "Ember Hamster",
+      "src": "http://example.com/images/productivity.png"
+    }
   }
 }
 ```
@@ -1037,8 +1061,10 @@ Content-Type: application/vnd.api+json
   "data": {
     "type": "photos",
     "id": "550e8400-e29b-41d4-a716-446655440000",
-    "title": "Ember Hamster",
-    "src": "http://example.com/images/productivity.png",
+    "attributes": {
+      "title": "Ember Hamster",
+      "src": "http://example.com/images/productivity.png"
+    },
     "links": {
       "self": "http://example.com/photos/550e8400-e29b-41d4-a716-446655440000"
     }
@@ -1099,7 +1125,9 @@ Accept: application/vnd.api+json
   "data": {
     "type": "articles",
     "id": "1",
-    "title": "To TDD or Not"
+    "attributes": {
+      "title": "To TDD or Not"
+    }
   }
 }
 ```
@@ -1109,9 +1137,9 @@ Accept: application/vnd.api+json
 Any or all of a resource's attributes **MAY** be included in the resource
 object included in a `PATCH` request.
 
-If a request does not include all of the fields for a resource, the server
-**MUST** interpret the missing fields as if they were included together with
-their current values. It **MUST NOT** interpret them as `null` values.
+If a request does not include all of the [fields] for a resource, the server
+**MUST** interpret the missing [fields] as if they were included with their
+current values. It **MUST NOT** interpret them as `null` values.
 
 For example, the following `PATCH` request is interpreted as a request to
 update only the `title` and `text` attributes of an article:
@@ -1125,8 +1153,10 @@ Accept: application/vnd.api+json
   "data": {
     "type": "articles",
     "id": "1",
-    "title": "To TDD or Not",
-    "text": "TLDR; It's complicated... but check your test coverage regardless."
+    "attributes": {
+      "title": "To TDD or Not",
+      "text": "TLDR; It's complicated... but check your test coverage regardless."
+    }
   }
 }
 ```
@@ -1149,7 +1179,9 @@ Accept: application/vnd.api+json
   "data": {
     "type": "articles",
     "id": "1",
-    "title": "Rails is a Melting Pot",
+    "attributes": {
+      "title": "Rails is a Melting Pot"
+    },
     "links": {
       "author": {
         "linkage": { "type": "people", "id": "1" }
@@ -1171,7 +1203,9 @@ Accept: application/vnd.api+json
   "data": {
     "type": "articles",
     "id": "1",
-    "title": "Rails is a Melting Pot",
+    "attributes": {
+      "title": "Rails is a Melting Pot"
+    },
     "links": {
       "tags": {
         "linkage": [
@@ -1477,5 +1511,5 @@ An error object **MAY** have the following members:
 Additional members **MAY** be specified within error objects.
 
 [attributes]: #document-structure-resource-object-attributes
-[complex attributes]: #document-structure-resource-object-complex-attributes
+[links]: #document-structure-resource-links
 [fields]: #document-structure-resource-object-fields

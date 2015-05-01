@@ -58,8 +58,10 @@ Accept: application/vnd.api+json; ext=jsonpatch
     "path": "/-",
     "value": {
       "type": "photos",
-      "title": "Ember Hamster",
-      "src": "http://example.com/images/productivity.png"
+      "attributes": {
+        "title": "Ember Hamster",
+        "src": "http://example.com/images/productivity.png"
+      }
     }
   }
 ]
@@ -130,7 +132,7 @@ A server **MUST** respond to Patch operations that target a *to-many
 relationship URL* as described below.
 
 For all operations, the `"value"` **MUST** contain an object that contains
-an array of linkage objects or an empty array, to remove all elements 
+an array of linkage objects or an empty array, to remove all elements
 of the relationship.
 
 If a client requests a `"replace"` operation to a *to-many relationship URL*, the
@@ -147,12 +149,12 @@ Content-Type: application/vnd.api+json; ext=jsonpatch
 Accept: application/vnd.api+json; ext=jsonpatch
 
 [
-  { 
-    "op": "replace", 
-    "path": "", 
+  {
+    "op": "replace",
+    "path": "",
     "value": [
-      { "type": "tags", "id": "2" }, 
-      { "type": "tags", "id": "3" } 
+      { "type": "tags", "id": "2" },
+      { "type": "tags", "id": "3" }
     ]
   }
 ]
@@ -171,9 +173,9 @@ Content-Type: application/vnd.api+json; ext=jsonpatch
 Accept: application/vnd.api+json; ext=jsonpatch
 
 [
-  { 
-    "op": "add", 
-    "path": "/-", 
+  {
+    "op": "add",
+    "path": "/-",
     "value": [
       { "type": "comments", "id": "123" }
     ]
@@ -193,9 +195,9 @@ Content-Type: application/vnd.api+json; ext=jsonpatch
 Accept: application/vnd.api+json; ext=jsonpatch
 
 [
-  { 
-    "op": "remove", 
-    "path": "", 
+  {
+    "op": "remove",
+    "path": "",
     "value": [
       { "type": "comments", "id": "5" },
       { "type": "comments", "id": "13" }
@@ -255,8 +257,10 @@ Accept: application/vnd.api+json; ext=jsonpatch
     "path": "/-",
     "value": {
       "type": "photos",
-      "title": "Ember Hamster",
-      "src": "http://example.com/images/productivity.png"
+      "attributes": {
+        "title": "Ember Hamster",
+        "src": "http://example.com/images/productivity.png"
+      }
     }
   },
   {
@@ -264,8 +268,10 @@ Accept: application/vnd.api+json; ext=jsonpatch
     "path": "/-",
     "value": {
       "type": "photos",
-      "title": "Mustaches on a Stick",
-      "src": "http://example.com/images/mustaches.png"
+      "attributes": {
+        "title": "Mustaches on a Stick",
+        "src": "http://example.com/images/mustaches.png"
+      }
     }
   }
 ]
@@ -283,15 +289,19 @@ Content-Type: application/vnd.api+json; ext=jsonpatch
     "data": [{
       "type": "photos",
       "id": "123",
-      "title": "Ember Hamster",
-      "src": "http://example.com/images/productivity.png"
+      "attributes": {
+        "title": "Ember Hamster",
+        "src": "http://example.com/images/productivity.png"
+      }
     }]
   }, {
     "data": [{
       "type": "photos",
       "id": "124",
-      "title": "Mustaches on a Stick",
-      "src": "http://example.com/images/mustaches.png"
+      "attributes": {
+        "title": "Mustaches on a Stick",
+        "src": "http://example.com/images/mustaches.png"
+      }
     }]
   }
 ]
