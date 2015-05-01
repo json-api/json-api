@@ -30,6 +30,7 @@ for exchanging data.
   - [Compound Documents](#document-structure-compound-documents)
   - [Meta information](#document-structure-meta)
   - [Top-level Links](#document-structure-top-level-links)
+  - [Read-only attributes and relationships](#document-structure-readonly)
 - [Fetching Data](#fetching)
   - [Fetching Resources](#fetching-resources)
   - [Fetching Relationships](#fetching-relationships)
@@ -170,6 +171,8 @@ A document's top level **MAY** also have the following members:
 * `"links"`: URLs related to the primary data.
 * `"included"`: a list of resource objects that are related to the primary data
   and/or each other ("included resources").
+* `"readonly"`: a list, per resource type, of lists of attributes or 
+  relationships of resources of a given type, which cannot be modified by client.
 
 If any of these members appears in the top-level of a response, their values
 **MUST** comply with this specification.
@@ -192,6 +195,8 @@ In addition, a resource object **MAY** contain any of these top-level members:
   relationships (described below).
 * `"meta"`: non-standard meta-information about a resource that can not be
   represented as an attribute or relationship.
+* `"readonly"`: a list of attributes or relationships of the given resource, 
+  which cannot be modified by client.
 
 Here's how an article (i.e. a resource of type "articles") might appear in a document:
 
@@ -487,6 +492,112 @@ The top-level links object **MAY** contain the following members:
 * `"related"` - a related resource URL (as defined above) when the primary
   data represents a resource relationship.
 * Pagination links for the primary data (as described below).
+
+### Read-only attributes and relationships <a href="#document-structure-readonly" id="document-structure-readonly" class="headerlink"></a>
+
+A server **MAY** inform client which resource attributes or relationships
+cannot be modified by client by providing top-level or resource-level
+members `"readonly"`. If supplied, they **MUST** be provided either on
+resource level or on top level of any given response document,
+and **MUST** have the following values:
+
+* at resource level, an array containing names of read-only attributes 
+  and relationships of that resource,
+* at top level, an object containing members keyed by resource type, 
+  each of which is an array containing names of read-only attributes
+  and relationships of that resource type. 
+
+If `"readonly"` member is supplied for a given resource of resource type,
+and `"id"` of that resource or resource type cannot be modified by
+client, element `"id"` **MUST** be included in the arrays defined above.
+
+If `"readonly"` member is provided, it **MUST** account for authentication 
+and authorization status of the current client and for other pertinent 
+circumstances, so that the returned information is accurate for the given 
+client at the moment when the response is being built by the server.
+If `"readonly"` member is provided at resource level, it also **MUST** 
+be accourate for the given resource.
+
+If the server provides facilities to inform the client about read-only 
+attributes or relationships, it **MUST** return `403 Forbidden` 
+in response to attempt of a client to modify them and provide 
+additional information on the cause of the error in the error object.
+
+Example of top-level read-only object 
+(it also illustrates that the server allows the client to modify IDs of countries):
+
+```json
+{
+  "data": {
+    "id": "12",
+    "type": "users",
+    "username": "jsmith",
+    "email": "jsmith@example.com",
+    "updated_at": "2015-01-01",
+    "name": {
+      "first": "jane",
+      "last": "smith"
+    },
+    "links": {
+      "father": { "linkage": { "id": "34", "type": "users" }},
+      "mother": { "linkage": { "id": "56", "type": "users" }},
+      "spouse": { "linkage": { "id": "78", "type": "users" }},
+      "country": { "linkage": { "id": "90", "type": "countries" }}
+    }
+  },
+  "included": [{
+    "id": "90",
+    "type": "countries",
+    "name": "USA",
+    "updated_at": "2015-01-01"
+  }],
+  "readonly": {
+    "users": [ "id", "username", "name.first", "father", "mother", "updated_at" ],
+    "countries": [ "updated_at" ]
+  }
+}
+```
+
+Example of resource-level read-only object:
+
+```json
+{
+  "data": {
+    "id": "12",
+    "type": "users",
+    "username": "jsmith",
+    "email": "jsmith@example.com",
+    "updated_at": "2015-01-01",
+    "name": {
+      "first": "jane",
+      "last": "smith"
+    },
+    "links": {
+      "father": { "linkage": { "id": "34", "type": "users" }},
+      "mother": { "linkage": { "id": "56", "type": "users" }},
+      "spouse": { "linkage": { "id": "78", "type": "users" }}
+    },
+    "readonly": [
+      "id", "username", "name.first", "father", "mother", "updated_at"
+    ]
+  }
+}
+```
+
+A server may provide an endpoint for fetching read-only attributes 
+and relationships for all resources in the API. For example,
+
+```
+GET /readonly
+
+{
+  "data": null,
+  "readonly": {
+    "users": [ "id", "username", "name.first", "father", "mother", "updated_at" ],
+    "countries": [ "updated_at" ]
+  }
+}
+```
 
 ## Fetching Data <a href="#fetching" id="fetching" class="headerlink"></a>
 
