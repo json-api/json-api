@@ -586,7 +586,7 @@ document's primary data.
 might correspond to a single resource, but doesn't currently.
 
 > Note: Consider, for example, a request to fetch a to-one related resource URL.
-This request wold respond with `null` when the relationship is empty (such that
+This request would respond with `null` when the relationship is empty (such that
 the URL is corresponding to no resources) but with the single related resource's
 resource object otherwise.
 
