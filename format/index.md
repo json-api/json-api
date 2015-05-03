@@ -346,7 +346,7 @@ meta-information about linkage.
 together all of the included resource objects without having to `GET` any
 relationship URLs.
 
-> Note: If present, a *related resource URL* must be a valid URL, even if the
+If present, a *related resource URL* **MUST** be a valid URL, even if the
 relationship isn't currently associated with any target resources.
 
 For example, the following article is associated with an `author` and `comments`:
@@ -747,7 +747,7 @@ a relationship URL that does not exist.
 does not exist. For example, when `/articles/1` does not exist, request to
 `/articles/1/links/tags` returns `404 Not Found`.
 
-> Note: If a relationship URL exists but the relationship is empty, then
+If a relationship URL exists but the relationship is empty, then
 `200 OK` **MUST** be returned, as described above.
 
 ##### Other Responses <a href="#fetching-relationships-responses-other" id="fetching-relationships-responses-other" class="headerlink"></a>
