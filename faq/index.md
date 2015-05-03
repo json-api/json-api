@@ -80,3 +80,7 @@ significant. It's necessary to separate primary and related resources by more
 than type because it's possible that a primary resource may have related
 resources of the same type (e.g. the "parents" of a "person"). Nesting related
 resources in `included` prevents this possible conflict.
+
+### Does JSON API take any position on URI structure, on rules for custom endpoints, which do not fit the paradigm of GET/POST/PATCH/DELETE on the resource URI, etc.?
+
+JSON API has no requirements about URI structure, implementations are free to use whatever form they wish.
