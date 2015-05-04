@@ -10,15 +10,14 @@ pull request](https://github.com/json-api/json-api).
 
 ### JavaScript <a href="#client-javascript" id="client-libraries-javascript" class="headerlink"></a>
 
-* [ember-data](https://github.com/emberjs/data) is one of the original exemplar
-implementations. There is a [custom adapter](https://github.com/kurko/ember-json-api) to support json-api.
+* [ember-data](https://github.com/emberjs/data) is one of the original exemplar implementations. There is a [custom adapter](https://github.com/kurko/ember-json-api) to support json-api.
 * [backbone-jsonapi](https://github.com/guillaumervls/backbone-jsonapi) is a Backbone adapter for JSON API. Supports fetching Models & Collections from a JSON API source.
 * [orbit.js](https://github.com/orbitjs/orbit.js) is a standalone library for
   coordinating access to data sources and keeping their contents synchronized.
   Orbit's Common Library includes
   [JSONAPISource](https://github.com/orbitjs/orbit.js/blob/master/lib/orbit-common/jsonapi-source.js)
   for accessing JSON API servers. Orbit can be used
-  independently or with Ember.js through the 
+  independently or with Ember.js through the
   [ember-orbit](https://github.com/orbitjs/ember-orbit) integration library.
 
 ### iOS <a href="#client-ios" id="client-libraries-ios" class="headerlink"></a>
@@ -28,7 +27,7 @@ implementations. There is a [custom adapter](https://github.com/kurko/ember-json
 
 ### Ruby <a href="#client-ruby" id="client-libraries-ruby" class="headerlink"></a>
 
-* [jsonapi-consumer](https://github.com/jsmestad/jsonapi-consumer) a ruby library for consuming JSONAPI payloads. 
+* [jsonapi-consumer](https://github.com/jsmestad/jsonapi-consumer) a ruby library for consuming JSONAPI payloads.
 * [JsonApiClient](https://github.com/chingor13/json_api_client) attempts to give you a query building framework that is easy to understand (similar to ActiveRecord scopes)
 
 
@@ -43,6 +42,7 @@ implementations. There is a [custom adapter](https://github.com/kurko/ember-json
 ### Node.js <a href="#server-node-js" id="server-libraries-node-js" class="headerlink"></a>
 * [Fortune.js](http://fortunejs.com) is a framework built to implement json-api.
 * [json-api](https://www.npmjs.org/package/json-api) turns an Express + Mongoose app into a JSON-API server.
+* [endpoints](https://github.com/endpoints) is an implementation of JSON-API using [Bookshelf](http://bookshelfjs.org).
 
 ### Ruby <a href="#server-ruby" id="server-libraries-ruby" class="headerlink"></a>
 
