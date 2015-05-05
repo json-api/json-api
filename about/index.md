@@ -61,3 +61,5 @@ This media type is still a work in progress, and we are extremely open to
 feedback and proposals for improvement. That said, implementation work
 has already begun, and we value good working systems over perfect
 vaporware.
+
+JSON API was originally drafted by [Yehuda Katz](http://twitter.com/wycats) in May 2013.
