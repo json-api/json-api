@@ -23,8 +23,9 @@ There are four primary editors of this specification:
 
 ## History <a href="#history" id="history" class="headerlink"></a>
 
-JSON API is extracted from the JSON transport implicitly defined by
-[Ember](http://emberjs.com/) Data's REST adapter.
+JSON API was originally drafted by [Yehuda Katz](http://twitter.com/wycats)
+in May 2013. This first draft was extracted from the JSON transport
+implicitly defined by [Ember](http://emberjs.com/) Data's REST adapter.
 
 In general, Ember Data's goal is to eliminate the need for ad-hoc code
 per application to communicate with servers that communicate in a
@@ -62,4 +63,3 @@ feedback and proposals for improvement. That said, implementation work
 has already begun, and we value good working systems over perfect
 vaporware.
 
-JSON API was originally drafted by [Yehuda Katz](http://twitter.com/wycats) in May 2013.
