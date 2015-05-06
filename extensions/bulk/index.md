@@ -40,12 +40,16 @@ Accept: application/vnd.api+json; ext=bulk
 {
   "data": [{
     "type": "photos",
-    "title": "Ember Hamster",
-    "src": "http://example.com/images/productivity.png"
+    "attributes": {
+      "title": "Ember Hamster",
+      "src": "http://example.com/images/productivity.png"
+    }
   }, {
     "type": "photos",
-    "title": "Mustaches on a Stick",
-    "src": "http://example.com/images/mustaches.png"
+    "attributes": {
+      "title": "Mustaches on a Stick",
+      "src": "http://example.com/images/mustaches.png"
+    }
   }]
 }
 ```
@@ -69,11 +73,15 @@ Accept: application/vnd.api+json; ext=bulk
   "data": [{
     "type": "articles",
     "id": "1",
-    "title": "To TDD or Not"
+    "attributes": {
+      "title": "To TDD or Not"
+    }
   }, {
     "type": "articles",
     "id": "2",
-    "title": "LOL Engineering"
+    "attributes": {
+      "title": "LOL Engineering"
+    }
   }]
 }
 ```
