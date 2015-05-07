@@ -364,7 +364,7 @@ For example, the following article is associated with an `author` and `comments`
   "type": "articles",
   "id": "1",
   "attributes": {
-    "title": "Rails is Omakase",
+    "title": "Rails is Omakase"
   },
   "links": {
     "self": "http://example.com/articles/1",
