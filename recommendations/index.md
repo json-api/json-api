@@ -9,12 +9,11 @@ are beyond the scope of the base JSON API specification.
 
 ## Recommendations for Naming <a href="#naming" id="naming" class="headerlink"></a>
 
-It is recommended that resource type names, attribute names, and association
-names with multiple words be separated. It's recommended to use an underscore (U+005F LOW LINE, "_") as separator, because other separator characters (like a hyphen minus or space) could cause problems in some implementation languages, when reading/processing the JSON API document.
+The allowed characters for naming members are defined in the spec, but it's recommended to only use the lower-case ASCII characters a-z and 0-9, and to start the name with a-z. Furthormore the hypen minus (U+002D HYPHEN-MINUS, "-") should be used as a word separator.
 
-It is also recommended that resource types be pluralized. Separated and
-pluralized resource types can be used as URL segments without translation,
-as discussed below.
+All these recommended characters are URL safe following [RFC 3986](http://tools.ietf.org/html/rfc3986), so member names can be mapped to URLs without translation (see below for details).
+
+These recommendations help to standardize the naming of members and to avoid potential problems.
 
 ## Recommendations for URL Design <a href="#urls" id="urls" class="headerlink"></a>
 
