@@ -513,22 +513,21 @@ All member names used in the document **MUST** be handled case sensitive by clie
 - Member names **MUST** start and end with one of the following ASCII characters: a-z, A-Z, 0-9, or any NON-ASCII character.
 - Member names **MUST** contain only non-reserved ASCII characters or NON-ASCII characters.
 
-To standardize the naming and avoid potential problems with the implementation of JSON API, member names **SHOULD** also meet the following (more restrictive) conditions:
-- Members **SHOULD NOT** start with a digit ("0-9").
-- Members **SHOULD NOT** contain NON-ASCII characters.
-- Members **SHOULD NOT** contain ASCII control characters.
-- Members **SHOULD NOT** use the "same" name in different spellings (e.g. "name" and "NAME").
-- Members **SHOULD** use an underscore (U+005F LOW LINE, "_") as word separator.
+To standardize the naming and to enable an easy mapping of member names to URLs, member names **SHOULD** also meet the following (more restrictive) conditions:
+- Member names **SHOULD** start with one of the following ASCII characters: a-z
+- Member names **SHOULD** consist only of the following URL safe ASCII characters: a-z, 0-9, hyphen minus (U+002D HYPHEN-MINUS, "-")
 
-#### Allowed ASCII characters <a href="#document-structure-member-names-allowed-ascii-characters" id="document-structure-member-names-allowed-ascii-characters"></a>
+#### Allowed and recommended ASCII characters <a href="#document-structure-member-names-allowed-recommended-ascii-characters" id="document-structure-member-names-allowed-recommended-ascii-characters"></a>
 - a-z
+- 0-9 (not recommended as first character)
+- U+002D HYPHEN-MINUS, "-" (not allowed as first character)
+
+#### Other allowed ASCII characters <a href="#document-structure-member-names-other-allowed-ascii-characters" id="document-structure-member-names-other-allowed-ascii-characters"></a>
 - A-Z
-- 0-9
-- U+0020 SPACE, " " (except as first character)
-- U+002D HYPHEN-MINUS, "-" (except as first character)
-- U+005F LOW LINE, "_" (except as first character)
-- U+005E CIRCUMFLEX ACCENT, "^" (except as first character)
-- U+0060 GRAVE ACCENT, "`" (except as first character)
+- U+0020 SPACE, " " (not allowed as first character, not URL safe)
+- U+005F LOW LINE, "_" (not allowed as first character)
+- U+005E CIRCUMFLEX ACCENT, "^" (not allowed as first character, not URL safe)
+- U+0060 GRAVE ACCENT, "`" (not allowed as first character, not URL safe)
 
 #### Reserved ASCII characters (currently in use) <a href="#document-structure-member-names-reserved-ascii-characters-in-use" id="document-structure-member-names-reserved-ascii-characters-in-use"></a>
 - U+002B PLUS SIGN, "+" (used for ordering)
