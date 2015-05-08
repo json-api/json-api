@@ -9,9 +9,8 @@ are beyond the scope of the base JSON API specification.
 
 ## Recommendations for Naming <a href="#naming" id="naming" class="headerlink"></a>
 
-It is recommended that resource types, attribute names, and association
-names be "dasherized"; i.e. consist of only lower case alphanumeric
-characters and dashes (U+002D HYPHEN-MINUS, "-").
+It is recommended that resource type names, attribute names, and association
+names with multiple words be separated. It's recommended to use an underscore (U+005F LOW LINE, "_") as separator, because other separator characters (like a hyphen minus or space) could cause problems in some implementation languages, when reading/processing the JSON API document.
 
 It is also recommended that resource types be pluralized. Dasherized and
 pluralized resource types can be used as URL segments without translation,
