@@ -12,7 +12,7 @@ are beyond the scope of the base JSON API specification.
 It is recommended that resource type names, attribute names, and association
 names with multiple words be separated. It's recommended to use an underscore (U+005F LOW LINE, "_") as separator, because other separator characters (like a hyphen minus or space) could cause problems in some implementation languages, when reading/processing the JSON API document.
 
-It is also recommended that resource types be pluralized. Dasherized and
+It is also recommended that resource types be pluralized. Separated and
 pluralized resource types can be used as URL segments without translation,
 as discussed below.
 
