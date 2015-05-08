@@ -30,6 +30,7 @@ for exchanging data.
   - [Compound Documents](#document-structure-compound-documents)
   - [Meta information](#document-structure-meta)
   - [Top-level Links](#document-structure-top-level-links)
+  - [Member names](#document-structure-member-names)
 - [Fetching Data](#fetching)
   - [Fetching Resources](#fetching-resources)
   - [Fetching Relationships](#fetching-relationships)
@@ -504,6 +505,62 @@ The top-level links object **MAY** contain the following members:
 * `"related"` - a related resource URL (as defined above) when the primary
   data represents a resource relationship.
 * Pagination links for the primary data (as described below).
+
+### Member names <a href="#document-structure-member-names" id="document-structure-member-names"></a>
+
+All member names used in the document **MUST** be handled case sensitive by clients and servers, and they **MUST** meet all of the following conditions:
+- Member names **MUST** contain at least one character.
+- Member names **MUST** start and end with one of the following ASCII characters: a-z, A-Z, 0-9, or any NON-ASCII character.
+- Member names **MUST** contain only non-reserved ASCII characters or NON-ASCII characters.
+
+To standardize the naming and avoid potential problems with the implementation of JSON API, member names **SHOULD** also meet the following (more restrictive) conditions:
+- Members **SHOULD NOT** start with a digit ("0-9").
+- Members **SHOULD NOT** contain NON-ASCII characters.
+- Members **SHOULD NOT** contain ASCII control characters.
+- Members **SHOULD NOT** use the "same" name in different spellings (e.g. "name" and "NAME").
+- Members **SHOULD** use an underscore (U+005F LOW LINE, "_") as word separator.
+
+#### Allowed ASCII characters <a href="#document-structure-member-names-allowed-ascii-characters" id="document-structure-member-names-allowed-ascii-characters"></a>
+- a-z
+- A-Z
+- 0-9
+- U+0020 SPACE, " " (except as first character)
+- U+002D HYPHEN-MINUS, "-" (except as first character)
+- U+005F LOW LINE, "_" (except as first character)
+- U+005E CIRCUMFLEX ACCENT, "^" (except as first character)
+- U+0060 GRAVE ACCENT, "`" (except as first character)
+
+#### Reserved ASCII characters (currently in use) <a href="#document-structure-member-names-reserved-ascii-characters-in-use" id="document-structure-member-names-reserved-ascii-characters-in-use"></a>
+- U+002B PLUS SIGN, "+" (used for ordering)
+- U+002C COMMA, "," (used separator for multiple relationship paths)
+- U+002E PERIOD, "." (used as relationship path separators)
+- U+005B LEFT SQUARE BRACKET, "[" (use in sparse fieldsets)
+- U+005D RIGHT SQUARE BRACKET, "]" (used in sparse fieldsets)
+
+#### Reserved ASCII characters (punctation, currency and math symbols) for later use <a href="#document-structure-member-names-reserved-ascii-characters-later-use" id="document-structure-member-names-reserved-ascii-characters-later-use"></a>
+- U+0021 EXCLAMATION MARK, "!"	 	
+- U+0022 QUOTATION MARK, '"'
+- U+0023 NUMBER SIGN, "#"
+- U+0024 DOLLAR SIGN, "$"
+- U+0025 PERCENT SIGN, "%"
+- U+0026 AMPERSAND, "&"
+- U+0027 APOSTROPHE, "'"
+- U+0028 LEFT PARENTHESIS, "("
+- U+0029 RIGHT PARENTHESIS, ")"
+- U+002A ASTERISK, "*"
+- U+002F SOLIDUS, "/"
+- U+003A COLON, ":"
+- U+003B SEMICOLON, ";"
+- U+003C LESS-THAN SIGN, "<"
+- U+003D EQUALS SIGN, "="
+- U+003E GREATER-THAN SIGN, ">"
+- U+003F QUESTION MARK, "?"
+- U+0040 COMMERCIAL AT, "@"
+- U+005C REVERSE SOLIDUS, "\"
+- U+007B LEFT CURLY BRACKET, "{"
+- U+007C VERTICAL LINE, "|"
+- U+007D RIGHT CURLY BRACKET, "}"
+- U+007E TILDE, "~"
 
 ## Fetching Data <a href="#fetching" id="fetching" class="headerlink"></a>
 
