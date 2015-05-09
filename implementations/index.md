@@ -73,6 +73,10 @@ has a page describing how to emit conformant JSON.
 
 * [JSONAPI.NET](https://github.com/SphtKr/JSONAPI.NET) is a .NET library that integrates with ASP.NET WebAPI, Json.NET, and (optionally) Entity Framework to help you quickly create JSON API compliant web services.
 
+### JAVA <a href="#server-java" id="server-libraries-java" class="headerlink"></a>
+
+* [katharsis](https://github.com/katharsis-project) has comprehensive coverage of standard allowing to create JSON:API compatible resources with dynamic relation based routing. Library is highly modular and compatible with all JAX-RS based frameworks.
+
 
 ## Examples <a href="#examples" id="examples" class="headerlink"></a>
 
