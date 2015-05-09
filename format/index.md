@@ -510,33 +510,32 @@ The top-level links object **MAY** contain the following members:
 
 All member names used in the document **MUST** be handled case sensitive by clients and servers, and they **MUST** meet all of the following conditions:
 - Member names **MUST** contain at least one character.
-- Member names **MUST** start and end with one of the following ASCII characters: a-z, A-Z, 0-9, or any NON-ASCII character.
-- Member names **MUST** contain only non-reserved ASCII characters or NON-ASCII characters.
+- Member names **MUST** contain only allowed characters as listed below.
+- Member names **MUST** start and end with an overall allowed character as listed below.
 
-To standardize the naming and to enable an easy mapping of member names to URLs, member names **SHOULD** also meet the following (more restrictive) conditions:
-- Member names **SHOULD** start with one of the following ASCII characters: a-z
-- Member names **SHOULD** consist only of the following URL safe ASCII characters: a-z, 0-9, hyphen minus (U+002D HYPHEN-MINUS, "-")
+To enable an easy mapping of member names to URLs, it's **RECOMMENDED** to limit the allowed characters to non-reserved, URL safe characters, following [RFC 3986](http://tools.ietf.org/html/rfc3986#page-13).
 
-#### Allowed and recommended ASCII characters <a href="#document-structure-member-names-allowed-recommended-ascii-characters" id="document-structure-member-names-allowed-recommended-ascii-characters"></a>
-- a-z
-- 0-9 (not recommended as first character)
-- U+002D HYPHEN-MINUS, "-" (not allowed as first character)
+#### Overall allowed characters <a href="#document-structure-member-names-overall-allowed-characters" id="document-structure-member-names-overall-allowed-characters"></a>
+- U+0061 to U+007A, "a-z"
+- U+0041 to U+005A, "A-Z"
+- U+0030 to U+0039, "0-9"
+- any UNICODE character except U+0000 to U+007F _(not recommended, not URL safe)_
 
-#### Other allowed ASCII characters <a href="#document-structure-member-names-other-allowed-ascii-characters" id="document-structure-member-names-other-allowed-ascii-characters"></a>
-- A-Z
-- U+0020 SPACE, " " (not allowed as first character, not URL safe)
-- U+005F LOW LINE, "_" (not allowed as first character)
-- U+005E CIRCUMFLEX ACCENT, "^" (not allowed as first character, not URL safe)
-- U+0060 GRAVE ACCENT, "`" (not allowed as first character, not URL safe)
+#### Other allowed characters (but not at start/end of the member name) <a href="#document-structure-member-names-other-allowed-characters" id="document-structure-member-names-other-allowed-characters"></a>
+- U+002D HYPHEN-MINUS, "-"
+- U+005F LOW LINE, "_"
+- U+0020 SPACE, " " _(not recommended, not URL safe)_
+- U+005E CIRCUMFLEX ACCENT, "^" _(not recommended, not URL safe)_
+- U+0060 GRAVE ACCENT, "`" _(not recommended, not URL safe)_
 
-#### Reserved ASCII characters (currently in use) <a href="#document-structure-member-names-reserved-ascii-characters-in-use" id="document-structure-member-names-reserved-ascii-characters-in-use"></a>
-- U+002B PLUS SIGN, "+" (used for ordering)
-- U+002C COMMA, "," (used separator for multiple relationship paths)
-- U+002E PERIOD, "." (used as relationship path separators)
-- U+005B LEFT SQUARE BRACKET, "[" (use in sparse fieldsets)
-- U+005D RIGHT SQUARE BRACKET, "]" (used in sparse fieldsets)
+#### Reserved characters (currently in use) <a href="#document-structure-member-names-reserved-ascii-characters-in-use" id="document-structure-member-names-reserved-ascii-characters-in-use"></a>
+- U+002B PLUS SIGN, "+" _(used for ordering)_
+- U+002C COMMA, "," _(used separator for multiple relationship paths)_
+- U+002E PERIOD, "." _(used as relationship path separators)_
+- U+005B LEFT SQUARE BRACKET, "[" _(use in sparse fieldsets)_
+- U+005D RIGHT SQUARE BRACKET, "]" _(used in sparse fieldsets)_
 
-#### Reserved ASCII characters (punctation, currency and math symbols) for later use <a href="#document-structure-member-names-reserved-ascii-characters-later-use" id="document-structure-member-names-reserved-ascii-characters-later-use"></a>
+#### Reserved characters (punctation, currency and math symbols) for later use <a href="#document-structure-member-names-reserved-ascii-characters-later-use" id="document-structure-member-names-reserved-ascii-characters-later-use"></a>
 - U+0021 EXCLAMATION MARK, "!"	 	
 - U+0022 QUOTATION MARK, '"'
 - U+0023 NUMBER SIGN, "#"
