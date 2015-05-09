@@ -9,14 +9,9 @@ are beyond the scope of the base JSON API specification.
 
 ## Recommendations for Naming <a href="#naming" id="naming" class="headerlink"></a>
 
-The allowed and recommended characters for an URL safe naming of members are defined in the format spec. In addition, to standardize member names, the following restrictions are recommended:
-- Member names **SHOULD** be all lower-case.
-- Member names **SHOULD NOT** start with a digit (U+0030 to U+0039, "0-9")
-- Member names cointaining multiple words **SHOULD** use a hyphen minus (U+002D HYPHEN-MINUS, "-") as word separator.
-
-Together with the recommendations in the format spec this results in:
+The allowed and recommended characters for an URL safe naming of members are defined in the format spec. To also standardize member names, the following (more restrictive) rules are recommended:
 - Member names **SHOULD** start and end with the characters "a-z" (U+0061 to U+007A)
-- Member names **SHOULD** contain only the characters "a-z" (U+0061 to U+007A), "0-9" (U+0030 to U+0039) and "-" (U+002D HYPHEN-MINUS)
+- Member names **SHOULD** contain only the characters "a-z" (U+0061 to U+007A), "0-9" (U+0030 to U+0039), and the hyphen minus (U+002D HYPHEN-MINUS, "-") as seperator between multiple words.
 
 ## Recommendations for URL Design <a href="#urls" id="urls" class="headerlink"></a>
 
