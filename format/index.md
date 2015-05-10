@@ -346,6 +346,7 @@ Resource linkage **MUST** be represented as one of the following:
 
 A "linkage object" is an object that identifies an individual related resource.
 It **MUST** contain `type` and `id` members.
+
 A linkage object **MAY** include a `"meta"` member to contain non-standard
 meta-information about linkage.
 
@@ -471,7 +472,7 @@ multiple times.
 
 As discussed above, the document **MAY** be extended to include
 meta-information as `"meta"` members in several locations: at the top-level,
-within resource objects, and within link objects.
+within resource objects, within link objects, and within linkage objects.
 
 All `"meta"` members **MUST** have an object as a value, the contents of which
 can be used for custom extensions.
