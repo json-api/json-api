@@ -346,6 +346,7 @@ Resource linkage **MUST** be represented as one of the following:
 
 A "linkage object" is an object that identifies an individual related resource.
 It **MUST** contain `type` and `id` members.
+
 A linkage object **MAY** include a `"meta"` member to contain non-standard
 meta-information about linkage.
 
@@ -471,7 +472,7 @@ multiple times.
 
 As discussed above, the document **MAY** be extended to include
 meta-information as `"meta"` members in several locations: at the top-level,
-within resource objects, and within link objects.
+within resource objects, within link objects, and within linkage objects.
 
 All `"meta"` members **MUST** have an object as a value, the contents of which
 can be used for custom extensions.
@@ -783,12 +784,15 @@ details **MAY** also be returned, as discussed below.
 
 An endpoint **MAY** return resources related to the primary data by default.
 
-An endpoint **MAY** also support custom inclusion of related resources based
-upon an `include` request parameter. This parameter **MUST** specify the
-relationship using the name used in the `links` section of the primary data.
+An endpoint **MAY** also support an `include` request parameter to allow the
+client to customize which related resources should be returned.
 
-If a client supplies an `include` parameter, the server **MUST NOT** include
-other resource objects in the `included` section of the compound document.
+If an endpoint does not support the `include` parameter, it must respond with
+`400 Bad Request` to any requests that include it.
+
+If an endpoint supports the `include` parameter and a client supplies it,
+the server **MUST NOT** include other resource objects in the `included`
+section of the compound document.
 
 The value of the `include` parameter **MUST** be a comma-separated (U+002C
 COMMA, ",") list of relationship paths. A relationship path is a dot-separated
