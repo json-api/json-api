@@ -1512,8 +1512,6 @@ An error object **MAY** have the following members:
   to the resource path(s) expressed in the error object's `"links"` member
   [e.g. `["/first-name", "/last-name"]` to reference a couple attributes].
 
-Additional members **MAY** be specified within error objects.
-
 [attributes]: #document-structure-resource-object-attributes
 [links]: #document-structure-resource-links
 [fields]: #document-structure-resource-object-fields
