@@ -91,9 +91,8 @@ name in the `ext` media type parameter with the `Accept` header. Servers
 that do not support a requested extension or combination of extensions
 **MUST** return a `406 Not Acceptable` status code.
 
-If the media type in the `Accept` header is supported by a server but the
-media type in the `Content-Type` header is unsupported, the server
-**MUST** return a `415 Unsupported Media Type` status code.
+If the media type in the client's `Content-Type` header is unsupported, the
+server **MUST** return a `415 Unsupported Media Type` status code.
 
 Servers **MUST NOT** provide extended functionality that is incompatible
 with the base specification to clients that do not request the extension in
