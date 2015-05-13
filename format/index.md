@@ -195,6 +195,8 @@ In addition, a resource object **MAY** contain any of these top-level members:
   relationships (described below).
 * `"meta"`: non-standard meta-information about a resource that can not be
   represented as an attribute or relationship.
+* `"actions"`: a list of actions, which the client can perform on 
+  the given resource.
 
 Here's how an article (i.e. a resource of type "articles") might appear in a document:
 
@@ -387,6 +389,51 @@ to fetch the resource objects, and linkage information.
 The `comments` relationship is simpler: it just provides a related resource URL
 to fetch the comments. The URL can therefore be specified directly as the
 attribute value.
+
+#### Actions <a href="#document-structure-resource-actions" id="document-structure-resource-actions" class="headerlink"></a>
+
+Member `"actions"` contains list of actions which the client can perform 
+on the given resource. If provided, it **MUST** account for authentication
+and authorization status of the current client and for other pertinent 
+circumstances in order to provide a list of actions which the given client 
+is actually allowed to perform on the given resource at the moment when 
+the response is being built by the server.
+
+Its value **MUST** be an array of action objects, each including at least 
+the following members:
+
+* `"label"`: a string, identifying the given action,
+* `"href"`: an endpoint for performing the given action.
+
+In addition, each action object **MAY** include the following members:
+
+* `"method"`: contains name of HTTP method corresponding to the given action.
+* `"meta"`: contains non-standard meta-information about the action.
+
+For example,
+
+```
+// ...
+{
+  "type": "articles",
+  "id": "1",
+  "title": "Rails is Omakase",
+  "actions": [{
+    "label": "FETCH",
+    "href": "http://example.com/articles/1",
+    "method": "GET"
+  },{
+    "label": "DISCARD",
+    "href": "http://example.com/articles/1",
+    "method": "DELETE"
+  },{
+    "label": "PUBLISH",
+    "href": "http://example.com/articles/1/publish",
+    "method": "POST"
+  }]
+}
+// ...
+```
 
 ### Compound Documents <a href="#document-structure-compound-documents" id="document-structure-compound-documents" class="headerlink"></a>
 
