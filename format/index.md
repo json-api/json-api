@@ -1100,6 +1100,9 @@ create a resource with a client-generated ID that already exists.
 A server **MUST** return `409 Conflict` when processing a `POST` request in
 which the resource's `type` does not match the server's endpoint.
 
+A server **SHOULD** include error details and provide enough information to 
+recognize the source of the conflict.
+
 ##### Other Responses <a href="#crud-creating-responses-other" id="crud-creating-responses-other" class="headerlink"></a>
 
 Servers **MAY** use other HTTP error codes to represent errors. Clients
@@ -1268,6 +1271,9 @@ constraints (such as a uniqueness constraint on a property other than `id`).
 
 A server **MUST** return `409 Conflict` when processing a `PATCH` request in
 which the resource's `type` and `id` do not match the server's endpoint.
+
+A server **SHOULD** include error details and provide enough information to 
+recognize the source of the conflict.
 
 ##### Other Responses <a href="#crud-updating-responses-other" id="crud-updating-responses-other" class="headerlink"></a>
 
