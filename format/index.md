@@ -282,7 +282,7 @@ The keys `"id"` and `"type"` are not allowed within the relationships object.
 
 Relationships may be to-one or to-many. Relationships can be specified by
 including a member in a resource's relationship's object. The name of the
-relationship is its key in the the relationship object.
+relationship is its key in the relationship object.
 
 The value of a relationship **MUST** be an object (a "relationship object"),
 which **MUST** contain at least one of the following:
@@ -298,7 +298,7 @@ which **MUST** contain at least one of the following:
   relationship.
 
 A relationship object that represents a to-many relationship **MAY** also contain
-pagination links, as described below.
+pagination links under the `links` member, as described below.
 
 If a relationship object refers to resource objects included in the same compound
 document, it **MUST** include resource linkage to those resource objects.
@@ -589,9 +589,9 @@ Responses can be further refined with the optional features described below.
 
 A server **MUST** support fetching resource data for every URL provided as:
 
-* a `self` link as part of the top-level *links object*
-* a `self` link as part of a *resource object*
-* a `related` link as part of a *relationship object*
+* a `self` link as part of the top-level links object
+* a `self` link as part of a resource-level links object
+* a `related` link as part of a relationship-level links object
 
 For example, the following request fetches a collection of articles:
 
@@ -731,7 +731,7 @@ details **MAY** also be returned, as discussed below.
 ### Fetching Relationships <a href="#fetching-relationships" id="fetching-relationships" class="headerlink"></a>
 
 A server **MUST** support fetching relationship data for every relationship URL
-provided as a `self` link as part of a *relationship object*.
+provided as a `self` link as part of a relationship's `links` object.
 
 For example, the following request fetches data about an article's comments:
 
@@ -1351,8 +1351,8 @@ Although relationships can be modified along with resources (as described
 above), JSON API also supports updating of relationships independently at
 *relationship URLs*.
 
-If a *relationship object* contains a *relationship URL*, then the server **MUST**
-respond to requests to that URL to update the relationship.
+If a *relationship's `links` object* contains a *relationship URL*, then the
+server **MUST** respond to requests to that URL to update the relationship.
 
 > Note: Relationships are updated without exposing the underlying server
 semantics, such as foreign keys. Furthermore, relationships can be updated
