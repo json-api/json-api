@@ -30,21 +30,27 @@ Here's an example response from a blog that implements JSON API:
     "attributes": {
       "title": "JSON API paints my bikeshed!"
     },
-    "links": {
-      "self": "http://example.com/posts/1",
+    "relationships": {
       "author": {
-        "self": "http://example.com/posts/1/links/author",
-        "related": "http://example.com/posts/1/author",
+        "links": {
+          "self": "http://example.com/posts/1/relationships/author",
+          "related": "http://example.com/posts/1/author"
+        },
         "linkage": { "type": "people", "id": "9" }
       },
       "comments": {
-        "self": "http://example.com/posts/1/links/comments",
-        "related": "http://example.com/posts/1/comments",
+        "links": {
+          "self": "http://example.com/posts/1/relationships/comments",
+          "related": "http://example.com/posts/1/comments"
+        },
         "linkage": [
           { "type": "comments", "id": "5" },
           { "type": "comments", "id": "12" }
         ]
       }
+    },
+    "links": {
+      "self": "http://example.com/posts/1"
     }
   }],
   "included": [{

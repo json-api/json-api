@@ -104,7 +104,7 @@ or `null`, to remove the relationship.
 For instance, the following request should update the `author` of an article:
 
 ```text
-PATCH /article/1/links/author
+PATCH /article/1/relationships/author
 Content-Type: application/vnd.api+json; ext=jsonpatch
 Accept: application/vnd.api+json; ext=jsonpatch
 
@@ -117,7 +117,7 @@ To remove a to-one relationship, perform a `replace` operation on the
 relationship to change its value to `null`. For example:
 
 ```text
-PATCH /article/1/links/author
+PATCH /article/1/relationships/author
 Content-Type: application/vnd.api+json; ext=jsonpatch
 Accept: application/vnd.api+json; ext=jsonpatch
 
@@ -144,7 +144,7 @@ not allowed by the server.
 For example, the following request replaces every tag for an article:
 
 ```text
-PATCH /photos/1/links/tags
+PATCH /photos/1/relationships/tags
 Content-Type: application/vnd.api+json; ext=jsonpatch
 Accept: application/vnd.api+json; ext=jsonpatch
 
@@ -168,7 +168,7 @@ In the following example, the comment with ID `123` is added to the list of
 comments for the article with ID `1`:
 
 ```text
-PATCH /articles/1/links/comments
+PATCH /articles/1/relationships/comments
 Content-Type: application/vnd.api+json; ext=jsonpatch
 Accept: application/vnd.api+json; ext=jsonpatch
 
@@ -190,7 +190,7 @@ In the following example, comments with IDs of `5` and `13` are removed
 from the list of comments for the article with ID `1`:
 
 ```text
-PATCH /articles/1/links/comments
+PATCH /articles/1/relationships/comments
 Content-Type: application/vnd.api+json; ext=jsonpatch
 Accept: application/vnd.api+json; ext=jsonpatch
 
