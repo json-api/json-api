@@ -65,28 +65,28 @@ As described in the base specification, there are two URLs that can be exposed
 for each relationship:
 
 * the "relationship URL" - a URL for the relationship itself, which is
-identified with the `"self"` key in a link object. This URL allows the
+identified with the `"self"` key in a relationship object. This URL allows the
 client to directly manipulate the relationship. For example, it would allow
 a client to remove an `author` from a `post` without deleting the `people`
 resource itself.
 
 * the "related resource URL" - a URL for the related resource(s), which is
-identified with the `"related"` key within a link object. When fetched, it
+identified with the `"related"` key within a relationship object. When fetched, it
 returns the related resource object(s) as the response's primary data.
 
-It is recommended that a relationship URL be formed by appending `/links/` and
-the name of the relationship to the resource's URL.
+It is recommended that a relationship URL be formed by appending `/relationships/`
+and the name of the relationship to the resource's URL.
 
 For example, a photo's `comments` relationship will have the URL:
 
 ```text
-/photos/1/links/comments
+/photos/1/relationships/comments
 ```
 
 And a photo's `photographer` relationship will have the URL:
 
 ```text
-/photos/1/links/photographer
+/photos/1/relationships/photographer
 ```
 
 It is recommended that a related resource URL be formed by appending the name
