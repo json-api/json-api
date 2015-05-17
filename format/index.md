@@ -221,7 +221,7 @@ Here's how an article (i.e. a resource of type "articles") might appear in a doc
 // ...
 ```
 
-#### Attributes Object <a href="#document-structure-resource-object-attributes-object" id="document-structure-resource-object-attributes"></a>
+#### Attributes Object <a href="#document-structure-resource-object-attributes-object" id="document-structure-resource-object-attributes-object"></a>
 
 The value of the `"attributes"` key is a JSON object (an "attributes object")
 that represents information about the resource object it is contained within.
