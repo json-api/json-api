@@ -29,7 +29,7 @@ for exchanging data.
   - [Resource Objects](#document-structure-resource-objects)
   - [Compound Documents](#document-structure-compound-documents)
   - [Meta information](#document-structure-meta)
-  - [Top-level Links](#document-structure-top-level-links)
+  - [Links](#document-structure-links)
 - [Fetching Data](#fetching)
   - [Fetching Resources](#fetching-resources)
   - [Fetching Relationships](#fetching-relationships)
@@ -193,7 +193,7 @@ In addition, a resource object **MAY** contain any of these top-level members:
 * `"attributes"`: an "attributes object" representing some of the resource's data.
 * `"relationships": a "relationships object" describing relationships between
  the resource and other JSON API resources.
-* `"links"`: URLs related to the resource.
+* `"links"`: a "links object" containing URLs related to the resource.
 * `"meta"`: non-standard meta-information about a resource that can not be
   represented as an attribute or relationship.
 
@@ -513,9 +513,18 @@ For example:
 
 Any members **MAY** be specified within `meta` objects.
 
-### Top-level Links <a href="#document-structure-top-level-links" id="document-structure-top-level-links" class="headerlink"></a>
+### Links <a href="#document-structure-links" id="document-structure-links" class="headerlink"></a>
 
-The top-level links object **MAY** contain the following members:
+As discussed above, the document **MAY** be extended to include relevant URLs
+within `"links"` members at several locations: at the top-level, within resource
+objects, and within relationship objects.
+
+The allowed keys for `links` objects at the resource and relationship object
+levels are defined in the sections on [resource relationships] and
+[resource links].
+
+When a links object appears at the document's top-level, it **MAY** have
+the following members:
 
 * `"self"` - the URL that generated the current response document.
 * `"related"` - a related resource URL (as defined above) when the primary
@@ -1534,5 +1543,6 @@ Additional members **MAY** be specified within error objects.
 
 [attributes]: #document-structure-resource-object-attributes
 [relationships]: #document-structure-resource-object-relationships
-[links]: #document-structure-resource-object-links
+[resource relationships]: #document-structure-resource-object-relationships
+[resource links]: #document-structure-resource-object-links
 [fields]: #document-structure-resource-object-fields
