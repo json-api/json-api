@@ -283,21 +283,8 @@ Relationships may be to-one or to-many. Relationships can be specified by
 including a member in a resource's relationship's object. The name of the
 relationship is its key in the the relationship object.
 
-The value of a relationship **MUST** be one of the following:
-
-* A URL for the related resource(s) (a "related resource URL"). When fetched, it
-  returns the related resource object(s) as the response's primary data. For
-  example, an `article`'s `comments` relationship could specify a URL that
-  returns a list of comment resource objects when retrieved through a `GET`
-  request. A related resource URL **MUST** remain constant even when the
-  relationship (the set of referenced resources) mutates. That is, the response
-  from a related resource URL always reflects the current state of the
-  relationship.
-
-* An object (a "relationship object").
-
-If a relationship is provided as a relationship object, it **MUST** contain at
-least one of the following:
+The value of a relationship **MUST** be an object (a "relationship object"),
+which **MUST** contain at least one of the following:
 
 * A `"links"` member that contains at least one of the following:
   * A `"self"` member, whose value is a URL for the relationship itself (a
@@ -335,7 +322,7 @@ relationship URLs.
 If present, a *related resource URL* **MUST** be a valid URL, even if the
 relationship isn't currently associated with any target resources.
 
-For example, the following article is associated with an `author` and `comments`:
+For example, the following article is associated with an `author`:
 
 ```javascript
 // ...
@@ -352,8 +339,7 @@ For example, the following article is associated with an `author` and `comments`
         "related": "http://example.com/articles/1/author"
       },
       "linkage": { "type": "people", "id": "9" }
-    },
-    "comments": "http://example.com/articles/1/comments"
+    }
   },
   "links": {
     "self": "http://example.com/articles/1"
@@ -365,10 +351,6 @@ For example, the following article is associated with an `author` and `comments`
 The `author` relationship includes a URL for the relationship itself (which
 allows the client to change the related author directly), a related resource URL
 to fetch the resource objects, and linkage information.
-
-The `comments` relationship is simpler: it just provides a related resource URL
-to fetch the comments. The URL can therefore be specified directly as the
-attribute value.
 
 #### Resource Links <a href="#document-structure-structure-resource-object-links" id="document-structure-resource-object-links" class="headerlink"></a>
 
