@@ -132,3 +132,11 @@ Furthermore, multiple filters can be applied to a single request:
 ```http
 GET /comments?filter[post]=1,2&filter[author]=12
 ```
+
+## Recommendations for Supporting Clients Lacking `PATCH` <a href="#patchless-clients" id="patchless-clients" class="headerlink"></a>
+
+Some clients, like IE8, lack support for HTTP's `PATCH` method. API servers
+that wish to support these clients are recommended to treat `POST` requests as
+`PATCH` requests if the client includes the `X-HTTP-Method-Override: PATCH`
+header. This allows clients that lack `PATCH` support to have their update
+requests honored, simply by adding the header.
