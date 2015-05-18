@@ -163,7 +163,7 @@ resource collections
 ```
 
 A logical collection of resources (e.g., the target of a to-many relationship)
-**MUST** be represented as an array, even if it only contains one item.
+**MUST** be represented as an array, even if it only contains one item or is empty.
 
 Error objects **MUST** appear under a top-level key named `"errors"`.
 
@@ -537,7 +537,7 @@ To enable an easy mapping of member names to URLs, it's **RECOMMENDED** to limit
 - U+005D RIGHT SQUARE BRACKET, "]" _(used in sparse fieldsets)_
 
 #### Reserved characters (punctation, currency and math symbols) for later use <a href="#document-structure-member-names-reserved-ascii-characters-later-use" id="document-structure-member-names-reserved-ascii-characters-later-use"></a>
-- U+0021 EXCLAMATION MARK, "!"	 	
+- U+0021 EXCLAMATION MARK, "!"
 - U+0022 QUOTATION MARK, '"'
 - U+0023 NUMBER SIGN, "#"
 - U+0024 DOLLAR SIGN, "$"
@@ -1155,7 +1155,7 @@ create a resource with a client-generated ID that already exists.
 A server **MUST** return `409 Conflict` when processing a `POST` request in
 which the resource's `type` does not match the server's endpoint.
 
-A server **SHOULD** include error details and provide enough information to 
+A server **SHOULD** include error details and provide enough information to
 recognize the source of the conflict.
 
 ##### Other Responses <a href="#crud-creating-responses-other" id="crud-creating-responses-other" class="headerlink"></a>
@@ -1327,7 +1327,7 @@ constraints (such as a uniqueness constraint on a property other than `id`).
 A server **MUST** return `409 Conflict` when processing a `PATCH` request in
 which the resource's `type` and `id` do not match the server's endpoint.
 
-A server **SHOULD** include error details and provide enough information to 
+A server **SHOULD** include error details and provide enough information to
 recognize the source of the conflict.
 
 ##### Other Responses <a href="#crud-updating-responses-other" id="crud-updating-responses-other" class="headerlink"></a>
