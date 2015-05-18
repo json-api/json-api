@@ -1517,8 +1517,8 @@ An error object **MAY** have the following members:
   associated resource(s) in the request document. Each path **MUST** be relative
   to the resource path(s) expressed in the error object's `"links"` member
   [e.g. `["/first-name", "/last-name"]` to reference a couple attributes].
+* `"meta"` - to contain non-standard meta-information about the error.
 
-Additional members **MAY** be specified within error objects.
 
 [attributes]: #document-structure-resource-object-attributes
 [links]: #document-structure-resource-links
