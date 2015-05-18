@@ -29,7 +29,7 @@ for exchanging data.
   - [Resource Objects](#document-structure-resource-objects)
   - [Compound Documents](#document-structure-compound-documents)
   - [Meta information](#document-structure-meta)
-  - [Top-level Links](#document-structure-top-level-links)
+  - [Links](#document-structure-links)
 - [Fetching Data](#fetching)
   - [Fetching Resources](#fetching-resources)
   - [Fetching Relationships](#fetching-relationships)
@@ -190,9 +190,10 @@ the client and represents a new resource to be created on the server.
 
 In addition, a resource object **MAY** contain any of these top-level members:
 
-* `"attributes"`: an "attributes object", providing information about a resource.
-* `"links"`: a "links object", providing information about a resource's
-  relationships (described below).
+* `"attributes"`: an "attributes object" representing some of the resource's data.
+* `"relationships": a "relationships object" describing relationships between
+ the resource and other JSON API resources.
+* `"links"`: a "links object" containing URLs related to the resource.
 * `"meta"`: non-standard meta-information about a resource that can not be
   represented as an attribute or relationship.
 
@@ -206,10 +207,12 @@ Here's how an article (i.e. a resource of type "articles") might appear in a doc
   "attributes": {
     "title": "Rails is Omakase"
   },
-  "links": {
+  "relationships": {
     "author": {
-      "self": "/articles/1/links/author",
-      "related": "/articles/1/author",
+      "links": {
+        "self": "/articles/1/relationships/author",
+        "related": "/articles/1/author"
+      },
       "linkage": { "type": "people", "id": "9" }
     }
   }
@@ -217,14 +220,14 @@ Here's how an article (i.e. a resource of type "articles") might appear in a doc
 // ...
 ```
 
-#### Attributes Object <a href="#document-structure-resource-object-attributes-object" id="document-structure-resource-object-attributes"></a>
+#### Attributes Object <a href="#document-structure-resource-object-attributes-object" id="document-structure-resource-object-attributes-object"></a>
 
 The value of the `"attributes"` key is a JSON object (an "attributes object")
 that represents information about the resource object it is contained within.
 
-The top level of this object shares a namespace with the members of `links` and
-**MUST** reserve the `id` and `type` keys. Apart from these restrictions this
-object can contain members keyed by any string valid for this specification.
+The top level of this object shares a namespace with the members of `relationships`
+and **MUST NOT** contain `id` or `type` members. Apart from these restrictions,
+this object can contain members keyed by any string valid for this specification.
 
 #### Attributes <a href="#document-structure-resource-object-attributes" id="document-structure-resource-object-attributes"></a>
 
@@ -238,8 +241,8 @@ be represented under the "links object".
 
 #### Fields <a href="#document-structure-resource-object-fields" id="document-structure-resource-object-fields" class="headerlink"></a>
 
-With the exception of the `self` link, a resource object's [attributes] and
-[links] are collectively called its "[fields]".
+A resource object's [attributes] and its [relationships] are collectively called
+its "[fields]".
 
 #### Resource Identification <a href="#document-structure-resource-identification" id="document-structure-resource-identification" class="headerlink"></a>
 
@@ -266,75 +269,37 @@ consistently throughout an implementation.
 Each resource object **MUST** contain an `id` member, whose value **MUST**
 be a string.
 
-#### Links <a href="#document-structure-links" id="document-structure-links" class="headerlink"></a>
+#### Relationships <a href="#document-structure-links" id="document-structure-resource-objects-relationships" class="headerlink"></a>
 
-The value of the `"links"` key is a JSON object (a "links object") that
-represents related resources, keyed by the name of each association.
-These associations share a namespace with [attributes]. Associations of a
-given resource object **MUST** be named differently than its [attributes].
+The value of the `"relationships"` key is a JSON object (a "relationships object")
+that represents references from the resource in whose resource object it's defined
+to other resources ("relationships"). These relationships share a namespace with
+[attributes]; that is, relationships of a given resource object **MUST** be named
+differently than its [attributes].
 
-The keys `"id"`, `"type"` and `"self"` are reserved within the links object.
+The keys `"id"` and `"type"` are not allowed within the relationships object.
 
-#### Resource URLs <a href="#document-structure-resource-urls" id="document-structure-resource-urls" class="headerlink"></a>
+Relationships may be to-one or to-many. Relationships can be specified by
+including a member in a resource's relationship's object. The name of the
+relationship is its key in the relationship object.
 
-A resource object **MAY** include a URL in its links object, keyed by
-`"self"`, that identifies the resource represented by the resource object.
+The value of a relationship **MUST** be an object (a "relationship object"),
+which **MUST** contain at least one of the following:
 
-```json
-// ...
-{
-  "type": "articles",
-  "id": "1",
-  "attributes": {
-    "title": "Rails is Omakase"
-  },
-  "links": {
-    "self": "http://example.com/articles/1"
-  }
-}
-// ...
-```
-
-A server **MUST** respond to a `GET` request to the specified URL with a
-response that includes the resource as the primary data.
-
-#### Resource Relationships <a href="#document-structure-resource-relationships" id="document-structure-resource-relationships" class="headerlink"></a>
-
-A resource object **MAY** contain references to other resource objects
-("relationships"). Relationships may be to-one or to-many. Relationships
-can be specified by including a member in a resource's [links] object.
-
-The name of the relationship declared in the key **SHALL NOT** be `"self"`.
-
-The value of a relationship **MUST** be one of the following:
-
-* A URL for the related resource(s) (a "related resource URL"). When fetched, it
-  returns the related resource object(s) as the response's primary data. For
-  example, an `article`'s `comments` relationship could specify a URL that
-  returns a list of comment resource objects when retrieved through a `GET`
-  request. A related resource URL **MUST** remain constant even when the
-  relationship (the set of referenced resources) mutates. That is, the response
-  from a related resource URL always reflects the current state of the
-  relationship.
-
-* An object (a "link object").
-
-If a relationship is provided as a link object, it **MUST** contain at least
-one of the following:
-
-* A `"self"` member, whose value is a URL for the relationship itself (a
-  "relationship URL"). This URL allows the client to directly manipulate the
-  relationship. For example, it would allow a client to remove an `author` from
-  an `article` without deleting the `people` resource itself.
-* A `"related"` member, whose value is a related resource URL (as defined above).
-* A `"linkage"` member, whose value represents "resource linkage".
+* A `"links"` member that contains at least one of the following:
+  * A `"self"` member, whose value is a URL for the relationship itself (a
+    "relationship URL"). This URL allows the client to directly manipulate the
+    relationship. For example, it would allow a client to remove an `author`
+    from an `article` without deleting the `people` resource itself.
+  * A `"related"` member, whose value is a related resource URL, as defined above.
+* A `"linkage"` member, whose value represents "resource linkage" (defined below).
 * A `"meta"` member that contains non-standard meta-information about the
   relationship.
 
-A link object that represents a to-many relationship **MAY** also contain
-pagination links, as described below.
+A relationship object that represents a to-many relationship **MAY** also contain
+pagination links under the `links` member, as described below.
 
-If a link object refers to resource objects included in the same compound
+If a relationship object refers to resource objects included in the same compound
 document, it **MUST** include resource linkage to those resource objects.
 
 Resource linkage **MUST** be represented as one of the following:
@@ -357,7 +322,7 @@ relationship URLs.
 If present, a *related resource URL* **MUST** be a valid URL, even if the
 relationship isn't currently associated with any target resources.
 
-For example, the following article is associated with an `author` and `comments`:
+For example, the following article is associated with an `author`:
 
 ```javascript
 // ...
@@ -367,14 +332,17 @@ For example, the following article is associated with an `author` and `comments`
   "attributes": {
     "title": "Rails is Omakase"
   },
-  "links": {
-    "self": "http://example.com/articles/1",
+  "relationships": {
     "author": {
-      "self": "http://example.com/articles/1/links/author",
-      "related": "http://example.com/articles/1/author",
+      "links": {
+        "self": "http://example.com/articles/1/relationships/author",
+        "related": "http://example.com/articles/1/author"
+      },
       "linkage": { "type": "people", "id": "9" }
-    },
-    "comments": "http://example.com/articles/1/comments"
+    }
+  },
+  "links": {
+    "self": "http://example.com/articles/1"
   }
 }
 // ...
@@ -384,9 +352,33 @@ The `author` relationship includes a URL for the relationship itself (which
 allows the client to change the related author directly), a related resource URL
 to fetch the resource objects, and linkage information.
 
-The `comments` relationship is simpler: it just provides a related resource URL
-to fetch the comments. The URL can therefore be specified directly as the
-attribute value.
+#### Resource Links <a href="#document-structure-structure-resource-object-links" id="document-structure-resource-object-links" class="headerlink"></a>
+
+Analogous to the `"links"` member at the document's top level, the optional
+`"links"` member within each resource object contains URLs related to the
+resource.
+
+If present, this object **MAY** contain a URL keyed by `"self"`, that identifies
+the resource represented by the resource object.
+
+```json
+// ...
+{
+  "type": "articles",
+  "id": "1",
+  "attributes": {
+    "title": "Rails is Omakase"
+  },
+  "links": {
+    "self": "http://example.com/articles/1"
+  }
+}
+// ...
+```
+
+A server **MUST** respond to a `GET` request to the specified URL with a
+response that includes the resource as the primary data.
+
 
 ### Compound Documents <a href="#document-structure-compound-documents" id="document-structure-compound-documents" class="headerlink"></a>
 
@@ -408,15 +400,21 @@ A complete example document with multiple included relationships:
       "title": "JSON API paints my bikeshed!"
     },
     "links": {
-      "self": "http://example.com/articles/1",
+      "self": "http://example.com/articles/1"
+    },
+    "relationships": {
       "author": {
-        "self": "http://example.com/articles/1/links/author",
-        "related": "http://example.com/articles/1/author",
+        "links": {
+          "self": "http://example.com/articles/1/relationships/author",
+          "related": "http://example.com/articles/1/author"
+        },
         "linkage": { "type": "people", "id": "9" }
       },
       "comments": {
-        "self": "http://example.com/articles/1/links/comments",
-        "related": "http://example.com/articles/1/comments",
+        "links": {
+          "self": "http://example.com/articles/1/relationships/comments",
+          "related": "http://example.com/articles/1/comments"
+        },
         "linkage": [
           { "type": "comments", "id": "5" },
           { "type": "comments", "id": "12" }
@@ -472,14 +470,14 @@ multiple times.
 
 As discussed above, the document **MAY** be extended to include
 meta-information as `"meta"` members in several locations: at the top-level,
-within resource objects, within link objects, and within linkage objects.
+within resource objects, within relationship objects, and within linkage objects.
 
 All `"meta"` members **MUST** have an object as a value, the contents of which
 can be used for custom extensions.
 
 For example:
 
-```json
+```javascript
 {
   "meta": {
     "copyright": "Copyright 2015 Example Corp.",
@@ -497,9 +495,18 @@ For example:
 
 Any members **MAY** be specified within `meta` objects.
 
-### Top-level Links <a href="#document-structure-top-level-links" id="document-structure-top-level-links" class="headerlink"></a>
+### Links <a href="#document-structure-links" id="document-structure-links" class="headerlink"></a>
 
-The top-level links object **MAY** contain the following members:
+As discussed above, the document **MAY** be extended to include relevant URLs
+within `"links"` members at several locations: at the top-level, within resource
+objects, and within relationship objects.
+
+The allowed keys for `links` objects at the resource and relationship object
+levels are defined in the sections on [resource relationships] and
+[resource links].
+
+When a links object appears at the document's top-level, it **MAY** have
+the following members:
 
 * `"self"` - the URL that generated the current response document.
 * `"related"` - a related resource URL (as defined above) when the primary
@@ -527,9 +534,9 @@ Responses can be further refined with the optional features described below.
 
 A server **MUST** support fetching resource data for every URL provided as:
 
-* a `self` link as part of the top-level *links object*
-* a `self` link as part of a *resource object*
-* a `related` link as part of a *link object*
+* a `self` link as part of the top-level links object
+* a `self` link as part of a resource-level links object
+* a `related` link as part of a relationship-level links object
 
 For example, the following request fetches a collection of articles:
 
@@ -628,9 +635,11 @@ Content-Type: application/vnd.api+json
     "attributes": {
       "title": "JSON API paints my bikeshed!"
     },
-    "links": {
+    "relationships": {
       "author": {
-        "related": "http://example.com/articles/1/author"
+        "links": {
+          "related": "http://example.com/articles/1/author"
+        }
       }
     }
   }
@@ -667,18 +676,18 @@ details **MAY** also be returned, as discussed below.
 ### Fetching Relationships <a href="#fetching-relationships" id="fetching-relationships" class="headerlink"></a>
 
 A server **MUST** support fetching relationship data for every relationship URL
-provided as a `self` link as part of a *link object*.
+provided as a `self` link as part of a relationship's `links` object.
 
 For example, the following request fetches data about an article's comments:
 
 ```http
-GET /articles/1/links/comments
+GET /articles/1/relationships/comments
 ```
 
 And the following request fetches data about an article's author:
 
 ```http
-GET /articles/1/links/author
+GET /articles/1/relationships/author
 ```
 
 #### Responses <a href="#fetching-relationships-responses" id="fetching-relationships-responses" class="headerlink"></a>
@@ -689,10 +698,10 @@ A server **MUST** respond to a successful request to fetch a relationship
 with a `200 OK` response.
 
 The primary data in the response document **MUST** match the appropriate
-value for resource linkage, as described above for link objects.
+value for resource linkage, as described above for relationship objects.
 
 The top-level *links object* **MAY** contain `self` and `related` links,
-as described above for link objects.
+as described above for relationship objects.
 
 For example, a `GET` request to a to-one relationship URL could return:
 
@@ -702,7 +711,7 @@ Content-Type: application/vnd.api+json
 
 {
   "links": {
-    "self": "/articles/1/links/author",
+    "self": "/articles/1/relationships/author",
     "related": "/articles/1/author"
   },
   "data": {
@@ -721,7 +730,7 @@ Content-Type: application/vnd.api+json
 
 {
   "links": {
-    "self": "/articles/1/links/author",
+    "self": "/articles/1/relationships/author",
     "related": "/articles/1/author"
   },
   "data": null
@@ -736,7 +745,7 @@ Content-Type: application/vnd.api+json
 
 {
   "links": {
-    "self": "/articles/1/links/tags",
+    "self": "/articles/1/relationships/tags",
     "related": "/articles/1/tags"
   },
   "data": [
@@ -755,7 +764,7 @@ Content-Type: application/vnd.api+json
 
 {
   "links": {
-    "self": "/articles/1/links/tags",
+    "self": "/articles/1/relationships/tags",
     "related": "/articles/1/tags"
   },
   "data": []
@@ -769,7 +778,7 @@ a relationship URL that does not exist.
 
 > Note: This can happen when the parent resource of the relationship
 does not exist. For example, when `/articles/1` does not exist, request to
-`/articles/1/links/tags` returns `404 Not Found`.
+`/articles/1/relationships/tags` returns `404 Not Found`.
 
 If a relationship URL exists but the relationship is empty, then
 `200 OK` **MUST** be returned, as described above.
@@ -986,7 +995,7 @@ Accept: application/vnd.api+json
       "title": "Ember Hamster",
       "src": "http://example.com/images/productivity.png"
     },
-    "links": {
+    "relationships": {
       "photographer": {
         "linkage": { "type": "people", "id": "9" }
       }
@@ -996,7 +1005,7 @@ Accept: application/vnd.api+json
 ```
 
 If a relationship is provided in the `links` section of the resource object, its
-value **MUST** be a link object with a `linkage` member. The value of this key
+value **MUST** be a relationship object with a `linkage` member. The value of this key
 represents the linkage the new resource is to have.
 
 #### Client-Generated IDs <a href="#crud-creating-client-ids" id="crud-creating-client-ids" class="headerlink"></a>
@@ -1171,7 +1180,7 @@ Accept: application/vnd.api+json
 #### Updating a Resource's Relationships <a href="#crud-updating-resource-relationships" id="crud-updating-resource-relationships" class="headerlink"></a>
 
 If a relationship is provided in the `links` section of a resource object in a
-`PATCH` request, its value **MUST** be a link object with a `linkage` member.
+`PATCH` request, its value **MUST** be a relationship object with a `linkage` member.
 The relationship's value will be replaced with the value specified in this member.
 
 For instance, the following `PATCH` request will update the `title` attribute
@@ -1189,7 +1198,7 @@ Accept: application/vnd.api+json
     "attributes": {
       "title": "Rails is a Melting Pot"
     },
-    "links": {
+    "relationships": {
       "author": {
         "linkage": { "type": "people", "id": "1" }
       }
@@ -1213,7 +1222,7 @@ Accept: application/vnd.api+json
     "attributes": {
       "title": "Rails is a Melting Pot"
     },
-    "links": {
+    "relationships": {
       "tags": {
         "linkage": [
           { "type": "tags", "id": "2" },
@@ -1287,8 +1296,8 @@ Although relationships can be modified along with resources (as described
 above), JSON API also supports updating of relationships independently at
 *relationship URLs*.
 
-If a *link object* contains a *relationship URL*, then the server **MUST**
-respond to requests to that URL to update the relationship.
+If a *relationship's `links` object* contains a *relationship URL*, then the
+server **MUST** respond to requests to that URL to update the relationship.
 
 > Note: Relationships are updated without exposing the underlying server
 semantics, such as foreign keys. Furthermore, relationships can be updated
@@ -1317,7 +1326,7 @@ one of:
 For example, the following request updates the author of an article:
 
 ```text
-PATCH /articles/1/links/author
+PATCH /articles/1/relationships/author
 Content-Type: application/vnd.api+json
 Accept: application/vnd.api+json
 
@@ -1329,7 +1338,7 @@ Accept: application/vnd.api+json
 And the following request clears the author of the same article:
 
 ```text
-PATCH /articles/1/links/author
+PATCH /articles/1/relationships/author
 Content-Type: application/vnd.api+json
 Accept: application/vnd.api+json
 
@@ -1358,7 +1367,7 @@ not allowed by the server.
 For example, the following request replaces every tag for an article:
 
 ```text
-PATCH /articles/1/links/tags
+PATCH /articles/1/relationships/tags
 Content-Type: application/vnd.api+json
 Accept: application/vnd.api+json
 
@@ -1373,7 +1382,7 @@ Accept: application/vnd.api+json
 And the following request clears every tag for an article:
 
 ```text
-PATCH /articles/1/links/tags
+PATCH /articles/1/relationships/tags
 Content-Type: application/vnd.api+json
 Accept: application/vnd.api+json
 
@@ -1403,7 +1412,7 @@ In the following example, the comment with ID `123` is added to the list of
 comments for the article with ID `1`:
 
 ```text
-POST /articles/1/links/comments
+POST /articles/1/relationships/comments
 Content-Type: application/vnd.api+json
 Accept: application/vnd.api+json
 
@@ -1429,7 +1438,7 @@ In the following example, comments with IDs of `12` and `13` are removed
 from the list of comments for the article with ID `1`:
 
 ```text
-DELETE /articles/1/links/comments
+DELETE /articles/1/relationships/comments
 Content-Type: application/vnd.api+json
 Accept: application/vnd.api+json
 
@@ -1521,5 +1530,7 @@ An error object **MAY** have the following members:
 
 
 [attributes]: #document-structure-resource-object-attributes
-[links]: #document-structure-resource-links
+[relationships]: #document-structure-resource-object-relationships
+[resource relationships]: #document-structure-resource-object-relationships
+[resource links]: #document-structure-resource-object-links
 [fields]: #document-structure-resource-object-fields
