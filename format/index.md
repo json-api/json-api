@@ -566,10 +566,10 @@ To enable an easy mapping of member names to URLs, it's **RECOMMENDED** to limit
 Data, including resources and relationships, can be fetched by sending a
 `GET` request to an endpoint.
 
-JSON API requests **MUST** include an `Accept` header specifying the JSON
-API media type. This header value **MUST** also include media type
-extensions relevant to the request. Servers **MUST** return a `406 Not
-Acceptable` status code if this header is missing or specifies an
+Clients **MUST** indicate that they can accept the JSON API media type, per
+the semantics of the HTTP `Accept` header. If present, this header value **MUST**
+also include any media type extensions relevant to the request. Servers **MUST**
+return a `406 Not Acceptable` status code if this header specifies an
 unsupported media type.
 
 > Note: Servers may support multiple media types at any endpoint. For example,
