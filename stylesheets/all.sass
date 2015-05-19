@@ -44,6 +44,9 @@ h1, h2, h3, h4, h5
   &:hover .headerlink::after
     content: "¶"
 
+h1
+  text-transform: uppercase
+
 h2
   margin: 50px 0 15px 0
   color: $color-main
@@ -141,7 +144,7 @@ header
     text-align: center
 
   @media screen and (max-width: $mobile-breakpoint)
-    .content 
+    .content
       +flex-direction(column)
       padding-top: 20px
       padding-bottom: 20px
@@ -179,7 +182,11 @@ footer
 
 .sidebar
   width: $sidebar-width
+  margin-top: 8px
   float: left
+
+  h1
+    font-size: 15px
 
   // Hide the sidebar on small viewports
   @media screen and (max-width: $page-width + ($page-padding * 2))

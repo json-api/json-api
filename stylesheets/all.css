@@ -91,6 +91,9 @@ h1, h2, h3, h4, h5 {
   h1:hover .headerlink::after, h2:hover .headerlink::after, h3:hover .headerlink::after, h4:hover .headerlink::after, h5:hover .headerlink::after {
     content: "¶"; }
 
+h1 {
+  text-transform: uppercase; }
+
 h2 {
   margin: 50px 0 15px 0;
   color: #52008e;
@@ -234,7 +237,10 @@ footer {
 
 .sidebar {
   width: 250px;
+  margin-top: 8px;
   float: left; }
+  .sidebar h1 {
+    font-size: 15px; }
   @media screen and (max-width: 995px) {
     .sidebar {
       display: none; } }
