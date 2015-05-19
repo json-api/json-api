@@ -192,7 +192,7 @@ the client and represents a new resource to be created on the server.
 In addition, a resource object **MAY** contain any of these top-level members:
 
 * `"attributes"`: an "attributes object" representing some of the resource's data.
-* `"relationships": a "relationships object" describing relationships between
+* `"relationships"`: a "relationships object" describing relationships between
  the resource and other JSON API resources.
 * `"links"`: a "links object" containing URLs related to the resource.
 * `"meta"`: non-standard meta-information about a resource that can not be
