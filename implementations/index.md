@@ -1,6 +1,7 @@
 ---
 layout: page
 title: Implementations
+show_sidebar: true
 ---
 
 The following are projects implementing JSON API. If you'd like your project listed, [send a

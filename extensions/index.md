@@ -1,6 +1,7 @@
 ---
 layout: page
 title: Extensions
+show_sidebar: true
 ---
 
 JSON API can be extended in several ways:
