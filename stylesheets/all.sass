@@ -10,7 +10,8 @@ $page-padding: 20px
 
 $mobile-breakpoint: 600px
 
-$color-main: rgb(82, 0, 142)
+$color-main: rgb(90, 90, 90)
+$color-masthead: rgb(235, 235, 235)
 $border-radius-main: 4px
 
 
@@ -91,6 +92,7 @@ p > code
   padding: 8px 0
   font-weight: 500
   color: #52008E
+  background: lighten($color-masthead, 6%)
   border-bottom: 1px solid $color-main
 
   ul
@@ -110,42 +112,54 @@ p > code
     text-decoration: none
 
   .active
-    opacity: 0.5
+    a
+      color: darken($color-main, 80%)
 
 
 /** Header */
 
 header
-  background: $color-main
+  background: $color-masthead
+  border-bottom: 1px solid lighten($color-main, 30%)
 
   .content
+    padding-top: 20px
+    padding-bottom: 30px
+
+  h1
+    +hide-text
+    text-align: center
+    height: 130px
+    margin: 0
+    padding: 0
+    background: url('../images/jsonapi.png') no-repeat center
+    background-size: contain
+
+  h2
+    text-align: center
+    margin: 10px 0 40px 0
+    padding: 0
+    font-size: 130%
+    text-transform: uppercase
+
+  .quicklinks
     +centerbox
-    padding-top: 50px
-    padding-bottom: 50px
     +display-flex
     +align-items(center)
     +justify-content(center)
 
-  h1
-    +hide-text
-    width: 321px
-    height: 107px
-    margin: 0 auto 0 0
-    background: url('../images/logo.svg') no-repeat
-    background-size: contain
-
   .quicklinks a
     display: block
-    margin: 15px 0
-    padding: 6px 30px
+    margin: 5px 15px
+    padding: 6px 25px
     +border-radius($border-radius-main)
+    border: 1px solid lighten($color-main, 30%)
     background: white
     text-decoration: none
     text-align: center
 
   @media screen and (max-width: $mobile-breakpoint)
     .content
-      +flex-direction(column)
       padding-top: 20px
       padding-bottom: 20px
 
@@ -153,6 +167,8 @@ header
       margin: 0 auto 20px auto
       max-width: 100%
 
+    .quicklinks
+      +flex-direction(column)
 
 
 /** Footer */

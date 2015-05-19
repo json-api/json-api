@@ -17,7 +17,7 @@ pygments: false
 port: 9876
 
 navigation:
-- title: JSON:API
+- title: JSON API
   url: /
 - title: Format
   url: /format/
