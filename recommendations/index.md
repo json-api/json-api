@@ -1,19 +1,20 @@
 ---
 layout: page
 title: "Recommendations"
+show_sidebar: true
 ---
 
 This section contains recommendations for JSON API implementations. These
 recommendations are intended to establish a level of consistency in areas that
 are beyond the scope of the base JSON API specification.
 
-## Recommendations for Naming <a href="#naming" id="naming" class="headerlink"></a>
+## Naming <a href="#naming" id="naming" class="headerlink"></a>
 
 The allowed and recommended characters for an URL safe naming of members are defined in the format spec. To also standardize member names, the following (more restrictive) rules are recommended:
 - Member names **SHOULD** start and end with the characters "a-z" (U+0061 to U+007A)
 - Member names **SHOULD** contain only the characters "a-z" (U+0061 to U+007A), "0-9" (U+0030 to U+0039), and the hyphen minus (U+002D HYPHEN-MINUS, "-") as seperator between multiple words.
 
-## Recommendations for URL Design <a href="#urls" id="urls" class="headerlink"></a>
+## URL Design <a href="#urls" id="urls" class="headerlink"></a>
 
 ### Reference Document <a href="#urls-reference-document" id="urls-reference-document" class="headerlink"></a>
 
@@ -104,7 +105,7 @@ Because these URLs represent resources in relationships, they should not be
 used as `self` links for the resources themselves. Instead the recommendations
 for individual resource URLs should still apply when forming `self` links.
 
-## Recommendations for Filtering <a href="#filtering" id="filtering" class="headerlink"></a>
+## Filtering <a href="#filtering" id="filtering" class="headerlink"></a>
 
 The base specification is agnostic about filtering strategies supported by a
 server. The `filter` query parameter is reserved to be used as the basis for
@@ -133,7 +134,7 @@ Furthermore, multiple filters can be applied to a single request:
 GET /comments?filter[post]=1,2&filter[author]=12
 ```
 
-## Recommendations for Supporting Clients Lacking `PATCH` <a href="#patchless-clients" id="patchless-clients" class="headerlink"></a>
+## Supporting Clients Lacking `PATCH` <a href="#patchless-clients" id="patchless-clients" class="headerlink"></a>
 
 Some clients, like IE8, lack support for HTTP's `PATCH` method. API servers
 that wish to support these clients are recommended to treat `POST` requests as

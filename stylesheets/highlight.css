@@ -1,40 +1,3 @@
-.highlight {
-  background: #f9f9f9;
-  border: 1px solid #d1d1d1;
-  -webkit-border-radius: 5px;
-  -moz-border-radius: 5px;
-  -ms-border-radius: 5px;
-  -o-border-radius: 5px;
-  border-radius: 5px;
-  font-size: 12px;
-  font-family: Menlo, monospace;
-  line-height: 16px;
-  overflow: hidden;
-  position: relative;
-  margin: 2em 0;
-  -webkit-box-shadow: 0 1px white, inset -1px 1px 4px rgba(0, 0, 0, 0.1);
-  -moz-box-shadow: 0 1px white, inset -1px 1px 4px rgba(0, 0, 0, 0.1);
-  box-shadow: 0 1px white, inset -1px 1px 4px rgba(0, 0, 0, 0.1); }
-  .highlight .scroller {
-    overflow: auto; }
-  .highlight table {
-    margin: 0 0; }
-  .highlight .ribbon {
-    position: absolute;
-    right: 0;
-    bottom: 6px;
-    width: 52px;
-    height: 20px; }
-  .highlight.javascript .ribbon, .highlight.js .ribbon {
-    background-image: url("/images/js-ribbon.png"); }
-  .highlight.html .ribbon {
-    background-image: url("/images/html-ribbon.png"); }
-  .highlight.handlebars .ribbon {
-    background-image: url("/images/handlebars-ribbon.png"); }
-
-.highlight pre {
-  padding-left: 1em; }
-
 /*
 
 Syntax highlighting styles for highlight.js.
@@ -74,7 +37,7 @@ pre .string,
 pre .tag .value,
 pre .phpdoc,
 pre .tex .formula {
-  color: #dd1144; }
+  color: #d14; }
 
 pre .title,
 pre .id {
@@ -104,7 +67,7 @@ pre .django .tag .keyword {
 pre .attribute,
 pre .variable,
 pre .lisp .body {
-  color: teal; }
+  color: #008080; }
 
 pre .regexp {
   color: #009926; }
@@ -134,13 +97,15 @@ pre .cdata {
   font-weight: bold; }
 
 pre .deletion {
-  background: #ffdddd; }
+  background: #fdd; }
 
 pre .addition {
-  background: #ddffdd; }
+  background: #dfd; }
 
 pre .diff .change {
   background: #0086b3; }
 
 pre .chunk {
-  color: #aaaaaa; }
+  color: #aaa; }
+
+/*# sourceMappingURL=highlight.css.map */

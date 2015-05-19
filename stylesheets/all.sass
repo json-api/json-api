@@ -1,0 +1,256 @@
+@import "compass"
+@import "fontello"
+@charset "utf-8"
+
+/** Config */
+
+$page-width: 955px
+$sidebar-width: 250px
+$page-padding: 20px
+
+$mobile-breakpoint: 600px
+
+$color-main: rgb(90, 90, 90)
+$color-masthead: rgb(235, 235, 235)
+$border-radius-main: 4px
+
+
+/** Mixins */
+
+@mixin centerbox()
+  display: block
+  max-width: $page-width
+  margin: 0 auto
+  padding: 0 $page-padding
+
+body
+  font-family: "Helvetica Neue", "Helvetica", "Open Sans", sans-serif
+  font-size: 15px
+  line-height: 1.5
+  -webkit-font-smoothing: antialiased
+
+
+/** Typography */
+
+.headerlink
+  text-decoration: none
+  color: rgba($color-main, 0.35)
+
+h1, h2, h3, h4, h5
+  font-weight: 300
+
+  &:first-child
+    margin-top: 0
+
+  &:hover .headerlink::after
+    content: "¶"
+
+h1
+  text-transform: uppercase
+
+h2
+  margin: 50px 0 15px 0
+  color: $color-main
+  font-size: 22px
+  line-height: 1.3
+
+h3
+  margin: 30px 0 15px 0
+  font-size: 18px
+
+h4
+  margin: 20px 0 10px 0
+  font-size: 16px
+
+h5
+  margin: 20px 0 10px 0
+  font-weight: 500
+  font-size: inherit
+
+p
+  margin: 0 0 10px 0
+
+a
+  color: $color-main
+
+blockquote
+  margin: 20px 0
+  padding: 10px 15px 0 15px
+  +border-radius($border-radius-main)
+  font-weight: lighter
+  background: rgba($color-main, 0.04)
+  border: 1px solid rgba($color-main, 0.35)
+
+p > code
+  padding: 1px 4px
+  background: rgba(0, 0, 0, 0.06)
+
+
+/** Navigation */
+
+.site-nav
+  padding: 8px 0
+  font-weight: 500
+  color: #52008E
+  background: lighten($color-masthead, 6%)
+  border-bottom: 1px solid $color-main
+
+  ul
+    +centerbox
+    +display-flex
+    +justify-content(space-between)
+    list-style: none
+
+    @media screen and (max-width: $mobile-breakpoint)
+      +flex-direction(column)
+      text-align: center
+
+  li
+    +flex(0 1 auto)
+
+  a
+    text-decoration: none
+
+  .active
+    a
+      color: darken($color-main, 80%)
+
+
+/** Header */
+
+header
+  background: $color-masthead
+  border-bottom: 1px solid lighten($color-main, 30%)
+
+  .content
+    padding-top: 20px
+    padding-bottom: 30px
+
+  h1
+    +hide-text
+    text-align: center
+    height: 130px
+    margin: 0
+    padding: 0
+    background: url('../images/jsonapi.png') no-repeat center
+    background-size: contain
+
+  h2
+    text-align: center
+    margin: 10px 0 40px 0
+    padding: 0
+    font-size: 130%
+    text-transform: uppercase
+
+  .quicklinks
+    +centerbox
+    +display-flex
+    +align-items(center)
+    +justify-content(center)
+
+  .quicklinks a
+    display: block
+    margin: 5px 15px
+    padding: 6px 25px
+    +border-radius($border-radius-main)
+    border: 1px solid lighten($color-main, 30%)
+    background: white
+    text-decoration: none
+    text-align: center
+
+  @media screen and (max-width: $mobile-breakpoint)
+    .content
+      padding-top: 20px
+      padding-bottom: 20px
+
+    h1
+      margin: 0 auto 20px auto
+      max-width: 100%
+
+    .quicklinks
+      +flex-direction(column)
+
+
+/** Footer */
+
+footer
+  padding: 8px 0
+  border-top: 1px solid #B8B8B8
+  text-align: center
+  font-size: 12px
+  color: #B8B8B8
+
+  span
+    display: inline-block
+    margin: 0 10px
+
+  .social-links span
+    +hide-text
+
+
+/** Content */
+
+.site-wrapper
+  +centerbox
+  +clearfix
+  margin-top: 50px
+  margin-bottom: 50px
+
+.sidebar
+  width: $sidebar-width
+  margin-top: 8px
+  float: left
+
+  h1
+    font-size: 15px
+
+  // Hide the sidebar on small viewports
+  @media screen and (max-width: $page-width + ($page-padding * 2))
+    display: none
+
+// Float the content to the right, except on small viewports
+@media screen and (min-width: $page-width + ($page-padding * 2))
+  .sidebar + .content
+    float: right
+    max-width: $page-width - $sidebar-width
+
+
+/** Document outline */
+
+.document-outline
+  font-size: 13px
+
+  ol
+    list-style: none
+    margin: 0
+    padding: 0
+
+    li ol
+      padding: 0 0 0 10px
+
+  a
+    text-decoration: none
+    color: inherit
+
+    &:hover
+      color: $color-main
+
+.document-outline > ol > li
+  padding: 0 0 5px 0
+
+
+/** Code blocks highlighting */
+
+.highlight
+  +border-radius($border-radius-main)
+  position: relative
+  margin: 2em 0
+  padding: 10px 15px
+  background: #f9f9f9
+  border: 1px solid #d1d1d1
+  font-size: 12px
+  line-height: 16px
+
+  pre
+    margin: 0
+    font-family: Menlo, monospace

@@ -1,6 +1,7 @@
 ---
 layout: page
 title: "Format"
+show_sidebar: true
 ---
 
 {% include status.md %}
@@ -17,34 +18,6 @@ without compromising readability, flexibility, or discoverability.
 JSON API requires use of the JSON API media type
 ([`application/vnd.api+json`](http://www.iana.org/assignments/media-types/application/vnd.api+json))
 for exchanging data.
-
-**Table of Contents**
-
-- [Status](#status)
-- [Introduction](#introduction)
-- [Conventions](#conventions)
-- [Extending](#extending)
-- [Document Structure](#document-structure)
-  - [Top Level](#document-structure-top-level)
-  - [Resource Objects](#document-structure-resource-objects)
-  - [Compound Documents](#document-structure-compound-documents)
-  - [Meta information](#document-structure-meta)
-  - [Links](#document-structure-links)
-  - [Member names](#document-structure-member-names)
-- [Fetching Data](#fetching)
-  - [Fetching Resources](#fetching-resources)
-  - [Fetching Relationships](#fetching-relationships)
-  - [Inclusion of Related Resources](#fetching-includes)
-  - [Sparse Fieldsets](#fetching-sparse-fieldsets)
-  - [Sorting](#fetching-sorting)
-  - [Pagination](#fetching-pagination)
-  - [Filtering](#fetching-filtering)
-- [Creating, Updating and Deleting Resources](#crud)
-  - [Creating Resources](#crud-creating)
-  - [Updating Resources](#crud-updating)
-  - [Updating Relationships](#crud-updating-relationships)
-  - [Deleting Resources](#crud-deleting)
-- [Errors](#errors)
 
 ## Conventions <a href="#conventions" id="conventions" class="headerlink"></a>
 
