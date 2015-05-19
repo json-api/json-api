@@ -1,6 +1,5 @@
 ---
 layout: page
-title: "A standard for building APIs in JSON."
 title: "A standard for building APIs in JSON"
 show_masthead: true
 ---
