@@ -109,19 +109,22 @@ evolve through additive changes.
 A JSON object **MUST** be at the root of every JSON API response containing
 data. This object defines a document's "top level".
 
-The document's "primary data" is a representation of the resource, collection
-of resources, or resource relationship primarily targeted by a request.
+A document **MUST** contain one of the following top-level members:
 
-A document **MUST** contain either primary data or an array of [error objects](#errors).
+* `"data"`, containing the document's "primary data"
+* `"errors"`, containing an array of [error objects](#errors)
 
-Primary data **MUST** appear under a top-level key named `"data"`.
+The document's "primary data" is a representation of the resource or collection
+of resources targeted by a request.
 
 Primary data **MUST** be either:
 
-* a single resource object or `null`, for requests that target single resources
-* an array of resource objects or an empty array ([]), for requests that target
-resource collections
-* resource linkage, for requests that target a resource's relationship
+* a single resource object, a single [resource identifier object], or `null`,
+  for requests that target single resources
+* an array of resource objects, an array of [resource identifier objects], or
+  an empty array ([]), for requests that target resource collections
+
+For example, the following primary data is a single resource object:
 
 ```javascript
 {
@@ -129,16 +132,30 @@ resource collections
     "type": "articles",
     "id": "1",
     "attributes": {
-      // ... attributes of this article
+      // ... this article's attributes
+    },
+    "relationships": {
+      // ... this article's relationships
     }
   }
 }
 ```
 
-A logical collection of resources (e.g., the target of a to-many relationship)
-**MUST** be represented as an array, even if it only contains one item or is empty.
+The following primary data is a single [resource identifier object] that
+references the same resource:
 
-Error objects **MUST** appear under a top-level key named `"errors"`.
+```javascript
+{
+  "data": {
+    "type": "articles",
+    "id": "1"
+  }
+}
+```
+
+A logical collection of resources (e.g. the target of a to-many relationship)
+**MUST** be represented as an array, even if it only contains one item or is
+empty.
 
 A document's top level **MAY** also have the following members:
 
@@ -187,7 +204,7 @@ Here's how an article (i.e. a resource of type "articles") might appear in a doc
         "self": "/articles/1/relationships/author",
         "related": "/articles/1/author"
       },
-      "linkage": { "type": "people", "id": "9" }
+      "data": { "type": "people", "id": "9" }
     }
   }
 }
@@ -220,18 +237,16 @@ its "[fields]".
 
 #### Resource Identification <a href="#document-structure-resource-identification" id="document-structure-resource-identification" class="headerlink"></a>
 
-Every JSON API resource object is uniquely identified by a combination of
-its `type` and `id` members. This identification is used for linkage in
-compound documents and batch operations that modify multiple resources at a
-time.
+Every resource object is uniquely identified by the combination of its `"type"`
+and `"id"` members.
 
-A resource object's `type` and `id` pair **MUST** refer to a single, unique
+A resource object's `"type"` and `"id"` pair **MUST** refer to a single, unique
 resource.
 
 #### Resource Types <a href="#document-structure-resource-types" id="document-structure-resource-types" class="headerlink"></a>
 
-Each resource object **MUST** contain a `type` member, whose value **MUST**
-be a string. The `type` is used to describe resource objects that share
+Each resource object **MUST** contain a `"type"` member, whose value **MUST**
+be a string. The `"type"` is used to describe resource objects that share
 common attributes and relationships.
 
 > Note: This spec is agnostic about inflection rules, so the value of `type`
@@ -266,7 +281,7 @@ which **MUST** contain at least one of the following:
     relationship. For example, it would allow a client to remove an `author`
     from an `article` without deleting the `people` resource itself.
   * A `"related"` member, whose value is a related resource URL, as defined above.
-* A `"linkage"` member, whose value represents "resource linkage" (defined below).
+* A `"data"` member, whose value represents "resource linkage" (defined below).
 * A `"meta"` member that contains non-standard meta-information about the
   relationship.
 
@@ -279,15 +294,9 @@ document, it **MUST** include resource linkage to those resource objects.
 Resource linkage **MUST** be represented as one of the following:
 
 * `null` for empty to-one relationships.
-* a "linkage object" (defined below) for non-empty to-one relationships.
+* a [resource identifier object] for non-empty to-one relationships.
 * an empty array (`[]`) for empty to-many relationships.
-* an array of linkage objects for non-empty to-many relationships.
-
-A "linkage object" is an object that identifies an individual related resource.
-It **MUST** contain `type` and `id` members.
-
-A linkage object **MAY** include a `"meta"` member to contain non-standard
-meta-information about linkage.
+* an array of [resource identifier objects] for non-empty to-many relationships.
 
 > Note: Resource linkage in a compound document allows a client to link
 together all of the included resource objects without having to `GET` any
@@ -312,7 +321,7 @@ For example, the following article is associated with an `author`:
         "self": "http://example.com/articles/1/relationships/author",
         "related": "http://example.com/articles/1/author"
       },
-      "linkage": { "type": "people", "id": "9" }
+      "data": { "type": "people", "id": "9" }
     }
   },
   "links": {
@@ -353,6 +362,15 @@ the resource represented by the resource object.
 A server **MUST** respond to a `GET` request to the specified URL with a
 response that includes the resource as the primary data.
 
+### Resource Indentifier Objects <a href="#document-structure-resource-identifier-objects" id="document-structure-resource-identifier-objects" class="headerlink"></a>
+
+A "resource identifier object" is an object that identifies an individual
+resource.
+
+It **MUST** contain `"type"` and `"id"` members.
+
+It **MAY** also include a `"meta"` member to contain non-standard
+meta-information.
 
 ### Compound Documents <a href="#document-structure-compound-documents" id="document-structure-compound-documents" class="headerlink"></a>
 
@@ -382,14 +400,14 @@ A complete example document with multiple included relationships:
           "self": "http://example.com/articles/1/relationships/author",
           "related": "http://example.com/articles/1/author"
         },
-        "linkage": { "type": "people", "id": "9" }
+        "data": { "type": "people", "id": "9" }
       },
       "comments": {
         "links": {
           "self": "http://example.com/articles/1/relationships/comments",
           "related": "http://example.com/articles/1/comments"
         },
-        "linkage": [
+        "data": [
           { "type": "comments", "id": "5" },
           { "type": "comments", "id": "12" }
         ]
@@ -444,7 +462,8 @@ multiple times.
 
 As discussed above, the document **MAY** be extended to include
 meta-information as `"meta"` members in several locations: at the top-level,
-within resource objects, within relationship objects, and within linkage objects.
+within resource objects, within relationship objects, and within [resource
+identifier objects].
 
 All `"meta"` members **MUST** have an object as a value, the contents of which
 can be used for custom extensions.
@@ -1018,16 +1037,17 @@ Accept: application/vnd.api+json
     },
     "relationships": {
       "photographer": {
-        "linkage": { "type": "people", "id": "9" }
+        "data": { "type": "people", "id": "9" }
       }
     }
   }
 }
 ```
 
-If a relationship is provided in the `links` section of the resource object, its
-value **MUST** be a relationship object with a `linkage` member. The value of this key
-represents the linkage the new resource is to have.
+If a relationship is provided in the `"relationships"` member of the
+resource object, its value **MUST** be a relationship object with a `"data"`
+member. The value of this key represents the linkage the new resource is to
+have.
 
 #### Client-Generated IDs <a href="#crud-creating-client-ids" id="crud-creating-client-ids" class="headerlink"></a>
 
@@ -1200,9 +1220,10 @@ Accept: application/vnd.api+json
 
 #### Updating a Resource's Relationships <a href="#crud-updating-resource-relationships" id="crud-updating-resource-relationships" class="headerlink"></a>
 
-If a relationship is provided in the `links` section of a resource object in a
-`PATCH` request, its value **MUST** be a relationship object with a `linkage` member.
-The relationship's value will be replaced with the value specified in this member.
+If a relationship is provided in the `"relationships"` member of a resource
+object in a `PATCH` request, its value **MUST** be a relationship object
+with a `"data"` member. The relationship's value will be replaced with the
+value specified in this member.
 
 For instance, the following `PATCH` request will update the `title` attribute
 and `author` relationship of an article:
@@ -1221,7 +1242,7 @@ Accept: application/vnd.api+json
     },
     "relationships": {
       "author": {
-        "linkage": { "type": "people", "id": "1" }
+        "data": { "type": "people", "id": "1" }
       }
     }
   }
@@ -1245,7 +1266,7 @@ Accept: application/vnd.api+json
     },
     "relationships": {
       "tags": {
-        "linkage": [
+        "data": [
           { "type": "tags", "id": "2" },
           { "type": "tags", "id": "3" }
         ]
@@ -1341,7 +1362,7 @@ described below.
 The `PATCH` request **MUST** include a top-level member named `data` containing
 one of:
 
-* a linkage object (defined above) corresponding to the new related resource.
+* a [resource identifier object] corresponding to the new related resource.
 * `null`, to remove the relationship.
 
 For example, the following request updates the author of an article:
@@ -1377,7 +1398,7 @@ A server **MUST** respond to `PATCH`, `POST`, and `DELETE` requests to a
 *to-many relationship URL* as described below.
 
 For all request types, the body **MUST** contain a `data` member whose value
-is an empty array or an array of linkage objects.
+is an empty array or an array of [resource identifier objects].
 
 If a client makes a `PATCH` request to a *to-many relationship URL*, the
 server **MUST** either completely replace every member of the relationship,
@@ -1554,4 +1575,6 @@ An error object **MAY** have the following members:
 [relationships]: #document-structure-resource-object-relationships
 [resource relationships]: #document-structure-resource-object-relationships
 [resource links]: #document-structure-resource-object-links
+[resource identifier object]: #document-structure-resource-identifier-objects
+[resource identifier objects]: #document-structure-resource-identifier-objects
 [fields]: #document-structure-resource-object-fields
