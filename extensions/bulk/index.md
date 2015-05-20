@@ -28,7 +28,7 @@ server **MUST NOT** be changed by a request if any individual operation fails.
 Multiple resources can be created by sending a `POST` request to a URL that
 represents a collection of resources. The request **MUST** include an array
 of resource objects as primary data. Each resource object **MUST** contain
-at least a `type` member.
+at least a `"type"` member.
 
 For instance, multiple photos might be created with the following request:
 
@@ -60,7 +60,7 @@ Accept: application/vnd.api+json; ext=bulk
 Multiple resources can be updated by sending a `PATCH` request to a URL that
 represents a collection of resources to which they all belong. The request
 **MUST** include an array of resource objects as primary data. Each resource
-object **MUST** contain at least `type` and `id` members.
+object **MUST** contain at least `"type"` and `"id"` members.
 
 For example:
 
@@ -91,8 +91,8 @@ Accept: application/vnd.api+json; ext=bulk
 Multiple resources can be deleted by sending a `DELETE` request to a URL that
 represents a collection of resources to which they all belong.
 
-The body of the request **MUST** contain a `data` member whose value is an
-an array of objects that each contain a `type` and `id`.
+The body of the request **MUST** contain a `"data"` member whose value is an
+an array of resource identifier objects.
 
 For example:
 
