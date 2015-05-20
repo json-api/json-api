@@ -898,7 +898,7 @@ An endpoint **MAY** support requests to sort the primary data with a `sort`
 query parameter. The value for `sort` **MUST** represent sort fields.
 
 ```http
-GET /people?sort=+age
+GET /people?sort=age
 ```
 
 An endpoint **MAY** support multiple sort fields by allowing comma-separated
@@ -906,21 +906,14 @@ An endpoint **MAY** support multiple sort fields by allowing comma-separated
 order specified.
 
 ```http
-GET /people?sort=+age,+name
+GET /people?sort=age,name
 ```
 
-The sort order for each sort field **MUST** be specified with one of the
-following prefixes:
-
-* Plus (U+002B PLUS SIGN, "+") to request an ascending sort order.
-* Minus (U+002D HYPHEN-MINUS, "-") to request a descending sort order.
-
-> Note: By requiring a sort order prefix instead of allowing a default
-order, JSON API avoids setting requirements for the first character in sort
-field names.
+The sort order for each sort field **MUST** be ascending unless it is prefixed
+with a minus (U+002D HYPHEN-MINUS, "-"), in which case it **MUST** be descending.
 
 ```http
-GET /articles?sort=-created,+title
+GET /articles?sort=-created,title
 ```
 
 The above example should return the newest articles first. Any articles
