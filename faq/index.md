@@ -70,9 +70,6 @@ A JSON array is naturally ordered while sets require metadata to specify order
 among members. Therefore, arrays allow for more natural sorting by default or
 specified criteria.
 
-In addition, JSON API allows read-only resources to be returned without IDs,
-which would of course be incompatible with a set keyed by IDs.
-
 ## Why are related resources nested in an `included` object in a compound document?
 
 Primary resources should be isolated because their order and number is often
