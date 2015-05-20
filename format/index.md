@@ -225,7 +225,7 @@ The keys `"id"` and `"type"` are not allowed within the relationships object.
 
 Relationships may be to-one or to-many. Relationships can be specified by
 including a member in a resource's relationship's object. The name of the
-relationship is its key in the relationship object.
+relationship is its key in the relationships object.
 
 The value of a relationship **MUST** be an object (a "relationship object"),
 which **MUST** contain at least one of the following:
