@@ -1032,7 +1032,7 @@ Accept: application/vnd.api+json
 }
 ```
 
-If a relationship is provided in the `links` section of the resource object, its
+If a relationship is provided in the `relationships` section of the resource object, its
 value **MUST** be a relationship object with a `linkage` member. The value of this key
 represents the linkage the new resource is to have.
 
@@ -1207,7 +1207,7 @@ Accept: application/vnd.api+json
 
 #### Updating a Resource's Relationships <a href="#crud-updating-resource-relationships" id="crud-updating-resource-relationships" class="headerlink"></a>
 
-If a relationship is provided in the `links` section of a resource object in a
+If a relationship is provided in the `relationships` section of a resource object in a
 `PATCH` request, its value **MUST** be a relationship object with a `linkage` member.
 The relationship's value will be replaced with the value specified in this member.
 
