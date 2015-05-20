@@ -255,7 +255,7 @@ consistently throughout an implementation.
 
 #### Resource IDs <a href="#document-structure-resource-ids" id="document-structure-resource-ids" class="headerlink"></a>
 
-Each resource object **MUST** contain an `id` member, whose value **MUST**
+Each resource object **MUST** contain an `"id"` member, whose value **MUST**
 be a string.
 
 #### Relationships <a href="#document-structure-links" id="document-structure-resource-objects-relationships" class="headerlink"></a>
@@ -286,7 +286,7 @@ which **MUST** contain at least one of the following:
   relationship.
 
 A relationship object that represents a to-many relationship **MAY** also contain
-pagination links under the `links` member, as described below.
+pagination links under the `"links"` member, as described below.
 
 If a relationship object refers to resource objects included in the same compound
 document, it **MUST** include resource linkage to those resource objects.
