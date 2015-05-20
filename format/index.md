@@ -288,9 +288,6 @@ which **MUST** contain at least one of the following:
 A relationship object that represents a to-many relationship **MAY** also contain
 pagination links under the `"links"` member, as described below.
 
-If a relationship object refers to resource objects included in the same compound
-document, it **MUST** include resource linkage to those resource objects.
-
 Resource linkage **MUST** be represented as one of the following:
 
 * `null` for empty to-one relationships.
@@ -380,6 +377,16 @@ responses are called "compound documents".
 
 In a compound document, all included resources **MUST** be represented as an
 array of resource objects in a top-level `"included"` member.
+
+Compound documents require "full linkage", meaning that every included
+resource **MUST** be identified by at least one [resource identifier object]
+in the same document. These resource identifier objects could either be
+primary data or represent resource linkage contained within primary or
+included resources.
+
+> Note: Full linkage ensures that included resources are related to either
+the primary data (which could be resource objects or resource identifier
+objects) or to each other.
 
 A complete example document with multiple included relationships:
 
@@ -853,7 +860,7 @@ section of the compound document.
 The value of the `include` parameter **MUST** be a comma-separated (U+002C
 COMMA, ",") list of relationship paths. A relationship path is a dot-separated
 (U+002E FULL-STOP, ".") list of relationship names. Each relationship name
-**MUST** be identical to the key in the `links` section of its parent
+**MUST** be identical to the key in the `"relationships"` member of its parent
 resource object.
 
 > Note: For example, a relationship path could be `comments.author`, where
@@ -873,15 +880,22 @@ for each relationship name can be specified:
 GET /articles/1?include=comments.author
 ```
 
-> Note: A request for `comments.author` should not automatically also
-include `comments` in the response. This can happen if the client already
-has the `comments` locally, and now wants to fetch the associated authors
-without fetching the comments again.
+> Note: Because compound documents require full linkage, intermediate
+resources in a multi-part path must be returned along with the leaf nodes.
+For example, a response to a request for `comments.author` should
+automatically include `comments` as well as the `author` of each of those
+`comments`.
+
+> Note: A server may choose to expose a deeply nested relationship such as
+`comments.author` as a direct relationship with an alias such as
+`comment-authors`. By abstracting the underlying relationship, the server
+can still provide full linkage in compound documents without including
+potentially unwanted intermediate resources.
 
 Multiple related resources can be requested in a comma-separated list:
 
 ```http
-GET /articles/1?include=author,comments,comments.author
+GET /articles/1?include=author,comments.author
 ```
 
 ### Sparse Fieldsets <a href="#fetching-sparse-fieldsets" id="fetching-sparse-fieldsets" class="headerlink"></a>
