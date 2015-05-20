@@ -1561,15 +1561,15 @@ An error object **MAY** have the following members:
   localization.
 * `"detail"` - A human-readable explanation specific to this occurrence of the
   problem.
-* `"links"` - An array of JSON Pointers
-  [[RFC6901](https://tools.ietf.org/html/rfc6901)] to the associated resource(s)
-  within the request document [e.g. `["/data"]` for a primary data object].
-* `"paths"` - An array of JSON Pointers to the relevant attribute(s) within the
-  associated resource(s) in the request document. Each path **MUST** be relative
-  to the resource path(s) expressed in the error object's `"links"` member
-  [e.g. `["/first-name", "/last-name"]` to reference a couple attributes].
+* `"source"` - An object containing references to the source of the error,
+  optionally including any of the following members:
+  * `"pointer"` - A JSON Pointer
+    [[RFC6901](https://tools.ietf.org/html/rfc6901)] to the associated entity in
+    the request document [e.g. `"/data"` for a primary data object, or
+    `"/data/attributes/title"` for a specific attribute].
+  * `"parameter"` - An optional string indicating which query parameter caused
+    the error.
 * `"meta"` - to contain non-standard meta-information about the error.
-
 
 [attributes]: #document-structure-resource-object-attributes
 [relationships]: #document-structure-resource-object-relationships
