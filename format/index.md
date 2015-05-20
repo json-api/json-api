@@ -923,7 +923,7 @@ correspond to resource attribute and association names.
 
 > Note: It is recommended that dot-separated (U+002E FULL-STOP, ".") sort
 fields be used to request sorting based upon relationship attributes. For
-example, a sort field of `+author.name` could be used to request that the
+example, a sort field of `author.name` could be used to request that the
 primary data be sorted based upon the `name` attribute of the `author`
 relationship.
 
