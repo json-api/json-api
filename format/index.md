@@ -995,6 +995,9 @@ parameter `sort`, the server **MUST** return elements of the top-level
 The server **MAY** apply default sorting rules to top-level `data` if
 request parameter `sort` is not specified.
 
+> Note: This section applies to any endpoint that responds with a resource
+collection as primary data, regardless of the request type.
+
 ### Pagination <a href="#fetching-pagination" id="fetching-pagination" class="headerlink"></a>
 
 A server **MAY** choose to limit the number of resources returned in a response
@@ -1032,6 +1035,9 @@ be used as a basis for any of these strategies. For example, a page-based
 strategy might use query parameters such as `page[number]` and `page[size]`,
 an offset-based strategy might use `page[offset]` and `page[limit]`, while a
 cursor-based strategy might use `page[cursor]`.
+
+> Note: This section applies to any endpoint that responds with a resource
+collection as primary data, regardless of the request type.
 
 ### Filtering <a href="#fetching-filtering" id="fetching-filtering" class="headerlink"></a>
 
