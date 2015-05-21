@@ -1361,11 +1361,11 @@ return a `202 Accepted` status code.
 
 ##### 200 OK <a href="#crud-updating-responses-200" id="crud-updating-responses-200" class="headerlink"></a>
 
-If a server accepts an update but also changes the resource(s) in other ways
+If a server accepts an update but also changes the resource(s) in ways other
 than those specified by the request (for example, updating the `updated-at`
 attribute or a computed `sha`), it **MUST** return a `200 OK` response. The
-response document **MUST** include a representation of the updated resource(s)
-as if a `GET` request was made to the request URL.
+response document **MUST** include a representation of the updated
+resource(s) as if a `GET` request was made to the request URL.
 
 A server **MUST** return a `200 OK` status code if an update is successful,
 the client's current attributes remain up to date, and the server responds
