@@ -1181,6 +1181,12 @@ Content-Type: application/vnd.api+json
 }
 ```
 
+##### 202 Accepted <a href="#crud-creating-responses-202" id="crud-creating-responses-202" class="headerlink"></a>
+
+If a request to create a resource has been accepted for processing, but the
+processing has not been completed by the time the server responds, the
+server **MUST** return a `202 Accepted` status code.
+
 ##### 204 No Content <a href="#crud-creating-responses-204" id="crud-creating-responses-204" class="headerlink"></a>
 
 If a `POST` request *did* include a [Client-Generated
@@ -1346,6 +1352,12 @@ it has not provided the client with the full list of associated objects, and
 does not want to allow deletion of records the client has not seen.
 
 #### Responses <a href="#crud-updating-responses" id="crud-updating-responses" class="headerlink"></a>
+
+##### 202 Accepted <a href="#crud-updating-responses-202" id="crud-updating-responses-202" class="headerlink"></a>
+
+If an update request has been accepted for processing, but the processing
+has not been completed by the time the server responds, the server **MUST**
+return a `202 Accepted` status code.
 
 ##### 204 No Content <a href="#crud-updating-responses-204" id="crud-updating-responses-204" class="headerlink"></a>
 
@@ -1562,6 +1574,12 @@ server, and we are defining its semantics for JSON API.
 
 #### Responses <a href="#crud-updating-relationship-responses" id="crud-updating-relationship-responses" class="headerlink"></a>
 
+##### 202 Accepted <a href="#crud-updating-relationship-responses-202" id="crud-updating-relationship-responses-202" class="headerlink"></a>
+
+If a relationship update request has been accepted for processing, but the
+processing has not been completed by the time the server responds, the
+server **MUST** return a `202 Accepted` status code.
+
 ##### 204 No Content <a href="#crud-updating-relationship-responses-204" id="crud-updating-relationship-responses-204" class="headerlink"></a>
 
 A server **MUST** return a `204 No Content` status code if an update is
@@ -1597,6 +1615,12 @@ DELETE /photos/1
 ```
 
 #### Responses <a href="#crud-deleting-responses" id="crud-deleting-responses" class="headerlink"></a>
+
+##### 202 Accepted <a href="#crud-deleting-responses-202" id="crud-deleting-responses-202" class="headerlink"></a>
+
+If a deletion request has been accepted for processing, but the processing has
+not been completed by the time the server responds, the server **MUST**
+return a `202 Accepted` status code.
 
 ##### 204 No Content <a href="#crud-deleting-responses-204" id="crud-deleting-responses-204" class="headerlink"></a>
 
