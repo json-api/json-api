@@ -230,11 +230,6 @@ alongside other information to be represented in a resource object, these keys
 **SHOULD NOT** appear as attributes. If relations are provided, they **MUST**
 be represented under the "relationships object".
 
-#### Fields <a href="#document-structure-resource-object-fields" id="document-structure-resource-object-fields" class="headerlink"></a>
-
-A resource object's [attributes] and its [relationships] are collectively called
-its "[fields]".
-
 #### Resource Identification <a href="#document-structure-resource-identification" id="document-structure-resource-identification" class="headerlink"></a>
 
 Every resource object is uniquely identified by the combination of its `"type"`
@@ -358,6 +353,11 @@ the resource represented by the resource object.
 
 A server **MUST** respond to a `GET` request to the specified URL with a
 response that includes the resource as the primary data.
+
+#### Fields <a href="#document-structure-resource-object-fields" id="document-structure-resource-object-fields" class="headerlink"></a>
+
+A resource object's [attributes] and its [relationships] are collectively called
+its "[fields]".
 
 ### Resource Indentifier Objects <a href="#document-structure-resource-identifier-objects" id="document-structure-resource-identifier-objects" class="headerlink"></a>
 
