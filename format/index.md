@@ -513,7 +513,7 @@ the following members:
   data represents a resource relationship.
 * Pagination links for the primary data (as described below).
 
-### Member names <a href="#document-structure-member-names" id="document-structure-member-names"></a>
+### Member names <a href="#document-structure-member-names" id="document-structure-member-names" class="headerlink"></a>
 
 All member names used in the document **MUST** be handled case sensitive by clients and servers, and they **MUST** meet all of the following conditions:
 - Member names **MUST** contain at least one character.
@@ -522,27 +522,27 @@ All member names used in the document **MUST** be handled case sensitive by clie
 
 To enable an easy mapping of member names to URLs, it's **RECOMMENDED** to limit the allowed characters to non-reserved, URL safe characters, following [RFC 3986](http://tools.ietf.org/html/rfc3986#page-13).
 
-#### Overall allowed characters <a href="#document-structure-member-names-overall-allowed-characters" id="document-structure-member-names-overall-allowed-characters"></a>
+#### Overall allowed characters <a href="#document-structure-member-names-overall-allowed-characters" id="document-structure-member-names-overall-allowed-characters" class="headerlink"></a>
 - U+0061 to U+007A, "a-z"
 - U+0041 to U+005A, "A-Z"
 - U+0030 to U+0039, "0-9"
 - any UNICODE character except U+0000 to U+007F _(not recommended, not URL safe)_
 
-#### Other allowed characters (but not at start/end of the member name) <a href="#document-structure-member-names-other-allowed-characters" id="document-structure-member-names-other-allowed-characters"></a>
+#### Other allowed characters (but not at start/end of the member name) <a href="#document-structure-member-names-other-allowed-characters" id="document-structure-member-names-other-allowed-characters" class="headerlink"></a>
 - U+002D HYPHEN-MINUS, "-"
 - U+005F LOW LINE, "_"
 - U+0020 SPACE, " " _(not recommended, not URL safe)_
 - U+005E CIRCUMFLEX ACCENT, "^" _(not recommended, not URL safe)_
 - U+0060 GRAVE ACCENT, "`" _(not recommended, not URL safe)_
 
-#### Reserved characters (currently in use) <a href="#document-structure-member-names-reserved-ascii-characters-in-use" id="document-structure-member-names-reserved-ascii-characters-in-use"></a>
+#### Reserved characters (currently in use) <a href="#document-structure-member-names-reserved-ascii-characters-in-use" id="document-structure-member-names-reserved-ascii-characters-in-use" class="headerlink"></a>
 - U+002B PLUS SIGN, "+" _(used for ordering)_
 - U+002C COMMA, "," _(used separator for multiple relationship paths)_
 - U+002E PERIOD, "." _(used as relationship path separators)_
 - U+005B LEFT SQUARE BRACKET, "[" _(use in sparse fieldsets)_
 - U+005D RIGHT SQUARE BRACKET, "]" _(used in sparse fieldsets)_
 
-#### Reserved characters (punctation, currency and math symbols) for later use <a href="#document-structure-member-names-reserved-ascii-characters-later-use" id="document-structure-member-names-reserved-ascii-characters-later-use"></a>
+#### Reserved characters (punctation, currency and math symbols) for later use <a href="#document-structure-member-names-reserved-ascii-characters-later-use" id="document-structure-member-names-reserved-ascii-characters-later-use" class="headerlink"></a>
 - U+0021 EXCLAMATION MARK, "!"
 - U+0022 QUOTATION MARK, '"'
 - U+0023 NUMBER SIGN, "#"
