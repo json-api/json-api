@@ -727,9 +727,13 @@ fetch a single resource that does not exist, except when the request warrants a
 
 ##### Other Responses <a href="#fetching-resources-responses-other" id="fetching-resources-responses-other" class="headerlink"></a>
 
-Servers **MAY** use other HTTP error codes to represent errors. Clients
-**MUST** interpret those errors in accordance with HTTP semantics. Error
-details **MAY** also be returned, as discussed below.
+A server **MAY** respond with other HTTP status codes.
+
+A server **MAY** include [error details] with error responses.
+
+A server **MUST** prepare responses, and a client **MUST** interpret
+responses, in accordance with
+[`HTTP semantics`](http://tools.ietf.org/html/rfc7231).
 
 ### Fetching Relationships <a href="#fetching-relationships" id="fetching-relationships" class="headerlink"></a>
 
@@ -843,9 +847,13 @@ If a relationship URL exists but the relationship is empty, then
 
 ##### Other Responses <a href="#fetching-relationships-responses-other" id="fetching-relationships-responses-other" class="headerlink"></a>
 
-Servers **MAY** use other HTTP error codes to represent errors. Clients
-**MUST** interpret those errors in accordance with HTTP semantics. Error
-details **MAY** also be returned, as discussed below.
+A server **MAY** respond with other HTTP status codes.
+
+A server **MAY** include [error details] with error responses.
+
+A server **MUST** prepare responses, and a client **MUST** interpret
+responses, in accordance with
+[`HTTP semantics`](http://tools.ietf.org/html/rfc7231).
 
 ### Inclusion of Related Resources <a href="#fetching-includes" id="fetching-includes" class="headerlink"></a>
 
@@ -1203,9 +1211,13 @@ recognize the source of the conflict.
 
 ##### Other Responses <a href="#crud-creating-responses-other" id="crud-creating-responses-other" class="headerlink"></a>
 
-Servers **MAY** use other HTTP error codes to represent errors. Clients
-**MUST** interpret those errors in accordance with HTTP semantics. Error
-details **MAY** also be returned, as discussed below.
+A server **MAY** respond with other HTTP status codes.
+
+A server **MAY** include [error details] with error responses.
+
+A server **MUST** prepare responses, and a client **MUST** interpret
+responses, in accordance with
+[`HTTP semantics`](http://tools.ietf.org/html/rfc7231).
 
 ### Updating Resources <a href="#crud-updating" id="crud-updating" class="headerlink"></a>
 
@@ -1376,9 +1388,13 @@ recognize the source of the conflict.
 
 ##### Other Responses <a href="#crud-updating-responses-other" id="crud-updating-responses-other" class="headerlink"></a>
 
-Servers **MAY** use other HTTP error codes to represent errors. Clients
-**MUST** interpret those errors in accordance with HTTP semantics. Error
-details **MAY** also be returned, as discussed below.
+A server **MAY** respond with other HTTP status codes.
+
+A server **MAY** include [error details] with error responses.
+
+A server **MUST** prepare responses, and a client **MUST** interpret
+responses, in accordance with
+[`HTTP semantics`](http://tools.ietf.org/html/rfc7231).
 
 ### Updating Relationships <a href="#crud-updating-relationships" id="crud-updating-relationships" class="headerlink"></a>
 
@@ -1563,9 +1579,13 @@ to update a relationship.
 
 ##### Other Responses <a href="#crud-updating-relationship-responses-other" id="crud-updating-relationship-responses-other" class="headerlink"></a>
 
-Servers **MAY** use other HTTP error codes to represent errors. Clients
-**MUST** interpret those errors in accordance with HTTP semantics. Error
-details **MAY** also be returned, as discussed below.
+A server **MAY** respond with other HTTP status codes.
+
+A server **MAY** include [error details] with error responses.
+
+A server **MUST** prepare responses, and a client **MUST** interpret
+responses, in accordance with
+[`HTTP semantics`](http://tools.ietf.org/html/rfc7231).
 
 ### Deleting Resources <a href="#crud-deleting" id="crud-deleting" class="headerlink"></a>
 
@@ -1585,9 +1605,13 @@ successful.
 
 ##### Other Responses <a href="#crud-deleting-responses-other" id="crud-deleting-responses-other" class="headerlink"></a>
 
-Servers **MAY** use other HTTP error codes to represent errors. Clients
-**MUST** interpret those errors in accordance with HTTP semantics. Error
-details **MAY** also be returned, as discussed below.
+A server **MAY** respond with other HTTP status codes.
+
+A server **MAY** include [error details] with error responses.
+
+A server **MUST** prepare responses, and a client **MUST** interpret
+responses, in accordance with
+[`HTTP semantics`](http://tools.ietf.org/html/rfc7231).
 
 ## Errors <a href="#errors" id="errors" class="headerlink"></a>
 
@@ -1626,3 +1650,4 @@ An error object **MAY** have the following members:
 [resource identifier object]: #document-structure-resource-identifier-objects
 [resource identifier objects]: #document-structure-resource-identifier-objects
 [fields]: #document-structure-resource-object-fields
+[error details]: #errors
