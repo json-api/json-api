@@ -234,13 +234,26 @@ which **MUST** contain at least one of the following:
     "relationship URL"). This URL allows the client to directly manipulate the
     relationship. For example, it would allow a client to remove an `author`
     from an `article` without deleting the `people` resource itself.
-  * A `"related"` member, whose value is a related resource URL, as defined above.
+  * A `"related"` member, whose value is a related resource URL, as defined below.
 * A `"data"` member, whose value represents "resource linkage" (defined below).
 * A `"meta"` member that contains non-standard meta-information about the
   relationship.
 
 A relationship object that represents a to-many relationship **MAY** also contain
 pagination links under the `"links"` member, as described below.
+
+A "related resource URL" provides access to the resources targeted by the
+relationship. When fetched, it returns the related resource object(s) as the
+response's primary data. For example, an `article`'s `comments` relationship
+could specify a URL that returns a list of comment resource objects when
+retrieved through a `GET` request.
+
+A related resource URL **MUST** remain constant even when the relationship (the
+set of referenced resources) mutates. That is, the response from a related
+resource URL always reflects the current state of the relationship.
+
+If present, a related resource URL **MUST** be a valid URL, even if the
+relationship isn't currently associated with any target resources.
 
 Resource linkage **MUST** be represented as one of the following:
 
@@ -252,9 +265,6 @@ Resource linkage **MUST** be represented as one of the following:
 > Note: Resource linkage in a compound document allows a client to link
 together all of the included resource objects without having to `GET` any
 relationship URLs.
-
-If present, a *related resource URL* **MUST** be a valid URL, even if the
-relationship isn't currently associated with any target resources.
 
 > Note: The spec does not impart meaning to order of resource identifier
 objects in linkage arrays of to-many relationships, although implementations
