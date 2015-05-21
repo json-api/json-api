@@ -1639,6 +1639,20 @@ responses, in accordance with
 
 ## Errors <a href="#errors" id="errors" class="headerlink"></a>
 
+### Processing Errors <a href="#errors-processing" id="errors-processing" class="headerlink"></a>
+
+A server **MAY** choose to stop processing as soon as a problem is encountered,
+or it **MAY** continue processing and encounter multiple problems. For instance,
+a server might process multiple attribute updates and then return multiple
+validation problems in a single response.
+
+When a server encounters multiple problems for a single request, the most
+generally applicable HTTP error code **SHOULD** be used in the response. For
+instance, `400 Bad Request` might be appropriate for multiple 4xx errors
+or `500 Internal Server Error` might be appropriate for multiple 5xx errors.
+
+### Error Objects <a href="#error-objects" id="error-objects" class="headerlink"></a>
+
 Error objects provide additional information about problems encountered while
 performing an operation. Error objects **MUST** be returned as an array
 keyed by `"errors"` in the top level of a JSON API document, and **SHOULD
