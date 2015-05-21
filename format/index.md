@@ -238,6 +238,10 @@ this object can contain members keyed by any string valid for this specification
 All members which appear in an "attributes object" are considered attributes and
 may contain any valid JSON value.
 
+Complex data structures involving JSON objects and arrays are allowed as
+attribute values. However, any object that constitutes or is contained in an
+attribute **MUST** reserve the `relationships` and `links` members for future use.
+
 Although has-one foreign keys (e.g. `author_id`) are often stored internally
 alongside other information to be represented in a resource object, these keys
 **SHOULD NOT** appear as attributes. If relations are provided, they **MUST**
