@@ -210,8 +210,23 @@ Here's how an article (i.e. a resource of type "articles") might appear in a doc
 }
 // ...
 ```
+#### Resource Identification <a href="#document-structure-resource-identification" id="document-structure-resource-identification" class="headerlink"></a>
 
-#### Attributes Object <a href="#document-structure-resource-attributes-object" id="document-structure-resource-attributes-object" class="headerlink"></a>
+Every resource object **MUST** contain an `"id"` member and a `"type"` member.
+The value of each of these members **MUST** be a string.
+
+Each resource object's `"type"` and `"id"` pair **MUST** identify a single,
+unique resource.
+
+The `"type"` member is used to describe resource objects that share common
+attributes and relationships.
+
+> Note: This spec is agnostic about inflection rules, so the value of `type`
+can be either plural or singular. However, the same value should be used
+consistently throughout an implementation.
+
+
+#### Attributes <a href="#document-structure-resource-attributes" id="document-structure-resource-attributes" class="headerlink"></a>
 
 The value of the `"attributes"` key is a JSON object (an "attributes object")
 that represents information about the resource object it is contained within.
@@ -220,8 +235,6 @@ The top level of this object shares a namespace with the members of `relationshi
 and **MUST NOT** contain `id` or `type` members. Apart from these restrictions,
 this object can contain members keyed by any string valid for this specification.
 
-#### Attributes <a href="#document-structure-resource-attributes" id="document-structure-resource-attributes" class="headerlink"></a>
-
 All members which appear in an "attributes object" are considered attributes and
 may contain any valid JSON value.
 
@@ -229,29 +242,6 @@ Although has-one foreign keys (e.g. `author_id`) are often stored internally
 alongside other information to be represented in a resource object, these keys
 **SHOULD NOT** appear as attributes. If relations are provided, they **MUST**
 be represented under the "relationships object".
-
-#### Resource Identification <a href="#document-structure-resource-identification" id="document-structure-resource-identification" class="headerlink"></a>
-
-Every resource object is uniquely identified by the combination of its `"type"`
-and `"id"` members.
-
-A resource object's `"type"` and `"id"` pair **MUST** refer to a single, unique
-resource.
-
-#### Resource Types <a href="#document-structure-resource-types" id="document-structure-resource-types" class="headerlink"></a>
-
-Each resource object **MUST** contain a `"type"` member, whose value **MUST**
-be a string. The `"type"` is used to describe resource objects that share
-common attributes and relationships.
-
-> Note: This spec is agnostic about inflection rules, so the value of `type`
-can be either plural or singular. However, the same value should be used
-consistently throughout an implementation.
-
-#### Resource IDs <a href="#document-structure-resource-ids" id="document-structure-resource-ids" class="headerlink"></a>
-
-Each resource object **MUST** contain an `"id"` member, whose value **MUST**
-be a string.
 
 #### Relationships <a href="#document-structure-links" id="document-structure-resource-objects-relationships" class="headerlink"></a>
 
@@ -327,6 +317,11 @@ The `author` relationship includes a URL for the relationship itself (which
 allows the client to change the related author directly), a related resource URL
 to fetch the resource objects, and linkage information.
 
+#### Fields <a href="#document-structure-resource-object-fields" id="document-structure-resource-object-fields" class="headerlink"></a>
+
+A resource object's [attributes] and its [relationships] are collectively called
+its "[fields]".
+
 #### Resource Links <a href="#document-structure-structure-resource-object-links" id="document-structure-resource-object-links" class="headerlink"></a>
 
 Analogous to the `"links"` member at the document's top level, the optional
@@ -353,11 +348,6 @@ the resource represented by the resource object.
 
 A server **MUST** respond to a `GET` request to the specified URL with a
 response that includes the resource as the primary data.
-
-#### Fields <a href="#document-structure-resource-object-fields" id="document-structure-resource-object-fields" class="headerlink"></a>
-
-A resource object's [attributes] and its [relationships] are collectively called
-its "[fields]".
 
 ### Resource Indentifier Objects <a href="#document-structure-resource-identifier-objects" id="document-structure-resource-identifier-objects" class="headerlink"></a>
 
