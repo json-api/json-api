@@ -1337,11 +1337,6 @@ If an update request has been accepted for processing, but the processing
 has not been completed by the time the server responds, the server **MUST**
 return a `202 Accepted` status code.
 
-##### 204 No Content <a href="#crud-updating-responses-204" id="crud-updating-responses-204" class="headerlink"></a>
-
-A server **MUST** return a `204 No Content` status code if an update is
-successful and the client's current attributes remain up to date.
-
 ##### 200 OK <a href="#crud-updating-responses-200" id="crud-updating-responses-200" class="headerlink"></a>
 
 If a server accepts an update but also changes the resource(s) in other ways
@@ -1350,6 +1345,13 @@ attribute or a computed `sha`), it **MUST** return a `200 OK` response.
 
 The response document for a `200 OK` **MUST** include a representation of
 the updated resource(s) as if a `GET` request was made to the request URL.
+
+##### 204 No Content <a href="#crud-updating-responses-204" id="crud-updating-responses-204" class="headerlink"></a>
+
+If an update is successful and the server doesn't update any attributes besides
+those provided, the server **MUST** return either a `200 OK` status code and
+response document (as described above) or a `204 No Content` status code with no
+response document.
 
 ##### 403 Forbidden <a href="#crud-updating-relationship-responses-403" id="crud-updating-relationship-responses-403" class="headerlink"></a>
 
