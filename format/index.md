@@ -1144,15 +1144,12 @@ to create a resource with a client-generated ID.
 
 ##### 201 Created <a href="#crud-creating-responses-201" id="crud-creating-responses-201" class="headerlink"></a>
 
-A server **MUST** respond to a successful resource creation request according to
-[`HTTP semantics`](http://tools.ietf.org/html/rfc7231#section-6.3).
+If a `POST` request did not include a [Client-Generated
+ID](#crud-creating-client-ids) and the requested resource has been created
+successfully, the server **MUST** return a `201 Created` status code.
 
 The response **SHOULD** include a `Location` header identifying the location
 of the newly created resource.
-
-If a `POST` request did not include a [Client-Generated
-ID](#crud-creating-client-ids), and a resource has been created, the server
-**MUST** return a `201 Created` status code.
 
 The response **MUST** also include a document that contains the primary
 resource created.
