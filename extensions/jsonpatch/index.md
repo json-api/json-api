@@ -312,23 +312,7 @@ Content-Type: application/vnd.api+json; ext=jsonpatch
 ]
 ```
 
-#### Other Responses <a href="#patch-responses-other" id="patch-responses-other" class="headerlink"></a>
-
-When a server encounters one or more problems while processing a Patch
-operation, it **SHOULD** specify the most appropriate HTTP error code in the
-response. Clients **MUST** interpret those errors in accordance with HTTP
-semantics.
-
-A server **MAY** choose to stop processing Patch operations as soon as the
-first problem is encountered, or it **MAY** continue processing operations and
-encounter multiple problems. For instance, a server might process multiple
-attribute updates and then return multiple validation problems in a single
-response.
-
-When a server encounters multiple problems from a single request, the most
-generally applicable HTTP error code should be specified in the response. For
-instance, `400 Bad Request` might be appropriate for multiple 4xx errors or `500
-Internal Server Error` might be appropriate for multiple 5xx errors.
+#### Errors <a href="#patch-responses-errors" id="patch-responses-errors" class="headerlink"></a>
 
 A server **MAY** return error objects that correspond to each operation. The
 body of the response **MUST** contain an array of JSON objects, which
