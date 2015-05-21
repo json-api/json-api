@@ -115,7 +115,7 @@ A document **MUST** contain at least one of the following top-level members:
 * `"errors"`, containing an array of [error objects](#errors)
 * `"meta"`, non-standard meta-information.
 
-The members `"data"` and `"errors"` may not coexist in the same document.
+The members `"data"` and `"errors"` **MUST NOT** coexist in the same document.
 
 The document's "primary data" is a representation of the resource or collection
 of resources targeted by a request.
