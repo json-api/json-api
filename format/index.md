@@ -1187,9 +1187,10 @@ server **MUST** return a `202 Accepted` status code.
 ##### 204 No Content <a href="#crud-creating-responses-204" id="crud-creating-responses-204" class="headerlink"></a>
 
 If a `POST` request *did* include a [Client-Generated
-ID](#crud-creating-client-ids), the server **MUST** return either a `201
-Created` status code and response document (as described above) or a `204 No
-Content` status code with no response document.
+ID](#crud-creating-client-ids) and the requested resource has been created
+successfully, the server **MUST** return either a `201 Created` status code
+and response document (as described above) or a `204 No Content` status code
+with no response document.
 
 > Note: If a `204` response is received the client should consider the resource
 object sent in the request to be accepted by the server, as if the server
