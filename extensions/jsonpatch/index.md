@@ -3,6 +3,11 @@ layout: page
 title: "JSON Patch Extension"
 ---
 
+## Status <a href="#status" id="status" class="headerlink"></a>
+
+**This extension is a work in progress** and will change as implementation work
+progresses.
+
 ## Introduction <a href="#introduction" id="introduction" class="headerlink"></a>
 
 The "JSON Patch extension" is an [official
