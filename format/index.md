@@ -228,7 +228,7 @@ may contain any valid JSON value.
 Although has-one foreign keys (e.g. `author_id`) are often stored internally
 alongside other information to be represented in a resource object, these keys
 **SHOULD NOT** appear as attributes. If relations are provided, they **MUST**
-be represented under the "links object".
+be represented under the "relationships object".
 
 #### Fields <a href="#document-structure-resource-object-fields" id="document-structure-resource-object-fields" class="headerlink"></a>
 
