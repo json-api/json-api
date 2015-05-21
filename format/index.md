@@ -1598,8 +1598,8 @@ return a `202 Accepted` status code.
 
 ##### 204 No Content <a href="#crud-deleting-responses-204" id="crud-deleting-responses-204" class="headerlink"></a>
 
-A server **MUST** return a `204 No Content` status code if a delete request is
-successful.
+A server **MUST** return a `204 No Content` status code if a deletion
+request is successful.
 
 ##### Other Responses <a href="#crud-deleting-responses-other" id="crud-deleting-responses-other" class="headerlink"></a>
 
