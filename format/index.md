@@ -211,7 +211,7 @@ Here's how an article (i.e. a resource of type "articles") might appear in a doc
 // ...
 ```
 
-#### Attributes Object <a href="#document-structure-resource-object-attributes-object" id="document-structure-resource-object-attributes-object"></a>
+#### Attributes Object <a href="#document-structure-resource-attributes-object" id="document-structure-resource-attributes-object" class="headerlink"></a>
 
 The value of the `"attributes"` key is a JSON object (an "attributes object")
 that represents information about the resource object it is contained within.
@@ -220,7 +220,7 @@ The top level of this object shares a namespace with the members of `relationshi
 and **MUST NOT** contain `id` or `type` members. Apart from these restrictions,
 this object can contain members keyed by any string valid for this specification.
 
-#### Attributes <a href="#document-structure-resource-object-attributes" id="document-structure-resource-object-attributes"></a>
+#### Attributes <a href="#document-structure-resource-attributes" id="document-structure-resource-attributes" class="headerlink"></a>
 
 All members which appear in an "attributes object" are considered attributes and
 may contain any valid JSON value.
