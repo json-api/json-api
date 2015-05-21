@@ -926,6 +926,11 @@ include additional [fields] in the response.
 GET /articles?include=author&fields[articles]=title,body&fields[people]=name
 ```
 
+A client **MUST NOT** use the `fields` parameter to exclude a relationship that
+is simultaneously requested for inclusion using the `include` parameter. If
+such an inconsistent request is made, the server **MUST** respond with `400 Bad
+Request`.
+
 ### Sorting <a href="#fetching-sorting" id="fetching-sorting" class="headerlink"></a>
 
 A server **MAY** choose to support requests to sort resource collections
