@@ -109,10 +109,13 @@ evolve through additive changes.
 A JSON object **MUST** be at the root of every JSON API response containing
 data. This object defines a document's "top level".
 
-A document **MUST** contain one of the following top-level members:
+A document **MUST** contain at least one of the following top-level members:
 
 * `"data"`, containing the document's "primary data"
 * `"errors"`, containing an array of [error objects](#errors)
+* `"meta"`, non-standard meta-information.
+
+The members `"data"` and `"errors"` may not coexist in the same document.
 
 The document's "primary data" is a representation of the resource or collection
 of resources targeted by a request.
@@ -159,7 +162,6 @@ empty.
 
 A document's top level **MAY** also have the following members:
 
-* `"meta"`: non-standard meta-information about the primary data.
 * `"links"`: URLs related to the primary data.
 * `"included"`: an array of resource objects that are related to the primary
   data and/or each other ("included resources").
