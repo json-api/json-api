@@ -465,8 +465,8 @@ multiple times.
 
 As discussed above, a JSON API document **MAY** be extended to include
 meta-information as `"meta"` members in several locations: at the top-level,
-within resource objects, within relationship objects, and within [resource
-identifier objects].
+within resource objects, within relationship objects, within [resource
+identifier objects], and within link objects.
 
 All `"meta"` members **MUST** have an object as a value, the contents of which
 can be used for custom extensions.
@@ -508,6 +508,36 @@ the following members:
 * `"related"` - a related resource URL (as defined above) when the primary
   data represents a resource relationship.
 * Pagination links for the primary data (as described below).
+
+For links currently defined by the spec (`self`, `related`, `prev`, `next`, 
+`first`, `last`), the value of each member of a `links` object can be either 
+a string containing the link URL or a "link object", which can contain
+the following members:
+
+* `"href"` - the string containing the link URL,
+* `"meta"` - non-standard meta-information about the link.
+
+Examples of the supported formats:
+
+```
+"links": {
+  "self": "http://example.com/posts",
+}
+```
+```
+"links": {
+  "self": {
+    "href": "http://example.com/posts",
+    "meta": {}
+  }
+}
+```
+
+> Note: For links which can be defined or allowed by the spec 
+in the future, value of each member of a `links` object is not 
+constrained by the current version of the spec. It should be 
+assumed that anything can be allowed in the future for such 
+values: object, array, scalar.
 
 ### Member Names <a href="#document-structure-member-names" id="document-structure-member-names" class="headerlink"></a>
 
@@ -1010,10 +1040,10 @@ to a subset ("page") of the whole set available.
 A server **MAY** provide links to traverse a paginated data set ("pagination
 links").
 
-Pagination links **MUST** appear in the link object that corresponds to a
+Pagination links **MUST** appear in the links object that corresponds to a
 collection. To paginate the primary data, supply pagination links in the
 top-level `links` object. To paginate an included collection returned in
-a compound document, supply pagination links in the corresponding link
+a compound document, supply pagination links in the corresponding links
 object.
 
 The following keys **MUST** be used for pagination links:
