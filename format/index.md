@@ -291,6 +291,12 @@ relationship URLs.
 If present, a *related resource URL* **MUST** be a valid URL, even if the
 relationship isn't currently associated with any target resources.
 
+> Note: The spec does not impart meaning to order of resource identifier 
+objects in linkage arrays of to-many relationships, although implementations
+may do that. Arrays of resource identifier objects may represent ordered
+or unordered relationships, and both types can be mixed in one response
+object.
+
 For example, the following article is associated with an `author`:
 
 ```javascript
@@ -1510,9 +1516,9 @@ Accept: application/vnd.api+json
 ```
 
 If a client makes a `POST` request to a *relationship URL*, the server
-**MUST** append the specified members to the relationship using set
-semantics. This means that if a given `type` and `id` is already in the
-relationship, the server **MUST NOT** add it again.
+**MUST** add the specified members to the relationship unless they are 
+already present. If a given `type` and `id` is already in the relationship,
+the server **MUST NOT** add it again.
 
 > Note: This matches the semantics of databases that use foreign keys for
 has-many relationships. Document-based storage should check the has-many
