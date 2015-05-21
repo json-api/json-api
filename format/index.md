@@ -18,6 +18,8 @@ without compromising readability, flexibility, or discoverability.
 JSON API requires use of the JSON API media type
 ([`application/vnd.api+json`](http://www.iana.org/assignments/media-types/application/vnd.api+json))
 for exchanging data.
+JSON API documents are defined in JavaScript Object Notation (JSON)
+[[RFC4627](http://tools.ietf.org/html/rfc4627)].
 
 ## Conventions <a href="#conventions" id="conventions" class="headerlink"></a>
 
@@ -32,7 +34,8 @@ The base JSON API specification **MAY** be extended to support additional
 capabilities.
 
 An extension **MAY** make changes to and deviate from the requirements of the
-base specification apart from this section, which remains binding.
+base specification in the sections starting from the next one.
+Sections from the first one through this one remain binding.
 
 Servers that support one or more extensions to JSON API **MUST** return
 those extensions in every response in the `supported-ext` media type
@@ -90,8 +93,6 @@ marks (U+0022 QUOTATION MARK, """), in accordance with the HTTP specification.
 This section describes the structure of a JSON API document, which is identified
 by the media type [`application/vnd.api+json`]
 (http://www.iana.org/assignments/media-types/application/vnd.api+json).
-JSON API documents are defined in JavaScript Object Notation (JSON)
-[[RFC4627](http://tools.ietf.org/html/rfc4627)].
 
 Although the same media type is used for both request and response documents,
 certain aspects are only applicable to one or the other. These differences are
