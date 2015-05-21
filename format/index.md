@@ -727,9 +727,13 @@ fetch a single resource that does not exist, except when the request warrants a
 
 ##### Other Responses <a href="#fetching-resources-responses-other" id="fetching-resources-responses-other" class="headerlink"></a>
 
-Servers **MAY** use other HTTP error codes to represent errors. Clients
-**MUST** interpret those errors in accordance with HTTP semantics. Error
-details **MAY** also be returned, as discussed below.
+A server **MAY** respond with other HTTP status codes.
+
+A server **MAY** include [error details] with error responses.
+
+A server **MUST** prepare responses, and a client **MUST** interpret
+responses, in accordance with
+[`HTTP semantics`](http://tools.ietf.org/html/rfc7231).
 
 ### Fetching Relationships <a href="#fetching-relationships" id="fetching-relationships" class="headerlink"></a>
 
@@ -843,9 +847,13 @@ If a relationship URL exists but the relationship is empty, then
 
 ##### Other Responses <a href="#fetching-relationships-responses-other" id="fetching-relationships-responses-other" class="headerlink"></a>
 
-Servers **MAY** use other HTTP error codes to represent errors. Clients
-**MUST** interpret those errors in accordance with HTTP semantics. Error
-details **MAY** also be returned, as discussed below.
+A server **MAY** respond with other HTTP status codes.
+
+A server **MAY** include [error details] with error responses.
+
+A server **MUST** prepare responses, and a client **MUST** interpret
+responses, in accordance with
+[`HTTP semantics`](http://tools.ietf.org/html/rfc7231).
 
 ### Inclusion of Related Resources <a href="#fetching-includes" id="fetching-includes" class="headerlink"></a>
 
@@ -1136,15 +1144,12 @@ to create a resource with a client-generated ID.
 
 ##### 201 Created <a href="#crud-creating-responses-201" id="crud-creating-responses-201" class="headerlink"></a>
 
-A server **MUST** respond to a successful resource creation request according to
-[`HTTP semantics`](http://tools.ietf.org/html/rfc7231#section-6.3).
+If a `POST` request did not include a [Client-Generated
+ID](#crud-creating-client-ids) and the requested resource has been created
+successfully, the server **MUST** return a `201 Created` status code.
 
 The response **SHOULD** include a `Location` header identifying the location
 of the newly created resource.
-
-If a `POST` request did not include a [Client-Generated
-ID](#crud-creating-client-ids), and a resource has been created, the server
-**MUST** return a `201 Created` status code.
 
 The response **MUST** also include a document that contains the primary
 resource created.
@@ -1173,12 +1178,19 @@ Content-Type: application/vnd.api+json
 }
 ```
 
+##### 202 Accepted <a href="#crud-creating-responses-202" id="crud-creating-responses-202" class="headerlink"></a>
+
+If a request to create a resource has been accepted for processing, but the
+processing has not been completed by the time the server responds, the
+server **MUST** return a `202 Accepted` status code.
+
 ##### 204 No Content <a href="#crud-creating-responses-204" id="crud-creating-responses-204" class="headerlink"></a>
 
 If a `POST` request *did* include a [Client-Generated
-ID](#crud-creating-client-ids), the server **MUST** return either a `201
-Created` status code and response document (as described above) or a `204 No
-Content` status code with no response document.
+ID](#crud-creating-client-ids) and the requested resource has been created
+successfully, the server **MUST** return either a `201 Created` status code
+and response document (as described above) or a `204 No Content` status code
+with no response document.
 
 > Note: If a `204` response is received the client should consider the resource
 object sent in the request to be accepted by the server, as if the server
@@ -1203,9 +1215,13 @@ recognize the source of the conflict.
 
 ##### Other Responses <a href="#crud-creating-responses-other" id="crud-creating-responses-other" class="headerlink"></a>
 
-Servers **MAY** use other HTTP error codes to represent errors. Clients
-**MUST** interpret those errors in accordance with HTTP semantics. Error
-details **MAY** also be returned, as discussed below.
+A server **MAY** respond with other HTTP status codes.
+
+A server **MAY** include [error details] with error responses.
+
+A server **MUST** prepare responses, and a client **MUST** interpret
+responses, in accordance with
+[`HTTP semantics`](http://tools.ietf.org/html/rfc7231).
 
 ### Updating Resources <a href="#crud-updating" id="crud-updating" class="headerlink"></a>
 
@@ -1335,10 +1351,11 @@ does not want to allow deletion of records the client has not seen.
 
 #### Responses <a href="#crud-updating-responses" id="crud-updating-responses" class="headerlink"></a>
 
-##### 204 No Content <a href="#crud-updating-responses-204" id="crud-updating-responses-204" class="headerlink"></a>
+##### 202 Accepted <a href="#crud-updating-responses-202" id="crud-updating-responses-202" class="headerlink"></a>
 
-A server **MUST** return a `204 No Content` status code if an update is
-successful and the client's current attributes remain up to date.
+If an update request has been accepted for processing, but the processing
+has not been completed by the time the server responds, the server **MUST**
+return a `202 Accepted` status code.
 
 ##### 200 OK <a href="#crud-updating-responses-200" id="crud-updating-responses-200" class="headerlink"></a>
 
@@ -1348,6 +1365,13 @@ attribute or a computed `sha`), it **MUST** return a `200 OK` response.
 
 The response document for a `200 OK` **MUST** include a representation of
 the updated resource(s) as if a `GET` request was made to the request URL.
+
+##### 204 No Content <a href="#crud-updating-responses-204" id="crud-updating-responses-204" class="headerlink"></a>
+
+If an update is successful and the server doesn't update any attributes besides
+those provided, the server **MUST** return either a `200 OK` status code and
+response document (as described above) or a `204 No Content` status code with no
+response document.
 
 ##### 403 Forbidden <a href="#crud-updating-relationship-responses-403" id="crud-updating-relationship-responses-403" class="headerlink"></a>
 
@@ -1376,9 +1400,13 @@ recognize the source of the conflict.
 
 ##### Other Responses <a href="#crud-updating-responses-other" id="crud-updating-responses-other" class="headerlink"></a>
 
-Servers **MAY** use other HTTP error codes to represent errors. Clients
-**MUST** interpret those errors in accordance with HTTP semantics. Error
-details **MAY** also be returned, as discussed below.
+A server **MAY** respond with other HTTP status codes.
+
+A server **MAY** include [error details] with error responses.
+
+A server **MUST** prepare responses, and a client **MUST** interpret
+responses, in accordance with
+[`HTTP semantics`](http://tools.ietf.org/html/rfc7231).
 
 ### Updating Relationships <a href="#crud-updating-relationships" id="crud-updating-relationships" class="headerlink"></a>
 
@@ -1546,6 +1574,12 @@ server, and we are defining its semantics for JSON API.
 
 #### Responses <a href="#crud-updating-relationship-responses" id="crud-updating-relationship-responses" class="headerlink"></a>
 
+##### 202 Accepted <a href="#crud-updating-relationship-responses-202" id="crud-updating-relationship-responses-202" class="headerlink"></a>
+
+If a relationship update request has been accepted for processing, but the
+processing has not been completed by the time the server responds, the
+server **MUST** return a `202 Accepted` status code.
+
 ##### 204 No Content <a href="#crud-updating-relationship-responses-204" id="crud-updating-relationship-responses-204" class="headerlink"></a>
 
 A server **MUST** return a `204 No Content` status code if an update is
@@ -1563,9 +1597,13 @@ to update a relationship.
 
 ##### Other Responses <a href="#crud-updating-relationship-responses-other" id="crud-updating-relationship-responses-other" class="headerlink"></a>
 
-Servers **MAY** use other HTTP error codes to represent errors. Clients
-**MUST** interpret those errors in accordance with HTTP semantics. Error
-details **MAY** also be returned, as discussed below.
+A server **MAY** respond with other HTTP status codes.
+
+A server **MAY** include [error details] with error responses.
+
+A server **MUST** prepare responses, and a client **MUST** interpret
+responses, in accordance with
+[`HTTP semantics`](http://tools.ietf.org/html/rfc7231).
 
 ### Deleting Resources <a href="#crud-deleting" id="crud-deleting" class="headerlink"></a>
 
@@ -1578,16 +1616,26 @@ DELETE /photos/1
 
 #### Responses <a href="#crud-deleting-responses" id="crud-deleting-responses" class="headerlink"></a>
 
+##### 202 Accepted <a href="#crud-deleting-responses-202" id="crud-deleting-responses-202" class="headerlink"></a>
+
+If a deletion request has been accepted for processing, but the processing has
+not been completed by the time the server responds, the server **MUST**
+return a `202 Accepted` status code.
+
 ##### 204 No Content <a href="#crud-deleting-responses-204" id="crud-deleting-responses-204" class="headerlink"></a>
 
-A server **MUST** return a `204 No Content` status code if a delete request is
-successful.
+A server **MUST** return a `204 No Content` status code if a deletion
+request is successful.
 
 ##### Other Responses <a href="#crud-deleting-responses-other" id="crud-deleting-responses-other" class="headerlink"></a>
 
-Servers **MAY** use other HTTP error codes to represent errors. Clients
-**MUST** interpret those errors in accordance with HTTP semantics. Error
-details **MAY** also be returned, as discussed below.
+A server **MAY** respond with other HTTP status codes.
+
+A server **MAY** include [error details] with error responses.
+
+A server **MUST** prepare responses, and a client **MUST** interpret
+responses, in accordance with
+[`HTTP semantics`](http://tools.ietf.org/html/rfc7231).
 
 ## Errors <a href="#errors" id="errors" class="headerlink"></a>
 
@@ -1626,3 +1674,4 @@ An error object **MAY** have the following members:
 [resource identifier object]: #document-structure-resource-identifier-objects
 [resource identifier objects]: #document-structure-resource-identifier-objects
 [fields]: #document-structure-resource-object-fields
+[error details]: #errors
