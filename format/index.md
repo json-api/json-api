@@ -109,10 +109,13 @@ evolve through additive changes.
 A JSON object **MUST** be at the root of every JSON API response containing
 data. This object defines a document's "top level".
 
-A document **MUST** contain one of the following top-level members:
+A document **MUST** contain at least one of the following top-level members:
 
 * `"data"`, containing the document's "primary data"
 * `"errors"`, containing an array of [error objects](#errors)
+* `"meta"`, non-standard meta-information.
+
+The members `"data"` and `"errors"` **MUST NOT** coexist in the same document.
 
 The document's "primary data" is a representation of the resource or collection
 of resources targeted by a request.
@@ -159,7 +162,6 @@ empty.
 
 A document's top level **MAY** also have the following members:
 
-* `"meta"`: non-standard meta-information about the primary data.
 * `"links"`: URLs related to the primary data.
 * `"included"`: an array of resource objects that are related to the primary
   data and/or each other ("included resources").
@@ -1359,12 +1361,16 @@ return a `202 Accepted` status code.
 
 ##### 200 OK <a href="#crud-updating-responses-200" id="crud-updating-responses-200" class="headerlink"></a>
 
-If a server accepts an update but also changes the resource(s) in other ways
+If a server accepts an update but also changes the resource(s) in ways other
 than those specified by the request (for example, updating the `updated-at`
-attribute or a computed `sha`), it **MUST** return a `200 OK` response.
+attribute or a computed `sha`), it **MUST** return a `200 OK` response. The
+response document **MUST** include a representation of the updated
+resource(s) as if a `GET` request was made to the request URL.
 
-The response document for a `200 OK` **MUST** include a representation of
-the updated resource(s) as if a `GET` request was made to the request URL.
+A server **MUST** return a `200 OK` status code if an update is successful,
+the client's current attributes remain up to date, and the server responds
+only with top-level `"meta"` data. In this case the server **MUST NOT**
+include a representation of the updated resource(s).
 
 ##### 204 No Content <a href="#crud-updating-responses-204" id="crud-updating-responses-204" class="headerlink"></a>
 
@@ -1466,7 +1472,7 @@ Accept: application/vnd.api+json
 ```
 
 If the relationship is updated successfully then the server **MUST** return
-a `204 No Content` response.
+a successful response.
 
 #### Updating To-Many Relationships <a href="#crud-updating-to-many-relationships" id="crud-updating-to-many-relationships" class="headerlink"></a>
 
@@ -1519,8 +1525,7 @@ has-many relationships. Document-based storage should check the has-many
 relationship before appending to avoid duplicates.
 
 If all of the specified resources can be added to, or are already present
-in, the relationship then the server **MUST** return a successful `204 No
-Content` response.
+in, the relationship then the server **MUST** return a successful response.
 
 > Note: This approach ensures that a request is successful if the server's
 state matches the requested state, and helps avoid pointless race conditions
@@ -1545,7 +1550,7 @@ If the client makes a `DELETE` request to a *relationship URL*, the server
 **MUST** delete the specified members from the relationship or return a `403
 Forbidden` response. If all of the specified resources are able to be
 removed from, or are already missing from, the relationship then the server
-**MUST** return a successful `204 No Content` response.
+**MUST** return a successful response.
 
 > Note: As described above for `POST` requests, this approach helps avoid
 pointless race conditions between multiple clients making the same changes.
@@ -1590,6 +1595,18 @@ successful and the client's current attributes remain up to date.
 the appropriate response to a `DELETE` request sent to a *to-many
 relationship URL* when that relationship does not exist.
 
+##### 200 OK <a href="#crud-updating-relationship-responses-200" id="crud-updating-relationship-responses-200" class="headerlink"></a>
+
+If a server accepts an update but also changes the targeted relationship(s)
+in other ways than those specified by the request, it **MUST** return a `200
+OK` response. The response document **MUST** include a representation of the
+updated relationship(s).
+
+A server **MUST** return a `200 OK` status code if an update is successful,
+the client's current data remain up to date, and the server responds
+only with top-level `"meta"` data. In this case the server **MUST NOT**
+include a representation of the updated relationship(s).
+
 ##### 403 Forbidden <a href="#crud-updating-relationship-responses-403" id="crud-updating-relationship-responses-403" class="headerlink"></a>
 
 A server **MUST** return `403 Forbidden` in response to an unsupported request
@@ -1625,7 +1642,12 @@ return a `202 Accepted` status code.
 ##### 204 No Content <a href="#crud-deleting-responses-204" id="crud-deleting-responses-204" class="headerlink"></a>
 
 A server **MUST** return a `204 No Content` status code if a deletion
-request is successful.
+request is successful and no content is returned.
+
+##### 200 OK <a href="#crud-deleting-responses-200" id="crud-deleting-responses-200" class="headerlink"></a>
+
+A server **MUST** return a `200 OK` status code if a deletion request is
+successful and the server responds with only top-level `"meta"` data.
 
 ##### Other Responses <a href="#crud-deleting-responses-other" id="crud-deleting-responses-other" class="headerlink"></a>
 
