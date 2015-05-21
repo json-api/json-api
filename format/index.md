@@ -911,6 +911,21 @@ Multiple related resources can be requested in a comma-separated list:
 GET /articles/1?include=author,comments.author
 ```
 
+Furthermore, related resources can be requested from a relationship endpoint:
+
+```http
+GET /articles/1/relationships/comments?include=comments.author
+```
+
+In this case, the primary data would be a collection of [resource identifier
+objects] that represent linkage to comments for an article, while the full
+comments and comment authors would be returned as included data.
+
+> Note: This section applies to any endpoint that responds with primary
+data, regardless of the request type. For instance, a server could support
+the inclusion of related resources along with a `POST` request to create a
+resource or relationship.
+
 ### Sparse Fieldsets <a href="#fetching-sparse-fieldsets" id="fetching-sparse-fieldsets" class="headerlink"></a>
 
 A client **MAY** request that an endpoint return only specific [fields] in the
@@ -925,6 +940,11 @@ include additional [fields] in the response.
 ```http
 GET /articles?include=author&fields[articles]=title,body&fields[people]=name
 ```
+
+> Note: This section applies to any endpoint that responds with resources as
+primary or included data, regardless of the request type. For instance, a
+server could support sparse fieldsets along with a `POST` request to create
+a resource.
 
 ### Sorting <a href="#fetching-sorting" id="fetching-sorting" class="headerlink"></a>
 
@@ -975,6 +995,9 @@ parameter `sort`, the server **MUST** return elements of the top-level
 The server **MAY** apply default sorting rules to top-level `data` if
 request parameter `sort` is not specified.
 
+> Note: This section applies to any endpoint that responds with a resource
+collection as primary data, regardless of the request type.
+
 ### Pagination <a href="#fetching-pagination" id="fetching-pagination" class="headerlink"></a>
 
 A server **MAY** choose to limit the number of resources returned in a response
@@ -1012,6 +1035,9 @@ be used as a basis for any of these strategies. For example, a page-based
 strategy might use query parameters such as `page[number]` and `page[size]`,
 an offset-based strategy might use `page[offset]` and `page[limit]`, while a
 cursor-based strategy might use `page[cursor]`.
+
+> Note: This section applies to any endpoint that responds with a resource
+collection as primary data, regardless of the request type.
 
 ### Filtering <a href="#fetching-filtering" id="fetching-filtering" class="headerlink"></a>
 
