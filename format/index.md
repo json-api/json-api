@@ -161,8 +161,8 @@ A document's top level **MAY** also have the following members:
 
 * `"meta"`: non-standard meta-information about the primary data.
 * `"links"`: URLs related to the primary data.
-* `"included"`: a list of resource objects that are related to the primary data
-  and/or each other ("included resources").
+* `"included"`: an array of resource objects that are related to the primary
+  data and/or each other ("included resources").
 
 If any of these members appears in the top-level of a response, their values
 **MUST** comply with this specification.
