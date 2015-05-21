@@ -26,6 +26,25 @@ The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD",
 interpreted as described in RFC 2119
 [[RFC2119](http://tools.ietf.org/html/rfc2119)].
 
+## Media Type Negotiation <a href="#media-type-negotiation" id="media-type-negotiation" class="headerlink"></a>
+
+Clients **MUST** send all JSON API data in request documents with
+the header `Content-Type: application/vnd.api+json`.
+
+Clients **MUST** ignore all parameters for the `application/vnd.api+json`
+media type received in the `Content-Type` header of response documents.
+
+Servers **MUST** send all JSON API data in response documents with
+the header `Content-Type: application/vnd.api+json`.
+
+Servers **MUST** return a `406 Not Acceptable` status code if the
+`application/vnd.api+json` media type is modified by the `ext` parameter in
+the `Accept` header of a request. Otherwise, servers **MUST** return a `415
+Unsupported Media Type` status code if the `application/vnd.api+json` media
+type is modified by the `ext` parameter in the `Content-Type` header of a
+request. Servers **MUST** ignore all other parameters for the
+`application/vnd.api+json` in `Accept` and `Content-Type` headers.
+
 ## Document Structure <a href="#document-structure" id="document-structure" class="headerlink"></a>
 
 This section describes the structure of a JSON API document, which is identified
