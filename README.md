@@ -3,7 +3,7 @@ JSON API
 
 Documentation for the [application/vnd.api+json media
 type](http://www.iana.org/assignments/media-types/application/vnd.api+json),
-a standard for APIs that use JSON. This repository is the
+a specification for APIs that use JSON. This repository is the
 source code for [http://jsonapi.org](http://jsonapi.org).
 
 
