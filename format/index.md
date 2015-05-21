@@ -465,9 +465,9 @@ the document.
 returned with each response, even when the same resource is referenced
 multiple times.
 
-### Meta information <a href="#document-structure-meta" id="document-structure-meta" class="headerlink"></a>
+### Meta Information <a href="#document-structure-meta" id="document-structure-meta" class="headerlink"></a>
 
-As discussed above, the document **MAY** be extended to include
+As discussed above, a JSON API document **MAY** be extended to include
 meta-information as `"meta"` members in several locations: at the top-level,
 within resource objects, within relationship objects, and within [resource
 identifier objects].
@@ -497,7 +497,7 @@ Any members **MAY** be specified within `meta` objects.
 
 ### Links <a href="#document-structure-links" id="document-structure-links" class="headerlink"></a>
 
-As discussed above, the document **MAY** be extended to include relevant URLs
+As discussed above, a document **MAY** be extended to include relevant URLs
 within `"links"` members at several locations: at the top-level, within resource
 objects, and within relationship objects.
 
@@ -513,36 +513,46 @@ the following members:
   data represents a resource relationship.
 * Pagination links for the primary data (as described below).
 
-### Member names <a href="#document-structure-member-names" id="document-structure-member-names" class="headerlink"></a>
+### Member Names <a href="#document-structure-member-names" id="document-structure-member-names" class="headerlink"></a>
 
-All member names used in the document **MUST** be handled case sensitive by clients and servers, and they **MUST** meet all of the following conditions:
+All member names used in a JSON API document **MUST** be treated as case sensitive
+by clients and servers, and they **MUST** meet all of the following conditions:
+
 - Member names **MUST** contain at least one character.
-- Member names **MUST** contain only allowed characters as listed below.
-- Member names **MUST** start and end with an overall allowed character as listed below.
+- Member names **MUST** contain only the allowed characters listed below.
+- Member names **MUST** start and end with a "globally allowed character",
+  as defined below.
 
-To enable an easy mapping of member names to URLs, it's **RECOMMENDED** to limit the allowed characters to non-reserved, URL safe characters, following [RFC 3986](http://tools.ietf.org/html/rfc3986#page-13).
+To enable an easy mapping of member names to URLs, it is **RECOMMENDED** that
+member names use only non-reserved, URL safe characters specified in [RFC 3986](http://tools.ietf.org/html/rfc3986#page-13).
 
-#### Overall allowed characters <a href="#document-structure-member-names-overall-allowed-characters" id="document-structure-member-names-overall-allowed-characters" class="headerlink"></a>
+#### Allowed Characters <a href="#document-structure-member-names-allowed-characters" id="document-structure-member-names-allowed-characters" class="headerlink"></a>
+
+The following "globally allowed characters" **MAY** be used anywhere in a member name:
+
 - U+0061 to U+007A, "a-z"
 - U+0041 to U+005A, "A-Z"
 - U+0030 to U+0039, "0-9"
 - any UNICODE character except U+0000 to U+007F _(not recommended, not URL safe)_
 
-#### Other allowed characters (but not at start/end of the member name) <a href="#document-structure-member-names-other-allowed-characters" id="document-structure-member-names-other-allowed-characters" class="headerlink"></a>
+Additionally, the following characters are allowed in member names, except as the
+first or last character:
+
 - U+002D HYPHEN-MINUS, "-"
 - U+005F LOW LINE, "_"
 - U+0020 SPACE, " " _(not recommended, not URL safe)_
 - U+005E CIRCUMFLEX ACCENT, "^" _(not recommended, not URL safe)_
 - U+0060 GRAVE ACCENT, "`" _(not recommended, not URL safe)_
 
-#### Reserved characters (currently in use) <a href="#document-structure-member-names-reserved-ascii-characters-in-use" id="document-structure-member-names-reserved-ascii-characters-in-use" class="headerlink"></a>
+#### Reserved Characters <a href="#document-structure-member-names-reserved-characters" id="document-structure-member-names-reserved-characters" class="headerlink"></a>
+
+The following characters **MUST NOT** be used in member names:
+
 - U+002B PLUS SIGN, "+" _(used for ordering)_
 - U+002C COMMA, "," _(used separator for multiple relationship paths)_
 - U+002E PERIOD, "." _(used as relationship path separators)_
 - U+005B LEFT SQUARE BRACKET, "[" _(use in sparse fieldsets)_
 - U+005D RIGHT SQUARE BRACKET, "]" _(used in sparse fieldsets)_
-
-#### Reserved characters (punctation, currency and math symbols) for later use <a href="#document-structure-member-names-reserved-ascii-characters-later-use" id="document-structure-member-names-reserved-ascii-characters-later-use" class="headerlink"></a>
 - U+0021 EXCLAMATION MARK, "!"
 - U+0022 QUOTATION MARK, '"'
 - U+0023 NUMBER SIGN, "#"
