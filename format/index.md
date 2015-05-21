@@ -464,9 +464,13 @@ multiple times.
 ### Meta Information <a href="#document-structure-meta" id="document-structure-meta" class="headerlink"></a>
 
 As discussed above, a JSON API document **MAY** be extended to include
-meta-information as `"meta"` members in several locations: at the top-level,
-within resource objects, within relationship objects, and within [resource
-identifier objects].
+meta-information as `"meta"` members in several locations:
+
+* at the top-level
+* within resource objects
+* within relationship objects
+* within [resource identifier objects]
+* within [error objects](#errors)
 
 All `"meta"` members **MUST** have an object as a value, the contents of which
 can be used for custom extensions.
