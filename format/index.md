@@ -453,6 +453,8 @@ the following members:
 * `"self"` - the URL that generated the current response document.
 * `"related"` - a related resource URL (as defined above) when the primary
   data represents a resource relationship.
+* `"profile"` - the name of one or more [profile extensions](#extending-extension-types-profile-extensions) being used
+  in the document.
 * Pagination links for the primary data (as described below).
 
 ### Member Names <a href="#document-structure-member-names" id="document-structure-member-names" class="headerlink"></a>
@@ -460,9 +462,10 @@ the following members:
 All member names used in a JSON API document **MUST** be treated as case
 sensitive by clients and servers.
 
-Member names added to a document by an [extension](#extending) **MUST** be
+Member names added to a document by a [profile extension](#extending-extension-types-profile-extensions) **MUST** be
 prefixed with either an underscore (U+005F LOW LINE, "_") or an "at sign"
-(U+0040 COMMERCIAL AT, "@").
+(U+0040 COMMERCIAL AT, "@") if they sit at the same level as any members defined
+by this specification.
 
 Additionally:
 
@@ -527,7 +530,7 @@ The following characters **MUST NOT** be used in member names:
 - U+007D RIGHT CURLY BRACKET, "}"
 - U+007E TILDE, "~"
 
-### Query Parameter Names
+### Query Parameter Names <a href="#document-structure-query-parameter-names" id="document-structure-query-parameter-names" class="headerlink"></a>
 
 If a URI in a `links` object contains any query parameters other than those
 defined or reserved for users by this specification, the names of these
@@ -543,9 +546,7 @@ Data, including resources and relationships, can be fetched by sending a
 
 Clients **MUST** indicate that they can accept the JSON API media type, per
 the semantics of the HTTP `Accept` header. If present, this header value **MUST**
-also include any media type extensions relevant to the request. Servers **MUST**
-return a `406 Not Acceptable` status code if this header specifies an
-unsupported media type.
+also include any media type extensions relevant to the request.
 
 > Note: Servers may support multiple media types at any endpoint. For example,
 a server may choose to support `text/html` in order to simplify viewing content
@@ -988,7 +989,8 @@ also allow existing resources to be modified or deleted.
 
 Any requests that contain content **MUST** include a `Content-Type` header
 whose value is `application/vnd.api+json`. This header value **MUST** also
-include media type extensions relevant to the request.
+[include media type extensions](#extending-negotiating-extensions-sending)
+relevant to the request.
 
 A request **MUST** completely succeed or fail (in a single "transaction"). No
 partial updates are allowed.
@@ -1421,7 +1423,7 @@ Accept: application/vnd.api+json
 ```
 
 If a client makes a `POST` request to a *relationship URL*, the server
-**MUST** append the specified members to the relationship using set
+**MUST** add the specified members to the relationship using set
 semantics. This means that if a given `type` and `id` is already in the
 relationship, the server **MUST NOT** add it again.
 
@@ -1534,58 +1536,225 @@ details **MAY** also be returned, as discussed below.
 The base JSON API specification **MAY** be extended to support additional
 capabilities.
 
-An extension **MAY** make changes to and deviate from the requirements of the
-base specification apart from this section, which remains binding.
+### Extension Types <a href="#extending-extension-types" id="extending-extension-types" class="headerlink"></a>
 
-Servers that support one or more extensions to JSON API **MUST** return
-those extensions in every response in the `supported-ext` media type
-parameter of the `Content-Type` header. The value of the `supported-ext`
-parameter **MUST** be a comma-separated (U+002C COMMA, ",") list of
-extension names.
+JSON API allows two types of extensions, each with their own constraints and
+negotiation rules.
 
-For example: a response that includes the header `Content-Type:
-application/vnd.api+json; supported-ext="bulk,jsonpatch"` indicates that the
-server supports both the "bulk" and "jsonpatch" extensions.
+#### Profile Extensions <a href="#extending-extension-types-profile-extensions" id="extending-extension-types-profile-extensions" class="headerlink"></a>
 
-If an extension is used to form a particular request or response document,
-then it **MUST** be specified by including its name in the `ext` media type
-parameter with the `Content-Type` header. The value of the `ext` media type
-parameter **MUST** be formatted as a comma-separated (U+002C COMMA, ",")
-list of extension names and **MUST** be limited to a subset of the
-extensions supported by the server, which are listed in `supported-ext`
-of every response.
+An extension **MAY** allow (or require) users to add new members to a JSON API
+document. An extension that does this, and that defines the semantics or behavior
+associated with those new members, is called a "profile extension".
 
-For example: a response that includes the header `Content-Type:
-application/vnd.api+json; ext="ext1,ext2"; supported-ext="ext1,ext2,ext3"`
-indicates that the response document is formatted according to the
-extensions "ext1" and "ext2". Another example: a request that includes
-the header `Content-Type: application/vnd.api+json; ext="ext1,ext2"`
-indicates that the request document is formatted according to the
-extensions "ext1" and "ext2".
+Beyond adding new members to JSON objects, a profile extension **MUST NOT** alter
+the JSON structure for any concept defined in this specification, including to
+allow a superset of JSON structures.
 
-Clients **MAY** request a particular media type extension by including its
-name in the `ext` media type parameter with the `Accept` header. Servers
-that do not support a requested extension or combination of extensions
-**MUST** return a `406 Not Acceptable` status code.
+The semantics that a profile extension defines for the new document members it
+allows **MUST NOT** vary based on the presence or absence of other profile extensions.
 
-If the media type in the `Accept` header is supported by a server but the
-media type in the `Content-Type` header is unsupported, the server
-**MUST** return a `415 Unsupported Media Type` status code.
+Additionally, a profile extension **MUST NOT** alter the semantics associated
+with any concept defined in the base spec, including to add additional meaning.
 
-Servers **MUST NOT** provide extended functionality that is incompatible
-with the base specification to clients that do not request the extension in
-the `ext` parameter of the `Content-Type` or the `Accept` header.
+> Note: Prohibiting profile extensions from imposing additional meanings on base
+spec constructs prevents profile extensions from conflicting with one another and
+ensures forward compatibility with meanings the base spec might add in the future.
 
-> Note: Since extensions can contradict one another or have interactions
-that can be resolved in many equally plausible ways, it is the
-responsibility of the server to decide which extensions are compatible, and
-it is the responsibility of the designer of each implementation of this
-specification to describe extension interoperability rules which are
-applicable to that implementation.
+The members that a profile extension defines **MAY** be added anywhere in the
+document. However, they **MUST** follow the [member naming rules](#document-structure-member-names)
+about prefixing.
 
-When the value of the `ext` or `supported-ext` media type parameter contains
-more than one extension name, the value **MUST** be surrounded with quotation
-marks (U+0022 QUOTATION MARK, """), in accordance with the HTTP specification.
+Profile extensions that add multiple members **SHOULD** group those members in
+an object literal when possible, to reduce the risk of name collisions with other
+profile extensions.
+
+To simplify extension negotiation, servers **MUST NOT** offer support for profile
+extensions which add conflicting member names, even if only one such extension
+is requested at a time.
+
+#### Comprehensive Extensions <a href="#extending-extension-types-comprehensive-extensions" id="extending-extension-types-comprehensive-extensions" class="headerlink"></a>
+
+An extension **MAY** define semantics for requests that are invalid or
+undefined under the base specification. An extension that does this is called a
+"comprehensive extension".
+
+For the purposes of this section, an invalid request is one that triggers a 4xx
+or 5xx status code in response. Conversly, a valid request is one that triggers
+a 2xx or 3xx status code.
+
+When a comprehensive extension is in use, it **MUST** treat any requests that
+are valid under the base specification's rules exactly as though they were made
+without the extension in use. That is, comprehensive extensions only affect
+requests that would otherwise be invalid.
+
+On the requests for which it applies, a comprehensive extension **MAY** deviate
+from the base specification however it wishes, apart from the definitions and
+requirements of the [Extending](#extending) section, which remain binding.
+
+#### Other Extensions <a href="#extending-extension-types-other-extensions" id="extending-extension-types-other-extensions" class="headerlink"></a>
+
+Any extension that can not be classified as a profile extension or a
+comprehensive extension, per the above definitions, is not allowed.
+
+### Naming Extensions <a href="#extending-naming-extensions" id="extending-naming-extensions" class="headerlink"></a>
+
+A profile extension is named with a [URI](https://www.ietf.org/rfc/rfc3986.txt).
+This URI **SHOULD** be dereferencable to a document that contains useful
+documentation about the profile extension.
+
+A comprehensive extension is named with a string. Except for official extensions,
+the name of a comprehensive extension **MUST** contain a slash (U+002F SOLIDUS, "/").
+Additionally, the name of a comprehensive extension **MUST NOT** contain a space
+(U+0020 SPACE, " ") or any character that is not allowed in a media type parameter.
+
+It is **RECOMMENDED** that comprehensive extensions that are not designed to be
+shared be named in the format "organization-name/extension-name" and that
+extensions that are designed to be shared be named with URIs.
+
+### Advertising Extensions <a href="#extending-advertising-extensions" id="extending-advertising-extensions" class="headerlink"></a>
+
+A server **MAY** advertise the extensions it supports to make it easier for
+clients to request extended responses.
+
+Servers that choose to advertise their extensions **MUST** do so by responding
+to an `OPTIONS` request made to any URI that represents a JSON API resource or
+collection, or that is provided in a `links` object (as defined in the base spec).
+
+The server's response **MUST** contain a body with a JSON object at the top-level.
+This object **MUST** contain a `"data"` member, the value of which be must be an
+array of JSON objects.
+
+Each object in the array **MUST** have a `"type"` member and an `"id"` member.
+
+The value of the `"type"` member **MUST** be either `"comprehensive"`, for
+comprehensive extensions, or `"profile"` for profile extensions. The value of
+the `"id"` member **MUST** be the extension's name.
+
+The server's response **MUST** have a `Content-Type` header whose value is
+`application/vnd.api+json`.
+
+For example, a client interested in the extensions supported at the `/articles`
+endpoint would request `OPTIONS /articles`, and the response might be as follows:
+
+```http
+HTTP/1.1 200 OK
+Content-Type: application/vnd.api+json
+
+{
+  "data": [{
+    "type": "comprehensive",
+    "id": "bulk"
+  }, {
+    "type": "comprehensive",
+    "id": "acme-corp/magic-ext"
+  }, {
+    "type": "profile",
+    "id": "http://example.com/json-api-profile"
+  }]
+}
+```
+
+### Negotiating Extensions <a href="#extending-negotiating-extensions" id="extending-negotiating-extensions" class="headerlink"></a>
+
+The JSON API media type defines two parameters, `ext` and `profile`. These
+parameters allow clients and servers to indicate the use of comprehensive
+extensions and profile extensions, respectively, on an HTTP request. They also
+allow clients to ask for particular extensions.
+
+The value of each of these parameters, if present, is a space-separated
+(U+0020 SPACE, " ") list of extension names.
+
+#### Fetching Data
+
+##### The Client
+
+When fetching data using a `GET` request, the client **MAY** ask for the
+response to be formatted using a combination of comprehensive extensions by
+listing those extensions as the value of the `ext` parameter and including the
+parameterized media type in its `Accept` header.
+
+For example, to request that the response to `GET /` be formatted according to a
+comprehensive extension called `"acme/entry-point"`, the client would send a
+request like:
+
+```http
+GET /
+Accept: application/vnd.api+json; ext="acme/entry-point"
+```
+
+> Note: this example request is for an API's entrypoint (i.e. the `/` URI)
+because a comprehensive extension cannot, for example, change the response of a
+request to fetch a JSON API resource, since that is a valid request under the
+base specification.
+
+And, to request that the response be simultaneously be formatted according to
+the `acme/entry-point` extension _and_ the `acme/ext2` extension, the
+client would request:
+
+```http
+GET /
+Accept: application/vnd.api+json; ext="acme/entry-point acme/ext2"
+```
+
+A client **MAY** also signal that it can accept more than one combination of
+comprehensive extensions, by adding additional entries to its `Accept` header.
+
+For example, if a client wants to communicate that it understands both the
+`http://example.com/ext/entry-point` format and the `http://jsonapi.org/ext/entry-point`
+format, it would make a request like so:
+
+```http
+GET /
+Accept: application/vnd.api+json; ext="http://example.com/ext/entry-point",
+          application/vnd.api+json; ext="http://jsonapi.org/ext/entry-point"
+```
+
+Whenever the client provides the JSON API media type in the `Accept` header, it
+**MAY** also include a `profile` parameter to request a set of profiles. This
+applies even when the `ext` parameter is not present.
+
+##### The Server
+
+When the server recieves a `GET` request with an `Accept` header, it **MUST**
+first select the comprehensive extensions to use in its response.
+
+To do this, it checks the entries of the `Accept` header, in the order defined
+by the HTTP specification. The first combination of comprehensive extensions
+that it finds that it supports, as specified by the `ext` parameter (or the lack
+of such a parameter, if the base specification is requested) constitute the
+"selected comprehensive extensions".
+
+If the server doesn't support any of the requested combinations of comprehensive
+extensions, it **MUST** return a `406 Not Acceptable` status code.
+
+Otherwise, having selected the comprehensive extensions to use for the request,
+it **MUST** then look for a `profile` parameter on the entry in the `Accept`
+header from which it picked the selected comprehensive extensions.
+
+If such a `profile` parameter exists, the server **MUST** apply to its response
+as many of the specified profile extensions as it knows how to support in
+conjunction with the selected comprehensive extensions.
+
+> Note: Because most profile extensions will define the locations of the members
+that they add to the document with reference to the document described by the
+base specification, there is no gaurantee that a given profile will work
+with a given comprehensive extension (which can change the document structure
+arbitrarily). Authors of a comprehensive extension (or server implementors) who
+wish to make that extension compatible with profile extensions are responsible
+for explicitly defining how this interoperability works.
+
+Finally, in its response, the server **MUST** send the `Content-Type` header
+with the JSON API media type; the selected comprehensive extensions' names
+as the value of the `ext` parameter; and the selected profile extensions' name
+as the value of the `profile` parameter.
+
+Additionally, the server **MUST** indicate in the body of the response which
+profile extensions are in use by listing them in the [top-level `links` object]().
+
+#### Sending Data to the Server <a href="#extending-negotiating-extensions-sending" id="extending-negotiating-extensions-sending" class="headerlink"></a>
+
+THIS IS TO BE WRITTEN.
 
 ## Errors <a href="#errors" id="errors" class="headerlink"></a>
 
