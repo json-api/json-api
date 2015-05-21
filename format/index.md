@@ -1165,7 +1165,8 @@ A server **MUST** return `409 Conflict` when processing a `POST` request to
 create a resource with a client-generated ID that already exists.
 
 A server **MUST** return `409 Conflict` when processing a `POST` request in
-which the resource's `type` does not match the server's endpoint.
+which the resource's `type` is not among the type(s) that constitute the
+collection represented by the endpoint.
 
 A server **SHOULD** include error details and provide enough information to
 recognize the source of the conflict.
