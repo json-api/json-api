@@ -515,13 +515,20 @@ the following members:
 
 ### Member Names <a href="#document-structure-member-names" id="document-structure-member-names" class="headerlink"></a>
 
-All member names used in a JSON API document **MUST** be treated as case sensitive
-by clients and servers, and they **MUST** meet all of the following conditions:
+All member names used in a JSON API document **MUST** be treated as case
+sensitive by clients and servers.
 
-- Member names **MUST** contain at least one character.
+Member names added to a document by an [extension](#extending) **MUST** be
+prefixed with either an underscore (U+005F LOW LINE, "_") or an "at sign"
+(U+0040 COMMERCIAL AT, "@").
+
+Additionally:
+
+- Member names **MUST** contain at least one character in addition to their
+  prefix character (if any).
 - Member names **MUST** contain only the allowed characters listed below.
-- Member names **MUST** start and end with a "globally allowed character",
-  as defined below.
+- Excluding their prefix character (if any), member names **MUST** start and end
+  with a "globally allowed character", as defined below.
 
 To enable an easy mapping of member names to URLs, it is **RECOMMENDED** that
 member names use only non-reserved, URL safe characters specified in [RFC 3986](http://tools.ietf.org/html/rfc3986#page-13).
@@ -535,11 +542,13 @@ The following "globally allowed characters" **MAY** be used anywhere in a member
 - U+0030 to U+0039, "0-9"
 - any UNICODE character except U+0000 to U+007F _(not recommended, not URL safe)_
 
-Additionally, the following characters are allowed in member names, except as the
-first or last character:
+Additionally, the following characters **MAY** be used in member names, except as
+the last character and, excluding their possible use as a prefix character, as the
+first character:
 
 - U+002D HYPHEN-MINUS, "-"
 - U+005F LOW LINE, "_"
+- U+0040 COMMERCIAL AT, "@"
 - U+0020 SPACE, " " _(not recommended, not URL safe)_
 - U+005E CIRCUMFLEX ACCENT, "^" _(not recommended, not URL safe)_
 - U+0060 GRAVE ACCENT, "`" _(not recommended, not URL safe)_
@@ -570,12 +579,20 @@ The following characters **MUST NOT** be used in member names:
 - U+003D EQUALS SIGN, "="
 - U+003E GREATER-THAN SIGN, ">"
 - U+003F QUESTION MARK, "?"
-- U+0040 COMMERCIAL AT, "@"
 - U+005C REVERSE SOLIDUS, "\"
 - U+007B LEFT CURLY BRACKET, "{"
 - U+007C VERTICAL LINE, "|"
 - U+007D RIGHT CURLY BRACKET, "}"
 - U+007E TILDE, "~"
+
+### Query Parameter Names
+
+If a URI in a `links` object contains any query parameters other than those
+defined or reserved for users by this specification, the names of these
+additional query parameters **MUST** begin with an underscore (U+005F LOW LINE, "_")
+or an "at sign" (U+0040 COMMERCIAL AT, "@").
+
+This is the only restriction that JSON API imposes on URIs.
 
 ## Fetching Data <a href="#fetching" id="fetching" class="headerlink"></a>
 
