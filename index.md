@@ -115,6 +115,8 @@ Official extensions are being developed for [Bulk](/extensions/bulk/) and
 
 ## Update history <a href="#update-history" id="update-history" class="headerlink"></a>
 
+- _2015-05-28: 1.0 final to be released._
+- 2015-05-21: Release candidate 4 released.
 - 2015-03-16: Release candidate 3 released.
 - 2015-02-18: Release candidate 2 released.
 - 2014-07-05: Release candidate 1 released.

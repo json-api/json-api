@@ -3,10 +3,17 @@ layout: page
 title: "JSON API: Specification Status"
 ---
 
-JSON API is at a third release candidate state. This means that it is not yet
-stable, however, libraries intended to work with 1.0 should implement this
-version of the specification. We may make very small tweaks, but everything is
-basically in place.
+JSON API is at a fourth release candidate state.
+
+This is the final release candidate before the specification will be tagged
+1.0 on May 28, 2015.
+
+In the final week before 1.0, do not expect any changes to the specified
+document structure. This release candidate exists solely to provide time for
+the specification to be carefully reviewed for inconsistencies and defects.
+
+Libraries intended to work with 1.0 should implement this version of the
+specification as soon as possible.
 
 Work on this specification is being done at its [GitHub
 repository](https://github.com/json-api/json-api). Please feel free to help
