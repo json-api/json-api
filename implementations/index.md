@@ -20,6 +20,7 @@ pull request](https://github.com/json-api/json-api).
   for accessing JSON API servers. Orbit can be used
   independently or with Ember.js through the
   [ember-orbit](https://github.com/orbitjs/ember-orbit) integration library.
+* [YAYSON](https://github.com/confetti/yayson) is an isomorphic library for serializing and reading JSON API data. Extend it to fit your models or just use it with plain objects.
 
 ### iOS <a href="#client-ios" id="client-libraries-ios" class="headerlink"></a>
 
@@ -45,6 +46,7 @@ pull request](https://github.com/json-api/json-api).
 * [Fortune.js](http://fortunejs.com) is a framework built to implement json-api.
 * [json-api](https://www.npmjs.org/package/json-api) turns an Express + Mongoose app into a JSON-API server.
 * [endpoints](https://github.com/endpoints) is an implementation of JSON-API using [Bookshelf](http://bookshelfjs.org).
+* [YAYSON](https://github.com/confetti/yayson) is an isomorphic library for serializing and reading JSON API data. Simply use it with plain objects or extend it to fit your ORM (currently it has an adapter for [Sequalize](http://sequelizejs.com)).
 
 ### Ruby <a href="#server-ruby" id="server-libraries-ruby" class="headerlink"></a>
 
