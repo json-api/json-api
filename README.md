@@ -17,7 +17,7 @@ Resources
 Status
 ------
 
-This standard is currently under development. To assist:
+This specification is currently under development. To assist:
 
 1. Get the dependencies:
 
@@ -33,3 +33,13 @@ This standard is currently under development. To assist:
 
 The website is automatically built by [GitHub Pages](http://pages.github.com)
 when changes are pushed to the `gh-pages` branch.
+
+
+Deployment
+----------
+Ensure you have the latest [Ansible](http://docs.ansible.com/intro_installation.html#getting-ansible) installed on your machine (1.9+).
+  * `apt-get/yum/pip install ansible` (Linux)
+  * `brew install ansible` (OSX)
+
+Run the following:
+`cd deploy/ansible && ansible-playbook -i inventory/production deploy.yml`
