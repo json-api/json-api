@@ -20,6 +20,15 @@ users:
         key: ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDASWvJsFUg1ONxaV64PSaZg9dM5xhml+oeSfetRHMeO+JtzLodFgLu+wc5UED29xYf0I7/jDPaQQFu8gEs7x6A91unjR2mZzpx4du+NrNpwj+TGTNEdf6VmbneKu/RqCxTLXvkga4DJ4uXpUfL97u6sEMZDKr1uDYjH1CXR9yhGmRnsVw0UDIbOUD9rw5ociqMSwlW362XDNJh+yRSeG80cyAYDU0YXopMc8jIzoJ8j6qVdawvnBoVUswGvjRHQbTaKNqp+tyhGKFQGdPzoSubtJ8pt6g7tldkLuxphqQ5/m5q/rb74BU48laGvl5ssigEfY2tuqN9jG35zIVJxo3J
       - state: present
         key: ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCUpQGw83rF9wV3/0H7TJAmADHJEFJcUhvveYhflvnvBY+aunLj2hYEwdtzI/Zf4sZgDn+IdEbk5QAdmxAURPrT0rTF3SFvs/86aLaBR/UZK3ABRqqGBhP6HqaEOwGv5AnHkByMd6KB9tzpFmpmI+tkSvw0flKIA38lNO2ULd0Y+MGFvAcJ5EvLfK0fiEXyj4dh9t2gsG4cL/QPa5IydTbCmhsJkzpFxMBnghNrvoqN7r1T14meFb/PWSC2LTTR5kh5F6y4GaDBljLkwReFHr2KhzNEG3EgexzhZtDxfWR5jMXZbkkyLJZLkz/BT4EFxQe3yl0Ps0oNgFGkXNkNrvyV
+  - name: dan
+    real_name: Dan Gebhardt
+    state: present
+    shadow_pass: $1$9lkjhgft$YgAENufJb/4hU.zfwEKQ50
+    groups: sudo
+    shell: /bin/bash
+    keys:
+      - state: present
+        key: ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEA0YDbKBwoN1JDbXXcVWVR5lyUgSVT9HsWx6gjDfNKV952qprr0D7cz09Z9RmyvM+xbt3vbpysiInaorGNRWzm1WGSYk9/QEb5VaUns7L8Z3QzlpoQ4WHt44fTl5v6m1v7YUB6ZRmekf3KuTcfaATYsVI2i5TaHtg1zSYojK6PQDPDjTchGCbybxpJ0eHqDhvyk0NedyPbQMIFLmel5iVNpM9mpSNdjrGaScpMtrtzOEXUi5FeYSvd10Mt7A/9L9uAIiexe8ZqX7aFvmAt38RZImlSVetyxoCcmg/Bp9KvA2vz4ANCoLZ+VRbErpma7znvViD+d5ISDIqFxrOaHtuAsw==
   - name: steve
     real_name: Steve Klabnik
     state: present
