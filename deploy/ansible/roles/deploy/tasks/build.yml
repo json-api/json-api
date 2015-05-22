@@ -1,0 +1,9 @@
+- name: bundler has been run
+  shell: cd {{clone_path}} && bundle --path vendor
+
+- name: site is built
+  shell: cd {{clone_path}} && bundle exec jekyll build -s src
+
+- name: generate build info file
+  template: src=build_info.txt dest={{clone_path}}/{{build_info_path}}
+  when: build_info_path is defined

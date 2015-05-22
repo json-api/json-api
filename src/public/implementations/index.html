@@ -1,0 +1,206 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Use title if it's in the page YAML frontmatter -->
+    <title>JSON API - Implementations</title>
+
+    <link href='http://fonts.googleapis.com/css?family=Titillium+Web:400,300,600' rel='stylesheet' type='text/css'>
+    <link href="/stylesheets/normalize.css" media="screen" rel="stylesheet" type="text/css" />
+    <link href="/stylesheets/highlight.css" media="screen" rel="stylesheet" type="text/css" />
+    <link href="/stylesheets/all.css" media="screen" rel="stylesheet" type="text/css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script src="/javascripts/all.js" type="text/javascript"></script>
+    <script src="/javascripts/highlight.pack.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+  </head>
+
+  <body>
+     <nav class="site-nav">
+      <ul>
+
+
+          <li ><a href="/" title="JSON API">JSON API</a></li>
+
+          <li ><a href="/format/" title="Format">Format</a></li>
+
+          <li ><a href="/extensions/" title="Extensions">Extensions</a></li>
+
+          <li ><a href="/recommendations/" title="Recommendations">Recommendations</a></li>
+
+          <li class="active"><a href="/implementations/" title="Implementations">Implementations</a></li>
+
+          <li ><a href="/faq/" title="FAQ">FAQ</a></li>
+
+          <li ><a href="/about/" title="About">About</a></li>
+
+      </ul>
+    </nav>
+
+    <div class="site-wrapper">
+
+        <div class="sidebar">
+          <nav class="document-outline" id="document-outline">
+            <h1>Implementations</h1>
+          </nav>
+        </div>
+
+      <div class="content">
+
+          <h1>Implementations</h1>
+
+        <section>
+          <p>The following are projects implementing JSON API. If you&#39;d like your project listed, <a href="https://github.com/json-api/json-api">send a
+pull request</a>.</p>
+
+<h2>Client libraries <a href="#client-libraries" id="client-libraries" class="headerlink"></a></h2>
+
+<h3>JavaScript <a href="#client-javascript" id="client-libraries-javascript" class="headerlink"></a></h3>
+
+<ul>
+<li><a href="https://github.com/emberjs/data">ember-data</a> is one of the original exemplar implementations. There is a <a href="https://github.com/kurko/ember-json-api">custom adapter</a> to support json-api.</li>
+<li><a href="https://github.com/guillaumervls/backbone-jsonapi">backbone-jsonapi</a> is a Backbone adapter for JSON API. Supports fetching Models &amp; Collections from a JSON API source.</li>
+<li><a href="https://github.com/orbitjs/orbit.js">orbit.js</a> is a standalone library for
+coordinating access to data sources and keeping their contents synchronized.
+Orbit&#39;s Common Library includes
+<a href="https://github.com/orbitjs/orbit.js/blob/master/lib/orbit-common/jsonapi-source.js">JSONAPISource</a>
+for accessing JSON API servers. Orbit can be used
+independently or with Ember.js through the
+<a href="https://github.com/orbitjs/ember-orbit">ember-orbit</a> integration library.</li>
+</ul>
+
+<h3>iOS <a href="#client-ios" id="client-libraries-ios" class="headerlink"></a></h3>
+
+<ul>
+<li><a href="https://github.com/joshdholtz/jsonapi-ios">jsonapi-ios</a> is a library for loading data from a JSON API datasource. Parses JSON API data into models with support for auto-linking of resources and custom model classes.</li>
+<li><a href="https://github.com/wvteijlingen/spine">Spine</a> is a Swift library for working with JSON:API APIs. It supports mapping to custom model classes, fetching, advanced querying, linking and persisting.</li>
+</ul>
+
+<h3>Ruby <a href="#client-ruby" id="client-libraries-ruby" class="headerlink"></a></h3>
+
+<ul>
+<li><a href="https://github.com/jsmestad/jsonapi-consumer">jsonapi-consumer</a> a ruby library for consuming JSONAPI payloads.</li>
+<li><a href="https://github.com/chingor13/json_api_client">JsonApiClient</a> attempts to give you a query building framework that is easy to understand (similar to ActiveRecord scopes)</li>
+</ul>
+
+<h2>Server libraries <a href="#server-libraries" id="server-libraries-libraries" class="headerlink"></a></h2>
+
+<h3>PHP <a href="#server-php" id="server-libraries-php" class="headerlink"></a></h3>
+
+<ul>
+<li><a href="https://github.com/FriendsOfSymfony/FOSRestBundle/issues/452">FriendsOfSymfony / FOSRestBundle</a></li>
+<li><a href="https://github.com/gointegro/hateoas-bundle">GOintegro / HATEOAS</a> is a library and Symfony 2 bundle that allows you to magically expose your Doctrine 2 mapped entities as resources in a HATEOAS API and supports the full spec of JSON-API for serializing and fetching.</li>
+<li><a href="https://github.com/tobscure/json-api">tobscure / json-api</a></li>
+<li><a href="https://github.com/neomerx/json-api">Neomerx / json-api</a> is a framework agnostic library for encoding PHP objects to JSON API representation.</li>
+</ul>
+
+<h3>Node.js <a href="#server-node-js" id="server-libraries-node-js" class="headerlink"></a></h3>
+
+<ul>
+<li><a href="http://fortunejs.com">Fortune.js</a> is a framework built to implement json-api.</li>
+<li><a href="https://www.npmjs.org/package/json-api">json-api</a> turns an Express + Mongoose app into a JSON-API server.</li>
+<li><a href="https://github.com/endpoints">endpoints</a> is an implementation of JSON-API using <a href="http://bookshelfjs.org">Bookshelf</a>.</li>
+</ul>
+
+<h3>Ruby <a href="#server-ruby" id="server-libraries-ruby" class="headerlink"></a></h3>
+
+<ul>
+<li><a href="https://github.com/rails-api/active_model_serializers">ActiveModel::Serializers</a>
+is one of the original exemplar implementations, but is slightly out of date at
+the moment.</li>
+<li><a href="https://github.com/nesquena/rabl/wiki/Conforming-to-jsonapi.org-format">The rabl wiki</a>
+has a page describing how to emit conformant JSON.</li>
+<li><a href="https://github.com/RestPack/restpack_serializer">RestPack::Serializer</a> implements the read elements of json-api. It also supports paging and side-loading.</li>
+<li><a href="https://github.com/ismasan/oat#adapters">Oat</a> ships with a JSON API adapter.</li>
+<li><a href="https://github.com/cerebris/jsonapi-resources">JSONAPI::Resources</a> provides a complete framework for developing a JSON API server. It is designed to work with Rails, and provides routes, controllers, and serializers.</li>
+<li><a href="https://github.com/plexus/yaks">Yaks</a> Library for building hypermedia APIs, contains a JSON API output format.</li>
+<li><a href="https://github.com/fotinakis/jsonapi-serializers">JSONAPI::Serializers</a> provides a pure Ruby, readonly serializer implementation.</li>
+</ul>
+
+<h3>Python <a href="#server-python" id="server-libraries-python" class="headerlink"></a></h3>
+
+<ul>
+<li><a href="https://github.com/kalasjocke/hyp">Hyp</a> is a library for creating json-api responses.</li>
+<li><a href="https://github.com/coltonprovias/sqlalchemy-jsonapi">SQLAlchemy-JSONAPI</a> provides JSON API serialization for SQLAlchemy models.</li>
+<li><a href="http://drf-json-api.readthedocs.org">Django REST Framework JSON API</a> provides JSON API parsing and rendering for the Django REST Framework.</li>
+<li><a href="https://github.com/pavlov99/jsonapi">jsonapi</a> is a Django module with JSON API implementation.</li>
+</ul>
+
+<h3>Go <a href="#server-go" id="server-libraries-go" class="headerlink"></a></h3>
+
+<ul>
+<li><a href="https://github.com/univedo/api2go">api2go</a> is a small library to make it easier to provide a JSON API with your Golang project.</li>
+</ul>
+
+<h3>.NET <a href="#server-net" id="server-libraries-net" class="headerlink"></a></h3>
+
+<ul>
+<li><a href="https://github.com/SphtKr/JSONAPI.NET">JSONAPI.NET</a> is a .NET library that integrates with ASP.NET WebAPI, Json.NET, and (optionally) Entity Framework to help you quickly create JSON API compliant web services.</li>
+</ul>
+
+<h3>JAVA <a href="#server-java" id="server-libraries-java" class="headerlink"></a></h3>
+
+<ul>
+<li><a href="https://github.com/katharsis-project">katharsis</a> has comprehensive coverage of standard allowing to create JSON:API compatible resources with dynamic relation based routing. Library is highly modular and compatible with all JAX-RS based frameworks.</li>
+</ul>
+
+<h2>Examples <a href="#examples" id="examples" class="headerlink"></a></h2>
+
+<ul>
+<li><a href="http://restpack-serializer-sample.herokuapp.com/">RestPack::Serializer provides examples</a> which demonstrate sample responses.</li>
+</ul>
+
+<h2>Related Tools <a href="#related-tools" id="related-tools" class="headerlink"></a></h2>
+
+<h3>Ruby <a href="#related-tools-ruby" id="related-tools-ruby" class="headerlink"></a></h3>
+
+<ul>
+<li><a href="https://github.com/guillec/json-patch">json-patch</a> implementation of JSON Patch (rfc6902)</li>
+<li><a href="https://github.com/tenderlove/hana">hana</a> implementation of the JSON Patch and JSON pointer spec</li>
+</ul>
+
+<h3>Node.js <a href="#relted-tools-node-js" id="relted-tools-node-js" class="headerlink"></a></h3>
+
+<ul>
+<li><a href="https://www.npmjs.org/package/json-patch">json-patch</a> implementation of JSON Patch (rfc6902)</li>
+</ul>
+
+<h3>Python <a href="#server-python" id="server-python" class="headerlink"></a></h3>
+
+<ul>
+<li><a href="https://python-json-patch.readthedocs.org">jsonpatch</a> implementation of JSON Patch (rfc6902)</li>
+<li><a href="https://drf-json-patch.readthedocs.org">drf-json-patch</a> integrates jsonpatch with Django REST Framework</li>
+</ul>
+
+        </section>
+      </div>
+    </div>
+    <footer>
+      <span>Built with <a href="http://jekyllrb.com/">Jekyll</a> and <a href="http://softwaremaniacs.org/soft/highlight/en/">Highlight.js</a></span>
+      <span>Hosted by <a href="http://pages.github.com/">GitHub Pages</a></span>
+      <span>Generated at 2015-05-21T14:04:00-04:00</span>
+      <span class="social-links">
+        <a class="twitter" href="http://twitter.com/jsonapi"><i class="icon-twitter"></i><span>Twitter</span></a>
+        <a class="github" href="https://github.com/json-api"><i class="icon-github"></i><span>GitHub</span></a>
+        <a class="googleplus" href="https://groups.google.com/forum/?fromgroups#!forum/jsonapi"><i class="icon-gplus"></i><span>Google</span></a>
+      </span>
+      <div class="license">
+        <a rel="license" href="http://creativecommons.org/publicdomain/zero/1.0/"><img src="http://i.creativecommons.org/p/zero/1.0/88x31.png" style="border-style: none;" alt="CC0" /></a>
+      </div>
+    </footer>
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-40609539-1', 'jsonapi.org');
+      ga('send', 'pageview');
+
+    </script>
+  </body>
+
+</html>

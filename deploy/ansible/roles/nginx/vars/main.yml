@@ -1,0 +1,6 @@
+nginx_dir: /etc/nginx
+conf_dir: "{{nginx_dir}}/conf.d"
+shared:
+  - {file: gzip_params, directory: "{{nginx_dir}}"}
+confs:
+  - {file: app.conf, directory: "{{conf_dir}}"}

@@ -1,0 +1,4 @@
+# If defined, only this many of the most recent clone directories (including the
+# current specified commit) will be retained. Anything older will be removed,
+# once the current clone has been made live.
+keep_n_most_recent: 3

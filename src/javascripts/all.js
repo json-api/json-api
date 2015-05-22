@@ -79,7 +79,7 @@ function createOutlineFromElement(element) {
 
 /**
  * Creates a nested list from an array in the form returned by `createOutlineFromElement`.
- * 
+ *
  * @param  {array}   outline The outline from which to create a navigation list.
  * @return {element}        The HTML element containing the navigation list.
  */

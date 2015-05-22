@@ -1,0 +1,1728 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Use title if it's in the page YAML frontmatter -->
+    <title>JSON API - Format</title>
+
+    <link href='http://fonts.googleapis.com/css?family=Titillium+Web:400,300,600' rel='stylesheet' type='text/css'>
+    <link href="/stylesheets/normalize.css" media="screen" rel="stylesheet" type="text/css" />
+    <link href="/stylesheets/highlight.css" media="screen" rel="stylesheet" type="text/css" />
+    <link href="/stylesheets/all.css" media="screen" rel="stylesheet" type="text/css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script src="/javascripts/all.js" type="text/javascript"></script>
+    <script src="/javascripts/highlight.pack.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+  </head>
+
+  <body>
+     <nav class="site-nav">
+      <ul>
+
+
+          <li ><a href="/" title="JSON API">JSON API</a></li>
+
+          <li class="active"><a href="/format/" title="Format">Format</a></li>
+
+          <li ><a href="/extensions/" title="Extensions">Extensions</a></li>
+
+          <li ><a href="/recommendations/" title="Recommendations">Recommendations</a></li>
+
+          <li ><a href="/implementations/" title="Implementations">Implementations</a></li>
+
+          <li ><a href="/faq/" title="FAQ">FAQ</a></li>
+
+          <li ><a href="/about/" title="About">About</a></li>
+
+      </ul>
+    </nav>
+
+    <div class="site-wrapper">
+
+        <div class="sidebar">
+          <nav class="document-outline" id="document-outline">
+            <h1>Format</h1>
+          </nav>
+        </div>
+
+      <div class="content">
+
+          <h1>Format</h1>
+
+        <section>
+          <h2>Status <a href="#status" id="status" class="headerlink"></a></h2>
+
+<p><strong>This document is a work in progress</strong> and will change as implementation work
+progresses. See the <a href="/status">Status</a> page for more information.</p>
+
+<h2>Introduction <a href="#introduction" id="introduction" class="headerlink"></a></h2>
+
+<p>JSON API is a specification for how a client should request that resources be
+fetched or modified, and how a server should respond to those requests.</p>
+
+<p>JSON API is designed to minimize both the number of requests and the amount of
+data transmitted between clients and servers. This efficiency is achieved
+without compromising readability, flexibility, or discoverability.</p>
+
+<p>JSON API requires use of the JSON API media type
+(<a href="http://www.iana.org/assignments/media-types/application/vnd.api+json"><code>application/vnd.api+json</code></a>)
+for exchanging data.</p>
+
+<h2>Conventions <a href="#conventions" id="conventions" class="headerlink"></a></h2>
+
+<p>The key words &quot;MUST&quot;, &quot;MUST NOT&quot;, &quot;REQUIRED&quot;, &quot;SHALL&quot;, &quot;SHALL NOT&quot;, &quot;SHOULD&quot;,
+&quot;SHOULD NOT&quot;, &quot;RECOMMENDED&quot;, &quot;MAY&quot;, and &quot;OPTIONAL&quot; in this document are to be
+interpreted as described in RFC 2119
+[<a href="http://tools.ietf.org/html/rfc2119">RFC2119</a>].</p>
+
+<h2>Extending <a href="#extending" id="extending" class="headerlink"></a></h2>
+
+<p>The base JSON API specification <strong>MAY</strong> be extended to support additional
+capabilities.</p>
+
+<p>An extension <strong>MAY</strong> make changes to and deviate from the requirements of the
+base specification apart from this section, which remains binding.</p>
+
+<p>Servers that support one or more extensions to JSON API <strong>MUST</strong> return
+those extensions in every response in the <code>supported-ext</code> media type
+parameter of the <code>Content-Type</code> header. The value of the <code>supported-ext</code>
+parameter <strong>MUST</strong> be a comma-separated (U+002C COMMA, &quot;,&quot;) list of
+extension names.</p>
+
+<p>For example: a response that includes the header <code>Content-Type:
+application/vnd.api+json; supported-ext=&quot;bulk,jsonpatch&quot;</code> indicates that the
+server supports both the &quot;bulk&quot; and &quot;jsonpatch&quot; extensions.</p>
+
+<p>If an extension is used to form a particular request or response document,
+then it <strong>MUST</strong> be specified by including its name in the <code>ext</code> media type
+parameter with the <code>Content-Type</code> header. The value of the <code>ext</code> media type
+parameter <strong>MUST</strong> be formatted as a comma-separated (U+002C COMMA, &quot;,&quot;)
+list of extension names and <strong>MUST</strong> be limited to a subset of the
+extensions supported by the server, which are listed in <code>supported-ext</code>
+of every response.</p>
+
+<p>For example: a response that includes the header <code>Content-Type:
+application/vnd.api+json; ext=&quot;ext1,ext2&quot;; supported-ext=&quot;ext1,ext2,ext3&quot;</code>
+indicates that the response document is formatted according to the
+extensions &quot;ext1&quot; and &quot;ext2&quot;. Another example: a request that includes
+the header <code>Content-Type: application/vnd.api+json; ext=&quot;ext1,ext2&quot;</code>
+indicates that the request document is formatted according to the
+extensions &quot;ext1&quot; and &quot;ext2&quot;.</p>
+
+<p>Clients <strong>MAY</strong> request a particular media type extension by including its
+name in the <code>ext</code> media type parameter with the <code>Accept</code> header. Servers
+that do not support a requested extension or combination of extensions
+<strong>MUST</strong> return a <code>406 Not Acceptable</code> status code.</p>
+
+<p>If the media type in the <code>Accept</code> header is supported by a server but the
+media type in the <code>Content-Type</code> header is unsupported, the server
+<strong>MUST</strong> return a <code>415 Unsupported Media Type</code> status code.</p>
+
+<p>Servers <strong>MUST NOT</strong> provide extended functionality that is incompatible
+with the base specification to clients that do not request the extension in
+the <code>ext</code> parameter of the <code>Content-Type</code> or the <code>Accept</code> header.</p>
+
+<blockquote>
+<p>Note: Since extensions can contradict one another or have interactions
+that can be resolved in many equally plausible ways, it is the
+responsibility of the server to decide which extensions are compatible, and
+it is the responsibility of the designer of each implementation of this
+specification to describe extension interoperability rules which are
+applicable to that implementation.</p>
+</blockquote>
+
+<p>When the value of the <code>ext</code> or <code>supported-ext</code> media type parameter contains
+more than one extension name, the value <strong>MUST</strong> be surrounded with quotation
+marks (U+0022 QUOTATION MARK, &quot;&quot;&quot;), in accordance with the HTTP specification.</p>
+
+<h2>Document Structure <a href="#document-structure" id="document-structure" class="headerlink"></a></h2>
+
+<p>This section describes the structure of a JSON API document, which is identified
+by the media type <a href="http://www.iana.org/assignments/media-types/application/vnd.api+json"><code>application/vnd.api+json</code></a>.
+JSON API documents are defined in JavaScript Object Notation (JSON)
+[<a href="http://tools.ietf.org/html/rfc4627">RFC4627</a>].</p>
+
+<p>Although the same media type is used for both request and response documents,
+certain aspects are only applicable to one or the other. These differences are
+called out below.</p>
+
+<p>Unless otherwise noted, objects defined by this specification <strong>MUST NOT</strong>
+contain any additional members. Client and server implementations <strong>MUST</strong>
+ignore object members not recognized by this specification.</p>
+
+<blockquote>
+<p>Note: These conditions for object members allow this specification to
+evolve through additive changes.</p>
+</blockquote>
+
+<h3>Top Level <a href="#document-structure-top-level" id="document-structure-top-level" class="headerlink"></a></h3>
+
+<p>A JSON object <strong>MUST</strong> be at the root of every JSON API response containing
+data. This object defines a document&#39;s &quot;top level&quot;.</p>
+
+<p>A document <strong>MUST</strong> contain one of the following top-level members:</p>
+
+<ul>
+<li><code>&quot;data&quot;</code>, containing the document&#39;s &quot;primary data&quot;</li>
+<li><code>&quot;errors&quot;</code>, containing an array of <a href="#errors">error objects</a></li>
+</ul>
+
+<p>The document&#39;s &quot;primary data&quot; is a representation of the resource or collection
+of resources targeted by a request.</p>
+
+<p>Primary data <strong>MUST</strong> be either:</p>
+
+<ul>
+<li>a single resource object, a single <a href="#document-structure-resource-identifier-objects">resource identifier object</a>, or <code>null</code>,
+for requests that target single resources</li>
+<li>an array of resource objects, an array of <a href="#document-structure-resource-identifier-objects">resource identifier objects</a>, or
+an empty array ([]), for requests that target resource collections</li>
+</ul>
+
+<p>For example, the following primary data is a single resource object:</p>
+<div class="highlight"><pre><code class="javascript language-javascript" data-lang="javascript">{
+  &quot;data&quot;: {
+    &quot;type&quot;: &quot;articles&quot;,
+    &quot;id&quot;: &quot;1&quot;,
+    &quot;attributes&quot;: {
+      // ... this article&#39;s attributes
+    },
+    &quot;relationships&quot;: {
+      // ... this article&#39;s relationships
+    }
+  }
+}
+</code></pre></div>
+<p>The following primary data is a single <a href="#document-structure-resource-identifier-objects">resource identifier object</a> that
+references the same resource:</p>
+<div class="highlight"><pre><code class="javascript language-javascript" data-lang="javascript">{
+  &quot;data&quot;: {
+    &quot;type&quot;: &quot;articles&quot;,
+    &quot;id&quot;: &quot;1&quot;
+  }
+}
+</code></pre></div>
+<p>A logical collection of resources (e.g. the target of a to-many relationship)
+<strong>MUST</strong> be represented as an array, even if it only contains one item or is
+empty.</p>
+
+<p>A document&#39;s top level <strong>MAY</strong> also have the following members:</p>
+
+<ul>
+<li><code>&quot;meta&quot;</code>: non-standard meta-information about the primary data.</li>
+<li><code>&quot;links&quot;</code>: URLs related to the primary data.</li>
+<li><code>&quot;included&quot;</code>: an array of resource objects that are related to the primary
+data and/or each other (&quot;included resources&quot;).</li>
+</ul>
+
+<p>If any of these members appears in the top-level of a response, their values
+<strong>MUST</strong> comply with this specification.</p>
+
+<h3>Resource Objects <a href="#document-structure-resource-objects" id="document-structure-resource-objects" class="headerlink"></a></h3>
+
+<p>&quot;Resource objects&quot; appear in a JSON API document to represent resources.</p>
+
+<p>A resource object <strong>MUST</strong> contain at least the following top-level members:</p>
+
+<ul>
+<li><code>&quot;id&quot;</code></li>
+<li><code>&quot;type&quot;</code></li>
+</ul>
+
+<p>Exception: The <code>id</code> member is not required when the resource object originates at
+the client and represents a new resource to be created on the server.</p>
+
+<p>In addition, a resource object <strong>MAY</strong> contain any of these top-level members:</p>
+
+<ul>
+<li><code>&quot;attributes&quot;</code>: an &quot;attributes object&quot; representing some of the resource&#39;s data.</li>
+<li><code>&quot;relationships&quot;</code>: a &quot;relationships object&quot; describing relationships between
+the resource and other JSON API resources.</li>
+<li><code>&quot;links&quot;</code>: a &quot;links object&quot; containing URLs related to the resource.</li>
+<li><code>&quot;meta&quot;</code>: non-standard meta-information about a resource that can not be
+represented as an attribute or relationship.</li>
+</ul>
+
+<p>Here&#39;s how an article (i.e. a resource of type &quot;articles&quot;) might appear in a document:</p>
+<div class="highlight"><pre><code class="javascript language-javascript" data-lang="javascript">// ...
+{
+  &quot;type&quot;: &quot;articles&quot;,
+  &quot;id&quot;: &quot;1&quot;,
+  &quot;attributes&quot;: {
+    &quot;title&quot;: &quot;Rails is Omakase&quot;
+  },
+  &quot;relationships&quot;: {
+    &quot;author&quot;: {
+      &quot;links&quot;: {
+        &quot;self&quot;: &quot;/articles/1/relationships/author&quot;,
+        &quot;related&quot;: &quot;/articles/1/author&quot;
+      },
+      &quot;data&quot;: { &quot;type&quot;: &quot;people&quot;, &quot;id&quot;: &quot;9&quot; }
+    }
+  }
+}
+// ...
+</code></pre></div>
+<h4>Resource Identification <a href="#document-structure-resource-identification" id="document-structure-resource-identification" class="headerlink"></a></h4>
+
+<p>Every resource object <strong>MUST</strong> contain an <code>&quot;id&quot;</code> member and a <code>&quot;type&quot;</code> member.
+The value of each of these members <strong>MUST</strong> be a string.</p>
+
+<p>Each resource object&#39;s <code>&quot;type&quot;</code> and <code>&quot;id&quot;</code> pair <strong>MUST</strong> identify a single,
+unique resource.</p>
+
+<p>The <code>&quot;type&quot;</code> member is used to describe resource objects that share common
+attributes and relationships.</p>
+
+<blockquote>
+<p>Note: This spec is agnostic about inflection rules, so the value of <code>type</code>
+can be either plural or singular. However, the same value should be used
+consistently throughout an implementation.</p>
+</blockquote>
+
+<h4>Attributes <a href="#document-structure-resource-attributes" id="document-structure-resource-attributes" class="headerlink"></a></h4>
+
+<p>The value of the <code>&quot;attributes&quot;</code> key is a JSON object (an &quot;attributes object&quot;)
+that represents information about the resource object it is contained within.</p>
+
+<p>The top level of this object shares a namespace with the members of <code>relationships</code>
+and <strong>MUST NOT</strong> contain <code>id</code> or <code>type</code> members. Apart from these restrictions,
+this object can contain members keyed by any string valid for this specification.</p>
+
+<p>All members which appear in an &quot;attributes object&quot; are considered attributes and
+may contain any valid JSON value.</p>
+
+<p>Complex data structures involving JSON objects and arrays are allowed as
+attribute values. However, any object that constitutes or is contained in an
+attribute <strong>MUST</strong> reserve the <code>relationships</code> and <code>links</code> members for future use.</p>
+
+<p>Although has-one foreign keys (e.g. <code>author_id</code>) are often stored internally
+alongside other information to be represented in a resource object, these keys
+<strong>SHOULD NOT</strong> appear as attributes. If relations are provided, they <strong>MUST</strong>
+be represented under the &quot;relationships object&quot;.</p>
+
+<h4>Relationships <a href="#document-structure-links" id="document-structure-resource-objects-relationships" class="headerlink"></a></h4>
+
+<p>The value of the <code>&quot;relationships&quot;</code> key is a JSON object (a &quot;relationships object&quot;)
+that represents references from the resource in whose resource object it&#39;s defined
+to other resources (&quot;relationships&quot;). These relationships share a namespace with
+<a href="#document-structure-resource-object-attributes">attributes</a>; that is, relationships of a given resource object <strong>MUST</strong> be named
+differently than its <a href="#document-structure-resource-object-attributes">attributes</a>.</p>
+
+<p>The keys <code>&quot;id&quot;</code> and <code>&quot;type&quot;</code> are not allowed within the relationships object.</p>
+
+<p>Relationships may be to-one or to-many. Relationships can be specified by
+including a member in a resource&#39;s relationship&#39;s object. The name of the
+relationship is its key in the relationship object.</p>
+
+<p>The value of a relationship <strong>MUST</strong> be an object (a &quot;relationship object&quot;),
+which <strong>MUST</strong> contain at least one of the following:</p>
+
+<ul>
+<li>A <code>&quot;links&quot;</code> member that contains at least one of the following:
+
+<ul>
+<li>A <code>&quot;self&quot;</code> member, whose value is a URL for the relationship itself (a
+&quot;relationship URL&quot;). This URL allows the client to directly manipulate the
+relationship. For example, it would allow a client to remove an <code>author</code>
+from an <code>article</code> without deleting the <code>people</code> resource itself.</li>
+<li>A <code>&quot;related&quot;</code> member, whose value is a related resource URL, as defined above.</li>
+</ul></li>
+<li>A <code>&quot;data&quot;</code> member, whose value represents &quot;resource linkage&quot; (defined below).</li>
+<li>A <code>&quot;meta&quot;</code> member that contains non-standard meta-information about the
+relationship.</li>
+</ul>
+
+<p>A relationship object that represents a to-many relationship <strong>MAY</strong> also contain
+pagination links under the <code>&quot;links&quot;</code> member, as described below.</p>
+
+<p>Resource linkage <strong>MUST</strong> be represented as one of the following:</p>
+
+<ul>
+<li><code>null</code> for empty to-one relationships.</li>
+<li>a <a href="#document-structure-resource-identifier-objects">resource identifier object</a> for non-empty to-one relationships.</li>
+<li>an empty array (<code>[]</code>) for empty to-many relationships.</li>
+<li>an array of <a href="#document-structure-resource-identifier-objects">resource identifier objects</a> for non-empty to-many relationships.</li>
+</ul>
+
+<blockquote>
+<p>Note: Resource linkage in a compound document allows a client to link
+together all of the included resource objects without having to <code>GET</code> any
+relationship URLs.</p>
+</blockquote>
+
+<p>If present, a <em>related resource URL</em> <strong>MUST</strong> be a valid URL, even if the
+relationship isn&#39;t currently associated with any target resources.</p>
+
+<p>For example, the following article is associated with an <code>author</code>:</p>
+<div class="highlight"><pre><code class="javascript language-javascript" data-lang="javascript">// ...
+{
+  &quot;type&quot;: &quot;articles&quot;,
+  &quot;id&quot;: &quot;1&quot;,
+  &quot;attributes&quot;: {
+    &quot;title&quot;: &quot;Rails is Omakase&quot;
+  },
+  &quot;relationships&quot;: {
+    &quot;author&quot;: {
+      &quot;links&quot;: {
+        &quot;self&quot;: &quot;http://example.com/articles/1/relationships/author&quot;,
+        &quot;related&quot;: &quot;http://example.com/articles/1/author&quot;
+      },
+      &quot;data&quot;: { &quot;type&quot;: &quot;people&quot;, &quot;id&quot;: &quot;9&quot; }
+    }
+  },
+  &quot;links&quot;: {
+    &quot;self&quot;: &quot;http://example.com/articles/1&quot;
+  }
+}
+// ...
+</code></pre></div>
+<p>The <code>author</code> relationship includes a URL for the relationship itself (which
+allows the client to change the related author directly), a related resource URL
+to fetch the resource objects, and linkage information.</p>
+
+<h4>Fields <a href="#document-structure-resource-object-fields" id="document-structure-resource-object-fields" class="headerlink"></a></h4>
+
+<p>A resource object&#39;s <a href="#document-structure-resource-object-attributes">attributes</a> and its <a href="#document-structure-resource-object-relationships">relationships</a> are collectively called
+its &quot;<a href="#document-structure-resource-object-fields">fields</a>&quot;.</p>
+
+<h4>Resource Links <a href="#document-structure-structure-resource-object-links" id="document-structure-resource-object-links" class="headerlink"></a></h4>
+
+<p>Analogous to the <code>&quot;links&quot;</code> member at the document&#39;s top level, the optional
+<code>&quot;links&quot;</code> member within each resource object contains URLs related to the
+resource.</p>
+
+<p>If present, this object <strong>MAY</strong> contain a URL keyed by <code>&quot;self&quot;</code>, that identifies
+the resource represented by the resource object.</p>
+<div class="highlight"><pre><code class="json language-json" data-lang="json">// ...
+{
+  &quot;type&quot;: &quot;articles&quot;,
+  &quot;id&quot;: &quot;1&quot;,
+  &quot;attributes&quot;: {
+    &quot;title&quot;: &quot;Rails is Omakase&quot;
+  },
+  &quot;links&quot;: {
+    &quot;self&quot;: &quot;http://example.com/articles/1&quot;
+  }
+}
+// ...
+</code></pre></div>
+<p>A server <strong>MUST</strong> respond to a <code>GET</code> request to the specified URL with a
+response that includes the resource as the primary data.</p>
+
+<h3>Resource Indentifier Objects <a href="#document-structure-resource-identifier-objects" id="document-structure-resource-identifier-objects" class="headerlink"></a></h3>
+
+<p>A &quot;resource identifier object&quot; is an object that identifies an individual
+resource.</p>
+
+<p>It <strong>MUST</strong> contain <code>&quot;type&quot;</code> and <code>&quot;id&quot;</code> members.</p>
+
+<p>It <strong>MAY</strong> also include a <code>&quot;meta&quot;</code> member to contain non-standard
+meta-information.</p>
+
+<h3>Compound Documents <a href="#document-structure-compound-documents" id="document-structure-compound-documents" class="headerlink"></a></h3>
+
+<p>To reduce the number of HTTP requests, servers <strong>MAY</strong> allow responses that
+include related resources along with the requested primary resources. Such
+responses are called &quot;compound documents&quot;.</p>
+
+<p>In a compound document, all included resources <strong>MUST</strong> be represented as an
+array of resource objects in a top-level <code>&quot;included&quot;</code> member.</p>
+
+<p>Compound documents require &quot;full linkage&quot;, meaning that every included
+resource <strong>MUST</strong> be identified by at least one <a href="#document-structure-resource-identifier-objects">resource identifier object</a>
+in the same document. These resource identifier objects could either be
+primary data or represent resource linkage contained within primary or
+included resources.</p>
+
+<blockquote>
+<p>Note: Full linkage ensures that included resources are related to either
+the primary data (which could be resource objects or resource identifier
+objects) or to each other.</p>
+</blockquote>
+
+<p>A complete example document with multiple included relationships:</p>
+<div class="highlight"><pre><code class="json language-json" data-lang="json">{
+  &quot;data&quot;: [{
+    &quot;type&quot;: &quot;articles&quot;,
+    &quot;id&quot;: &quot;1&quot;,
+    &quot;attributes&quot;: {
+      &quot;title&quot;: &quot;JSON API paints my bikeshed!&quot;
+    },
+    &quot;links&quot;: {
+      &quot;self&quot;: &quot;http://example.com/articles/1&quot;
+    },
+    &quot;relationships&quot;: {
+      &quot;author&quot;: {
+        &quot;links&quot;: {
+          &quot;self&quot;: &quot;http://example.com/articles/1/relationships/author&quot;,
+          &quot;related&quot;: &quot;http://example.com/articles/1/author&quot;
+        },
+        &quot;data&quot;: { &quot;type&quot;: &quot;people&quot;, &quot;id&quot;: &quot;9&quot; }
+      },
+      &quot;comments&quot;: {
+        &quot;links&quot;: {
+          &quot;self&quot;: &quot;http://example.com/articles/1/relationships/comments&quot;,
+          &quot;related&quot;: &quot;http://example.com/articles/1/comments&quot;
+        },
+        &quot;data&quot;: [
+          { &quot;type&quot;: &quot;comments&quot;, &quot;id&quot;: &quot;5&quot; },
+          { &quot;type&quot;: &quot;comments&quot;, &quot;id&quot;: &quot;12&quot; }
+        ]
+      }
+    }
+  }],
+  &quot;included&quot;: [{
+    &quot;type&quot;: &quot;people&quot;,
+    &quot;id&quot;: &quot;9&quot;,
+    &quot;attributes&quot;: {
+      &quot;first-name&quot;: &quot;Dan&quot;,
+      &quot;last-name&quot;: &quot;Gebhardt&quot;,
+      &quot;twitter&quot;: &quot;dgeb&quot;
+    },
+    &quot;links&quot;: {
+      &quot;self&quot;: &quot;http://example.com/people/9&quot;
+    }
+  }, {
+    &quot;type&quot;: &quot;comments&quot;,
+    &quot;id&quot;: &quot;5&quot;,
+    &quot;attributes&quot;: {
+      &quot;body&quot;: &quot;First!&quot;
+    },
+    &quot;links&quot;: {
+      &quot;self&quot;: &quot;http://example.com/comments/5&quot;
+    }
+  }, {
+    &quot;type&quot;: &quot;comments&quot;,
+    &quot;id&quot;: &quot;12&quot;,
+    &quot;attributes&quot;: {
+      &quot;body&quot;: &quot;I like XML better&quot;
+    },
+    &quot;links&quot;: {
+      &quot;self&quot;: &quot;http://example.com/comments/12&quot;
+    }
+  }]
+}
+</code></pre></div>
+<p>A compound document <strong>MUST NOT</strong> include more than one resource object for
+each <code>type</code> and <code>id</code> pair.</p>
+
+<blockquote>
+<p>Note: In a single document, you can think of the <code>type</code> and <code>id</code> as a
+composite key that uniquely references resource objects in another part of
+the document.</p>
+
+<p>Note: This approach ensures that a single canonical resource object is
+returned with each response, even when the same resource is referenced
+multiple times.</p>
+</blockquote>
+
+<h3>Meta Information <a href="#document-structure-meta" id="document-structure-meta" class="headerlink"></a></h3>
+
+<p>As discussed above, a JSON API document <strong>MAY</strong> be extended to include
+meta-information as <code>&quot;meta&quot;</code> members in several locations: at the top-level,
+within resource objects, within relationship objects, and within <a href="#document-structure-resource-identifier-objects">resource
+identifier objects</a>.</p>
+
+<p>All <code>&quot;meta&quot;</code> members <strong>MUST</strong> have an object as a value, the contents of which
+can be used for custom extensions.</p>
+
+<p>For example:</p>
+<div class="highlight"><pre><code class="javascript language-javascript" data-lang="javascript">{
+  &quot;meta&quot;: {
+    &quot;copyright&quot;: &quot;Copyright 2015 Example Corp.&quot;,
+    &quot;authors&quot;: [
+      &quot;Yehuda Katz&quot;,
+      &quot;Steve Klabnik&quot;,
+      &quot;Dan Gebhardt&quot;
+    ]
+  },
+  &quot;data&quot;: {
+    // ...
+  }
+}
+</code></pre></div>
+<p>Any members <strong>MAY</strong> be specified within <code>meta</code> objects.</p>
+
+<h3>Links <a href="#document-structure-links" id="document-structure-links" class="headerlink"></a></h3>
+
+<p>As discussed above, a document <strong>MAY</strong> be extended to include relevant URLs
+within <code>&quot;links&quot;</code> members at several locations: at the top-level, within resource
+objects, and within relationship objects.</p>
+
+<p>The allowed keys for <code>links</code> objects at the resource and relationship object
+levels are defined in the sections on <a href="#document-structure-resource-object-relationships">resource relationships</a> and
+<a href="#document-structure-resource-object-links">resource links</a>.</p>
+
+<p>When a links object appears at the document&#39;s top-level, it <strong>MAY</strong> have
+the following members:</p>
+
+<ul>
+<li><code>&quot;self&quot;</code> - the URL that generated the current response document.</li>
+<li><code>&quot;related&quot;</code> - a related resource URL (as defined above) when the primary
+data represents a resource relationship.</li>
+<li>Pagination links for the primary data (as described below).</li>
+</ul>
+
+<h3>Member Names <a href="#document-structure-member-names" id="document-structure-member-names" class="headerlink"></a></h3>
+
+<p>All member names used in a JSON API document <strong>MUST</strong> be treated as case sensitive
+by clients and servers, and they <strong>MUST</strong> meet all of the following conditions:</p>
+
+<ul>
+<li>Member names <strong>MUST</strong> contain at least one character.</li>
+<li>Member names <strong>MUST</strong> contain only the allowed characters listed below.</li>
+<li>Member names <strong>MUST</strong> start and end with a &quot;globally allowed character&quot;,
+as defined below.</li>
+</ul>
+
+<p>To enable an easy mapping of member names to URLs, it is <strong>RECOMMENDED</strong> that
+member names use only non-reserved, URL safe characters specified in <a href="http://tools.ietf.org/html/rfc3986#page-13">RFC 3986</a>.</p>
+
+<h4>Allowed Characters <a href="#document-structure-member-names-allowed-characters" id="document-structure-member-names-allowed-characters" class="headerlink"></a></h4>
+
+<p>The following &quot;globally allowed characters&quot; <strong>MAY</strong> be used anywhere in a member name:</p>
+
+<ul>
+<li>U+0061 to U+007A, &quot;a-z&quot;</li>
+<li>U+0041 to U+005A, &quot;A-Z&quot;</li>
+<li>U+0030 to U+0039, &quot;0-9&quot;</li>
+<li>any UNICODE character except U+0000 to U+007F <em>(not recommended, not URL safe)</em></li>
+</ul>
+
+<p>Additionally, the following characters are allowed in member names, except as the
+first or last character:</p>
+
+<ul>
+<li>U+002D HYPHEN-MINUS, &quot;-&quot;</li>
+<li>U+005F LOW LINE, &quot;_&quot;</li>
+<li>U+0020 SPACE, &quot; &quot; <em>(not recommended, not URL safe)</em></li>
+<li>U+005E CIRCUMFLEX ACCENT, &quot;^&quot; <em>(not recommended, not URL safe)</em></li>
+<li>U+0060 GRAVE ACCENT, &quot;`&quot; <em>(not recommended, not URL safe)</em></li>
+</ul>
+
+<h4>Reserved Characters <a href="#document-structure-member-names-reserved-characters" id="document-structure-member-names-reserved-characters" class="headerlink"></a></h4>
+
+<p>The following characters <strong>MUST NOT</strong> be used in member names:</p>
+
+<ul>
+<li>U+002B PLUS SIGN, &quot;+&quot; <em>(used for ordering)</em></li>
+<li>U+002C COMMA, &quot;,&quot; <em>(used separator for multiple relationship paths)</em></li>
+<li>U+002E PERIOD, &quot;.&quot; <em>(used as relationship path separators)</em></li>
+<li>U+005B LEFT SQUARE BRACKET, &quot;[&quot; <em>(use in sparse fieldsets)</em></li>
+<li>U+005D RIGHT SQUARE BRACKET, &quot;]&quot; <em>(used in sparse fieldsets)</em></li>
+<li>U+0021 EXCLAMATION MARK, &quot;!&quot;</li>
+<li>U+0022 QUOTATION MARK, &#39;&quot;&#39;</li>
+<li>U+0023 NUMBER SIGN, &quot;#&quot;</li>
+<li>U+0024 DOLLAR SIGN, &quot;$&quot;</li>
+<li>U+0025 PERCENT SIGN, &quot;%&quot;</li>
+<li>U+0026 AMPERSAND, &quot;&amp;&quot;</li>
+<li>U+0027 APOSTROPHE, &quot;&#39;&quot;</li>
+<li>U+0028 LEFT PARENTHESIS, &quot;(&quot;</li>
+<li>U+0029 RIGHT PARENTHESIS, &quot;)&quot;</li>
+<li>U+002A ASTERISK, &quot;*&quot;</li>
+<li>U+002F SOLIDUS, &quot;/&quot;</li>
+<li>U+003A COLON, &quot;:&quot;</li>
+<li>U+003B SEMICOLON, &quot;;&quot;</li>
+<li>U+003C LESS-THAN SIGN, &quot;&lt;&quot;</li>
+<li>U+003D EQUALS SIGN, &quot;=&quot;</li>
+<li>U+003E GREATER-THAN SIGN, &quot;&gt;&quot;</li>
+<li>U+003F QUESTION MARK, &quot;?&quot;</li>
+<li>U+0040 COMMERCIAL AT, &quot;@&quot;</li>
+<li>U+005C REVERSE SOLIDUS, &quot;\&quot;</li>
+<li>U+007B LEFT CURLY BRACKET, &quot;{&quot;</li>
+<li>U+007C VERTICAL LINE, &quot;|&quot;</li>
+<li>U+007D RIGHT CURLY BRACKET, &quot;}&quot;</li>
+<li>U+007E TILDE, &quot;~&quot;</li>
+</ul>
+
+<h2>Fetching Data <a href="#fetching" id="fetching" class="headerlink"></a></h2>
+
+<p>Data, including resources and relationships, can be fetched by sending a
+<code>GET</code> request to an endpoint.</p>
+
+<p>Clients <strong>MUST</strong> indicate that they can accept the JSON API media type, per
+the semantics of the HTTP <code>Accept</code> header. If present, this header value <strong>MUST</strong>
+also include any media type extensions relevant to the request. Servers <strong>MUST</strong>
+return a <code>406 Not Acceptable</code> status code if this header specifies an
+unsupported media type.</p>
+
+<blockquote>
+<p>Note: Servers may support multiple media types at any endpoint. For example,
+a server may choose to support <code>text/html</code> in order to simplify viewing content
+via a web browser.</p>
+</blockquote>
+
+<p>Responses can be further refined with the optional features described below.</p>
+
+<h3>Fetching Resources <a href="#fetching-resources" id="fetching-resources" class="headerlink"></a></h3>
+
+<p>A server <strong>MUST</strong> support fetching resource data for every URL provided as:</p>
+
+<ul>
+<li>a <code>self</code> link as part of the top-level links object</li>
+<li>a <code>self</code> link as part of a resource-level links object</li>
+<li>a <code>related</code> link as part of a relationship-level links object</li>
+</ul>
+
+<p>For example, the following request fetches a collection of articles:</p>
+<div class="highlight"><pre><code class="http language-http" data-lang="http">GET /articles
+</code></pre></div>
+<p>The following request fetches an article:</p>
+<div class="highlight"><pre><code class="http language-http" data-lang="http">GET /articles/1
+</code></pre></div>
+<p>And the following request fetches an article&#39;s author:</p>
+<div class="highlight"><pre><code class="http language-http" data-lang="http">GET /articles/1/author
+</code></pre></div>
+<h4>Responses <a href="#fetching-resources-responses" id="fetching-resources-responses" class="headerlink"></a></h4>
+
+<h5>200 OK <a href="#fetching-resources-responses-200" id="fetching-resources-responses-200" class="headerlink"></a></h5>
+
+<p>A server <strong>MUST</strong> respond to a successful request to fetch an individual
+resource or resource collection with a <code>200 OK</code> response.</p>
+
+<p>A server <strong>MUST</strong> respond to a successful request to fetch a resource
+collection with an array of <em>resource objects</em> or an empty array (<code>[]</code>) as
+the response document&#39;s primary data.</p>
+
+<p>For example, a <code>GET</code> request to a collection of articles could return:</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">HTTP/1.1 200 OK
+Content-Type: application/vnd.api+json
+
+{
+  &quot;links&quot;: {
+    &quot;self&quot;: &quot;http://example.com/articles&quot;
+  },
+  &quot;data&quot;: [{
+    &quot;type&quot;: &quot;articles&quot;,
+    &quot;id&quot;: &quot;1&quot;,
+    &quot;attributes&quot;: {
+      &quot;title&quot;: &quot;JSON API paints my bikeshed!&quot;
+    }
+  }, {
+    &quot;type&quot;: &quot;articles&quot;,
+    &quot;id&quot;: &quot;2&quot;,
+    &quot;attributes&quot;: {
+      &quot;title&quot;: &quot;Rails is Omakase&quot;
+    }
+  }]
+}
+</code></pre></div>
+<p>A similar response representing an empty collection would be:</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">HTTP/1.1 200 OK
+Content-Type: application/vnd.api+json
+
+{
+  &quot;links&quot;: {
+    &quot;self&quot;: &quot;http://example.com/articles&quot;
+  },
+  &quot;data&quot;: []
+}
+</code></pre></div>
+<p>A server <strong>MUST</strong> respond to a successful request to fetch an individual
+resource with a <em>resource object</em> or <code>null</code> provided as the response
+document&#39;s primary data.</p>
+
+<p><code>null</code> is only an appropriate response when the requested URL is one that
+might correspond to a single resource, but doesn&#39;t currently.</p>
+
+<blockquote>
+<p>Note: Consider, for example, a request to fetch a to-one related resource URL.
+This request would respond with <code>null</code> when the relationship is empty (such that
+the URL is corresponding to no resources) but with the single related resource&#39;s
+resource object otherwise.</p>
+</blockquote>
+
+<p>For example, a <code>GET</code> request to an individual article could return:</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">HTTP/1.1 200 OK
+Content-Type: application/vnd.api+json
+
+{
+  &quot;links&quot;: {
+    &quot;self&quot;: &quot;http://example.com/articles/1&quot;
+  },
+  &quot;data&quot;: {
+    &quot;type&quot;: &quot;articles&quot;,
+    &quot;id&quot;: &quot;1&quot;,
+    &quot;attributes&quot;: {
+      &quot;title&quot;: &quot;JSON API paints my bikeshed!&quot;
+    },
+    &quot;relationships&quot;: {
+      &quot;author&quot;: {
+        &quot;links&quot;: {
+          &quot;related&quot;: &quot;http://example.com/articles/1/author&quot;
+        }
+      }
+    }
+  }
+}
+</code></pre></div>
+<p>If the above article&#39;s author is missing, then a <code>GET</code> request to that related
+resource would return:</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">HTTP/1.1 200 OK
+Content-Type: application/vnd.api+json
+
+{
+  &quot;links&quot;: {
+    &quot;self&quot;: &quot;http://example.com/articles/1/author&quot;
+  },
+  &quot;data&quot;: null
+}
+</code></pre></div>
+<h5>404 Not Found <a href="#fetching-resources-responses-404" id="fetching-resources-responses-404" class="headerlink"></a></h5>
+
+<p>A server <strong>MUST</strong> respond with <code>404 Not Found</code> when processing a request to
+fetch a single resource that does not exist, except when the request warrants a
+<code>200 OK</code> response with <code>null</code> as the primary data (as described above).</p>
+
+<h5>Other Responses <a href="#fetching-resources-responses-other" id="fetching-resources-responses-other" class="headerlink"></a></h5>
+
+<p>A server <strong>MAY</strong> respond with other HTTP status codes.</p>
+
+<p>A server <strong>MAY</strong> include <a href="#errors">error details</a> with error responses.</p>
+
+<p>A server <strong>MUST</strong> prepare responses, and a client <strong>MUST</strong> interpret
+responses, in accordance with
+<a href="http://tools.ietf.org/html/rfc7231"><code>HTTP semantics</code></a>.</p>
+
+<h3>Fetching Relationships <a href="#fetching-relationships" id="fetching-relationships" class="headerlink"></a></h3>
+
+<p>A server <strong>MUST</strong> support fetching relationship data for every relationship URL
+provided as a <code>self</code> link as part of a relationship&#39;s <code>links</code> object.</p>
+
+<p>For example, the following request fetches data about an article&#39;s comments:</p>
+<div class="highlight"><pre><code class="http language-http" data-lang="http">GET /articles/1/relationships/comments
+</code></pre></div>
+<p>And the following request fetches data about an article&#39;s author:</p>
+<div class="highlight"><pre><code class="http language-http" data-lang="http">GET /articles/1/relationships/author
+</code></pre></div>
+<h4>Responses <a href="#fetching-relationships-responses" id="fetching-relationships-responses" class="headerlink"></a></h4>
+
+<h5>200 OK <a href="#fetching-relationships-responses-200" id="fetching-relationships-responses-200" class="headerlink"></a></h5>
+
+<p>A server <strong>MUST</strong> respond to a successful request to fetch a relationship
+with a <code>200 OK</code> response.</p>
+
+<p>The primary data in the response document <strong>MUST</strong> match the appropriate
+value for resource linkage, as described above for relationship objects.</p>
+
+<p>The top-level <em>links object</em> <strong>MAY</strong> contain <code>self</code> and <code>related</code> links,
+as described above for relationship objects.</p>
+
+<p>For example, a <code>GET</code> request to a to-one relationship URL could return:</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">HTTP/1.1 200 OK
+Content-Type: application/vnd.api+json
+
+{
+  &quot;links&quot;: {
+    &quot;self&quot;: &quot;/articles/1/relationships/author&quot;,
+    &quot;related&quot;: &quot;/articles/1/author&quot;
+  },
+  &quot;data&quot;: {
+    &quot;type&quot;: &quot;people&quot;,
+    &quot;id&quot;: &quot;12&quot;
+  }
+}
+</code></pre></div>
+<p>If the above relationship is empty, then a <code>GET</code> request to the same URL would
+return:</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">HTTP/1.1 200 OK
+Content-Type: application/vnd.api+json
+
+{
+  &quot;links&quot;: {
+    &quot;self&quot;: &quot;/articles/1/relationships/author&quot;,
+    &quot;related&quot;: &quot;/articles/1/author&quot;
+  },
+  &quot;data&quot;: null
+}
+</code></pre></div>
+<p>A <code>GET</code> request to a to-many relationship URL could return:</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">HTTP/1.1 200 OK
+Content-Type: application/vnd.api+json
+
+{
+  &quot;links&quot;: {
+    &quot;self&quot;: &quot;/articles/1/relationships/tags&quot;,
+    &quot;related&quot;: &quot;/articles/1/tags&quot;
+  },
+  &quot;data&quot;: [
+    { &quot;type&quot;: &quot;tags&quot;, &quot;id&quot;: &quot;2&quot; },
+    { &quot;type&quot;: &quot;tags&quot;, &quot;id&quot;: &quot;3&quot; }
+  ]
+}
+</code></pre></div>
+<p>If the above relationship is empty, then a <code>GET</code> request to the same URL would
+return:</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">HTTP/1.1 200 OK
+Content-Type: application/vnd.api+json
+
+{
+  &quot;links&quot;: {
+    &quot;self&quot;: &quot;/articles/1/relationships/tags&quot;,
+    &quot;related&quot;: &quot;/articles/1/tags&quot;
+  },
+  &quot;data&quot;: []
+}
+</code></pre></div>
+<h5>404 Not Found <a href="#fetching-relationships-responses-404" id="fetching-relationships-responses-404" class="headerlink"></a></h5>
+
+<p>A server <strong>MUST</strong> return <code>404 Not Found</code> when processing a request to fetch
+a relationship URL that does not exist.</p>
+
+<blockquote>
+<p>Note: This can happen when the parent resource of the relationship
+does not exist. For example, when <code>/articles/1</code> does not exist, request to
+<code>/articles/1/relationships/tags</code> returns <code>404 Not Found</code>.</p>
+</blockquote>
+
+<p>If a relationship URL exists but the relationship is empty, then
+<code>200 OK</code> <strong>MUST</strong> be returned, as described above.</p>
+
+<h5>Other Responses <a href="#fetching-relationships-responses-other" id="fetching-relationships-responses-other" class="headerlink"></a></h5>
+
+<p>A server <strong>MAY</strong> respond with other HTTP status codes.</p>
+
+<p>A server <strong>MAY</strong> include <a href="#errors">error details</a> with error responses.</p>
+
+<p>A server <strong>MUST</strong> prepare responses, and a client <strong>MUST</strong> interpret
+responses, in accordance with
+<a href="http://tools.ietf.org/html/rfc7231"><code>HTTP semantics</code></a>.</p>
+
+<h3>Inclusion of Related Resources <a href="#fetching-includes" id="fetching-includes" class="headerlink"></a></h3>
+
+<p>An endpoint <strong>MAY</strong> return resources related to the primary data by default.</p>
+
+<p>An endpoint <strong>MAY</strong> also support an <code>include</code> request parameter to allow the
+client to customize which related resources should be returned.</p>
+
+<p>If an endpoint does not support the <code>include</code> parameter, it must respond with
+<code>400 Bad Request</code> to any requests that include it.</p>
+
+<p>If an endpoint supports the <code>include</code> parameter and a client supplies it,
+the server <strong>MUST NOT</strong> include other resource objects in the <code>included</code>
+section of the compound document.</p>
+
+<p>The value of the <code>include</code> parameter <strong>MUST</strong> be a comma-separated (U+002C
+COMMA, &quot;,&quot;) list of relationship paths. A relationship path is a dot-separated
+(U+002E FULL-STOP, &quot;.&quot;) list of relationship names. Each relationship name
+<strong>MUST</strong> be identical to the key in the <code>&quot;relationships&quot;</code> member of its parent
+resource object.</p>
+
+<blockquote>
+<p>Note: For example, a relationship path could be <code>comments.author</code>, where
+<code>comments</code> is a relationship listed under a <code>articles</code> resource object, and
+<code>author</code> is a relationship listed under a <code>comments</code> resource object.</p>
+</blockquote>
+
+<p>For instance, comments could be requested with an article:</p>
+<div class="highlight"><pre><code class="http language-http" data-lang="http">GET /articles/1?include=comments
+</code></pre></div>
+<p>In order to request resources related to other resources, a dot-separated path
+for each relationship name can be specified:</p>
+<div class="highlight"><pre><code class="http language-http" data-lang="http">GET /articles/1?include=comments.author
+</code></pre></div>
+<blockquote>
+<p>Note: Because compound documents require full linkage, intermediate
+resources in a multi-part path must be returned along with the leaf nodes.
+For example, a response to a request for <code>comments.author</code> should
+automatically include <code>comments</code> as well as the <code>author</code> of each of those
+<code>comments</code>.</p>
+
+<p>Note: A server may choose to expose a deeply nested relationship such as
+<code>comments.author</code> as a direct relationship with an alias such as
+<code>comment-authors</code>. This would allow a client to request
+<code>/articles/1?include=comment-authors</code> instead of
+<code>/articles/1?include=comments.author</code>. By abstracting the nested
+relationship with an alias, the server can still provide full linkage in
+compound documents without including potentially unwanted intermediate
+resources.</p>
+</blockquote>
+
+<p>Multiple related resources can be requested in a comma-separated list:</p>
+<div class="highlight"><pre><code class="http language-http" data-lang="http">GET /articles/1?include=author,comments.author
+</code></pre></div>
+<p>Furthermore, related resources can be requested from a relationship endpoint:</p>
+<div class="highlight"><pre><code class="http language-http" data-lang="http">GET /articles/1/relationships/comments?include=comments.author
+</code></pre></div>
+<p>In this case, the primary data would be a collection of <a href="#document-structure-resource-identifier-objects">resource identifier
+objects</a> that represent linkage to comments for an article, while the full
+comments and comment authors would be returned as included data.</p>
+
+<blockquote>
+<p>Note: This section applies to any endpoint that responds with primary
+data, regardless of the request type. For instance, a server could support
+the inclusion of related resources along with a <code>POST</code> request to create a
+resource or relationship.</p>
+</blockquote>
+
+<h3>Sparse Fieldsets <a href="#fetching-sparse-fieldsets" id="fetching-sparse-fieldsets" class="headerlink"></a></h3>
+
+<p>A client <strong>MAY</strong> request that an endpoint return only specific <a href="#document-structure-resource-object-fields">fields</a> in the
+response on a per-type basis by including a <code>fields[TYPE]</code> parameter.</p>
+
+<p>The value of the <code>fields</code> parameter <strong>MUST</strong> be a comma-separated (U+002C
+COMMA, &quot;,&quot;) list that refers to the name(s) of the fields to be returned.</p>
+
+<p>If a client requests a restricted set of <a href="#document-structure-resource-object-fields">fields</a>, an endpoint <strong>MUST NOT</strong>
+include additional <a href="#document-structure-resource-object-fields">fields</a> in the response.</p>
+<div class="highlight"><pre><code class="http language-http" data-lang="http">GET /articles?include=author&amp;fields[articles]=title,body&amp;fields[people]=name
+</code></pre></div>
+<blockquote>
+<p>Note: This section applies to any endpoint that responds with resources as
+primary or included data, regardless of the request type. For instance, a
+server could support sparse fieldsets along with a <code>POST</code> request to create
+a resource.</p>
+</blockquote>
+
+<h3>Sorting <a href="#fetching-sorting" id="fetching-sorting" class="headerlink"></a></h3>
+
+<p>A server <strong>MAY</strong> choose to support requests to sort resource collections
+according to one or more criteria (&quot;sort fields&quot;).</p>
+
+<blockquote>
+<p>Note: Although recommended, sort fields do not necessarily need to
+correspond to resource attribute and association names.</p>
+
+<p>Note: It is recommended that dot-separated (U+002E FULL-STOP, &quot;.&quot;) sort
+fields be used to request sorting based upon relationship attributes. For
+example, a sort field of <code>author.name</code> could be used to request that the
+primary data be sorted based upon the <code>name</code> attribute of the <code>author</code>
+relationship.</p>
+</blockquote>
+
+<p>An endpoint <strong>MAY</strong> support requests to sort the primary data with a <code>sort</code>
+query parameter. The value for <code>sort</code> <strong>MUST</strong> represent sort fields.</p>
+<div class="highlight"><pre><code class="http language-http" data-lang="http">GET /people?sort=age
+</code></pre></div>
+<p>An endpoint <strong>MAY</strong> support multiple sort fields by allowing comma-separated
+(U+002C COMMA, &quot;,&quot;) sort fields. Sort fields <strong>SHOULD</strong> be applied in the
+order specified.</p>
+<div class="highlight"><pre><code class="http language-http" data-lang="http">GET /people?sort=age,name
+</code></pre></div>
+<p>The sort order for each sort field <strong>MUST</strong> be ascending unless it is prefixed
+with a minus (U+002D HYPHEN-MINUS, &quot;-&quot;), in which case it <strong>MUST</strong> be descending.</p>
+<div class="highlight"><pre><code class="http language-http" data-lang="http">GET /articles?sort=-created,title
+</code></pre></div>
+<p>The above example should return the newest articles first. Any articles
+created on the same date will then be sorted by their title in ascending
+alphabetical order.</p>
+
+<p>If the server does not support sorting as specified in the query parameter
+<code>sort</code>, it <strong>MUST</strong> return <code>400 Bad Request</code>.</p>
+
+<p>If sorting is supported by the server and requested by the client via query
+parameter <code>sort</code>, the server <strong>MUST</strong> return elements of the top-level
+<code>data</code> array of the response ordered according to the criteria specified.
+The server <strong>MAY</strong> apply default sorting rules to top-level <code>data</code> if
+request parameter <code>sort</code> is not specified.</p>
+
+<blockquote>
+<p>Note: This section applies to any endpoint that responds with a resource
+collection as primary data, regardless of the request type.</p>
+</blockquote>
+
+<h3>Pagination <a href="#fetching-pagination" id="fetching-pagination" class="headerlink"></a></h3>
+
+<p>A server <strong>MAY</strong> choose to limit the number of resources returned in a response
+to a subset (&quot;page&quot;) of the whole set available.</p>
+
+<p>A server <strong>MAY</strong> provide links to traverse a paginated data set (&quot;pagination
+links&quot;).</p>
+
+<p>Pagination links <strong>MUST</strong> appear in the link object that corresponds to a
+collection. To paginate the primary data, supply pagination links in the
+top-level <code>links</code> object. To paginate an included collection returned in
+a compound document, supply pagination links in the corresponding link
+object.</p>
+
+<p>The following keys <strong>MUST</strong> be used for pagination links:</p>
+
+<ul>
+<li><code>&quot;first&quot;</code> - the first page of data</li>
+<li><code>&quot;last&quot;</code> - the last page of data</li>
+<li><code>&quot;prev&quot;</code> - the previous page of data</li>
+<li><code>&quot;next&quot;</code> - the next page of data</li>
+</ul>
+
+<p>Keys <strong>MUST</strong> either be omitted or have a <code>null</code> value to indicate that a
+particular link is unavailable.</p>
+
+<p>Concepts of order, as expressed in the naming of pagination links, <strong>MUST</strong>
+remain consistent with JSON API&#39;s <a href="#fetching-sorting">sorting rules</a>.</p>
+
+<p>The <code>page</code> query parameter is reserved for pagination. Servers and clients
+<strong>SHOULD</strong> use this key for pagination operations.</p>
+
+<blockquote>
+<p>Note: JSON API is agnostic about the pagination strategy used by a server.
+Effective pagination strategies include (but are not limited to):
+page-based, offset-based, and cursor-based. The <code>page</code> query parameter can
+be used as a basis for any of these strategies. For example, a page-based
+strategy might use query parameters such as <code>page[number]</code> and <code>page[size]</code>,
+an offset-based strategy might use <code>page[offset]</code> and <code>page[limit]</code>, while a
+cursor-based strategy might use <code>page[cursor]</code>.</p>
+
+<p>Note: This section applies to any endpoint that responds with a resource
+collection as primary data, regardless of the request type.</p>
+</blockquote>
+
+<h3>Filtering <a href="#fetching-filtering" id="fetching-filtering" class="headerlink"></a></h3>
+
+<p>The <code>filter</code> query parameter is reserved for filtering data. Servers and clients
+<strong>SHOULD</strong> use this key for filtering operations.</p>
+
+<blockquote>
+<p>Note: JSON API is agnostic about the strategies supported by a server. The
+<code>filter</code> query parameter can be used as the basis for any number of filtering
+strategies.</p>
+</blockquote>
+
+<h2>Creating, Updating and Deleting Resources <a href="#crud" id="crud" class="headerlink"></a></h2>
+
+<p>A server <strong>MAY</strong> allow resources of a given type to be created. It <strong>MAY</strong>
+also allow existing resources to be modified or deleted.</p>
+
+<p>Any requests that contain content <strong>MUST</strong> include a <code>Content-Type</code> header
+whose value is <code>application/vnd.api+json</code>. This header value <strong>MUST</strong> also
+include media type extensions relevant to the request.</p>
+
+<p>A request <strong>MUST</strong> completely succeed or fail (in a single &quot;transaction&quot;). No
+partial updates are allowed.</p>
+
+<blockquote>
+<p>Note: The <code>type</code> member is required in every resource object throughout requests and
+responses in JSON API. There are some cases, such as when <code>POST</code>ing to an
+endpoint representing heterogenous data, when the <code>type</code> could not be inferred
+from the endpoint. However, picking and choosing when it is required would be
+confusing; it would be hard to remember when it was required and when it was
+not. Therefore, to improve consistency and minimize confusion, <code>type</code> is
+always required.</p>
+</blockquote>
+
+<h3>Creating Resources <a href="#crud-creating" id="crud-creating" class="headerlink"></a></h3>
+
+<p>A resource can be created by sending a <code>POST</code> request to a URL that represents
+a collection of resources. The request <strong>MUST</strong> include a single resource object
+as primary data. The resource object <strong>MUST</strong> contain at least a <code>type</code> member.</p>
+
+<p>For instance, a new photo might be created with the following request:</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">POST /photos
+Content-Type: application/vnd.api+json
+Accept: application/vnd.api+json
+
+{
+  &quot;data&quot;: {
+    &quot;type&quot;: &quot;photos&quot;,
+    &quot;attributes&quot;: {
+      &quot;title&quot;: &quot;Ember Hamster&quot;,
+      &quot;src&quot;: &quot;http://example.com/images/productivity.png&quot;
+    },
+    &quot;relationships&quot;: {
+      &quot;photographer&quot;: {
+        &quot;data&quot;: { &quot;type&quot;: &quot;people&quot;, &quot;id&quot;: &quot;9&quot; }
+      }
+    }
+  }
+}
+</code></pre></div>
+<p>If a relationship is provided in the <code>&quot;relationships&quot;</code> member of the
+resource object, its value <strong>MUST</strong> be a relationship object with a <code>&quot;data&quot;</code>
+member. The value of this key represents the linkage the new resource is to
+have.</p>
+
+<h4>Client-Generated IDs <a href="#crud-creating-client-ids" id="crud-creating-client-ids" class="headerlink"></a></h4>
+
+<p>A server <strong>MAY</strong> accept a client-generated ID along with a request to create
+a resource. An ID <strong>MUST</strong> be specified with an <code>&quot;id&quot;</code> key, the value of
+which <strong>MUST</strong> be a universally unique identifier. The client <strong>SHOULD</strong> use
+a properly generated and formatted <em>UUID</em> as described in RFC 4122
+[<a href="http://tools.ietf.org/html/rfc4122.html">RFC4122</a>].</p>
+
+<blockquote>
+<p>NOTE: In some use-cases, such as importing data from another source, it
+may be possible to use something other than a UUID that is still guaranteed
+to be globally unique. Do not use anything other than a UUID unless you are
+100% confident that the strategy you are using indeed generates globally
+unique indentifiers.</p>
+</blockquote>
+
+<p>For example:</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">POST /photos
+Content-Type: application/vnd.api+json
+Accept: application/vnd.api+json
+
+{
+  &quot;data&quot;: {
+    &quot;type&quot;: &quot;photos&quot;,
+    &quot;id&quot;: &quot;550e8400-e29b-41d4-a716-446655440000&quot;,
+    &quot;attributes&quot;: {
+      &quot;title&quot;: &quot;Ember Hamster&quot;,
+      &quot;src&quot;: &quot;http://example.com/images/productivity.png&quot;
+    }
+  }
+}
+</code></pre></div>
+<p>A server <strong>MUST</strong> return <code>403 Forbidden</code> in response to an unsupported request
+to create a resource with a client-generated ID.</p>
+
+<h4>Responses <a href="#crud-creating-responses" id="crud-creating-responses" class="headerlink"></a></h4>
+
+<h5>201 Created <a href="#crud-creating-responses-201" id="crud-creating-responses-201" class="headerlink"></a></h5>
+
+<p>If a <code>POST</code> request did not include a <a href="#crud-creating-client-ids">Client-Generated
+ID</a> and the requested resource has been created
+successfully, the server <strong>MUST</strong> return a <code>201 Created</code> status code.</p>
+
+<p>The response <strong>SHOULD</strong> include a <code>Location</code> header identifying the location
+of the newly created resource.</p>
+
+<p>The response <strong>MUST</strong> also include a document that contains the primary
+resource created.</p>
+
+<p>If the resource object returned by the response contains a <code>self</code> key in its
+<code>links</code> member, the value of the <code>self</code> member <strong>MUST</strong> match the value of
+the <code>Location</code> header.</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">HTTP/1.1 201 Created
+Location: http://example.com/photos/550e8400-e29b-41d4-a716-446655440000
+Content-Type: application/vnd.api+json
+
+{
+  &quot;data&quot;: {
+    &quot;type&quot;: &quot;photos&quot;,
+    &quot;id&quot;: &quot;550e8400-e29b-41d4-a716-446655440000&quot;,
+    &quot;attributes&quot;: {
+      &quot;title&quot;: &quot;Ember Hamster&quot;,
+      &quot;src&quot;: &quot;http://example.com/images/productivity.png&quot;
+    },
+    &quot;links&quot;: {
+      &quot;self&quot;: &quot;http://example.com/photos/550e8400-e29b-41d4-a716-446655440000&quot;
+    }
+  }
+}
+</code></pre></div>
+<h5>202 Accepted <a href="#crud-creating-responses-202" id="crud-creating-responses-202" class="headerlink"></a></h5>
+
+<p>If a request to create a resource has been accepted for processing, but the
+processing has not been completed by the time the server responds, the
+server <strong>MUST</strong> return a <code>202 Accepted</code> status code.</p>
+
+<h5>204 No Content <a href="#crud-creating-responses-204" id="crud-creating-responses-204" class="headerlink"></a></h5>
+
+<p>If a <code>POST</code> request <em>did</em> include a <a href="#crud-creating-client-ids">Client-Generated
+ID</a> and the requested resource has been created
+successfully, the server <strong>MUST</strong> return either a <code>201 Created</code> status code
+and response document (as described above) or a <code>204 No Content</code> status code
+with no response document.</p>
+
+<blockquote>
+<p>Note: If a <code>204</code> response is received the client should consider the resource
+object sent in the request to be accepted by the server, as if the server
+had returned it back in a <code>201</code> response.</p>
+</blockquote>
+
+<h5>403 Forbidden <a href="#crud-creating-responses-403" id="crud-creating-responses-403" class="headerlink"></a></h5>
+
+<p>A server <strong>MAY</strong> return <code>403 Forbidden</code> in response to an unsupported request
+to create a resource.</p>
+
+<h5>409 Conflict <a href="#crud-creating-responses-409" id="crud-creating-responses-409" class="headerlink"></a></h5>
+
+<p>A server <strong>MUST</strong> return <code>409 Conflict</code> when processing a <code>POST</code> request to
+create a resource with a client-generated ID that already exists.</p>
+
+<p>A server <strong>MUST</strong> return <code>409 Conflict</code> when processing a <code>POST</code> request in
+which the resource&#39;s <code>type</code> is not among the type(s) that constitute the
+collection represented by the endpoint.</p>
+
+<p>A server <strong>SHOULD</strong> include error details and provide enough information to
+recognize the source of the conflict.</p>
+
+<h5>Other Responses <a href="#crud-creating-responses-other" id="crud-creating-responses-other" class="headerlink"></a></h5>
+
+<p>A server <strong>MAY</strong> respond with other HTTP status codes.</p>
+
+<p>A server <strong>MAY</strong> include <a href="#errors">error details</a> with error responses.</p>
+
+<p>A server <strong>MUST</strong> prepare responses, and a client <strong>MUST</strong> interpret
+responses, in accordance with
+<a href="http://tools.ietf.org/html/rfc7231"><code>HTTP semantics</code></a>.</p>
+
+<h3>Updating Resources <a href="#crud-updating" id="crud-updating" class="headerlink"></a></h3>
+
+<p>A resource&#39;s attributes and relationships can be updated by sending a <code>PATCH</code>
+request to the URL that represents the resource.</p>
+
+<p>The URL for a resource can be obtained in the <code>self</code> link of the resource
+object. Alternatively, when a <code>GET</code> request returns a single resource object as
+primary data, the same request URL can be used for updates.</p>
+
+<p>The <code>PATCH</code> request <strong>MUST</strong> include a single resource object as primary data.
+The resource object <strong>MUST</strong> contain <code>type</code> and <code>id</code> members.</p>
+
+<p>For example:</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">PATCH /articles/1
+Content-Type: application/vnd.api+json
+Accept: application/vnd.api+json
+
+{
+  &quot;data&quot;: {
+    &quot;type&quot;: &quot;articles&quot;,
+    &quot;id&quot;: &quot;1&quot;,
+    &quot;attributes&quot;: {
+      &quot;title&quot;: &quot;To TDD or Not&quot;
+    }
+  }
+}
+</code></pre></div>
+<h4>Updating a Resource&#39;s Attributes <a href="#crud-updating-resource-attributes" id="crud-updating-resource-attributes" class="headerlink"></a></h4>
+
+<p>Any or all of a resource&#39;s attributes <strong>MAY</strong> be included in the resource
+object included in a <code>PATCH</code> request.</p>
+
+<p>If a request does not include all of the <a href="#document-structure-resource-object-fields">fields</a> for a resource, the server
+<strong>MUST</strong> interpret the missing <a href="#document-structure-resource-object-fields">fields</a> as if they were included with their
+current values. It <strong>MUST NOT</strong> interpret them as <code>null</code> values.</p>
+
+<p>For example, the following <code>PATCH</code> request is interpreted as a request to
+update only the <code>title</code> and <code>text</code> attributes of an article:</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">PATCH /articles/1
+Content-Type: application/vnd.api+json
+Accept: application/vnd.api+json
+
+{
+  &quot;data&quot;: {
+    &quot;type&quot;: &quot;articles&quot;,
+    &quot;id&quot;: &quot;1&quot;,
+    &quot;attributes&quot;: {
+      &quot;title&quot;: &quot;To TDD or Not&quot;,
+      &quot;text&quot;: &quot;TLDR; It&#39;s complicated... but check your test coverage regardless.&quot;
+    }
+  }
+}
+</code></pre></div>
+<h4>Updating a Resource&#39;s Relationships <a href="#crud-updating-resource-relationships" id="crud-updating-resource-relationships" class="headerlink"></a></h4>
+
+<p>If a relationship is provided in the <code>&quot;relationships&quot;</code> member of a resource
+object in a <code>PATCH</code> request, its value <strong>MUST</strong> be a relationship object
+with a <code>&quot;data&quot;</code> member. The relationship&#39;s value will be replaced with the
+value specified in this member.</p>
+
+<p>For instance, the following <code>PATCH</code> request will update the <code>title</code> attribute
+and <code>author</code> relationship of an article:</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">PATCH /articles/1
+Content-Type: application/vnd.api+json
+Accept: application/vnd.api+json
+
+{
+  &quot;data&quot;: {
+    &quot;type&quot;: &quot;articles&quot;,
+    &quot;id&quot;: &quot;1&quot;,
+    &quot;attributes&quot;: {
+      &quot;title&quot;: &quot;Rails is a Melting Pot&quot;
+    },
+    &quot;relationships&quot;: {
+      &quot;author&quot;: {
+        &quot;data&quot;: { &quot;type&quot;: &quot;people&quot;, &quot;id&quot;: &quot;1&quot; }
+      }
+    }
+  }
+}
+</code></pre></div>
+<p>Likewise, the following <code>PATCH</code> request performs a complete replacement of
+the <code>tags</code> for an article:</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">PATCH /articles/1
+Content-Type: application/vnd.api+json
+Accept: application/vnd.api+json
+
+{
+  &quot;data&quot;: {
+    &quot;type&quot;: &quot;articles&quot;,
+    &quot;id&quot;: &quot;1&quot;,
+    &quot;attributes&quot;: {
+      &quot;title&quot;: &quot;Rails is a Melting Pot&quot;
+    },
+    &quot;relationships&quot;: {
+      &quot;tags&quot;: {
+        &quot;data&quot;: [
+          { &quot;type&quot;: &quot;tags&quot;, &quot;id&quot;: &quot;2&quot; },
+          { &quot;type&quot;: &quot;tags&quot;, &quot;id&quot;: &quot;3&quot; }
+        ]
+      }
+    }
+  }
+}
+</code></pre></div>
+<p>A server <strong>MAY</strong> reject an attempt to do a full replacement of a to-many
+relationship. In such a case, the server <strong>MUST</strong> reject the entire update,
+and return a <code>403 Forbidden</code> response.</p>
+
+<blockquote>
+<p>Note: Since full replacement may be a very dangerous operation, a server
+may choose to disallow it. For example, a server may reject full replacement if
+it has not provided the client with the full list of associated objects, and
+does not want to allow deletion of records the client has not seen.</p>
+</blockquote>
+
+<h4>Responses <a href="#crud-updating-responses" id="crud-updating-responses" class="headerlink"></a></h4>
+
+<h5>202 Accepted <a href="#crud-updating-responses-202" id="crud-updating-responses-202" class="headerlink"></a></h5>
+
+<p>If an update request has been accepted for processing, but the processing
+has not been completed by the time the server responds, the server <strong>MUST</strong>
+return a <code>202 Accepted</code> status code.</p>
+
+<h5>200 OK <a href="#crud-updating-responses-200" id="crud-updating-responses-200" class="headerlink"></a></h5>
+
+<p>If a server accepts an update but also changes the resource(s) in other ways
+than those specified by the request (for example, updating the <code>updated-at</code>
+attribute or a computed <code>sha</code>), it <strong>MUST</strong> return a <code>200 OK</code> response.</p>
+
+<p>The response document for a <code>200 OK</code> <strong>MUST</strong> include a representation of
+the updated resource(s) as if a <code>GET</code> request was made to the request URL.</p>
+
+<h5>204 No Content <a href="#crud-updating-responses-204" id="crud-updating-responses-204" class="headerlink"></a></h5>
+
+<p>If an update is successful and the server doesn&#39;t update any attributes besides
+those provided, the server <strong>MUST</strong> return either a <code>200 OK</code> status code and
+response document (as described above) or a <code>204 No Content</code> status code with no
+response document.</p>
+
+<h5>403 Forbidden <a href="#crud-updating-relationship-responses-403" id="crud-updating-relationship-responses-403" class="headerlink"></a></h5>
+
+<p>A server <strong>MUST</strong> return <code>403 Forbidden</code> in response to an unsupported request
+to update a resource or relationship.</p>
+
+<h5>404 Not Found <a href="#crud-updating-responses-404" id="crud-updating-responses-404" class="headerlink"></a></h5>
+
+<p>A server <strong>MUST</strong> return <code>404 Not Found</code> when processing a request to modify
+a resource that does not exist.</p>
+
+<p>A server <strong>MUST</strong> return <code>404 Not Found</code> when processing a request that
+references a related resource that does not exist.</p>
+
+<h5>409 Conflict <a href="#crud-updating-responses-409" id="crud-updating-responses-409" class="headerlink"></a></h5>
+
+<p>A server <strong>MAY</strong> return <code>409 Conflict</code> when processing a <code>PATCH</code> request to
+update a resource if that update would violate other server-enforced
+constraints (such as a uniqueness constraint on a property other than <code>id</code>).</p>
+
+<p>A server <strong>MUST</strong> return <code>409 Conflict</code> when processing a <code>PATCH</code> request in
+which the resource&#39;s <code>type</code> and <code>id</code> do not match the server&#39;s endpoint.</p>
+
+<p>A server <strong>SHOULD</strong> include error details and provide enough information to
+recognize the source of the conflict.</p>
+
+<h5>Other Responses <a href="#crud-updating-responses-other" id="crud-updating-responses-other" class="headerlink"></a></h5>
+
+<p>A server <strong>MAY</strong> respond with other HTTP status codes.</p>
+
+<p>A server <strong>MAY</strong> include <a href="#errors">error details</a> with error responses.</p>
+
+<p>A server <strong>MUST</strong> prepare responses, and a client <strong>MUST</strong> interpret
+responses, in accordance with
+<a href="http://tools.ietf.org/html/rfc7231"><code>HTTP semantics</code></a>.</p>
+
+<h3>Updating Relationships <a href="#crud-updating-relationships" id="crud-updating-relationships" class="headerlink"></a></h3>
+
+<p>Although relationships can be modified along with resources (as described
+above), JSON API also supports updating of relationships independently at
+<em>relationship URLs</em>.</p>
+
+<p>If a <em>relationship&#39;s <code>links</code> object</em> contains a <em>relationship URL</em>, then the
+server <strong>MUST</strong> respond to requests to that URL to update the relationship.</p>
+
+<blockquote>
+<p>Note: Relationships are updated without exposing the underlying server
+semantics, such as foreign keys. Furthermore, relationships can be updated
+without necessarily affecting the related resources. For example, if an article
+has many authors, it is possible to remove one of the authors from the article
+without deleting the person itself. Similarly, if an article has many tags, it
+is possible to add or remove tags. Under the hood on the server, the first
+of these examples might be implemented with a foreign key, while the second
+could be implemented with a join table, but the JSON API protocol would be
+the same in both cases.</p>
+
+<p>Note: A server may choose to delete the underlying resource if a
+relationship is deleted (as a garbage collection measure).</p>
+</blockquote>
+
+<h4>Updating To-One Relationships <a href="#crud-updating-to-one-relationships" id="crud-updating-to-one-relationships" class="headerlink"></a></h4>
+
+<p>A server <strong>MUST</strong> respond to <code>PATCH</code> requests to a <em>to-one relationship URL</em> as
+described below.</p>
+
+<p>The <code>PATCH</code> request <strong>MUST</strong> include a top-level member named <code>data</code> containing
+one of:</p>
+
+<ul>
+<li>a <a href="#document-structure-resource-identifier-objects">resource identifier object</a> corresponding to the new related resource.</li>
+<li><code>null</code>, to remove the relationship.</li>
+</ul>
+
+<p>For example, the following request updates the author of an article:</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">PATCH /articles/1/relationships/author
+Content-Type: application/vnd.api+json
+Accept: application/vnd.api+json
+
+{
+  &quot;data&quot;: { &quot;type&quot;: &quot;people&quot;, &quot;id&quot;: &quot;12&quot; }
+}
+</code></pre></div>
+<p>And the following request clears the author of the same article:</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">PATCH /articles/1/relationships/author
+Content-Type: application/vnd.api+json
+Accept: application/vnd.api+json
+
+{
+  &quot;data&quot;: null
+}
+</code></pre></div>
+<p>If the relationship is updated successfully then the server <strong>MUST</strong> return
+a <code>204 No Content</code> response.</p>
+
+<h4>Updating To-Many Relationships <a href="#crud-updating-to-many-relationships" id="crud-updating-to-many-relationships" class="headerlink"></a></h4>
+
+<p>A server <strong>MUST</strong> respond to <code>PATCH</code>, <code>POST</code>, and <code>DELETE</code> requests to a
+<em>to-many relationship URL</em> as described below.</p>
+
+<p>For all request types, the body <strong>MUST</strong> contain a <code>data</code> member whose value
+is an empty array or an array of <a href="#document-structure-resource-identifier-objects">resource identifier objects</a>.</p>
+
+<p>If a client makes a <code>PATCH</code> request to a <em>to-many relationship URL</em>, the
+server <strong>MUST</strong> either completely replace every member of the relationship,
+return an appropriate error response if some resources can not be found or
+accessed, or return a <code>403 Forbidden</code> response if complete replacement is
+not allowed by the server.</p>
+
+<p>For example, the following request replaces every tag for an article:</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">PATCH /articles/1/relationships/tags
+Content-Type: application/vnd.api+json
+Accept: application/vnd.api+json
+
+{
+  &quot;data&quot;: [
+    { &quot;type&quot;: &quot;tags&quot;, &quot;id&quot;: &quot;2&quot; },
+    { &quot;type&quot;: &quot;tags&quot;, &quot;id&quot;: &quot;3&quot; }
+  ]
+}
+</code></pre></div>
+<p>And the following request clears every tag for an article:</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">PATCH /articles/1/relationships/tags
+Content-Type: application/vnd.api+json
+Accept: application/vnd.api+json
+
+{
+  &quot;data&quot;: []
+}
+</code></pre></div>
+<p>If a client makes a <code>POST</code> request to a <em>relationship URL</em>, the server
+<strong>MUST</strong> append the specified members to the relationship using set
+semantics. This means that if a given <code>type</code> and <code>id</code> is already in the
+relationship, the server <strong>MUST NOT</strong> add it again.</p>
+
+<blockquote>
+<p>Note: This matches the semantics of databases that use foreign keys for
+has-many relationships. Document-based storage should check the has-many
+relationship before appending to avoid duplicates.</p>
+</blockquote>
+
+<p>If all of the specified resources can be added to, or are already present
+in, the relationship then the server <strong>MUST</strong> return a successful <code>204 No
+Content</code> response.</p>
+
+<blockquote>
+<p>Note: This approach ensures that a request is successful if the server&#39;s
+state matches the requested state, and helps avoid pointless race conditions
+caused by multiple clients making the same changes to a relationship.</p>
+</blockquote>
+
+<p>In the following example, the comment with ID <code>123</code> is added to the list of
+comments for the article with ID <code>1</code>:</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">POST /articles/1/relationships/comments
+Content-Type: application/vnd.api+json
+Accept: application/vnd.api+json
+
+{
+  &quot;data&quot;: [
+    { &quot;type&quot;: &quot;comments&quot;, &quot;id&quot;: &quot;123&quot; }
+  ]
+}
+</code></pre></div>
+<p>If the client makes a <code>DELETE</code> request to a <em>relationship URL</em>, the server
+<strong>MUST</strong> delete the specified members from the relationship or return a <code>403
+Forbidden</code> response. If all of the specified resources are able to be
+removed from, or are already missing from, the relationship then the server
+<strong>MUST</strong> return a successful <code>204 No Content</code> response.</p>
+
+<blockquote>
+<p>Note: As described above for <code>POST</code> requests, this approach helps avoid
+pointless race conditions between multiple clients making the same changes.</p>
+</blockquote>
+
+<p>Relationship members are specified in the same way as in the <code>POST</code> request.</p>
+
+<p>In the following example, comments with IDs of <code>12</code> and <code>13</code> are removed
+from the list of comments for the article with ID <code>1</code>:</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">DELETE /articles/1/relationships/comments
+Content-Type: application/vnd.api+json
+Accept: application/vnd.api+json
+
+{
+  &quot;data&quot;: [
+    { &quot;type&quot;: &quot;comments&quot;, &quot;id&quot;: &quot;12&quot; },
+    { &quot;type&quot;: &quot;comments&quot;, &quot;id&quot;: &quot;13&quot; }
+  ]
+}
+</code></pre></div>
+<blockquote>
+<p>Note: RFC 7231 specifies that a DELETE request may include a body, but
+that a server may reject the request. This spec defines the semantics of a
+server, and we are defining its semantics for JSON API.</p>
+</blockquote>
+
+<h4>Responses <a href="#crud-updating-relationship-responses" id="crud-updating-relationship-responses" class="headerlink"></a></h4>
+
+<h5>202 Accepted <a href="#crud-updating-relationship-responses-202" id="crud-updating-relationship-responses-202" class="headerlink"></a></h5>
+
+<p>If a relationship update request has been accepted for processing, but the
+processing has not been completed by the time the server responds, the
+server <strong>MUST</strong> return a <code>202 Accepted</code> status code.</p>
+
+<h5>204 No Content <a href="#crud-updating-relationship-responses-204" id="crud-updating-relationship-responses-204" class="headerlink"></a></h5>
+
+<p>A server <strong>MUST</strong> return a <code>204 No Content</code> status code if an update is
+successful and the client&#39;s current attributes remain up to date.</p>
+
+<blockquote>
+<p>Note: This is the appropriate response to a <code>POST</code> request sent to a
+<em>to-many relationship URL</em> when that relationship already exists. It is also
+the appropriate response to a <code>DELETE</code> request sent to a <em>to-many
+relationship URL</em> when that relationship does not exist.</p>
+</blockquote>
+
+<h5>403 Forbidden <a href="#crud-updating-relationship-responses-403" id="crud-updating-relationship-responses-403" class="headerlink"></a></h5>
+
+<p>A server <strong>MUST</strong> return <code>403 Forbidden</code> in response to an unsupported request
+to update a relationship.</p>
+
+<h5>Other Responses <a href="#crud-updating-relationship-responses-other" id="crud-updating-relationship-responses-other" class="headerlink"></a></h5>
+
+<p>A server <strong>MAY</strong> respond with other HTTP status codes.</p>
+
+<p>A server <strong>MAY</strong> include <a href="#errors">error details</a> with error responses.</p>
+
+<p>A server <strong>MUST</strong> prepare responses, and a client <strong>MUST</strong> interpret
+responses, in accordance with
+<a href="http://tools.ietf.org/html/rfc7231"><code>HTTP semantics</code></a>.</p>
+
+<h3>Deleting Resources <a href="#crud-deleting" id="crud-deleting" class="headerlink"></a></h3>
+
+<p>An individual resource can be <em>deleted</em> by making a <code>DELETE</code> request to the
+resource&#39;s URL:</p>
+<div class="highlight"><pre><code class="http language-http" data-lang="http">DELETE /photos/1
+</code></pre></div>
+<h4>Responses <a href="#crud-deleting-responses" id="crud-deleting-responses" class="headerlink"></a></h4>
+
+<h5>202 Accepted <a href="#crud-deleting-responses-202" id="crud-deleting-responses-202" class="headerlink"></a></h5>
+
+<p>If a deletion request has been accepted for processing, but the processing has
+not been completed by the time the server responds, the server <strong>MUST</strong>
+return a <code>202 Accepted</code> status code.</p>
+
+<h5>204 No Content <a href="#crud-deleting-responses-204" id="crud-deleting-responses-204" class="headerlink"></a></h5>
+
+<p>A server <strong>MUST</strong> return a <code>204 No Content</code> status code if a deletion
+request is successful.</p>
+
+<h5>Other Responses <a href="#crud-deleting-responses-other" id="crud-deleting-responses-other" class="headerlink"></a></h5>
+
+<p>A server <strong>MAY</strong> respond with other HTTP status codes.</p>
+
+<p>A server <strong>MAY</strong> include <a href="#errors">error details</a> with error responses.</p>
+
+<p>A server <strong>MUST</strong> prepare responses, and a client <strong>MUST</strong> interpret
+responses, in accordance with
+<a href="http://tools.ietf.org/html/rfc7231"><code>HTTP semantics</code></a>.</p>
+
+<h2>Errors <a href="#errors" id="errors" class="headerlink"></a></h2>
+
+<h3>Processing Errors <a href="#errors-processing" id="errors-processing" class="headerlink"></a></h3>
+
+<p>A server <strong>MAY</strong> choose to stop processing as soon as a problem is encountered,
+or it <strong>MAY</strong> continue processing and encounter multiple problems. For instance,
+a server might process multiple attribute updates and then return multiple
+validation problems in a single response.</p>
+
+<p>When a server encounters multiple problems for a single request, the most
+generally applicable HTTP error code <strong>SHOULD</strong> be used in the response. For
+instance, <code>400 Bad Request</code> might be appropriate for multiple 4xx errors
+or <code>500 Internal Server Error</code> might be appropriate for multiple 5xx errors.</p>
+
+<h3>Error Objects <a href="#error-objects" id="error-objects" class="headerlink"></a></h3>
+
+<p>Error objects provide additional information about problems encountered while
+performing an operation. Error objects <strong>MUST</strong> be returned as an array
+keyed by <code>&quot;errors&quot;</code> in the top level of a JSON API document, and <strong>SHOULD
+NOT</strong> be returned with any primary data.</p>
+
+<p>An error object <strong>MAY</strong> have the following members:</p>
+
+<ul>
+<li><code>&quot;id&quot;</code> - A unique identifier for this particular occurrence of the problem.</li>
+<li><code>&quot;href&quot;</code> - A URI that <strong>MAY</strong> yield further details about this particular
+occurrence of the problem.</li>
+<li><code>&quot;status&quot;</code> - The HTTP status code applicable to this problem, expressed as a
+string value.</li>
+<li><code>&quot;code&quot;</code> - An application-specific error code, expressed as a string value.</li>
+<li><code>&quot;title&quot;</code> - A short, human-readable summary of the problem. It <strong>SHOULD NOT</strong>
+change from occurrence to occurrence of the problem, except for purposes of
+localization.</li>
+<li><code>&quot;detail&quot;</code> - A human-readable explanation specific to this occurrence of the
+problem.</li>
+<li><code>&quot;source&quot;</code> - An object containing references to the source of the error,
+optionally including any of the following members:
+
+<ul>
+<li><code>&quot;pointer&quot;</code> - A JSON Pointer
+[<a href="https://tools.ietf.org/html/rfc6901">RFC6901</a>] to the associated entity in
+the request document [e.g. <code>&quot;/data&quot;</code> for a primary data object, or
+<code>&quot;/data/attributes/title&quot;</code> for a specific attribute].</li>
+<li><code>&quot;parameter&quot;</code> - An optional string indicating which query parameter caused
+the error.</li>
+</ul></li>
+<li><code>&quot;meta&quot;</code> - to contain non-standard meta-information about the error.</li>
+</ul>
+
+        </section>
+      </div>
+    </div>
+    <footer>
+      <span>Built with <a href="http://jekyllrb.com/">Jekyll</a> and <a href="http://softwaremaniacs.org/soft/highlight/en/">Highlight.js</a></span>
+      <span>Hosted by <a href="http://pages.github.com/">GitHub Pages</a></span>
+      <span>Generated at 2015-05-21T14:04:00-04:00</span>
+      <span class="social-links">
+        <a class="twitter" href="http://twitter.com/jsonapi"><i class="icon-twitter"></i><span>Twitter</span></a>
+        <a class="github" href="https://github.com/json-api"><i class="icon-github"></i><span>GitHub</span></a>
+        <a class="googleplus" href="https://groups.google.com/forum/?fromgroups#!forum/jsonapi"><i class="icon-gplus"></i><span>Google</span></a>
+      </span>
+      <div class="license">
+        <a rel="license" href="http://creativecommons.org/publicdomain/zero/1.0/"><img src="http://i.creativecommons.org/p/zero/1.0/88x31.png" style="border-style: none;" alt="CC0" /></a>
+      </div>
+    </footer>
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-40609539-1', 'jsonapi.org');
+      ga('send', 'pageview');
+
+    </script>
+  </body>
+
+</html>

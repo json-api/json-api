@@ -1,0 +1,2 @@
+[appservers]
+jsonapi.org ansible_ssh_host=52.7.201.218

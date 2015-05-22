@@ -1,0 +1,22 @@
+project_name: json-api
+git_repo: https://github.com/json-api/json-api.git
+base_path: /mnt
+site_path: "{{base_path}}/site"
+clone_path: "{{base_path}}/temp"
+build_info_path: "public/build.txt"
+public_path: "{{site_path}}/public"
+hostname: "{{project_name}}"
+fqdn: "{{project_name}}.org"
+
+users:
+  - name: tkellen
+    real_name: Tyler Kellen
+    state: present
+    shadow_pass: $1$SLUJWFxu$Zrq6t39fbas7duavaPLKb.
+    groups: sudo
+    shell: /bin/bash
+    keys:
+      - state: present
+        key: ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDASWvJsFUg1ONxaV64PSaZg9dM5xhml+oeSfetRHMeO+JtzLodFgLu+wc5UED29xYf0I7/jDPaQQFu8gEs7x6A91unjR2mZzpx4du+NrNpwj+TGTNEdf6VmbneKu/RqCxTLXvkga4DJ4uXpUfL97u6sEMZDKr1uDYjH1CXR9yhGmRnsVw0UDIbOUD9rw5ociqMSwlW362XDNJh+yRSeG80cyAYDU0YXopMc8jIzoJ8j6qVdawvnBoVUswGvjRHQbTaKNqp+tyhGKFQGdPzoSubtJ8pt6g7tldkLuxphqQ5/m5q/rb74BU48laGvl5ssigEfY2tuqN9jG35zIVJxo3J
+      - state: present
+        key: ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCUpQGw83rF9wV3/0H7TJAmADHJEFJcUhvveYhflvnvBY+aunLj2hYEwdtzI/Zf4sZgDn+IdEbk5QAdmxAURPrT0rTF3SFvs/86aLaBR/UZK3ABRqqGBhP6HqaEOwGv5AnHkByMd6KB9tzpFmpmI+tkSvw0flKIA38lNO2ULd0Y+MGFvAcJ5EvLfK0fiEXyj4dh9t2gsG4cL/QPa5IydTbCmhsJkzpFxMBnghNrvoqN7r1T14meFb/PWSC2LTTR5kh5F6y4GaDBljLkwReFHr2KhzNEG3EgexzhZtDxfWR5jMXZbkkyLJZLkz/BT4EFxQe3yl0Ps0oNgFGkXNkNrvyV

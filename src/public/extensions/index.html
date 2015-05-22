@@ -1,0 +1,182 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Use title if it's in the page YAML frontmatter -->
+    <title>JSON API - Extensions</title>
+
+    <link href='http://fonts.googleapis.com/css?family=Titillium+Web:400,300,600' rel='stylesheet' type='text/css'>
+    <link href="/stylesheets/normalize.css" media="screen" rel="stylesheet" type="text/css" />
+    <link href="/stylesheets/highlight.css" media="screen" rel="stylesheet" type="text/css" />
+    <link href="/stylesheets/all.css" media="screen" rel="stylesheet" type="text/css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script src="/javascripts/all.js" type="text/javascript"></script>
+    <script src="/javascripts/highlight.pack.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+  </head>
+
+  <body>
+     <nav class="site-nav">
+      <ul>
+
+
+          <li ><a href="/" title="JSON API">JSON API</a></li>
+
+          <li ><a href="/format/" title="Format">Format</a></li>
+
+          <li class="active"><a href="/extensions/" title="Extensions">Extensions</a></li>
+
+          <li ><a href="/recommendations/" title="Recommendations">Recommendations</a></li>
+
+          <li ><a href="/implementations/" title="Implementations">Implementations</a></li>
+
+          <li ><a href="/faq/" title="FAQ">FAQ</a></li>
+
+          <li ><a href="/about/" title="About">About</a></li>
+
+      </ul>
+    </nav>
+
+    <div class="site-wrapper">
+
+        <div class="sidebar">
+          <nav class="document-outline" id="document-outline">
+            <h1>Extensions</h1>
+          </nav>
+        </div>
+
+      <div class="content">
+
+          <h1>Extensions</h1>
+
+        <section>
+          <p>JSON API can be extended in several ways:</p>
+
+<ul>
+<li><p>The <code>supported-ext</code> and <code>ext</code> media type parameters can be used to negotiate
+support for extensions,
+<a href="/format#extending">as discussed in the base specification</a>.
+Official and custom extensions to the specification are discussed below.</p></li>
+<li><p>Meta information can be included in several places in a document,
+<a href="/format/#document-structure-meta">as discussed in the base specification</a>.</p></li>
+<li><p>A profile can be specified in the top-level <code>meta</code> object, as discussed below.</p></li>
+</ul>
+
+<h2>Official Extensions <a href="#official-extensions" id="official-extensions" class="headerlink"></a></h2>
+
+<p>JSON API currently supports the following official extensions:</p>
+
+<ul>
+<li><p><a href="/extensions/bulk/">Bulk extension</a> - provides support for performing multiple
+operations in a request, including adding and removing multiple resources.
+The Bulk extension is referenced with the extension name <code>bulk</code>.</p></li>
+<li><p><a href="/extensions/jsonpatch/">JSON Patch extension</a> - provides support for
+modification of resources with the HTTP PATCH method
+[<a href="http://tools.ietf.org/html/rfc5789">RFC5789</a>] and the JSON Patch format
+[<a href="http://tools.ietf.org/html/rfc6902">RFC6902</a>]. The JSON Patch extension is
+referenced with the extension name <code>jsonpatch</code>.</p></li>
+</ul>
+
+<h2>Custom Extensions <a href="#custom-extensions" id="custom-extensions" class="headerlink"></a></h2>
+
+<p>The JSON API media type can be extended for your organization by writing your
+own custom extension. This extension should also be specified using the <code>ext</code>
+and <code>supported-ext</code> media type parameters.</p>
+
+<p>It is strongly recommended that custom extensions be prefixed with a unique
+identifier for your organization to avoid namespace collision. For example,
+<code>my-org/embedded-resources</code>.</p>
+
+<h2>Profiles <a href="#profiles" id="profiles" class="headerlink"></a></h2>
+
+<p>JSON API can be extended with the profile link relation, defined in <a href="http://tools.ietf.org/html/rfc6906">RFC
+6906</a>. See also <a href="http://www.mnot.net/blog/2012/04/17/profiles">this blog post by Mark
+Nottingham</a>.</p>
+
+<p>According to the RFC, profiles are:</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">defined not to alter the semantics of the resource representation itself, but
+to allow clients to learn about additional semantics (constraints, conventions,
+extensions) that are associated with the resource representation, in addition
+to those defined by the media type and possibly other mechanisms.
+</code></pre></div>
+<p>A profile link <strong>SHOULD</strong> be specified in the top-level <code>meta</code> object, keyed
+by <code>profile</code>.</p>
+
+<p>For example, let&#39;s say that you want your API to support a offset / limit
+based pagination scheme that you&#39;d like to describe to your users. You would
+make some sort of profile page on your site, such as
+<code>http://api.example.com/profile</code>, and then include it in the <code>meta</code> key of
+your responses:</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">GET http://api.example.com/posts
+
+{
+  &quot;meta&quot;: {
+    &quot;profile&quot;: &quot;http://api.example.com/profile&quot;,
+    &quot;page&quot;: {
+      &quot;offset&quot;: 1,
+      &quot;limit&quot;: 10,
+      &quot;total&quot;: 35
+    }
+  },
+  &quot;links&quot;: {
+    &quot;self&quot;: &quot;http://api.example.com/posts&quot;,
+    &quot;next&quot;: &quot;http://api.example.com/posts?page[offset]=11&quot;,
+    &quot;last&quot;: &quot;http://api.example.com/posts?page[offset]=31&quot;
+  },
+  &quot;data&quot;: [
+    // First 10 posts
+  ]
+}
+</code></pre></div>
+<p>That document will de-reference to explain your link relations:</p>
+<div class="highlight"><pre><code class="http language-http" data-lang="http">GET http://api.example.com/profile HTTP/1.1
+</code></pre></div><div class="highlight"><pre><code class="text language-text" data-lang="text">HTTP/1.1 200 OK
+Content-Type: text/plain
+
+The Example.com API Profile
+===========================
+
+The Example.com API uses simple offset and limit-based pagination. Paginated
+resources will include the standard JSON API `next`, `prev`, `first`, and
+`last` pagination links in the top-level `links` object when they are not
+`null`.
+
+In addition, a `page` member will be added to the top-level `meta` object
+that includes the following members: `offset`, `limit`, and `total`. The
+`total` member represents the total count of resources in the paginated
+collection. You can use the `offset` and `limit` members to construct your
+own custom pagination links with the query parameters `page[offset]` and
+`page[limit]`.
+</code></pre></div>
+        </section>
+      </div>
+    </div>
+    <footer>
+      <span>Built with <a href="http://jekyllrb.com/">Jekyll</a> and <a href="http://softwaremaniacs.org/soft/highlight/en/">Highlight.js</a></span>
+      <span>Hosted by <a href="http://pages.github.com/">GitHub Pages</a></span>
+      <span>Generated at 2015-05-21T14:04:00-04:00</span>
+      <span class="social-links">
+        <a class="twitter" href="http://twitter.com/jsonapi"><i class="icon-twitter"></i><span>Twitter</span></a>
+        <a class="github" href="https://github.com/json-api"><i class="icon-github"></i><span>GitHub</span></a>
+        <a class="googleplus" href="https://groups.google.com/forum/?fromgroups#!forum/jsonapi"><i class="icon-gplus"></i><span>Google</span></a>
+      </span>
+      <div class="license">
+        <a rel="license" href="http://creativecommons.org/publicdomain/zero/1.0/"><img src="http://i.creativecommons.org/p/zero/1.0/88x31.png" style="border-style: none;" alt="CC0" /></a>
+      </div>
+    </footer>
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-40609539-1', 'jsonapi.org');
+      ga('send', 'pageview');
+
+    </script>
+  </body>
+
+</html>

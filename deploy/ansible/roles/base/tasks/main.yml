@@ -1,0 +1,17 @@
+- name: add ppas to apt
+  apt_repository: repo="{{item}}" update_cache=yes
+  with_items: apt_ppas
+
+- name: install apt packages
+  apt: name={{item}} state=latest update_cache=yes
+  with_items: apt_packages
+
+- name: symlink overrides ruby executable to 2.0
+  file: src=/usr/bin/ruby2.0 dest=/usr/local/bin/ruby state=link
+
+- name: symlink overrides ruby gem to 2.0
+  file: src=/usr/bin/gem2.0 dest=/usr/local/bin/gem state=link
+
+- name: install ruby gems
+  command: gem install {{item}}
+  with_items: ruby_gems

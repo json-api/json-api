@@ -1,0 +1,36 @@
+# Clone the repo and check out the specified "commit" (defaults to master)
+# unless it has already been checked out. Specifying "force" will clone and
+# build regardless of prior status. When done, symlink the specified commit
+# to make it go live, and remove old clones to free up disk space.
+
+- name: check if specified commit has already been deployed
+  stat: path={{base_path}}/{{commit}} get_checksum=no get_md5=no
+  register: commit_dir
+
+- include: checkout.yml
+  when: force or not commit_dir.stat.exists
+
+- name: link sha-named clone to make it live
+  file: path={{site_path}} state=link src={{base_path}}/{{sha.stdout|default(commit)}} force=yes
+
+- name: update last-modification time of sha-named clone
+  file: path={{base_path}}/{{sha.stdout|default(commit)}} state=touch
+
+- name: remove old clones to free up disk space
+  shell: |
+    # Find all 40-char-SHA-named child directories and for each directory, print
+    # out the last-modified timestamp and the SHA.
+    find . -mindepth 1 -maxdepth 1 -type d \
+    -regextype posix-extended -regex './[0-9a-f]{40}' -printf '%T@ %P\n' |
+    # Sort numerically in ascending order (on the timestamp), remove the
+    # timestamp from each line (leaving only the SHA), then remove the most
+    # recent SHAs from the list (leaving only the old SHAs-to-be-removed).
+    sort -n | cut -d ' ' -f 2 | head -n -{{keep_n_most_recent}} |
+    # Remove each remaining SHA-named directory and echo the SHA (so the task
+    # can display whether or not changes were made).
+    xargs -I % sh -c 'rm -rf "$1"; echo "$1"' -- %
+  register: remove_result
+  changed_when: remove_result.stdout != ''
+  args:
+    chdir: "{{base_path}}"
+  when: keep_n_most_recent is defined

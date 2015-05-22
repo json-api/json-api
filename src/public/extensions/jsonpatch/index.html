@@ -1,0 +1,367 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Use title if it's in the page YAML frontmatter -->
+    <title>JSON API - JSON Patch Extension</title>
+
+    <link href='http://fonts.googleapis.com/css?family=Titillium+Web:400,300,600' rel='stylesheet' type='text/css'>
+    <link href="/stylesheets/normalize.css" media="screen" rel="stylesheet" type="text/css" />
+    <link href="/stylesheets/highlight.css" media="screen" rel="stylesheet" type="text/css" />
+    <link href="/stylesheets/all.css" media="screen" rel="stylesheet" type="text/css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script src="/javascripts/all.js" type="text/javascript"></script>
+    <script src="/javascripts/highlight.pack.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+  </head>
+
+  <body>
+     <nav class="site-nav">
+      <ul>
+
+
+          <li ><a href="/" title="JSON API">JSON API</a></li>
+
+          <li ><a href="/format/" title="Format">Format</a></li>
+
+          <li ><a href="/extensions/" title="Extensions">Extensions</a></li>
+
+          <li ><a href="/recommendations/" title="Recommendations">Recommendations</a></li>
+
+          <li ><a href="/implementations/" title="Implementations">Implementations</a></li>
+
+          <li ><a href="/faq/" title="FAQ">FAQ</a></li>
+
+          <li ><a href="/about/" title="About">About</a></li>
+
+      </ul>
+    </nav>
+
+    <div class="site-wrapper">
+
+      <div class="content">
+
+          <h1>JSON Patch Extension</h1>
+
+        <section>
+          <h2>Status <a href="#status" id="status" class="headerlink"></a></h2>
+
+<p><strong>This extension is a work in progress</strong> and will change as implementation work
+progresses.</p>
+
+<h2>Introduction <a href="#introduction" id="introduction" class="headerlink"></a></h2>
+
+<p>The &quot;JSON Patch extension&quot; is an <a href="/extensions/#official-extensions">official
+extension</a> of the JSON API specification.
+It provides support for modification of resources with the HTTP PATCH method
+[<a href="http://tools.ietf.org/html/rfc5789">RFC5789</a>] and the JSON Patch format
+[<a href="http://tools.ietf.org/html/rfc6902">RFC6902</a>].</p>
+
+<p>For the sake of brevity, operations requested with <code>PATCH</code> and conforming
+with JSON Patch will be called &quot;Patch operations&quot;.</p>
+
+<p>Servers and clients <strong>MUST</strong> negotiate support for and use of the JSON Patch
+extension <a href="/format/#extending">as described in the base specification</a> using
+<code>jsonpatch</code> as the name of the extension.</p>
+
+<h2>Patch Operations <a href="#patch-operations" id="patch-operations" class="headerlink"></a></h2>
+
+<p>Patch operations <strong>MUST</strong> be sent as an array to conform with the JSON
+Patch format. A server <strong>MAY</strong> limit the type, order, and count of
+operations allowed in this top level array.</p>
+
+<h3>Request URLs and Patch Paths <a href="#patch-urls" id="patch-urls" class="headerlink"></a></h3>
+
+<p>The request URL and each Patch operation&#39;s <code>&quot;path&quot;</code> are complementary and
+<strong>MUST</strong> combine to target a particular resource, collection, attribute, or
+relationship.</p>
+
+<p>If a server supports the Patch extension, it <strong>MUST</strong> allow Patch operations at
+any resource or relationship URLs that accept POST, PATCH, or DELETE requests.</p>
+
+<p>Patch operations <strong>MAY</strong> also be allowed at the root URL of an API. In this
+case, every <code>&quot;path&quot;</code> within a Patch operation <strong>MUST</strong> include the full
+resource path relative to the root URL. This allows for general &quot;fire hose&quot;
+updates to any resource or relationship represented by an API. As stated
+above, a server <strong>MAY</strong> limit the type, order, and count of bulk operations.</p>
+
+<h3>Creating Resources <a href="#patch-creating" id="patch-creating" class="headerlink"></a></h3>
+
+<p>To create a resource, request an <code>&quot;add&quot;</code> operation with a <code>&quot;path&quot;</code> that points
+to the end of its corresponding resource collection (<code>&quot;/-&quot;</code>). The <code>&quot;value&quot;</code>
+should contain a resource object.</p>
+
+<p>For example, a new photo could be created with the following request:</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">PATCH /photos
+Content-Type: application/vnd.api+json; ext=jsonpatch
+Accept: application/vnd.api+json; ext=jsonpatch
+
+[
+  {
+    &quot;op&quot;: &quot;add&quot;,
+    &quot;path&quot;: &quot;/-&quot;,
+    &quot;value&quot;: {
+      &quot;type&quot;: &quot;photos&quot;,
+      &quot;attributes&quot;: {
+        &quot;title&quot;: &quot;Ember Hamster&quot;,
+        &quot;src&quot;: &quot;http://example.com/images/productivity.png&quot;
+      }
+    }
+  }
+]
+</code></pre></div>
+<h3>Updating Attributes <a href="#patch-updating-attributes" id="patch-updating-attributes" class="headerlink"></a></h3>
+
+<p>To update an attribute, perform a <code>&quot;replace&quot;</code> operation with the attribute&#39;s
+name specified by the <code>&quot;path&quot;</code>.</p>
+
+<p>For instance, the following request should update just the <code>src</code> property of the
+photo at <code>/photos/1</code>:</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">PATCH /photos/1
+Content-Type: application/vnd.api+json; ext=jsonpatch
+Accept: application/vnd.api+json; ext=jsonpatch
+
+[
+  { &quot;op&quot;: &quot;replace&quot;, &quot;path&quot;: &quot;/src&quot;, &quot;value&quot;: &quot;http://example.com/hamster.png&quot; }
+]
+</code></pre></div>
+<h3>Updating Relationships <a href="#patch-updating-relationships" id="patch-updating-relationships" class="headerlink"></a></h3>
+
+<p>To update a relationship, send an appropriate Patch operation to the
+relationship&#39;s URL.</p>
+
+<p>A server <strong>MAY</strong> also support relationship updates at a higher level, such
+as the resource&#39;s URL or the API&#39;s root URL. As discussed above, the request
+URL and each Patch operation&#39;s <code>&quot;path&quot;</code> must be complementary and combine to
+target a particular relationship&#39;s URL.</p>
+
+<h4>Updating To-One Relationships <a href="#patch-updating-to-one-relationships" id="patch-updating-to-one-relationships" class="headerlink"></a></h4>
+
+<p>To update a to-one relationship, perform a <code>&quot;replace&quot;</code> operation with a URL
+and <code>&quot;path&quot;</code> that targets the relationship. The <code>&quot;value&quot;</code> <strong>MUST</strong> be a
+resource identifier object or <code>null</code>, to remove the relationship.</p>
+
+<p>For instance, the following request should update the <code>author</code> of an article:</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">PATCH /article/1/relationships/author
+Content-Type: application/vnd.api+json; ext=jsonpatch
+Accept: application/vnd.api+json; ext=jsonpatch
+
+[
+  { &quot;op&quot;: &quot;replace&quot;, &quot;path&quot;: &quot;&quot;, &quot;value&quot;: {&quot;type&quot;: &quot;people&quot;, &quot;id&quot;: &quot;1&quot;} }
+]
+</code></pre></div>
+<p>To remove a to-one relationship, perform a <code>replace</code> operation on the
+relationship to change its value to <code>null</code>. For example:</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">PATCH /article/1/relationships/author
+Content-Type: application/vnd.api+json; ext=jsonpatch
+Accept: application/vnd.api+json; ext=jsonpatch
+
+[
+  { &quot;op&quot;: &quot;replace&quot;, &quot;path&quot;: &quot;&quot;, &quot;value&quot;: null }
+]
+</code></pre></div>
+<h4>Updating To-Many Relationships <a href="#patch-updating-to-many-relationships" id="patch-updating-to-many-relationships" class="headerlink"></a></h4>
+
+<p>A server <strong>MUST</strong> respond to Patch operations that target a <em>to-many
+relationship URL</em> as described below.</p>
+
+<p>For all operations, the <code>&quot;value&quot;</code> <strong>MUST</strong> contain an object that contains
+an array of resource identifier objects or an empty array, to remove all
+elements of the relationship.</p>
+
+<p>If a client requests a <code>&quot;replace&quot;</code> operation to a <em>to-many relationship URL</em>, the
+server <strong>MUST</strong> either completely replace every member of the relationship,
+return an appropriate error response if some resources can not be found or
+accessed, or return a <code>403 Forbidden</code> response if complete replacement is
+not allowed by the server.</p>
+
+<p>For example, the following request replaces every tag for an article:</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">PATCH /photos/1/relationships/tags
+Content-Type: application/vnd.api+json; ext=jsonpatch
+Accept: application/vnd.api+json; ext=jsonpatch
+
+[
+  {
+    &quot;op&quot;: &quot;replace&quot;,
+    &quot;path&quot;: &quot;&quot;,
+    &quot;value&quot;: [
+      { &quot;type&quot;: &quot;tags&quot;, &quot;id&quot;: &quot;2&quot; },
+      { &quot;type&quot;: &quot;tags&quot;, &quot;id&quot;: &quot;3&quot; }
+    ]
+  }
+]
+</code></pre></div>
+<p>To add an element to a to-many relationship, request an <code>&quot;add&quot;</code> operation that
+targets the relationship&#39;s URL. Because the operation is targeting the end of a
+collection, the <code>&quot;path&quot;</code> must end with <code>&quot;/-&quot;</code>.</p>
+
+<p>In the following example, the comment with ID <code>123</code> is added to the list of
+comments for the article with ID <code>1</code>:</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">PATCH /articles/1/relationships/comments
+Content-Type: application/vnd.api+json; ext=jsonpatch
+Accept: application/vnd.api+json; ext=jsonpatch
+
+[
+  {
+    &quot;op&quot;: &quot;add&quot;,
+    &quot;path&quot;: &quot;/-&quot;,
+    &quot;value&quot;: [
+      { &quot;type&quot;: &quot;comments&quot;, &quot;id&quot;: &quot;123&quot; }
+    ]
+  }
+]
+</code></pre></div>
+<p>To remove a to-many relationship, perform a <code>&quot;remove&quot;</code> operation that targets
+the relationship&#39;s URL.</p>
+
+<p>In the following example, comments with IDs of <code>5</code> and <code>13</code> are removed
+from the list of comments for the article with ID <code>1</code>:</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">PATCH /articles/1/relationships/comments
+Content-Type: application/vnd.api+json; ext=jsonpatch
+Accept: application/vnd.api+json; ext=jsonpatch
+
+[
+  {
+    &quot;op&quot;: &quot;remove&quot;,
+    &quot;path&quot;: &quot;&quot;,
+    &quot;value&quot;: [
+      { &quot;type&quot;: &quot;comments&quot;, &quot;id&quot;: &quot;5&quot; },
+      { &quot;type&quot;: &quot;comments&quot;, &quot;id&quot;: &quot;13&quot; }
+    ]
+  }
+]
+</code></pre></div>
+<h3>Deleting a Resource <a href="#patch-deleting" id="patch-deleting" class="headerlink"></a></h3>
+
+<p>To delete a resource, perform a <code>&quot;remove&quot;</code> operation with a URL and <code>&quot;path&quot;</code>
+that targets the resource.</p>
+
+<p>For instance, photo <code>1</code> might be deleted with the following request:</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">PATCH /photos/1
+Content-Type: application/vnd.api+json; ext=jsonpatch
+Accept: application/vnd.api+json; ext=jsonpatch
+
+[
+  { &quot;op&quot;: &quot;remove&quot;, &quot;path&quot;: &quot;&quot; }
+]
+</code></pre></div>
+<h3>Responses <a href="#patch-responses" id="patch-responses" class="headerlink"></a></h3>
+
+<h4>204 No Content <a href="#patch-responses-204" id="patch-responses-204" class="headerlink"></a></h4>
+
+<p>A server <strong>MUST</strong> return a <code>204 No Content</code> status code in response to a
+successful Patch operation in which the client&#39;s current attributes remain up to
+date.</p>
+
+<h4>200 OK <a href="#patch-responses-200" id="patch-responses-200" class="headerlink"></a></h4>
+
+<p>If a server accepts an update but also changes the resource(s) in other ways
+than those specified by the request (for example, updating the <code>updatedAt</code>
+attribute or a computed <code>sha</code>), it <strong>MUST</strong> return a <code>200 OK</code> response as well
+as a representation of the updated resources.</p>
+
+<p>The server <strong>MUST</strong> specify a <code>Content-Type</code> header of <code>application/vnd.api+json;
+ext=jsonpatch</code>. The body of the response <strong>MUST</strong> contain an array of JSON objects,
+each of which <strong>MUST</strong> conform to the JSON API media type
+(<code>application/vnd.api+json</code>). Response objects in this array <strong>MUST</strong> be in
+sequential order and correspond to the operations in the request document.</p>
+
+<p>For instance, a request may create two photos in separate operations:</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">PATCH /photos
+Content-Type: application/vnd.api+json; ext=jsonpatch
+Accept: application/vnd.api+json; ext=jsonpatch
+
+[
+  {
+    &quot;op&quot;: &quot;add&quot;,
+    &quot;path&quot;: &quot;/-&quot;,
+    &quot;value&quot;: {
+      &quot;type&quot;: &quot;photos&quot;,
+      &quot;attributes&quot;: {
+        &quot;title&quot;: &quot;Ember Hamster&quot;,
+        &quot;src&quot;: &quot;http://example.com/images/productivity.png&quot;
+      }
+    }
+  },
+  {
+    &quot;op&quot;: &quot;add&quot;,
+    &quot;path&quot;: &quot;/-&quot;,
+    &quot;value&quot;: {
+      &quot;type&quot;: &quot;photos&quot;,
+      &quot;attributes&quot;: {
+        &quot;title&quot;: &quot;Mustaches on a Stick&quot;,
+        &quot;src&quot;: &quot;http://example.com/images/mustaches.png&quot;
+      }
+    }
+  }
+]
+</code></pre></div>
+<p>The response would then include corresponding JSON API documents contained
+within an array:</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">HTTP/1.1 200 OK
+Content-Type: application/vnd.api+json; ext=jsonpatch
+
+[
+  {
+    &quot;data&quot;: [{
+      &quot;type&quot;: &quot;photos&quot;,
+      &quot;id&quot;: &quot;123&quot;,
+      &quot;attributes&quot;: {
+        &quot;title&quot;: &quot;Ember Hamster&quot;,
+        &quot;src&quot;: &quot;http://example.com/images/productivity.png&quot;
+      }
+    }]
+  }, {
+    &quot;data&quot;: [{
+      &quot;type&quot;: &quot;photos&quot;,
+      &quot;id&quot;: &quot;124&quot;,
+      &quot;attributes&quot;: {
+        &quot;title&quot;: &quot;Mustaches on a Stick&quot;,
+        &quot;src&quot;: &quot;http://example.com/images/mustaches.png&quot;
+      }
+    }]
+  }
+]
+</code></pre></div>
+<h4>Errors <a href="#patch-responses-errors" id="patch-responses-errors" class="headerlink"></a></h4>
+
+<p>A server <strong>MAY</strong> return error objects that correspond to each operation. The
+body of the response <strong>MUST</strong> contain an array of JSON objects, which
+<strong>MUST</strong> be in sequential order and correspond to the operations in the
+request document. Each response object <strong>SHOULD</strong> contain only error objects
+keyed by <code>&quot;errors&quot;</code>, since no operations can be completed successfully when
+any errors occur. Error codes for each specific operation <strong>SHOULD</strong> be
+returned in the <code>&quot;status&quot;</code> member of each error object.</p>
+
+        </section>
+      </div>
+    </div>
+    <footer>
+      <span>Built with <a href="http://jekyllrb.com/">Jekyll</a> and <a href="http://softwaremaniacs.org/soft/highlight/en/">Highlight.js</a></span>
+      <span>Hosted by <a href="http://pages.github.com/">GitHub Pages</a></span>
+      <span>Generated at 2015-05-21T14:04:00-04:00</span>
+      <span class="social-links">
+        <a class="twitter" href="http://twitter.com/jsonapi"><i class="icon-twitter"></i><span>Twitter</span></a>
+        <a class="github" href="https://github.com/json-api"><i class="icon-github"></i><span>GitHub</span></a>
+        <a class="googleplus" href="https://groups.google.com/forum/?fromgroups#!forum/jsonapi"><i class="icon-gplus"></i><span>Google</span></a>
+      </span>
+      <div class="license">
+        <a rel="license" href="http://creativecommons.org/publicdomain/zero/1.0/"><img src="http://i.creativecommons.org/p/zero/1.0/88x31.png" style="border-style: none;" alt="CC0" /></a>
+      </div>
+    </footer>
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-40609539-1', 'jsonapi.org');
+      ga('send', 'pageview');
+
+    </script>
+  </body>
+
+</html>

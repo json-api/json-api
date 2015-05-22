@@ -1,0 +1,42 @@
+- name: hostname is set
+  hostname: name={{hostname}}
+
+- name: /etc/hosts has loopback references to our hostname
+  lineinfile: "dest=/etc/hosts line='127.0.0.1 {{hostname}}'"
+
+- name: /etc/hosts has loopback references to our domain
+  lineinfile: "dest=/etc/hosts line='{{fqdn}}'"
+
+- name: get github.com public key
+  command: /usr/bin/ssh-keyscan github.com
+  register: github_keyscan
+
+- name: github key is recognized
+  lineinfile: dest=/etc/ssh/ssh_known_hosts
+    create=yes
+    regexp='^github.com'
+    line="{{github_keyscan.stdout}}"
+
+- name: keep SSH agent socket when sudoing
+  lineinfile: dest=/etc/sudoers
+    insertafter='^Defaults'
+    line='Defaults env_keep += "SSH_AUTH_SOCK"'
+    state=present
+    validate='visudo -cf %s'
+
+- name: sync all users
+  user: name={{item.name}} state={{item.state}} groups={{item.groups}} password={{item.shadow_pass}} shell={{item.shell | default("/bin/bash") }} force=yes
+  with_items: users
+
+- name: sync all users keys
+  authorized_key: user={{item.0.name}} key="{{item.1.key}}" state={{item.1.state}}
+  with_subelements:
+    - users
+    - keys
+
+- name: ensure absent users' home directories are removed
+  file: path=/home/{{item.name}} state={{ (item.state == 'present') | ternary('directory', 'absent')}}
+  with_items: users
+
+- name: www-data has access to site base directory
+  file: path=/mnt state=directory owner=www-data group=www-data mode=0755

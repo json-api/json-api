@@ -1,0 +1,34 @@
+# Clone the repo, checking out the specified commit. If a canonical-sha-named
+# directory for that commit doesn't already exist, or if "force" is true,
+# clone the repo and build it.
+
+- name: ensure pre-existing temp directory is removed
+  file: path={{clone_path}} state=absent
+
+- name: clone git repo into temp directory
+  git: dest={{clone_path}} repo={{git_repo}} version={{commit}}
+
+- name: get sha of cloned repo
+  command: git rev-parse HEAD
+  args:
+    chdir: "{{clone_path}}"
+  register: sha
+  changed_when: false
+
+- name: check if specified commit sha has already been deployed
+  stat: path={{base_path}}/{{sha.stdout}} get_checksum=no get_md5=no
+  register: sha_dir
+
+- include: build.yml
+  when: force or not sha_dir.stat.exists
+
+- name: delete pre-existing sha-named directory
+  file: path={{base_path}}/{{sha.stdout}} state=absent
+  when: force and sha_dir.stat.exists
+
+- name: move cloned repo to sha-named directory
+  command: mv {{clone_path}} {{base_path}}/{{sha.stdout}}
+  when: force or not sha_dir.stat.exists
+
+- name: ensure just-created temp directory is removed
+  file: path={{clone_path}} state=absent

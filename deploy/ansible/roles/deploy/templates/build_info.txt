@@ -1,0 +1,2 @@
+date: {{ansible_date_time.iso8601}}
+sha: {{sha.stdout}}

@@ -1,0 +1,11 @@
+apt_ppas:
+  - "ppa:git-core/ppa"
+apt_packages:
+  - nginx
+  - git
+  - ruby2.0
+  - ruby2.0-dev
+  - build-essential
+ruby_gems:
+  - bundler
+  - fast-stemmer

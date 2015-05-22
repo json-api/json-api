@@ -1,0 +1,10 @@
+- hosts: all
+  become: true
+  become_user: www-data
+  handlers:
+    - include: handlers/main.yml
+  vars:
+    commit: deployment
+    force: false
+  roles:
+    - deploy

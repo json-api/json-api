@@ -1,0 +1,45 @@
+# Generate nginx config files (and ssl configuration, if ssl was specified),
+# rolling back changes if any part of the config is invalid.
+
+- name: ensure default nginx server is not present
+  file: path=/etc/nginx/sites-enabled/default state=absent
+
+- name: ensure nginx config files exist
+  shell: touch {{item.directory}}/{{item.file}}
+  args:
+    creates: "{{item.directory}}/{{item.file}}"
+  with_items: confs + shared
+
+- name: backup existing nginx config files
+  shell: cp {{item.file}} {{item.file}}.backup
+  args:
+    chdir: "{{item.directory}}"
+  with_items: confs + shared
+
+- name: generate new nginx config files
+  template: src={{item.file}} dest={{item.directory}}/
+  register: nginx_conf
+  with_items: confs + shared
+  notify: restart nginx
+
+- name: ensure nginx config is valid
+  shell: nginx -t
+  ignore_errors: yes
+  register: nginx_test_valid
+  changed_when: false
+  when: nginx_conf|changed
+
+- name: remove temporary backups if new nginx config files are valid
+  file: path={{item.directory}}/{{item.file}}.backup state=absent
+  with_items: confs + shared
+  when: nginx_test_valid|success
+
+- name: restore temporary backups if new nginx config files are invalid
+  shell: mv {{item.file}}.backup {{item.file}}
+  args:
+    chdir: "{{item.directory}}"
+  with_items: confs
+  when: nginx_test_valid|failed
+
+- fail: msg="nginx config is invalid"
+  when: nginx_test_valid|failed

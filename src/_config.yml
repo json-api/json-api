@@ -1,7 +1,6 @@
 url: http://jsonapi.org
 safe: true
 lsi: false
-source: .
 destination: ./public
 exclude:
   - Rakefile

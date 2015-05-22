@@ -1,0 +1,8 @@
+- hosts: all
+  gather_facts: false
+  sudo: yes
+  handlers:
+    - include: handlers/main.yml
+  roles:
+    - configure
+    - nginx
