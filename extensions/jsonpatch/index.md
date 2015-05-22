@@ -5,8 +5,9 @@ title: "JSON Patch Extension"
 
 ## Status <a href="#status" id="status" class="headerlink"></a>
 
-**This extension is a work in progress** and will change as implementation work
-progresses.
+**Extensions are an experimental feature** and should be considered a work
+in progress. There is no official support for extensions in the base JSON
+API specification.
 
 ## Introduction <a href="#introduction" id="introduction" class="headerlink"></a>
 

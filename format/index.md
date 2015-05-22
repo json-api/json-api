@@ -26,64 +26,27 @@ The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD",
 interpreted as described in RFC 2119
 [[RFC2119](http://tools.ietf.org/html/rfc2119)].
 
-## Extending <a href="#extending" id="extending" class="headerlink"></a>
+## Media Type Negotiation <a href="#media-type-negotiation" id="media-type-negotiation" class="headerlink"></a>
 
-The base JSON API specification **MAY** be extended to support additional
-capabilities.
+Clients **MUST** send all JSON API data in request documents with
+the header `Content-Type: application/vnd.api+json`.
 
-An extension **MAY** make changes to and deviate from the requirements of the
-base specification apart from this section, which remains binding.
+Clients **MUST** ignore all parameters for the `application/vnd.api+json`
+media type received in the `Content-Type` header of response documents.
 
-Servers that support one or more extensions to JSON API **MUST** return
-those extensions in every response in the `supported-ext` media type
-parameter of the `Content-Type` header. The value of the `supported-ext`
-parameter **MUST** be a comma-separated (U+002C COMMA, ",") list of
-extension names.
+Servers **MUST** send all JSON API data in response documents with
+the header `Content-Type: application/vnd.api+json`.
 
-For example: a response that includes the header `Content-Type:
-application/vnd.api+json; supported-ext="bulk,jsonpatch"` indicates that the
-server supports both the "bulk" and "jsonpatch" extensions.
+Servers **MUST** return a `406 Not Acceptable` status code if the
+`application/vnd.api+json` media type is modified by the `ext` parameter in
+the `Accept` header of a request. Otherwise, servers **MUST** return a `415
+Unsupported Media Type` status code if the `application/vnd.api+json` media
+type is modified by the `ext` parameter in the `Content-Type` header of a
+request. Servers **MUST** ignore all other parameters for the
+`application/vnd.api+json` in `Accept` and `Content-Type` headers.
 
-If an extension is used to form a particular request or response document,
-then it **MUST** be specified by including its name in the `ext` media type
-parameter with the `Content-Type` header. The value of the `ext` media type
-parameter **MUST** be formatted as a comma-separated (U+002C COMMA, ",")
-list of extension names and **MUST** be limited to a subset of the
-extensions supported by the server, which are listed in `supported-ext`
-of every response.
-
-For example: a response that includes the header `Content-Type:
-application/vnd.api+json; ext="ext1,ext2"; supported-ext="ext1,ext2,ext3"`
-indicates that the response document is formatted according to the
-extensions "ext1" and "ext2". Another example: a request that includes
-the header `Content-Type: application/vnd.api+json; ext="ext1,ext2"`
-indicates that the request document is formatted according to the
-extensions "ext1" and "ext2".
-
-Clients **MAY** request a particular media type extension by including its
-name in the `ext` media type parameter with the `Accept` header. Servers
-that do not support a requested extension or combination of extensions
-**MUST** return a `406 Not Acceptable` status code.
-
-If the media type in the `Accept` header is supported by a server but the
-media type in the `Content-Type` header is unsupported, the server
-**MUST** return a `415 Unsupported Media Type` status code.
-
-Servers **MUST NOT** provide extended functionality that is incompatible
-with the base specification to clients that do not request the extension in
-the `ext` parameter of the `Content-Type` or the `Accept` header.
-
-> Note: Since extensions can contradict one another or have interactions
-that can be resolved in many equally plausible ways, it is the
-responsibility of the server to decide which extensions are compatible, and
-it is the responsibility of the designer of each implementation of this
-specification to describe extension interoperability rules which are
-applicable to that implementation.
-
-When the value of the `ext` or `supported-ext` media type parameter contains
-more than one extension name, the value **MUST** be surrounded with quotation
-marks (U+0022 QUOTATION MARK, """), in accordance with the HTTP specification.
-
+> Note: These requirements may allow future versions of this specification
+to support an extension mechanism based upon the `ext` media type parameter.
 
 ## Document Structure <a href="#document-structure" id="document-structure" class="headerlink"></a>
 
@@ -293,7 +256,7 @@ relationship URLs.
 If present, a *related resource URL* **MUST** be a valid URL, even if the
 relationship isn't currently associated with any target resources.
 
-> Note: The spec does not impart meaning to order of resource identifier 
+> Note: The spec does not impart meaning to order of resource identifier
 objects in linkage arrays of to-many relationships, although implementations
 may do that. Arrays of resource identifier objects may represent ordered
 or unordered relationships, and both types can be mixed in one response
@@ -1556,7 +1519,7 @@ Accept: application/vnd.api+json
 ```
 
 If a client makes a `POST` request to a *relationship URL*, the server
-**MUST** add the specified members to the relationship unless they are 
+**MUST** add the specified members to the relationship unless they are
 already present. If a given `type` and `id` is already in the relationship,
 the server **MUST NOT** add it again.
 

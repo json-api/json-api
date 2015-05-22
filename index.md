@@ -108,9 +108,9 @@ specification](/format).
 
 ## Extensions <a href="#extensions" id="extensions" class="headerlink"></a>
 
-JSON API can be [extended in several ways](/extensions).
+JSON API has [experimental support for extensions](/extensions).
 
-Official extensions are available for [Bulk](/extensions/bulk/) and
+Official extensions are being developed for [Bulk](/extensions/bulk/) and
 [JSON Patch](/extensions/jsonpatch/) operations.
 
 ## Update history <a href="#update-history" id="update-history" class="headerlink"></a>
