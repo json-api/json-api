@@ -955,8 +955,84 @@ COMMA, ",") list that refers to the name(s) of the fields to be returned.
 If a client requests a restricted set of [fields], an endpoint **MUST NOT**
 include additional [fields] in the response.
 
+Basic request:
+
+```http
+GET /articles?include=author
+```
+
+```text
+HTTP/1.1 200 OK
+Content-Type: application/vnd.api+json
+
+{
+  "data": {
+    "type": "articles",
+    "id": "1",
+    "attributes": {
+      "title": "JSON API paints my bikeshed!",
+      "body": "The shortest article. Ever.",
+      "created": 1432306588,
+      "updated": 1432306589
+    },
+    "relationships": {
+      "author": {
+        "linkage": {
+          "id": 42, "type": "people"
+        }
+      }
+    }
+  },
+  "included": [
+    {
+      "type": "people",
+      "id": 42,
+      "attributes": {
+        "name": "John",
+        "age": 80,
+        "gender": "male"
+      }
+    }
+  ]
+}
+```
+
+Request with `fields` parameter:
+
 ```http
 GET /articles?include=author&fields[articles]=title,body&fields[people]=name
+```
+
+```text
+HTTP/1.1 200 OK
+Content-Type: application/vnd.api+json
+
+{
+  "data": {
+    "type": "articles",
+    "id": "1",
+    "attributes": {
+      "title": "JSON API paints my bikeshed!",
+      "body": "The shortest article. Ever."
+    },
+    "relationships": {
+      "author": {
+        "linkage": {
+          "id": 42, "type": "people"
+        }
+      }
+    }
+  },
+  "included": [
+    {
+      "type": "people",
+      "id": 42,
+      "attributes": {
+        "name": "John"
+      }
+    }
+  ]
+}
 ```
 
 > Note: This section applies to any endpoint that responds with resources as
