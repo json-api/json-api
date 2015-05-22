@@ -43,7 +43,8 @@ the `Accept` header of a request. Otherwise, servers **MUST** return a `415
 Unsupported Media Type` status code if the `application/vnd.api+json` media
 type is modified by the `ext` parameter in the `Content-Type` header of a
 request. Servers **MUST** ignore all other parameters for the
-`application/vnd.api+json` in `Accept` and `Content-Type` headers.
+`application/vnd.api+json` media type in `Accept` and `Content-Type`
+headers.
 
 > Note: These requirements may allow future versions of this specification
 to support an extension mechanism based upon the `ext` media type parameter.
