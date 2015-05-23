@@ -181,8 +181,9 @@ Here's how an article (i.e. a resource of type "articles") might appear in a doc
 Every resource object **MUST** contain an `"id"` member and a `"type"` member.
 The value of each of these members **MUST** be a string.
 
-Each resource object's `"type"` and `"id"` pair **MUST** identify a single,
-unique resource.
+Within a given API, each resource object's `"type"` and `"id"` pair **MUST**
+identify a single, unique resource. (The set of URIs controlled by a server,
+or multiple servers acting as one, constitute an API.)
 
 The `"type"` member is used to describe resource objects that share common
 attributes and relationships.
