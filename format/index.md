@@ -551,8 +551,6 @@ first or last character:
 - U+002D HYPHEN-MINUS, "-"
 - U+005F LOW LINE, "_"
 - U+0020 SPACE, " " _(not recommended, not URL safe)_
-- U+005E CIRCUMFLEX ACCENT, "^" _(not recommended, not URL safe)_
-- U+0060 GRAVE ACCENT, "`" _(not recommended, not URL safe)_
 
 #### Reserved Characters <a href="#document-structure-member-names-reserved-characters" id="document-structure-member-names-reserved-characters" class="headerlink"></a>
 
@@ -582,6 +580,8 @@ The following characters **MUST NOT** be used in member names:
 - U+003F QUESTION MARK, "?"
 - U+0040 COMMERCIAL AT, "@"
 - U+005C REVERSE SOLIDUS, "\"
+- U+005E CIRCUMFLEX ACCENT, "^"
+- U+0060 GRAVE ACCENT, "`"
 - U+007B LEFT CURLY BRACKET, "{"
 - U+007C VERTICAL LINE, "|"
 - U+007D RIGHT CURLY BRACKET, "}"
