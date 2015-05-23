@@ -887,9 +887,10 @@ section of the compound document.
 
 The value of the `include` parameter **MUST** be a comma-separated (U+002C
 COMMA, ",") list of relationship paths. A relationship path is a dot-separated
-(U+002E FULL-STOP, ".") list of relationship names. Each relationship name
-**MUST** be identical to the key in the `"relationships"` member of its parent
-resource object.
+(U+002E FULL-STOP, ".") list of relationship names.
+
+If a server is unable to identify a relationship path or does not support
+inclusion of resources from a path, it **MUST** respond with 400 Bad Request.
 
 > Note: For example, a relationship path could be `comments.author`, where
 `comments` is a relationship listed under a `articles` resource object, and
