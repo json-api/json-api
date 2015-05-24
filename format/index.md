@@ -192,7 +192,7 @@ can be either plural or singular. However, the same value should be used
 consistently throughout an implementation.
 
 
-#### Attributes <a href="#document-structure-resource-attributes" id="document-structure-resource-attributes" class="headerlink"></a>
+#### Attributes <a href="#document-structure-resource-object-attributes" id="document-structure-resource-object-attributes" class="headerlink"></a>
 
 The value of the `"attributes"` key is a JSON object (an "attributes object")
 that represents information about the resource object it is contained within.
@@ -213,7 +213,7 @@ alongside other information to be represented in a resource object, these keys
 **SHOULD NOT** appear as attributes. If relations are provided, they **MUST**
 be represented under the "relationships object".
 
-#### Relationships <a href="#document-structure-links" id="document-structure-resource-objects-relationships" class="headerlink"></a>
+#### Relationships <a href="#document-structure-resource-object-relationships" id="document-structure-resource-object-relationships" class="headerlink"></a>
 
 The value of the `"relationships"` key is a JSON object (a "relationships object")
 that represents references from the resource in whose resource object it's defined
@@ -308,7 +308,7 @@ to fetch the resource objects, and linkage information.
 A resource object's [attributes] and its [relationships] are collectively called
 its "[fields]".
 
-#### Resource Links <a href="#document-structure-structure-resource-object-links" id="document-structure-resource-object-links" class="headerlink"></a>
+#### Resource Links <a href="#document-structure-resource-object-links" id="document-structure-resource-object-links" class="headerlink"></a>
 
 Analogous to the `"links"` member at the document's top level, the optional
 `"links"` member within each resource object contains URLs related to the
