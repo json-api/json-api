@@ -194,14 +194,17 @@ consistently throughout an implementation.
 
 #### Attributes <a href="#document-structure-resource-attributes" id="document-structure-resource-attributes" class="headerlink"></a>
 
-The value of the `"attributes"` key is a JSON object (an "attributes object")
-that represents information about the resource object it is contained within.
+The value of the `"attributes"` key is an "attributes object". The attributes
+object is a JSON object that represents information about the resource object.
 
-The top level of this object shares a namespace with the members of `relationships`
-and **MUST NOT** contain `id` or `type` members. Apart from these restrictions,
-this object can contain members keyed by any string valid for this specification.
+The members of the attributes object ("attributes") shares namespace with the
+members of the relationships object of the resource object; that is, attributes
+of a given resource object **MUST** be named differently than its relationships.
+The attributes object **MUST NOT** contain `id` or `type` members. Apart from
+these restrictions, this object can contain members keyed by any string valid
+for this specification.
 
-All members which appear in an "attributes object" are considered attributes and
+All members which appear in an attributes object are considered attributes and
 may contain any valid JSON value.
 
 Complex data structures involving JSON objects and arrays are allowed as
