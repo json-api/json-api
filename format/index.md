@@ -213,7 +213,7 @@ alongside other information to be represented in a resource object, these keys
 **SHOULD NOT** appear as attributes. If relations are provided, they **MUST**
 be represented under the "relationships object".
 
-#### Relationships <a href="#document-structure-links" id="document-structure-resource-objects-relationships" class="headerlink"></a>
+#### Relationships <a href="#document-structure-resource-objects-relationships" id="document-structure-resource-objects-relationships" class="headerlink"></a>
 
 The value of the `"relationships"` key is a JSON object (a "relationships object")
 that represents references from the resource in whose resource object it's defined
@@ -1717,9 +1717,9 @@ An error object **MAY** have the following members:
     the error.
 * `"meta"` - to contain non-standard meta-information about the error.
 
-[attributes]: #document-structure-resource-object-attributes
-[relationships]: #document-structure-resource-object-relationships
-[resource relationships]: #document-structure-resource-object-relationships
+[attributes]: #document-structure-resource-attributes
+[relationships]: #document-structure-resource-objects-relationships
+[resource relationships]: #document-structure-resource-objects-relationships
 [resource links]: #document-structure-resource-object-links
 [resource identifier object]: #document-structure-resource-identifier-objects
 [resource identifier objects]: #document-structure-resource-identifier-objects
