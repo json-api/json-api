@@ -1434,9 +1434,6 @@ Although relationships can be modified along with resources (as described
 above), JSON API also supports updating of relationships independently at
 *relationship URLs*.
 
-If a *relationship's `links` object* contains a *relationship URL*, then the
-server **MUST** respond to requests to that URL to update the relationship.
-
 > Note: Relationships are updated without exposing the underlying server
 semantics, such as foreign keys. Furthermore, relationships can be updated
 without necessarily affecting the related resources. For example, if an article
