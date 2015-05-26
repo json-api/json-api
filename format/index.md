@@ -197,7 +197,7 @@ consistently throughout an implementation.
 The value of the `"attributes"` key is an "attributes object". The attributes
 object is a JSON object that represents information about the resource object.
 
-The members of the attributes object ("attributes") shares namespace with the
+The members of the attributes object ("attributes") share a namespace with the
 members of the relationships object of the resource object; that is, attributes
 of a given resource object **MUST** be named differently than its relationships.
 The attributes object **MUST NOT** contain `id` or `type` members. Apart from
