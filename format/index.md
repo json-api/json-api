@@ -1691,8 +1691,7 @@ or `500 Internal Server Error` might be appropriate for multiple 5xx errors.
 
 Error objects provide additional information about problems encountered while
 performing an operation. Error objects **MUST** be returned as an array
-keyed by `"errors"` in the top level of a JSON API document, and **SHOULD
-NOT** be returned with any primary data.
+keyed by `"errors"` in the top level of a JSON API document.
 
 An error object **MAY** have the following members:
 
