@@ -898,6 +898,10 @@ resource object.
 `comments` is a relationship listed under a `articles` resource object, and
 `author` is a relationship listed under a `comments` resource object.
 
+If any segment in any relationship path listed in the `include` parameter
+contains a relationship name that is not a [valid member name](#document-structure-member-names),
+the server **MUST** respond with `400 Bad Request`.
+
 For instance, comments could be requested with an article:
 
 ```http
