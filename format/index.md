@@ -1768,7 +1768,7 @@ keyed by `errors` in the top level of a JSON API document.
 An error object **MAY** have the following members:
 
 * `id` - A unique identifier for this particular occurrence of the problem.
-* `links` - Links object containing a member `"about"`, that **MAY** lead to 
+* `links` - Links object containing a member `about`, that **MAY** lead to 
   further details about this particular occurrence of the problem. 
 * `status` - The HTTP status code applicable to this problem, expressed as a
   string value.
