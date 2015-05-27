@@ -32,7 +32,7 @@ operations allowed in this top level array.
 
 ### Request URLs and Patch Paths <a href="#patch-urls" id="patch-urls" class="headerlink"></a>
 
-The request URL and each Patch operation's `"path"` are complementary and
+The request URL and each Patch operation's `path` are complementary and
 **MUST** combine to target a particular resource, collection, attribute, or
 relationship.
 
@@ -40,15 +40,15 @@ If a server supports the Patch extension, it **MUST** allow Patch operations at
 any resource or relationship URLs that accept POST, PATCH, or DELETE requests.
 
 Patch operations **MAY** also be allowed at the root URL of an API. In this
-case, every `"path"` within a Patch operation **MUST** include the full
+case, every `path` within a Patch operation **MUST** include the full
 resource path relative to the root URL. This allows for general "fire hose"
 updates to any resource or relationship represented by an API. As stated
 above, a server **MAY** limit the type, order, and count of bulk operations.
 
 ### Creating Resources <a href="#patch-creating" id="patch-creating" class="headerlink"></a>
 
-To create a resource, request an `"add"` operation with a `"path"` that points
-to the end of its corresponding resource collection (`"/-"`). The `"value"`
+To create a resource, request an `add` operation with a `path` that points
+to the end of its corresponding resource collection (`/-`). The `value`
 should contain a resource object.
 
 For example, a new photo could be created with the following request:
@@ -75,8 +75,8 @@ Accept: application/vnd.api+json; ext=jsonpatch
 
 ### Updating Attributes <a href="#patch-updating-attributes" id="patch-updating-attributes" class="headerlink"></a>
 
-To update an attribute, perform a `"replace"` operation with the attribute's
-name specified by the `"path"`.
+To update an attribute, perform a `replace` operation with the attribute's
+name specified by the `path`.
 
 For instance, the following request should update just the `src` property of the
 photo at `/photos/1`:
@@ -98,13 +98,13 @@ relationship's URL.
 
 A server **MAY** also support relationship updates at a higher level, such
 as the resource's URL or the API's root URL. As discussed above, the request
-URL and each Patch operation's `"path"` must be complementary and combine to
+URL and each Patch operation's `path` must be complementary and combine to
 target a particular relationship's URL.
 
 #### Updating To-One Relationships <a href="#patch-updating-to-one-relationships" id="patch-updating-to-one-relationships" class="headerlink"></a>
 
-To update a to-one relationship, perform a `"replace"` operation with a URL
-and `"path"` that targets the relationship. The `"value"` **MUST** be a
+To update a to-one relationship, perform a `replace` operation with a URL
+and `path` that targets the relationship. The `value` **MUST** be a
 resource identifier object or `null`, to remove the relationship.
 
 For instance, the following request should update the `author` of an article:
@@ -137,11 +137,11 @@ Accept: application/vnd.api+json; ext=jsonpatch
 A server **MUST** respond to Patch operations that target a *to-many
 relationship URL* as described below.
 
-For all operations, the `"value"` **MUST** contain an object that contains
+For all operations, the `value` **MUST** contain an object that contains
 an array of resource identifier objects or an empty array, to remove all
 elements of the relationship.
 
-If a client requests a `"replace"` operation to a *to-many relationship URL*, the
+If a client requests a `replace` operation to a *to-many relationship URL*, the
 server **MUST** either completely replace every member of the relationship,
 return an appropriate error response if some resources can not be found or
 accessed, or return a `403 Forbidden` response if complete replacement is
@@ -166,9 +166,9 @@ Accept: application/vnd.api+json; ext=jsonpatch
 ]
 ```
 
-To add an element to a to-many relationship, request an `"add"` operation that
+To add an element to a to-many relationship, request an `add` operation that
 targets the relationship's URL. Because the operation is targeting the end of a
-collection, the `"path"` must end with `"/-"`.
+collection, the `path` must end with `/-`.
 
 In the following example, the comment with ID `123` is added to the list of
 comments for the article with ID `1`:
@@ -189,7 +189,7 @@ Accept: application/vnd.api+json; ext=jsonpatch
 ]
 ```
 
-To remove a to-many relationship, perform a `"remove"` operation that targets
+To remove a to-many relationship, perform a `remove` operation that targets
 the relationship's URL.
 
 In the following example, comments with IDs of `5` and `13` are removed
@@ -214,10 +214,10 @@ Accept: application/vnd.api+json; ext=jsonpatch
 
 ### Deleting a Resource <a href="#patch-deleting" id="patch-deleting" class="headerlink"></a>
 
-To delete a resource, perform a `"remove"` operation with a URL and `"path"`
+To delete a resource, perform a `remove` operation with a URL and `path`
 that targets the resource.
 
-For instance, photo `1` might be deleted with the following request:
+For instance, photo `"1"` might be deleted with the following request:
 
 ```text
 PATCH /photos/1
@@ -319,6 +319,6 @@ A server **MAY** return error objects that correspond to each operation. The
 body of the response **MUST** contain an array of JSON objects, which
 **MUST** be in sequential order and correspond to the operations in the
 request document. Each response object **SHOULD** contain only error objects
-keyed by `"errors"`, since no operations can be completed successfully when
+keyed by `errors`, since no operations can be completed successfully when
 any errors occur. Error codes for each specific operation **SHOULD** be
-returned in the `"status"` member of each error object.
+returned in the `status` member of each error object.

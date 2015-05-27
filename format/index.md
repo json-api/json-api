@@ -75,11 +75,11 @@ data. This object defines a document's "top level".
 
 A document **MUST** contain at least one of the following top-level members:
 
-* `"data"`: containing the document's "primary data"
-* `"errors"`: containing an array of [error objects](#errors)
-* `"meta"`: non-standard meta-information.
+* `data`: containing the document's "primary data"
+* `errors`: containing an array of [error objects](#errors)
+* `meta`: non-standard meta-information.
 
-The members `"data"` and `"errors"` **MUST NOT** coexist in the same document.
+The members `data` and `errors` **MUST NOT** coexist in the same document.
 
 The document's "primary data" is a representation of the resource or collection
 of resources targeted by a request.
@@ -126,9 +126,9 @@ empty.
 
 A document's top level **MAY** also have the following members:
 
-* `"jsonapi"`: an object describing the server's implementation
-* `"links"`: URLs related to the primary data.
-* `"included"`: an array of resource objects that are related to the primary
+* `jsonapi`: an object describing the server's implementation
+* `links`: URLs related to the primary data.
+* `included`: an array of resource objects that are related to the primary
   data and/or each other ("included resources").
 
 If any of these members appears in the top-level of a response, their values
@@ -140,19 +140,19 @@ If any of these members appears in the top-level of a response, their values
 
 A resource object **MUST** contain at least the following top-level members:
 
-* `"id"`
-* `"type"`
+* `id`
+* `type`
 
 Exception: The `id` member is not required when the resource object originates at
 the client and represents a new resource to be created on the server.
 
 In addition, a resource object **MAY** contain any of these top-level members:
 
-* `"attributes"`: an "attributes object" representing some of the resource's data.
-* `"relationships"`: a "relationships object" describing relationships between
+* `attributes`: an "attributes object" representing some of the resource's data.
+* `relationships`: a "relationships object" describing relationships between
  the resource and other JSON API resources.
-* `"links"`: a "links object" containing URLs related to the resource.
-* `"meta"`: non-standard meta-information about a resource that can not be
+* `links`: a "links object" containing URLs related to the resource.
+* `meta`: non-standard meta-information about a resource that can not be
   represented as an attribute or relationship.
 
 Here's how an article (i.e. a resource of type "articles") might appear in a document:
@@ -179,14 +179,14 @@ Here's how an article (i.e. a resource of type "articles") might appear in a doc
 ```
 #### Resource Identification <a href="#document-structure-resource-identification" id="document-structure-resource-identification" class="headerlink"></a>
 
-Every resource object **MUST** contain an `"id"` member and a `"type"` member.
+Every resource object **MUST** contain an `id` member and a `type` member.
 The value of each of these members **MUST** be a string.
 
-Within a given API, each resource object's `"type"` and `"id"` pair **MUST**
+Within a given API, each resource object's `type` and `id` pair **MUST**
 identify a single, unique resource. (The set of URIs controlled by a server,
 or multiple servers acting as one, constitute an API.)
 
-The `"type"` member is used to describe resource objects that share common
+The `type` member is used to describe resource objects that share common
 attributes and relationships.
 
 > Note: This spec is agnostic about inflection rules, so the value of `type`
@@ -196,7 +196,7 @@ consistently throughout an implementation.
 
 #### Attributes <a href="#document-structure-resource-attributes" id="document-structure-resource-attributes" class="headerlink"></a>
 
-The value of the `"attributes"` key is an "attributes object". The attributes
+The value of the `attributes` key is an "attributes object". The attributes
 object is a JSON object that represents information about the resource object.
 
 The members of the attributes object ("attributes") share a namespace with the
@@ -220,13 +220,13 @@ be represented under the "relationships object".
 
 #### Relationships <a href="#document-structure-resource-objects-relationships" id="document-structure-resource-objects-relationships" class="headerlink"></a>
 
-The value of the `"relationships"` key is a JSON object (a "relationships object")
+The value of the `relationships` key is a JSON object (a "relationships object")
 that represents references from the resource in whose resource object it's defined
 to other resources ("relationships"). These relationships share a namespace with
 [attributes]; that is, relationships of a given resource object **MUST** be named
 differently than its [attributes].
 
-The keys `"id"` and `"type"` are not allowed within the relationships object.
+The keys `id` and `type` are not allowed within the relationships object.
 
 Relationships may be to-one or to-many. Relationships can be specified by
 including a member in a resource's relationship's object. The name of the
@@ -235,18 +235,18 @@ relationship is its key in the relationships object.
 The value of a relationship **MUST** be an object (a "relationship object"),
 which **MUST** contain at least one of the following:
 
-* A `"links"` member that contains at least one of the following:
-  * A `"self"` member, whose value is a URL for the relationship itself (a
+* A `links` member that contains at least one of the following:
+  * A `self` member, whose value is a URL for the relationship itself (a
     "relationship URL"). This URL allows the client to directly manipulate the
     relationship. For example, it would allow a client to remove an `author`
     from an `article` without deleting the `people` resource itself.
-  * A `"related"` member, whose value is a related resource URL, as defined below.
-* A `"data"` member, whose value represents "resource linkage" (defined below).
-* A `"meta"` member that contains non-standard meta-information about the
+  * A `related` member, whose value is a related resource URL, as defined below.
+* A `data` member, whose value represents "resource linkage" (defined below).
+* A `meta` member that contains non-standard meta-information about the
   relationship.
 
 A relationship object that represents a to-many relationship **MAY** also contain
-pagination links under the `"links"` member, as described below.
+pagination links under the `links` member, as described below.
 
 A "related resource URL" provides access to the resources targeted by the
 relationship. When fetched, it returns the related resource object(s) as the
@@ -315,11 +315,11 @@ its "[fields]".
 
 #### Resource Links <a href="#document-structure-structure-resource-object-links" id="document-structure-resource-object-links" class="headerlink"></a>
 
-Analogous to the `"links"` member at the document's top level, the optional
-`"links"` member within each resource object contains URLs related to the
+Analogous to the `links` member at the document's top level, the optional
+`links` member within each resource object contains URLs related to the
 resource.
 
-If present, this object **MAY** contain a URL keyed by `"self"`, that identifies
+If present, this object **MAY** contain a URL keyed by `self`, that identifies
 the resource represented by the resource object.
 
 ```json
@@ -345,9 +345,9 @@ response that includes the resource as the primary data.
 A "resource identifier object" is an object that identifies an individual
 resource.
 
-It **MUST** contain `"type"` and `"id"` members.
+It **MUST** contain `type` and `id` members.
 
-It **MAY** also include a `"meta"` member to contain non-standard
+It **MAY** also include a `meta` member to contain non-standard
 meta-information.
 
 ### Compound Documents <a href="#document-structure-compound-documents" id="document-structure-compound-documents" class="headerlink"></a>
@@ -357,7 +357,7 @@ include related resources along with the requested primary resources. Such
 responses are called "compound documents".
 
 In a compound document, all included resources **MUST** be represented as an
-array of resource objects in a top-level `"included"` member.
+array of resource objects in a top-level `included` member.
 
 Compound documents require "full linkage", meaning that every included
 resource **MUST** be identified by at least one [resource identifier object]
@@ -451,7 +451,7 @@ multiple times.
 ### Meta Information <a href="#document-structure-meta" id="document-structure-meta" class="headerlink"></a>
 
 As discussed above, a JSON API document **MAY** be extended to include
-meta-information as `"meta"` members in several locations:
+meta-information as `meta` members in several locations:
 
 * at the top-level
 * within the top level `jsonapi` object.
@@ -461,7 +461,7 @@ meta-information as `"meta"` members in several locations:
 * within [resource identifier objects]
 * within [error objects](#errors)
 
-All `"meta"` members **MUST** have an object as a value, the contents of which
+All `meta` members **MUST** have an object as a value, the contents of which
 can be used for custom extensions.
 
 For example:
@@ -487,7 +487,7 @@ Any members **MAY** be specified within `meta` objects.
 ### Links <a href="#document-structure-links" id="document-structure-links" class="headerlink"></a>
 
 As discussed above, a document **MAY** be extended to include relevant URLs
-within `"links"` members at several locations: at the top-level, within resource
+within `links` members at several locations: at the top-level, within resource
 objects, and within relationship objects.
 
 The allowed keys for `links` objects at the resource and relationship object
@@ -497,8 +497,8 @@ levels are defined in the sections on [resource relationships] and
 When a links object appears at the document's top-level, it **MAY** have
 the following members:
 
-* `"self"` - the URL that generated the current response document.
-* `"related"` - a related resource URL (as defined above) when the primary
+* `self` - the URL that generated the current response document.
+* `related` - a related resource URL (as defined above) when the primary
   data represents a resource relationship.
 * Pagination links for the primary data (as described below).
 
@@ -507,8 +507,8 @@ For links currently defined by the spec (`self`, `related`, `prev`, `next`,
 a string containing the link URL or a "link object", which can contain
 the following members:
 
-* `"href"` - the string containing the link URL,
-* `"meta"` - non-standard meta-information about the link.
+* `href` - the string containing the link URL,
+* `meta` - non-standard meta-information about the link.
 
 Examples of the supported formats:
 
@@ -534,9 +534,9 @@ allowed in the future for such values: object, array, or scalar.
 ### JSON API Object <a href="#document-structure-jsonapi-object" id="document-structure-jsonapi-object" class="headerlink"></a>
 
 A JSON API document **MAY** include information about its implementation under
-a top level `"jsonapi"` member. If present, it **MUST** be an object containing
+a top level `jsonapi` member. If present, it **MUST** be an object containing
 a `version` member whose value is a string indicating the highest JSON API
-version supported. Other than `"meta"`, servers **MUST NOT** include any
+version supported. Other than `meta`, servers **MUST NOT** include any
 additional members.
 
 ```json
@@ -1063,10 +1063,10 @@ object.
 
 The following keys **MUST** be used for pagination links:
 
-* `"first"` - the first page of data
-* `"last"` - the last page of data
-* `"prev"` - the previous page of data
-* `"next"` - the next page of data
+* `first` - the first page of data
+* `last` - the last page of data
+* `prev` - the previous page of data
+* `next` - the next page of data
 
 Keys **MUST** either be omitted or have a `null` value to indicate that a
 particular link is unavailable.
@@ -1146,15 +1146,15 @@ Accept: application/vnd.api+json
 }
 ```
 
-If a relationship is provided in the `"relationships"` member of the
-resource object, its value **MUST** be a relationship object with a `"data"`
+If a relationship is provided in the `relationships` member of the
+resource object, its value **MUST** be a relationship object with a `data`
 member. The value of this key represents the linkage the new resource is to
 have.
 
 #### Client-Generated IDs <a href="#crud-creating-client-ids" id="crud-creating-client-ids" class="headerlink"></a>
 
 A server **MAY** accept a client-generated ID along with a request to create
-a resource. An ID **MUST** be specified with an `"id"` key, the value of
+a resource. An ID **MUST** be specified with an `id` key, the value of
 which **MUST** be a universally unique identifier. The client **SHOULD** use
 a properly generated and formatted *UUID* as described in RFC 4122
 [[RFC4122](http://tools.ietf.org/html/rfc4122.html)].
@@ -1331,9 +1331,9 @@ Accept: application/vnd.api+json
 
 #### Updating a Resource's Relationships <a href="#crud-updating-resource-relationships" id="crud-updating-resource-relationships" class="headerlink"></a>
 
-If a relationship is provided in the `"relationships"` member of a resource
+If a relationship is provided in the `relationships` member of a resource
 object in a `PATCH` request, its value **MUST** be a relationship object
-with a `"data"` member. The relationship's value will be replaced with the
+with a `data` member. The relationship's value will be replaced with the
 value specified in this member.
 
 For instance, the following `PATCH` request will update the `title` attribute
@@ -1414,7 +1414,7 @@ resource(s) as if a `GET` request was made to the request URL.
 
 A server **MUST** return a `200 OK` status code if an update is successful,
 the client's current attributes remain up to date, and the server responds
-only with top-level `"meta"` data. In this case the server **MUST NOT**
+only with top-level `meta` data. In this case the server **MUST NOT**
 include a representation of the updated resource(s).
 
 ##### 204 No Content <a href="#crud-updating-responses-204" id="crud-updating-responses-204" class="headerlink"></a>
@@ -1646,7 +1646,7 @@ updated relationship(s).
 
 A server **MUST** return a `200 OK` status code if an update is successful,
 the client's current data remain up to date, and the server responds
-only with top-level `"meta"` data. In this case the server **MUST NOT**
+only with top-level `meta` data. In this case the server **MUST NOT**
 include a representation of the updated relationship(s).
 
 ##### 403 Forbidden <a href="#crud-updating-relationship-responses-403" id="crud-updating-relationship-responses-403" class="headerlink"></a>
@@ -1689,7 +1689,7 @@ request is successful and no content is returned.
 ##### 200 OK <a href="#crud-deleting-responses-200" id="crud-deleting-responses-200" class="headerlink"></a>
 
 A server **MUST** return a `200 OK` status code if a deletion request is
-successful and the server responds with only top-level `"meta"` data.
+successful and the server responds with only top-level `meta` data.
 
 ##### Other Responses <a href="#crud-deleting-responses-other" id="crud-deleting-responses-other" class="headerlink"></a>
 
@@ -1719,30 +1719,30 @@ or `500 Internal Server Error` might be appropriate for multiple 5xx errors.
 
 Error objects provide additional information about problems encountered while
 performing an operation. Error objects **MUST** be returned as an array
-keyed by `"errors"` in the top level of a JSON API document.
+keyed by `errors` in the top level of a JSON API document.
 
 An error object **MAY** have the following members:
 
-* `"id"` - A unique identifier for this particular occurrence of the problem.
-* `"href"` - A URI that **MAY** yield further details about this particular
+* `id` - A unique identifier for this particular occurrence of the problem.
+* `href` - A URI that **MAY** yield further details about this particular
   occurrence of the problem.
-* `"status"` - The HTTP status code applicable to this problem, expressed as a
+* `status` - The HTTP status code applicable to this problem, expressed as a
   string value.
-* `"code"` - An application-specific error code, expressed as a string value.
-* `"title"` - A short, human-readable summary of the problem. It **SHOULD NOT**
+* `code` - An application-specific error code, expressed as a string value.
+* `title` - A short, human-readable summary of the problem. It **SHOULD NOT**
   change from occurrence to occurrence of the problem, except for purposes of
   localization.
-* `"detail"` - A human-readable explanation specific to this occurrence of the
+* `detail` - A human-readable explanation specific to this occurrence of the
   problem.
-* `"source"` - An object containing references to the source of the error,
+* `source` - An object containing references to the source of the error,
   optionally including any of the following members:
-  * `"pointer"` - A JSON Pointer
+  * `pointer` - A JSON Pointer
     [[RFC6901](https://tools.ietf.org/html/rfc6901)] to the associated entity in
-    the request document [e.g. `"/data"` for a primary data object, or
-    `"/data/attributes/title"` for a specific attribute].
-  * `"parameter"` - An optional string indicating which query parameter caused
+    the request document [e.g. `/data` for a primary data object, or
+    `/data/attributes/title` for a specific attribute].
+  * `parameter` - An optional string indicating which query parameter caused
     the error.
-* `"meta"` - to contain non-standard meta-information about the error.
+* `meta` - to contain non-standard meta-information about the error.
 
 [attributes]: #document-structure-resource-attributes
 [relationships]: #document-structure-resource-objects-relationships

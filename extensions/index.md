@@ -21,7 +21,7 @@ JSON API can be extended in several ways:
 * Meta information can be included in several places in a document,
   [as discussed in the base specification](/format/#document-structure-meta).
 
-* A profile can be specified in the top-level `"meta"` object, as discussed
+* A profile can be specified in the top-level `meta` object, as discussed
   below.
 
 ## Extension Negotiation <a href="#extension-negotiation" id="extension-negotiation" class="headerlink"></a>
