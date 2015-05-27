@@ -454,7 +454,7 @@ As discussed above, a JSON API document **MAY** be extended to include
 meta-information as `"meta"` members in several locations:
 
 * at the top-level
-* within the top level jsonapi object.
+* within the top level `jsonapi` object.
 * within resource objects
 * within relationship objects
 * within link objects
