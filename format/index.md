@@ -75,9 +75,9 @@ data. This object defines a document's "top level".
 
 A document **MUST** contain at least one of the following top-level members:
 
-* `"data"`, containing the document's "primary data"
-* `"errors"`, containing an array of [error objects](#errors)
-* `"meta"`, non-standard meta-information.
+* `"data"`: containing the document's "primary data"
+* `"errors"`: containing an array of [error objects](#errors)
+* `"meta"`: non-standard meta-information.
 
 The members `"data"` and `"errors"` **MUST NOT** coexist in the same document.
 
@@ -126,6 +126,7 @@ empty.
 
 A document's top level **MAY** also have the following members:
 
+* `"jsonapi"`: an object describing the server's implementation
 * `"links"`: URLs related to the primary data.
 * `"included"`: an array of resource objects that are related to the primary
   data and/or each other ("included resources").
@@ -451,6 +452,7 @@ As discussed above, a JSON API document **MAY** be extended to include
 meta-information as `"meta"` members in several locations:
 
 * at the top-level
+* within the top level jsonapi object.
 * within resource objects
 * within relationship objects
 * within link objects
@@ -526,6 +528,28 @@ Examples of the supported formats:
 the value of each member of a `links` object is not constrained by the
 current version of the spec. It should be assumed that anything can be
 allowed in the future for such values: object, array, or scalar.
+
+### JSON API Object <a href="#document-structure-jsonapi-object" id="document-structure-jsonapi-object" class="headerlink"></a>
+
+A JSON API document **MAY** include information about its implementation under
+a top level `"jsonapi"` member. If present, it **MUST** be an object containing
+a `version` member whose value is a string indicating the highest JSON API
+version supported. Other than `"meta"`, servers **MUST NOT** include any
+additional members.
+
+```json
+{
+  "jsonapi": {
+    "version": "1.0"
+  }
+}
+```
+
+If this member is not present, clients should assume the server implements
+version 1.0 of the specification.
+
+> Note: Because JSON API is committed to making additive changes only, the
+version string primarily indicates which new features a server may support.
 
 ### Member Names <a href="#document-structure-member-names" id="document-structure-member-names" class="headerlink"></a>
 
