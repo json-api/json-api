@@ -362,7 +362,9 @@ Compound documents require "full linkage", meaning that every included
 resource **MUST** be identified by at least one [resource identifier object]
 in the same document. These resource identifier objects could either be
 primary data or represent resource linkage contained within primary or
-included resources.
+included resources. The only exception to the full linkage requirement is
+when relationship fields that would otherwise contain linkage data are
+excluded via [sparse fieldsets](#fetching-sparse-fieldsets).
 
 > Note: Full linkage ensures that included resources are related to either
 the primary data (which could be resource objects or resource identifier
