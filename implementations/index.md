@@ -42,6 +42,7 @@ pull request](https://github.com/json-api/json-api).
 * [tobscure / json-api](https://github.com/tobscure/json-api)
 * [neomerx / json-api](https://github.com/neomerx/json-api) is a framework agnostic library that fully implements JSON API v1.0.
 * [neomerx / limoncello-collins](https://github.com/neomerx/limoncello-collins) (Laravel-based) and [neomerx / limoncello-shot](https://github.com/neomerx/limoncello-shot) (Lumen-based) are pre-configured JSON API v1.0 quick start server application that use [neomerx / json-api](https://github.com/neomerx/json-api).
+* [lode / jsonapi](https://github.com/lode/jsonapi) a simple and friendly library, easy to understand for people without knowledge of the specification.
 
 ### Node.js <a href="#server-libraries-node-js" id="server-libraries-node-js" class="headerlink"></a>
 * [Fortune.js](http://fortunejs.com) is a framework built to implement json-api.
