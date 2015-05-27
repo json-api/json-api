@@ -93,16 +93,22 @@ Primary data **MUST** be either:
 
 For example, the following primary data is a single resource object:
 
-```javascript
+```json
 {
   "data": {
     "type": "articles",
     "id": "1",
     "attributes": {
-      // ... this article's attributes
+      "title": "JSON API paints my bikeshed!"
     },
     "relationships": {
-      // ... this article's relationships
+      "author": {
+        "links": {
+          "self": "/articles/1/relationships/author",
+          "related": "/articles/1/author"
+        },
+        "data": { "type": "people", "id": "9" }
+      }
     }
   }
 }
@@ -111,7 +117,7 @@ For example, the following primary data is a single resource object:
 The following primary data is a single [resource identifier object] that
 references the same resource:
 
-```javascript
+```json
 {
   "data": {
     "type": "articles",
@@ -162,25 +168,23 @@ In addition, a resource object **MAY** contain any of these top-level members:
 
 Here's how an article (i.e. a resource of type "articles") might appear in a document:
 
-```javascript
-// ...
-{
-  "type": "articles",
-  "id": "1",
-  "attributes": {
-    "title": "Rails is Omakase"
-  },
-  "relationships": {
-    "author": {
-      "links": {
-        "self": "/articles/1/relationships/author",
-        "related": "/articles/1/author"
-      },
-      "data": { "type": "people", "id": "9" }
+```json
+  {
+    "type": "articles",
+    "id": "1",
+    "attributes": {
+      "title": "JSON API paints my bikeshed!"
+    },
+    "relationships": {
+      "author": {
+        "links": {
+          "self": "/articles/1/relationships/author",
+          "related": "/articles/1/author"
+        },
+        "data": { "type": "people", "id": "9" }
+      }
     }
   }
-}
-// ...
 ```
 #### Resource Identification <a href="#document-structure-resource-identification" id="document-structure-resource-identification" class="headerlink"></a>
 
@@ -285,28 +289,26 @@ object.
 
 For example, the following article is associated with an `author`:
 
-```javascript
-// ...
-{
-  "type": "articles",
-  "id": "1",
-  "attributes": {
-    "title": "Rails is Omakase"
-  },
-  "relationships": {
-    "author": {
-      "links": {
-        "self": "http://example.com/articles/1/relationships/author",
-        "related": "http://example.com/articles/1/author"
-      },
-      "data": { "type": "people", "id": "9" }
+```json
+  {
+    "type": "articles",
+    "id": "1",
+    "attributes": {
+      "title": "JSON API paints my bikeshed!"
+    },
+    "relationships": {
+      "author": {
+        "links": {
+          "self": "http://example.com/articles/1/relationships/author",
+          "related": "http://example.com/articles/1/author"
+        },
+        "data": { "type": "people", "id": "9" }
+      }
+    },
+    "links": {
+      "self": "http://example.com/articles/1"
     }
-  },
-  "links": {
-    "self": "http://example.com/articles/1"
   }
-}
-// ...
 ```
 
 The `author` relationship includes a URL for the relationship itself (which
@@ -328,18 +330,16 @@ If present, this object **MAY** contain a URL keyed by `self`, that identifies
 the resource represented by the resource object.
 
 ```json
-// ...
-{
-  "type": "articles",
-  "id": "1",
-  "attributes": {
-    "title": "Rails is Omakase"
-  },
-  "links": {
-    "self": "http://example.com/articles/1"
+  {
+    "type": "articles",
+    "id": "1",
+    "attributes": {
+      "title": "JSON API paints my bikeshed!"
+    },
+    "links": {
+      "self": "http://example.com/articles/1"
+    }
   }
-}
-// ...
 ```
 
 A server **MUST** respond to a `GET` request to the specified URL with a
@@ -471,7 +471,7 @@ can be used for custom extensions.
 
 For example:
 
-```javascript
+```json
 {
   "meta": {
     "copyright": "Copyright 2015 Example Corp.",
@@ -480,9 +480,6 @@ For example:
       "Steve Klabnik",
       "Dan Gebhardt"
     ]
-  },
-  "data": {
-    // ...
   }
 }
 ```
@@ -517,16 +514,21 @@ the following members:
 
 Examples of the supported formats:
 
-```
-"links": {
-  "self": "http://example.com/posts",
+```json
+{
+  "links": {
+    "self": "http://example.com/posts"
+  }
 }
 ```
-```
-"links": {
-  "self": {
-    "href": "http://example.com/posts",
-    "meta": {}
+
+```json
+{
+  "links": {
+    "self": {
+      "href": "http://example.com/posts",
+      "meta": {}
+    }
   }
 }
 ```
