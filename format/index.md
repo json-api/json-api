@@ -493,7 +493,7 @@ Any members **MAY** be specified within `meta` objects.
 
 As discussed above, a document **MAY** be extended to include relevant URLs
 within `links` members at several locations: at the top-level, within resource
-objects, and within relationship objects.
+objects, within relationship objects, and within error objects.
 
 The allowed keys for `links` objects at the resource and relationship object
 levels are defined in the sections on [resource relationships] and
@@ -508,7 +508,7 @@ the following members:
 * Pagination links for the primary data (as described below).
 
 For links currently defined by the spec (`self`, `related`, `prev`, `next`,
-`first`, `last`), the value of each member of a `links` object can be either
+`first`, `last`, `about`), the value of each member of a `links` object can be either
 a string containing the link URL or a "link object", which can contain
 the following members:
 
@@ -1768,8 +1768,8 @@ keyed by `errors` in the top level of a JSON API document.
 An error object **MAY** have the following members:
 
 * `id` - A unique identifier for this particular occurrence of the problem.
-* `href` - A URI that **MAY** yield further details about this particular
-  occurrence of the problem.
+* `links` - Links object containing a member `"about"`, that **MAY** lead to 
+  further details about this particular occurrence of the problem. 
 * `status` - The HTTP status code applicable to this problem, expressed as a
   string value.
 * `code` - An application-specific error code, expressed as a string value.
