@@ -321,7 +321,7 @@ resource.
 If present, this object **MAY** contain a URL keyed by `"self"`, that identifies
 the resource represented by the resource object.
 
-```json
+```javascript
 // ...
 {
   "type": "articles",
@@ -370,7 +370,7 @@ objects) or to each other.
 
 A complete example document with multiple included relationships:
 
-```json
+```javascript
 {
   "data": [{
     "type": "articles",
@@ -508,12 +508,13 @@ the following members:
 
 Examples of the supported formats:
 
-```
+```javascript
 "links": {
   "self": "http://example.com/posts",
 }
 ```
-```
+
+```javascript
 "links": {
   "self": {
     "href": "http://example.com/posts",
