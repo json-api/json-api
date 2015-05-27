@@ -143,6 +143,9 @@ A resource object **MUST** contain at least the following top-level members:
 * `id`
 * `type`
 
+The value of `type` members **MUST** adhere to the same constraints as
+[member names].
+
 Exception: The `id` member is not required when the resource object originates at
 the client and represents a new resource to be created on the server.
 
@@ -1780,3 +1783,4 @@ An error object **MAY** have the following members:
 [resource identifier objects]: #document-structure-resource-identifier-objects
 [fields]: #document-structure-resource-object-fields
 [error details]: #errors
+[member names]: #document-structure-member-names
