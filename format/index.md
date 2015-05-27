@@ -48,6 +48,13 @@ Servers **MUST NOT** send responses with the `application/vnd.api+json` media
 type if the client has not indicated, using its `Accept` header, that it can
 understand this format.
 
+> Note: If a client's `Accept` header indicates that it accepts standard JSON
+but not the JSON API media type, the server may choose serve it a JSON API
+document identified as `application/json`. If the server does so, is not
+considered to be sending "JSON API data" for the purposes of the requirement
+above, but rather simple JSON data, and the client cannot rely on any of the
+rules laid out in this specification.
+
 Clients **MUST** ignore any parameters for the `application/vnd.api+json`
 media type received in the `Content-Type` header of response documents.
 
