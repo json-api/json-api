@@ -645,19 +645,25 @@ A server **MUST** support fetching resource data for every URL provided as:
 For example, the following request fetches a collection of articles:
 
 ```http
-GET /articles
+GET /articles HTTP/1.1
+Content-Type: application/vnd.api+json
+Accept: application/vnd.api+json
 ```
 
 The following request fetches an article:
 
 ```http
-GET /articles/1
+GET /articles/1 HTTP/1.1
+Content-Type: application/vnd.api+json
+Accept: application/vnd.api+json
 ```
 
 And the following request fetches an article's author:
 
 ```http
-GET /articles/1/author
+GET /articles/1/author HTTP/1.1
+Content-Type: application/vnd.api+json
+Accept: application/vnd.api+json
 ```
 
 #### Responses <a href="#fetching-resources-responses" id="fetching-resources-responses" class="headerlink"></a>
@@ -673,7 +679,7 @@ the response document's primary data.
 
 For example, a `GET` request to a collection of articles could return:
 
-```text
+```http
 HTTP/1.1 200 OK
 Content-Type: application/vnd.api+json
 
@@ -699,7 +705,7 @@ Content-Type: application/vnd.api+json
 
 A similar response representing an empty collection would be:
 
-```text
+```http
 HTTP/1.1 200 OK
 Content-Type: application/vnd.api+json
 
@@ -725,7 +731,7 @@ resource object otherwise.
 
 For example, a `GET` request to an individual article could return:
 
-```text
+```http
 HTTP/1.1 200 OK
 Content-Type: application/vnd.api+json
 
@@ -753,7 +759,7 @@ Content-Type: application/vnd.api+json
 If the above article's author is missing, then a `GET` request to that related
 resource would return:
 
-```text
+```http
 HTTP/1.1 200 OK
 Content-Type: application/vnd.api+json
 
@@ -789,13 +795,17 @@ provided as a `self` link as part of a relationship's `links` object.
 For example, the following request fetches data about an article's comments:
 
 ```http
-GET /articles/1/relationships/comments
+GET /articles/1/relationships/comments HTTP/1.1
+Content-Type: application/vnd.api+json
+Accept: application/vnd.api+json
 ```
 
 And the following request fetches data about an article's author:
 
 ```http
-GET /articles/1/relationships/author
+GET /articles/1/relationships/author HTTP/1.1
+Content-Type: application/vnd.api+json
+Accept: application/vnd.api+json
 ```
 
 #### Responses <a href="#fetching-relationships-responses" id="fetching-relationships-responses" class="headerlink"></a>
@@ -813,7 +823,7 @@ as described above for relationship objects.
 
 For example, a `GET` request to a to-one relationship URL could return:
 
-```text
+```http
 HTTP/1.1 200 OK
 Content-Type: application/vnd.api+json
 
@@ -832,7 +842,7 @@ Content-Type: application/vnd.api+json
 If the above relationship is empty, then a `GET` request to the same URL would
 return:
 
-```text
+```http
 HTTP/1.1 200 OK
 Content-Type: application/vnd.api+json
 
@@ -847,7 +857,7 @@ Content-Type: application/vnd.api+json
 
 A `GET` request to a to-many relationship URL could return:
 
-```text
+```http
 HTTP/1.1 200 OK
 Content-Type: application/vnd.api+json
 
@@ -929,14 +939,18 @@ inclusion of resources from a path, it **MUST** respond with 400 Bad Request.
 For instance, comments could be requested with an article:
 
 ```http
-GET /articles/1?include=comments
+GET /articles/1?include=comments HTTP/1.1
+Content-Type: application/vnd.api+json
+Accept: application/vnd.api+json
 ```
 
 In order to request resources related to other resources, a dot-separated path
 for each relationship name can be specified:
 
 ```http
-GET /articles/1?include=comments.author
+GET /articles/1?include=comments.author HTTP/1.1
+Content-Type: application/vnd.api+json
+Accept: application/vnd.api+json
 ```
 
 > Note: Because compound documents require full linkage, intermediate
@@ -957,13 +971,17 @@ resources.
 Multiple related resources can be requested in a comma-separated list:
 
 ```http
-GET /articles/1?include=author,comments.author
+GET /articles/1?include=author,comments.author HTTP/1.1
+Content-Type: application/vnd.api+json
+Accept: application/vnd.api+json
 ```
 
 Furthermore, related resources can be requested from a relationship endpoint:
 
 ```http
-GET /articles/1/relationships/comments?include=comments.author
+GET /articles/1/relationships/comments?include=comments.author HTTP/1.1
+Content-Type: application/vnd.api+json
+Accept: application/vnd.api+json
 ```
 
 In this case, the primary data would be a collection of [resource identifier
@@ -987,7 +1005,9 @@ If a client requests a restricted set of [fields], an endpoint **MUST NOT**
 include additional [fields] in the response.
 
 ```http
-GET /articles?include=author&fields[articles]=title,body&fields[people]=name
+GET /articles?include=author&fields[articles]=title,body&fields[people]=name HTTP/1.1
+Content-Type: application/vnd.api+json
+Accept: application/vnd.api+json
 ```
 
 > Note: This section applies to any endpoint that responds with resources as
@@ -1013,7 +1033,9 @@ An endpoint **MAY** support requests to sort the primary data with a `sort`
 query parameter. The value for `sort` **MUST** represent sort fields.
 
 ```http
-GET /people?sort=age
+GET /people?sort=age HTTP/1.1
+Content-Type: application/vnd.api+json
+Accept: application/vnd.api+json
 ```
 
 An endpoint **MAY** support multiple sort fields by allowing comma-separated
@@ -1021,14 +1043,18 @@ An endpoint **MAY** support multiple sort fields by allowing comma-separated
 order specified.
 
 ```http
-GET /people?sort=age,name
+GET /people?sort=age,name HTTP/1.1
+Content-Type: application/vnd.api+json
+Accept: application/vnd.api+json
 ```
 
 The sort order for each sort field **MUST** be ascending unless it is prefixed
 with a minus (U+002D HYPHEN-MINUS, "-"), in which case it **MUST** be descending.
 
 ```http
-GET /articles?sort=-created,title
+GET /articles?sort=-created,title HTTP/1.1
+Content-Type: application/vnd.api+json
+Accept: application/vnd.api+json
 ```
 
 The above example should return the newest articles first. Any articles
@@ -1125,8 +1151,8 @@ as primary data. The resource object **MUST** contain at least a `type` member.
 
 For instance, a new photo might be created with the following request:
 
-```text
-POST /photos
+```http
+POST /photos HTTP/1.1
 Content-Type: application/vnd.api+json
 Accept: application/vnd.api+json
 
@@ -1167,8 +1193,8 @@ unique indentifiers.
 
 For example:
 
-```text
-POST /photos
+```http
+POST /photos HTTP/1.1
 Content-Type: application/vnd.api+json
 Accept: application/vnd.api+json
 
@@ -1205,7 +1231,7 @@ If the resource object returned by the response contains a `self` key in its
 `links` member, the value of the `self` member **MUST** match the value of
 the `Location` header.
 
-```text
+```http
 HTTP/1.1 201 Created
 Location: http://example.com/photos/550e8400-e29b-41d4-a716-446655440000
 Content-Type: application/vnd.api+json
@@ -1284,8 +1310,8 @@ The resource object **MUST** contain `type` and `id` members.
 
 For example:
 
-```text
-PATCH /articles/1
+```http
+PATCH /articles/1 HTTP/1.1
 Content-Type: application/vnd.api+json
 Accept: application/vnd.api+json
 
@@ -1312,8 +1338,8 @@ current values. It **MUST NOT** interpret them as `null` values.
 For example, the following `PATCH` request is interpreted as a request to
 update only the `title` and `text` attributes of an article:
 
-```text
-PATCH /articles/1
+```http
+PATCH /articles/1 HTTP/1.1
 Content-Type: application/vnd.api+json
 Accept: application/vnd.api+json
 
@@ -1339,8 +1365,8 @@ value specified in this member.
 For instance, the following `PATCH` request will update the `title` attribute
 and `author` relationship of an article:
 
-```text
-PATCH /articles/1
+```http
+PATCH /articles/1 HTTP/1.1
 Content-Type: application/vnd.api+json
 Accept: application/vnd.api+json
 
@@ -1363,8 +1389,8 @@ Accept: application/vnd.api+json
 Likewise, the following `PATCH` request performs a complete replacement of
 the `tags` for an article:
 
-```text
-PATCH /articles/1
+```http
+PATCH /articles/1 HTTP/1.1
 Content-Type: application/vnd.api+json
 Accept: application/vnd.api+json
 
@@ -1491,8 +1517,8 @@ one of:
 
 For example, the following request updates the author of an article:
 
-```text
-PATCH /articles/1/relationships/author
+```http
+PATCH /articles/1/relationships/author HTTP/1.1
 Content-Type: application/vnd.api+json
 Accept: application/vnd.api+json
 
@@ -1503,8 +1529,8 @@ Accept: application/vnd.api+json
 
 And the following request clears the author of the same article:
 
-```text
-PATCH /articles/1/relationships/author
+```http
+PATCH /articles/1/relationships/author HTTP/1.1
 Content-Type: application/vnd.api+json
 Accept: application/vnd.api+json
 
@@ -1532,8 +1558,8 @@ not allowed by the server.
 
 For example, the following request replaces every tag for an article:
 
-```text
-PATCH /articles/1/relationships/tags
+```http
+PATCH /articles/1/relationships/tags HTTP/1.1
 Content-Type: application/vnd.api+json
 Accept: application/vnd.api+json
 
@@ -1547,8 +1573,8 @@ Accept: application/vnd.api+json
 
 And the following request clears every tag for an article:
 
-```text
-PATCH /articles/1/relationships/tags
+```http
+PATCH /articles/1/relationships/tags HTTP/1.1
 Content-Type: application/vnd.api+json
 Accept: application/vnd.api+json
 
@@ -1576,8 +1602,8 @@ caused by multiple clients making the same changes to a relationship.
 In the following example, the comment with ID `123` is added to the list of
 comments for the article with ID `1`:
 
-```text
-POST /articles/1/relationships/comments
+```http
+POST /articles/1/relationships/comments HTTP/1.1
 Content-Type: application/vnd.api+json
 Accept: application/vnd.api+json
 
@@ -1602,8 +1628,8 @@ Relationship members are specified in the same way as in the `POST` request.
 In the following example, comments with IDs of `12` and `13` are removed
 from the list of comments for the article with ID `1`:
 
-```text
-DELETE /articles/1/relationships/comments
+```http
+DELETE /articles/1/relationships/comments HTTP/1.1
 Content-Type: application/vnd.api+json
 Accept: application/vnd.api+json
 
@@ -1670,7 +1696,9 @@ An individual resource can be *deleted* by making a `DELETE` request to the
 resource's URL:
 
 ```http
-DELETE /photos/1
+DELETE /photos/1 HTTP/1.1
+Content-Type: application/vnd.api+json
+Accept: application/vnd.api+json
 ```
 
 #### Responses <a href="#crud-deleting-responses" id="crud-deleting-responses" class="headerlink"></a>
