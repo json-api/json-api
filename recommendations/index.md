@@ -39,7 +39,7 @@ transport documents because order is significant.
 It is recommended that the URL for a collection of resources be formed from
 the resource type.
 
-For example, a collection of resources of type `"photos"` will have the URL:
+For example, a collection of resources of type `photos` will have the URL:
 
 ```text
 /photos
@@ -63,13 +63,13 @@ As described in the base specification, there are two URLs that can be exposed
 for each relationship:
 
 * the "relationship URL" - a URL for the relationship itself, which is
-identified with the `"self"` key in a relationship's `links` object. This URL
+identified with the `self` key in a relationship's `links` object. This URL
 allows the client to directly manipulate the relationship. For example, it would
 allow a client to remove an `author` from a `post` without deleting the `people`
 resource itself.
 
 * the "related resource URL" - a URL for the related resource(s), which is
-identified with the `"related"` key within a relationship's `links` object. When
+identified with the `related` key within a relationship's `links` object. When
 fetched, it returns the related resource object(s) as the response's primary data.
 
 It is recommended that a relationship URL be formed by appending `/relationships/`

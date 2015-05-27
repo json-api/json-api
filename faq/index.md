@@ -43,7 +43,7 @@ You should use the OPTIONS HTTP method to discover what can be done with a
 particular resource. The semantics of the methods returned by OPTIONS is defined
 by the JSON API standard.
 
-For instance, if `"GET,POST"` is the response to an OPTIONS request to an URL,
+For instance, if `GET,POST` is the response to an OPTIONS request to an URL,
 then you can get information about the resource and also create new resources.
 
 If you want to know what you can do with a specific resource attribute then
