@@ -134,6 +134,8 @@ A document's top level **MAY** also have the following members:
 If any of these members appears in the top-level of a response, their values
 **MUST** comply with this specification.
 
+If a document does not contain a top-level `data` key, then the `included` key **MUST NOT** be present either.
+
 ### Resource Objects <a href="#document-structure-resource-objects" id="document-structure-resource-objects" class="headerlink"></a>
 
 "Resource objects" appear in a JSON API document to represent resources.
