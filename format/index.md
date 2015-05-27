@@ -651,7 +651,6 @@ For example, the following request fetches a collection of articles:
 
 ```http
 GET /articles HTTP/1.1
-Content-Type: application/vnd.api+json
 Accept: application/vnd.api+json
 ```
 
@@ -659,7 +658,6 @@ The following request fetches an article:
 
 ```http
 GET /articles/1 HTTP/1.1
-Content-Type: application/vnd.api+json
 Accept: application/vnd.api+json
 ```
 
@@ -667,7 +665,6 @@ And the following request fetches an article's author:
 
 ```http
 GET /articles/1/author HTTP/1.1
-Content-Type: application/vnd.api+json
 Accept: application/vnd.api+json
 ```
 
@@ -801,7 +798,6 @@ For example, the following request fetches data about an article's comments:
 
 ```http
 GET /articles/1/relationships/comments HTTP/1.1
-Content-Type: application/vnd.api+json
 Accept: application/vnd.api+json
 ```
 
@@ -809,7 +805,6 @@ And the following request fetches data about an article's author:
 
 ```http
 GET /articles/1/relationships/author HTTP/1.1
-Content-Type: application/vnd.api+json
 Accept: application/vnd.api+json
 ```
 
@@ -945,7 +940,6 @@ For instance, comments could be requested with an article:
 
 ```http
 GET /articles/1?include=comments HTTP/1.1
-Content-Type: application/vnd.api+json
 Accept: application/vnd.api+json
 ```
 
@@ -954,7 +948,6 @@ for each relationship name can be specified:
 
 ```http
 GET /articles/1?include=comments.author HTTP/1.1
-Content-Type: application/vnd.api+json
 Accept: application/vnd.api+json
 ```
 
@@ -977,7 +970,6 @@ Multiple related resources can be requested in a comma-separated list:
 
 ```http
 GET /articles/1?include=author,comments.author HTTP/1.1
-Content-Type: application/vnd.api+json
 Accept: application/vnd.api+json
 ```
 
@@ -985,7 +977,6 @@ Furthermore, related resources can be requested from a relationship endpoint:
 
 ```http
 GET /articles/1/relationships/comments?include=comments.author HTTP/1.1
-Content-Type: application/vnd.api+json
 Accept: application/vnd.api+json
 ```
 
@@ -1011,7 +1002,6 @@ include additional [fields] in the response.
 
 ```http
 GET /articles?include=author&fields[articles]=title,body&fields[people]=name HTTP/1.1
-Content-Type: application/vnd.api+json
 Accept: application/vnd.api+json
 ```
 
@@ -1039,7 +1029,6 @@ query parameter. The value for `sort` **MUST** represent sort fields.
 
 ```http
 GET /people?sort=age HTTP/1.1
-Content-Type: application/vnd.api+json
 Accept: application/vnd.api+json
 ```
 
@@ -1049,7 +1038,6 @@ order specified.
 
 ```http
 GET /people?sort=age,name HTTP/1.1
-Content-Type: application/vnd.api+json
 Accept: application/vnd.api+json
 ```
 
@@ -1058,7 +1046,6 @@ with a minus (U+002D HYPHEN-MINUS, "-"), in which case it **MUST** be descending
 
 ```http
 GET /articles?sort=-created,title HTTP/1.1
-Content-Type: application/vnd.api+json
 Accept: application/vnd.api+json
 ```
 
