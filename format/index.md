@@ -1735,9 +1735,9 @@ responses, in accordance with
 ## Query Parameters <a href="#query-parameters" id="query-parameters" class="headerlink"></a>
 
 Implementation specific query parameters **MUST** adhere to the same constraints
-as [member names] with the exception that they **MUST** contain at least one
-non a-z character (U+0061 to U+007A). It is **RECOMMENDED** that a U+002D
-HYPHEN-MINUS, "-", U+005F LOW LINE, "_", or capital letter is used
+as [member names] with the additional requirement that they **MUST** contain at
+least one non a-z character (U+0061 to U+007A). It is **RECOMMENDED** that a
+U+002D HYPHEN-MINUS, "-", U+005F LOW LINE, "_", or capital letter is used
 (e.g. camelCasing).
 
 > Note: This is to preserve the ability of JSON API to make additive additions
