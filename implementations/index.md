@@ -40,7 +40,8 @@ pull request](https://github.com/json-api/json-api).
 * [FriendsOfSymfony / FOSRestBundle](https://github.com/FriendsOfSymfony/FOSRestBundle/issues/452)
 * [GOintegro / HATEOAS](https://github.com/gointegro/hateoas-bundle) is a library and Symfony 2 bundle that allows you to magically expose your Doctrine 2 mapped entities as resources in a HATEOAS API and supports the full spec of JSON-API for serializing and fetching.
 * [tobscure / json-api](https://github.com/tobscure/json-api)
-* [Neomerx / json-api](https://github.com/neomerx/json-api) is a framework agnostic library for encoding PHP objects to JSON API representation.
+* [neomerx / json-api](https://github.com/neomerx/json-api) is a framework agnostic library that fully implements JSON API v1.0.
+* [neomerx / limoncello-collins](https://github.com/neomerx/limoncello-collins) (Laravel-based) and [neomerx / limoncello-shot](https://github.com/neomerx/limoncello-shot) (Lumen-based) are pre-configured JSON API v1.0 quick start server application that use [neomerx / json-api](https://github.com/neomerx/json-api).
 
 ### Node.js <a href="#server-node-js" id="server-libraries-node-js" class="headerlink"></a>
 * [Fortune.js](http://fortunejs.com) is a framework built to implement json-api.
