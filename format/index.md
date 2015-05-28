@@ -220,8 +220,7 @@ attribute **MUST** reserve the `relationships` and `links` members for future us
 
 Although has-one foreign keys (e.g. `author_id`) are often stored internally
 alongside other information to be represented in a resource object, these keys
-**SHOULD NOT** appear as attributes. If relations are provided, they **MUST**
-be represented under the "relationships object".
+**SHOULD NOT** appear as attributes.
 
 #### Relationships <a href="#document-structure-resource-objects-relationships" id="document-structure-resource-objects-relationships" class="headerlink"></a>
 
