@@ -86,7 +86,11 @@ has a page describing how to emit conformant JSON.
 
 ## Examples <a href="#examples" id="examples" class="headerlink"></a>
 
-* [RestPack::Serializer provides examples](http://restpack-serializer-sample.herokuapp.com/) which demonstrate sample responses.
+* https://www.balancedpayments.com/  was processing over a million dollars of credit card charges per day. Sadly they're shutting down. For now though, their documented test API calls still work, and their API docs show sample responses in a JSON-API stucture e.g. [Order objects](https://docs.balancedpayments.com/1.1/api/orders/#create-an-order)
+
+* [RestPack::Serializer provides examples](http://restpack-serializer-sample.herokuapp.com/) demonstrates sample responses, though following an older verson of the JSON-API spec
+
+* [ethanresnick's json-api-example](http://github.com/ethanresnick/json-api-example) demonstrates sample responses, although you need to install and run the server yourself (nodeJS)
 
 
 ## Related Tools <a href="#related-tools" id="related-tools" class="headerlink"></a>
