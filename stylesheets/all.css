@@ -129,7 +129,7 @@ blockquote {
   background: rgba(90, 90, 90, 0.04);
   border: 1px solid rgba(90, 90, 90, 0.35); }
 
-p > code {
+p > code, li > code {
   padding: 1px 4px;
   background: rgba(0, 0, 0, 0.06); }
 
