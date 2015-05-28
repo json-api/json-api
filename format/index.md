@@ -26,28 +26,35 @@ The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD",
 interpreted as described in RFC 2119
 [[RFC2119](http://tools.ietf.org/html/rfc2119)].
 
-## Media Type Negotiation <a href="#media-type-negotiation" id="media-type-negotiation" class="headerlink"></a>
+## Content Negotiation <a href="#content-negotiation" id="content-negotiation" class="headerlink"></a>
 
-Clients **MUST** send all JSON API data in request documents with
-the header `Content-Type: application/vnd.api+json`.
+### Client Responsibilities <a href="#content-negotiation-clients" id="content-negotiation-clients" class="headerlink"></a>
 
-Clients **MUST** ignore all parameters for the `application/vnd.api+json`
+Clients **MUST** send all JSON API data in request documents with the header
+`Content-Type: application/vnd.api+json`, without any media type parameters.
+
+Clients that include the JSON API media type in their `Accept` header, **MUST**
+specify the media type there at least once without any media type parameters.
+
+Clients **MUST** ignore any parameters for the `application/vnd.api+json`
 media type received in the `Content-Type` header of response documents.
 
-Servers **MUST** send all JSON API data in response documents with
-the header `Content-Type: application/vnd.api+json`.
+### Server Responsibilities <a href="#content-negotiation-servers" id="content-negotiation-servers" class="headerlink"></a>
 
-Servers **MUST** return a `406 Not Acceptable` status code if the
-`application/vnd.api+json` media type is modified by the `ext` parameter in
-the `Accept` header of a request. Otherwise, servers **MUST** return a `415
-Unsupported Media Type` status code if the `application/vnd.api+json` media
-type is modified by the `ext` parameter in the `Content-Type` header of a
-request. Servers **MUST** ignore all other parameters for the
-`application/vnd.api+json` media type in `Accept` and `Content-Type`
-headers.
+Servers **MUST** send all JSON API data in response documents with the header
+`Content-Type: application/vnd.api+json`, without any media type parameters.
 
-> Note: These requirements may allow future versions of this specification
-to support an extension mechanism based upon the `ext` media type parameter.
+Servers **MUST** respond with a `415 Unsupported Media Type` status code if
+a request specifies the header `Content-Type: application/vnd.api+json`
+with any media type parameters.
+
+Servers **MUST** respond with a `406 Not Acceptable` status code if a
+request's `Accept` header contains the JSON API media type and all instances
+of that media type are modified with media type parameters.
+
+> Note: The content negotiation requirements exist to allow future versions
+of this specification to use media type parameters for extension negotiation
+and versioning.
 
 ## Document Structure <a href="#document-structure" id="document-structure" class="headerlink"></a>
 
@@ -627,16 +634,6 @@ The following characters **MUST NOT** be used in member names:
 Data, including resources and relationships, can be fetched by sending a
 `GET` request to an endpoint.
 
-Clients **MUST** indicate that they can accept the JSON API media type, per
-the semantics of the HTTP `Accept` header. If present, this header value **MUST**
-also include any media type extensions relevant to the request. Servers **MUST**
-return a `406 Not Acceptable` status code if this header specifies an
-unsupported media type.
-
-> Note: Servers may support multiple media types at any endpoint. For example,
-a server may choose to support `text/html` in order to simplify viewing content
-via a web browser.
-
 Responses can be further refined with the optional features described below.
 
 ### Fetching Resources <a href="#fetching-resources" id="fetching-resources" class="headerlink"></a>
@@ -1119,10 +1116,6 @@ strategies.
 
 A server **MAY** allow resources of a given type to be created. It **MAY**
 also allow existing resources to be modified or deleted.
-
-Any requests that contain content **MUST** include a `Content-Type` header
-whose value is `application/vnd.api+json`. This header value **MUST** also
-include media type extensions relevant to the request.
 
 A request **MUST** completely succeed or fail (in a single "transaction"). No
 partial updates are allowed.
