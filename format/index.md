@@ -31,9 +31,9 @@ interpreted as described in RFC 2119
 ### Client Responsibilities <a href="#content-negotiation-clients" id="content-negotiation-clients" class="headerlink"></a>
 
 Clients **MUST** send all JSON API data in request documents with the header
-`Content-Type: application/vnd.api+json`, without any media type parameters.
+`Content-Type: application/vnd.api+json` without any media type parameters.
 
-Clients that include the JSON API media type in their `Accept` header, **MUST**
+Clients that include the JSON API media type in their `Accept` header **MUST**
 specify the media type there at least once without any media type parameters.
 
 Clients **MUST** ignore any parameters for the `application/vnd.api+json`
@@ -42,7 +42,7 @@ media type received in the `Content-Type` header of response documents.
 ### Server Responsibilities <a href="#content-negotiation-servers" id="content-negotiation-servers" class="headerlink"></a>
 
 Servers **MUST** send all JSON API data in response documents with the header
-`Content-Type: application/vnd.api+json`, without any media type parameters.
+`Content-Type: application/vnd.api+json` without any media type parameters.
 
 Servers **MUST** respond with a `415 Unsupported Media Type` status code if
 a request specifies the header `Content-Type: application/vnd.api+json`
