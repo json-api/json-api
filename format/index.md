@@ -233,14 +233,14 @@ Relationships may be to-one or to-many.
 The value of a relationship **MUST** be an object (a "relationship object"),
 which **MUST** contain at least one of the following:
 
-* A `links` member that contains at least one of the following:
-  * A `self` member, whose value is a URL for the relationship itself (a
+* `links`: a member that contains at least one of the following:
+  * `self`: a member, whose value is a URL for the relationship itself (a
     "relationship URL"). This URL allows the client to directly manipulate the
     relationship. For example, it would allow a client to remove an `author`
     from an `article` without deleting the `people` resource itself.
-  * A `related` member, whose value is a related resource URL, as defined below.
-* A `data` member, whose value represents "resource linkage" (defined below).
-* A `meta` member that contains non-standard meta-information about the
+  * `related`: a member, whose value is a related resource URL, as defined below.
+* `data`: a member, whose value represents "resource linkage" (defined below).
+* `meta`: a member that contains non-standard meta-information about the
   relationship.
 
 A relationship object that represents a to-many relationship **MAY** also contain
@@ -262,8 +262,8 @@ relationship isn't currently associated with any target resources.
 Resource linkage **MUST** be represented as one of the following:
 
 * `null` for empty to-one relationships.
-* a [resource identifier object] for non-empty to-one relationships.
 * an empty array (`[]`) for empty to-many relationships.
+* a single [resource identifier object] for non-empty to-one relationships.
 * an array of [resource identifier objects] for non-empty to-many relationships.
 
 > Note: Resource linkage in a compound document allows a client to link
@@ -500,18 +500,18 @@ levels are defined in the sections on [resource relationships] and
 When a links object appears at the document's top-level, it **MAY** have
 the following members:
 
-* `self` - the URL that generated the current response document.
-* `related` - a related resource URL (as defined above) when the primary
+* `self`: the URL that generated the current response document.
+* `related`: a related resource URL (as defined above) when the primary
   data represents a resource relationship.
 * Pagination links for the primary data (as described below).
 
 For links currently defined by the spec (`self`, `related`, `prev`, `next`,
-`first`, `last`, `about`), the value of each member of a `links` object can be either
-a string containing the link URL or a "link object", which can contain
+`first`, `last`, `about`), the value of each member of a `links` object can be
+either a string containing the link URL or a "link object", which can contain
 the following members:
 
-* `href` - the string containing the link URL,
-* `meta` - non-standard meta-information about the link.
+* `href`: the string containing the link URL,
+* `meta`: non-standard meta-information about the link.
 
 Examples of the supported formats:
 
@@ -1069,10 +1069,10 @@ object.
 
 The following keys **MUST** be used for pagination links:
 
-* `first` - the first page of data
-* `last` - the last page of data
-* `prev` - the previous page of data
-* `next` - the next page of data
+* `first`: the first page of data
+* `last`: the last page of data
+* `prev`: the previous page of data
+* `next`: the next page of data
 
 Keys **MUST** either be omitted or have a `null` value to indicate that a
 particular link is unavailable.
@@ -1737,26 +1737,26 @@ keyed by `errors` in the top level of a JSON API document.
 
 An error object **MAY** have the following members:
 
-* `id` - A unique identifier for this particular occurrence of the problem.
-* `links` - Links object containing a member `about`, that **MAY** lead to
+* `id`: A unique identifier for this particular occurrence of the problem.
+* `links`: Links object containing a member `about`, that **MAY** lead to
   further details about this particular occurrence of the problem.
-* `status` - The HTTP status code applicable to this problem, expressed as a
+* `status`: The HTTP status code applicable to this problem, expressed as a
   string value.
-* `code` - An application-specific error code, expressed as a string value.
-* `title` - A short, human-readable summary of the problem. It **SHOULD NOT**
+* `code`: An application-specific error code, expressed as a string value.
+* `title`: A short, human-readable summary of the problem. It **SHOULD NOT**
   change from occurrence to occurrence of the problem, except for purposes of
   localization.
-* `detail` - A human-readable explanation specific to this occurrence of the
+* `detail`: A human-readable explanation specific to this occurrence of the
   problem.
-* `source` - An object containing references to the source of the error,
+* `source`: An object containing references to the source of the error,
   optionally including any of the following members:
-  * `pointer` - A JSON Pointer
+  * `pointer`: A JSON Pointer
     [[RFC6901](https://tools.ietf.org/html/rfc6901)] to the associated entity in
     the request document [e.g. `/data` for a primary data object, or
     `/data/attributes/title` for a specific attribute].
-  * `parameter` - An optional string indicating which query parameter caused
+  * `parameter`: An optional string indicating which query parameter caused
     the error.
-* `meta` - to contain non-standard meta-information about the error.
+* `meta`: to contain non-standard meta-information about the error.
 
 [attributes]: #document-structure-resource-attributes
 [relationships]: #document-structure-resource-objects-relationships
@@ -1767,3 +1767,4 @@ An error object **MAY** have the following members:
 [fields]: #document-structure-resource-object-fields
 [error details]: #errors
 [member names]: #document-structure-member-names
+[links]: #document-structure-links
