@@ -145,9 +145,8 @@ references the same resource:
 }
 ```
 
-A logical collection of resources (e.g. the target of a to-many relationship)
-**MUST** be represented as an array, even if it only contains one item or is
-empty.
+A logical collection of resources **MUST** be represented as an array, even if
+it only contains one item or is empty.
 
 ### Resource Objects <a href="#document-structure-resource-objects" id="document-structure-resource-objects" class="headerlink"></a>
 
