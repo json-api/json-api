@@ -533,11 +533,12 @@ array of values, whereas a `self` link does not).
 
 ### JSON API Object <a href="#document-structure-jsonapi-object" id="document-structure-jsonapi-object" class="headerlink"></a>
 
-A JSON API document **MAY** include information about its implementation under
-a top level `jsonapi` member. If present, it **MUST** be an object containing
-a `version` member whose value is a string indicating the highest JSON API
-version supported. Other than `meta`, which **MUST** contain a [meta] object if
-included, servers **MUST NOT** include any additional members.
+A JSON API document **MAY** include information about its implementation
+under a top level `jsonapi` member. If present, its value **MUST** be an
+object (a "jsonapi object") that **MUST** contain a `version` member whose
+value is a string indicating the highest JSON API version supported. This
+object **MAY** also contain a `meta` member, whose value is a [meta] object
+that contains non-standard meta-information.
 
 ```json
 {
