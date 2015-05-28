@@ -89,6 +89,23 @@ A document **MUST** contain at least one of the following top-level members:
 
 The members `data` and `errors` **MUST NOT** coexist in the same document.
 
+A document **MAY** contain any of these top-level members:
+
+* `jsonapi`: an object describing the server's implementation
+* `links`: a [links object][links] related to the primary data.
+* `included`: an array of resource objects that are related to the primary
+  data and/or each other ("included resources").
+
+If a document does not contain a top-level `data` key, the `included` member
+**MUST NOT** be present either.
+
+The top-level [links object][links] **MAY** contain the following members:
+
+* `self`: the [link][links] that generated the current response document.
+* `related`: a [related resource link] when the primary data represents a
+  resource relationship.
+* [pagination] links for the primary data.
+
 The document's "primary data" is a representation of the resource or collection
 of resources targeted by a request.
 
@@ -128,28 +145,8 @@ references the same resource:
 }
 ```
 
-A logical collection of resources (e.g. the target of a to-many relationship)
-**MUST** be represented as an array, even if it only contains one item or is
-empty.
-
-A document's top level **MAY** also have the following members:
-
-* `jsonapi`: an object describing the server's implementation
-* `links`: a [links object][links] related to the primary data.
-* `included`: an array of resource objects that are related to the primary
-  data and/or each other ("included resources").
-
-If any of these members appears in the top level of a response, their values
-**MUST** comply with this specification.
-
-If a document does not contain a top-level `data` key, then the `included` key **MUST NOT** be present either.
-
-The top-level [links object][links] **MAY** contain the following members:
-
-* `self`: the [link][links] that generated the current response document.
-* `related`: a [related resource link] when the primary data represents a
-  resource relationship.
-* [pagination] links for the primary data.
+A logical collection of resources **MUST** be represented as an array, even if
+it only contains one item or is empty.
 
 ### Resource Objects <a href="#document-structure-resource-objects" id="document-structure-resource-objects" class="headerlink"></a>
 
