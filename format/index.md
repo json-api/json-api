@@ -623,7 +623,11 @@ Responses can be further refined with the optional features described below.
 
 ### Fetching Resources <a href="#fetching-resources" id="fetching-resources" class="headerlink"></a>
 
-A server **MUST** support `GET` requests to all resource endpoints it controls.
+A server **MUST** support fetching resource data for every URL provided as:
+
+* a `self` link as part of the top-level links object
+* a `self` link as part of a resource-level links object
+* a `related` link as part of a relationship-level links object
 
 For example, the following request fetches a collection of articles:
 
@@ -769,7 +773,8 @@ responses, in accordance with
 
 ### Fetching Relationships <a href="#fetching-relationships" id="fetching-relationships" class="headerlink"></a>
 
-A server **MUST** support `GET` requests to all relationship endpoints it controls.
+A server **MUST** support fetching relationship data for every relationship URL
+provided as a `self` link as part of a relationship's `links` object.
 
 For example, the following request fetches data about an article's comments:
 
