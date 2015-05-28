@@ -1732,25 +1732,24 @@ keyed by `errors` in the top level of a JSON API document.
 
 An error object **MAY** have the following members:
 
-* `id`: A unique identifier for this particular occurrence of the problem.
-* `links`: A [links object][links] containing the following members:
+* `id`: a unique identifier for this particular occurrence of the problem.
+* `links`: a [links object][links] containing the following members:
   * `about`: a [link][links] that leads to further details about this
     particular occurrence of the problem.
-* `status`: The HTTP status code applicable to this problem, expressed as a
+* `status`: the HTTP status code applicable to this problem, expressed as a
   string value.
-* `code`: An application-specific error code, expressed as a string value.
-* `title`: A short, human-readable summary of the problem. It **SHOULD NOT**
+* `code`: an application-specific error code, expressed as a string value.
+* `title`: a short, human-readable summary of the problem that **SHOULD NOT**
   change from occurrence to occurrence of the problem, except for purposes of
   localization.
-* `detail`: A human-readable explanation specific to this occurrence of the
+* `detail`: a human-readable explanation specific to this occurrence of the
   problem.
-* `source`: An object containing references to the source of the error,
+* `source`: an object containing references to the source of the error,
   optionally including any of the following members:
-  * `pointer`: A JSON Pointer
-    [[RFC6901](https://tools.ietf.org/html/rfc6901)] to the associated entity in
-    the request document [e.g. `/data` for a primary data object, or
-    `/data/attributes/title` for a specific attribute].
-  * `parameter`: An optional string indicating which query parameter caused
+  * `pointer`: a JSON Pointer [[RFC6901](https://tools.ietf.org/html/rfc6901)]
+    to the associated entity in the request document [e.g. `/data` for a
+    primary data object, or `/data/attributes/title` for a specific attribute].
+  * `parameter`: an optional string indicating which query parameter caused
     the error.
 * `meta`: a [meta] object containing non-standard meta-information about the
   error.
