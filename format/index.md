@@ -31,9 +31,9 @@ interpreted as described in RFC 2119
 ### Client Responsibilities <a href="#content-negotiation-clients" id="content-negotiation-clients" class="headerlink"></a>
 
 Clients **MUST** send all JSON API data in request documents with the header
-`Content-Type: application/vnd.api+json`, without any media type parameters.
+`Content-Type: application/vnd.api+json` without any media type parameters.
 
-Clients that include the JSON API media type in their `Accept` header, **MUST**
+Clients that include the JSON API media type in their `Accept` header **MUST**
 specify the media type there at least once without any media type parameters.
 
 Clients **MUST** ignore any parameters for the `application/vnd.api+json`
@@ -42,7 +42,7 @@ media type received in the `Content-Type` header of response documents.
 ### Server Responsibilities <a href="#content-negotiation-servers" id="content-negotiation-servers" class="headerlink"></a>
 
 Servers **MUST** send all JSON API data in response documents with the header
-`Content-Type: application/vnd.api+json`, without any media type parameters.
+`Content-Type: application/vnd.api+json` without any media type parameters.
 
 Servers **MUST** respond with a `415 Unsupported Media Type` status code if
 a request specifies the header `Content-Type: application/vnd.api+json`
@@ -208,18 +208,11 @@ consistently throughout an implementation.
 
 #### Attributes <a href="#document-structure-resource-attributes" id="document-structure-resource-attributes" class="headerlink"></a>
 
-The value of the `attributes` key is an "attributes object". The attributes
-object is a JSON object that represents information about the resource object.
+The value of the `attributes` key is an object (an "attributes object").
+Members of the attributes object ("attributes") represent information about
+the resource in which it's defined.
 
-The members of the attributes object ("attributes") share a namespace with the
-members of the relationships object of the resource object; that is, attributes
-of a given resource object **MUST** be named differently than its relationships.
-The attributes object **MUST NOT** contain `id` or `type` members. Apart from
-these restrictions, this object can contain members keyed by any string valid
-for this specification.
-
-All members which appear in an attributes object are considered attributes and
-may contain any valid JSON value.
+Attributes may contain any valid JSON value.
 
 Complex data structures involving JSON objects and arrays are allowed as
 attribute values. However, any object that constitutes or is contained in an
@@ -232,17 +225,11 @@ be represented under the "relationships object".
 
 #### Relationships <a href="#document-structure-resource-objects-relationships" id="document-structure-resource-objects-relationships" class="headerlink"></a>
 
-The value of the `relationships` key is a JSON object (a "relationships object")
-that represents references from the resource in whose resource object it's defined
-to other resources ("relationships"). These relationships share a namespace with
-[attributes]; that is, relationships of a given resource object **MUST** be named
-differently than its [attributes].
+The value of the `relationships` key is an object (a "relationships
+object"). Members of the relationships object ("relationships") represent
+references from the resource in which it's defined to other resources.
 
-The keys `id` and `type` are not allowed within the relationships object.
-
-Relationships may be to-one or to-many. Relationships can be specified by
-including a member in a resource's relationship's object. The name of the
-relationship is its key in the relationships object.
+Relationships may be to-one or to-many.
 
 The value of a relationship **MUST** be an object (a "relationship object"),
 which **MUST** contain at least one of the following:
@@ -324,6 +311,11 @@ to fetch the resource objects, and linkage information.
 
 A resource object's [attributes] and its [relationships] are collectively called
 its "[fields]".
+
+Fields for a resource object **MUST** share a common namespace with each
+other and with `type` and `id`. In other words, a resource can not have an
+attribute and relationship with the same name, nor can it have an attribute
+or relationship named `type` or `id`.
 
 #### Resource Links <a href="#document-structure-structure-resource-object-links" id="document-structure-resource-object-links" class="headerlink"></a>
 
