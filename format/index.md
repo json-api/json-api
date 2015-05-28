@@ -1689,7 +1689,6 @@ resource's URL:
 
 ```http
 DELETE /photos/1 HTTP/1.1
-Content-Type: application/vnd.api+json
 Accept: application/vnd.api+json
 ```
 
