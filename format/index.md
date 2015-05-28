@@ -470,7 +470,7 @@ meta-information as `meta` members in several locations:
 * within the top-level [JSON API object]
 * within [resource objects]
 * within [relationship objects][relationship object]
-* within [link objects]
+* within [link objects][links]
 * within [resource identifier objects]
 * within [error objects](#errors)
 
@@ -805,7 +805,7 @@ with a `200 OK` response.
 The primary data in the response document **MUST** match the appropriate
 value for resource linkage, as described above for [relationship objects][relationship object].
 
-The top-level [links object] **MAY** contain `self` and `related` links,
+The top-level [links object][links] **MAY** contain `self` and `related` links,
 as described above for [relationship objects][relationship object].
 
 For example, a `GET` request to a URL from a to-one relationship link could
@@ -1776,8 +1776,6 @@ An error object **MAY** have the following members:
 [resource links]: #document-structure-structure-resource-object-links
 [error details]: #errors
 [meta-information]: #document-structure-meta
-[link objects]: #document-structure-links
-[links object]: #document-structure-links
 [JSON API object]: #document-structure-jsonapi-object
 [member names]: #document-structure-member-names
 [links]: #document-structure-links
