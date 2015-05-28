@@ -82,9 +82,9 @@ data. This object defines a document's "top level".
 
 A document **MUST** contain at least one of the following top-level members:
 
-* `data`: containing the document's "primary data"
-* `errors`: containing an array of [error objects](#errors)
-* `meta`: whose value is a [meta] object that contains non-standard
+* `data`: the document's "primary data"
+* `errors`: an array of [error objects](#errors)
+* `meta`: a [meta] object that contains non-standard
   meta-information.
 
 The members `data` and `errors` **MUST NOT** coexist in the same document.
@@ -242,16 +242,15 @@ Relationships may be to-one or to-many.
 The value of a relationship **MUST** be an object (a "relationship object"),
 which **MUST** contain at least one of the following:
 
-* `links`: a member that contains at least one of the following [links]:
-  * `self`: a member, whose value is a link for the relationship itself (a
-    "relationship link"). This link allows the client to directly manipulate the
-    relationship. For example, it would allow a client to remove an `author`
-    from an `article` without deleting the `people` resource itself.
-  * `related`: a member, whose value is a "related resource link", as defined
-    below.
-* `data`: a member, whose value represents "resource linkage" (defined below).
-* `meta`: a member, whose value is a [meta] object that contains non-standard
-  meta-information about the relationship.
+* `links`: a [links object][links] containing at least one of the following:
+  * `self`: a link for the relationship itself (a "relationship link"). This
+    link allows the client to directly manipulate the relationship. For example,
+    it would allow a client to remove an `author` from an `article` without
+    deleting the `people` resource itself.
+  * `related`: a "related resource link", as defined below.
+* `data`: representing "resource linkage", as defined below.
+* `meta`: a [meta] object that contains non-standard meta-information about the
+  relationship.
 
 A relationship object that represents a to-many relationship **MAY** also contain
 [pagination] links under the `links` member, as described below.
