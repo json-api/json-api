@@ -466,8 +466,7 @@ Where specified, a `meta` member can be used to include non-standard
 meta-information. The value of each `meta` member **MUST** be an object (a
 "meta object").
 
-The contents of the meta object can be used to provide non-standard
-meta-information.
+Any members **MAY** be specified within `meta` objects.
 
 For example:
 
@@ -487,8 +486,6 @@ For example:
   }
 }
 ```
-
-Any members **MAY** be specified within `meta` objects.
 
 ### Links <a href="#document-structure-links" id="document-structure-links" class="headerlink"></a>
 
