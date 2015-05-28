@@ -134,14 +134,21 @@ empty.
 A document's top level **MAY** also have the following members:
 
 * `jsonapi`: an object describing the server's implementation
-* `links`: URLs related to the primary data.
+* `links`: a [links object][links] related to the primary data.
 * `included`: an array of resource objects that are related to the primary
   data and/or each other ("included resources").
 
-If any of these members appears in the top-level of a response, their values
+If any of these members appears in the top level of a response, their values
 **MUST** comply with this specification.
 
 If a document does not contain a top-level `data` key, then the `included` key **MUST NOT** be present either.
+
+The top-level [links object][links] **MAY** contain the following members:
+
+* `self`: the [link][links] that generated the current response document.
+* `related`: a [related resource link] when the primary data represents a
+  resource relationship.
+* [pagination] links for the primary data.
 
 ### Resource Objects <a href="#document-structure-resource-objects" id="document-structure-resource-objects" class="headerlink"></a>
 
@@ -163,7 +170,7 @@ In addition, a resource object **MAY** contain any of these top-level members:
 * `attributes`: an "attributes object" representing some of the resource's data.
 * `relationships`: a "relationships object" describing relationships between
  the resource and other JSON API resources.
-* `links`: a "links object" containing URLs related to the resource.
+* `links`: a [links object][links] containing links related to the resource.
 * `meta`: non-standard meta-information about a resource that can not be
   represented as an attribute or relationship.
 
@@ -189,6 +196,7 @@ Here's how an article (i.e. a resource of type "articles") might appear in a doc
 }
 // ...
 ```
+
 #### Resource Identification <a href="#document-structure-resource-identification" id="document-structure-resource-identification" class="headerlink"></a>
 
 Every resource object **MUST** contain an `id` member and a `type` member.
@@ -233,31 +241,32 @@ Relationships may be to-one or to-many.
 The value of a relationship **MUST** be an object (a "relationship object"),
 which **MUST** contain at least one of the following:
 
-* `links`: a member that contains at least one of the following:
-  * `self`: a member, whose value is a URL for the relationship itself (a
-    "relationship URL"). This URL allows the client to directly manipulate the
+* `links`: a member that contains at least one of the following [links]:
+  * `self`: a member, whose value is a link for the relationship itself (a
+    "relationship link"). This link allows the client to directly manipulate the
     relationship. For example, it would allow a client to remove an `author`
     from an `article` without deleting the `people` resource itself.
-  * `related`: a member, whose value is a related resource URL, as defined below.
+  * `related`: a member, whose value is a "related resource link", as defined
+    below.
 * `data`: a member, whose value represents "resource linkage" (defined below).
 * `meta`: a member that contains non-standard meta-information about the
   relationship.
 
 A relationship object that represents a to-many relationship **MAY** also contain
-pagination links under the `links` member, as described below.
+[pagination] links under the `links` member, as described below.
 
-A "related resource URL" provides access to the resources targeted by the
+A "related resource link" provides access to the resources targeted by the
 relationship. When fetched, it returns the related resource object(s) as the
 response's primary data. For example, an `article`'s `comments` relationship
-could specify a URL that returns a list of comment resource objects when
+could specify a link that returns a list of comment resource objects when
 retrieved through a `GET` request.
 
-A related resource URL **MUST** remain constant even when the relationship (the
-set of referenced resources) mutates. That is, the response from a related
-resource URL always reflects the current state of the relationship.
+A related resource link **MUST** remain constant even when the relationship
+(the set of referenced resources) mutates. That is, the response from a
+related resource link always reflects the current state of the relationship.
 
-If present, a related resource URL **MUST** be a valid URL, even if the
-relationship isn't currently associated with any target resources.
+If present, a related resource link **MUST** reference a valid URL, even if
+the relationship isn't currently associated with any target resources.
 
 Resource linkage **MUST** be represented as one of the following:
 
@@ -268,7 +277,7 @@ Resource linkage **MUST** be represented as one of the following:
 
 > Note: Resource linkage in a compound document allows a client to link
 together all of the included resource objects without having to `GET` any
-relationship URLs.
+URLs via relationship links.
 
 > Note: The spec does not impart meaning to order of resource identifier
 objects in linkage arrays of to-many relationships, although implementations
@@ -302,9 +311,9 @@ For example, the following article is associated with an `author`:
 // ...
 ```
 
-The `author` relationship includes a URL for the relationship itself (which
-allows the client to change the related author directly), a related resource URL
-to fetch the resource objects, and linkage information.
+The `author` relationship includes a link for the relationship itself (which
+allows the client to change the related author directly), a related resource
+link to fetch the resource objects, and linkage information.
 
 #### Fields <a href="#document-structure-resource-object-fields" id="document-structure-resource-object-fields" class="headerlink"></a>
 
@@ -318,11 +327,10 @@ or relationship named `type` or `id`.
 
 #### Resource Links <a href="#document-structure-structure-resource-object-links" id="document-structure-resource-object-links" class="headerlink"></a>
 
-Analogous to the `links` member at the document's top level, the optional
-`links` member within each resource object contains URLs related to the
-resource.
+The optional `links` member within each resource object contains [links]
+related to the resource.
 
-If present, this object **MAY** contain a URL keyed by `self`, that identifies
+If present, this object **MAY** contain a `self` [link][links] that identifies
 the resource represented by the resource object.
 
 ```json
@@ -489,50 +497,44 @@ Any members **MAY** be specified within `meta` objects.
 
 ### Links <a href="#document-structure-links" id="document-structure-links" class="headerlink"></a>
 
-As discussed above, a document **MAY** be extended to include relevant URLs
-within `links` members at several locations: at the top-level, within resource
-objects, within relationship objects, and within error objects.
+Where specified, a `links` member can be used to represent links. The value
+of the `links` member **MUST** be an object (a "links object").
 
-The allowed keys for `links` objects at the resource and relationship object
-levels are defined in the sections on [resource relationships] and
-[resource links].
+Each member of a links object is a "link". A link **MUST** be represented as
+either:
 
-When a links object appears at the document's top-level, it **MAY** have
-the following members:
+* a string containing the link's URL.
+* an object ("link object") which can contain the following members:
+  * `href`: a string containing the link's URL.
+  * `meta`: a meta object containing non-standard meta-information about the
+    link.
 
-* `self`: the URL that generated the current response document.
-* `related`: a related resource URL (as defined above) when the primary
-  data represents a resource relationship.
-* Pagination links for the primary data (as described below).
-
-For links currently defined by the spec (`self`, `related`, `prev`, `next`,
-`first`, `last`, `about`), the value of each member of a `links` object can be
-either a string containing the link URL or a "link object", which can contain
-the following members:
-
-* `href`: the string containing the link URL,
-* `meta`: non-standard meta-information about the link.
-
-Examples of the supported formats:
+The following `self` link is simply a URL:
 
 ```
 "links": {
   "self": "http://example.com/posts",
 }
 ```
+
+The following `related` link includes a URL as well as meta-information
+about a related resource collection:
+
 ```
 "links": {
-  "self": {
-    "href": "http://example.com/posts",
-    "meta": {}
+  "related": {
+    "href": "http://example.com/articles/1/comments",
+    "meta": {
+      "count": 10
+    }
   }
 }
 ```
 
-> Note: For links which can be defined or allowed by the spec in the future,
-the value of each member of a `links` object is not constrained by the
-current version of the spec. It should be assumed that anything can be
-allowed in the future for such values: object, array, or scalar.
+> Note: Additional members may be specified for links objects and link
+objects in the future. It is also possible that the allowed values of
+additional members will be expanded (e.g. a `collection` link may support an
+array of values, whereas a `self` link does not).
 
 ### JSON API Object <a href="#document-structure-jsonapi-object" id="document-structure-jsonapi-object" class="headerlink"></a>
 
@@ -710,9 +712,9 @@ document's primary data.
 `null` is only an appropriate response when the requested URL is one that
 might correspond to a single resource, but doesn't currently.
 
-> Note: Consider, for example, a request to fetch a to-one related resource URL.
+> Note: Consider, for example, a request to fetch a to-one related resource link.
 This request would respond with `null` when the relationship is empty (such that
-the URL is corresponding to no resources) but with the single related resource's
+the link is corresponding to no resources) but with the single related resource's
 resource object otherwise.
 
 For example, a `GET` request to an individual article could return:
@@ -804,7 +806,8 @@ value for resource linkage, as described above for relationship objects.
 The top-level *links object* **MAY** contain `self` and `related` links,
 as described above for relationship objects.
 
-For example, a `GET` request to a to-one relationship URL could return:
+For example, a `GET` request to a URL from a to-one relationship link could
+return:
 
 ```http
 HTTP/1.1 200 OK
@@ -838,7 +841,7 @@ Content-Type: application/vnd.api+json
 }
 ```
 
-A `GET` request to a to-many relationship URL could return:
+A `GET` request to a URL from a to-many relationship link could return:
 
 ```http
 HTTP/1.1 200 OK
@@ -875,13 +878,13 @@ Content-Type: application/vnd.api+json
 ##### 404 Not Found <a href="#fetching-relationships-responses-404" id="fetching-relationships-responses-404" class="headerlink"></a>
 
 A server **MUST** return `404 Not Found` when processing a request to fetch
-a relationship URL that does not exist.
+a relationship link URL that does not exist.
 
 > Note: This can happen when the parent resource of the relationship
 does not exist. For example, when `/articles/1` does not exist, request to
 `/articles/1/relationships/tags` returns `404 Not Found`.
 
-If a relationship URL exists but the relationship is empty, then
+If a relationship link URL exists but the relationship is empty, then
 `200 OK` **MUST** be returned, as described above.
 
 ##### Other Responses <a href="#fetching-relationships-responses-other" id="fetching-relationships-responses-other" class="headerlink"></a>
@@ -1460,7 +1463,7 @@ responses, in accordance with
 
 Although relationships can be modified along with resources (as described
 above), JSON API also supports updating of relationships independently at
-*relationship URLs*.
+URLs from [relationship links].
 
 > Note: Relationships are updated without exposing the underlying server
 semantics, such as foreign keys. Furthermore, relationships can be updated
@@ -1477,8 +1480,8 @@ relationship is deleted (as a garbage collection measure).
 
 #### Updating To-One Relationships <a href="#crud-updating-to-one-relationships" id="crud-updating-to-one-relationships" class="headerlink"></a>
 
-A server **MUST** respond to `PATCH` requests to a *to-one relationship URL* as
-described below.
+A server **MUST** respond to `PATCH` requests to a URL from a *to-one
+relationship link* as described below.
 
 The `PATCH` request **MUST** include a top-level member named `data` containing
 one of:
@@ -1516,16 +1519,16 @@ a successful response.
 #### Updating To-Many Relationships <a href="#crud-updating-to-many-relationships" id="crud-updating-to-many-relationships" class="headerlink"></a>
 
 A server **MUST** respond to `PATCH`, `POST`, and `DELETE` requests to a
-*to-many relationship URL* as described below.
+URL from a *to-many relationship link* as described below.
 
 For all request types, the body **MUST** contain a `data` member whose value
 is an empty array or an array of [resource identifier objects].
 
-If a client makes a `PATCH` request to a *to-many relationship URL*, the
-server **MUST** either completely replace every member of the relationship,
-return an appropriate error response if some resources can not be found or
-accessed, or return a `403 Forbidden` response if complete replacement is
-not allowed by the server.
+If a client makes a `PATCH` request to a URL from a *to-many relationship
+link*, the server **MUST** either completely replace every member of the
+relationship, return an appropriate error response if some resources can not
+be found or accessed, or return a `403 Forbidden` response if complete
+replacement is not allowed by the server.
 
 For example, the following request replaces every tag for an article:
 
@@ -1554,10 +1557,10 @@ Accept: application/vnd.api+json
 }
 ```
 
-If a client makes a `POST` request to a *relationship URL*, the server
-**MUST** add the specified members to the relationship unless they are
-already present. If a given `type` and `id` is already in the relationship,
-the server **MUST NOT** add it again.
+If a client makes a `POST` request to a URL from a *relationship link*, the
+server **MUST** add the specified members to the relationship unless they
+are already present. If a given `type` and `id` is already in the
+relationship, the server **MUST NOT** add it again.
 
 > Note: This matches the semantics of databases that use foreign keys for
 has-many relationships. Document-based storage should check the has-many
@@ -1585,11 +1588,11 @@ Accept: application/vnd.api+json
 }
 ```
 
-If the client makes a `DELETE` request to a *relationship URL*, the server
-**MUST** delete the specified members from the relationship or return a `403
-Forbidden` response. If all of the specified resources are able to be
-removed from, or are already missing from, the relationship then the server
-**MUST** return a successful response.
+If the client makes a `DELETE` request to a URL from a *relationship link*,
+the server **MUST** delete the specified members from the relationship or
+return a `403 Forbidden` response. If all of the specified resources are
+able to be removed from, or are already missing from, the relationship then
+the server **MUST** return a successful response.
 
 > Note: As described above for `POST` requests, this approach helps avoid
 pointless race conditions between multiple clients making the same changes.
@@ -1629,10 +1632,10 @@ server **MUST** return a `202 Accepted` status code.
 A server **MUST** return a `204 No Content` status code if an update is
 successful and the client's current attributes remain up to date.
 
-> Note: This is the appropriate response to a `POST` request sent to a
-*to-many relationship URL* when that relationship already exists. It is also
-the appropriate response to a `DELETE` request sent to a *to-many
-relationship URL* when that relationship does not exist.
+> Note: This is the appropriate response to a `POST` request sent to a URL
+from a *to-many relationship link* when that relationship already exists. It
+is also the appropriate response to a `DELETE` request sent to a URL from a
+*to-many relationship link* when that relationship does not exist.
 
 ##### 200 OK <a href="#crud-updating-relationship-responses-200" id="crud-updating-relationship-responses-200" class="headerlink"></a>
 
@@ -1733,8 +1736,9 @@ keyed by `errors` in the top level of a JSON API document.
 An error object **MAY** have the following members:
 
 * `id`: A unique identifier for this particular occurrence of the problem.
-* `links`: Links object containing a member `about`, that **MAY** lead to
-  further details about this particular occurrence of the problem.
+* `links`: A [links object][links] containing the following members:
+  * `about`: a [link][links] that leads to further details about this
+    particular occurrence of the problem.
 * `status`: The HTTP status code applicable to this problem, expressed as a
   string value.
 * `code`: An application-specific error code, expressed as a string value.
@@ -1756,6 +1760,7 @@ An error object **MAY** have the following members:
 [attributes]: #document-structure-resource-attributes
 [relationships]: #document-structure-resource-objects-relationships
 [resource relationships]: #document-structure-resource-objects-relationships
+[related resource link]: #document-structure-resource-objects-relationships
 [resource links]: #document-structure-resource-object-links
 [resource identifier object]: #document-structure-resource-identifier-objects
 [resource identifier objects]: #document-structure-resource-identifier-objects
@@ -1763,3 +1768,4 @@ An error object **MAY** have the following members:
 [error details]: #errors
 [member names]: #document-structure-member-names
 [links]: #document-structure-links
+[pagination]: #fetching-pagination
