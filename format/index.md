@@ -623,9 +623,7 @@ Responses can be further refined with the optional features described below.
 
 ### Fetching Resources <a href="#fetching-resources" id="fetching-resources" class="headerlink"></a>
 
-A server **MUST** support `GET` requests to all resource endpoints it controls.
-
-For example, the following request fetches a collection of articles:
+The following request fetches a collection of articles:
 
 ```http
 GET /articles HTTP/1.1
@@ -769,9 +767,7 @@ responses, in accordance with
 
 ### Fetching Relationships <a href="#fetching-relationships" id="fetching-relationships" class="headerlink"></a>
 
-A server **MUST** support `GET` requests to all relationship endpoints it controls.
-
-For example, the following request fetches data about an article's comments:
+The following request fetches relationship data about an article's comments:
 
 ```http
 GET /articles/1/relationships/comments HTTP/1.1
