@@ -84,7 +84,8 @@ A document **MUST** contain at least one of the following top-level members:
 
 * `data`: containing the document's "primary data"
 * `errors`: containing an array of [error objects](#errors)
-* `meta`: non-standard meta-information.
+* `meta`: whose value is a [meta] object that contains non-standard
+  meta-information.
 
 The members `data` and `errors` **MUST NOT** coexist in the same document.
 
@@ -171,8 +172,8 @@ In addition, a resource object **MAY** contain any of these top-level members:
 * `relationships`: a "relationships object" describing relationships between
  the resource and other JSON API resources.
 * `links`: a [links object][links] containing links related to the resource.
-* `meta`: non-standard meta-information about a resource that can not be
-  represented as an attribute or relationship.
+* `meta`: a [meta] object containing non-standard meta-information about a
+  resource that can not be represented as an attribute or relationship.
 
 Here's how an article (i.e. a resource of type "articles") might appear in a document:
 
@@ -249,8 +250,8 @@ which **MUST** contain at least one of the following:
   * `related`: a member, whose value is a "related resource link", as defined
     below.
 * `data`: a member, whose value represents "resource linkage" (defined below).
-* `meta`: a member that contains non-standard meta-information about the
-  relationship.
+* `meta`: a member, whose value is a [meta] object that contains non-standard
+  meta-information about the relationship.
 
 A relationship object that represents a to-many relationship **MAY** also contain
 [pagination] links under the `links` member, as described below.
@@ -358,8 +359,8 @@ resource.
 
 It **MUST** contain `type` and `id` members.
 
-It **MAY** also include a `meta` member to contain non-standard
-meta-information.
+It **MAY** also include a `meta` member, whose value is a [meta] object that
+contains non-standard meta-information.
 
 ### Compound Documents <a href="#document-structure-compound-documents" id="document-structure-compound-documents" class="headerlink"></a>
 
@@ -461,19 +462,12 @@ multiple times.
 
 ### Meta Information <a href="#document-structure-meta" id="document-structure-meta" class="headerlink"></a>
 
-As discussed above, a JSON API document **MAY** be extended to include
-meta-information as `meta` members in several locations:
+Where specified, a `meta` member can be used to include non-standard
+meta-information. The value of each `meta` member **MUST** be an object (a
+"meta object").
 
-* at the top-level
-* within the top level `jsonapi` object.
-* within resource objects
-* within relationship objects
-* within link objects
-* within [resource identifier objects]
-* within [error objects](#errors)
-
-All `meta` members **MUST** have an object as a value, the contents of which
-can be used for custom extensions.
+The contents of the meta object can be used to provide non-standard
+meta-information.
 
 For example:
 
@@ -484,7 +478,8 @@ For example:
     "authors": [
       "Yehuda Katz",
       "Steve Klabnik",
-      "Dan Gebhardt"
+      "Dan Gebhardt",
+      "Tyler Kellen"
     ]
   },
   "data": {
@@ -498,7 +493,7 @@ Any members **MAY** be specified within `meta` objects.
 ### Links <a href="#document-structure-links" id="document-structure-links" class="headerlink"></a>
 
 Where specified, a `links` member can be used to represent links. The value
-of the `links` member **MUST** be an object (a "links object").
+of each `links` member **MUST** be an object (a "links object").
 
 Each member of a links object is a "link". A link **MUST** be represented as
 either:
@@ -541,8 +536,8 @@ array of values, whereas a `self` link does not).
 A JSON API document **MAY** include information about its implementation under
 a top level `jsonapi` member. If present, it **MUST** be an object containing
 a `version` member whose value is a string indicating the highest JSON API
-version supported. Other than `meta`, servers **MUST NOT** include any
-additional members.
+version supported. Other than `meta`, which **MUST** contain a [meta] object if
+included, servers **MUST NOT** include any additional members.
 
 ```json
 {
@@ -1414,7 +1409,7 @@ resource(s) as if a `GET` request was made to the request URL.
 
 A server **MUST** return a `200 OK` status code if an update is successful,
 the client's current attributes remain up to date, and the server responds
-only with top-level `meta` data. In this case the server **MUST NOT**
+only with top-level [meta] data. In this case the server **MUST NOT**
 include a representation of the updated resource(s).
 
 ##### 204 No Content <a href="#crud-updating-responses-204" id="crud-updating-responses-204" class="headerlink"></a>
@@ -1646,7 +1641,7 @@ updated relationship(s).
 
 A server **MUST** return a `200 OK` status code if an update is successful,
 the client's current data remain up to date, and the server responds
-only with top-level `meta` data. In this case the server **MUST NOT**
+only with top-level [meta] data. In this case the server **MUST NOT**
 include a representation of the updated relationship(s).
 
 ##### 403 Forbidden <a href="#crud-updating-relationship-responses-403" id="crud-updating-relationship-responses-403" class="headerlink"></a>
@@ -1690,7 +1685,7 @@ request is successful and no content is returned.
 ##### 200 OK <a href="#crud-deleting-responses-200" id="crud-deleting-responses-200" class="headerlink"></a>
 
 A server **MUST** return a `200 OK` status code if a deletion request is
-successful and the server responds with only top-level `meta` data.
+successful and the server responds with only top-level [meta] data.
 
 ##### Other Responses <a href="#crud-deleting-responses-other" id="crud-deleting-responses-other" class="headerlink"></a>
 
@@ -1755,7 +1750,8 @@ An error object **MAY** have the following members:
     `/data/attributes/title` for a specific attribute].
   * `parameter`: An optional string indicating which query parameter caused
     the error.
-* `meta`: to contain non-standard meta-information about the error.
+* `meta`: a [meta] object containing non-standard meta-information about the
+  error.
 
 [attributes]: #document-structure-resource-attributes
 [relationships]: #document-structure-resource-objects-relationships
@@ -1768,4 +1764,5 @@ An error object **MAY** have the following members:
 [error details]: #errors
 [member names]: #document-structure-member-names
 [links]: #document-structure-links
+[meta]: #document-structure-meta
 [pagination]: #fetching-pagination
