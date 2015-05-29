@@ -245,18 +245,22 @@ A "relationship object" **MUST** contain at least one of the following:
     link allows the client to directly manipulate the relationship. For example,
     it would allow a client to remove an `author` from an `article` without
     deleting the `people` resource itself.
-  * `related`: a "related resource link", as defined below.
-* `data`: representing "resource linkage", as defined below.
+  * `related`: a [related resource link]
+* `data`: [resource linkage]
 * `meta`: a [meta object][meta] that contains non-standard meta-information about the
   relationship.
 
 A relationship object that represents a to-many relationship **MAY** also contain
 [pagination] links under the `links` member, as described below.
 
-A "related resource link" provides access to the resources targeted by the
-relationship. When fetched, it returns the related resource object(s) as the
-response's primary data. For example, an `article`'s `comments` relationship
-could specify a link that returns a list of comment resource objects when
+#### Related Resource Links <a href="#document-structure-resource-objects-related-resource-links" id="document-structure-resource-objects-related-resource-links" class="headerlink"></a>
+
+A "related resource link" provides access to [resource objects] [linked][links]
+in a [relationship]. When fetched, the related resource object(s) are returned
+as the response's primary data.
+
+For example, an `article`'s `comments` [relationship] could specify a
+[link][links] that returns a collection of comment [resource objects] when
 retrieved through a `GET` request.
 
 A related resource link **MUST** remain constant even when the relationship
@@ -266,6 +270,11 @@ related resource link always reflects the current state of the relationship.
 If present, a related resource link **MUST** reference a valid URL, even if
 the relationship isn't currently associated with any target resources.
 
+#### Resource Linkage <a href="#document-structure-resource-objects-resource-linkage" id="document-structure-resource-objects-resource-linkage" class="headerlink"></a>
+
+Resource linkage in a compound document allows a client to link together all of
+the included resource objects without having to `GET` any URLs via [links].
+
 Resource linkage **MUST** be represented as one of the following:
 
 * `null` for empty to-one relationships.
@@ -273,12 +282,8 @@ Resource linkage **MUST** be represented as one of the following:
 * a single [resource identifier object] for non-empty to-one relationships.
 * an array of [resource identifier objects] for non-empty to-many relationships.
 
-> Note: Resource linkage in a compound document allows a client to link
-together all of the included resource objects without having to `GET` any
-URLs via relationship links.
-
-> Note: The spec does not impart meaning to order of resource identifier
-objects in linkage arrays of to-many relationships, although implementations
+> Note: The spec does not impart meaning to order of [resource identifier
+objects] in linkage arrays of to-many relationships, although implementations
 may do that. Arrays of resource identifier objects may represent ordered
 or unordered relationships, and both types can be mixed in one response
 object.
