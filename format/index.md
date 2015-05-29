@@ -263,12 +263,10 @@ For example, an `article`'s `comments` [relationship] could specify a
 [link][links] that returns a collection of comment [resource objects] when
 retrieved through a `GET` request.
 
-A related resource link **MUST** remain constant even when the relationship
-(the set of referenced resources) mutates. That is, the response from a
-related resource link always reflects the current state of the relationship.
-
-If present, a related resource link **MUST** reference a valid URL, even if
-the relationship isn't currently associated with any target resources.
+If present, a related resource link **MUST** reference a valid URL, even if the
+relationship isn't currently associated with any target resources. Additionally,
+a related resource link **MUST NOT** change because its relationship's content
+changes.
 
 #### Resource Linkage <a href="#document-structure-resource-objects-resource-linkage" id="document-structure-resource-objects-resource-linkage" class="headerlink"></a>
 
