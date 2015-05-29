@@ -254,7 +254,6 @@ A relationship object that represents a to-many relationship **MAY** also contai
 
 #### Related Resource Links <a href="#document-resource-object-related-resource-links" id="document-resource-object-related-resource-links" class="headerlink"></a>
 
-
 A "related resource link" provides access to resource objects [linked][links]
 in a [relationship][relationships]. When fetched, the related resource object(s)
 are returned as the response's primary data.
@@ -271,8 +270,8 @@ changes.
 
 #### Linkage <a href="#document-resource-object-linkage" id="document-resource-object-linkage" class="headerlink"></a>
 
-Resource linkage in a compound document allows a client to link together all of
-the included resource objects without having to `GET` any URLs via [links].
+Resource linkage in a [compound document] allows a client to link together all
+of the included resource objects without having to `GET` any URLs via [links].
 
 Resource linkage **MUST** be represented as one of the following:
 
@@ -451,7 +450,7 @@ A complete example document with multiple included relationships:
 }
 ```
 
-A compound document **MUST NOT** include more than one resource object for
+A [compound document] **MUST NOT** include more than one resource object for
 each `type` and `id` pair.
 
 > Note: In a single document, you can think of the `type` and `id` as a
@@ -661,7 +660,7 @@ A server **MUST** respond to a successful request to fetch an individual
 resource or resource collection with a `200 OK` response.
 
 A server **MUST** respond to a successful request to fetch a resource
-collection with an array of *resource objects* or an empty array (`[]`) as
+collection with an array of [resource objects] or an empty array (`[]`) as
 the response document's primary data.
 
 For example, a `GET` request to a collection of articles could return:
@@ -705,8 +704,8 @@ Content-Type: application/vnd.api+json
 ```
 
 A server **MUST** respond to a successful request to fetch an individual
-resource with a *resource object* or `null` provided as the response
-document's primary data.
+resource with a [resource object][resource objects] or `null` provided as
+the response document's primary data.
 
 `null` is only an appropriate response when the requested URL is one that
 might correspond to a single resource, but doesn't currently.
@@ -804,7 +803,7 @@ The primary data in the response document **MUST** match the appropriate
 value for [resource linkage], as described above for
 [relationship objects][relationships].
 
-The top-level *links object* **MAY** contain `self` and `related` links,
+The top-level [links object][links] **MAY** contain `self` and `related` links,
 as described above for [relationship objects][relationships].
 
 For example, a `GET` request to a URL from a to-one relationship link could
@@ -910,7 +909,7 @@ If an endpoint does not support the `include` parameter, it must respond with
 
 If an endpoint supports the `include` parameter and a client supplies it,
 the server **MUST NOT** include other resource objects in the `included`
-section of the compound document.
+section of the [compound document].
 
 The value of the `include` parameter **MUST** be a comma-separated (U+002C
 COMMA, ",") list of relationship paths. A relationship path is a dot-separated
@@ -1063,7 +1062,7 @@ links").
 Pagination links **MUST** appear in the links object that corresponds to a
 collection. To paginate the primary data, supply pagination links in the
 top-level `links` object. To paginate an included collection returned in
-a compound document, supply pagination links in the corresponding links
+a [compound document], supply pagination links in the corresponding links
 object.
 
 The following keys **MUST** be used for pagination links:
@@ -1481,8 +1480,8 @@ relationship is deleted (as a garbage collection measure).
 
 #### Updating To-One Relationships <a href="#crud-updating-to-one-relationships" id="crud-updating-to-one-relationships" class="headerlink"></a>
 
-A server **MUST** respond to `PATCH` requests to a URL from a *to-one
-relationship link* as described below.
+A server **MUST** respond to `PATCH` requests to a URL from a to-one
+[relationship link][relationships] as described below.
 
 The `PATCH` request **MUST** include a top-level member named `data` containing
 one of:
@@ -1520,16 +1519,16 @@ a successful response.
 #### Updating To-Many Relationships <a href="#crud-updating-to-many-relationships" id="crud-updating-to-many-relationships" class="headerlink"></a>
 
 A server **MUST** respond to `PATCH`, `POST`, and `DELETE` requests to a
-URL from a *to-many relationship link* as described below.
+URL from a to-many [relationship link][relationships] as described below.
 
 For all request types, the body **MUST** contain a `data` member whose value
 is an empty array or an array of [resource identifier objects][resource identifier object].
 
-If a client makes a `PATCH` request to a URL from a *to-many relationship
-link*, the server **MUST** either completely replace every member of the
-relationship, return an appropriate error response if some resources can not
-be found or accessed, or return a `403 Forbidden` response if complete
-replacement is not allowed by the server.
+If a client makes a `PATCH` request to a URL from a to-many
+[relationship link][relationships], the server **MUST** either completely
+replace every member of the relationship, return an appropriate error response
+if some resources can not be found or accessed, or return a `403 Forbidden`
+response if complete replacement is not allowed by the server.
 
 For example, the following request replaces every tag for an article:
 
@@ -1558,10 +1557,10 @@ Accept: application/vnd.api+json
 }
 ```
 
-If a client makes a `POST` request to a URL from a *relationship link*, the
-server **MUST** add the specified members to the relationship unless they
-are already present. If a given `type` and `id` is already in the
-relationship, the server **MUST NOT** add it again.
+If a client makes a `POST` request to a URL from a
+[relationship link][relationships], the server **MUST** add the specified
+members to the relationship unless they are already present. If a given `type`
+and `id` is already in the relationship, the server **MUST NOT** add it again.
 
 > Note: This matches the semantics of databases that use foreign keys for
 has-many relationships. Document-based storage should check the has-many
@@ -1589,11 +1588,11 @@ Accept: application/vnd.api+json
 }
 ```
 
-If the client makes a `DELETE` request to a URL from a *relationship link*,
-the server **MUST** delete the specified members from the relationship or
-return a `403 Forbidden` response. If all of the specified resources are
-able to be removed from, or are already missing from, the relationship then
-the server **MUST** return a successful response.
+If the client makes a `DELETE` request to a URL from a
+[relationship link][relationships] the server **MUST** delete the specified
+members from the relationship or return a `403 Forbidden` response. If all of
+the specified resources are able to be removed from, or are already missing
+from, the relationship then the server **MUST** return a successful response.
 
 > Note: As described above for `POST` requests, this approach helps avoid
 pointless race conditions between multiple clients making the same changes.
@@ -1634,9 +1633,10 @@ A server **MUST** return a `204 No Content` status code if an update is
 successful and the client's current attributes remain up to date.
 
 > Note: This is the appropriate response to a `POST` request sent to a URL
-from a *to-many relationship link* when that relationship already exists. It
-is also the appropriate response to a `DELETE` request sent to a URL from a
-*to-many relationship link* when that relationship does not exist.
+from a to-many [relationship link][relationships] when that relationship already
+exists. It is also the appropriate response to a `DELETE` request sent to a URL
+from a to-many [relationship link][relationships] when that relationship does
+not exist.
 
 ##### 200 OK <a href="#crud-updating-relationship-responses-200" id="crud-updating-relationship-responses-200" class="headerlink"></a>
 
@@ -1770,6 +1770,7 @@ An error object **MAY** have the following members:
 [resource linkage]: #document-resource-object-linkage
 [links]: #document-resource-object-links
 [resource identifier object]: #document-resource-identifier-objects
+[compound document]: #document-compound-documents
 [meta]: #document-meta
 [links]: #document-links
 [error details]: #errors
