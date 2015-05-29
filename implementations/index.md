@@ -32,12 +32,10 @@ pull request](https://github.com/json-api/json-api).
 * [jsonapi-consumer](https://github.com/jsmestad/jsonapi-consumer) a ruby library for consuming JSONAPI payloads.
 * [JsonApiClient](https://github.com/chingor13/json_api_client) attempts to give you a query building framework that is easy to understand (similar to ActiveRecord scopes)
 
-
 ## Server libraries <a href="#server-libraries" id="server-libraries" class="headerlink"></a>
 
 ### PHP <a href="#server-libraries-php" id="server-libraries-php" class="headerlink"></a>
 
-* [FriendsOfSymfony / FOSRestBundle](https://github.com/FriendsOfSymfony/FOSRestBundle/issues/452)
 * [GOintegro / HATEOAS](https://github.com/gointegro/hateoas-bundle) is a library and Symfony 2 bundle that allows you to magically expose your Doctrine 2 mapped entities as resources in a HATEOAS API and supports the full spec of JSON-API for serializing and fetching.
 * [tobscure / json-api](https://github.com/tobscure/json-api)
 * [neomerx / json-api](https://github.com/neomerx/json-api) is a framework agnostic library that fully implements JSON API v1.0.
@@ -74,7 +72,6 @@ has a page describing how to emit conformant JSON.
 
 * [api2go](https://github.com/univedo/api2go) is a small library to make it easier to provide a JSON API with your Golang project.
 
-
 ### .NET <a href="#server-libraries-net" id="server-libraries-net" class="headerlink"></a>
 
 * [JSONAPI.NET](https://github.com/SphtKr/JSONAPI.NET) is a .NET library that integrates with ASP.NET WebAPI, Json.NET, and (optionally) Entity Framework to help you quickly create JSON API compliant web services.
@@ -83,11 +80,9 @@ has a page describing how to emit conformant JSON.
 
 * [katharsis](https://github.com/katharsis-project) has comprehensive coverage of standard allowing to create JSON:API compatible resources with dynamic relation based routing. Library is highly modular and compatible with all JAX-RS based frameworks.
 
-
 ## Examples <a href="#examples" id="examples" class="headerlink"></a>
 
 * [RestPack::Serializer provides examples](http://restpack-serializer-sample.herokuapp.com/) which demonstrate sample responses.
-
 
 ## Related Tools <a href="#related-tools" id="related-tools" class="headerlink"></a>
 
