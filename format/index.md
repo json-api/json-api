@@ -216,7 +216,7 @@ consistently throughout an implementation.
 
 The value of the `attributes` key is an object (an "attributes object").
 Members of the attributes object ("attributes") represent information about
-the resource in which it's defined.
+the resource object in which it's defined.
 
 Attributes may contain any valid JSON value.
 
@@ -232,7 +232,8 @@ alongside other information to be represented in a resource object, these keys
 
 The value of the `relationships` key is an object (a "relationships
 object"). Members of the relationships object ("relationships") represent
-references from the resource in which it's defined to other resources.
+references from the resource object in which it's defined to other resource
+objects.
 
 Relationships may be to-one or to-many.
 
