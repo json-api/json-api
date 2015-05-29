@@ -1248,7 +1248,7 @@ A server **MUST** return `409 Conflict` when processing a `POST` request to
 create a resource with a client-generated ID that already exists.
 
 A server **MUST** return `409 Conflict` when processing a `POST` request in
-which the resource's `type` is not among the type(s) that constitute the
+which the resource object's `type` is not among the type(s) that constitute the
 collection represented by the endpoint.
 
 A server **SHOULD** include error details and provide enough information to
@@ -1438,7 +1438,7 @@ update a resource if that update would violate other server-enforced
 constraints (such as a uniqueness constraint on a property other than `id`).
 
 A server **MUST** return `409 Conflict` when processing a `PATCH` request in
-which the resource's `type` and `id` do not match the server's endpoint.
+which the resource object's `type` and `id` do not match the server's endpoint.
 
 A server **SHOULD** include error details and provide enough information to
 recognize the source of the conflict.
