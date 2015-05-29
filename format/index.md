@@ -1202,8 +1202,8 @@ The response **MUST** also include a document that contains the primary
 resource created.
 
 If the resource object returned by the response contains a `self` key in its
-`links` member, the value of the `self` member **MUST** match the value of
-the `Location` header.
+`links` member and a `Location` header is provided, the value of the `self`
+member **MUST** match the value of the `Location` header.
 
 ```http
 HTTP/1.1 201 Created
