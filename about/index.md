@@ -58,8 +58,4 @@ The goals of the media type are to balance:
 * Ease of implementation on the server side
 * Ease of implementation on the client side
 
-This media type is still a work in progress, and we are extremely open to
-feedback and proposals for improvement. That said, implementation work
-has already begun, and we value good working systems over perfect
-vaporware.
-
+This specification reached a stable version 1.0 on May 29, 2015.

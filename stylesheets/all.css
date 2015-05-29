@@ -164,6 +164,11 @@ p > code, li > code {
     text-decoration: none; }
   .site-nav .active a {
     color: black; }
+  .site-nav .version div {
+    background-color: #747474;
+    color: white;
+    font-weight: bold;
+    padding: 1px 6px; }
 
 /** Header */
 header {
