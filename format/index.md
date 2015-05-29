@@ -6,7 +6,8 @@ show_sidebar: true
 
 {% include status.md %}
 
-## Introduction <a href="#introduction" id="introduction" class="headerlink"></a>
+<a href="#introduction" id="introduction" class="headerlink"></a>
+## Introduction
 
 JSON API is a specification for how a client should request that resources be
 fetched or modified, and how a server should respond to those requests.
@@ -19,16 +20,19 @@ JSON API requires use of the JSON API media type
 ([`application/vnd.api+json`](http://www.iana.org/assignments/media-types/application/vnd.api+json))
 for exchanging data.
 
-## Conventions <a href="#conventions" id="conventions" class="headerlink"></a>
+<a href="#conventions" id="conventions" class="headerlink"></a>
+## Conventions
 
 The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD",
 "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this document are to be
 interpreted as described in RFC 2119
 [[RFC2119](http://tools.ietf.org/html/rfc2119)].
 
-## Content Negotiation <a href="#content-negotiation" id="content-negotiation" class="headerlink"></a>
+<a href="#content-negotiation" id="content-negotiation" class="headerlink"></a>
+## Content Negotiation
 
-### Client Responsibilities <a href="#content-negotiation-clients" id="content-negotiation-clients" class="headerlink"></a>
+<a href="#content-negotiation-clients" id="content-negotiation-clients" class="headerlink"></a>
+### Client Responsibilities
 
 Clients **MUST** send all JSON API data in request documents with the header
 `Content-Type: application/vnd.api+json` without any media type parameters.
@@ -39,7 +43,8 @@ specify the media type there at least once without any media type parameters.
 Clients **MUST** ignore any parameters for the `application/vnd.api+json`
 media type received in the `Content-Type` header of response documents.
 
-### Server Responsibilities <a href="#content-negotiation-servers" id="content-negotiation-servers" class="headerlink"></a>
+<a href="#content-negotiation-servers" id="content-negotiation-servers" class="headerlink"></a>
+### Server Responsibilities
 
 Servers **MUST** send all JSON API data in response documents with the header
 `Content-Type: application/vnd.api+json` without any media type parameters.
@@ -56,7 +61,8 @@ of that media type are modified with media type parameters.
 of this specification to use media type parameters for extension negotiation
 and versioning.
 
-## Document Structure <a href="#document-structure" id="document-structure" class="headerlink"></a>
+<a href="#document-structure" id="document-structure" class="headerlink"></a>
+## Document Structure
 
 This section describes the structure of a JSON API document, which is identified
 by the media type [`application/vnd.api+json`]
@@ -75,7 +81,8 @@ ignore those not recognized by this specification.
 > Note: These conditions allow this specification to evolve through additive
 changes.
 
-### Top Level <a href="#document-top-level" id="document-top-level" class="headerlink"></a>
+<a href="#document-top-level" id="document-top-level" class="headerlink"></a>
+### Top Level
 
 A JSON object **MUST** be at the root of every JSON API response containing
 data. This object defines a document's "top level".
@@ -148,7 +155,8 @@ references the same resource:
 A logical collection of resources **MUST** be represented as an array, even if
 it only contains one item or is empty.
 
-### Resource Objects <a href="#document-resource-objects" id="document-resource-objects" class="headerlink"></a>
+<a href="#document-resource-objects" id="document-resource-objects" class="headerlink"></a>
+### Resource Objects
 
 "Resource objects" appear in a JSON API document to represent resources.
 
@@ -195,7 +203,8 @@ Here's how an article (i.e. a resource of type "articles") might appear in a doc
 // ...
 ```
 
-#### Identification <a href="#document-resource-object-identification" id="document-resource-object-identification" class="headerlink"></a>
+<a href="#document-resource-object-identification" id="document-resource-object-identification" class="headerlink"></a>
+#### Identification
 
 Every resource object **MUST** contain an `id` member and a `type` member.
 The value of each of these members **MUST** be a string.
@@ -211,7 +220,8 @@ attributes and relationships.
 can be either plural or singular. However, the same value should be used
 consistently throughout an implementation.
 
-#### Attributes <a href="#document-resource-object-attributes" id="document-resource-object-attributes" class="headerlink"></a>
+<a href="#document-resource-object-attributes" id="document-resource-object-attributes" class="headerlink"></a>
+#### Attributes
 
 The value of the `attributes` key **MUST** be an object (an "attributes
 object"). Members of the attributes object ("attributes") represent information
@@ -228,7 +238,8 @@ Although has-one foreign keys (e.g. `author_id`) are often stored internally
 alongside other information to be represented in a resource object, these keys
 **SHOULD NOT** appear as attributes.
 
-#### Relationships <a href="#document-resource-object-relationships" id="document-resource-object-relationships" class="headerlink"></a>
+<a href="#document-resource-object-relationships" id="document-resource-object-relationships" class="headerlink"></a>
+#### Relationships
 
 The value of the `relationships` key **MUST** be an object (a "relationships
 object"). Members of the relationships object ("relationships") represent
@@ -252,7 +263,8 @@ A "relationship object" **MUST** contain at least one of the following:
 A relationship object that represents a to-many relationship **MAY** also contain
 [pagination] links under the `links` member, as described below.
 
-#### Related Resource Links <a href="#document-resource-object-related-resource-links" id="document-resource-object-related-resource-links" class="headerlink"></a>
+<a href="#document-resource-object-related-resource-links" id="document-resource-object-related-resource-links"
+#### Related Resource Links class="headerlink"></a>
 
 A "related resource link" provides access to [resource objects] [linked][links]
 in a [relationship]. When fetched, the related resource object(s) are returned
@@ -267,7 +279,8 @@ relationship isn't currently associated with any target resources. Additionally,
 a related resource link **MUST NOT** change because its relationship's content
 changes.
 
-#### Linkage <a href="#document-resource-object-linkage" id="document-resource-object-linkage" class="headerlink"></a>
+<a href="#document-resource-object-linkage" id="document-resource-object-linkage" class="headerlink"></a>
+#### Linkage
 
 Resource linkage in a compound document allows a client to link together all of
 the included resource objects without having to `GET` any URLs via [links].
@@ -315,7 +328,8 @@ The `author` relationship includes a link for the relationship itself (which
 allows the client to change the related author directly), a related resource
 link to fetch the resource objects, and linkage information.
 
-#### Fields <a href="#document-resource-object-fields" id="document-resource-object-fields" class="headerlink"></a>
+<a href="#document-resource-object-fields" id="document-resource-object-fields" class="headerlink"></a>
+#### Fields
 
 A resource object's [attributes] and its [relationships] are collectively called
 its "[fields]".
@@ -326,7 +340,8 @@ attribute and relationship with the same name, nor can it have an attribute
 or relationship named `type` or `id`.
 
 
-#### Links <a href="#document-structure-resource-object-links" id="document-resource-object-links" class="headerlink"></a>
+<a href="#document-structure-resource-object-links" id="document-resource-object-links" class="headerlink"></a>
+#### Links
 
 The optional `links` member within each resource object contains [links]
 related to the resource.
@@ -352,7 +367,8 @@ the resource represented by the resource object.
 A server **MUST** respond to a `GET` request to the specified URL with a
 response that includes the resource as the primary data.
 
-### Resource Indentifier Objects <a href="#document-resource-identifier-objects" id="document-resource-identifier-objects" class="headerlink"></a>
+<a href="#document-resource-identifier-objects" id="document-resource-identifier-objects"
+### Resource Indentifier Objects class="headerlink"></a>
 
 A "resource identifier object" is an object that identifies an individual
 resource.
@@ -362,7 +378,8 @@ It **MUST** contain `type` and `id` members.
 It **MAY** also include a `meta` member, whose value is a [meta] object that
 contains non-standard meta-information.
 
-### Compound Documents <a href="#document-compound-documents" id="document-compound-documents" class="headerlink"></a>
+<a href="#document-compound-documents" id="document-compound-documents" class="headerlink"></a>
+### Compound Documents
 
 To reduce the number of HTTP requests, servers **MAY** allow responses that
 include related resources along with the requested primary resources. Such
@@ -460,7 +477,8 @@ the document.
 returned with each response, even when the same resource is referenced
 multiple times.
 
-### Meta Information <a href="#document-meta" id="document-meta" class="headerlink"></a>
+<a href="#document-meta" id="document-meta" class="headerlink"></a>
+### Meta Information
 
 Where specified, a `meta` member can be used to include non-standard
 meta-information. The value of each `meta` member **MUST** be an object (a
@@ -487,7 +505,8 @@ For example:
 }
 ```
 
-### Links <a href="#document-links" id="document-links" class="headerlink"></a>
+<a href="#document-links" id="document-links" class="headerlink"></a>
+### Links
 
 Where specified, a `links` member can be used to represent links. The value
 of each `links` member **MUST** be an object (a "links object").
@@ -528,7 +547,8 @@ objects in the future. It is also possible that the allowed values of
 additional members will be expanded (e.g. a `collection` link may support an
 array of values, whereas a `self` link does not).
 
-### JSON API Object <a href="#document-jsonapi-object" id="document-jsonapi-object" class="headerlink"></a>
+<a href="#document-jsonapi-object" id="document-jsonapi-object" class="headerlink"></a>
+### JSON API Object
 
 A JSON API document **MAY** include information about its implementation
 under a top level `jsonapi` member. If present, its value **MUST** be an
@@ -551,7 +571,8 @@ version 1.0 of the specification.
 > Note: Because JSON API is committed to making additive changes only, the
 version string primarily indicates which new features a server may support.
 
-### Member Names <a href="#document-member-names" id="document-member-names" class="headerlink"></a>
+<a href="#document-member-names" id="document-member-names" class="headerlink"></a>
+### Member Names
 
 All member names used in a JSON API document **MUST** be treated as case sensitive
 by clients and servers, and they **MUST** meet all of the following conditions:
@@ -564,7 +585,8 @@ by clients and servers, and they **MUST** meet all of the following conditions:
 To enable an easy mapping of member names to URLs, it is **RECOMMENDED** that
 member names use only non-reserved, URL safe characters specified in [RFC 3986](http://tools.ietf.org/html/rfc3986#page-13).
 
-#### Allowed Characters <a href="#document-member-names-allowed-characters" id="document-member-names-allowed-characters" class="headerlink"></a>
+<a href="#document-member-names-allowed-characters" id="document-member-names-allowed-characters"
+#### Allowed Characters class="headerlink"></a>
 
 The following "globally allowed characters" **MAY** be used anywhere in a member name:
 
@@ -580,7 +602,8 @@ first or last character:
 - U+005F LOW LINE, "_"
 - U+0020 SPACE, " " _(not recommended, not URL safe)_
 
-#### Reserved Characters <a href="#document-member-names-reserved-characters" id="document-member-names-reserved-characters" class="headerlink"></a>
+<a href="#document-member-names-reserved-characters" id="document-member-names-reserved-characters"
+#### Reserved Characters class="headerlink"></a>
 
 The following characters **MUST NOT** be used in member names:
 
@@ -615,14 +638,16 @@ The following characters **MUST NOT** be used in member names:
 - U+007D RIGHT CURLY BRACKET, "}"
 - U+007E TILDE, "~"
 
-## Fetching Data <a href="#fetching" id="fetching" class="headerlink"></a>
+<a href="#fetching" id="fetching" class="headerlink"></a>
+## Fetching Data
 
 Data, including resources and relationships, can be fetched by sending a
 `GET` request to an endpoint.
 
 Responses can be further refined with the optional features described below.
 
-### Fetching Resources <a href="#fetching-resources" id="fetching-resources" class="headerlink"></a>
+<a href="#fetching-resources" id="fetching-resources" class="headerlink"></a>
+### Fetching Resources
 
 A server **MUST** support fetching resource data for every URL provided as:
 
@@ -651,9 +676,11 @@ GET /articles/1/author HTTP/1.1
 Accept: application/vnd.api+json
 ```
 
-#### Responses <a href="#fetching-resources-responses" id="fetching-resources-responses" class="headerlink"></a>
+<a href="#fetching-resources-responses" id="fetching-resources-responses" class="headerlink"></a>
+#### Responses
 
-##### 200 OK <a href="#fetching-resources-responses-200" id="fetching-resources-responses-200" class="headerlink"></a>
+<a href="#fetching-resources-responses-200" id="fetching-resources-responses-200" class="headerlink"></a>
+##### 200 OK
 
 A server **MUST** respond to a successful request to fetch an individual
 resource or resource collection with a `200 OK` response.
@@ -756,13 +783,15 @@ Content-Type: application/vnd.api+json
 }
 ```
 
-##### 404 Not Found <a href="#fetching-resources-responses-404" id="fetching-resources-responses-404" class="headerlink"></a>
+<a href="#fetching-resources-responses-404" id="fetching-resources-responses-404" class="headerlink"></a>
+##### 404 Not Found
 
 A server **MUST** respond with `404 Not Found` when processing a request to
 fetch a single resource that does not exist, except when the request warrants a
 `200 OK` response with `null` as the primary data (as described above).
 
-##### Other Responses <a href="#fetching-resources-responses-other" id="fetching-resources-responses-other" class="headerlink"></a>
+<a href="#fetching-resources-responses-other" id="fetching-resources-responses-other" class="headerlink"></a>
+##### Other Responses
 
 A server **MAY** respond with other HTTP status codes.
 
@@ -772,7 +801,8 @@ A server **MUST** prepare responses, and a client **MUST** interpret
 responses, in accordance with
 [`HTTP semantics`](http://tools.ietf.org/html/rfc7231).
 
-### Fetching Relationships <a href="#fetching-relationships" id="fetching-relationships" class="headerlink"></a>
+<a href="#fetching-relationships" id="fetching-relationships" class="headerlink"></a>
+### Fetching Relationships
 
 A server **MUST** support fetching relationship data for every relationship URL
 provided as a `self` link as part of a relationship's `links` object.
@@ -791,9 +821,11 @@ GET /articles/1/relationships/author HTTP/1.1
 Accept: application/vnd.api+json
 ```
 
-#### Responses <a href="#fetching-relationships-responses" id="fetching-relationships-responses" class="headerlink"></a>
+<a href="#fetching-relationships-responses" id="fetching-relationships-responses" class="headerlink"></a>
+#### Responses
 
-##### 200 OK <a href="#fetching-relationships-responses-200" id="fetching-relationships-responses-200" class="headerlink"></a>
+<a href="#fetching-relationships-responses-200" id="fetching-relationships-responses-200" class="headerlink"></a>
+##### 200 OK
 
 A server **MUST** respond to a successful request to fetch a relationship
 with a `200 OK` response.
@@ -874,7 +906,8 @@ Content-Type: application/vnd.api+json
 }
 ```
 
-##### 404 Not Found <a href="#fetching-relationships-responses-404" id="fetching-relationships-responses-404" class="headerlink"></a>
+<a href="#fetching-relationships-responses-404" id="fetching-relationships-responses-404" class="headerlink"></a>
+##### 404 Not Found
 
 A server **MUST** return `404 Not Found` when processing a request to fetch
 a relationship link URL that does not exist.
@@ -886,7 +919,8 @@ does not exist. For example, when `/articles/1` does not exist, request to
 If a relationship link URL exists but the relationship is empty, then
 `200 OK` **MUST** be returned, as described above.
 
-##### Other Responses <a href="#fetching-relationships-responses-other" id="fetching-relationships-responses-other" class="headerlink"></a>
+<a href="#fetching-relationships-responses-other" id="fetching-relationships-responses-other" class="headerlink"></a>
+##### Other Responses
 
 A server **MAY** respond with other HTTP status codes.
 
@@ -896,7 +930,8 @@ A server **MUST** prepare responses, and a client **MUST** interpret
 responses, in accordance with
 [`HTTP semantics`](http://tools.ietf.org/html/rfc7231).
 
-### Inclusion of Related Resources <a href="#fetching-includes" id="fetching-includes" class="headerlink"></a>
+<a href="#fetching-includes" id="fetching-includes" class="headerlink"></a>
+### Inclusion of Related Resources
 
 An endpoint **MAY** return resources related to the primary data by default.
 
@@ -974,7 +1009,8 @@ data, regardless of the request type. For instance, a server could support
 the inclusion of related resources along with a `POST` request to create a
 resource or relationship.
 
-### Sparse Fieldsets <a href="#fetching-sparse-fieldsets" id="fetching-sparse-fieldsets" class="headerlink"></a>
+<a href="#fetching-sparse-fieldsets" id="fetching-sparse-fieldsets" class="headerlink"></a>
+### Sparse Fieldsets
 
 A client **MAY** request that an endpoint return only specific [fields] in the
 response on a per-type basis by including a `fields[TYPE]` parameter.
@@ -995,7 +1031,8 @@ primary or included data, regardless of the request type. For instance, a
 server could support sparse fieldsets along with a `POST` request to create
 a resource.
 
-### Sorting <a href="#fetching-sorting" id="fetching-sorting" class="headerlink"></a>
+<a href="#fetching-sorting" id="fetching-sorting" class="headerlink"></a>
+### Sorting
 
 A server **MAY** choose to support requests to sort resource collections
 according to one or more criteria ("sort fields").
@@ -1050,7 +1087,8 @@ request parameter `sort` is not specified.
 > Note: This section applies to any endpoint that responds with a resource
 collection as primary data, regardless of the request type.
 
-### Pagination <a href="#fetching-pagination" id="fetching-pagination" class="headerlink"></a>
+<a href="#fetching-pagination" id="fetching-pagination" class="headerlink"></a>
+### Pagination
 
 A server **MAY** choose to limit the number of resources returned in a response
 to a subset ("page") of the whole set available.
@@ -1091,7 +1129,8 @@ cursor-based strategy might use `page[cursor]`.
 > Note: This section applies to any endpoint that responds with a resource
 collection as primary data, regardless of the request type.
 
-### Filtering <a href="#fetching-filtering" id="fetching-filtering" class="headerlink"></a>
+<a href="#fetching-filtering" id="fetching-filtering" class="headerlink"></a>
+### Filtering
 
 The `filter` query parameter is reserved for filtering data. Servers and clients
 **SHOULD** use this key for filtering operations.
@@ -1100,7 +1139,8 @@ The `filter` query parameter is reserved for filtering data. Servers and clients
 `filter` query parameter can be used as the basis for any number of filtering
 strategies.
 
-## Creating, Updating and Deleting Resources <a href="#crud" id="crud" class="headerlink"></a>
+<a href="#crud" id="crud" class="headerlink"></a>
+## Creating, Updating and Deleting Resources
 
 A server **MAY** allow resources of a given type to be created. It **MAY**
 also allow existing resources to be modified or deleted.
@@ -1116,7 +1156,8 @@ confusing; it would be hard to remember when it was required and when it was
 not. Therefore, to improve consistency and minimize confusion, `type` is
 always required.
 
-### Creating Resources <a href="#crud-creating" id="crud-creating" class="headerlink"></a>
+<a href="#crud-creating" id="crud-creating" class="headerlink"></a>
+### Creating Resources
 
 A resource can be created by sending a `POST` request to a URL that represents
 a collection of resources. The request **MUST** include a single resource object
@@ -1150,7 +1191,8 @@ resource object, its value **MUST** be a relationship object with a `data`
 member. The value of this key represents the linkage the new resource is to
 have.
 
-#### Client-Generated IDs <a href="#crud-creating-client-ids" id="crud-creating-client-ids" class="headerlink"></a>
+<a href="#crud-creating-client-ids" id="crud-creating-client-ids" class="headerlink"></a>
+#### Client-Generated IDs
 
 A server **MAY** accept a client-generated ID along with a request to create
 a resource. An ID **MUST** be specified with an `id` key, the value of
@@ -1186,9 +1228,11 @@ Accept: application/vnd.api+json
 A server **MUST** return `403 Forbidden` in response to an unsupported request
 to create a resource with a client-generated ID.
 
-#### Responses <a href="#crud-creating-responses" id="crud-creating-responses" class="headerlink"></a>
+<a href="#crud-creating-responses" id="crud-creating-responses" class="headerlink"></a>
+#### Responses
 
-##### 201 Created <a href="#crud-creating-responses-201" id="crud-creating-responses-201" class="headerlink"></a>
+<a href="#crud-creating-responses-201" id="crud-creating-responses-201" class="headerlink"></a>
+##### 201 Created
 
 If a `POST` request did not include a [Client-Generated
 ID](#crud-creating-client-ids) and the requested resource has been created
@@ -1224,13 +1268,15 @@ Content-Type: application/vnd.api+json
 }
 ```
 
-##### 202 Accepted <a href="#crud-creating-responses-202" id="crud-creating-responses-202" class="headerlink"></a>
+<a href="#crud-creating-responses-202" id="crud-creating-responses-202" class="headerlink"></a>
+##### 202 Accepted
 
 If a request to create a resource has been accepted for processing, but the
 processing has not been completed by the time the server responds, the
 server **MUST** return a `202 Accepted` status code.
 
-##### 204 No Content <a href="#crud-creating-responses-204" id="crud-creating-responses-204" class="headerlink"></a>
+<a href="#crud-creating-responses-204" id="crud-creating-responses-204" class="headerlink"></a>
+##### 204 No Content
 
 If a `POST` request *did* include a [Client-Generated
 ID](#crud-creating-client-ids) and the requested resource has been created
@@ -1242,12 +1288,14 @@ with no response document.
 object sent in the request to be accepted by the server, as if the server
 had returned it back in a `201` response.
 
-##### 403 Forbidden <a href="#crud-creating-responses-403" id="crud-creating-responses-403" class="headerlink"></a>
+<a href="#crud-creating-responses-403" id="crud-creating-responses-403" class="headerlink"></a>
+##### 403 Forbidden
 
 A server **MAY** return `403 Forbidden` in response to an unsupported request
 to create a resource.
 
-##### 409 Conflict <a href="#crud-creating-responses-409" id="crud-creating-responses-409" class="headerlink"></a>
+<a href="#crud-creating-responses-409" id="crud-creating-responses-409" class="headerlink"></a>
+##### 409 Conflict
 
 A server **MUST** return `409 Conflict` when processing a `POST` request to
 create a resource with a client-generated ID that already exists.
@@ -1259,7 +1307,8 @@ collection represented by the endpoint.
 A server **SHOULD** include error details and provide enough information to
 recognize the source of the conflict.
 
-##### Other Responses <a href="#crud-creating-responses-other" id="crud-creating-responses-other" class="headerlink"></a>
+<a href="#crud-creating-responses-other" id="crud-creating-responses-other" class="headerlink"></a>
+##### Other Responses
 
 A server **MAY** respond with other HTTP status codes.
 
@@ -1269,7 +1318,8 @@ A server **MUST** prepare responses, and a client **MUST** interpret
 responses, in accordance with
 [`HTTP semantics`](http://tools.ietf.org/html/rfc7231).
 
-### Updating Resources <a href="#crud-updating" id="crud-updating" class="headerlink"></a>
+<a href="#crud-updating" id="crud-updating" class="headerlink"></a>
+### Updating Resources
 
 A resource's attributes and relationships can be updated by sending a `PATCH`
 request to the URL that represents the resource.
@@ -1299,7 +1349,8 @@ Accept: application/vnd.api+json
 }
 ```
 
-#### Updating a Resource's Attributes <a href="#crud-updating-resource-attributes" id="crud-updating-resource-attributes" class="headerlink"></a>
+<a href="#crud-updating-resource-attributes" id="crud-updating-resource-attributes"
+#### Updating a Resource's Attributes class="headerlink"></a>
 
 Any or all of a resource's [attributes] **MAY** be included in the resource
 object included in a `PATCH` request.
@@ -1328,7 +1379,8 @@ Accept: application/vnd.api+json
 }
 ```
 
-#### Updating a Resource's Relationships <a href="#crud-updating-resource-relationships" id="crud-updating-resource-relationships" class="headerlink"></a>
+<a href="#crud-updating-resource-relationships" id="crud-updating-resource-relationships"
+#### Updating a Resource's Relationships class="headerlink"></a>
 
 Any or all of a resource's [relationships] **MAY** be included in the resource
 object included in a `PATCH` request.
@@ -1395,15 +1447,18 @@ may choose to disallow it. For example, a server may reject full replacement if
 it has not provided the client with the full list of associated objects, and
 does not want to allow deletion of records the client has not seen.
 
-#### Responses <a href="#crud-updating-responses" id="crud-updating-responses" class="headerlink"></a>
+<a href="#crud-updating-responses" id="crud-updating-responses" class="headerlink"></a>
+#### Responses
 
-##### 202 Accepted <a href="#crud-updating-responses-202" id="crud-updating-responses-202" class="headerlink"></a>
+<a href="#crud-updating-responses-202" id="crud-updating-responses-202" class="headerlink"></a>
+##### 202 Accepted
 
 If an update request has been accepted for processing, but the processing
 has not been completed by the time the server responds, the server **MUST**
 return a `202 Accepted` status code.
 
-##### 200 OK <a href="#crud-updating-responses-200" id="crud-updating-responses-200" class="headerlink"></a>
+<a href="#crud-updating-responses-200" id="crud-updating-responses-200" class="headerlink"></a>
+##### 200 OK
 
 If a server accepts an update but also changes the resource(s) in ways other
 than those specified by the request (for example, updating the `updated-at`
@@ -1416,19 +1471,22 @@ the client's current attributes remain up to date, and the server responds
 only with top-level [meta] data. In this case the server **MUST NOT**
 include a representation of the updated resource(s).
 
-##### 204 No Content <a href="#crud-updating-responses-204" id="crud-updating-responses-204" class="headerlink"></a>
+<a href="#crud-updating-responses-204" id="crud-updating-responses-204" class="headerlink"></a>
+##### 204 No Content
 
 If an update is successful and the server doesn't update any attributes besides
 those provided, the server **MUST** return either a `200 OK` status code and
 response document (as described above) or a `204 No Content` status code with no
 response document.
 
-##### 403 Forbidden <a href="#crud-updating-relationship-responses-403" id="crud-updating-relationship-responses-403" class="headerlink"></a>
+<a href="#crud-updating-relationship-responses-403" id="crud-updating-relationship-responses-403" class="headerlink"></a>
+##### 403 Forbidden
 
 A server **MUST** return `403 Forbidden` in response to an unsupported request
 to update a resource or relationship.
 
-##### 404 Not Found <a href="#crud-updating-responses-404" id="crud-updating-responses-404" class="headerlink"></a>
+<a href="#crud-updating-responses-404" id="crud-updating-responses-404" class="headerlink"></a>
+##### 404 Not Found
 
 A server **MUST** return `404 Not Found` when processing a request to modify
 a resource that does not exist.
@@ -1436,7 +1494,8 @@ a resource that does not exist.
 A server **MUST** return `404 Not Found` when processing a request that
 references a related resource that does not exist.
 
-##### 409 Conflict <a href="#crud-updating-responses-409" id="crud-updating-responses-409" class="headerlink"></a>
+<a href="#crud-updating-responses-409" id="crud-updating-responses-409" class="headerlink"></a>
+##### 409 Conflict
 
 A server **MAY** return `409 Conflict` when processing a `PATCH` request to
 update a resource if that update would violate other server-enforced
@@ -1448,7 +1507,8 @@ which the resource object's `type` and `id` do not match the server's endpoint.
 A server **SHOULD** include error details and provide enough information to
 recognize the source of the conflict.
 
-##### Other Responses <a href="#crud-updating-responses-other" id="crud-updating-responses-other" class="headerlink"></a>
+<a href="#crud-updating-responses-other" id="crud-updating-responses-other" class="headerlink"></a>
+##### Other Responses
 
 A server **MAY** respond with other HTTP status codes.
 
@@ -1458,7 +1518,8 @@ A server **MUST** prepare responses, and a client **MUST** interpret
 responses, in accordance with
 [`HTTP semantics`](http://tools.ietf.org/html/rfc7231).
 
-### Updating Relationships <a href="#crud-updating-relationships" id="crud-updating-relationships" class="headerlink"></a>
+<a href="#crud-updating-relationships" id="crud-updating-relationships" class="headerlink"></a>
+### Updating Relationships
 
 Although relationships can be modified along with resources (as described
 above), JSON API also supports updating of relationships independently at
@@ -1477,7 +1538,8 @@ the same in both cases.
 > Note: A server may choose to delete the underlying resource if a
 relationship is deleted (as a garbage collection measure).
 
-#### Updating To-One Relationships <a href="#crud-updating-to-one-relationships" id="crud-updating-to-one-relationships" class="headerlink"></a>
+<a href="#crud-updating-to-one-relationships" id="crud-updating-to-one-relationships" class="headerlink"></a>
+#### Updating To-One Relationships
 
 A server **MUST** respond to `PATCH` requests to a URL from a *to-one
 relationship link* as described below.
@@ -1515,7 +1577,8 @@ Accept: application/vnd.api+json
 If the relationship is updated successfully then the server **MUST** return
 a successful response.
 
-#### Updating To-Many Relationships <a href="#crud-updating-to-many-relationships" id="crud-updating-to-many-relationships" class="headerlink"></a>
+<a href="#crud-updating-to-many-relationships" id="crud-updating-to-many-relationships"
+#### Updating To-Many Relationships class="headerlink"></a>
 
 A server **MUST** respond to `PATCH`, `POST`, and `DELETE` requests to a
 URL from a *to-many relationship link* as described below.
@@ -1618,15 +1681,18 @@ Accept: application/vnd.api+json
 that a server may reject the request. This spec defines the semantics of a
 server, and we are defining its semantics for JSON API.
 
-#### Responses <a href="#crud-updating-relationship-responses" id="crud-updating-relationship-responses" class="headerlink"></a>
+<a href="#crud-updating-relationship-responses" id="crud-updating-relationship-responses" class="headerlink"></a>
+#### Responses
 
-##### 202 Accepted <a href="#crud-updating-relationship-responses-202" id="crud-updating-relationship-responses-202" class="headerlink"></a>
+<a href="#crud-updating-relationship-responses-202" id="crud-updating-relationship-responses-202" class="headerlink"></a>
+##### 202 Accepted
 
 If a relationship update request has been accepted for processing, but the
 processing has not been completed by the time the server responds, the
 server **MUST** return a `202 Accepted` status code.
 
-##### 204 No Content <a href="#crud-updating-relationship-responses-204" id="crud-updating-relationship-responses-204" class="headerlink"></a>
+<a href="#crud-updating-relationship-responses-204" id="crud-updating-relationship-responses-204" class="headerlink"></a>
+##### 204 No Content
 
 A server **MUST** return a `204 No Content` status code if an update is
 successful and the client's current attributes remain up to date.
@@ -1636,7 +1702,8 @@ from a *to-many relationship link* when that relationship already exists. It
 is also the appropriate response to a `DELETE` request sent to a URL from a
 *to-many relationship link* when that relationship does not exist.
 
-##### 200 OK <a href="#crud-updating-relationship-responses-200" id="crud-updating-relationship-responses-200" class="headerlink"></a>
+<a href="#crud-updating-relationship-responses-200" id="crud-updating-relationship-responses-200" class="headerlink"></a>
+##### 200 OK
 
 If a server accepts an update but also changes the targeted relationship(s)
 in other ways than those specified by the request, it **MUST** return a `200
@@ -1648,12 +1715,14 @@ the client's current data remain up to date, and the server responds
 only with top-level [meta] data. In this case the server **MUST NOT**
 include a representation of the updated relationship(s).
 
-##### 403 Forbidden <a href="#crud-updating-relationship-responses-403" id="crud-updating-relationship-responses-403" class="headerlink"></a>
+<a href="#crud-updating-relationship-responses-403" id="crud-updating-relationship-responses-403" class="headerlink"></a>
+##### 403 Forbidden
 
 A server **MUST** return `403 Forbidden` in response to an unsupported request
 to update a relationship.
 
-##### Other Responses <a href="#crud-updating-relationship-responses-other" id="crud-updating-relationship-responses-other" class="headerlink"></a>
+<a href="#crud-updating-relationship-responses-other" id="crud-updating-relationship-responses-other"
+##### Other Responses class="headerlink"></a>
 
 A server **MAY** respond with other HTTP status codes.
 
@@ -1663,7 +1732,8 @@ A server **MUST** prepare responses, and a client **MUST** interpret
 responses, in accordance with
 [`HTTP semantics`](http://tools.ietf.org/html/rfc7231).
 
-### Deleting Resources <a href="#crud-deleting" id="crud-deleting" class="headerlink"></a>
+<a href="#crud-deleting" id="crud-deleting" class="headerlink"></a>
+### Deleting Resources
 
 An individual resource can be *deleted* by making a `DELETE` request to the
 resource's URL:
@@ -1673,25 +1743,30 @@ DELETE /photos/1 HTTP/1.1
 Accept: application/vnd.api+json
 ```
 
-#### Responses <a href="#crud-deleting-responses" id="crud-deleting-responses" class="headerlink"></a>
+<a href="#crud-deleting-responses" id="crud-deleting-responses" class="headerlink"></a>
+#### Responses
 
-##### 202 Accepted <a href="#crud-deleting-responses-202" id="crud-deleting-responses-202" class="headerlink"></a>
+<a href="#crud-deleting-responses-202" id="crud-deleting-responses-202" class="headerlink"></a>
+##### 202 Accepted
 
 If a deletion request has been accepted for processing, but the processing has
 not been completed by the time the server responds, the server **MUST**
 return a `202 Accepted` status code.
 
-##### 204 No Content <a href="#crud-deleting-responses-204" id="crud-deleting-responses-204" class="headerlink"></a>
+<a href="#crud-deleting-responses-204" id="crud-deleting-responses-204" class="headerlink"></a>
+##### 204 No Content
 
 A server **MUST** return a `204 No Content` status code if a deletion
 request is successful and no content is returned.
 
-##### 200 OK <a href="#crud-deleting-responses-200" id="crud-deleting-responses-200" class="headerlink"></a>
+<a href="#crud-deleting-responses-200" id="crud-deleting-responses-200" class="headerlink"></a>
+##### 200 OK
 
 A server **MUST** return a `200 OK` status code if a deletion request is
 successful and the server responds with only top-level [meta] data.
 
-##### Other Responses <a href="#crud-deleting-responses-other" id="crud-deleting-responses-other" class="headerlink"></a>
+<a href="#crud-deleting-responses-other" id="crud-deleting-responses-other" class="headerlink"></a>
+##### Other Responses
 
 A server **MAY** respond with other HTTP status codes.
 
@@ -1701,7 +1776,8 @@ A server **MUST** prepare responses, and a client **MUST** interpret
 responses, in accordance with
 [`HTTP semantics`](http://tools.ietf.org/html/rfc7231).
 
-## Query Parameters <a href="#query-parameters" id="query-parameters" class="headerlink"></a>
+<a href="#query-parameters" id="query-parameters" class="headerlink"></a>
+## Query Parameters
 
 Implementation specific query parameters **MUST** adhere to the same constraints
 as [member names] with the additional requirement that they **MUST** contain at
@@ -1712,9 +1788,11 @@ U+002D HYPHEN-MINUS, "-", U+005F LOW LINE, "_", or capital letter is used
 > Note: This is to preserve the ability of JSON API to make additive additions
 to standard query parameters without conflicting with existing implementations.
 
-## Errors <a href="#errors" id="errors" class="headerlink"></a>
+<a href="#errors" id="errors" class="headerlink"></a>
+## Errors
 
-### Processing Errors <a href="#errors-processing" id="errors-processing" class="headerlink"></a>
+<a href="#errors-processing" id="errors-processing" class="headerlink"></a>
+### Processing Errors
 
 A server **MAY** choose to stop processing as soon as a problem is encountered,
 or it **MAY** continue processing and encounter multiple problems. For instance,
@@ -1726,7 +1804,8 @@ generally applicable HTTP error code **SHOULD** be used in the response. For
 instance, `400 Bad Request` might be appropriate for multiple 4xx errors
 or `500 Internal Server Error` might be appropriate for multiple 5xx errors.
 
-### Error Objects <a href="#error-objects" id="error-objects" class="headerlink"></a>
+<a href="#error-objects" id="error-objects" class="headerlink"></a>
+### Error Objects
 
 Error objects provide additional information about problems encountered while
 performing an operation. Error objects **MUST** be returned as an array
