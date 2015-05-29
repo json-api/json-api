@@ -1463,7 +1463,7 @@ responses, in accordance with
 
 Although relationships can be modified along with resources (as described
 above), JSON API also supports updating of relationships independently at
-URLs from relationship links.
+URLs from [relationship links][relationships].
 
 > Note: Relationships are updated without exposing the underlying server
 semantics, such as foreign keys. Furthermore, relationships can be updated
