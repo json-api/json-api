@@ -1759,9 +1759,9 @@ An error object **MAY** have the following members:
   error.
 
 [resource objects]: #document-resource-objects
-[attributes]: document-resource-object-attributes
-[relationships]: document-resource-object-relationships
-[fields]: document-resource-object-fields
+[attributes]: #document-resource-object-attributes
+[relationships]: #document-resource-object-relationships
+[fields]: #document-resource-object-fields
 [related resource link]: #document-resource-object-related-resource-links
 [resource linkage]: #document-resource-object-linkage
 [links]: #document-resource-object-links
