@@ -1272,8 +1272,8 @@ responses, in accordance with
 
 ### Updating Resources <a href="#crud-updating" id="crud-updating" class="headerlink"></a>
 
-A resource's attributes and relationships can be updated by sending a `PATCH`
-request to the URL that represents the resource.
+A resource can be updated by sending a `PATCH` request to the URL that
+represents the resource.
 
 The URL for a resource can be obtained in the `self` link of the resource
 object. Alternatively, when a `GET` request returns a single resource object as
