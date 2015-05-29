@@ -14,7 +14,6 @@ $color-main: rgb(90, 90, 90)
 $color-masthead: rgb(235, 235, 235)
 $border-radius-main: 4px
 
-
 /** Mixins */
 
 @mixin centerbox()
@@ -116,6 +115,13 @@ p > code, li > code
   .active
     a
       color: darken($color-main, 80%)
+
+  .version
+    div
+      background-color: lighten($color-main, 10%)
+      color: rgb(255, 255, 255)
+      font-weight: bold
+      padding: 1px 6px
 
 
 /** Header */

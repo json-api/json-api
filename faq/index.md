@@ -3,11 +3,15 @@ layout: page
 title: Frequently Asked Questions
 ---
 
-## Why is JSON API not versioned? <a href="#why-is-json-api-not-versioned" id="why-is-json-api-not-versioned" class="headerlink"></a>
+## What is the meaning of JSON API's version? <a href="#what-is-the-meaning-of-json-apis-version" id="what-is-the-meaning-of-json-apis-version" class="headerlink"></a>
 
-Once JSON API is stable, it will always be backwards compatible using a _never
-remove, only add_ strategy.
-[#46](https://github.com/json-api/json-api/issues/46)
+Now that JSON API has reached a stable version 1.0, it will always be
+backwards compatible using a _never remove, only add_ strategy.
+
+A version is maintained in order to:
+
+* allow tracking of additive changes to the specification.
+* know what features a particular implementation *may potentially* support.
 
 ## Why not use the HAL specification? <a href="#why-not-use-the-hal-specification" id="why-not-use-the-hal-specification" class="headerlink"></a>
 

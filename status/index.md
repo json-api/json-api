@@ -3,20 +3,15 @@ layout: page
 title: "JSON API: Specification Status"
 ---
 
-JSON API is at a fourth release candidate state.
+**The JSON API specification has reached version 1.0.**
 
-This is the final release candidate before the specification will be tagged
-1.0 on May 28, 2015.
+The [base specification](/format/) should be considered stable. It will
+remain backwards compatible using a _never remove, only add_ strategy.
 
-In the final week before 1.0, do not expect any changes to the specified
-document structure. This release candidate exists solely to provide time for
-the specification to be carefully reviewed for inconsistencies and defects.
+Some work related to this specification, such as [extensions](/extensions/),
+is still experimental and should be considered a work in progress.
 
-Libraries intended to work with 1.0 should implement this version of the
-specification as soon as possible.
-
-Work on this specification is being done at its [GitHub
-repository](https://github.com/json-api/json-api). Please feel free to help
-flesh it out or, if you try to write an implementation, to tell us where things
-were ambiguous. The best way to do so is to [file an
-Issue](https://github.com/json-api/json-api/issues).
+This entire site, including the specification itself, is managed at JSON
+API's [GitHub repository](https://github.com/json-api/json-api). Please feel
+free to suggest changes or let us know if you write an implementation by filing
+an issue or pull request.
