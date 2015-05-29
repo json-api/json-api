@@ -157,9 +157,6 @@ A resource object **MUST** contain at least the following top-level members:
 * `id`
 * `type`
 
-The value of `type` members **MUST** adhere to the same constraints as
-[member names].
-
 Exception: The `id` member is not required when the resource object originates at
 the client and represents a new resource to be created on the server.
 
@@ -206,6 +203,9 @@ or multiple servers acting as one, constitute an API.)
 
 The `type` member is used to describe resource objects that share common
 attributes and relationships.
+
+The values of `type` members **MUST** adhere to the same constraints as
+[member names].
 
 > Note: This spec is agnostic about inflection rules, so the value of `type`
 can be either plural or singular. However, the same value should be used
