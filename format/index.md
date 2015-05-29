@@ -1296,11 +1296,11 @@ Accept: application/vnd.api+json
 
 #### Updating a Resource's Attributes <a href="#crud-updating-resource-attributes" id="crud-updating-resource-attributes" class="headerlink"></a>
 
-Any or all of a resource's attributes **MAY** be included in the resource
+Any or all of a resource's [attributes] **MAY** be included in the resource
 object included in a `PATCH` request.
 
-If a request does not include all of the [fields] for a resource, the server
-**MUST** interpret the missing [fields] as if they were included with their
+If a request does not include all of the [attributes] for a resource, the server
+**MUST** interpret the missing [attributes] as if they were included with their
 current values. It **MUST NOT** interpret them as `null` values.
 
 For example, the following `PATCH` request is interpreted as a request to
@@ -1325,13 +1325,19 @@ Accept: application/vnd.api+json
 
 #### Updating a Resource's Relationships <a href="#crud-updating-resource-relationships" id="crud-updating-resource-relationships" class="headerlink"></a>
 
+Any or all of a resource's [relationships] **MAY** be included in the resource
+object included in a `PATCH` request.
+
+If a request does not include all of the [relationships] for a resource, the server
+**MUST** interpret the missing [relationships] as if they were included with their
+current values. It **MUST NOT** interpret them as `null` or empty values.
+
 If a relationship is provided in the `relationships` member of a resource
 object in a `PATCH` request, its value **MUST** be a relationship object
 with a `data` member. The relationship's value will be replaced with the
 value specified in this member.
 
-For instance, the following `PATCH` request will update the `title` attribute
-and `author` relationship of an article:
+For instance, the following `PATCH` request will update the `author` relationship of an article:
 
 ```http
 PATCH /articles/1 HTTP/1.1
@@ -1342,9 +1348,6 @@ Accept: application/vnd.api+json
   "data": {
     "type": "articles",
     "id": "1",
-    "attributes": {
-      "title": "Rails is a Melting Pot"
-    },
     "relationships": {
       "author": {
         "data": { "type": "people", "id": "1" }
@@ -1366,9 +1369,6 @@ Accept: application/vnd.api+json
   "data": {
     "type": "articles",
     "id": "1",
-    "attributes": {
-      "title": "Rails is a Melting Pot"
-    },
     "relationships": {
       "tags": {
         "data": [
