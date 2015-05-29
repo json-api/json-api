@@ -87,6 +87,7 @@ has a page describing how to emit conformant JSON.
 ## Examples <a href="#examples" id="examples" class="headerlink"></a>
 
 * [RestPack::Serializer provides examples](http://restpack-serializer-sample.herokuapp.com/) which demonstrate sample responses.
+* [Endpoints provides a fully working example API](http://github.com/endpoints/example/)
 
 ## Related Tools <a href="#related-tools" id="related-tools" class="headerlink"></a>
 
