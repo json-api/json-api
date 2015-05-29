@@ -330,7 +330,7 @@ The `author` relationship includes a link for the relationship itself (which
 allows the client to change the related author directly), a related resource
 link to fetch the resource objects, and linkage information.
 
-#### Links <a href="#document-structure-resource-object-links" id="document-resource-object-links" class="headerlink"></a>
+#### Resource Links <a href="#document-resource-object-links" id="document-resource-object-links" class="headerlink"></a>
 
 The optional `links` member within each resource object contains [links]
 related to the resource.
@@ -1771,7 +1771,7 @@ An error object **MAY** have the following members:
 [fields]: #document-resource-object-fields
 [related resource link]: #document-resource-object-related-resource-links
 [resource linkage]: #document-resource-object-linkage
-[links]: #document-resource-object-links
+[resource links]: #document-resource-object-links
 [resource identifier object]: #document-resource-identifier-objects
 [compound document]: #document-compound-documents
 [meta]: #document-meta
