@@ -908,7 +908,7 @@ If an endpoint does not support the `include` parameter, it must respond with
 `400 Bad Request` to any requests that include it.
 
 If an endpoint supports the `include` parameter and a client supplies it,
-the server **MUST NOT** include other resource objects in the `included`
+the server **MUST NOT** include unrequested resource objects in the `included`
 section of the [compound document].
 
 The value of the `include` parameter **MUST** be a comma-separated (U+002C
