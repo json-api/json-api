@@ -77,8 +77,8 @@ changes.
 
 ### Top Level <a href="#document-top-level" id="document-top-level" class="headerlink"></a>
 
-A JSON object **MUST** be at the root of every JSON API response containing
-data. This object defines a document's "top level".
+A JSON object **MUST** be at the root of every JSON API request and response
+containing data. This object defines a document's "top level".
 
 A document **MUST** contain at least one of the following top-level members:
 
