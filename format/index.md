@@ -913,7 +913,7 @@ section of the [compound document].
 
 The value of the `include` parameter **MUST** be a comma-separated (U+002C
 COMMA, ",") list of relationship paths. A relationship path is a dot-separated
-(U+002E FULL-STOP, ".") list of relationship names.
+(U+002E FULL-STOP, ".") list of [relationship][relationships] names.
 
 If a server is unable to identify a relationship path or does not support
 inclusion of resources from a path, it **MUST** respond with 400 Bad Request.
