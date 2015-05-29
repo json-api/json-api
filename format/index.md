@@ -113,7 +113,7 @@ Primary data **MUST** be either:
 
 * a single resource object, a single [resource identifier object], or `null`,
   for requests that target single resources
-* an array of resource objects, an array of [resource identifier objects][resource identifier object], or
+* an array of resource objects, an array of [resource identifier object], or
   an empty array ([]), for requests that target resource collections
 
 For example, the following primary data is a single resource object:
@@ -244,8 +244,8 @@ A "relationship object" **MUST** contain at least one of the following:
     link allows the client to directly manipulate the relationship. For example,
     it would allow a client to remove an `author` from an `article` without
     deleting the `people` resource itself.
-  * `related`: a [related resource link][related resource links]
-* `data`: [resource linkage][linkage]
+  * `related`: a [related resource link]
+* `data`: [resource linkage]
 * `meta`: a [meta object][meta] that contains non-standard meta-information about the
   relationship.
 
@@ -254,13 +254,15 @@ A relationship object that represents a to-many relationship **MAY** also contai
 
 #### Related Resource Links <a href="#document-resource-object-related-resource-links" id="document-resource-object-related-resource-links" class="headerlink"></a>
 
-A "related resource link" provides access to [resource objects] [linked][links]
-in a [relationship]. When fetched, the related resource object(s) are returned
-as the response's primary data.
 
-For example, an `article`'s `comments` [relationship] could specify a
-[link][links] that returns a collection of comment [resource objects] when
-retrieved through a `GET` request.
+A "related resource link" provides access to resource objects [linked][links]
+in a [relationship][relationships]. When fetched, the related resource object(s)
+are returned as the response's primary data.
+
+For example, an `article`'s `comments` [relationship][relationships] could
+
+specify a [link][links] that returns a collection of comment [resource objects]
+when retrieved through a `GET` request.
 
 If present, a related resource link **MUST** reference a valid URL, even if the
 relationship isn't currently associated with any target resources. Additionally,
@@ -965,9 +967,9 @@ GET /articles/1/relationships/comments?include=comments.author HTTP/1.1
 Accept: application/vnd.api+json
 ```
 
-In this case, the primary data would be a collection of [resource identifier
-objects] that represent linkage to comments for an article, while the full
-comments and comment authors would be returned as included data.
+In this case, the primary data would be a collection of
+[resource identifier objects][resource identifier object] that represent linkage to comments for an article,
+while the full comments and comment authors would be returned as included data.
 
 > Note: This section applies to any endpoint that responds with primary
 data, regardless of the request type. For instance, a server could support
