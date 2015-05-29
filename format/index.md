@@ -75,7 +75,7 @@ ignore those not recognized by this specification.
 > Note: These conditions allow this specification to evolve through additive
 changes.
 
-### Top Level <a href="#document-structure-top-level" id="document-structure-top-level" class="headerlink"></a>
+### Top Level <a href="#document-top-level" id="document-top-level" class="headerlink"></a>
 
 A JSON object **MUST** be at the root of every JSON API response containing
 data. This object defines a document's "top level".
@@ -84,7 +84,7 @@ A document **MUST** contain at least one of the following top-level members:
 
 * `data`: the document's "primary data"
 * `errors`: an array of [error objects](#errors)
-* `meta`: a [meta] object that contains non-standard
+* `meta`: a [meta object][meta] that contains non-standard
   meta-information.
 
 The members `data` and `errors` **MUST NOT** coexist in the same document.
@@ -113,7 +113,7 @@ Primary data **MUST** be either:
 
 * a single resource object, a single [resource identifier object], or `null`,
   for requests that target single resources
-* an array of resource objects, an array of [resource identifier objects], or
+* an array of resource objects, an array of [resource identifier objects][resource identifier object], or
   an empty array ([]), for requests that target resource collections
 
 For example, the following primary data is a single resource object:
@@ -148,7 +148,7 @@ references the same resource:
 A logical collection of resources **MUST** be represented as an array, even if
 it only contains one item or is empty.
 
-### Resource Objects <a href="#document-structure-resource-objects" id="document-structure-resource-objects" class="headerlink"></a>
+### Resource Objects <a href="#document-resource-objects" id="document-resource-objects" class="headerlink"></a>
 
 "Resource objects" appear in a JSON API document to represent resources.
 
@@ -195,7 +195,7 @@ Here's how an article (i.e. a resource of type "articles") might appear in a doc
 // ...
 ```
 
-#### Resource Identification <a href="#document-structure-resource-identification" id="document-structure-resource-identification" class="headerlink"></a>
+#### Identification <a href="#document-resource-object-identification" id="document-resource-object-identification" class="headerlink"></a>
 
 Every resource object **MUST** contain an `id` member and a `type` member.
 The value of each of these members **MUST** be a string.
@@ -211,8 +211,7 @@ attributes and relationships.
 can be either plural or singular. However, the same value should be used
 consistently throughout an implementation.
 
-
-#### Attributes <a href="#document-structure-resource-attributes" id="document-structure-resource-attributes" class="headerlink"></a>
+#### Attributes <a href="#document-resource-object-attributes" id="document-resource-object-attributes" class="headerlink"></a>
 
 The value of the `attributes` key **MUST** be an object (an "attributes
 object"). Members of the attributes object ("attributes") represent information
@@ -229,7 +228,7 @@ Although has-one foreign keys (e.g. `author_id`) are often stored internally
 alongside other information to be represented in a resource object, these keys
 **SHOULD NOT** appear as attributes.
 
-#### Relationships <a href="#document-structure-resource-objects-relationships" id="document-structure-resource-objects-relationships" class="headerlink"></a>
+#### Relationships <a href="#document-resource-object-relationships" id="document-resource-object-relationships" class="headerlink"></a>
 
 The value of the `relationships` key **MUST** be an object (a "relationships
 object"). Members of the relationships object ("relationships") represent
@@ -245,15 +244,15 @@ A "relationship object" **MUST** contain at least one of the following:
     link allows the client to directly manipulate the relationship. For example,
     it would allow a client to remove an `author` from an `article` without
     deleting the `people` resource itself.
-  * `related`: a [related resource link]
-* `data`: [resource linkage]
+  * `related`: a [related resource link][related resource links]
+* `data`: [resource linkage][linkage]
 * `meta`: a [meta object][meta] that contains non-standard meta-information about the
   relationship.
 
 A relationship object that represents a to-many relationship **MAY** also contain
 [pagination] links under the `links` member, as described below.
 
-#### Related Resource Links <a href="#document-structure-resource-objects-related-resource-links" id="document-structure-resource-objects-related-resource-links" class="headerlink"></a>
+#### Related Resource Links <a href="#document-resource-object-related-resource-links" id="document-resource-object-related-resource-links" class="headerlink"></a>
 
 A "related resource link" provides access to [resource objects] [linked][links]
 in a [relationship]. When fetched, the related resource object(s) are returned
@@ -268,7 +267,7 @@ relationship isn't currently associated with any target resources. Additionally,
 a related resource link **MUST NOT** change because its relationship's content
 changes.
 
-#### Resource Linkage <a href="#document-structure-resource-objects-resource-linkage" id="document-structure-resource-objects-resource-linkage" class="headerlink"></a>
+#### Linkage <a href="#document-resource-object-linkage" id="document-resource-object-linkage" class="headerlink"></a>
 
 Resource linkage in a compound document allows a client to link together all of
 the included resource objects without having to `GET` any URLs via [links].
@@ -278,10 +277,10 @@ Resource linkage **MUST** be represented as one of the following:
 * `null` for empty to-one relationships.
 * an empty array (`[]`) for empty to-many relationships.
 * a single [resource identifier object] for non-empty to-one relationships.
-* an array of [resource identifier objects] for non-empty to-many relationships.
+* an array of [resource identifier objects][resource identifier object] for non-empty to-many relationships.
 
-> Note: The spec does not impart meaning to order of [resource identifier
-objects] in linkage arrays of to-many relationships, although implementations
+> Note: The spec does not impart meaning to order of resource identifier
+objects in linkage arrays of to-many relationships, although implementations
 may do that. Arrays of resource identifier objects may represent ordered
 or unordered relationships, and both types can be mixed in one response
 object.
@@ -316,7 +315,7 @@ The `author` relationship includes a link for the relationship itself (which
 allows the client to change the related author directly), a related resource
 link to fetch the resource objects, and linkage information.
 
-#### Fields <a href="#document-structure-resource-object-fields" id="document-structure-resource-object-fields" class="headerlink"></a>
+#### Fields <a href="#document-resource-object-fields" id="document-resource-object-fields" class="headerlink"></a>
 
 A resource object's [attributes] and its [relationships] are collectively called
 its "[fields]".
@@ -326,7 +325,8 @@ other and with `type` and `id`. In other words, a resource can not have an
 attribute and relationship with the same name, nor can it have an attribute
 or relationship named `type` or `id`.
 
-#### Resource Links <a href="#document-structure-structure-resource-object-links" id="document-structure-resource-object-links" class="headerlink"></a>
+
+#### Links <a href="#document-structure-resource-object-links" id="document-resource-object-links" class="headerlink"></a>
 
 The optional `links` member within each resource object contains [links]
 related to the resource.
@@ -352,7 +352,7 @@ the resource represented by the resource object.
 A server **MUST** respond to a `GET` request to the specified URL with a
 response that includes the resource as the primary data.
 
-### Resource Indentifier Objects <a href="#document-structure-resource-identifier-objects" id="document-structure-resource-identifier-objects" class="headerlink"></a>
+### Resource Indentifier Objects <a href="#document-resource-identifier-objects" id="document-resource-identifier-objects" class="headerlink"></a>
 
 A "resource identifier object" is an object that identifies an individual
 resource.
@@ -362,7 +362,7 @@ It **MUST** contain `type` and `id` members.
 It **MAY** also include a `meta` member, whose value is a [meta] object that
 contains non-standard meta-information.
 
-### Compound Documents <a href="#document-structure-compound-documents" id="document-structure-compound-documents" class="headerlink"></a>
+### Compound Documents <a href="#document-compound-documents" id="document-compound-documents" class="headerlink"></a>
 
 To reduce the number of HTTP requests, servers **MAY** allow responses that
 include related resources along with the requested primary resources. Such
@@ -460,7 +460,7 @@ the document.
 returned with each response, even when the same resource is referenced
 multiple times.
 
-### Meta Information <a href="#document-structure-meta" id="document-structure-meta" class="headerlink"></a>
+### Meta Information <a href="#document-meta" id="document-meta" class="headerlink"></a>
 
 Where specified, a `meta` member can be used to include non-standard
 meta-information. The value of each `meta` member **MUST** be an object (a
@@ -487,7 +487,7 @@ For example:
 }
 ```
 
-### Links <a href="#document-structure-links" id="document-structure-links" class="headerlink"></a>
+### Links <a href="#document-links" id="document-links" class="headerlink"></a>
 
 Where specified, a `links` member can be used to represent links. The value
 of each `links` member **MUST** be an object (a "links object").
@@ -528,7 +528,7 @@ objects in the future. It is also possible that the allowed values of
 additional members will be expanded (e.g. a `collection` link may support an
 array of values, whereas a `self` link does not).
 
-### JSON API Object <a href="#document-structure-jsonapi-object" id="document-structure-jsonapi-object" class="headerlink"></a>
+### JSON API Object <a href="#document-jsonapi-object" id="document-jsonapi-object" class="headerlink"></a>
 
 A JSON API document **MAY** include information about its implementation
 under a top level `jsonapi` member. If present, its value **MUST** be an
@@ -551,7 +551,7 @@ version 1.0 of the specification.
 > Note: Because JSON API is committed to making additive changes only, the
 version string primarily indicates which new features a server may support.
 
-### Member Names <a href="#document-structure-member-names" id="document-structure-member-names" class="headerlink"></a>
+### Member Names <a href="#document-member-names" id="document-member-names" class="headerlink"></a>
 
 All member names used in a JSON API document **MUST** be treated as case sensitive
 by clients and servers, and they **MUST** meet all of the following conditions:
@@ -564,7 +564,7 @@ by clients and servers, and they **MUST** meet all of the following conditions:
 To enable an easy mapping of member names to URLs, it is **RECOMMENDED** that
 member names use only non-reserved, URL safe characters specified in [RFC 3986](http://tools.ietf.org/html/rfc3986#page-13).
 
-#### Allowed Characters <a href="#document-structure-member-names-allowed-characters" id="document-structure-member-names-allowed-characters" class="headerlink"></a>
+#### Allowed Characters <a href="#document-member-names-allowed-characters" id="document-member-names-allowed-characters" class="headerlink"></a>
 
 The following "globally allowed characters" **MAY** be used anywhere in a member name:
 
@@ -580,7 +580,7 @@ first or last character:
 - U+005F LOW LINE, "_"
 - U+0020 SPACE, " " _(not recommended, not URL safe)_
 
-#### Reserved Characters <a href="#document-structure-member-names-reserved-characters" id="document-structure-member-names-reserved-characters" class="headerlink"></a>
+#### Reserved Characters <a href="#document-member-names-reserved-characters" id="document-member-names-reserved-characters" class="headerlink"></a>
 
 The following characters **MUST NOT** be used in member names:
 
@@ -799,10 +799,11 @@ A server **MUST** respond to a successful request to fetch a relationship
 with a `200 OK` response.
 
 The primary data in the response document **MUST** match the appropriate
-value for resource linkage, as described above for relationship objects.
+value for [resource linkage], as described above for
+[relationship objects][relationships].
 
 The top-level *links object* **MAY** contain `self` and `related` links,
-as described above for relationship objects.
+as described above for [relationship objects][relationships].
 
 For example, a `GET` request to a URL from a to-one relationship link could
 return:
@@ -1461,7 +1462,7 @@ responses, in accordance with
 
 Although relationships can be modified along with resources (as described
 above), JSON API also supports updating of relationships independently at
-URLs from [relationship links].
+URLs from relationship links.
 
 > Note: Relationships are updated without exposing the underlying server
 semantics, such as foreign keys. Furthermore, relationships can be updated
@@ -1520,7 +1521,7 @@ A server **MUST** respond to `PATCH`, `POST`, and `DELETE` requests to a
 URL from a *to-many relationship link* as described below.
 
 For all request types, the body **MUST** contain a `data` member whose value
-is an empty array or an array of [resource identifier objects].
+is an empty array or an array of [resource identifier objects][resource identifier object].
 
 If a client makes a `PATCH` request to a URL from a *to-many relationship
 link*, the server **MUST** either completely replace every member of the
@@ -1752,19 +1753,19 @@ An error object **MAY** have the following members:
     primary data object, or `/data/attributes/title` for a specific attribute].
   * `parameter`: an optional string indicating which query parameter caused
     the error.
-* `meta`: a [meta] object containing non-standard meta-information about the
+* `meta`: a [meta object][meta] containing non-standard meta-information about the
   error.
 
-[attributes]: #document-structure-resource-attributes
-[relationships]: #document-structure-resource-objects-relationships
-[resource relationships]: #document-structure-resource-objects-relationships
-[related resource link]: #document-structure-resource-objects-relationships
-[resource links]: #document-structure-resource-object-links
-[resource identifier object]: #document-structure-resource-identifier-objects
-[resource identifier objects]: #document-structure-resource-identifier-objects
-[fields]: #document-structure-resource-object-fields
+[resource objects]: #document-resource-objects
+[attributes]: document-resource-object-attributes
+[relationships]: document-resource-object-relationships
+[fields]: document-resource-object-fields
+[related resource link]: #document-resource-object-related-resource-links
+[resource linkage]: #document-resource-object-linkage
+[links]: #document-resource-object-links
+[resource identifier object]: #document-resource-identifier-objects
+[meta]: #document-meta
+[links]: #document-links
 [error details]: #errors
-[member names]: #document-structure-member-names
-[links]: #document-structure-links
-[meta]: #document-structure-meta
+[member names]: #document-member-names
 [pagination]: #fetching-pagination
