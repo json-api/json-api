@@ -214,15 +214,16 @@ consistently throughout an implementation.
 
 #### Attributes <a href="#document-structure-resource-attributes" id="document-structure-resource-attributes" class="headerlink"></a>
 
-The value of the `attributes` key is an object (an "attributes object").
-Members of the attributes object ("attributes") represent information about
-the resource object in which it's defined.
+The value of the `attributes` key **MUST** be an object (an "attributes
+object"). Members of the attributes object ("attributes") represent information
+about the resource object in which it's defined.
 
 Attributes may contain any valid JSON value.
 
 Complex data structures involving JSON objects and arrays are allowed as
 attribute values. However, any object that constitutes or is contained in an
-attribute **MUST** reserve the `relationships` and `links` members for future use.
+attribute **MUST** reserve the `relationships` and `links` members for future
+use.
 
 Although has-one foreign keys (e.g. `author_id`) are often stored internally
 alongside other information to be represented in a resource object, these keys
@@ -230,15 +231,14 @@ alongside other information to be represented in a resource object, these keys
 
 #### Relationships <a href="#document-structure-resource-objects-relationships" id="document-structure-resource-objects-relationships" class="headerlink"></a>
 
-The value of the `relationships` key is an object (a "relationships
+The value of the `relationships` key **MUST** be an object (a "relationships
 object"). Members of the relationships object ("relationships") represent
 references from the resource object in which it's defined to other resource
 objects.
 
 Relationships may be to-one or to-many.
 
-The value of a relationship **MUST** be an object (a "relationship object"),
-which **MUST** contain at least one of the following:
+A "relationship object" **MUST** contain at least one of the following:
 
 * `links`: a [links object][links] containing at least one of the following:
   * `self`: a link for the relationship itself (a "relationship link"). This
