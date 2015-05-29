@@ -1307,8 +1307,8 @@ Accept: application/vnd.api+json
 Any or all of a resource's [attributes] **MAY** be included in the resource
 object included in a `PATCH` request.
 
-If a request does not include all of the attributes for a resource, the server
-**MUST** interpret the missing attributes as if they were included with their
+If a request does not include all of the [attributes] for a resource, the server
+**MUST** interpret the missing [attributes] as if they were included with their
 current values. It **MUST NOT** interpret them as `null` values.
 
 For example, the following `PATCH` request is interpreted as a request to
@@ -1336,8 +1336,8 @@ Accept: application/vnd.api+json
 Any or all of a resource's [relationships] **MAY** be included in the resource
 object included in a `PATCH` request.
 
-If a request does not include all of the relationships for a resource, the server
-**MUST** interpret the missing relationships as if they were included with their
+If a request does not include all of the [relationships] for a resource, the server
+**MUST** interpret the missing [relationships] as if they were included with their
 current values. It **MUST NOT** interpret them as `null` or empty values.
 
 If a relationship is provided in the `relationships` member of a resource
