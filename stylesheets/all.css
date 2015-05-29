@@ -76,7 +76,7 @@
 body {
   font-family: "Helvetica Neue", "Helvetica", "Open Sans", sans-serif;
   font-size: 15px;
-  line-height: 1.5;
+  line-height: 1.6;
   -webkit-font-smoothing: antialiased; }
 
 /** Typography */
@@ -114,7 +114,8 @@ h5 {
   font-size: inherit; }
 
 p {
-  margin: 0 0 10px 0; }
+  line-height: 1.7333;
+  margin: 0 0 13px 0; }
 
 a {
   color: #5a5a5a; }
@@ -131,7 +132,8 @@ blockquote {
 
 p > code, li > code {
   padding: 1px 4px;
-  background: rgba(0, 0, 0, 0.06); }
+  background: rgba(0, 0, 0, 0.06);
+  white-space: nowrap; }
 
 /** Navigation */
 .site-nav {
