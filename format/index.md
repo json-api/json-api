@@ -937,11 +937,10 @@ GET /articles/1?include=comments.author HTTP/1.1
 Accept: application/vnd.api+json
 ```
 
-> Note: Because compound documents require full linkage, intermediate
-resources in a multi-part path must be returned along with the leaf nodes.
-For example, a response to a request for `comments.author` should
-automatically include `comments` as well as the `author` of each of those
-`comments`.
+> Note: Because [compound documents][compound document] require full linkage,
+intermediate resources in a multi-part path must be returned along with the leaf
+nodes. For example, a response to a request for `comments.author` should
+include `comments` as well as the `author` of each of those `comments`.
 
 > Note: A server may choose to expose a deeply nested relationship such as
 `comments.author` as a direct relationship with an alias such as
