@@ -247,7 +247,7 @@ A "relationship object" **MUST** contain at least one of the following:
     deleting the `people` resource itself.
   * `related`: a "related resource link", as defined below.
 * `data`: representing "resource linkage", as defined below.
-* `meta`: a [meta] object that contains non-standard meta-information about the
+* `meta`: a [meta object][meta] that contains non-standard meta-information about the
   relationship.
 
 A relationship object that represents a to-many relationship **MAY** also contain
