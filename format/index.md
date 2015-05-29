@@ -1724,8 +1724,8 @@ to standard query parameters without conflicting with existing implementations.
 
 A server **MAY** choose to stop processing as soon as a problem is encountered,
 or it **MAY** continue processing and encounter multiple problems. For instance,
-a server might process multiple attribute updates and then return multiple
-validation problems in a single response.
+a server might process multiple attribute and then return multiple validation
+problems in a single response.
 
 When a server encounters multiple problems for a single request, the most
 generally applicable HTTP error code **SHOULD** be used in the response. For
