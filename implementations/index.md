@@ -7,6 +7,10 @@ show_sidebar: true
 The following are projects implementing JSON API. If you'd like your project listed, [send a
 pull request](https://github.com/json-api/json-api).
 
+> Note: This specification marked 1.0 on May 29th, 2015. The implementations
+below have not been verified for compliance, but a test suite is now being
+assembled to vet them.
+
 ## Client libraries <a href="#client-libraries" id="client-libraries" class="headerlink"></a>
 
 ### JavaScript <a href="#client-libraries-javascript" id="client-libraries-javascript" class="headerlink"></a>
