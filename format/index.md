@@ -1630,7 +1630,8 @@ server **MUST** return a `202 Accepted` status code.
 ##### 204 No Content <a href="#crud-updating-relationship-responses-204" id="crud-updating-relationship-responses-204" class="headerlink"></a>
 
 A server **MUST** return a `204 No Content` status code if an update is
-successful and the client's current attributes remain up to date.
+successful and the representation of the resource in the request matches the
+result.
 
 > Note: This is the appropriate response to a `POST` request sent to a URL
 from a to-many [relationship link][relationships] when that relationship already
