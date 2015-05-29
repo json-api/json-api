@@ -259,7 +259,6 @@ in a [relationship][relationships]. When fetched, the related resource object(s)
 are returned as the response's primary data.
 
 For example, an `article`'s `comments` [relationship][relationships] could
-
 specify a [link][links] that returns a collection of comment [resource objects]
 when retrieved through a `GET` request.
 
