@@ -239,6 +239,8 @@ Although has-one foreign keys (e.g. `author_id`) are often stored internally
 alongside other information to be represented in a resource object, these keys
 **SHOULD NOT** appear as attributes.
 
+> Note: See [fields] and [member names] for more restrictions on this container.
+
 #### Relationships <a href="#document-resource-object-relationships" id="document-resource-object-relationships" class="headerlink"></a>
 
 The value of the `relationships` key **MUST** be an object (a "relationships
@@ -262,6 +264,8 @@ A "relationship object" **MUST** contain at least one of the following:
 
 A relationship object that represents a to-many relationship **MAY** also contain
 [pagination] links under the `links` member, as described below.
+
+> Note: See [fields] and [member names] for more restrictions on this container.
 
 #### Related Resource Links <a href="#document-resource-object-related-resource-links" id="document-resource-object-related-resource-links" class="headerlink"></a>
 
