@@ -212,6 +212,16 @@ The values of `type` members **MUST** adhere to the same constraints as
 can be either plural or singular. However, the same value should be used
 consistently throughout an implementation.
 
+#### Fields <a href="#document-resource-object-fields" id="document-resource-object-fields" class="headerlink"></a>
+
+A resource object's [attributes] and its [relationships] are collectively called
+its "[fields]".
+
+Fields for a resource object **MUST** share a common namespace with each
+other and with `type` and `id`. In other words, a resource can not have an
+attribute and relationship with the same name, nor can it have an attribute
+or relationship named `type` or `id`.
+
 #### Attributes <a href="#document-resource-object-attributes" id="document-resource-object-attributes" class="headerlink"></a>
 
 The value of the `attributes` key **MUST** be an object (an "attributes
@@ -228,6 +238,8 @@ use.
 Although has-one foreign keys (e.g. `author_id`) are often stored internally
 alongside other information to be represented in a resource object, these keys
 **SHOULD NOT** appear as attributes.
+
+> Note: See [fields] and [member names] for more restrictions on this container.
 
 #### Relationships <a href="#document-resource-object-relationships" id="document-resource-object-relationships" class="headerlink"></a>
 
@@ -252,6 +264,8 @@ A "relationship object" **MUST** contain at least one of the following:
 
 A relationship object that represents a to-many relationship **MAY** also contain
 [pagination] links under the `links` member, as described below.
+
+> Note: See [fields] and [member names] for more restrictions on this container.
 
 #### Related Resource Links <a href="#document-resource-object-related-resource-links" id="document-resource-object-related-resource-links" class="headerlink"></a>
 
@@ -315,17 +329,6 @@ For example, the following article is associated with an `author`:
 The `author` relationship includes a link for the relationship itself (which
 allows the client to change the related author directly), a related resource
 link to fetch the resource objects, and linkage information.
-
-#### Fields <a href="#document-resource-object-fields" id="document-resource-object-fields" class="headerlink"></a>
-
-A resource object's [attributes] and its [relationships] are collectively called
-its "[fields]".
-
-Fields for a resource object **MUST** share a common namespace with each
-other and with `type` and `id`. In other words, a resource can not have an
-attribute and relationship with the same name, nor can it have an attribute
-or relationship named `type` or `id`.
-
 
 #### Links <a href="#document-structure-resource-object-links" id="document-resource-object-links" class="headerlink"></a>
 
