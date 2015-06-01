@@ -255,7 +255,7 @@ A relationship object that represents a to-many relationship **MAY** also contai
 
 #### Related Resource Links <a href="#document-resource-object-related-resource-links" id="document-resource-object-related-resource-links" class="headerlink"></a>
 
-A "related resource link" provides access to resource objects [linked][links]
+A "related resource link" provides access to resource objects [linked][resource linkage]
 in a [relationship][relationships]. When fetched, the related resource object(s)
 are returned as the response's primary data.
 
@@ -271,7 +271,8 @@ changes.
 #### Linkage <a href="#document-resource-object-linkage" id="document-resource-object-linkage" class="headerlink"></a>
 
 Resource linkage in a [compound document] allows a client to link together all
-of the included resource objects without having to `GET` any URLs via [links].
+of the included resource objects without having to `GET` any URLs via the
+[resource links].
 
 Resource linkage **MUST** be represented as one of the following:
 
@@ -327,7 +328,7 @@ attribute and relationship with the same name, nor can it have an attribute
 or relationship named `type` or `id`.
 
 
-#### Links <a href="#document-structure-resource-object-links" id="document-resource-object-links" class="headerlink"></a>
+#### Resource Links <a href="#document-structure-resource-object-links" id="document-resource-object-links" class="headerlink"></a>
 
 The optional `links` member within each resource object contains [links]
 related to the resource.
@@ -1768,7 +1769,7 @@ An error object **MAY** have the following members:
 [fields]: #document-resource-object-fields
 [related resource link]: #document-resource-object-related-resource-links
 [resource linkage]: #document-resource-object-linkage
-[links]: #document-resource-object-links
+[resource links]: #document-resource-object-links
 [resource identifier object]: #document-resource-identifier-objects
 [compound document]: #document-compound-documents
 [meta]: #document-meta
