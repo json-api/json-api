@@ -282,7 +282,7 @@ relationship isn't currently associated with any target resources. Additionally,
 a related resource link **MUST NOT** change because its relationship's content
 changes.
 
-#### Linkage <a href="#document-resource-object-linkage" id="document-resource-object-linkage" class="headerlink"></a>
+#### Resource Linkage <a href="#document-resource-object-linkage" id="document-resource-object-linkage" class="headerlink"></a>
 
 Resource linkage in a [compound document] allows a client to link together all
 of the included resource objects without having to `GET` any URLs via [links].
