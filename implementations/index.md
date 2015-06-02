@@ -82,7 +82,7 @@ has a page describing how to emit conformant JSON.
 
 ### JAVA <a href="#server-libraries-java" id="server-libraries-java" class="headerlink"></a>
 
-* [katharsis](https://github.com/katharsis-project) has comprehensive coverage of standard allowing to create JSON:API compatible resources with dynamic relation based routing. Library is highly modular and compatible with all JAX-RS based frameworks.
+* [katharsis](http://katharsis.io) has comprehensive coverage of standard allowing to create JSON:API compatible resources with dynamic relation based routing. Library is highly modular and compatible with all JAX-RS based frameworks.
 
 ## Examples <a href="#examples" id="examples" class="headerlink"></a>
 
