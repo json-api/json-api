@@ -1758,8 +1758,8 @@ An error object **MAY** have the following members:
 * `source`: an object containing references to the source of the error,
   optionally including any of the following members:
   * `pointer`: a JSON Pointer [[RFC6901](https://tools.ietf.org/html/rfc6901)]
-    to the associated entity in the request document [e.g. `/data` for a
-    primary data object, or `/data/attributes/title` for a specific attribute].
+    to the associated entity in the request document [e.g. `"/data"` for a
+    primary data object, or `"/data/attributes/title"` for a specific attribute].
   * `parameter`: a string indicating which query parameter caused
     the error.
 * `meta`: a [meta object][meta] containing non-standard meta-information about the
