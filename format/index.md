@@ -232,8 +232,8 @@ Attributes may contain any valid JSON value.
 
 Complex data structures involving JSON objects and arrays are allowed as
 attribute values. However, any object that constitutes or is contained in an
-attribute **MUST** reserve the `relationships` and `links` members for future
-use.
+attribute **MUST NOT** contain a `relationships` or `links` member, as those
+members are reserved by this specification for future use.
 
 Although has-one foreign keys (e.g. `author_id`) are often stored internally
 alongside other information to be represented in a resource object, these keys
