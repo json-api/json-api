@@ -70,7 +70,7 @@ called out below.
 
 Unless otherwise noted, objects defined by this specification **MUST NOT**
 contain any additional members. Client and server implementations **MUST**
-ignore those not recognized by this specification.
+ignore members not recognized by this specification.
 
 > Note: These conditions allow this specification to evolve through additive
 changes.
