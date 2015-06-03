@@ -8,7 +8,7 @@ $page-width: 955px
 $sidebar-width: 250px
 $page-padding: 20px
 
-$mobile-breakpoint: 600px
+$mobile-breakpoint: 800px
 
 $color-main: rgb(90, 90, 90)
 $color-masthead: rgb(235, 235, 235)
@@ -117,11 +117,13 @@ p > code, li > code
       color: darken($color-main, 80%)
 
   .version
-    div
-      background-color: lighten($color-main, 10%)
-      color: rgb(255, 255, 255)
-      font-weight: bold
-      padding: 1px 6px
+    margin-top: 2px
+    padding: 1px 6px
+    background-color: lighten($color-main, 10%)
+    font-size: 12px
+    font-weight: bold
+    color: white
+    +border-radius($border-radius-main)
 
 
 /** Header */

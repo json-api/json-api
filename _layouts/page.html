@@ -25,7 +25,7 @@
         {% for link in site.navigation %}
           <li {% if url == link.url %}class="active"{% endif %}><a href="{{link.url}}" title="{{link.title}}">{{link.title}}</a></li>
         {% endfor %}
-        <li class="version"><div>v{% include version.md %}</div></li>
+        <li class="version">v{% include version.md %}</li>
       </ul>
     </nav>
     {% if page.show_masthead %}
