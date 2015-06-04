@@ -152,7 +152,7 @@ p > code, li > code {
     -webkit-justify-content: space-between;
     justify-content: space-between;
     list-style: none; }
-    @media screen and (max-width: 600px) {
+    @media screen and (max-width: 800px) {
       .site-nav ul {
         -webkit-flex-direction: column;
         flex-direction: column;
@@ -164,11 +164,17 @@ p > code, li > code {
     text-decoration: none; }
   .site-nav .active a {
     color: black; }
-  .site-nav .version div {
+  .site-nav .version span {
+    display: inline-block;
+    margin-top: 2px;
+    padding: 1px 6px;
     background-color: #747474;
-    color: white;
+    font-size: 12px;
     font-weight: bold;
-    padding: 1px 6px; }
+    color: white;
+    -moz-border-radius: 4px;
+    -webkit-border-radius: 4px;
+    border-radius: 4px; }
 
 /** Header */
 header {
@@ -217,7 +223,7 @@ header {
     background: white;
     text-decoration: none;
     text-align: center; }
-  @media screen and (max-width: 600px) {
+  @media screen and (max-width: 800px) {
     header .content {
       padding-top: 20px;
       padding-bottom: 20px; }
