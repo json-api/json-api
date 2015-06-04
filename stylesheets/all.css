@@ -164,7 +164,8 @@ p > code, li > code {
     text-decoration: none; }
   .site-nav .active a {
     color: black; }
-  .site-nav .version {
+  .site-nav .version span {
+    display: inline-block;
     margin-top: 2px;
     padding: 1px 6px;
     background-color: #747474;
