@@ -993,6 +993,10 @@ GET /articles?include=author&fields[articles]=title,body&fields[people]=name HTT
 Accept: application/vnd.api+json
 ```
 
+> Note: The above example URI shows unencoded `[` and `]` characters simply for
+readability. In practice, these characters must be percent-encoded, per the
+requirements [in RFC 3986](http://tools.ietf.org/html/rfc3986#section-3.4).
+
 > Note: This section applies to any endpoint that responds with resources as
 primary or included data, regardless of the request type. For instance, a
 server could support sparse fieldsets along with a `POST` request to create
