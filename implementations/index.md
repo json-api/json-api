@@ -53,6 +53,7 @@ application
 * [json-api](https://www.npmjs.org/package/json-api) turns an Express + Mongoose app into a JSON-API server.
 * [endpoints](https://github.com/endpoints) is an implementation of JSON-API using [Bookshelf](http://bookshelfjs.org).
 * [YAYSON](https://github.com/confetti/yayson) is an isomorphic library for serializing and reading JSON API data. Simply use it with plain objects or extend it to fit your ORM (currently it has an adapter for [Sequelize](http://sequelizejs.com)).
+* [jsonapi-serializer](https://github.com/SeyZ/jsonapi-serializer) is a Node.js framework agnostic library for serializing your data to JSON API.
 
 ### Ruby <a href="#server-libraries-ruby" id="server-libraries-ruby" class="headerlink"></a>
 
