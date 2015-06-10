@@ -196,7 +196,7 @@ Here's how an article (i.e. a resource of type "articles") might appear in a doc
 #### Identification <a href="#document-resource-object-identification" id="document-resource-object-identification" class="headerlink"></a>
 
 Every resource object **MUST** contain an `id` member and a `type` member.
-The value of each of these members **MUST** be a string.
+The values of the `id` and `type` members **MUST** be strings.
 
 Within a given API, each resource object's `type` and `id` pair **MUST**
 identify a single, unique resource. (The set of URIs controlled by a server,
@@ -335,8 +335,8 @@ link to fetch the resource objects, and linkage information.
 The optional `links` member within each resource object contains [links]
 related to the resource.
 
-If present, this object **MAY** contain a `self` [link][links] that identifies
-the resource represented by the resource object.
+If present, this links object **MAY** contain a `self` [link][links] that
+identifies the resource represented by the resource object.
 
 ```json
 // ...
@@ -361,9 +361,9 @@ response that includes the resource as the primary data.
 A "resource identifier object" is an object that identifies an individual
 resource.
 
-It **MUST** contain `type` and `id` members.
+A "resource identifier object" **MUST** contain `type` and `id` members.
 
-It **MAY** also include a `meta` member, whose value is a [meta] object that
+A "resource identifier object" **MAY** also include a `meta` member, whose value is a [meta] object that
 contains non-standard meta-information.
 
 ### Compound Documents <a href="#document-compound-documents" id="document-compound-documents" class="headerlink"></a>
@@ -535,11 +535,11 @@ array of values, whereas a `self` link does not).
 ### JSON API Object <a href="#document-jsonapi-object" id="document-jsonapi-object" class="headerlink"></a>
 
 A JSON API document **MAY** include information about its implementation
-under a top level `jsonapi` member. If present, its value **MUST** be an
-object (a "jsonapi object") that **MAY** contain a `version` member whose
-value is a string indicating the highest JSON API version supported. This
-object **MAY** also contain a `meta` member, whose value is a [meta] object
-that contains non-standard meta-information.
+under a top level `jsonapi` member. If present, the value of the `jsonapi`
+member **MUST** be an object (a "jsonapi object"). The jsonapi object **MAY**
+contain a `version` member whose value is a string indicating the highest JSON
+API version supported. This object **MAY** also contain a `meta` member, whose
+value is a [meta] object that contains non-standard meta-information.
 
 ```json
 {
@@ -1309,7 +1309,8 @@ object included in a `PATCH` request.
 
 If a request does not include all of the [attributes] for a resource, the server
 **MUST** interpret the missing [attributes] as if they were included with their
-current values. It **MUST NOT** interpret them as `null` values.
+current values. The server **MUST NOT** interpret missing attributes as `null`
+values.
 
 For example, the following `PATCH` request is interpreted as a request to
 update only the `title` and `text` attributes of an article:
