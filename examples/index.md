@@ -20,7 +20,7 @@ HTTP/1.1 200 OK
 Content-Type: application/vnd.api+json
 
 {
-  "data": {
+  "data": [{
     "type": "articles",
     "id": "1",
     "attributes": {
@@ -34,7 +34,7 @@ Content-Type: application/vnd.api+json
         "data": {"id": 42, "type": "people"}
       }
     }
-  },
+  }],
   "included": [
     {
       "type": "people",
@@ -62,7 +62,7 @@ HTTP/1.1 200 OK
 Content-Type: application/vnd.api+json
 
 {
-  "data": {
+  "data": [{
     "type": "articles",
     "id": "1",
     "attributes": {
@@ -74,7 +74,7 @@ Content-Type: application/vnd.api+json
         "data": {"id": 42, "type": "people"}
       }
     }
-  },
+  }],
   "included": [
     {
       "type": "people",
@@ -98,14 +98,14 @@ HTTP/1.1 200 OK
 Content-Type: application/vnd.api+json
 
 {
-  "data": {
+  "data": [{
     "type": "articles",
     "id": "1",
     "attributes": {
       "title": "JSON API paints my bikeshed!",
       "body": "The shortest article. Ever."
     }
-  },
+  }],
   "included": [
     {
       "type": "people",
