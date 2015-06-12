@@ -1103,6 +1103,17 @@ The `filter` query parameter is reserved for filtering data. Servers and clients
 `filter` query parameter can be used as the basis for any number of filtering
 strategies.
 
+### Grouping <a href="#fetching-grouping" id="fetching-grouping" class="headerlink"></a>
+
+The `group` query parameter is reserved for grouping data. Servers and clients
+**SHOULD** use this key for grouping operations.
+
+> Note: JSON API is agnostic about the usage of grouping by a server. Allowance of grouping
+ on server is optional due to performance optimization.
+ 
+If server is not supporting grouping of fields provided under `group` key should return 
+`400 Bad Request` code along with `Error Object` with description of error.
+
 ## Creating, Updating and Deleting Resources <a href="#crud" id="crud" class="headerlink"></a>
 
 A server **MAY** allow resources of a given type to be created. It **MAY**
