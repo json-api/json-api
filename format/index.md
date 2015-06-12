@@ -30,27 +30,19 @@ interpreted as described in RFC 2119
 
 ### Client Responsibilities <a href="#content-negotiation-clients" id="content-negotiation-clients" class="headerlink"></a>
 
-Clients **MUST** send all JSON API data in request documents with the header
-`Content-Type: application/vnd.api+json` without any media type parameters.
+{{site.data.normative.request-content-type}}
 
-Clients that include the JSON API media type in their `Accept` header **MUST**
-specify the media type there at least once without any media type parameters.
+{{site.data.normative.request-accept}}
 
-Clients **MUST** ignore any parameters for the `application/vnd.api+json`
-media type received in the `Content-Type` header of response documents.
+{{site.data.normative.response-ignore-parameters}}
 
 ### Server Responsibilities <a href="#content-negotiation-servers" id="content-negotiation-servers" class="headerlink"></a>
 
-Servers **MUST** send all JSON API data in response documents with the header
-`Content-Type: application/vnd.api+json` without any media type parameters.
+{{site.data.normative.response-content-type}}
 
-Servers **MUST** respond with a `415 Unsupported Media Type` status code if
-a request specifies the header `Content-Type: application/vnd.api+json`
-with any media type parameters.
+{{site.data.normative.response-unsupported-media-type}}
 
-Servers **MUST** respond with a `406 Not Acceptable` status code if a
-request's `Accept` header contains the JSON API media type and all instances
-of that media type are modified with media type parameters.
+{{site.data.normative.response-not-acceptable}}
 
 > Note: The content negotiation requirements exist to allow future versions
 of this specification to use media type parameters for extension negotiation
@@ -68,36 +60,22 @@ Although the same media type is used for both request and response documents,
 certain aspects are only applicable to one or the other. These differences are
 called out below.
 
-Unless otherwise noted, objects defined by this specification **MUST NOT**
-contain any additional members. Client and server implementations **MUST**
-ignore members not recognized by this specification.
+{{site.data.normative.additional-members}} {{site.data.normative.ignore-additional-members}}
 
 > Note: These conditions allow this specification to evolve through additive
 changes.
 
 ### Top Level <a href="#document-top-level" id="document-top-level" class="headerlink"></a>
 
-A JSON object **MUST** be at the root of every JSON API request and response
-containing data. This object defines a document's "top level".
+{{site.data.normative.json-object}}
 
-A document **MUST** contain at least one of the following top-level members:
+{{site.data.normative.required-top-level}}
 
-* `data`: the document's "primary data"
-* `errors`: an array of [error objects](#errors)
-* `meta`: a [meta object][meta] that contains non-standard
-  meta-information.
+{{site.data.normative.data-errors}}
 
-The members `data` and `errors` **MUST NOT** coexist in the same document.
+{{site.data.normative.optional-top-level}}
 
-A document **MAY** contain any of these top-level members:
-
-* `jsonapi`: an object describing the server's implementation
-* `links`: a [links object][links] related to the primary data.
-* `included`: an array of resource objects that are related to the primary
-  data and/or each other ("included resources").
-
-If a document does not contain a top-level `data` key, the `included` member
-**MUST NOT** be present either.
+{{site.data.normative.data-included}}
 
 The top-level [links object][links] **MAY** contain the following members:
 
@@ -109,13 +87,7 @@ The top-level [links object][links] **MAY** contain the following members:
 The document's "primary data" is a representation of the resource or collection
 of resources targeted by a request.
 
-Primary data **MUST** be either:
-
-* a single resource object, a single [resource identifier object], or `null`,
-  for requests that target single resources
-* an array of resource objects, an array of
-  [resource identifier objects][resource identifier object], or
-  an empty array ([]), for requests that target resource collections
+{{site.data.normative.primary-data}}
 
 For example, the following primary data is a single resource object:
 
@@ -146,29 +118,15 @@ references the same resource:
 }
 ```
 
-A logical collection of resources **MUST** be represented as an array, even if
-it only contains one item or is empty.
+{{site.data.normative.logical-collection}}
 
 ### Resource Objects <a href="#document-resource-objects" id="document-resource-objects" class="headerlink"></a>
 
 "Resource objects" appear in a JSON API document to represent resources.
 
-A resource object **MUST** contain at least the following top-level members:
+{{site.data.normative.resource-required-top-level}}
 
-* `id`
-* `type`
-
-Exception: The `id` member is not required when the resource object originates at
-the client and represents a new resource to be created on the server.
-
-In addition, a resource object **MAY** contain any of these top-level members:
-
-* `attributes`: an [attributes object][attributes] representing some of the resource's data.
-* `relationships`: a [relationships object][relationships] describing relationships between
- the resource and other JSON API resources.
-* `links`: a [links object][links] containing links related to the resource.
-* `meta`: a [meta object][meta] containing non-standard meta-information about a
-  resource that can not be represented as an attribute or relationship.
+{{site.data.resource-optional-top-level}}
 
 Here's how an article (i.e. a resource of type "articles") might appear in a document:
 
@@ -195,18 +153,14 @@ Here's how an article (i.e. a resource of type "articles") might appear in a doc
 
 #### Identification <a href="#document-resource-object-identification" id="document-resource-object-identification" class="headerlink"></a>
 
-Every resource object **MUST** contain an `id` member and a `type` member.
-The values of the `id` and `type` members **MUST** be strings.
+{{resource-id-type}} {{resource-id-type-types}}
 
-Within a given API, each resource object's `type` and `id` pair **MUST**
-identify a single, unique resource. (The set of URIs controlled by a server,
-or multiple servers acting as one, constitute an API.)
+{{resource-unique}}
 
 The `type` member is used to describe resource objects that share common
 attributes and relationships.
 
-The values of `type` members **MUST** adhere to the same constraints as
-[member names].
+{{resource-type-constraints}}
 
 > Note: This spec is agnostic about inflection rules, so the value of `type`
 can be either plural or singular. However, the same value should be used
@@ -217,16 +171,14 @@ consistently throughout an implementation.
 A resource object's [attributes] and its [relationships] are collectively called
 its "[fields]".
 
-Fields for a resource object **MUST** share a common namespace with each
-other and with `type` and `id`. In other words, a resource can not have an
-attribute and relationship with the same name, nor can it have an attribute
-or relationship named `type` or `id`.
+{{resource-fields}}
 
 #### Attributes <a href="#document-resource-object-attributes" id="document-resource-object-attributes" class="headerlink"></a>
 
-The value of the `attributes` key **MUST** be an object (an "attributes
-object"). Members of the attributes object ("attributes") represent information
-about the resource object in which it's defined.
+{{resource-attributes-key}}
+
+Members of the attributes object ("attributes") represent information about the
+resource object in which it's defined.
 
 Attributes may contain any valid JSON value.
 
@@ -235,35 +187,23 @@ attribute values. However, any object that constitutes or is contained in an
 attribute **MUST NOT** contain a `relationships` or `links` member, as those
 members are reserved by this specification for future use.
 
-Although has-one foreign keys (e.g. `author_id`) are often stored internally
-alongside other information to be represented in a resource object, these keys
-**SHOULD NOT** appear as attributes.
+{{site.data.normative.resource-attributes-reserve-members}}
 
 > Note: See [fields] and [member names] for more restrictions on this container.
 
 #### Relationships <a href="#document-resource-object-relationships" id="document-resource-object-relationships" class="headerlink"></a>
 
-The value of the `relationships` key **MUST** be an object (a "relationships
-object"). Members of the relationships object ("relationships") represent
+{{site.data.normative.resource-relationships-key}}
+
+Members of the relationships object ("relationships") represent
 references from the resource object in which it's defined to other resource
 objects.
 
 Relationships may be to-one or to-many.
 
-A "relationship object" **MUST** contain at least one of the following:
+{{site.data.normative.resource-relationships-object}}
 
-* `links`: a [links object][links] containing at least one of the following:
-  * `self`: a link for the relationship itself (a "relationship link"). This
-    link allows the client to directly manipulate the relationship. For example,
-    it would allow a client to remove an `author` from an `article` without
-    deleting the `people` resource itself.
-  * `related`: a [related resource link]
-* `data`: [resource linkage]
-* `meta`: a [meta object][meta] that contains non-standard meta-information about the
-  relationship.
-
-A relationship object that represents a to-many relationship **MAY** also contain
-[pagination] links under the `links` member, as described below.
+{{site.data.normative.resource-relationships-pagination}}
 
 > Note: See [fields] and [member names] for more restrictions on this container.
 
@@ -277,22 +217,16 @@ For example, an `article`'s `comments` [relationship][relationships] could
 specify a [link][links] that returns a collection of comment [resource objects]
 when retrieved through a `GET` request.
 
-If present, a related resource link **MUST** reference a valid URL, even if the
-relationship isn't currently associated with any target resources. Additionally,
-a related resource link **MUST NOT** change because its relationship's content
-changes.
+{{site.data.normative.resource-related-resource-link}}
+
+Additionally, {{site.data.normative.resource-related-resource-link-change}}
 
 #### Resource Linkage <a href="#document-resource-object-linkage" id="document-resource-object-linkage" class="headerlink"></a>
 
 Resource linkage in a [compound document] allows a client to link together all
 of the included resource objects without having to `GET` any URLs via [links].
 
-Resource linkage **MUST** be represented as one of the following:
-
-* `null` for empty to-one relationships.
-* an empty array (`[]`) for empty to-many relationships.
-* a single [resource identifier object] for non-empty to-one relationships.
-* an array of [resource identifier objects][resource identifier object] for non-empty to-many relationships.
+{{site.data.normative.resource-linkage}}
 
 > Note: The spec does not impart meaning to order of resource identifier
 objects in linkage arrays of to-many relationships, although implementations
@@ -335,8 +269,7 @@ link to fetch the resource objects, and linkage information.
 The optional `links` member within each resource object contains [links]
 related to the resource.
 
-If present, this links object **MAY** contain a `self` [link][links] that
-identifies the resource represented by the resource object.
+{{site.data.normative.resource-links}}
 
 ```json
 // ...
@@ -353,35 +286,24 @@ identifies the resource represented by the resource object.
 // ...
 ```
 
-A server **MUST** respond to a `GET` request to the specified URL with a
-response that includes the resource as the primary data.
+{{site.data.normative.resource-link-response}}
 
 ### Resource Indentifier Objects <a href="#document-resource-identifier-objects" id="document-resource-identifier-objects" class="headerlink"></a>
 
 A "resource identifier object" is an object that identifies an individual
 resource.
 
-A "resource identifier object" **MUST** contain `type` and `id` members.
+{{site.data.normative.resource-identifier-required-members}}
 
-A "resource identifier object" **MAY** also include a `meta` member, whose value is a [meta] object that
-contains non-standard meta-information.
+{{site.data.normative.resource-identifier-optional-member}}
 
 ### Compound Documents <a href="#document-compound-documents" id="document-compound-documents" class="headerlink"></a>
 
-To reduce the number of HTTP requests, servers **MAY** allow responses that
-include related resources along with the requested primary resources. Such
-responses are called "compound documents".
+{{site.data.normative.compound-documents-allow}}
 
-In a compound document, all included resources **MUST** be represented as an
-array of resource objects in a top-level `included` member.
+{{site.data.normative.compound-documents-top-level-included}}
 
-Compound documents require "full linkage", meaning that every included
-resource **MUST** be identified by at least one [resource identifier object]
-in the same document. These resource identifier objects could either be
-primary data or represent resource linkage contained within primary or
-included resources. The only exception to the full linkage requirement is
-when relationship fields that would otherwise contain linkage data are
-excluded via [sparse fieldsets](#fetching-sparse-fieldsets).
+{{site.data.normative.compound-documents-full-linkage}}
 
 > Note: Full linkage ensures that included resources are related to either
 the primary data (which could be resource objects or resource identifier
@@ -453,8 +375,7 @@ A complete example document with multiple included relationships:
 }
 ```
 
-A [compound document] **MUST NOT** include more than one resource object for
-each `type` and `id` pair.
+{{site.data.normative.compound-documents-duplicates}}
 
 > Note: In a single document, you can think of the `type` and `id` as a
 composite key that uniquely references resource objects in another part of
@@ -467,10 +388,11 @@ multiple times.
 ### Meta Information <a href="#document-meta" id="document-meta" class="headerlink"></a>
 
 Where specified, a `meta` member can be used to include non-standard
-meta-information. The value of each `meta` member **MUST** be an object (a
-"meta object").
+meta-information.
 
-Any members **MAY** be specified within `meta` objects.
+{{site.data.normative.meta-objects}}
+
+{{site.data.normative.meta-object-members}}
 
 For example:
 
@@ -493,17 +415,11 @@ For example:
 
 ### Links <a href="#document-links" id="document-links" class="headerlink"></a>
 
-Where specified, a `links` member can be used to represent links. The value
-of each `links` member **MUST** be an object (a "links object").
+Where specified, a `links` member can be used to represent links.
 
-Each member of a links object is a "link". A link **MUST** be represented as
-either:
+{{site.data.normative.top-level-links}}
 
-* a string containing the link's URL.
-* an object ("link object") which can contain the following members:
-  * `href`: a string containing the link's URL.
-  * `meta`: a meta object containing non-standard meta-information about the
-    link.
+{{site.data.normative.top-level-links-members}}
 
 The following `self` link is simply a URL:
 
@@ -534,12 +450,13 @@ array of values, whereas a `self` link does not).
 
 ### JSON API Object <a href="#document-jsonapi-object" id="document-jsonapi-object" class="headerlink"></a>
 
-A JSON API document **MAY** include information about its implementation
-under a top level `jsonapi` member. If present, the value of the `jsonapi`
-member **MUST** be an object (a "jsonapi object"). The jsonapi object **MAY**
-contain a `version` member whose value is a string indicating the highest JSON
-API version supported. This object **MAY** also contain a `meta` member, whose
-value is a [meta] object that contains non-standard meta-information.
+{{site.data.normative.top-level-json-api-member}}
+
+{{site.data.normative.json-api-type}}
+
+{{site.data.normative.json-api-version}}
+
+{{site.data.normative.json-api-meta}}
 
 ```json
 {
@@ -557,25 +474,21 @@ version string primarily indicates which new features a server may support.
 
 ### Member Names <a href="#document-member-names" id="document-member-names" class="headerlink"></a>
 
-All member names used in a JSON API document **MUST** be treated as case sensitive
-by clients and servers, and they **MUST** meet all of the following conditions:
+{{member-name-case}}, and meet all of the following conditions:
 
-- Member names **MUST** contain at least one character.
-- Member names **MUST** contain only the allowed characters listed below.
-- Member names **MUST** start and end with a "globally allowed character",
-  as defined below.
+{% comment %}
+Several of these normative statements cannot be verified in isolation.
+{% endcomment %}
 
-To enable an easy mapping of member names to URLs, it is **RECOMMENDED** that
-member names use only non-reserved, URL safe characters specified in [RFC 3986](http://tools.ietf.org/html/rfc3986#page-13).
+- {{member-name-character}}
+- {{member-name-allowed-characters-only}}
+- {{member-name-globally-allowed}}
+
+To enable an easy mapping of member names to URLs, {{site.data.normative.member-name-url-safe}}
 
 #### Allowed Characters <a href="#document-member-names-allowed-characters" id="document-member-names-allowed-characters" class="headerlink"></a>
 
-The following "globally allowed characters" **MAY** be used anywhere in a member name:
-
-- U+0061 to U+007A, "a-z"
-- U+0041 to U+005A, "A-Z"
-- U+0030 to U+0039, "0-9"
-- any UNICODE character except U+0000 to U+007F _(not recommended, not URL safe)_
+{{site.data.normative.member-name-allowed-characters}}
 
 Additionally, the following characters are allowed in member names, except as the
 first or last character:
@@ -1415,52 +1328,39 @@ attribute or a computed `sha`), it **MUST** return a `200 OK` response. The
 response document **MUST** include a representation of the updated
 resource(s) as if a `GET` request was made to the request URL.
 
-A server **MUST** return a `200 OK` status code if an update is successful,
-the client's current attributes remain up to date, and the server responds
-only with top-level [meta] data. In this case the server **MUST NOT**
-include a representation of the updated resource(s).
+{{site.data.normative.update-resource-200-meta}}
+
+{{site.data.normative.update-resource-200-meta-representation}}
 
 ##### 204 No Content <a href="#crud-updating-responses-204" id="crud-updating-responses-204" class="headerlink"></a>
 
-If an update is successful and the server doesn't update any attributes besides
-those provided, the server **MUST** return either a `200 OK` status code and
-response document (as described above) or a `204 No Content` status code with no
-response document.
+{{site.data.normative.update-resource-204-status}}
 
 ##### 403 Forbidden <a href="#crud-updating-relationship-responses-403" id="crud-updating-relationship-responses-403" class="headerlink"></a>
 
-A server **MUST** return `403 Forbidden` in response to an unsupported request
-to update a resource or relationship.
+{{site.data.normative.update-resource-403-status}}
 
 ##### 404 Not Found <a href="#crud-updating-responses-404" id="crud-updating-responses-404" class="headerlink"></a>
 
-A server **MUST** return `404 Not Found` when processing a request to modify
-a resource that does not exist.
+{{site.data.normative.update-resource-404-status}}
 
-A server **MUST** return `404 Not Found` when processing a request that
-references a related resource that does not exist.
+{{site.data.normative.update-resource-404-related}}
 
 ##### 409 Conflict <a href="#crud-updating-responses-409" id="crud-updating-responses-409" class="headerlink"></a>
 
-A server **MAY** return `409 Conflict` when processing a `PATCH` request to
-update a resource if that update would violate other server-enforced
-constraints (such as a uniqueness constraint on a property other than `id`).
+{{site.data.normative.update-resource-409-status}}
 
-A server **MUST** return `409 Conflict` when processing a `PATCH` request in
-which the resource object's `type` and `id` do not match the server's endpoint.
+{{site.data.normative.update-resource-409-no-match}}
 
-A server **SHOULD** include error details and provide enough information to
-recognize the source of the conflict.
+{{site.data.normative.update-resource-409-details}}
 
 ##### Other Responses <a href="#crud-updating-responses-other" id="crud-updating-responses-other" class="headerlink"></a>
 
-A server **MAY** respond with other HTTP status codes.
+{{site.data.normative.update-resource-other-status}}
 
-A server **MAY** include [error details] with error responses.
+{{site.data.normative.update-resource-other-semantics}}
 
-A server **MUST** prepare responses, and a client **MUST** interpret
-responses, in accordance with
-[`HTTP semantics`](http://tools.ietf.org/html/rfc7231).
+{{site.data.normative.update-resource-http-semantics}}
 
 ### Updating Relationships <a href="#crud-updating-relationships" id="crud-updating-relationships" class="headerlink"></a>
 
@@ -1483,14 +1383,9 @@ relationship is deleted (as a garbage collection measure).
 
 #### Updating To-One Relationships <a href="#crud-updating-to-one-relationships" id="crud-updating-to-one-relationships" class="headerlink"></a>
 
-A server **MUST** respond to `PATCH` requests to a URL from a to-one
-[relationship link][relationships] as described below.
+{{site.data.normative.respond-patch-to-one-relationship-link}}
 
-The `PATCH` request **MUST** include a top-level member named `data` containing
-one of:
-
-* a [resource identifier object] corresponding to the new related resource.
-* `null`, to remove the relationship.
+{{site.data.normative.patch-to-one-data-member}}
 
 For example, the following request updates the author of an article:
 
@@ -1516,22 +1411,15 @@ Accept: application/vnd.api+json
 }
 ```
 
-If the relationship is updated successfully then the server **MUST** return
-a successful response.
+{{site.data.normative.patch-to-one-response}}
 
 #### Updating To-Many Relationships <a href="#crud-updating-to-many-relationships" id="crud-updating-to-many-relationships" class="headerlink"></a>
 
-A server **MUST** respond to `PATCH`, `POST`, and `DELETE` requests to a
-URL from a to-many [relationship link][relationships] as described below.
+{{site.data.normative.respond-patch-post-delete-to-many-relationship-link}}
 
-For all request types, the body **MUST** contain a `data` member whose value
-is an empty array or an array of [resource identifier objects][resource identifier object].
+{{site.data.normative.patch-post-delete-to-many-data-member}}
 
-If a client makes a `PATCH` request to a URL from a to-many
-[relationship link][relationships], the server **MUST** either completely
-replace every member of the relationship, return an appropriate error response
-if some resources can not be found or accessed, or return a `403 Forbidden`
-response if complete replacement is not allowed by the server.
+{{site.data.normative.patch-to-many-complete-replace}}
 
 For example, the following request replaces every tag for an article:
 
@@ -1560,17 +1448,15 @@ Accept: application/vnd.api+json
 }
 ```
 
-If a client makes a `POST` request to a URL from a
-[relationship link][relationships], the server **MUST** add the specified
-members to the relationship unless they are already present. If a given `type`
-and `id` is already in the relationship, the server **MUST NOT** add it again.
+{{post-to-many-add}}
+
+{{post-to-many-add-again}}
 
 > Note: This matches the semantics of databases that use foreign keys for
 has-many relationships. Document-based storage should check the has-many
 relationship before appending to avoid duplicates.
 
-If all of the specified resources can be added to, or are already present
-in, the relationship then the server **MUST** return a successful response.
+{{site.data.normative.post-to-many-response}}
 
 > Note: This approach ensures that a request is successful if the server's
 state matches the requested state, and helps avoid pointless race conditions
@@ -1591,11 +1477,9 @@ Accept: application/vnd.api+json
 }
 ```
 
-If the client makes a `DELETE` request to a URL from a
-[relationship link][relationships] the server **MUST** delete the specified
-members from the relationship or return a `403 Forbidden` response. If all of
-the specified resources are able to be removed from, or are already missing
-from, the relationship then the server **MUST** return a successful response.
+{{site.data.normative.delete-to-many}}
+
+{{site.data.normative.delete-to-many-success}}
 
 > Note: As described above for `POST` requests, this approach helps avoid
 pointless race conditions between multiple clients making the same changes.
@@ -1626,15 +1510,11 @@ server, and we are defining its semantics for JSON API.
 
 ##### 202 Accepted <a href="#crud-updating-relationship-responses-202" id="crud-updating-relationship-responses-202" class="headerlink"></a>
 
-If a relationship update request has been accepted for processing, but the
-processing has not been completed by the time the server responds, the
-server **MUST** return a `202 Accepted` status code.
+{{site.data.normative.updating-relationship-202-status}}
 
 ##### 204 No Content <a href="#crud-updating-relationship-responses-204" id="crud-updating-relationship-responses-204" class="headerlink"></a>
 
-A server **MUST** return a `204 No Content` status code if an update is
-successful and the representation of the resource in the request matches the
-result.
+{{site.data.normative.updating-relationship-204-status}}
 
 > Note: This is the appropriate response to a `POST` request sent to a URL
 from a to-many [relationship link][relationships] when that relationship already
@@ -1644,30 +1524,25 @@ not exist.
 
 ##### 200 OK <a href="#crud-updating-relationship-responses-200" id="crud-updating-relationship-responses-200" class="headerlink"></a>
 
-If a server accepts an update but also changes the targeted relationship(s)
-in other ways than those specified by the request, it **MUST** return a `200
-OK` response. The response document **MUST** include a representation of the
-updated relationship(s).
+{{site.data.normative.updating-relationship-200-status
 
-A server **MUST** return a `200 OK` status code if an update is successful,
-the client's current data remain up to date, and the server responds
-only with top-level [meta] data. In this case the server **MUST NOT**
-include a representation of the updated relationship(s).
+{{site.data.normative.updating-relationship-200-response}}
+
+{{site.data.normative.updating-relationship-200-meta}}
+
+{{site.data.normative.updating-relationship-200-meta-content}}
 
 ##### 403 Forbidden <a href="#crud-updating-relationship-responses-403" id="crud-updating-relationship-responses-403" class="headerlink"></a>
 
-A server **MUST** return `403 Forbidden` in response to an unsupported request
-to update a relationship.
+{{site.data.normative.updating-relationship-403-status}}
 
 ##### Other Responses <a href="#crud-updating-relationship-responses-other" id="crud-updating-relationship-responses-other" class="headerlink"></a>
 
-A server **MAY** respond with other HTTP status codes.
+{{site.data.normative.update-relationship-other-status}}
 
-A server **MAY** include [error details] with error responses.
+{{site.data.normative.updating-relationship-other-details}}
 
-A server **MUST** prepare responses, and a client **MUST** interpret
-responses, in accordance with
-[`HTTP semantics`](http://tools.ietf.org/html/rfc7231).
+{{site.data.normative.update-relationship-http-semantics}}
 
 ### Deleting Resources <a href="#crud-deleting" id="crud-deleting" class="headerlink"></a>
 
@@ -1683,41 +1558,29 @@ Accept: application/vnd.api+json
 
 ##### 202 Accepted <a href="#crud-deleting-responses-202" id="crud-deleting-responses-202" class="headerlink"></a>
 
-If a deletion request has been accepted for processing, but the processing has
-not been completed by the time the server responds, the server **MUST**
-return a `202 Accepted` status code.
+{{site.data.normative.delete-202-status}}
 
 ##### 204 No Content <a href="#crud-deleting-responses-204" id="crud-deleting-responses-204" class="headerlink"></a>
 
-A server **MUST** return a `204 No Content` status code if a deletion
-request is successful and no content is returned.
+{{site.data.normative.delete-204-status}}
 
 ##### 200 OK <a href="#crud-deleting-responses-200" id="crud-deleting-responses-200" class="headerlink"></a>
 
-A server **MUST** return a `200 OK` status code if a deletion request is
-successful and the server responds with only top-level [meta] data.
+{{site.data.normative.delete-200-status}}
 
 ##### Other Responses <a href="#crud-deleting-responses-other" id="crud-deleting-responses-other" class="headerlink"></a>
 
-A server **MAY** respond with other HTTP status codes.
+{{site.data.normative.deleting-other-status}}
 
-A server **MAY** include [error details] with error responses.
+{{site.data.normative.deleting-other-details}}
 
-A server **MUST** prepare responses, and a client **MUST** interpret
-responses, in accordance with
-[`HTTP semantics`](http://tools.ietf.org/html/rfc7231).
+{{site.data.normative.deleting-http-semantics}}
 
 ## Query Parameters <a href="#query-parameters" id="query-parameters" class="headerlink"></a>
 
-Implementation specific query parameters **MUST** adhere to the same constraints
-as [member names] with the additional requirement that they **MUST** contain at
-least one non a-z character (U+0061 to U+007A). It is **RECOMMENDED** that a
-U+002D HYPHEN-MINUS, "-", U+005F LOW LINE, "_", or capital letter is used
-(e.g. camelCasing).
+{{site.data.normative.query-parameters-non-alpha}} {{site.data.normative.query-parameters-under-camel}}
 
-If a server encounters a query parameter that does not follow the naming
-conventions above, and the server does not know how to proccess it as a query
-parameter from this specification, it **MUST** return `400 Bad Request`.
+{{site.data.normative.query-parameters-bad-request}}
 
 > Note: This is to preserve the ability of JSON API to make additive additions
 to standard query parameters without conflicting with existing implementations.
@@ -1726,45 +1589,24 @@ to standard query parameters without conflicting with existing implementations.
 
 ### Processing Errors <a href="#errors-processing" id="errors-processing" class="headerlink"></a>
 
-A server **MAY** choose to stop processing as soon as a problem is encountered,
-or it **MAY** continue processing and encounter multiple problems. For instance,
-a server might process multiple attributes and then return multiple validation
-problems in a single response.
+{{site.data.normative.error-stop-processing}}
 
-When a server encounters multiple problems for a single request, the most
-generally applicable HTTP error code **SHOULD** be used in the response. For
-instance, `400 Bad Request` might be appropriate for multiple 4xx errors
-or `500 Internal Server Error` might be appropriate for multiple 5xx errors.
+For instance, a server might process multiple attributes and then return
+multiple validation problems in a single response.
+
+{{site.data.normative.error-general}}
+
+For instance, `400 Bad Request` might be appropriate for multiple 4xx errors or
+`500 Internal Server Error` might be appropriate for multiple 5xx errors.
 
 ### Error Objects <a href="#error-objects" id="error-objects" class="headerlink"></a>
 
 Error objects provide additional information about problems encountered while
-performing an operation. Error objects **MUST** be returned as an array
-keyed by `errors` in the top level of a JSON API document.
+performing an operation.
 
-An error object **MAY** have the following members:
+{{site.data.normative.error-object-key}}
 
-* `id`: a unique identifier for this particular occurrence of the problem.
-* `links`: a [links object][links] containing the following members:
-  * `about`: a [link][links] that leads to further details about this
-    particular occurrence of the problem.
-* `status`: the HTTP status code applicable to this problem, expressed as a
-  string value.
-* `code`: an application-specific error code, expressed as a string value.
-* `title`: a short, human-readable summary of the problem that **SHOULD NOT**
-  change from occurrence to occurrence of the problem, except for purposes of
-  localization.
-* `detail`: a human-readable explanation specific to this occurrence of the
-  problem.
-* `source`: an object containing references to the source of the error,
-  optionally including any of the following members:
-  * `pointer`: a JSON Pointer [[RFC6901](https://tools.ietf.org/html/rfc6901)]
-    to the associated entity in the request document [e.g. `"/data"` for a
-    primary data object, or `"/data/attributes/title"` for a specific attribute].
-  * `parameter`: a string indicating which query parameter caused
-    the error.
-* `meta`: a [meta object][meta] containing non-standard meta-information about the
-  error.
+{{site.data.normative.error-object-members}}
 
 [resource objects]: #document-resource-objects
 [attributes]: #document-resource-object-attributes
