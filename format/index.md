@@ -706,12 +706,12 @@ Content-Type: application/vnd.api+json
 }
 ```
 
-A server **MUST** respond to a successful request to fetch an individual
-resource with a [resource object][resource objects] or `null` provided as
-the response document's primary data.
+If an individual resource exists, a server **MUST** respond to a successful
+request to fetch that resource with a [resource object][resource objects].
 
-`null` is only an appropriate response when the requested URL is one that
-might correspond to a single resource, but doesn't currently.
+If the requested URL is one that might correspond to a single resource but
+does not currently, a server **MUST** respond to a successful request to fetch
+that resource with `null` provided as primary data for the response document.
 
 > Note: Consider, for example, a request to fetch a to-one related resource link.
 This request would respond with `null` when the relationship is empty (such that

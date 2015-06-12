@@ -1038,11 +1038,25 @@
       }
     },
     {
-      "id": "fetch-primary-data-single",
+      "id": "fetch-primary-data-single-exists",
       "type": "normative-statements",
       "attributes": {
         "level": "MUST",
-        "description": "A server **MUST** respond to a successful request to fetch an individual resource with a resource object or `null` provided as the response document's primary data.\\n\\n`null` is only an appropriate response when the requested URL is one that might correspond to a single resource, but doesn't currently."
+        "description": "If an individual resource exists, a server **MUST** respond to a successful request to fetch that resource with a resource object."
+      },
+      "relationships": {
+        "section": {
+          "data": { "id": "reading", "type": "sections" }
+        }
+      }
+    },
+    {
+      "id": "fetch-primary-data-single-could-exist",
+      "type": "normative-statements",
+      "attributes": {
+        "section": "fetching-data-fetching-resources-responses-200-ok",
+        "level": "MUST",
+        "description": "If the requested URL is one that might correspond to a single resource but does not currently, a server **MUST** respond to a successful request to fetch that resource with `null` provided as primary data for the response document."
       },
       "relationships": {
         "section": {
