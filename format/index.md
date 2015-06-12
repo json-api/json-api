@@ -709,15 +709,6 @@ Content-Type: application/vnd.api+json
 If an individual resource exists, a server **MUST** respond to a successful
 request to fetch that resource with a [resource object][resource objects].
 
-If the requested URL is one that might correspond to a single resource but
-does not currently, a server **MUST** respond to a successful request to fetch
-that resource with `null` provided as primary data for the response document.
-
-> Note: Consider, for example, a request to fetch a to-one related resource link.
-This request would respond with `null` when the relationship is empty (such that
-the link is corresponding to no resources) but with the single related resource's
-resource object otherwise.
-
 For example, a `GET` request to an individual article could return:
 
 ```http
@@ -742,21 +733,6 @@ Content-Type: application/vnd.api+json
       }
     }
   }
-}
-```
-
-If the above article's author is missing, then a `GET` request to that related
-resource would return:
-
-```http
-HTTP/1.1 200 OK
-Content-Type: application/vnd.api+json
-
-{
-  "links": {
-    "self": "http://example.com/articles/1/author"
-  },
-  "data": null
 }
 ```
 
@@ -808,6 +784,16 @@ value for [resource linkage], as described above for
 
 The top-level [links object][links] **MAY** contain `self` and `related` links,
 as described above for [relationship objects][relationships].
+
+If the requested URL corresponds to a to-one relationship, but a resource does
+not currently exist for that relationship, a server **MUST** respond to a
+successful fetch request with `null` provided as primary data for the response
+document.
+
+Likewise, if the requested URL corresponds to a to-many relationship, but no
+resources currently exist for that relationship, a server **MUST** respond to
+a successful fetch request with an empty array (`[]`) provided as primary data
+for the response document.
 
 For example, a `GET` request to a URL from a to-one relationship link could
 return:
@@ -887,8 +873,8 @@ a relationship link URL that does not exist.
 does not exist. For example, when `/articles/1` does not exist, request to
 `/articles/1/relationships/tags` returns `404 Not Found`.
 
-If a relationship link URL exists but the relationship is empty, then
-`200 OK` **MUST** be returned, as described above.
+> Note: If a relationship link URL exists but the relationship is empty, then
+`200 OK` will be returned, as described above.
 
 ##### Other Responses <a href="#fetching-relationships-responses-other" id="fetching-relationships-responses-other" class="headerlink"></a>
 
