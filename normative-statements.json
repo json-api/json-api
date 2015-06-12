@@ -1002,7 +1002,6 @@
       "id": "fetch-url-support",
       "type": "normative-statements",
       "attributes": {
-        "section": "fetching-data-fetching-resources",
         "level": "MUST",
         "description": "A server **MUST** support fetching resource data for every URL provided as:\\n\\n- a self link as part of the top-level links object\\n- a self link as part of a resource-level links object\\n- a related link as part of a relationship-level links object"
       },
@@ -1016,7 +1015,6 @@
       "id": "fetch-response-code",
       "type": "normative-statements",
       "attributes": {
-        "section": "fetching-data-fetching-resources-responses",
         "level": "MUST",
         "description": "A server **MUST** respond to a successful request to fetch an individual resource or resource collection with a `200 OK` response."
       },
@@ -1030,7 +1028,6 @@
       "id": "fetch-primary-data-collection",
       "type": "normative-statements",
       "attributes": {
-        "section": "fetching-data-fetching-resources-responses-200-ok",
         "level": "MUST",
         "description": "A server **MUST** respond to a successful request to fetch a resource collection with an array of resource objects or an empty array (`[]`) as the response document's primary data."
       },
@@ -1044,7 +1041,6 @@
       "id": "fetch-primary-data-single",
       "type": "normative-statements",
       "attributes": {
-        "section": "fetching-data-fetching-resources-responses-200-ok",
         "level": "MUST",
         "description": "A server **MUST** respond to a successful request to fetch an individual resource with a resource object or `null` provided as the response document's primary data.\\n\\n`null` is only an appropriate response when the requested URL is one that might correspond to a single resource, but doesn't currently."
       },
@@ -1058,7 +1054,6 @@
       "id": "fetch-responses-404",
       "type": "normative-statements",
       "attributes": {
-        "section": "fetching-data-fetching-resources-responses-404-not-found",
         "level": "MUST",
         "description": "A server **MUST** respond with `404 Not Found` when processing a request to fetch a single resource that does not exist, except when the request warrants a `200 OK` response with `null` as the primary data (as described above)."
       },
@@ -1072,7 +1067,6 @@
       "id": "fetch-responses-other-status-codes",
       "type": "normative-statements",
       "attributes": {
-        "section": "fetching-data-fetching-resources-responses-other-responses",
         "level": "MAY",
         "description": "A server **MAY** respond with other HTTP status codes."
       },
@@ -1086,7 +1080,6 @@
       "id": "fetch-responses-error-details",
       "type": "normative-statements",
       "attributes": {
-        "section": "fetching-data-fetching-resources-responses-other-responses",
         "level": "MAY",
         "description": "A server **MAY** include error details with error responses."
       },
@@ -1100,7 +1093,6 @@
       "id": "fetch-responses-http-semantics",
       "type": "normative-statements",
       "attributes": {
-        "section": "fetching-data-fetching-resources-responses-other-responses",
         "level": "MUST",
         "description": "A server **MUST** prepare responses, and a client **MUST** interpret responses, in accordance with HTTP semantics."
       },
@@ -1114,7 +1106,6 @@
       "id": "fetch-relationships",
       "type": "normative-statements",
       "attributes": {
-        "section": "fetching-data-fetching-relationships",
         "level": "MUST",
         "description": "A server **MUST** support fetching relationship data for every relationship URL provided as a self link as part of a relationship's links object."
       },
@@ -1128,7 +1119,6 @@
       "id": "fetch-relationships-response-200",
       "type": "normative-statements",
       "attributes": {
-        "section": "fetching-data-fetching-relationships-responses-200-ok",
         "level": "MUST",
         "description": "A server **MUST** respond to a successful request to fetch a relationship with a `200 OK` response."
       },
@@ -1142,7 +1132,6 @@
       "id": "fetch-relationships-response-200-primary-data",
       "type": "normative-statements",
       "attributes": {
-        "section": "fetching-data-fetching-relationships-responses-200-ok",
         "level": "MUST",
         "description": "The primary data in the response document **MUST** match the appropriate value for resource linkage, as described above for relationship objects."
       },
@@ -1156,7 +1145,6 @@
       "id": "fetch-relationships-response-200-self-related",
       "type": "normative-statements",
       "attributes": {
-        "section": "fetching-data-fetching-relationships-responses-200-ok",
         "level": "MAY",
         "description": "The top-level links object **MAY** contain self and related links, as described above for relationship objects."
       },
@@ -1170,7 +1158,6 @@
       "id": "fetch-relationships-response-404",
       "type": "normative-statements",
       "attributes": {
-        "section": "fetching-data-fetching-relationships-responses-404-not-found",
         "level": "MUST",
         "description": "A server **MUST** return 404 Not Found when processing a request to fetch a relationship link URL that does not exist."
       },
@@ -1184,7 +1171,6 @@
       "id": "fetch-relationships-response-exists-empty",
       "type": "normative-statements",
       "attributes": {
-        "section": "fetching-data-fetching-relationships-responses-404-not-found",
         "level": "MUST",
         "description": "If a relationship link URL exists but the relationship is empty, then `200 OK` **MUST** be returned, as described above."
       },
@@ -1198,7 +1184,6 @@
       "id": "fetch-relationships-other-status-codes",
       "type": "normative-statements",
       "attributes": {
-        "section": "fetching-data-fetching-relationships-responses-other-responses",
         "level": "MAY",
         "description": "A server **MAY** respond with other HTTP status codes."
       },
@@ -1212,7 +1197,6 @@
       "id": "fetch-relationships-other-error-details",
       "type": "normative-statements",
       "attributes": {
-        "section": "fetching-data-fetching-relationships-responses-other-responses",
         "level": "MAY",
         "description": "A server **MAY** include error details with error responses."
       },
@@ -1226,7 +1210,6 @@
       "id": "fetch-relationships-http-semantics",
       "type": "normative-statements",
       "attributes": {
-        "section": "fetching-data-fetching-relationships-responses-other-responses",
         "level": "MUST",
         "description": "A server **MUST** prepare responses, and a client **MUST** interpret responses, in accordance with HTTP semantics."
       },
@@ -1240,7 +1223,6 @@
       "id": "inclusion-default",
       "type": "normative-statements",
       "attributes": {
-        "section": "fetching-data-inclusion-of-related-resources",
         "level": "MAY",
         "description": "An endpoint **MAY** return resources related to the primary data by default."
       },
@@ -1254,7 +1236,6 @@
       "id": "inclusion-include-parameter",
       "type": "normative-statements",
       "attributes": {
-        "section": "fetching-data-inclusion-of-related-resources",
         "level": "MAY",
         "description": "An endpoint **MAY** also support an `include` request parameter to allow the client to customize which related resources should be returned."
       },
@@ -1268,7 +1249,6 @@
       "id": "inclusion-unrequested",
       "type": "normative-statements",
       "attributes": {
-        "section": "fetching-data-inclusion-of-related-resources",
         "level": "MUST",
         "description": "If an endpoint supports the include parameter and a client supplies it, the server **MUST NOT** include unrequested resource objects in the included section of the compound document."
       },
@@ -1282,7 +1262,6 @@
       "id": "inclusion-include-parameter-value",
       "type": "normative-statements",
       "attributes": {
-        "section": "fetching-data-inclusion-of-related-resources",
         "level": "MUST",
         "description": "The value of the include parameter **MUST** be a comma-separated (U+002C COMMA, \",\") list of relationship paths. A relationship path is a dot-separated (U+002E FULL-STOP, \".\") list of relationship names."
       },
@@ -1296,7 +1275,6 @@
       "id": "inclusion-bad-request",
       "type": "normative-statements",
       "attributes": {
-        "section": "fetching-data-inclusion-of-related-resources",
         "level": "MUST",
         "description": "If a server is unable to identify a relationship path or does not support inclusion of resources from a path, it **MUST** respond with 400 Bad Request."
       },
@@ -1310,7 +1288,6 @@
       "id": "sparse-fieldsets-parameter",
       "type": "normative-statements",
       "attributes": {
-        "section": "fetching-data-sparse-fieldsets",
         "level": "MAY",
         "description": "An endpoint **MAY** also support a `fields[TYPE]` request parameter to allow the client to customize which related resources should be returned."
       },
@@ -1324,7 +1301,6 @@
       "id": "sparse-fieldsets-parameter-value",
       "type": "normative-statements",
       "attributes": {
-        "section": "fetching-data-sparse-fieldsets",
         "level": "MUST",
         "description": "The value of the fields parameter **MUST** be a comma-separated (U+002C COMMA, \",\") list that refers to the name(s) of the fields to be returned."
       },
@@ -1338,7 +1314,6 @@
       "id": "sparse-fieldsets-additional-fields",
       "type": "normative-statements",
       "attributes": {
-        "section": "fetching-data-sparse-fieldsets",
         "level": "MUST",
         "description": "If a client requests a restricted set of fields, an endpoint **MUST NOT** include additional fields in the response."
       },
@@ -1352,7 +1327,6 @@
       "id": "sorting-option",
       "type": "normative-statements",
       "attributes": {
-        "section": "fetching-data-sorting",
         "level": "MAY",
         "description": "A server **MAY** choose to support requests to sort resource collections according to one or more criteria (\"sort fields\")."
       },
@@ -1366,7 +1340,6 @@
       "id": "sorting-parameter",
       "type": "normative-statements",
       "attributes": {
-        "section": "fetching-data-sorting",
         "level": "MAY",
         "description": "An endpoint **MAY** support requests to sort the primary data with a sort query parameter."
       },
@@ -1380,7 +1353,6 @@
       "id": "sorting-parameter-value",
       "type": "normative-statements",
       "attributes": {
-        "section": "fetching-data-sorting",
         "level": "MUST",
         "description": "The value for sort **MUST** represent sort fields."
       },
@@ -1394,7 +1366,6 @@
       "id": "sorting-multiple-fields",
       "type": "normative-statements",
       "attributes": {
-        "section": "fetching-data-sorting",
         "level": "MUST",
         "description": "An endpoint **MAY** support multiple sort fields by allowing comma-separated (U+002C COMMA, \",\") sort fields."
       },
@@ -1408,7 +1379,6 @@
       "id": "sorting-multiple-fields-order",
       "type": "normative-statements",
       "attributes": {
-        "section": "fetching-data-sorting",
         "level": "SHOULD",
         "description": "Sort fields **SHOULD** be applied in the order specified."
       },
@@ -1422,7 +1392,6 @@
       "id": "sorting-order",
       "type": "normative-statements",
       "attributes": {
-        "section": "fetching-data-sorting",
         "level": "MUST",
         "description": "The sort order for each sort field **MUST** be ascending unless it is prefixed with a minus (U+002D HYPHEN-MINUS, \"-\"), in which case it **MUST** be descending."
       },
@@ -1436,7 +1405,6 @@
       "id": "sorting-not-supported",
       "type": "normative-statements",
       "attributes": {
-        "section": "fetching-data-sorting",
         "level": "MUST",
         "description": "If the server does not support sorting as specified in the query parameter sort, it **MUST** return `400 Bad Request`."
       },
@@ -1450,7 +1418,6 @@
       "id": "sorting-specified-order",
       "type": "normative-statements",
       "attributes": {
-        "section": "fetching-data-sorting",
         "level": "MUST",
         "description": "If sorting is supported by the server and requested by the client via query parameter sort, the server **MUST** return elements of the top-level data array of the response ordered according to the criteria specified."
       },
@@ -1464,7 +1431,6 @@
       "id": "sorting-default",
       "type": "normative-statements",
       "attributes": {
-        "section": "fetching-data-sorting",
         "level": "MAY",
         "description": "The server **MAY** apply default sorting rules to top-level data if request parameter sort is not specified."
       },
@@ -1478,7 +1444,6 @@
       "id": "pagination",
       "type": "normative-statements",
       "attributes": {
-        "section": "fetching-data-pagination",
         "level": "MAY",
         "description": "A server **MAY** choose to limit the number of resources returned in a response to a subset (\"page\") of the whole set available."
       },
@@ -1492,7 +1457,6 @@
       "id": "pagination-links",
       "type": "normative-statements",
       "attributes": {
-        "section": "fetching-data-pagination",
         "level": "MAY",
         "description": "A server **MAY** provide links to traverse a paginated data set (\"pagination links\")."
       },
@@ -1506,7 +1470,6 @@
       "id": "pagination-links-object",
       "type": "normative-statements",
       "attributes": {
-        "section": "fetching-data-pagination",
         "level": "MUST",
         "description": "Pagination links **MUST** appear in the links object that corresponds to a collection."
       },
@@ -1520,7 +1483,6 @@
       "id": "pagination-keys",
       "type": "normative-statements",
       "attributes": {
-        "section": "fetching-data-pagination",
         "level": "MUST",
         "description": "The following keys MUST be used for pagination links:\\n\\n- `first`: the first page of data\\n- `last`: the last page of data\\n- `prev`: the previous page of data\\n- `next`: the next page of data"
       },
@@ -1534,7 +1496,6 @@
       "id": "pagination-unavailable-link",
       "type": "normative-statements",
       "attributes": {
-        "section": "fetching-data-pagination",
         "level": "MUST",
         "description": "Keys **MUST** either be omitted or have a `null` value to indicate that a particular link is unavailable."
       },
@@ -1548,7 +1509,6 @@
       "id": "pagination-order",
       "type": "normative-statements",
       "attributes": {
-        "section": "fetching-data-pagination",
         "level": "MUST",
         "description": "Concepts of order, as expressed in the naming of pagination links, **MUST** remain consistent with JSON API's sorting rules."
       },
@@ -1562,7 +1522,6 @@
       "id": "pagination-page-parameter",
       "type": "normative-statements",
       "attributes": {
-        "section": "fetching-data-pagination",
         "level": "SHOULD",
         "description": "The `page` query parameter is reserved for pagination. Servers and clients *SHOULD* use this key for pagination operations."
       },
@@ -1576,7 +1535,6 @@
       "id": "filtering",
       "type": "normative-statements",
       "attributes": {
-        "section": "fetching-data-filtering",
         "level": "SHOULD",
         "description": "The `filter` query parameter is reserved for filtering data. Servers and clients **SHOULD** use this key for filtering operations."
       },
