@@ -1,4 +1,6 @@
 require 'redcard/1.9'
+require 'json'
+require 'yaml'
 
 def preview(browser=false)
   pids = [
@@ -23,6 +25,15 @@ end
 desc "Build the site and host it localhost:9876"
 task :preview do
   preview
+end
+
+task :parse do
+  normativeStatements = YAML.load_file('normative_statements.yml')
+  statements = normativeStatements['included'].inject({}) do |result, statement|
+    result[statement['id']] = statement['attributes']['description']
+    result
+  end
+  File.write('_data/normative.yml', statements.to_yaml)
 end
 
 namespace :preview do
