@@ -356,7 +356,7 @@ identifies the resource represented by the resource object.
 A server **MUST** respond to a `GET` request to the specified URL with a
 response that includes the resource as the primary data.
 
-### Resource Indentifier Objects <a href="#document-resource-identifier-objects" id="document-resource-identifier-objects" class="headerlink"></a>
+### Resource Identifier Objects <a href="#document-resource-identifier-objects" id="document-resource-identifier-objects" class="headerlink"></a>
 
 A "resource identifier object" is an object that identifies an individual
 resource.
@@ -1165,7 +1165,7 @@ a properly generated and formatted *UUID* as described in RFC 4122
 may be possible to use something other than a UUID that is still guaranteed
 to be globally unique. Do not use anything other than a UUID unless you are
 100% confident that the strategy you are using indeed generates globally
-unique indentifiers.
+unique identifiers.
 
 For example:
 
