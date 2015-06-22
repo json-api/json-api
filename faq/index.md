@@ -68,13 +68,13 @@ alternative ways of requesting certain operations (e.g., resource creation via
 
 Not currently, no. JSON Schema cannot fully represent the semantics of JSON API, and so any such schema would be partial anyway.
 
-## Why are resource collections returned as arrays instead of sets keyed by ID?
+## Why are resource collections returned as arrays instead of sets keyed by ID? <a href="#resource-collections-returned-as-arrays" id="resource-collections-returned-as-arrays" class="headerlink"></a>
 
 A JSON array is naturally ordered while sets require metadata to specify order
 among members. Therefore, arrays allow for more natural sorting by default or
 specified criteria.
 
-## Why are related resources nested in an `included` object in a compound document?
+## Why are related resources nested in an `included` object in a compound document? <a href="#why-related-resources-included-compound-document" id="why-related-resources-included-compound-document" class="headerlink"></a>
 
 Primary resources should be isolated because their order and number is often
 significant. It's necessary to separate primary and related resources by more
@@ -82,6 +82,6 @@ than type because it's possible that a primary resource may have related
 resources of the same type (e.g. the "parents" of a "person"). Nesting related
 resources in `included` prevents this possible conflict.
 
-## Does JSON API take any position on URI structure, on rules for custom endpoints, which do not fit the paradigm of GET/POST/PATCH/DELETE on the resource URI, etc.?
+## Does JSON API take any position on URI structure, on rules for custom endpoints, which do not fit the paradigm of GET/POST/PATCH/DELETE on the resource URI, etc.? <a href="#position-uri-structure-custom-endpoints" id="position-uri-structure-custom-endpoints" class="headerlink"></a>
 
 JSON API has no requirements about URI structure, implementations are free to use whatever form they wish.
