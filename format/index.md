@@ -507,7 +507,7 @@ either:
 
 The following `self` link is simply a URL:
 
-```
+```json
 "links": {
   "self": "http://example.com/posts",
 }
@@ -516,7 +516,7 @@ The following `self` link is simply a URL:
 The following `related` link includes a URL as well as meta-information
 about a related resource collection:
 
-```
+```json
 "links": {
   "related": {
     "href": "http://example.com/articles/1/comments",
@@ -865,7 +865,7 @@ Content-Type: application/vnd.api+json
 If the above relationship is empty, then a `GET` request to the same URL would
 return:
 
-```text
+```http
 HTTP/1.1 200 OK
 Content-Type: application/vnd.api+json
 
