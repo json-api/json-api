@@ -149,3 +149,36 @@ Although JSON API does not specify the format of date and time fields, it is
 recommended that servers align with ISO 8601. [This W3C
 NOTE](http://www.w3.org/TR/NOTE-datetime) provides an overview of the
 recommended formats.
+=======
+
+## Asynchronous Processing <a href="#asynchronous-processing" id="asynchronous-processing" class="headerlink"></a>
+
+Consider a situation when you need to create a resource and the operation takes long time to complete.
+
+The request **SHOULD** return a status `202 Accepted` with a link in Content-Location.
+
+```text
+HTTP/1.1 202 Accepted
+Content-Type: application/vnd.api+json
+Content-Location: https://example.com/photos/queue/5234
+```
+
+```json
+{
+   "data":{
+      "type":"queue job",
+      "id":"5234",
+      "attributes": { "status": "Pending request, waiting other process" },
+      "links": { "self": "/photos/queue/5234"}
+      }
+   }
+}
+```
+
+When job process is done the location given earlier **SHOULD** return `303 See other` with a link in Location.
+
+```text
+HTTP/1.1 303 See other
+Location: https://example.com/photos/4577
+Content-Type: application/vnd.api+json
+```
