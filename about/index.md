@@ -22,6 +22,14 @@ There are five primary editors of this specification:
 - [Tyler Kellen](http://twitter.com/tkellen)
 - [Ethan Resnick](http://twitter.com/ethanresnick)
 
+## Roadmap <a href="#roadmap" id="roadmap" class="headerlink"></a>
+
+### 1.1
+**Targeted Release Date:** September 30th, 2015
+
+* Embedding / creating multiple related resources in a single request
+* Extension support
+
 ## History <a href="#history" id="history" class="headerlink"></a>
 
 JSON API was originally drafted by [Yehuda Katz](http://twitter.com/wycats)
