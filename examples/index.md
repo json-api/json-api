@@ -55,6 +55,10 @@ Request with `fields` parameter:
 GET /articles?include=author&fields[articles]=title,body,author&fields[people]=name
 ```
 
+> Note: The above example URI shows unencoded `[` and `]` characters simply
+for readability. In practice, these characters must be percent-encoded, as
+noted in the base specification.
+
 Here we want `articles` objects to have fields `title`, `body` and `author` only and `people` objects to have `name` field only.
 
 ```http
@@ -117,3 +121,8 @@ Content-Type: application/vnd.api+json
   ]
 }
 ```
+
+> Note: The above example URI shows unencoded `[` and `]` characters simply
+for readability. In practice, these characters must be percent-encoded, as
+noted in the base specification.
+
