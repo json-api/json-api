@@ -17,6 +17,7 @@ assembled to vet them.
 
 * [ember-data](https://github.com/emberjs/data) is one of the original exemplar implementations. There is a [custom adapter](https://github.com/kurko/ember-json-api) to support json-api.
 * [backbone-jsonapi](https://github.com/guillaumervls/backbone-jsonapi) is a Backbone adapter for JSON API. Supports fetching Models & Collections from a JSON API source.
+* [backbone-relational-jsonapi](https://github.com/xbill82/backbone-relational-jsonapi) is a parsing layer for Backbone.Relational. Entities specified in JSON API are automatically parsed to be injected into Backbone.Relational relations.
 * [orbit.js](https://github.com/orbitjs/orbit.js) is a standalone library for
   coordinating access to data sources and keeping their contents synchronized.
   Orbit's Common Library includes
