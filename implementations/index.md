@@ -55,6 +55,7 @@ application
 * [endpoints](https://github.com/endpoints) is an implementation of JSON-API using [Bookshelf](http://bookshelfjs.org).
 * [YAYSON](https://github.com/confetti/yayson) is an isomorphic library for serializing and reading JSON API data. Simply use it with plain objects or extend it to fit your ORM (currently it has an adapter for [Sequelize](http://sequelizejs.com)).
 * [jsonapi-serializer](https://github.com/SeyZ/jsonapi-serializer) is a Node.js framework agnostic library for serializing your data to JSON API.
+* [jsonapi-server](https://github.com/holidayextras/jsonapi-server) is a fully featured NodeJS sever implementation of json:api.
 
 ### Ruby <a href="#server-libraries-ruby" id="server-libraries-ruby" class="headerlink"></a>
 
