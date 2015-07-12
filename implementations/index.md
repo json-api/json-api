@@ -26,8 +26,7 @@ assembled to vet them.
   independently or with Ember.js through the
   [ember-orbit](https://github.com/orbitjs/ember-orbit) integration library.
 * [YAYSON](https://github.com/confetti/yayson) is an isomorphic library for serializing and reading JSON API data. Extend it to fit your models or just use it with plain objects.
-* [Ember JSON API Resources](https://github.com/pixelhandler/ember-jsonapi-resources) An [Ember CLI](http://www.ember-cli.com) Addon for a lightweight solution for data persistence in an [Ember.js](http://emberjs.com)
-application
+* [Ember JSON API Resources](https://github.com/pixelhandler/ember-jsonapi-resources) is an [Ember CLI](http://www.ember-cli.com) Addon for a lightweight solution for data persistence in an [Ember.js](http://emberjs.com) application.
 
 ### iOS <a href="#client-libraries-ios" id="client-libraries-ios" class="headerlink"></a>
 
@@ -56,6 +55,7 @@ application
 * [YAYSON](https://github.com/confetti/yayson) is an isomorphic library for serializing and reading JSON API data. Simply use it with plain objects or extend it to fit your ORM (currently it has an adapter for [Sequelize](http://sequelizejs.com)).
 * [jsonapi-serializer](https://github.com/SeyZ/jsonapi-serializer) is a Node.js framework agnostic library for serializing your data to JSON API.
 * [jsonapi-server](https://github.com/holidayextras/jsonapi-server) is a fully featured NodeJS sever implementation of json:api.
+* [jsonapify](https://goo.gl/ScJlRn) is an unintrusive, well-tested and easy-to-use library for the development of JSON-API (or similar) APIs. It integrates nicely with Mongoose models as connect-compatible middleware. Its development is very recent though, which only means that feature requests and feedback is more than welcome!
 
 ### Ruby <a href="#server-libraries-ruby" id="server-libraries-ruby" class="headerlink"></a>
 
