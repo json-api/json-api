@@ -589,9 +589,9 @@ first or last character:
 The following characters **MUST NOT** be used in member names:
 
 - U+002B PLUS SIGN, "+" _(used for ordering)_
-- U+002C COMMA, "," _(used separator for multiple relationship paths)_
-- U+002E PERIOD, "." _(used as relationship path separators)_
-- U+005B LEFT SQUARE BRACKET, "[" _(use in sparse fieldsets)_
+- U+002C COMMA, "," _(used as a separator between relationship paths)_
+- U+002E PERIOD, "." _(used as a separator within relationship paths)_
+- U+005B LEFT SQUARE BRACKET, "[" _(used in sparse fieldsets)_
 - U+005D RIGHT SQUARE BRACKET, "]" _(used in sparse fieldsets)_
 - U+0021 EXCLAMATION MARK, "!"
 - U+0022 QUOTATION MARK, '"'
