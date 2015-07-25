@@ -26,8 +26,8 @@ Content-Type: application/vnd.api+json
     "attributes": {
       "title": "JSON API paints my bikeshed!",
       "body": "The shortest article. Ever.",
-      "created": 1432306588,
-      "updated": 1432306589
+      "created": "2015-05-22T14:56:29.000Z",
+      "updated": "2015-05-22T14:56:28.000Z"
     },
     "relationships": {
       "author": {
