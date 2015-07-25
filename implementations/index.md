@@ -48,6 +48,7 @@ assembled to vet them.
 * [neomerx / limoncello-collins](https://github.com/neomerx/limoncello-collins) (Laravel-based) and [neomerx / limoncello-shot](https://github.com/neomerx/limoncello-shot) (Lumen-based) are pre-configured JSON API v1.0 quick start server application that use [neomerx / json-api](https://github.com/neomerx/json-api).
 * [lode / jsonapi](https://github.com/lode/jsonapi) a simple and friendly library, easy to understand for people without knowledge of the specification.
 * [woohoolabs / yin](https://github.com/woohoolabs/yin) is a library for advanced users aiming for efficiency and elegance.
+* [nilportugues / json-api](https://github.com/nilportugues/json-api) Serializer transformers outputting valid API responses in JSON and JSON API formats.
 
 ### Node.js <a href="#server-libraries-node-js" id="server-libraries-node-js" class="headerlink"></a>
 * [Fortune.js](http://fortunejs.com) is a server-side library that includes a comprehensive implementation of JSON API.
