@@ -280,6 +280,7 @@ footer {
     max-width: 705px; } }
 /** Document outline */
 .document-outline {
+  padding-right: 40px;
   font-size: 13px; }
   .document-outline ol {
     list-style: none;
