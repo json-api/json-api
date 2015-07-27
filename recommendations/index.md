@@ -142,3 +142,10 @@ that wish to support these clients are recommended to treat `POST` requests as
 `PATCH` requests if the client includes the `X-HTTP-Method-Override: PATCH`
 header. This allows clients that lack `PATCH` support to have their update
 requests honored, simply by adding the header.
+
+## Formatting Date and Time Fields <a href="#date-and-time-fields" id="date-and-time-fields" class="headerlink"></a>
+
+Although JSON API does not specify the format of date and time fields, it is
+recommended that servers align with ISO 8601. [This W3C
+NOTE](http://www.w3.org/TR/NOTE-datetime) provides an overview of the
+recommended formats.
