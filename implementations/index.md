@@ -88,9 +88,11 @@ has a page describing how to emit conformant JSON.
 
 ### .NET <a href="#server-libraries-net" id="server-libraries-net" class="headerlink"></a>
 
+* [JsonApiNet](https://github.com/l8nite/JsonApiNet) lets you quickly deserialize JSON API documents into C# entities. Supports compound documents, complex type mapping from attributes, attribute mapping, and more. [See the README](https://github.com/l8nite/JsonApiNet/blob/master/README.md) for full details.
+
 * [JSONAPI.NET](https://github.com/SphtKr/JSONAPI.NET) is a .NET library that integrates with ASP.NET WebAPI, Json.NET, and (optionally) Entity Framework to help you quickly create JSON API compliant web services.
 
-* [Migrap.AspNet.Mvc.Jsonapi](https://github.com/migrap/Migrap.AspNet.Mvc.Jsonapi) is an ASP.NET 5 (vNext) library that allows for existing code to build JSON API responses through output formatters. 
+* [Migrap.AspNet.Mvc.Jsonapi](https://github.com/migrap/Migrap.AspNet.Mvc.Jsonapi) is an ASP.NET 5 (vNext) library that allows for existing code to build JSON API responses through output formatters.
 
 ### JAVA <a href="#server-libraries-java" id="server-libraries-java" class="headerlink"></a>
 
