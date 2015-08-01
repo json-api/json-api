@@ -66,7 +66,14 @@ alternative ways of requesting certain operations (e.g., resource creation via
 
 ## Is there a JSON Schema describing JSON API? <a href="#is-there-a-json-schema-describing-json-api" id="is-there-a-json-schema-describing-json-api" class="headerlink"></a>
 
-Not currently, no. JSON Schema cannot fully represent the semantics of JSON API, and so any such schema would be partial anyway.
+Yes, you can find the JSON Schema definition at
+[http://jsonapi.org/schema](http://jsonapi.org/schema). This schema is as
+restrictive as possible, but has flexibility to be extended within your
+documentation. Validation will not yield false negatives, but could yield false
+positives for the sake of flexibility.
+
+You can find more information about the JSON Schema format at
+[http://json-schema.org](http://json-schema.org).
 
 ## Why are resource collections returned as arrays instead of sets keyed by ID? <a href="#resource-collections-returned-as-arrays" id="resource-collections-returned-as-arrays" class="headerlink"></a>
 
