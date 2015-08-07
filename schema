@@ -273,23 +273,31 @@
       "properties": {
         "first": {
           "description": "The first page of data",
-          "type": "string",
-          "format": "uri"
+          "oneOf": [
+            { "type": "string", "format": "uri" },
+            { "type": "null" }
+          ]
         },
         "last": {
           "description": "The last page of data",
-          "type": "string",
-          "format": "uri"
+          "oneOf": [
+            { "type": "string", "format": "uri" },
+            { "type": "null" }
+          ]
         },
         "prev": {
           "description": "The previous page of data",
-          "type": "string",
-          "format": "uri"
+          "oneOf": [
+            { "type": "string", "format": "uri" },
+            { "type": "null" }
+          ]
         },
         "next": {
           "description": "The next page of data",
-          "type": "string",
-          "format": "uri"
+          "oneOf": [
+            { "type": "string", "format": "uri" },
+            { "type": "null" }
+          ]
         }
       }
     },
