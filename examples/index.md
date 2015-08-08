@@ -126,3 +126,38 @@ Content-Type: application/vnd.api+json
 for readability. In practice, these characters must be percent-encoded, as
 noted in the base specification.
 
+## Pagination Links
+
+Example of how to add [pagination links](http://jsonapi.org/format/#fetching-pagination).
+
+Basic request:
+
+```http
+GET /articles?page=3&per_page=1
+```
+
+```http
+HTTP/1.1 200 OK
+Content-Type: application/vnd.api+json
+
+{
+  "data": [
+    {
+      "type": "articles",
+      "id": "1",
+      "attributes": {
+        "title": "JSON API paints my bikeshed!",
+        "body": "The shortest article. Ever.",
+        "created": "2015-05-22T14:56:29.000Z",
+        "updated": "2015-05-22T14:56:28.000Z"
+      }
+    }
+  ],
+  "links": {
+    "first": "?page=1&per_page=1",
+    "prev": "?page=2&per_page=1",
+    "next": "?page=4&per_page=1",
+    "last": "?page=13&per_page=1"
+  }
+}
+```
