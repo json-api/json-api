@@ -154,10 +154,10 @@ Content-Type: application/vnd.api+json
     }
   ],
   "links": {
-    "first": "?page=1&per_page=1",
-    "prev": "?page=2&per_page=1",
-    "next": "?page=4&per_page=1",
-    "last": "?page=13&per_page=1"
+    "first": "http://example.com/articles?page=1&per_page=1",
+    "prev": "http://example.com/articles?page=2&per_page=1",
+    "next": "http://example.com/articles?page=4&per_page=1",
+    "last": "http://example.com/articles?page=13&per_page=1"
   }
 }
 ```
