@@ -128,12 +128,12 @@ noted in the base specification.
 
 ## Pagination Links
 
-Example of how to add [pagination links](http://jsonapi.org/format/#fetching-pagination).
+Example of a page-based strategy on how to add [pagination links](http://jsonapi.org/format/#fetching-pagination).
 
 Basic request:
 
 ```http
-GET /articles?page=3&per_page=1
+GET /articles?page[number]=3&page[size]=1
 ```
 
 ```http
@@ -154,10 +154,10 @@ Content-Type: application/vnd.api+json
     }
   ],
   "links": {
-    "first": "http://example.com/articles?page=1&per_page=1",
-    "prev": "http://example.com/articles?page=2&per_page=1",
-    "next": "http://example.com/articles?page=4&per_page=1",
-    "last": "http://example.com/articles?page=13&per_page=1"
+    "first": "http://example.com/articles?page[number]=1&page[size]=1",
+    "prev": "http://example.com/articles?page[number]=2&page[size]=1",
+    "next": "http://example.com/articles?page[number]=4&page[size]=1",
+    "last": "http://example.com/articles?page[number]=13&page[size]=1"
   }
 }
 ```
