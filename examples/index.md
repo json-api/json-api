@@ -144,7 +144,7 @@ Content-Type: application/vnd.api+json
   "data": [
     {
       "type": "articles",
-      "id": "1",
+      "id": "3",
       "attributes": {
         "title": "JSON API paints my bikeshed!",
         "body": "The shortest article. Ever.",
