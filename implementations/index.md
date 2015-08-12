@@ -39,6 +39,10 @@ assembled to vet them.
 * [jsonapi-consumer](https://github.com/jsmestad/jsonapi-consumer) a ruby library for consuming JSONAPI payloads.
 * [JsonApiClient](https://github.com/chingor13/json_api_client) attempts to give you a query building framework that is easy to understand (similar to ActiveRecord scopes)
 
+### PHP <a href="#client-libraries-php" id="client-libraries-php" class="headerlink"></a>
+
+* [json-api-client](https://github.com/Art4/json-api-client) is a library for validating and handling the response body in a simple OOP way.
+
 ## Server libraries <a href="#server-libraries" id="server-libraries" class="headerlink"></a>
 
 ### PHP <a href="#server-libraries-php" id="server-libraries-php" class="headerlink"></a>
