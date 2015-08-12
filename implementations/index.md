@@ -41,7 +41,7 @@ assembled to vet them.
 
 ### PHP <a href="#client-libraries-php" id="client-libraries-php" class="headerlink"></a>
 
-* [json-api-client](https://github.com/Art4/json-api-client) is a library for validating and handling the response body in a simple OOP way.
+* [Art4 / json-api-client](https://github.com/Art4/json-api-client) is a library for validating and handling the response body in a simple OOP way.
 
 ## Server libraries <a href="#server-libraries" id="server-libraries" class="headerlink"></a>
 
