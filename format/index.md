@@ -1765,7 +1765,7 @@ An error object **MAY** have the following members:
   * `pointer`: a JSON Pointer [[RFC6901](https://tools.ietf.org/html/rfc6901)]
     to the associated entity in the request document [e.g. `"/data"` for a
     primary data object, or `"/data/attributes/title"` for a specific attribute].
-  * `parameter`: a string indicating which query parameter caused
+  * `parameter`: a string indicating which URI query parameter caused
     the error.
 * `meta`: a [meta object][meta] containing non-standard meta-information about the
   error.
