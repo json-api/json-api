@@ -28,6 +28,7 @@ assembled to vet them.
 * [YAYSON](https://github.com/confetti/yayson) is an isomorphic library for serializing and reading JSON API data. Extend it to fit your models or just use it with plain objects.
 * [Ember JSON API Resources](https://github.com/pixelhandler/ember-jsonapi-resources) is an [Ember CLI](http://www.ember-cli.com) Addon for a lightweight solution for data persistence in an [Ember.js](http://emberjs.com) application.
 * [hapi-json-api](https://github.com/wraithgar/hapi-json-api) Plugin for the hapi framework; enforces Accept/Content-type rules and rewrites Boom errors to be spec compliant.
+* [jsonapi-datastore](https://github.com/beauby/jsonapi-datastore) is a lightweight standalone library for reading, serializing, and synchronizing relational JSON API data.
 
 ### iOS <a href="#client-libraries-ios" id="client-libraries-ios" class="headerlink"></a>
 
