@@ -58,7 +58,7 @@ assembled to vet them.
 * [nilportugues / json-api](https://github.com/nilportugues/json-api) Serializer transformers outputting valid API responses in JSON and JSON API formats.
 
 ### Node.js <a href="#server-libraries-node-js" id="server-libraries-node-js" class="headerlink"></a>
-* [Fortune.js](http://fortunejs.com) is a server-side library that includes a comprehensive implementation of JSON API.
+* [Fortune.js](http://fortunejs.com) is a library that includes a [comprehensive implementation of JSON API](https://github.com/fortunejs/fortune-json-api).
 * [json-api](https://www.npmjs.org/package/json-api) turns an Express + Mongoose app into a JSON-API server.
 * [endpoints](https://github.com/endpoints) is an implementation of JSON-API using [Bookshelf](http://bookshelfjs.org).
 * [YAYSON](https://github.com/confetti/yayson) is an isomorphic library for serializing and reading JSON API data. Simply use it with plain objects or extend it to fit your ORM (currently it has an adapter for [Sequelize](http://sequelizejs.com)).
