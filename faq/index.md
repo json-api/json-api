@@ -56,13 +56,26 @@ and capabilities and use the errors response to let users know. This error featu
 is still pending to be included in the standard since is still in
 [discussion](https://github.com/json-api/json-api/issues/7).
 
-## Where's PUT? Can I use method *X* to do *Y*? <a href="#wheres-put" id="wheres-put" class="headerlink"></a>
+## Where's PUT? <a href="#wheres-put" id="wheres-put" class="headerlink"></a>
 
-JSON API does not currently specify the use of the `PUT` method for any purpose.
+Using PUT to partially update a resource (i.e. to change only some of its state)
+is not allowed by the
+[HTTP specification](https://tools.ietf.org/html/rfc7231#section-4.3.4).
+Instead, PUT is supposed to completely replace the state of a resource:
 
-Servers may complement the base specification by providing extra capabilities and
-alternative ways of requesting certain operations (e.g., resource creation via
-`PUT` in addition to `POST`).
+> “The PUT method requests that the state of the target resource be **created
+  or replaced** with the state…in the request message payload. A successful PUT
+  of a given representation would suggest that a subsequent GET on that same
+  target resource will result in an equivalent representation being sent…”
+
+The correct method for partial updates, therefore, is [PATCH](http://tools.ietf.org/html/rfc5789),
+which is what JSON API uses. And because PATCH can also be used compliantly for
+full resource replacement, JSON API hasn't needed to define any behavior for
+PUT so far. However, it may define PUT semantics in the future.
+
+In the past, many APIs used PUT for partial updates because PATCH wasn’t yet
+well-supported. However, almost all clients now support PATCH, and those that
+don’t can be easily [worked around](/recommendations/#patchless-clients).
 
 ## Is there a JSON Schema describing JSON API? <a href="#is-there-a-json-schema-describing-json-api" id="is-there-a-json-schema-describing-json-api" class="headerlink"></a>
 
