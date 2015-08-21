@@ -176,34 +176,11 @@ you like (`"total"`, `"count"`, etc.) or not use it at all.
 
 Examples of how [error objects](http://jsonapi.org/format/#error-objects) work.
 
-### Responses to failed resource creation:
+### A Basic Error Object
 
-Response with one error object, with attribute error:
-
-```http
-HTTP/1.1 422 Unprocessable Entity
-Content-Type: application/vnd.api+json
-
-{
-  "errors": [
-    {
-      "title":  "Invalid Attribute",
-      "source": { "pointer": "data/attributes/first-name" },
-      "detail": "First name must contain at least three characters."
-    }
-  ]
-}
-```
-
-Notice that the attribute `first-name` is dasherized.  Dasherized attributes are preferred
-over underscored.
-
-Notice also that the `detail` is specific to this occurrence of the problem,
-whereas the `title` is more generic.
-
-Notice that the `source` points to the associated attribute with the error.
-
-Response with one error object, with relationship error:
+In the response below, the server is indicating that it encountered an error
+while creating/updating the resource, and that this error was caused
+by an invalid `"first-name"` attribute:
 
 ```http
 HTTP/1.1 422 Unprocessable Entity
@@ -213,38 +190,34 @@ Content-Type: application/vnd.api+json
   "errors": [
     {
       "status": "422",
-      "title":  "Missing Association",
-      "source": { "pointer": "data/relationships/author" },
-      "detail": "Post author cannot be blank."
+      "source": { "pointer": "/data/attributes/first-name" },
+      "title":  "Invalid Attribute",
+      "detail": "First name must contain at least three characters."
     }
   ]
 }
 ```
 
-Notice that the `source` points to the associated relationship with the error.
+Every member in an error object is optional, but all help the client
+by providing extra details.
 
-Notice also that the error object includes a `status` code. Though optional,
-it can be useful when the code processing the JSON isn't directly aware of
-the HTTP response or even if the JSON is coming via non-HTTP protocols.
+The `source` member is used to [indicate](https://tools.ietf.org/html/rfc6901)
+which part of the request document caused the error.
 
-Response with one error, using a `code`:
+The `title` and `detail` members are similar, but `detail` is specific
+to this occurrence of the problem, whereas `title` is more generic.
 
-```http
-HTTP/1.1 422 Unprocessable Entity
-Content-Type: application/vnd.api+json
+The `status` member represents the HTTP status code associated with the problem.
+It's very helpful when multiple errors are returned at once (see below), as the
+HTTP response itself can only have one status code. However, it can also be
+useful for single errors, to save clients the trouble of consulting the HTTP
+headers, or for using JSON API over non-HTTP protocols, which may be officially
+supported in the near future.
 
-{
-  "errors": [
-    {
-      "title": "Adapter Error",
-      "code": "ds.errors.invalid-error-expects-json-api-format",
-      "detail": "The adapter rejected the commit because it was not in the JSON API format."
-    }
-  ]
-}
-```
+### Multiple Errors
 
-Response with status:
+When multiple errors occur in response to a single request, the server
+can simply add each error to the `errors` array:
 
 ```http
 HTTP/1.1 400 Bad Request
@@ -255,15 +228,7 @@ Content-Type: application/vnd.api+json
     {
       "status": "403",
       "source": { "pointer": "data/attributes/secret-powers" },
-      "detail": "Access to secret powers not authorized on Sundays."
-    },
-    {
-      "status": "404",
-      "links": { "about": {
-        "href": "http://example.com/weapons/vorpal-blade",
-        },
-      },
-      "title": "Weapon not found."
+      "detail": "Editing secret powers is not authorized on Sundays."
     },
     {
       "status": "422",
@@ -272,25 +237,17 @@ Content-Type: application/vnd.api+json
     },
     {
       "status": "500",
+      "source": { "pointer": "data/attributes/reputation" },
       "title": "The backend responded with an error",
       "detail": "Reputation service not responding after three requests."
-    },
-    {
-      "status": "400",
-      "detail": "JSON parse error - Expecting property name enclosed in double quotes: line 1 column 2 (char 1)"
     }
   ]
 }
 ```
 
-The only uniqueness constraint on error objects in a response is the `id` field.
-Thus, multiple errors on the same attribute may be described by an error object
-for each error.
-
-Notice that one of the error objects references an association that was not found using
-a `links` object containing an about `link`.
-
-Multiple errors on `first-name` attribute:
+The only uniqueness constraint on error objects is the `id` field. Thus,
+multiple errors on the same attribute can each be given their own error
+object. The example below shows multiple errors on the `first-name` attribute:
 
 ```http
 HTTP/1.1 422 Unprocessable Entity
@@ -299,62 +256,42 @@ Content-Type: application/vnd.api+json
 {
   "errors": [
     {
-      "title": "Invalid Attribute",
       "source": { "pointer": "data/attributes/first-name" },
+      "title": "Invalid Attribute",
       "detail": "First name must contain at least three characters."
     },
     {
-      "title": "Invalid Attribute",
       "source": { "pointer": "data/attributes/first-name" },
+      "title": "Invalid Attribute",
       "detail": "First name must contain an emoji."
     }
   ]
 }
 ```
 
-A "400 Bad Request" response would also be acceptable. See
-[http://stackoverflow.com/a/20215807/1261879]('400 vs 422 response to POST of data' on
-Stack Overflow). The JSON API doesn't take a position on 400 vs. 422.
+> Note: in the responses above with a 422 status code, `400 Bad Request` would
+also be acceptable. ([http://stackoverflow.com/a/20215807/1261879](More details.))
+JSON API doesn't take a position on 400 vs. 422.
 
-If the API docs specified:
+### Error Codes
 
-> | Error Code | Title                                                                             |
-> |------------|-----------------------------------------------------------------------------------|
-> |  11        | "Invalid Attribute"                                                               |
-> |  123       | "too short"                                                                       |
-> |  124       | "emoji missing"                                                                   |
-> |  225       | "password must contain a letter, number, space, neologism, and special character" |
-> |  226       | "passwords do not match"                                                          |
-> |  227       | "password cannot be one of last five passwords"                                   |
+The `code` member of an error object contains an application-specific code
+representing the type of problem encountered. `code` is similar to `title`
+in that both identify a general type of problem (unlike `detail`, which is
+specific to the particular instance of the problem), but dealing with `code`
+is easier programatically, because the "same" `title` may appear in different
+forms due to localization.
+
+For the example below, imagine the API docs specifed the following mapping:
+
+> | Code | Problem                                                   |
+> |------|-----------------------------------------------------------|
+> |  123 | Value too short                                           |
+> |  225 | Password lacks a letter, number, or punctuation character |
+> |  226 | Passwords do not match                                    |
+> |  227 | Password cannot be one of last five passwords             |
 
 Multiple errors on `password` attribute, with error `code`:
-
-```http
-HTTP/1.1 422 Unprocessable Entity
-Content-Type: application/vnd.api+json
-
-{
-  "errors": [
-    {
-      "code":   "123",
-      "source": { "pointer": "data/attributes/first-name" },
-      "detail": "First name must contain at least three characters."
-    },
-    {
-      "code":   "225",
-      "source": { "pointer": "data/attributes/password" },
-      "detail": "Frobnicate is not a neologism."
-    },
-    {
-      "code":   "226",
-      "source": { "pointer": "data/attributes/password" },
-      "detail": "Password and password confirmation do not match."
-    }
-  ]
-}
-```
-
-Multiple errors on `first-name` attribute, with error `code`, and `title`:
 
 ```http
 HTTP/1.1 422 Unprocessable Entity
@@ -365,23 +302,37 @@ Content-Type: application/vnd.api+json
   "errors": [
     {
       "code":   "123",
-      "title":  "too short",
       "source": { "pointer": "data/attributes/first-name" },
+      "title":  "Value is too short",
       "detail": "First name must contain at least three characters."
     },
     {
-      "code":   "124",
-      "title":  "emoji missing",
-      "source": { "pointer": "data/attributes/first-name" },
-      "detail": "First name must contain an emoji"
+      "code":   "225",
+      "source": { "pointer": "data/attributes/password" },
+      "title": "Passwords must contain a letter, number, and punctuation character.",
+      "detail": "The password provided is missing a punctuation character."
+    },
+    {
+      "code":   "226",
+      "source": { "pointer": "data/attributes/password" },
+      "title": "Password and password confirmation do not match."
     }
   ]
 }
 ```
 
 Notice that this response includes not only the `errors` top-level member,
-but the `jsonapi` top-level member. It may also have include the `meta` or `links`
-top-level members, but not the `data` member.
+but the `jsonapi` top-level member. Error responses may not contain the
+top-level `data` member, but can include all the other top-level members
+JSON API defines.
+
+Also, notice that the third error object lacks a `detail` member (perhaps
+for security). Again, all error object members are optional.
+
+### Advanced `source` Usage
+
+In the example below, the user is sending an invalid JSON API
+request, because it's missing the `data` member:
 
 ```http
 PATCH /posts/1
@@ -391,6 +342,8 @@ Accept: application/vnd.api+json
 { "datum": [ ] }
 ```
 
+Therefore, the server responds:
+
 ```http
 HTTP/1.1 422 Unprocesssable Entity
 Content-Type: application/vnd.api+json
@@ -398,127 +351,61 @@ Content-Type: application/vnd.api+json
 {
   "errors": [
     {
-      "title":  "Missing Data Member",
-      "source": { "pointer": "/data" }
+      "source": { "pointer": "/" },
+      "detail":  "Missing `data` Member at document's top level."
     }
   ]
 }
 ```
 
-Notice that the `source` indicates the error was causes not by a missing attribute, but
-by missing `data`.
+It uses `source` to point to the top-level of the document (`"/"`).
+(Pointing to `"/data` would be invalid because the request document did
+not have a value at `"/data"`, and `source` is always given with reference
+to the request document.)
 
-### Responses to failed resource request:
+Note that if the server cannot parse the request as valid JSON, including
+`source` doesn't make sense (because there's no JSON document for `source` to
+refer to). Here's how the server might respond to an invalid JSON document:
 
-Response with one error object, with parameter error:
-
-```http
-GET /api/posts/1
 ```
-
-```http
-HTTP/1.1 400 Bad Request
-Content-Type: application/vnd.api+json
-
 {
-  "errors": [
-    {
-      "title":  "Missing Query Parameter",
-      "source": { "parameter": "auth_key" },
-      "detail": "The required parameter, auth_key, is missing."
-    }
-  ]
-}
-```
-
-Notice that the `source` indicates the URI query parameter which caused the error.
-This example with a missing `auth_key` parameter was chosen over an example with an invalid
-URI query parameter, since it may make sense to ignore invalid parameters in some cases, and
-have the request succeed rather than fail. As described in the [Bulk
-extension](http://jsonapi.org/extensions/bulk/#bulk-operations):
-
-> ...a request MUST completely succeed or fail (in a single "transaction").
-> ...any request that involves multiple operations MUST only succeed if all operations are performed
-successfully
-
-Examples of invalid parameters may be `?page[prev]=` (parameter present, but has no value),
-`?include=auther` (invalid parameter value, perhaps a typo), `?felds[author]=`,
-(invalid parameter key, perhaps a typo), `?redirect_to=http%3A%2F%2Fwww.owasp.org` (invalid
-parameter, in this case, a phishing attack), etc.
-
-### Using JSON API extensions
-
-Request and response using the [JSON PATCH
-Extension](http://jsonapi.org/extensions/jsonpatch/):
-
-```http
-PATCH /posts/1
-Content-Type: application/vnd.api+json; ext=jsonpatch
-Accept: application/vnd.api+json; ext=jsonpatch
-
-[ { "op": "remove" } ]
-```
-
-```http
-HTTP/1.1 422 Unprocesssable Entity
-Content-Type: application/vnd.api+json; ext=jsonpatch
-
-[
-  {
-    "errors": [
-      {
-        "status": "422",
-        "detail": "Operation missing required keys: 'path'"
-      }
-    ]
-  }
-]
-```
-
-Notice that JSON PATCH is a special semantics and does not mean an HTTP PATCH request
-containing JSON.
-
-Request and response using the [Bulk extension](http://jsonapi.org/extensions/bulk/)
-
-```http
-PATCH /photos
-Content-Type: application/vnd.api+json; ext=bulk
-Accept: application/vnd.api+json; ext=bulk
-
-{
-  "data": [{
-    "type": "articles",
-    "id": "1",
-    "attributes": {
-      "title": "To TDD or Not"
-    }
-  }, {
-    "type": "articles",
-    "id": "2",
-    "attributes": {
-      "title": "LOL Engineering"
-    }
+  "errors": [{
+    "status": "400",
+    "detail": "JSON parse error - Expecting property name at line 1 column 2 (char 1)."
   }]
 }
 ```
 
+#### Invalid Query Parameters
+
+The `source` member can also be used to indicate that the error originated
+from a problem with a URI query parameter, like so:
+
+```http
+GET /api/posts/1?include=auther
+```
+
 ```http
 HTTP/1.1 400 Bad Request
 Content-Type: application/vnd.api+json
 
-
 {
   "errors": [
     {
-      "status": "404",
-      "source": { "pointer": "/data/articles/1" },
-      "detail": "Article with id 1 could not be found."
+      "source": { "parameter": "include" },
+      "title":  "Invalid Query Parameter",
+      "detail": "The resource does not have an `auther` relationship path."
     }
   ]
 }
 ```
 
-Since requests are transactional, as the [Bulk
-extension](http://jsonapi.org/extensions/bulk/#bulk-operations) describes: *"The
-state of the server MUST NOT be changed by a request if any individual operation fails."*
-Thus, even though one of the objects to update was found, one was not, so none get updated.
+In most cases, JSON API requires the server to return an error when it encounters
+an invalid value for a JSON API–defined query parameter. However, for API-specific
+query parameters (i.e. those not defined by JSON API), a server may choose to
+ignore an invalid parameter and have the request succeed, rather than respond with
+an error. API-specific query paramters must contain one non a-z character.
+
+Other examples of invalid parameters include: `?felds[author]=` (invalid parameter name)
+and `?redirect_to=http%3A%2F%2Fwww.owasp.org` (invalid parameter, in this case,
+a phishing attack), etc.
