@@ -227,17 +227,17 @@ Content-Type: application/vnd.api+json
   "errors": [
     {
       "status": "403",
-      "source": { "pointer": "data/attributes/secret-powers" },
+      "source": { "pointer": "/data/attributes/secret-powers" },
       "detail": "Editing secret powers is not authorized on Sundays."
     },
     {
       "status": "422",
-      "source": { "pointer": "data/attributes/volume" },
+      "source": { "pointer": "/data/attributes/volume" },
       "detail": "Volume does not, in fact, go to 11."
     },
     {
       "status": "500",
-      "source": { "pointer": "data/attributes/reputation" },
+      "source": { "pointer": "/data/attributes/reputation" },
       "title": "The backend responded with an error",
       "detail": "Reputation service not responding after three requests."
     }
@@ -247,7 +247,7 @@ Content-Type: application/vnd.api+json
 
 The only uniqueness constraint on error objects is the `id` field. Thus,
 multiple errors on the same attribute can each be given their own error
-object. The example below shows multiple errors on the `first-name` attribute:
+object. The example below shows multiple errors on the `"first-name"` attribute:
 
 ```http
 HTTP/1.1 422 Unprocessable Entity
@@ -256,12 +256,12 @@ Content-Type: application/vnd.api+json
 {
   "errors": [
     {
-      "source": { "pointer": "data/attributes/first-name" },
+      "source": { "pointer": "/data/attributes/first-name" },
       "title": "Invalid Attribute",
       "detail": "First name must contain at least three characters."
     },
     {
-      "source": { "pointer": "data/attributes/first-name" },
+      "source": { "pointer": "/data/attributes/first-name" },
       "title": "Invalid Attribute",
       "detail": "First name must contain an emoji."
     }
@@ -291,7 +291,7 @@ For the example below, imagine the API docs specifed the following mapping:
 > |  226 | Passwords do not match                                    |
 > |  227 | Password cannot be one of last five passwords             |
 
-Multiple errors on `password` attribute, with error `code`:
+Multiple errors on `"password"` attribute, with error `code`:
 
 ```http
 HTTP/1.1 422 Unprocessable Entity
@@ -302,19 +302,19 @@ Content-Type: application/vnd.api+json
   "errors": [
     {
       "code":   "123",
-      "source": { "pointer": "data/attributes/first-name" },
+      "source": { "pointer": "/data/attributes/first-name" },
       "title":  "Value is too short",
       "detail": "First name must contain at least three characters."
     },
     {
       "code":   "225",
-      "source": { "pointer": "data/attributes/password" },
+      "source": { "pointer": "/data/attributes/password" },
       "title": "Passwords must contain a letter, number, and punctuation character.",
       "detail": "The password provided is missing a punctuation character."
     },
     {
       "code":   "226",
-      "source": { "pointer": "data/attributes/password" },
+      "source": { "pointer": "/data/attributes/password" },
       "title": "Password and password confirmation do not match."
     }
   ]
@@ -351,19 +351,21 @@ Content-Type: application/vnd.api+json
 {
   "errors": [
     {
-      "source": { "pointer": "/" },
+      "source": { "pointer": "" },
       "detail":  "Missing `data` Member at document's top level."
     }
   ]
 }
 ```
 
-It uses `source` to point to the top-level of the document (`"/"`).
-(Pointing to `"/data` would be invalid because the request document did
+It uses `source` to point to the top-level of the document (`""`).
+(Pointing to "/" would be an appropriate reference to the string
+`"some value"` in the request document `{"": "some value"}`.
+Pointing to `"/data"` would be invalid because the request document did
 not have a value at `"/data"`, and `source` is always given with reference
 to the request document.)
 
-Note that if the server cannot parse the request as valid JSON, including
+If the server cannot parse the request as valid JSON, including
 `source` doesn't make sense (because there's no JSON document for `source` to
 refer to). Here's how the server might respond to an invalid JSON document:
 
@@ -404,7 +406,8 @@ In most cases, JSON API requires the server to return an error when it encounter
 an invalid value for a JSON API–defined query parameter. However, for API-specific
 query parameters (i.e. those not defined by JSON API), a server may choose to
 ignore an invalid parameter and have the request succeed, rather than respond with
-an error. API-specific query paramters must contain one non a-z character.
+an error. [API-specific query parameters must contain one non a-z
+character.](http://jsonapi.org/format/#query-parameters)
 
 Other examples of invalid parameters include: `?felds[author]=` (invalid parameter name)
 and `?redirect_to=http%3A%2F%2Fwww.owasp.org` (invalid parameter, in this case,
