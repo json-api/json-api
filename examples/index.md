@@ -141,6 +141,9 @@ HTTP/1.1 200 OK
 Content-Type: application/vnd.api+json
 
 {
+  "meta": {
+    "total-pages": 13
+  },
   "data": [
     {
       "type": "articles",
@@ -162,3 +165,9 @@ Content-Type: application/vnd.api+json
   }
 }
 ```
+
+Note: Putting a property like `"total-pages"` in `"meta"` can be a convenient way
+to indicate to clients the total number of pages in a collection (as opposed to
+the `"last"` link, which simply gives the URI of the last page). However, all
+`"meta"` values are implementation-specific, so you can call this member whatever
+you like (`"total"`, `"count"`, etc.) or not use it at all.
