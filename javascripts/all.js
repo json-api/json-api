@@ -17,18 +17,30 @@ $(document).ready(function() {
 function fixElement(element, offset) {
     if(element.length == 0) return;
 
+    var $window = $(window);
+    var elementBottom = element.height() + offset;
     var affixWaypoint = element.offset().top - offset;
+    var shouldFix = $window.height() > elementBottom;
 
-    $(window).scroll(function(event) {
-        var scrollPosition = $(window).scrollTop();
+    function updatePosition() {
+        var scrollPosition = $window.scrollTop();
 
-        if(scrollPosition >= affixWaypoint) {
+        if(shouldFix && scrollPosition >= affixWaypoint) {
             element.css('position', 'fixed');
             element.css('top', offset + 'px');
         } else {
             element.css('position', 'relative');
             element.css('top', '0');
         }
+    }
+
+    $(window).resize(function(event) {
+        shouldFix = $window.height() > elementBottom;
+        updatePosition();
+    });
+
+    $(window).scroll(function(event) {
+        updatePosition();
     });
 }
 
