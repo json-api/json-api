@@ -14,28 +14,35 @@ $(document).ready(function() {
     fixElement($(".sidebar"), 50);
 });
 
-function fixElement(element, offset) {
-    if(element.length == 0) return;
+function fixElement($sidebar, offset) {
+    if($sidebar.length == 0) return;
 
-    var affixWaypoint = element.offset().top - offset;
+    var $heading = $sidebar.find('nav > h1');
+    var $list = $sidebar.find('nav > ol');
+
+    var affixWaypoint = $sidebar.offset().top - offset;
 
     $(window).scroll(function(event) {
         var scrollPosition = $(window).scrollTop();
 
         if(scrollPosition >= affixWaypoint) {
-            element.css({
+            $heading.css({
+              position: 'fixed',
+              top: offset + 'px',
+            });
+
+            $list.css({
                 position: 'fixed',
-                top: offset + 'px',
+                top: (offset + $heading.outerHeight(true)) + 'px',
                 bottom: '0',
-                overflow: 'scroll',
                 paddingBottom: offset + 'px'
             });
         } else {
-            element.css({
+            $heading.css({position: 'relative', top: '0'})
+            $list.css({
                 position: 'relative',
                 top: '',
                 bottom: '',
-                overflow: '',
                 paddingBottom: ''
             });
         }
@@ -89,7 +96,7 @@ function createOutlineFromElement(element) {
 
 /**
  * Creates a nested list from an array in the form returned by `createOutlineFromElement`.
- * 
+ *
  * @param  {array}   outline The outline from which to create a navigation list.
  * @return {element}        The HTML element containing the navigation list.
  */
