@@ -23,11 +23,21 @@ function fixElement(element, offset) {
         var scrollPosition = $(window).scrollTop();
 
         if(scrollPosition >= affixWaypoint) {
-            element.css('position', 'fixed');
-            element.css('top', offset + 'px');
+            element.css({
+                position: 'fixed',
+                top: offset + 'px',
+                bottom: '0',
+                overflow: 'scroll',
+                paddingBottom: offset + 'px'
+            });
         } else {
-            element.css('position', 'relative');
-            element.css('top', '0');
+            element.css({
+                position: 'relative',
+                top: '',
+                bottom: '',
+                overflow: '',
+                paddingBottom: ''
+            });
         }
     });
 }
