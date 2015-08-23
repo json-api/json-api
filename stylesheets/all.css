@@ -269,7 +269,13 @@ footer {
   margin-top: 8px;
   float: left; }
   .sidebar h1 {
-    font-size: 15px; }
+    font-size: 15px;
+    background-color: white;
+    z-index: 1;
+    width: 250px; }
+  .sidebar nav > ol {
+    width: 250px;
+    overflow: scroll; }
   @media screen and (max-width: 995px) {
     .sidebar {
       display: none; } }
