@@ -57,6 +57,8 @@ assembled to vet them.
 * [lode / jsonapi](https://github.com/lode/jsonapi) a simple and friendly library, easy to understand for people without knowledge of the specification.
 * [woohoolabs / yin](https://github.com/woohoolabs/yin) is a library for advanced users aiming for efficiency and elegance.
 * [nilportugues / json-api](https://github.com/nilportugues/json-api) Serializer transformers outputting valid API responses in JSON and JSON API formats.
+* [nilportugues / symfony2-jsonapi-transformer](https://github.com/nilportugues/symfony2-jsonapi-transformer) Symfony 2 JSON API Transformer Bundle outputting valid API responses in JSON and JSON API formats.
+* [nilportugues / laravel5-jsonapi-transformer](https://github.com/nilportugues/laravel5-jsonapi-transformer) Laravel 5 JSON API Transformer Package outputting valid API responses in JSON and JSON API formats.
 
 ### Node.js <a href="#server-libraries-node-js" id="server-libraries-node-js" class="headerlink"></a>
 * [Fortune.js](http://fortunejs.com) is a library that includes a [comprehensive implementation of JSON API](https://github.com/fortunejs/fortune-json-api).
