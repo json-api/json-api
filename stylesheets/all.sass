@@ -5,7 +5,7 @@
 /** Config */
 
 $page-width: 955px
-$sidebar-width: 250px
+$sidebar-width: 230px
 $page-padding: 20px
 
 $mobile-breakpoint: 800px
@@ -227,7 +227,7 @@ footer
 
   nav > ol
     width: $sidebar-width
-    overflow: scroll
+    overflow-y: auto
 
   // Hide the sidebar on small viewports
   @media screen and (max-width: $page-width + ($page-padding * 2))
@@ -237,7 +237,7 @@ footer
 @media screen and (min-width: $page-width + ($page-padding * 2))
   .sidebar + .content
     float: right
-    max-width: $page-width - $sidebar-width
+    max-width: $page-width - $sidebar-width - 20px
 
 
 /** Document outline */

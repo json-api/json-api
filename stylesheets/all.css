@@ -265,17 +265,17 @@ footer {
   margin-bottom: 50px; }
 
 .sidebar {
-  width: 250px;
+  width: 230px;
   margin-top: 8px;
   float: left; }
   .sidebar h1 {
     font-size: 15px;
     background-color: white;
     z-index: 1;
-    width: 250px; }
+    width: 230px; }
   .sidebar nav > ol {
-    width: 250px;
-    overflow: scroll; }
+    width: 230px;
+    overflow-y: auto; }
   @media screen and (max-width: 995px) {
     .sidebar {
       display: none; } }
