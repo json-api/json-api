@@ -11,42 +11,47 @@ $(document).ready(function() {
     }
 
     // Scroll affix
-    fixElement($(".sidebar"), 50);
+    fixElement($(".sidebar"), $("footer"), 52);
 });
 
-function fixElement($sidebar, offset) {
+function fixElement($sidebar, $footer, offset) {
     if($sidebar.length == 0) return;
 
-    var $heading = $sidebar.find('nav > h1');
+    var $window = $(window);
+    var $nav = $sidebar.find('nav');
     var $list = $sidebar.find('nav > ol');
 
     var affixWaypoint = $sidebar.offset().top - offset;
+    var windowHeight, headingHeight, footerOffsetTop;
 
-    $(window).scroll(function(event) {
-        var scrollPosition = $(window).scrollTop();
+    // function to set heights + css values that need to be recomputed on resize.
+    var computeAndAdjustHeights = function() {
+      windowHeight = $window.height();
+      headingHeight = $sidebar.find('h1').outerHeight(true);
+      footerOffsetTop = $footer.offset().top;
 
-        if(scrollPosition >= affixWaypoint) {
-            $heading.css({
-              position: 'fixed',
-              top: offset + 'px',
-            });
+      $list.css({height: 'calc(100% - ' + headingHeight + 'px)'});
+    }
 
-            $list.css({
-                position: 'fixed',
-                top: (offset + $heading.outerHeight(true)) + 'px',
-                bottom: '0',
-                paddingBottom: offset + 'px'
-            });
-        } else {
-            $heading.css({position: 'relative', top: '0'})
-            $list.css({
-                position: 'relative',
-                top: '',
-                bottom: '',
-                paddingBottom: ''
+    var scrollHandler = function(event) {
+        var scrollPosition = $window.scrollTop();
+        var footerPxOnScreen = Math.max(0, (scrollPosition + windowHeight) - footerOffsetTop);
+
+        if(scrollPosition < affixWaypoint) {
+            $nav.css({position: ''});
+        }
+        else {
+            $nav.css({
+                'position': 'fixed',
+                'top': (offset - footerPxOnScreen) + 'px',
+                'bottom': (0 + footerPxOnScreen) + 'px'
             });
         }
-    });
+    }
+
+    computeAndAdjustHeights();
+    $window.resize(function() { computeAndAdjustHeights(); scrollHandler(); });
+    $window.scroll(scrollHandler);
 }
 
 /**

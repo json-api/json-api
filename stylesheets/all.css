@@ -295,7 +295,8 @@ footer {
       padding: 0 0 0 10px; }
   .document-outline a {
     text-decoration: none;
-    color: inherit; }
+    color: inherit;
+    display: block; }
     .document-outline a:hover {
       color: #5a5a5a; }
 
