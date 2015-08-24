@@ -1095,9 +1095,9 @@ strategy might use query parameters such as `page[number]` and `page[size]`,
 an offset-based strategy might use `page[offset]` and `page[limit]`, while a
 cursor-based strategy might use `page[cursor]`.
 
-> Note: The above example URI shows unencoded `[` and `]` characters simply
-for readability. In practice, these characters must be percent-encoded, as
-noted in the base specification.
+> Note: The example query parameters above use unencoded `[` and `]` characters
+simply for readability. In practice, these characters must be percent-encoded,
+per the requirements in [RFC 3986](http://tools.ietf.org/html/rfc3986#section-3.4).
 
 > Note: This section applies to any endpoint that responds with a resource
 collection as primary data, regardless of the request type.

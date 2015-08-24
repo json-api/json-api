@@ -166,7 +166,11 @@ Content-Type: application/vnd.api+json
 }
 ```
 
-Note: Putting a property like `"total-pages"` in `"meta"` can be a convenient way
+> Note: The above example URIs show unencoded `[` and `]` characters simply
+for readability. In practice, these characters must be percent-encoded, as
+noted in the base specification.
+
+> Note: Putting a property like `"total-pages"` in `"meta"` can be a convenient way
 to indicate to clients the total number of pages in a collection (as opposed to
 the `"last"` link, which simply gives the URI of the last page). However, all
 `"meta"` values are implementation-specific, so you can call this member whatever
