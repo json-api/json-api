@@ -192,16 +192,24 @@ footer
   font-size: 12px
   color: #B8B8B8
 
+  .site-wrapper
+    margin-top: 0
+    margin-bottom: 0
+    line-height: 0
+    text-align: justify
+
+    &:after
+      content: ''
+      display: inline-block
+      width: 100%
+
   span
     display: inline-block
-    margin: 0 10px
+    vertical-align: middle
 
   .social-links span
     +hide-text
-
-  .license
-    margin: 15px 0 10px 0
-    text-align: center
+    margin: 0 10px
 
 
 /** Content */

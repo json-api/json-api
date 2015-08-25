@@ -241,17 +241,24 @@ footer {
   text-align: center;
   font-size: 12px;
   color: #B8B8B8; }
+  footer .site-wrapper {
+    margin-top: 0;
+    margin-bottom: 0;
+    text-align: justify;
+    line-height: 0; }
+    footer .site-wrapper:after {
+      content: "";
+      display: inline-block;
+      width: 100%; }
   footer span {
     display: inline-block;
-    margin: 0 10px; }
+    vertical-align: middle; }
   footer .social-links span {
     text-indent: -119988px;
     overflow: hidden;
     text-align: left;
-    text-transform: capitalize; }
-  footer .license {
-    margin: 15px 0 10px 0;
-    text-align: center; }
+    text-transform: capitalize;
+    margin: 0 10px; }
 
 /** Content */
 .site-wrapper {
