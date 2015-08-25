@@ -1,6 +1,7 @@
 ---
 layout: page
 title: Frequently Asked Questions
+show_sidebar: true
 ---
 
 ## What is the meaning of JSON API's version? <a href="#what-is-the-meaning-of-json-apis-version" id="what-is-the-meaning-of-json-apis-version" class="headerlink"></a>
