@@ -19,7 +19,7 @@ port: 9876
 navigation:
 - title: JSON API
   url: /
-- title: Format
+- title: Specification
   url: /format/
 - title: Extensions
   url: /extensions/
