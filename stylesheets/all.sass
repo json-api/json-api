@@ -116,7 +116,7 @@ p > code, li > code
     a
       color: darken($color-main, 80%)
 
-  .version span
+  .version .pill
     display: inline-block
     margin-top: 2px
     padding: 1px 6px
@@ -125,6 +125,11 @@ p > code, li > code
     font-weight: bold
     color: white
     +border-radius($border-radius-main)
+
+    .stable
+      text-transform: uppercase
+      letter-spacing: .2px
+      text-rendering: optimizeLegibility
 
 
 /** Header */

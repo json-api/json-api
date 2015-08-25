@@ -164,7 +164,7 @@ p > code, li > code {
     text-decoration: none; }
   .site-nav .active a {
     color: black; }
-  .site-nav .version span {
+  .site-nav .version .pill {
     display: inline-block;
     margin-top: 2px;
     padding: 1px 6px;
@@ -175,6 +175,10 @@ p > code, li > code {
     -moz-border-radius: 4px;
     -webkit-border-radius: 4px;
     border-radius: 4px; }
+    .site-nav .version .pill .stable {
+      text-transform: uppercase;
+      letter-spacing: 0.2px;
+      text-rendering: optimizeLegibility; }
 
 /** Header */
 header {
@@ -244,8 +248,8 @@ footer {
   footer .site-wrapper {
     margin-top: 0;
     margin-bottom: 0;
-    text-align: justify;
-    line-height: 0; }
+    line-height: 0;
+    text-align: justify; }
     footer .site-wrapper:after {
       content: "";
       display: inline-block;
