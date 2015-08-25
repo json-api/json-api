@@ -265,16 +265,16 @@ footer {
   margin-bottom: 50px; }
 
 .sidebar {
-  width: 230px;
+  width: 220px;
   margin-top: 8px;
   float: left; }
   .sidebar h1 {
     font-size: 15px;
     background-color: white;
     z-index: 1;
-    width: 230px; }
+    width: 220px; }
   .sidebar nav > ol {
-    width: 230px;
+    width: 220px;
     overflow-y: auto; }
   @media screen and (max-width: 995px) {
     .sidebar {
@@ -283,7 +283,7 @@ footer {
 @media screen and (min-width: 995px) {
   .sidebar + .content {
     float: right;
-    max-width: 705px; } }
+    max-width: 695px; } }
 /** Document outline */
 .document-outline {
   font-size: 13px; }
