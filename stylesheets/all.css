@@ -287,14 +287,17 @@ footer {
   .sidebar nav > ol {
     width: 220px;
     overflow-y: auto; }
-  @media screen and (max-width: 995px) {
+  @media screen and (max-width: 935px) {
     .sidebar {
       display: none; } }
 
-@media screen and (min-width: 995px) {
+@media screen and (min-width: 936px) {
   .sidebar + .content {
-    float: right;
-    max-width: 695px; } }
+    margin-left: 235px;
+    padding-left: calc(100vw - 936px); } }
+@media screen and (min-width: 961px) {
+  .sidebar + .content {
+    padding-left: 25px; } }
 /** Document outline */
 .document-outline {
   padding-right: 40px;
