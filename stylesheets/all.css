@@ -113,9 +113,13 @@ h5 {
   font-weight: 500;
   font-size: inherit; }
 
-p {
+p, table {
   line-height: 1.7333;
   margin: 0 0 13px 0; }
+
+th {
+  text-align: left;
+  padding-right: 1em; }
 
 a {
   color: #5a5a5a; }
@@ -310,7 +314,8 @@ footer {
       padding: 0 0 0 10px; }
   .document-outline a {
     text-decoration: none;
-    color: inherit; }
+    color: inherit;
+    display: block; }
     .document-outline a:hover {
       color: #5a5a5a; }
 

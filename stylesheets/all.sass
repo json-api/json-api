@@ -66,9 +66,13 @@ h5
   font-weight: 500
   font-size: inherit
 
-p
+p, table
   line-height: 1.7333
   margin: 0 0 13px 0
+
+th
+  text-align: left
+  padding-right: 1em
 
 a
   color: $color-main
@@ -248,11 +252,12 @@ footer
     display: none
 
 // Push the content to the right, except on small viewports
+// The padding-left: calc(...) functions to grow the gutter gradually by 25px
+// as the window grows. If this isn't supported, it's ok; the gutter width will
+// just jump to it's final size at the next media query.
 @media screen and (min-width: $page-width + ($page-padding * 2) - 59px)
   .sidebar + .content
     margin-left: $sidebar-width + 15px
-    // grow the gutter gradually by 25px as the window grows. If this isn't
-    // supported, it's ok; the gutter width'll just jump at the next media query.
     padding-left: calc(100vw - #{$page-width + ($page-padding * 2) - 59px})
 
 @media screen and (min-width: $page-width + ($page-padding * 2) - 34px)
@@ -276,6 +281,7 @@ footer
   a
     text-decoration: none
     color: inherit
+    display: block
 
     &:hover
       color: $color-main
