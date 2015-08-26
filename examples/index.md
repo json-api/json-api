@@ -1,6 +1,7 @@
 ---
 layout: page
 title: Examples
+show_sidebar: true
 ---
 
 This page contains additional examples of how to apply various parts of the specification.
