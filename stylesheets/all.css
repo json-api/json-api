@@ -269,17 +269,17 @@ footer {
   margin-bottom: 50px; }
 
 .sidebar {
-  width: 250px;
+  width: 220px;
   margin-top: 8px;
   float: left; }
   .sidebar h1 {
     font-size: 15px;
     background-color: white;
     z-index: 1;
-    width: 250px; }
+    width: 220px; }
   .sidebar nav > ol {
-    width: 250px;
-    overflow: scroll; }
+    width: 220px;
+    overflow-y: auto; }
   @media screen and (max-width: 995px) {
     .sidebar {
       display: none; } }
@@ -287,7 +287,7 @@ footer {
 @media screen and (min-width: 995px) {
   .sidebar + .content {
     float: right;
-    max-width: 705px; } }
+    max-width: 695px; } }
 /** Document outline */
 .document-outline {
   padding-right: 40px;
@@ -300,7 +300,8 @@ footer {
       padding: 0 0 0 10px; }
   .document-outline a {
     text-decoration: none;
-    color: inherit; }
+    color: inherit;
+    display: block; }
     .document-outline a:hover {
       color: #5a5a5a; }
 
