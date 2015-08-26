@@ -288,12 +288,12 @@ forms due to localization.
 
 For the example below, imagine the API docs specifed the following mapping:
 
-> | Code | Problem                                                   |
-> |------|-----------------------------------------------------------|
-> |  123 | Value too short                                           |
-> |  225 | Password lacks a letter, number, or punctuation character |
-> |  226 | Passwords do not match                                    |
-> |  227 | Password cannot be one of last five passwords             |
+| Code | Problem                                                   |
+|------|-----------------------------------------------------------|
+|  123 | Value too short                                           |
+|  225 | Password lacks a letter, number, or punctuation character |
+|  226 | Passwords do not match                                    |
+|  227 | Password cannot be one of last five passwords             |
 
 Multiple errors on `"password"` attribute, with error `code`:
 

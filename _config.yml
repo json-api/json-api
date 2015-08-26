@@ -13,6 +13,8 @@ exclude:
   - ./public
   - ./stylesheets/*.scss
 markdown: redcarpet
+redcarpet:
+  extensions: ["tables"]
 pygments: false
 port: 9876
 
