@@ -84,6 +84,7 @@ has a page describing how to emit conformant JSON.
 
 ### Python <a href="#server-libraries-python" id="server-libraries-python" class="headerlink"></a>
 
+* [ripozo](https://github.com/vertical-knowledge/ripozo/) provides a framework for serving JSON API content (among other Hypermedia formats) in Flask, Django and more.
 * [Hyp](https://github.com/kalasjocke/hyp) is a library for creating json-api responses.
 * [SQLAlchemy-JSONAPI](https://github.com/coltonprovias/sqlalchemy-jsonapi) provides JSON API serialization for SQLAlchemy models.
 * [Django REST Framework JSON API](http://drf-json-api.readthedocs.org) provides JSON API parsing and rendering for the Django REST Framework.
