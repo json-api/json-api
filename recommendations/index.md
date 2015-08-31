@@ -149,7 +149,6 @@ Although JSON API does not specify the format of date and time fields, it is
 recommended that servers align with ISO 8601. [This W3C
 NOTE](http://www.w3.org/TR/NOTE-datetime) provides an overview of the
 recommended formats.
-=======
 
 ## Asynchronous Processing <a href="#asynchronous-processing" id="asynchronous-processing" class="headerlink"></a>
 
