@@ -112,7 +112,7 @@ has a page describing how to emit conformant JSON.
 * [katharsis](http://katharsis.io) has comprehensive coverage of standard allowing to create JSON:API compatible resources with dynamic relation based routing. 
 * [katharsis-core](https://github.com/katharsis-project/katharsis-core) is Java 8 based core library for [katharsis](http://katharsis.io) allowing to manage RESTful endpoints compliant with JSON API standard.
 * [katharsis-rs](https://github.com/katharsis-project/katharsis-rs) is adapter for [katharsis](http://katharsis.io) core module for all compatible JAX-RS based frameworks.
-* [katharsis-servlet](https://github.com/woonsan/katharsis-servlet) is a generic servlet/filter adapter for [katharsis](http://katharsis.io) core module. This module can be used in traditional servlet or filter based Java web applications, or even non-Servlet-API-based web applications such as Portal/Portlet, Wicket, etc.
+* [katharsis-servlet](https://github.com/katharsis-project/katharsis-servlet) is a generic servlet/filter adapter for [katharsis](http://katharsis.io) core module. This module can be used in traditional servlet or filter based Java web applications, or even non-Servlet-API-based web applications such as Portal/Portlet, Wicket, etc.
 
 ## Examples <a href="#examples" id="examples" class="headerlink"></a>
 
