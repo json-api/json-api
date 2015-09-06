@@ -31,14 +31,14 @@ Content-Type: application/vnd.api+json
     },
     "relationships": {
       "author": {
-        "data": {"id": 42, "type": "people"}
+        "data": {"id": "42", "type": "people"}
       }
     }
   }],
   "included": [
     {
       "type": "people",
-      "id": 42,
+      "id": "42",
       "attributes": {
         "name": "John",
         "age": 80,
@@ -75,14 +75,14 @@ Content-Type: application/vnd.api+json
     },
     "relationships": {
       "author": {
-        "data": {"id": 42, "type": "people"}
+        "data": {"id": "42", "type": "people"}
       }
     }
   }],
   "included": [
     {
       "type": "people",
-      "id": 42,
+      "id": "42",
       "attributes": {
         "name": "John"
       }
@@ -113,7 +113,7 @@ Content-Type: application/vnd.api+json
   "included": [
     {
       "type": "people",
-      "id": 42,
+      "id": "42",
       "attributes": {
         "name": "John"
       }
