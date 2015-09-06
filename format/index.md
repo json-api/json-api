@@ -93,7 +93,7 @@ A document **MAY** contain any of these top-level members:
 
 * `jsonapi`: an object describing the server's implementation
 * `links`: a [links object][links] related to the primary data.
-* `included`: an array of resource objects that are related to the primary
+* `included`: an array of [resource objects] that are related to the primary
   data and/or each other ("included resources").
 
 If a document does not contain a top-level `data` key, the `included` member
@@ -111,11 +111,11 @@ of resources targeted by a request.
 
 Primary data **MUST** be either:
 
-* a single resource object, a single [resource identifier object], or `null`,
+* a single [resource object][resource objects], a single [resource identifier object], or `null`,
   for requests that target single resources
-* an array of resource objects, an array of
+* an array of [resource objects], an array of
   [resource identifier objects][resource identifier object], or
-  an empty array ([]), for requests that target resource collections
+  an empty array (`[]`), for requests that target resource collections
 
 For example, the following primary data is a single resource object:
 
@@ -195,14 +195,14 @@ Here's how an article (i.e. a resource of type "articles") might appear in a doc
 
 #### Identification <a href="#document-resource-object-identification" id="document-resource-object-identification" class="headerlink"></a>
 
-Every resource object **MUST** contain an `id` member and a `type` member.
+Every [resource object][resource objects] **MUST** contain an `id` member and a `type` member.
 The values of the `id` and `type` members **MUST** be strings.
 
 Within a given API, each resource object's `type` and `id` pair **MUST**
 identify a single, unique resource. (The set of URIs controlled by a server,
 or multiple servers acting as one, constitute an API.)
 
-The `type` member is used to describe resource objects that share common
+The `type` member is used to describe [resource objects] that share common
 attributes and relationships.
 
 The values of `type` members **MUST** adhere to the same constraints as
@@ -217,7 +217,7 @@ consistently throughout an implementation.
 A resource object's [attributes] and its [relationships] are collectively called
 its "[fields]".
 
-Fields for a resource object **MUST** share a common namespace with each
+Fields for a [resource object][resource objects] **MUST** share a common namespace with each
 other and with `type` and `id`. In other words, a resource can not have an
 attribute and relationship with the same name, nor can it have an attribute
 or relationship named `type` or `id`.
@@ -226,7 +226,7 @@ or relationship named `type` or `id`.
 
 The value of the `attributes` key **MUST** be an object (an "attributes
 object"). Members of the attributes object ("attributes") represent information
-about the resource object in which it's defined.
+about the [resource object][resource objects] in which it's defined.
 
 Attributes may contain any valid JSON value.
 
@@ -245,7 +245,7 @@ alongside other information to be represented in a resource object, these keys
 
 The value of the `relationships` key **MUST** be an object (a "relationships
 object"). Members of the relationships object ("relationships") represent
-references from the resource object in which it's defined to other resource
+references from the [resource object][resource objects] in which it's defined to other resource
 objects.
 
 Relationships may be to-one or to-many.
@@ -269,7 +269,7 @@ A relationship object that represents a to-many relationship **MAY** also contai
 
 #### Related Resource Links <a href="#document-resource-object-related-resource-links" id="document-resource-object-related-resource-links" class="headerlink"></a>
 
-A "related resource link" provides access to resource objects [linked][links]
+A "related resource link" provides access to [resource objects] [linked][links]
 in a [relationship][relationships]. When fetched, the related resource object(s)
 are returned as the response's primary data.
 
@@ -285,7 +285,7 @@ changes.
 #### Resource Linkage <a href="#document-resource-object-linkage" id="document-resource-object-linkage" class="headerlink"></a>
 
 Resource linkage in a [compound document] allows a client to link together all
-of the included resource objects without having to `GET` any URLs via [links].
+of the included [resource objects] without having to `GET` any URLs via [links].
 
 Resource linkage **MUST** be represented as one of the following:
 
@@ -332,7 +332,7 @@ link to fetch the resource objects, and linkage information.
 
 #### Resource Links <a href="#document-resource-object-links" id="document-resource-object-links" class="headerlink"></a>
 
-The optional `links` member within each resource object contains [links]
+The optional `links` member within each [resource object][resource objects] contains [links]
 related to the resource.
 
 If present, this links object **MAY** contain a `self` [link][links] that
@@ -373,7 +373,7 @@ include related resources along with the requested primary resources. Such
 responses are called "compound documents".
 
 In a compound document, all included resources **MUST** be represented as an
-array of resource objects in a top-level `included` member.
+array of [resource objects] in a top-level `included` member.
 
 Compound documents require "full linkage", meaning that every included
 resource **MUST** be identified by at least one [resource identifier object]
@@ -384,8 +384,8 @@ when relationship fields that would otherwise contain linkage data are
 excluded via [sparse fieldsets](#fetching-sparse-fieldsets).
 
 > Note: Full linkage ensures that included resources are related to either
-the primary data (which could be resource objects or resource identifier
-objects) or to each other.
+the primary data (which could be [resource objects] or [resource identifier
+objects][resource identifier object]) or to each other.
 
 A complete example document with multiple included relationships:
 
@@ -453,14 +453,14 @@ A complete example document with multiple included relationships:
 }
 ```
 
-A [compound document] **MUST NOT** include more than one resource object for
+A [compound document] **MUST NOT** include more than one [resource object][resource objects] for
 each `type` and `id` pair.
 
 > Note: In a single document, you can think of the `type` and `id` as a
-composite key that uniquely references resource objects in another part of
+composite key that uniquely references [resource objects] in another part of
 the document.
 
-> Note: This approach ensures that a single canonical resource object is
+> Note: This approach ensures that a single canonical [resource object][resource objects] is
 returned with each response, even when the same resource is referenced
 multiple times.
 
@@ -716,7 +716,7 @@ might correspond to a single resource, but doesn't currently.
 > Note: Consider, for example, a request to fetch a to-one related resource link.
 This request would respond with `null` when the relationship is empty (such that
 the link is corresponding to no resources) but with the single related resource's
-resource object otherwise.
+[resource object][resource objects] otherwise.
 
 For example, a `GET` request to an individual article could return:
 
@@ -911,7 +911,7 @@ If an endpoint does not support the `include` parameter, it must respond with
 `400 Bad Request` to any requests that include it.
 
 If an endpoint supports the `include` parameter and a client supplies it,
-the server **MUST NOT** include unrequested resource objects in the `included`
+the server **MUST NOT** include unrequested [resource objects] in the `included`
 section of the [compound document].
 
 The value of the `include` parameter **MUST** be a comma-separated (U+002C
@@ -922,8 +922,8 @@ If a server is unable to identify a relationship path or does not support
 inclusion of resources from a path, it **MUST** respond with 400 Bad Request.
 
 > Note: For example, a relationship path could be `comments.author`, where
-`comments` is a relationship listed under a `articles` resource object, and
-`author` is a relationship listed under a `comments` resource object.
+`comments` is a relationship listed under a `articles` [resource object][resource objects], and
+`author` is a relationship listed under a `comments` [resource object][resource objects].
 
 For instance, comments could be requested with an article:
 
@@ -1119,7 +1119,7 @@ also allow existing resources to be modified or deleted.
 A request **MUST** completely succeed or fail (in a single "transaction"). No
 partial updates are allowed.
 
-> Note: The `type` member is required in every resource object throughout requests and
+> Note: The `type` member is required in every [resource object][resource objects] throughout requests and
 responses in JSON API. There are some cases, such as when `POST`ing to an
 endpoint representing heterogenous data, when the `type` could not be inferred
 from the endpoint. However, picking and choosing when it is required would be
@@ -1130,8 +1130,8 @@ always required.
 ### Creating Resources <a href="#crud-creating" id="crud-creating" class="headerlink"></a>
 
 A resource can be created by sending a `POST` request to a URL that represents
-a collection of resources. The request **MUST** include a single resource object
-as primary data. The resource object **MUST** contain at least a `type` member.
+a collection of resources. The request **MUST** include a single [resource object][resource objects]
+as primary data. The [resource object][resource objects] **MUST** contain at least a `type` member.
 
 For instance, a new photo might be created with the following request:
 
@@ -1157,7 +1157,7 @@ Accept: application/vnd.api+json
 ```
 
 If a relationship is provided in the `relationships` member of the
-resource object, its value **MUST** be a relationship object with a `data`
+[resource object][resource objects], its value **MUST** be a relationship object with a `data`
 member. The value of this key represents the linkage the new resource is to
 have.
 
@@ -1211,7 +1211,7 @@ of the newly created resource.
 The response **MUST** also include a document that contains the primary
 resource created.
 
-If the resource object returned by the response contains a `self` key in its
+If the [resource object][resource objects] returned by the response contains a `self` key in its
 `links` member and a `Location` header is provided, the value of the `self`
 member **MUST** match the value of the `Location` header.
 
@@ -1264,7 +1264,7 @@ A server **MUST** return `409 Conflict` when processing a `POST` request to
 create a resource with a client-generated ID that already exists.
 
 A server **MUST** return `409 Conflict` when processing a `POST` request in
-which the resource object's `type` is not among the type(s) that constitute the
+which the [resource object][resource objects]'s `type` is not among the type(s) that constitute the
 collection represented by the endpoint.
 
 A server **SHOULD** include error details and provide enough information to
@@ -1286,11 +1286,11 @@ A resource can be updated by sending a `PATCH` request to the URL that
 represents the resource.
 
 The URL for a resource can be obtained in the `self` link of the resource
-object. Alternatively, when a `GET` request returns a single resource object as
+object. Alternatively, when a `GET` request returns a single [resource object][resource objects] as
 primary data, the same request URL can be used for updates.
 
-The `PATCH` request **MUST** include a single resource object as primary data.
-The resource object **MUST** contain `type` and `id` members.
+The `PATCH` request **MUST** include a single [resource object][resource objects] as primary data.
+The [resource object][resource objects] **MUST** contain `type` and `id` members.
 
 For example:
 
