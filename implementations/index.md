@@ -35,7 +35,7 @@ assembled to vet them.
 ### iOS <a href="#client-libraries-ios" id="client-libraries-ios" class="headerlink"></a>
 
 * [jsonapi-ios](https://github.com/joshdholtz/jsonapi-ios) is a library for loading data from a JSON API datasource. Parses JSON API data into models with support for auto-linking of resources and custom model classes.
-* [Spine](https://github.com/wvteijlingen/spine) is a Swift library for working with JSON:API APIs. It supports mapping to custom model classes, fetching, advanced querying, linking and persisting.
+* [Spine](https://github.com/wvteijlingen/spine) is a Swift library for working with JSON API APIs. It supports mapping to custom model classes, fetching, advanced querying, linking and persisting.
 
 ### Ruby <a href="#client-libraries-ruby" id="client-libraries-ruby" class="headerlink"></a>
 
@@ -63,11 +63,11 @@ assembled to vet them.
 ### Node.js <a href="#server-libraries-node-js" id="server-libraries-node-js" class="headerlink"></a>
 * [Fortune.js](http://fortunejs.com) is a library that includes a [comprehensive implementation of JSON API](https://github.com/fortunejs/fortune-json-api).
 * [json-api](https://www.npmjs.org/package/json-api) turns an Express + Mongoose app into a JSON-API server.
-* [endpoints](https://github.com/endpoints) is an implementation of JSON-API using [Bookshelf](http://bookshelfjs.org).
+* [endpoints](https://github.com/endpoints) is an implementation of JSON API using [Bookshelf](http://bookshelfjs.org).
 * [YAYSON](https://github.com/confetti/yayson) is an isomorphic library for serializing and reading JSON API data. Simply use it with plain objects or extend it to fit your ORM (currently it has an adapter for [Sequelize](http://sequelizejs.com)).
 * [jsonapi-serializer](https://github.com/SeyZ/jsonapi-serializer) is a Node.js framework agnostic library for serializing your data to JSON API.
 * [jsonapi-server](https://github.com/holidayextras/jsonapi-server) is a fully featured NodeJS sever implementation of json:api.
-* [jsonapify](https://github.com/alex94puchades/jsonapify) is an unintrusive, well-tested and easy-to-use library for the development of JSON-API (or similar) APIs. It integrates nicely with Mongoose models as connect-compatible middleware. Its development is very recent though, which only means that feature requests and feedback is more than welcome!
+* [jsonapify](https://github.com/alex94puchades/jsonapify) is an unintrusive, well-tested and easy-to-use library for the development of JSON API (or similar) APIs. It integrates nicely with Mongoose models as connect-compatible middleware. Its development is very recent though, which only means that feature requests and feedback is more than welcome!
 
 ### Ruby <a href="#server-libraries-ruby" id="server-libraries-ruby" class="headerlink"></a>
 
