@@ -28,7 +28,6 @@ body
   line-height: 1.6
   -webkit-font-smoothing: antialiased
 
-
 /** Typography */
 
 .headerlink
@@ -122,13 +121,14 @@ p > code, li > code
 
   .version .pill
     display: inline-block
-    margin-top: 2px
     padding: 1px 6px
-    background-color: lighten($color-main, 10%)
+    background-color: lighten($color-main, 11%)
     font-size: 12px
     font-weight: bold
     color: white
     +border-radius($border-radius-main)
+    position: relative
+    top: -1px
 
     .stable
       text-transform: uppercase

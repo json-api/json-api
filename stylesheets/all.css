@@ -170,15 +170,16 @@ p > code, li > code {
     color: black; }
   .site-nav .version .pill {
     display: inline-block;
-    margin-top: 2px;
     padding: 1px 6px;
-    background-color: #747474;
+    background-color: #767676;
     font-size: 12px;
     font-weight: bold;
     color: white;
     -moz-border-radius: 4px;
     -webkit-border-radius: 4px;
-    border-radius: 4px; }
+    border-radius: 4px;
+    position: relative;
+    top: -1px; }
     .site-nav .version .pill .stable {
       text-transform: uppercase;
       letter-spacing: 0.2px;
