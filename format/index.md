@@ -1,6 +1,6 @@
 ---
 layout: page
-title: "Format"
+title: "Specification"
 show_sidebar: true
 ---
 

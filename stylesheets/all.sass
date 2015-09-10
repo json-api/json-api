@@ -28,7 +28,6 @@ body
   line-height: 1.6
   -webkit-font-smoothing: antialiased
 
-
 /** Typography */
 
 .headerlink
@@ -120,15 +119,21 @@ p > code, li > code
     a
       color: darken($color-main, 80%)
 
-  .version span
+  .version .pill
     display: inline-block
-    margin-top: 2px
     padding: 1px 6px
-    background-color: lighten($color-main, 10%)
+    background-color: lighten($color-main, 11%)
     font-size: 12px
     font-weight: bold
     color: white
     +border-radius($border-radius-main)
+    position: relative
+    top: -1px
+
+    .stable
+      text-transform: uppercase
+      letter-spacing: .2px
+      text-rendering: optimizeLegibility
 
 
 /** Header */
@@ -196,16 +201,24 @@ footer
   font-size: 12px
   color: #B8B8B8
 
+  .site-wrapper
+    margin-top: 0
+    margin-bottom: 0
+    line-height: 0
+    text-align: justify
+
+    &:after
+      content: ''
+      display: inline-block
+      width: 100%
+
   span
     display: inline-block
-    margin: 0 10px
+    vertical-align: middle
 
   .social-links span
     +hide-text
-
-  .license
-    margin: 15px 0 10px 0
-    text-align: center
+    margin: 0 10px
 
 
 /** Content */
@@ -233,16 +246,23 @@ footer
     width: $sidebar-width
     overflow-y: auto
 
-  // Hide the sidebar on small viewports
-  @media screen and (max-width: $page-width + ($page-padding * 2))
+  // Hide the sidebar on small viewports, but only after we've shrunk the
+  // main column to below a comfortable size (that's the -60px)
+  @media screen and (max-width: $page-width + ($page-padding * 2) - 60px)
     display: none
 
-// Float the content to the right, except on small viewports
-@media screen and (min-width: $page-width + ($page-padding * 2))
+// Push the content to the right, except on small viewports
+// The padding-left: calc(...) functions to grow the gutter gradually by 25px
+// as the window grows. If this isn't supported, it's ok; the gutter width will
+// just jump to it's final size at the next media query.
+@media screen and (min-width: $page-width + ($page-padding * 2) - 59px)
   .sidebar + .content
-    float: right
-    max-width: $page-width - $sidebar-width - 40px
+    margin-left: $sidebar-width + 15px
+    padding-left: calc(100vw - #{$page-width + ($page-padding * 2) - 59px})
 
+@media screen and (min-width: $page-width + ($page-padding * 2) - 34px)
+  .sidebar + .content
+    padding-left: 25px
 
 /** Document outline */
 

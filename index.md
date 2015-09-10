@@ -94,8 +94,6 @@ resources.
 
 JSON API covers creating and updating resources as well, not just responses.
 
-{% include status.md %}
-
 ## MIME Types <a href="#mime-types" id="mime-types" class="headerlink"></a>
 
 JSON API has been properly registered with the IANA. Its media
