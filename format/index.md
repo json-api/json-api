@@ -437,6 +437,11 @@ A complete example document with multiple included relationships:
     "attributes": {
       "body": "First!"
     },
+    "relationships": {
+      "author": {
+        "data": { "type": "people", "id": "2" }
+      }
+    },
     "links": {
       "self": "http://example.com/comments/5"
     }
@@ -445,6 +450,11 @@ A complete example document with multiple included relationships:
     "id": "12",
     "attributes": {
       "body": "I like XML better"
+    },
+    "relationships": {
+      "author": {
+        "data": { "type": "people", "id": "9" }
+      }
     },
     "links": {
       "self": "http://example.com/comments/12"

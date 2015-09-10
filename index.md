@@ -70,6 +70,11 @@ Here's an example response from a blog that implements JSON API:
     "attributes": {
       "body": "First!"
     },
+    "relationships": {
+      "author": {
+        "data": { "type": "people", "id": "2" }
+      }
+    },
     "links": {
       "self": "http://example.com/comments/5"
     }
@@ -78,6 +83,11 @@ Here's an example response from a blog that implements JSON API:
     "id": "12",
     "attributes": {
       "body": "I like XML better"
+    },
+    "relationships": {
+      "author": {
+        "data": { "type": "people", "id": "9" }
+      }
     },
     "links": {
       "self": "http://example.com/comments/12"
