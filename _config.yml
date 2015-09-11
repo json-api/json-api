@@ -18,6 +18,8 @@ redcarpet:
 pygments: false
 port: 9876
 
+latest_version: 1.0
+
 navigation:
 - title: JSON API
   url: /

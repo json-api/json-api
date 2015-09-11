@@ -26,7 +26,7 @@
           <li {% if url == link.url %}class="active"{% endif %}><a href="{{link.url}}" title="{{link.title}}">{{link.title}}</a></li>
         {% endfor %}
         <li class="version">
-          <a href="/format/#status" class="pill">v{% include version.md %} <span class="stable">Stable</span></a>
+          <a href="/format/#status" class="pill">v{{ site.latest_version }} <span class="stable">Stable</span></a>
         </li>
       </ul>
     </nav>
