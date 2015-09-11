@@ -15,8 +15,21 @@ exclude:
 markdown: redcarpet
 redcarpet:
   extensions: ["tables"]
-pygments: false
+highlighter: null
 port: 9876
+
+collections:
+  format:
+    output: true
+
+defaults:
+  - scope:
+      path: ""
+      type: format
+    values:
+      layout: page
+      title: Specification
+      show_sidebar: true
 
 latest_version: 1.0
 

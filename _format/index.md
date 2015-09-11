@@ -1,7 +1,5 @@
 ---
-layout: page
-title: "Specification"
-show_sidebar: true
+version: 1.0
 ---
 
 {% include status.md %}
