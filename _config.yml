@@ -28,8 +28,8 @@ defaults:
       type: format
     values:
       layout: page
-      title: Specification
       show_sidebar: true
+      is_spec_page: true
 
 latest_version: 1.0
 

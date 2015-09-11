@@ -5,8 +5,23 @@
     <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <!-- Use title if it's in the page YAML frontmatter -->
-    <title>JSON API - {{ page.title }}</title>
+    {% comment %}
+      Below, we're either dealing with a generic page or a page from the
+      specification collection. Generic pages have a title, so we identify
+      them that way. For specification pages, we build the title dynamically to
+      take into account the version number and it's relationship to the latest version.
+    {% endcomment %}
+
+    {% if page.title %}
+      {% comment %}We're on a generic page.{% endcomment %}
+      {% assign page_title = page.title %}
+
+    {% else %}
+      {% capture page_title %}
+        {% include title_for_version.md is_latest_version=page.is_latest_version is_upcoming_version=page.is_upcoming_version version=page.version %}
+      {% endcapture %}
+    {% endif %}
+    <title>JSON API &mdash; {{page_title|strip }}</title>
 
     <link href='http://fonts.googleapis.com/css?family=Titillium+Web:400,300,600' rel='stylesheet' type='text/css'>
     <link href="/stylesheets/normalize.css" media="screen" rel="stylesheet" type="text/css" />
@@ -53,7 +68,13 @@
       {% endif %}
       <div class="content">
         {% unless page.show_masthead %}
-          <h1>{{ page.title }}</h1>
+          <h1>
+            {% if page.is_spec_page %}
+              {{ page_title }}
+            {% else %}
+              {{ page.title }}
+            {% endif %}
+          </h1>
         {% endunless %}
         <section>
           {{ content }}
