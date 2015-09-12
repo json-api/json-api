@@ -2,8 +2,6 @@
 version: 1.0
 ---
 
-{% include status.md %}
-
 ## Introduction <a href="#introduction" id="introduction" class="headerlink"></a>
 
 JSON API is a specification for how a client should request that resources be

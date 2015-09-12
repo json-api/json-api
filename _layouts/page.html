@@ -107,6 +107,12 @@
           </h1>
         {% endunless %}
         <section>
+          {% if page.is_spec_page %}
+            {% capture status %}
+              {% include status.md version=page.version is_latest_version=page.is_latest_version is_upcoming_version=page.is_upcoming_version %}
+            {% endcapture %}
+            {{ status|strip|markdownify }}
+          {% endif %}
           {{ content }}
         </section>
       </div>
