@@ -292,6 +292,8 @@ footer {
   .sidebar nav > ol {
     width: 220px;
     overflow-y: auto; }
+  .sidebar .version-picker {
+    margin-bottom: 20px; }
   @media screen and (max-width: 935px) {
     .sidebar {
       display: none; } }

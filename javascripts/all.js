@@ -10,8 +10,10 @@ $(document).ready(function() {
         documentOutlineElement.append(navList);
     }
 
-    // Scroll affix
+    // Sidebar scroll affix
     fixElement($(".sidebar"), $("footer"), 52);
+
+    activateVersionPicker();
 });
 
 function fixElement($sidebar, $footer, offset) {
@@ -27,7 +29,7 @@ function fixElement($sidebar, $footer, offset) {
     // function to set heights + css values that need to be recomputed on resize.
     var computeAndAdjustHeights = function() {
       windowHeight = $window.height();
-      headingHeight = $sidebar.find('h1').outerHeight(true);
+      headingHeight = $sidebar.find('.sidebar-top').outerHeight(true);
       footerOffsetTop = $footer.offset().top;
 
       $list.css({height: 'calc(100% - ' + headingHeight + 'px)'});
@@ -124,4 +126,10 @@ function createArticleNavigationFromOutline(outline) {
     });
 
     return ol;
+}
+
+function activateVersionPicker() {
+    $('select.version-picker').change(function() {
+        window.location.href = $(this).find(':selected').val();
+    });
 }

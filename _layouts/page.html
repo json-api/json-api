@@ -62,7 +62,37 @@
       {% if page.show_sidebar %}
         <div class="sidebar">
           <nav class="document-outline" id="document-outline">
-            <h1>{{ page.title }}</h1>
+            {% comment %}
+              Substite the version picker for the sidebar title on spec pages.
+            {% endcomment %}
+            {% if page.is_spec_page %}
+              <select class="sidebar-top version-picker">
+                <option value="/format/"
+                  {% if page.is_latest_version %}selected{% endif %}
+                >
+                  Latest Version (v{{ site.latest_version }})
+                </option>
+                <option
+                  value="/format/upcoming/"
+                  {% if page.is_upcoming_version %}selected{% endif %}
+                >
+                  Upcoming Version (v{{ site.latest_version|plus:0.1 }})
+                </option>
+                <optgroup label="Old Versions/Permalinks">
+                  {% for spec_draft in site.format|sort:'version' %}
+                    {% if spec_draft.version %}
+                      <option value="/format/{{spec_draft.version}}"
+                        {% if page.version == spec_draft.version %}selected{% endif%}
+                      >
+                        v{{spec_draft.version}}
+                      </option>
+                    {%endif %}
+                  {% endfor %}
+                </optgroup>
+              </select>
+            {% else %}
+              <h1 class="sidebar-top">{{ page.title }}</h1>
+            {% endif %}
           </nav>
         </div>
       {% endif %}
