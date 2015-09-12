@@ -292,11 +292,29 @@ footer {
   .sidebar nav > ol {
     width: 220px;
     overflow-y: auto; }
-  .sidebar .version-picker {
-    margin-bottom: 20px; }
+  .sidebar #version-picker-wrapper {
+    width: 220px;
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: row; }
+    .sidebar #version-picker-wrapper label {
+      display: none;
+      margin-right: 0.5em; }
+    .sidebar #version-picker-wrapper .version-picker {
+      flex-direction: row;
+      flex-grow: 1; }
   @media screen and (max-width: 935px) {
     .sidebar {
-      display: none; } }
+      float: none;
+      width: auto; }
+      .sidebar nav > :not(#version-picker-wrapper) {
+        display: none; }
+      .sidebar nav {
+        padding-right: 0; }
+      .sidebar #version-picker-wrapper {
+        width: auto; }
+        .sidebar #version-picker-wrapper label {
+          display: inline; } }
 
 @media screen and (min-width: 936px) {
   .sidebar + .content {
