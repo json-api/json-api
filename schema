@@ -247,9 +247,7 @@
     },
     "empty": {
       "description": "Describes an empty to-one relationship.",
-      "type": ["object", "null"],
-      "properties": {},
-      "additionalProperties": false
+      "type": "null"
     },
     "linkage": {
       "description": "The \"type\" and \"id\" to non-empty members.",
