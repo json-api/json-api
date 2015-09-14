@@ -20,12 +20,12 @@ Here's an example response from a blog that implements JSON API:
 ```json
 {
   "links": {
-    "self": "http://example.com/posts",
-    "next": "http://example.com/posts?page[offset]=2",
-    "last": "http://example.com/posts?page[offset]=10"
+    "self": "http://example.com/articles",
+    "next": "http://example.com/articles?page[offset]=2",
+    "last": "http://example.com/articles?page[offset]=10"
   },
   "data": [{
-    "type": "posts",
+    "type": "articles",
     "id": "1",
     "attributes": {
       "title": "JSON API paints my bikeshed!"
@@ -33,15 +33,15 @@ Here's an example response from a blog that implements JSON API:
     "relationships": {
       "author": {
         "links": {
-          "self": "http://example.com/posts/1/relationships/author",
-          "related": "http://example.com/posts/1/author"
+          "self": "http://example.com/articles/1/relationships/author",
+          "related": "http://example.com/articles/1/author"
         },
         "data": { "type": "people", "id": "9" }
       },
       "comments": {
         "links": {
-          "self": "http://example.com/posts/1/relationships/comments",
-          "related": "http://example.com/posts/1/comments"
+          "self": "http://example.com/articles/1/relationships/comments",
+          "related": "http://example.com/articles/1/comments"
         },
         "data": [
           { "type": "comments", "id": "5" },
@@ -50,7 +50,7 @@ Here's an example response from a blog that implements JSON API:
       }
     },
     "links": {
-      "self": "http://example.com/posts/1"
+      "self": "http://example.com/articles/1"
     }
   }],
   "included": [{
@@ -70,6 +70,11 @@ Here's an example response from a blog that implements JSON API:
     "attributes": {
       "body": "First!"
     },
+    "relationships": {
+      "author": {
+        "data": { "type": "people", "id": "2" }
+      }
+    },
     "links": {
       "self": "http://example.com/comments/5"
     }
@@ -78,6 +83,11 @@ Here's an example response from a blog that implements JSON API:
     "id": "12",
     "attributes": {
       "body": "I like XML better"
+    },
+    "relationships": {
+      "author": {
+        "data": { "type": "people", "id": "9" }
+      }
     },
     "links": {
       "self": "http://example.com/comments/12"
