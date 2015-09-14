@@ -82,7 +82,7 @@
                   </option>
                   <optgroup label="Old Versions/Permalinks">
                     {% for spec_draft in site.format|sort:'version' %}
-                      {% if spec_draft.version %}
+                      {% if spec_draft.version and spec_draft.path contains 'index' %}
                         <option value="/format/{{spec_draft.version}}"
                           {% if page.version == spec_draft.version %}selected{% endif%}
                         >
