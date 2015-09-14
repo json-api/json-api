@@ -92,6 +92,7 @@ has a page describing how to emit conformant JSON.
 * [jsonapi](https://github.com/pavlov99/jsonapi) is a Django module with JSON API implementation.
 * [jsoongia](https://github.com/digia/jsoongia) is a framework agnostic JSON API implementation.
 * [ripozo](https://github.com/vertical-knowledge/ripozo/) provides a framework for serving JSON API content (among other Hypermedia formats) in Flask, Django and more.
+* [marshmallow-jsonapi](https://github.com/marshmallow-code/marshmallow-jsonapi) provides JSON API data formatting for any Python web framework.
 
 ### Go <a href="#server-libraries-go" id="server-libraries-go" class="headerlink"></a>
 
