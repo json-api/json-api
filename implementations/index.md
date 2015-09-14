@@ -31,6 +31,7 @@ assembled to vet them.
 * [jsonapi-datastore](https://github.com/beauby/jsonapi-datastore) is a lightweight standalone library for reading, serializing, and synchronizing relational JSON API data.
 * [json-api-store](https://github.com/haydn/json-api-store) A lightweight JavaScript library for using JSON API in the browser.
 * [superagent-jsonapify](https://github.com/alex94puchades/superagent-jsonapify) A really lightweight (50 lines) JSON-API client addon for [superagent](https://github.com/visionmedia/superagent), the isomorphic ajax client.
+* [angular-jsonapi](https://github.com/jakubrohleder/angular-jsonapi) An Angular JSON API client
 
 ### iOS <a href="#client-libraries-ios" id="client-libraries-ios" class="headerlink"></a>
 
