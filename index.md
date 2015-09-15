@@ -104,24 +104,24 @@ resources.
 
 JSON API covers creating and updating resources as well, not just responses.
 
-## MIME Types <a href="#mime-types" id="mime-types" class="headerlink"></a>
+## <a href="#mime-types" id="mime-types" class="headerlink"></a> MIME Types
 
 JSON API has been properly registered with the IANA. Its media
 type designation is [`application/vnd.api+json`](http://www.iana.org/assignments/media-types/application/vnd.api+json).
 
-## Format documentation <a href="#format-documentation" id="format-documentation" class="headerlink"></a>
+## <a href="#format-documentation" id="format-documentation" class="headerlink"></a> Format documentation
 
 To get started with JSON API, check out [documentation for the base
 specification](/format).
 
-## Extensions <a href="#extensions" id="extensions" class="headerlink"></a>
+## <a href="#extensions" id="extensions" class="headerlink"></a> Extensions
 
 JSON API has [experimental support for extensions](/extensions).
 
 Official extensions are being developed for [Bulk](/extensions/bulk/) and
 [JSON Patch](/extensions/jsonpatch/) operations.
 
-## Update history <a href="#update-history" id="update-history" class="headerlink"></a>
+## <a href="#update-history" id="update-history" class="headerlink"></a> Update history
 
 - 2015-05-29: 1.0 final released.
 - 2015-05-21: Release candidate 4 released.

@@ -3,7 +3,7 @@ layout: page
 title: About
 ---
 
-## Channels <a href="#channels" id="channels" class="headerlink"></a>
+## <a href="#channels" id="channels" class="headerlink"></a> Channels
 
 JSON API is:
 
@@ -12,7 +12,7 @@ JSON API is:
   * _#jsonapi_ channel on [Freenode IRC](http://freenode.net)
   * [jsonapi discussion forum](http://discuss.jsonapi.org)
 
-## Editors <a href="#editors" id="editors" class="headerlink"></a>
+## <a href="#editors" id="editors" class="headerlink"></a> Editors
 
 There are five primary editors of this specification:
 
@@ -22,15 +22,15 @@ There are five primary editors of this specification:
 - [Tyler Kellen](http://twitter.com/tkellen)
 - [Ethan Resnick](http://twitter.com/ethanresnick)
 
-## Roadmap <a href="#roadmap" id="roadmap" class="headerlink"></a>
+## <a href="#roadmap" id="roadmap" class="headerlink"></a> Roadmap
 
-### 1.1
+### <a href="#roadmap-1-1" id="roadmap-1-1" class="headerlink"></a> 1.1
 **Targeted Release Date:** September 30th, 2015
 
 * Embedding / creating multiple related resources in a single request
 * Extension support
 
-## History <a href="#history" id="history" class="headerlink"></a>
+## <a href="#history" id="history" class="headerlink"></a> History
 
 JSON API was originally drafted by [Yehuda Katz](http://twitter.com/wycats)
 in May 2013. This first draft was extracted from the JSON transport

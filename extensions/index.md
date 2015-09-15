@@ -10,7 +10,7 @@ show_sidebar: true
 in progress. There is no official support for extensions in the base JSON
 API specification.
 
-## Extending JSON API <a href="#extending-json-api" id="extending-json-api" class="headerlink"></a>
+## <a href="#extending-json-api" id="extending-json-api" class="headerlink"></a> Extending JSON API
 
 JSON API can be extended in several ways:
 
@@ -24,7 +24,7 @@ JSON API can be extended in several ways:
 * A profile can be specified in the top-level `meta` object, as discussed
   below.
 
-## Extension Negotiation <a href="#extension-negotiation" id="extension-negotiation" class="headerlink"></a>
+## <a href="#extension-negotiation" id="extension-negotiation" class="headerlink"></a> Extension Negotiation
 
 The JSON API specification **MAY** be extended to support additional
 capabilities.
@@ -82,7 +82,7 @@ When the value of the `ext` or `supported-ext` media type parameter contains
 more than one extension name, the value **MUST** be surrounded with quotation
 marks (U+0022 QUOTATION MARK, """), in accordance with the HTTP specification.
 
-## Official Extensions <a href="#official-extensions" id="official-extensions" class="headerlink"></a>
+## <a href="#official-extensions" id="official-extensions" class="headerlink"></a> Official Extensions
 
 JSON API currently supports the following official extensions:
 
@@ -96,7 +96,7 @@ JSON API currently supports the following official extensions:
   [[RFC6902](http://tools.ietf.org/html/rfc6902)]. The JSON Patch extension is
   referenced with the extension name `jsonpatch`.
 
-## Custom Extensions <a href="#custom-extensions" id="custom-extensions" class="headerlink"></a>
+## <a href="#custom-extensions" id="custom-extensions" class="headerlink"></a> Custom Extensions
 
 The JSON API media type can be extended for your organization by writing your
 own custom extension. This extension should also be specified using the `ext`
@@ -106,7 +106,7 @@ It is strongly recommended that custom extensions be prefixed with a unique
 identifier for your organization to avoid namespace collision. For example,
 `my-org/embedded-resources`.
 
-## Profiles <a href="#profiles" id="profiles" class="headerlink"></a>
+## <a href="#profiles" id="profiles" class="headerlink"></a> Profiles
 
 JSON API can be extended with the profile link relation, defined in [RFC
 6906](http://tools.ietf.org/html/rfc6906). See also [this blog post by Mark
