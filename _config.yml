@@ -15,8 +15,23 @@ exclude:
 markdown: redcarpet
 redcarpet:
   extensions: ["tables"]
-pygments: false
+highlighter: null
 port: 9876
+
+collections:
+  format:
+    output: true
+
+defaults:
+  - scope:
+      path: ""
+      type: format
+    values:
+      layout: page
+      show_sidebar: true
+      is_spec_page: true
+
+latest_version: 1.0
 
 navigation:
 - title: JSON API

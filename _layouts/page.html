@@ -5,8 +5,23 @@
     <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <!-- Use title if it's in the page YAML frontmatter -->
-    <title>JSON API - {{ page.title }}</title>
+    {% comment %}
+      Below, we're either dealing with a generic page or a page from the
+      specification collection. Generic pages have a title, so we identify
+      them that way. For specification pages, we build the title dynamically to
+      take into account the version number and it's relationship to the latest version.
+    {% endcomment %}
+
+    {% if page.title %}
+      {% comment %}We're on a generic page.{% endcomment %}
+      {% assign page_title = page.title %}
+
+    {% else %}
+      {% capture page_title %}
+        {% include title_for_version.md is_latest_version=page.is_latest_version is_upcoming_version=page.is_upcoming_version version=page.version %}
+      {% endcapture %}
+    {% endif %}
+    <title>JSON API &mdash; {{page_title|strip }}</title>
 
     <link href='http://fonts.googleapis.com/css?family=Titillium+Web:400,300,600' rel='stylesheet' type='text/css'>
     <link href="/stylesheets/normalize.css" media="screen" rel="stylesheet" type="text/css" />
@@ -26,7 +41,7 @@
           <li {% if url == link.url %}class="active"{% endif %}><a href="{{link.url}}" title="{{link.title}}">{{link.title}}</a></li>
         {% endfor %}
         <li class="version">
-          <a href="/format/#status" class="pill">v{% include version.md %} <span class="stable">Stable</span></a>
+          <a href="/format/#status" class="pill">v{{ site.latest_version }} <span class="stable">Stable</span></a>
         </li>
       </ul>
     </nav>
@@ -47,15 +62,60 @@
       {% if page.show_sidebar %}
         <div class="sidebar">
           <nav class="document-outline" id="document-outline">
-            <h1>{{ page.title }}</h1>
+            {% comment %}
+              Substite the version picker for the sidebar title on spec pages.
+            {% endcomment %}
+            {% if page.is_spec_page %}
+              <div id="version-picker-wrapper" class="sidebar-top">
+                <label for="version-picker">Version: </label>
+                <select class="version-picker" id="version-picker">
+                  <option value="/format/"
+                    {% if page.is_latest_version %}selected{% endif %}
+                  >
+                    Latest Version (v{{ site.latest_version }})
+                  </option>
+                  <option
+                    value="/format/upcoming/"
+                    {% if page.is_upcoming_version %}selected{% endif %}
+                  >
+                    Upcoming Version (v{{ site.latest_version|plus:0.1 }})
+                  </option>
+                  <optgroup label="Old Versions/Permalinks">
+                    {% for spec_draft in site.format|sort:'version' %}
+                      {% if spec_draft.version and spec_draft.path contains 'index' %}
+                        <option value="/format/{{spec_draft.version}}"
+                          {% if page.version == spec_draft.version %}selected{% endif%}
+                        >
+                          v{{spec_draft.version}}
+                        </option>
+                      {%endif %}
+                    {% endfor %}
+                  </optgroup>
+                </select>
+              </div>
+            {% else %}
+              <h1 class="sidebar-top">{{ page.title }}</h1>
+            {% endif %}
           </nav>
         </div>
       {% endif %}
       <div class="content">
         {% unless page.show_masthead %}
-          <h1>{{ page.title }}</h1>
+          <h1>
+            {% if page.is_spec_page %}
+              {{ page_title }}
+            {% else %}
+              {{ page.title }}
+            {% endif %}
+          </h1>
         {% endunless %}
         <section>
+          {% if page.is_spec_page %}
+            {% capture status %}
+              {% include status.md version=page.version is_latest_version=page.is_latest_version is_upcoming_version=page.is_upcoming_version %}
+            {% endcapture %}
+            {{ status|strip|markdownify }}
+          {% endif %}
           {{ content }}
         </section>
       </div>

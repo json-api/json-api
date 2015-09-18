@@ -1,10 +1,6 @@
 ---
-layout: page
-title: "Specification"
-show_sidebar: true
+version: 1.1
 ---
-
-{% include status.md %}
 
 ## Introduction <a href="#introduction" id="introduction" class="headerlink"></a>
 

@@ -1,0 +1,2657 @@
+---
+version: 1.1
+layout: null
+---
+{
+  "jsonapi": {
+    "version": "1.1"
+  },
+  "data": [
+    {
+      "id": "content-negotiation",
+      "type": "sections",
+      "attributes": {
+        "title": "Content Negotiation"
+      },
+      "links": {
+        "self": "http://jsonapi.org/format/#content-negotiation"
+      },
+      "relationships": {
+        "statements": {
+          "data": [
+            { "id": "request-content-type", "type": "normative-statements" },
+            { "id": "request-accept", "type": "normative-statements" },
+            { "id": "response-ignore-parameters", "type": "normative-statements" },
+            { "id": "response-content-type", "type": "normative-statements"},
+            { "id": "response-unsupported-media-type", "type": "normative-statements"},
+            { "id": "response-not-acceptable", "type": "normative-statements"}
+          ]
+        }
+      }
+    },
+    {
+      "id": "document-structure",
+      "type": "sections",
+      "attributes": {
+        "title": "Document Structure"
+      },
+      "links": {
+        "self": "http://jsonapi.org/format/#document-structure"
+      },
+      "relationships": {
+        "statements": {
+          "data": [
+            { "id": "additional-members", "type": "normative-statements" },
+            { "id": "ignore-additional-members", "type": "normative-statements" },
+            { "id": "json-object", "type": "normative-statements" },
+            { "id": "required-top-level", "type": "normative-statements" },
+            { "id": "data-errors", "type": "normative-statements" },
+            { "id": "optional-top-level", "type": "normative-statements" },
+            { "id": "data-included", "type": "normative-statements" },
+            { "id": "top-level-links", "type": "normative-statements" },
+            { "id": "primary-data", "type": "normative-statements" },
+            { "id": "logical-collection", "type": "normative-statements" },
+            { "id": "resource-required-top-level", "type": "normative-statements" },
+            { "id": "resource-optional-top-level", "type": "normative-statements" },
+            { "id": "resource-id-type", "type": "normative-statements" },
+            { "id": "resource-id-type-types", "type": "normative-statements" },
+            { "id": "resource-unique", "type": "normative-statements" },
+            { "id": "resource-type-constraints", "type": "normative-statements" },
+            { "id": "resource-fields", "type": "normative-statements" },
+            { "id": "resource-attributes-key", "type": "normative-statements" },
+            { "id": "resource-attributes-reserve-members", "type": "normative-statements" },
+            { "id": "resource-attributes-reserve-members", "type": "normative-statements" },
+            { "id": "resource-relationships-key", "type": "normative-statements" },
+            { "id": "resource-relationships-object", "type": "normative-statements" },
+            { "id": "resource-relationships-pagination", "type": "normative-statements" },
+            { "id": "resource-related-resource-link", "type": "normative-statements" },
+            { "id": "resource-related-resource-link-change", "type": "normative-statements" },
+            { "id": "resource-linkage", "type": "normative-statements" },
+            { "id": "resource-links", "type": "normative-statements" },
+            { "id": "resource-link-response", "type": "normative-statements" },
+            { "id": "resource-identifier-required-members", "type": "normative-statements" },
+            { "id": "resource-identifier-optional-member", "type": "normative-statements" },
+            { "id": "compound-documents-allow", "type": "normative-statements" },
+            { "id": "compound-documents-top-level-included", "type": "normative-statements" },
+            { "id": "compound-documents-full-linkage", "type": "normative-statements" },
+            { "id": "compound-documents-duplicates", "type": "normative-statements" },
+            { "id": "meta-objects", "type": "normative-statements" },
+            { "id": "meta-object-members", "type": "normative-statements" },
+            { "id": "top-level-links", "type": "normative-statements" },
+            { "id": "top-level-links-members", "type": "normative-statements" },
+            { "id": "top-level-json-api-member", "type": "normative-statements" },
+            { "id": "json-api-type", "type": "normative-statements" },
+            { "id": "json-api-version", "type": "normative-statements" },
+            { "id": "json-api-meta", "type": "normative-statements" },
+            { "id": "member-name-case", "type": "normative-statements" },
+            { "id": "member-name-character", "type": "normative-statements" },
+            { "id": "member-name-allowed-characters-only", "type": "normative-statements" },
+            { "id": "member-name-globally-allowed", "type": "normative-statements" },
+            { "id": "member-name-url-safe", "type": "normative-statements" },
+            { "id": "member-name-allowed-characters", "type": "normative-statements" },
+            { "id": "member-name-reserved-characters", "type": "normative-statements" }
+          ]
+        }
+      }
+    },
+    {
+      "id": "reading",
+      "type": "sections",
+      "attributes": {
+        "title": "Fetching Data"
+      },
+      "links": {
+        "self": "http://jsonapi.org/format/#fetching"
+      },
+      "relationships": {
+        "statements": {
+          "data": [
+            { "id": "fetch-url-support", "type": "normative-statements" },
+            { "id": "fetch-response-code", "type": "normative-statements" },
+            { "id": "fetch-primary-data-collection", "type": "normative-statements" },
+            { "id": "fetch-primary-data-single", "type": "normative-statements" },
+            { "id": "fetch-responses-404", "type": "normative-statements" },
+            { "id": "fetch-responses-other-status-codes", "type": "normative-statements" },
+            { "id": "fetch-responses-error-details", "type": "normative-statements" },
+            { "id": "fetch-responses-http-semantics", "type": "normative-statements" },
+            { "id": "fetch-relationships", "type": "normative-statements" },
+            { "id": "fetch-relationships-response-200", "type": "normative-statements" },
+            { "id": "fetch-relationships-response-200-primary-data", "type": "normative-statements" },
+            { "id": "fetch-relationships-response-200-self-related", "type": "normative-statements" },
+            { "id": "fetch-relationships-response-404", "type": "normative-statements" },
+            { "id": "fetch-relationships-response-exists-empty", "type": "normative-statements" },
+            { "id": "fetch-relationships-other-status-codes", "type": "normative-statements" },
+            { "id": "fetch-relationships-other-error-details", "type": "normative-statements" },
+            { "id": "fetch-relationships-http-semantics", "type": "normative-statements" },
+            { "id": "inclusion-default", "type": "normative-statements" },
+            { "id": "inclusion-include-parameter", "type": "normative-statements" },
+            { "id": "inclusion-unrequested", "type": "normative-statements" },
+            { "id": "inclusion-include-parameter-value", "type": "normative-statements" },
+            { "id": "inclusion-bad-request", "type": "normative-statements" },
+            { "id": "sparse-fieldsets-parameter", "type": "normative-statements" },
+            { "id": "sparse-fieldsets-parameter-value", "type": "normative-statements" },
+            { "id": "sparse-fieldsets-additional-fields", "type": "normative-statements" },
+            { "id": "sorting-option", "type": "normative-statements" },
+            { "id": "sorting-parameter", "type": "normative-statements" },
+            { "id": "sorting-parameter-value", "type": "normative-statements" },
+            { "id": "sorting-multiple-fields", "type": "normative-statements" },
+            { "id": "sorting-multiple-fields-order", "type": "normative-statements" },
+            { "id": "sorting-order", "type": "normative-statements" },
+            { "id": "sorting-not-supported", "type": "normative-statements" },
+            { "id": "sorting-specified-order", "type": "normative-statements" },
+            { "id": "sorting-default", "type": "normative-statements" },
+            { "id": "pagination", "type": "normative-statements" },
+            { "id": "pagination-links", "type": "normative-statements" },
+            { "id": "pagination-links-object", "type": "normative-statements" },
+            { "id": "pagination-keys", "type": "normative-statements" },
+            { "id": "pagination-unavailable-link", "type": "normative-statements" },
+            { "id": "pagination-order", "type": "normative-statements" },
+            { "id": "pagination-page-parameter", "type": "normative-statements" },
+            { "id": "filtering", "type": "normative-statements" }
+          ]
+        }
+      }
+    },
+    {
+      "id": "creating-updating-deleting",
+      "type": "sections",
+      "attributes": {
+        "title": "Creating, Updating and Deleting Resources"
+      },
+      "links": {
+        "self": "http://jsonapi.org/format/#crud"
+      },
+      "relationships": {
+        "statements": {
+          "data": [
+            { "id": "create-support", "type": "normative-statements" },
+            { "id": "modify-delete-support", "type": "normative-statements" },
+            { "id": "crud-atomic", "type": "normative-statements" },
+            { "id": "create-single-resource", "type": "normative-statements" },
+            { "id": "create-type-member", "type": "normative-statements" },
+            { "id": "create-relationships-member", "type": "normative-statements" },
+            { "id": "create-accept-client-generated-ids", "type": "normative-statements" },
+            { "id": "create-client-generated-ids-key", "type": "normative-statements" },
+            { "id": "create-client-generated-ids-uuid", "type": "normative-statements" },
+            { "id": "create-client-generated-ids-forbidden", "type": "normative-statements" },
+            { "id": "create-responses-201-status", "type": "normative-statements" },
+            { "id": "create-responses-201-location", "type": "normative-statements" },
+            { "id": "create-responses-201-document", "type": "normative-statements" },
+            { "id": "create-responses-201-self", "type": "normative-statements" },
+            { "id": "create-responses-202", "type": "normative-statements" },
+            { "id": "create-responses-204", "type": "normative-statements" },
+            { "id": "create-responses-403", "type": "normative-statements" },
+            { "id": "create-responses-409-exists", "type": "normative-statements" },
+            { "id": "create-responses-409-bad-type", "type": "normative-statements" },
+            { "id": "create-responses-409-error-details", "type": "normative-statements" },
+            { "id": "create-responses-other-status", "type": "normative-statements" },
+            { "id": "create-responses-other-error-details", "type": "normative-statements" },
+            { "id": "create-http-semantics", "type": "normative-statements" },
+            { "id": "update-patch-resource", "type": "normative-statements" },
+            { "id": "update-patch-resource-members", "type": "normative-statements" },
+            { "id": "update-resource-attributes", "type": "normative-statements" },
+            { "id": "update-interpret-resource-attributes", "type": "normative-statements" },
+            { "id": "update-resource-relationships", "type": "normative-statements" },
+            { "id": "update-interpret-resource-relationships", "type": "normative-statements" },
+            { "id": "update-resource-relationship-value", "type": "normative-statements" },
+            { "id": "update-resource-relationship-reject-full-replacement", "type": "normative-statements" },
+            { "id": "update-resource-relationship-reject-full-replacement-response", "type": "normative-statements" },
+            { "id": "update-resource-202-status", "type": "normative-statements" },
+            { "id": "update-resource-200-status", "type": "normative-statements" },
+            { "id": "update-resource-relationship-200-response", "type": "normative-statements" },
+            { "id": "update-resource-200-meta", "type": "normative-statements" },
+            { "id": "update-resource-200-meta-representation", "type": "normative-statements" },
+            { "id": "update-resource-204-status", "type": "normative-statements" },
+            { "id": "update-resource-403-status", "type": "normative-statements" },
+            { "id": "update-resource-404-status", "type": "normative-statements" },
+            { "id": "update-resource-404-related", "type": "normative-statements" },
+            { "id": "update-resource-409-status", "type": "normative-statements" },
+            { "id": "update-resource-409-no-match", "type": "normative-statements" },
+            { "id": "update-resource-409-details", "type": "normative-statements" },
+            { "id": "update-resource-409-details", "type": "normative-statements" },
+            { "id": "update-resource-other-status", "type": "normative-statements" },
+            { "id": "update-resource-other-status", "type": "normative-statements" },
+            { "id": "update-resource-other-semantics", "type": "normative-statements" },
+            { "id": "update-resource-http-semantics", "type": "normative-statements" },
+            { "id": "respond-patch-to-one-relationship-link", "type": "normative-statements" },
+            { "id": "patch-to-one-data-member", "type": "normative-statements" },
+            { "id": "patch-to-one-response", "type": "normative-statements" },
+            { "id": "respond-patch-post-delete-to-many-relationship-link", "type": "normative-statements" },
+            { "id": "patch-post-delete-to-many-data-member", "type": "normative-statements" },
+            { "id": "patch-to-many-complete-replace", "type": "normative-statements" },
+            { "id": "post-to-many-add", "type": "normative-statements" },
+            { "id": "post-to-many-add-again", "type": "normative-statements" },
+            { "id": "post-to-many-add-again", "type": "normative-statements" },
+            { "id": "post-to-many-response", "type": "normative-statements" },
+            { "id": "delete-to-many", "type": "normative-statements" },
+            { "id": "delete-to-many", "type": "normative-statements" },
+            { "id": "delete-to-many-success", "type": "normative-statements" },
+            { "id": "updating-relationship-202-status", "type": "normative-statements" },
+            { "id": "updating-relationship-204-status", "type": "normative-statements" },
+            { "id": "updating-relationship-200-status", "type": "normative-statements" },
+            { "id": "updating-relationship-200-response", "type": "normative-statements" },
+            { "id": "updating-relationship-200-meta", "type": "normative-statements" },
+            { "id": "updating-relationship-200-meta-content", "type": "normative-statements" },
+            { "id": "updating-relationship-403-status", "type": "normative-statements" },
+            { "id": "updating-relationship-other-status", "type": "normative-statements" },
+            { "id": "updating-relationship-other-details", "type": "normative-statements" },
+            { "id": "update-relationship-http-semantics", "type": "normative-statements" },
+            { "id": "delete-202-status", "type": "normative-statements" },
+            { "id": "delete-204-status", "type": "normative-statements" },
+            { "id": "delete-200-status", "type": "normative-statements" },
+            { "id": "deleting-other-status", "type": "normative-statements" },
+            { "id": "deleting-other-details", "type": "normative-statements" },
+            { "id": "deleting-http-semantics", "type": "normative-statements" }
+          ]
+        }
+      }
+    },
+    {
+      "id": "query-parameters",
+      "type": "sections",
+      "attributes": {
+        "title": "Query Parameters"
+      },
+      "links": {
+        "self": "http://jsonapi.org/format/#query-parameters"
+      },
+      "relationships": {
+        "statements": {
+          "data": [
+            { "id": "query-parameters-non-alpha", "type": "normative-statements"},
+            { "id": "query-parameters-under-camel", "type": "normative-statements"},
+            { "id": "query-parameters-bad-request", "type": "normative-statements"}
+          ]
+        }
+      }
+    },
+    {
+      "id": "errors",
+      "type": "sections",
+      "attributes": {
+        "title": "Errors"
+      },
+      "links": {
+        "self": "http://jsonapi.org/format/#errors"
+      },
+      "relationships": {
+        "statements": {
+          "data": [
+            { "id": "error-stop-processing", "type": "normative-statements" },
+            { "id": "error-general", "type": "normative-statements" },
+            { "id": "error-object-key", "type": "normative-statements" },
+            { "id": "error-object-members", "type": "normative-statements" }
+          ]
+        }
+      }
+    }
+  ],
+  "included": [
+    {
+      "id": "request-content-type",
+      "type": "normative-statements",
+      "attributes": {
+        "level": "MUST",
+        "description": "Clients **MUST** send all JSON API data in request documents with the header `Content-Type: application/vnd.api+json` without any media type parameters."
+      },
+      "relationships": {
+        "section": {
+          "data": { "id": "content-negotiation", "type": "sections" }
+        }
+      }
+    },
+    {
+      "id": "request-accept",
+      "type": "normative-statements",
+      "attributes": {
+        "level": "MUST",
+        "description": "Clients that include the JSON API media type in their `Accept` header **MUST** specify the media type there at least once without any media type parameters."
+      },
+      "relationships": {
+        "section": {
+          "data": { "id": "content-negotiation", "type": "sections" }
+        }
+      }
+    },
+    {
+      "id": "response-ignore-parameters",
+      "type": "normative-statements",
+      "attributes": {
+        "level": "MUST",
+        "description": "Clients **MUST** ignore any parameters for the `application/vnd.api+json` media type received in the `Content-Type` header of response documents."
+      },
+      "relationships": {
+        "section": {
+          "data": { "id": "content-negotiation", "type": "sections" }
+        }
+      }
+    },
+    {
+      "id": "response-content-type",
+      "type": "normative-statements",
+      "attributes": {
+        "level": "MUST",
+        "description": "Servers **MUST** send all JSON API data in response documents with the header `Content-Type: application/vnd.api+json` without any media type parameters."
+      },
+      "relationships": {
+        "section": {
+          "data": { "id": "content-negotiation", "type": "sections" }
+        }
+      }
+    },
+    {
+      "id": "response-unsupported-media-type",
+      "type": "normative-statements",
+      "attributes": {
+        "level": "MUST",
+        "description": "Servers **MUST** respond with a `415 Unsupported Media Type` status code if a request specifies the header `Content-Type: application/vnd.api+json` with any media type parameters"
+      },
+      "relationships": {
+        "section": {
+          "data": { "id": "content-negotiation", "type": "sections" }
+        }
+      }
+    },
+    {
+      "id": "response-not-acceptable",
+      "type": "normative-statements",
+      "attributes": {
+        "level": "MUST",
+        "description": "Servers **MUST** respond with a `406 Not Acceptable` status code if a request's `Accept` header contains the JSON API media type and all instances of that media type are modified with media type parameters."
+      },
+      "relationships": {
+        "section": {
+          "data": { "id": "content-negotiation", "type": "sections" }
+        }
+      }
+    },
+    {
+      "id": "additional-members",
+      "type": "normative-statements",
+      "attributes": {
+        "level": "MUST",
+        "description": "Unless otherwise noted, objects defined by this specification **MUST NOT** contain any additional members. "
+      },
+      "relationships": {
+        "section": {
+          "data": { "id": "document-structure", "type": "sections" }
+        }
+      }
+    },
+    {
+      "id": "ignore-additional-members",
+      "type": "normative-statements",
+      "attributes": {
+        "level": "MUST",
+        "description": "Client and server implementations **MUST** ignore  members not recognized by this specification."
+      },
+      "relationships": {
+        "section": {
+          "data": { "id": "document-structure", "type": "sections" }
+        }
+      }
+    },
+    {
+      "id": "json-object",
+      "type": "normative-statements",
+      "attributes": {
+        "level": "MUST",
+        "description": "A JSON object MUST be at the root of every JSON API request and response containing data. This object defines a document's \"top level\"."
+      },
+      "relationships": {
+        "section": {
+          "data": { "id": "document-structure", "type": "sections" }
+        }
+      }
+    },
+    {
+      "id": "required-top-level",
+      "type": "normative-statements",
+      "attributes": {
+        "level": "MUST",
+        "description": "A document **MUST** contain at least one of the following top-level members:\\n\\n- `data`: the document's \"primary data\"\\n- `errors`: an array of error objects\\n- meta`: a meta object that contains non-standard meta-information."
+      },
+      "relationships": {
+        "section": {
+          "data": { "id": "document-structure", "type": "sections" }
+        }
+      }
+    },
+    {
+      "id": "data-errors",
+      "type": "normative-statements",
+      "attributes": {
+        "level": "MUST",
+        "description": "The members `data` and `errors` **MUST NOT** coexist in the same document."
+      },
+      "relationships": {
+        "section": {
+          "data": { "id": "document-structure", "type": "sections" }
+        }
+      }
+    },
+    {
+      "id": "optional-top-level",
+      "type": "normative-statements",
+      "attributes": {
+        "level": "MAY",
+        "description": "A document **MAY** contain any of these top-level members:\\n\\n- `jsonapi`: an object describing the server's implementation\\n- `links`: a links object related to the primary data.\\n- `included`: an array of resource objects that are related to the primary data and/or each other (\"included resources\")."
+      },
+      "relationships": {
+        "section": {
+          "data": { "id": "document-structure", "type": "sections" }
+        }
+      }
+    },
+    {
+      "id": "data-included",
+      "type": "normative-statements",
+      "attributes": {
+        "level": "MUST",
+        "description": "If a document does not contain a top-level `data` key, the `included` member **MUST NOT** be present either."
+      },
+      "relationships": {
+        "section": {
+          "data": { "id": "document-structure", "type": "sections" }
+        }
+      }
+    },
+    {
+      "id": "top-level-links",
+      "type": "normative-statements",
+      "attributes": {
+        "level": "MAY",
+        "description": "The top-level links object **MAY** contain the following members:\\n\\n- `self`: the link that generated the current response document.\\n- `related`: a related resource link when the primary data represents a resource relationship.\\n- pagination links for the primary data."
+      },
+      "relationships": {
+        "section": {
+          "data": { "id": "document-structure", "type": "sections" }
+        }
+      }
+    },
+    {
+      "id": "primary-data",
+      "type": "normative-statements",
+      "attributes": {
+        "level": "MUST",
+        "description": "Primary data **MUST** be either:\\n\\n- a single resource object, a single resource identifier object, or `null`, for requests that target single resources\\n- an array of resource objects, an array of resource identifier objects, or an empty array (`[]`), for requests that target resource collections"
+      },
+      "relationships": {
+        "section": {
+          "data": { "id": "document-structure", "type": "sections" }
+        }
+      }
+    },
+    {
+      "id": "logical-collection",
+      "type": "normative-statements",
+      "attributes": {
+        "level": "MUST",
+        "description": "A logical collection of resources **MUST** be represented as an array, even if it only contains one item or is empty."
+      },
+      "relationships": {
+        "section": {
+          "data": { "id": "document-structure", "type": "sections" }
+        }
+      }
+    },
+    {
+      "id": "resource-required-top-level",
+      "type": "normative-statements",
+      "attributes": {
+        "level": "MUST",
+        "description": "A resource object MUST contain at least the following top-level members:\\n\\n- `id`\\n- `type`\\n\\nException: The `id` member is not required when the resource object originates at the client and represents a new resource to be created on the server."
+      },
+      "relationships": {
+        "section": {
+          "data": { "id": "document-structure", "type": "sections" }
+        }
+      }
+    },
+    {
+      "id": "resource-optional-top-level",
+      "type": "normative-statements",
+      "attributes": {
+        "level": "MUST",
+        "description": "In addition, a resource object MAY contain any of these top-level members:\\n\\n- `attributes`: an attributes object representing some of the resource's data.\\n- `relationships`: a relationships object describing relationships between the resource and other JSON API resources.\\n -`links`: a links object containing links related to the resource.\\n- `meta`: a meta object containing non-standard meta-information about a resource that can not be represented as an attribute or relationship."
+      },
+      "relationships": {
+        "section": {
+          "data": { "id": "document-structure", "type": "sections" }
+        }
+      }
+    },
+    {
+      "id": "resource-id-type",
+      "type": "normative-statements",
+      "attributes": {
+        "level": "MUST",
+        "description": "Every resource object **MUST** contain an `id` member and a `type` member."
+      },
+      "relationships": {
+        "section": {
+          "data": { "id": "document-structure", "type": "sections" }
+        }
+      }
+    },
+    {
+      "id": "resource-id-type-types",
+      "type": "normative-statements",
+      "attributes": {
+        "level": "MUST",
+        "description": "The values of the `id` and `type` members **MUST** be strings."
+      },
+      "relationships": {
+        "section": {
+          "data": { "id": "document-structure", "type": "sections" }
+        }
+      }
+    },
+    {
+      "id": "resource-unique",
+      "type": "normative-statements",
+      "attributes": {
+        "level": "MUST",
+        "description": "Within a given API, each resource object's `type` and `id` pair **MUST** identify a single, unique resource. (The set of URIs controlled by a server, or multiple servers acting as one, constitute an API.)"
+      },
+      "relationships": {
+        "section": {
+          "data": { "id": "document-structure", "type": "sections" }
+        }
+      }
+    },
+    {
+      "id": "resource-type-constraints",
+      "type": "normative-statements",
+      "attributes": {
+        "level": "MUST",
+        "description": "The values of `type` members **MUST** adhere to the same constraints as member names."
+      },
+      "relationships": {
+        "section": {
+          "data": { "id": "document-structure", "type": "sections" }
+        }
+      }
+    },
+    {
+      "id": "resource-fields",
+      "type": "normative-statements",
+      "attributes": {
+        "level": "MUST",
+        "description": "Fields for a resource object **MUST** share a common namespace with each other and with `type` and `id`. In other words, a resource can not have an attribute and relationship with the same name, nor can it have an attribute or relationship named `type` or id."
+      },
+      "relationships": {
+        "section": {
+          "data": { "id": "document-structure", "type": "sections" }
+        }
+      }
+    },
+    {
+      "id": "resource-attributes-key",
+      "type": "normative-statements",
+      "attributes": {
+        "level": "MUST",
+        "description": "The value of the `attributes` key **MUST** be an object (an \"attributes object\")."
+      },
+      "relationships": {
+        "section": {
+          "data": { "id": "document-structure", "type": "sections" }
+        }
+      }
+    },
+    {
+      "id": "resource-attributes-reserve-members",
+      "type": "normative-statements",
+      "attributes": {
+        "level": "MUST",
+        "description": "any object that constitutes or is contained in an attribute **MUST** reserve the `relationships` and `links` members for future use."
+      },
+      "relationships": {
+        "section": {
+          "data": { "id": "document-structure", "type": "sections" }
+        }
+      }
+    },
+    {
+      "id": "resource-attributes-reserve-members",
+      "type": "normative-statements",
+      "attributes": {
+        "level": "SHOULD",
+        "description": "Although has-one foreign keys (e.g. author_id) are often stored internally alongside other information to be represented in a resource object, these keys **SHOULD NOT** appear as attributes."
+      },
+      "relationships": {
+        "section": {
+          "data": { "id": "document-structure", "type": "sections" }
+        }
+      }
+    },
+    {
+      "id": "resource-relationships-key",
+      "type": "normative-statements",
+      "attributes": {
+        "level": "MUST",
+        "description": "The value of the `relationships` key **MUST** be an object (a \"relationships object\")."
+      },
+      "relationships": {
+        "section": {
+          "data": { "id": "document-structure", "type": "sections" }
+        }
+      }
+    },
+    {
+      "id": "resource-relationships-object",
+      "type": "normative-statements",
+      "attributes": {
+        "level": "MUST",
+        "description": "A \"relationship object\" **MUST** contain at least one of the following:]\\n\\n- `links`: a links object containing at least one of the following:\\n  - `self`: a link for the relationship itself (a \"relationship link\"). This link allows the client to directly manipulate the relationship. For example, it would allow a client to remove an author from an article without deleting the people resource itself.\\n  - `related`: a related resource link\\n- `data`: resource linkage\\n- `meta`: a meta object that contains non-standard meta-information about the relationship."
+      },
+      "relationships": {
+        "section": {
+          "data": { "id": "document-structure", "type": "sections" }
+        }
+      }
+    },
+    {
+      "id": "resource-relationships-pagination",
+      "type": "normative-statements",
+      "attributes": {
+        "level": "MAY",
+        "description": "A relationship object that represents a to-many relationship **MAY** also contain pagination links under the links member"
+      },
+      "relationships": {
+        "section": {
+          "data": { "id": "document-structure", "type": "sections" }
+        }
+      }
+    },
+    {
+      "id": "resource-related-resource-link",
+      "type": "normative-statements",
+      "attributes": {
+        "level": "MUST",
+        "description": "If present, a related resource link **MUST** reference a valid URL, even if the relationship isn't currently associated with any target resources."
+      },
+      "relationships": {
+        "section": {
+          "data": { "id": "document-structure", "type": "sections" }
+        }
+      }
+    },
+    {
+      "id": "resource-related-resource-link-change",
+      "type": "normative-statements",
+      "attributes": {
+        "level": "MUST",
+        "description": "a related resource link **MUST NOT** change because its relationship's content changes."
+      },
+      "relationships": {
+        "section": {
+          "data": { "id": "document-structure", "type": "sections" }
+        }
+      }
+    },
+    {
+      "id": "resource-linkage",
+      "type": "normative-statements",
+      "attributes": {
+        "level": "MUST",
+        "description": "Resource linkage MUST be represented as one of the following:\\n\\n- `null` for empty to-one relationships.\\n- an empty array (`[]`) for empty to-many relationships.\\n- a single resource identifier object for non-empty to-one relationships.\\n- an array of resource identifier objects for non-empty to-many relationships."
+      },
+      "relationships": {
+        "section": {
+          "data": { "id": "document-structure", "type": "sections" }
+        }
+      }
+    },
+    {
+      "id": "resource-links",
+      "type": "normative-statements",
+      "attributes": {
+        "level": "MAY",
+        "description": "If present, this links object **MAY** contain a `self` link that identifies the resource represented by the resource object."
+      },
+      "relationships": {
+        "section": {
+          "data": { "id": "document-structure", "type": "sections" }
+        }
+      }
+    },
+    {
+      "id": "resource-link-response",
+      "type": "normative-statements",
+      "attributes": {
+        "level": "MUST",
+        "description": "A server **MUST** respond to a `GET` request to the specified URL with a response that includes the resource as the primary data."
+      },
+      "relationships": {
+        "section": {
+          "data": { "id": "document-structure", "type": "sections" }
+        }
+      }
+    },
+    {
+      "id": "resource-identifier-required-members",
+      "type": "normative-statements",
+      "attributes": {
+        "level": "MUST",
+        "description": "A \"resource identifier object\" **MUST** contain type and id members."
+      },
+      "relationships": {
+        "section": {
+          "data": { "id": "document-structure", "type": "sections" }
+        }
+      }
+    },
+    {
+      "id": "resource-identifier-optional-member",
+      "type": "normative-statements",
+      "attributes": {
+        "level": "MAY",
+        "description": "A \"resource identifier object\" **MAY** also include a meta member, whose value is a meta object that contains non-standard meta-information."
+      },
+      "relationships": {
+        "section": {
+          "data": { "id": "document-structure", "type": "sections" }
+        }
+      }
+    },
+    {
+      "id": "compound-documents-allow",
+      "type": "normative-statements",
+      "attributes": {
+        "level": "MAY",
+        "description": "To reduce the number of HTTP requests, servers **MAY** allow responses that include related resources along with the requested primary resources. Such responses are called \"compound documents\"."
+      },
+      "relationships": {
+        "section": {
+          "data": { "id": "document-structure", "type": "sections" }
+        }
+      }
+    },
+    {
+      "id": "compound-documents-top-level-included",
+      "type": "normative-statements",
+      "attributes": {
+        "level": "MUST",
+        "description": "In a compound document, all included resources **MUST** be represented as an array of resource objects in a top-level `included` member."
+      },
+      "relationships": {
+        "section": {
+          "data": { "id": "document-structure", "type": "sections" }
+        }
+      }
+    },
+    {
+      "id": "compound-documents-full-linkage",
+      "type": "normative-statements",
+      "attributes": {
+        "level": "MUST",
+        "description": "Compound documents require \"full linkage\", meaning that every included resource **MUST** be identified by at least one resource identifier object in the same document. These resource identifier objects could either be primary data or represent resource linkage contained within primary or included resources. The only exception to the full linkage requirement is when relationship fields that would otherwise contain linkage data are excluded via sparse fieldsets."
+      },
+      "relationships": {
+        "section": {
+          "data": { "id": "document-structure", "type": "sections" }
+        }
+      }
+    },
+    {
+      "id": "compound-documents-duplicates",
+      "type": "normative-statements",
+      "attributes": {
+        "level": "MUST",
+        "description": "A compound document **MUST NOT** include more than one resource object for each type and id pair."
+      },
+      "relationships": {
+        "section": {
+          "data": { "id": "document-structure", "type": "sections" }
+        }
+      }
+    },
+    {
+      "id": "meta-objects",
+      "type": "normative-statements",
+      "attributes": {
+        "level": "MUST",
+        "description": "The value of each meta member **MUST** be an object (a \"meta object\")."
+      },
+      "relationships": {
+        "section": {
+          "data": { "id": "document-structure", "type": "sections" }
+        }
+      }
+    },
+    {
+      "id": "meta-object-members",
+      "type": "normative-statements",
+      "attributes": {
+        "level": "MAY",
+        "description": "Any members **MAY** be specified within meta objects."
+      },
+      "relationships": {
+        "section": {
+          "data": { "id": "document-structure", "type": "sections" }
+        }
+      }
+    },
+    {
+      "id": "top-level-links",
+      "type": "normative-statements",
+      "attributes": {
+        "level": "MUST",
+        "description": "The value of each links member **MUST** be an object (a \"links object\")."
+      },
+      "relationships": {
+        "section": {
+          "data": { "id": "document-structure", "type": "sections" }
+        }
+      }
+    },
+    {
+      "id": "top-level-links-members",
+      "type": "normative-statements",
+      "attributes": {
+        "level": "MUST",
+        "description": "Each member of a links object is a \"link\". A link **MUST** be represented as either:\\n\\n- a string containing the link's URL.\\n- an object (\"link object\") which can contain the following members:\\n  - `href`: a string containing the link's URL.\\n  - `meta`: a meta object containing non-standard meta-information about the link."
+      },
+      "relationships": {
+        "section": {
+          "data": { "id": "document-structure", "type": "sections" }
+        }
+      }
+    },
+    {
+      "id": "top-level-json-api-member",
+      "type": "normative-statements",
+      "attributes": {
+        "level": "MAY",
+        "description": "A JSON API document **MAY** include information about its implementation under a top level `jsonapi` member."
+      },
+      "relationships": {
+        "section": {
+          "data": { "id": "document-structure", "type": "sections" }
+        }
+      }
+    },
+    {
+      "id": "json-api-type",
+      "type": "normative-statements",
+      "attributes": {
+        "level": "MUST",
+        "description": "If present, the value of the `jsonapi` member **MUST** be an object (a \"jsonapi object\")"
+      },
+      "relationships": {
+        "section": {
+          "data": { "id": "document-structure", "type": "sections" }
+        }
+      }
+    },
+    {
+      "id": "json-api-version",
+      "type": "normative-statements",
+      "attributes": {
+        "level": "MAY",
+        "description": "The jsonapi object **MAY** contain a `version` member whose value is a string indicating the highest JSON API version supported."
+      },
+      "relationships": {
+        "section": {
+          "data": { "id": "document-structure", "type": "sections" }
+        }
+      }
+    },
+    {
+      "id": "json-api-meta",
+      "type": "normative-statements",
+      "attributes": {
+        "level": "MAY",
+        "description": "The jsonapi object **MAY** also contain a `meta` member, whose value is a meta object that contains non-standard meta-information."
+      },
+      "relationships": {
+        "section": {
+          "data": { "id": "document-structure", "type": "sections" }
+        }
+      }
+    },
+    {
+      "id": "member-name-case",
+      "type": "normative-statements",
+      "attributes": {
+        "level": "MUST",
+        "description": "All member names used in a JSON API document **MUST** be treated as case sensitive by clients and servers"
+      },
+      "relationships": {
+        "section": {
+          "data": { "id": "document-structure", "type": "sections" }
+        }
+      }
+    },
+    {
+      "id": "member-name-character",
+      "type": "normative-statements",
+      "attributes": {
+        "level": "MUST",
+        "description": "Member names **MUST** contain at least one character."
+      },
+      "relationships": {
+        "section": {
+          "data": { "id": "document-structure", "type": "sections" }
+        }
+      }
+    },
+    {
+      "id": "member-name-allowed-characters-only",
+      "type": "normative-statements",
+      "attributes": {
+        "level": "MUST",
+        "description": "Member names **MUST** contain only the allowed characters listed below."
+      },
+      "relationships": {
+        "section": {
+          "data": { "id": "document-structure", "type": "sections" }
+        }
+      }
+    },
+    {
+      "id": "member-name-globally-allowed",
+      "type": "normative-statements",
+      "attributes": {
+        "level": "MUST",
+        "description": "Member names MUST start and end with a \"globally allowed character\", as defined below."
+      },
+      "relationships": {
+        "section": {
+          "data": { "id": "document-structure", "type": "sections" }
+        }
+      }
+    },
+    {
+      "id": "member-name-url-safe",
+      "type": "normative-statements",
+      "attributes": {
+        "level": "RECOMMENDED",
+        "description": "it is **RECOMMENDED** that member names use only non-reserved, URL safe characters specified in RFC 3986."
+      },
+      "relationships": {
+        "section": {
+          "data": { "id": "document-structure", "type": "sections" }
+        }
+      }
+    },
+    {
+      "id": "member-name-allowed-characters",
+      "type": "normative-statements",
+      "attributes": {
+        "level": "MAY",
+        "description": "The following \"globally allowed characters\" **MAY** be used anywhere in a member name:\\n\\n- U+0061 to U+007A, \"a-z\"\\n- U+0041 to U+005A, \"A-Z\"\\n- U+0030 to U+0039, \"0-9\"\\n- any UNICODE character except U+0000 to U+007F (not recommended, not URL safe)"
+      },
+      "relationships": {
+        "section": {
+          "data": { "id": "document-structure", "type": "sections" }
+        }
+      }
+    },
+    {
+      "id": "member-name-reserved-characters",
+      "type": "normative-statements",
+      "attributes": {
+        "level": "MUST",
+        "description": "The following characters **MUST NOT** be used in member names:\\n\\n- U+002B PLUS SIGN, \"+\" (used for ordering)\\n- U+002C COMMA, \",\" (used separator for multiple relationship paths)\\n- U+002E PERIOD, \".\" (used as relationship path separators)\\n- U+005B LEFT SQUARE BRACKET, \"[\" (use in sparse fieldsets)\\n- U+005D RIGHT SQUARE BRACKET, \"]\" (used in sparse fieldsets)\\n- U+0021 EXCLAMATION MARK, \"!\"\\n- U+0022 QUOTATION MARK, '\"'\\n- U+0023 NUMBER SIGN, \"#\"\\n- U+0024 DOLLAR SIGN, \"$\"\\n- U+0025 PERCENT SIGN, \"%\"\\n- U+0026 AMPERSAND, \"&\"\\n- U+0027 APOSTROPHE, \"'\"\\n- U+0028 LEFT PARENTHESIS, \"(\"\\n- U+0029 RIGHT PARENTHESIS, \")\"\\n- U+002A ASTERISK, \"*\"\\n- U+002F SOLIDUS, \"/\"\\n- U+003A COLON, \":\"\\n- U+003B SEMICOLON, \";\"\\n- U+003C LESS-THAN SIGN, \"<\"\\n- U+003D EQUALS SIGN, \"=\"\\n- U+003E GREATER-THAN SIGN, \">\"\\n- U+003F QUESTION MARK, \"?\"\\n- U+0040 COMMERCIAL AT, \"@\"\\n- U+005C REVERSE SOLIDUS, \"\\\"\\n- U+005E CIRCUMFLEX ACCENT, \"^\"\\n- U+0060 GRAVE ACCENT, \"`\"\\n- U+007B LEFT CURLY BRACKET, \"{\"\\n- U+007C VERTICAL LINE, \"|\"\\n- U+007D RIGHT CURLY BRACKET, \"}\"\\n- U+007E TILDE, \"~\""
+      },
+      "relationships": {
+        "section": {
+          "data": { "id": "document-structure", "type": "sections" }
+        }
+      }
+    },
+    {
+      "id": "fetch-url-support",
+      "type": "normative-statements",
+      "attributes": {
+        "level": "MUST",
+        "description": "A server **MUST** support fetching resource data for every URL provided as:\\n\\n- a self link as part of the top-level links object\\n- a self link as part of a resource-level links object\\n- a related link as part of a relationship-level links object"
+      },
+      "relationships": {
+        "section": {
+          "data": { "id": "reading", "type": "sections" }
+        }
+      }
+    },
+    {
+      "id": "fetch-response-code",
+      "type": "normative-statements",
+      "attributes": {
+        "level": "MUST",
+        "description": "A server **MUST** respond to a successful request to fetch an individual resource or resource collection with a `200 OK` response."
+      },
+      "relationships": {
+        "section": {
+          "data": { "id": "reading", "type": "sections" }
+        }
+      }
+    },
+    {
+      "id": "fetch-primary-data-collection",
+      "type": "normative-statements",
+      "attributes": {
+        "level": "MUST",
+        "description": "A server **MUST** respond to a successful request to fetch a resource collection with an array of resource objects or an empty array (`[]`) as the response document's primary data."
+      },
+      "relationships": {
+        "section": {
+          "data": { "id": "reading", "type": "sections" }
+        }
+      }
+    },
+    {
+      "id": "fetch-primary-data-single",
+      "type": "normative-statements",
+      "attributes": {
+        "level": "MUST",
+        "description": "A server **MUST** respond to a successful request to fetch an individual resource with a resource object or `null` provided as the response document's primary data.\\n\\n`null` is only an appropriate response when the requested URL is one that might correspond to a single resource, but doesn't currently."
+      },
+      "relationships": {
+        "section": {
+          "data": { "id": "reading", "type": "sections" }
+        }
+      }
+    },
+    {
+      "id": "fetch-responses-404",
+      "type": "normative-statements",
+      "attributes": {
+        "level": "MUST",
+        "description": "A server **MUST** respond with `404 Not Found` when processing a request to fetch a single resource that does not exist, except when the request warrants a `200 OK` response with `null` as the primary data (as described above)."
+      },
+      "relationships": {
+        "section": {
+          "data": { "id": "reading", "type": "sections" }
+        }
+      }
+    },
+    {
+      "id": "fetch-responses-other-status-codes",
+      "type": "normative-statements",
+      "attributes": {
+        "level": "MAY",
+        "description": "A server **MAY** respond with other HTTP status codes."
+      },
+      "relationships": {
+        "section": {
+          "data": { "id": "reading", "type": "sections" }
+        }
+      }
+    },
+    {
+      "id": "fetch-responses-error-details",
+      "type": "normative-statements",
+      "attributes": {
+        "level": "MAY",
+        "description": "A server **MAY** include error details with error responses."
+      },
+      "relationships": {
+        "section": {
+          "data": { "id": "reading", "type": "sections" }
+        }
+      }
+    },
+    {
+      "id": "fetch-responses-http-semantics",
+      "type": "normative-statements",
+      "attributes": {
+        "level": "MUST",
+        "description": "A server **MUST** prepare responses, and a client **MUST** interpret responses, in accordance with HTTP semantics."
+      },
+      "relationships": {
+        "section": {
+          "data": { "id": "reading", "type": "sections" }
+        }
+      }
+    },
+    {
+      "id": "fetch-relationships",
+      "type": "normative-statements",
+      "attributes": {
+        "level": "MUST",
+        "description": "A server **MUST** support fetching relationship data for every relationship URL provided as a self link as part of a relationship's links object."
+      },
+      "relationships": {
+        "section": {
+          "data": { "id": "reading", "type": "sections" }
+        }
+      }
+    },
+    {
+      "id": "fetch-relationships-response-200",
+      "type": "normative-statements",
+      "attributes": {
+        "level": "MUST",
+        "description": "A server **MUST** respond to a successful request to fetch a relationship with a `200 OK` response."
+      },
+      "relationships": {
+        "section": {
+          "data": { "id": "reading", "type": "sections" }
+        }
+      }
+    },
+    {
+      "id": "fetch-relationships-response-200-primary-data",
+      "type": "normative-statements",
+      "attributes": {
+        "level": "MUST",
+        "description": "The primary data in the response document **MUST** match the appropriate value for resource linkage, as described above for relationship objects."
+      },
+      "relationships": {
+        "section": {
+          "data": { "id": "reading", "type": "sections" }
+        }
+      }
+    },
+    {
+      "id": "fetch-relationships-response-200-self-related",
+      "type": "normative-statements",
+      "attributes": {
+        "level": "MAY",
+        "description": "The top-level links object **MAY** contain self and related links, as described above for relationship objects."
+      },
+      "relationships": {
+        "section": {
+          "data": { "id": "reading", "type": "sections" }
+        }
+      }
+    },
+    {
+      "id": "fetch-relationships-response-404",
+      "type": "normative-statements",
+      "attributes": {
+        "level": "MUST",
+        "description": "A server **MUST** return 404 Not Found when processing a request to fetch a relationship link URL that does not exist."
+      },
+      "relationships": {
+        "section": {
+          "data": { "id": "reading", "type": "sections" }
+        }
+      }
+    },
+    {
+      "id": "fetch-relationships-response-exists-empty",
+      "type": "normative-statements",
+      "attributes": {
+        "level": "MUST",
+        "description": "If a relationship link URL exists but the relationship is empty, then `200 OK` **MUST** be returned, as described above."
+      },
+      "relationships": {
+        "section": {
+          "data": { "id": "reading", "type": "sections" }
+        }
+      }
+    },
+    {
+      "id": "fetch-relationships-other-status-codes",
+      "type": "normative-statements",
+      "attributes": {
+        "level": "MAY",
+        "description": "A server **MAY** respond with other HTTP status codes."
+      },
+      "relationships": {
+        "section": {
+          "data": { "id": "reading", "type": "sections" }
+        }
+      }
+    },
+    {
+      "id": "fetch-relationships-other-error-details",
+      "type": "normative-statements",
+      "attributes": {
+        "level": "MAY",
+        "description": "A server **MAY** include error details with error responses."
+      },
+      "relationships": {
+        "section": {
+          "data": { "id": "reading", "type": "sections" }
+        }
+      }
+    },
+    {
+      "id": "fetch-relationships-http-semantics",
+      "type": "normative-statements",
+      "attributes": {
+        "level": "MUST",
+        "description": "A server **MUST** prepare responses, and a client **MUST** interpret responses, in accordance with HTTP semantics."
+      },
+      "relationships": {
+        "section": {
+          "data": { "id": "reading", "type": "sections" }
+        }
+      }
+    },
+    {
+      "id": "inclusion-default",
+      "type": "normative-statements",
+      "attributes": {
+        "level": "MAY",
+        "description": "An endpoint **MAY** return resources related to the primary data by default."
+      },
+      "relationships": {
+        "section": {
+          "data": { "id": "reading", "type": "sections" }
+        }
+      }
+    },
+    {
+      "id": "inclusion-include-parameter",
+      "type": "normative-statements",
+      "attributes": {
+        "level": "MAY",
+        "description": "An endpoint **MAY** also support an `include` request parameter to allow the client to customize which related resources should be returned."
+      },
+      "relationships": {
+        "section": {
+          "data": { "id": "reading", "type": "sections" }
+        }
+      }
+    },
+    {
+      "id": "inclusion-unrequested",
+      "type": "normative-statements",
+      "attributes": {
+        "level": "MUST",
+        "description": "If an endpoint supports the include parameter and a client supplies it, the server **MUST NOT** include unrequested resource objects in the included section of the compound document."
+      },
+      "relationships": {
+        "section": {
+          "data": { "id": "reading", "type": "sections" }
+        }
+      }
+    },
+    {
+      "id": "inclusion-include-parameter-value",
+      "type": "normative-statements",
+      "attributes": {
+        "level": "MUST",
+        "description": "The value of the include parameter **MUST** be a comma-separated (U+002C COMMA, \",\") list of relationship paths. A relationship path is a dot-separated (U+002E FULL-STOP, \".\") list of relationship names."
+      },
+      "relationships": {
+        "section": {
+          "data": { "id": "reading", "type": "sections" }
+        }
+      }
+    },
+    {
+      "id": "inclusion-bad-request",
+      "type": "normative-statements",
+      "attributes": {
+        "level": "MUST",
+        "description": "If a server is unable to identify a relationship path or does not support inclusion of resources from a path, it **MUST** respond with 400 Bad Request."
+      },
+      "relationships": {
+        "section": {
+          "data": { "id": "reading", "type": "sections" }
+        }
+      }
+    },
+    {
+      "id": "sparse-fieldsets-parameter",
+      "type": "normative-statements",
+      "attributes": {
+        "level": "MAY",
+        "description": "An endpoint **MAY** also support a `fields[TYPE]` request parameter to allow the client to customize which related resources should be returned."
+      },
+      "relationships": {
+        "section": {
+          "data": { "id": "reading", "type": "sections" }
+        }
+      }
+    },
+    {
+      "id": "sparse-fieldsets-parameter-value",
+      "type": "normative-statements",
+      "attributes": {
+        "level": "MUST",
+        "description": "The value of the fields parameter **MUST** be a comma-separated (U+002C COMMA, \",\") list that refers to the name(s) of the fields to be returned."
+      },
+      "relationships": {
+        "section": {
+          "data": { "id": "reading", "type": "sections" }
+        }
+      }
+    },
+    {
+      "id": "sparse-fieldsets-additional-fields",
+      "type": "normative-statements",
+      "attributes": {
+        "level": "MUST",
+        "description": "If a client requests a restricted set of fields, an endpoint **MUST NOT** include additional fields in the response."
+      },
+      "relationships": {
+        "section": {
+          "data": { "id": "reading", "type": "sections" }
+        }
+      }
+    },
+    {
+      "id": "sorting-option",
+      "type": "normative-statements",
+      "attributes": {
+        "level": "MAY",
+        "description": "A server **MAY** choose to support requests to sort resource collections according to one or more criteria (\"sort fields\")."
+      },
+      "relationships": {
+        "section": {
+          "data": { "id": "reading", "type": "sections" }
+        }
+      }
+    },
+    {
+      "id": "sorting-parameter",
+      "type": "normative-statements",
+      "attributes": {
+        "level": "MAY",
+        "description": "An endpoint **MAY** support requests to sort the primary data with a sort query parameter."
+      },
+      "relationships": {
+        "section": {
+          "data": { "id": "reading", "type": "sections" }
+        }
+      }
+    },
+    {
+      "id": "sorting-parameter-value",
+      "type": "normative-statements",
+      "attributes": {
+        "level": "MUST",
+        "description": "The value for sort **MUST** represent sort fields."
+      },
+      "relationships": {
+        "section": {
+          "data": { "id": "reading", "type": "sections" }
+        }
+      }
+    },
+    {
+      "id": "sorting-multiple-fields",
+      "type": "normative-statements",
+      "attributes": {
+        "level": "MUST",
+        "description": "An endpoint **MAY** support multiple sort fields by allowing comma-separated (U+002C COMMA, \",\") sort fields."
+      },
+      "relationships": {
+        "section": {
+          "data": { "id": "reading", "type": "sections" }
+        }
+      }
+    },
+    {
+      "id": "sorting-multiple-fields-order",
+      "type": "normative-statements",
+      "attributes": {
+        "level": "SHOULD",
+        "description": "Sort fields **SHOULD** be applied in the order specified."
+      },
+      "relationships": {
+        "section": {
+          "data": { "id": "reading", "type": "sections" }
+        }
+      }
+    },
+    {
+      "id": "sorting-order",
+      "type": "normative-statements",
+      "attributes": {
+        "level": "MUST",
+        "description": "The sort order for each sort field **MUST** be ascending unless it is prefixed with a minus (U+002D HYPHEN-MINUS, \"-\"), in which case it **MUST** be descending."
+      },
+      "relationships": {
+        "section": {
+          "data": { "id": "reading", "type": "sections" }
+        }
+      }
+    },
+    {
+      "id": "sorting-not-supported",
+      "type": "normative-statements",
+      "attributes": {
+        "level": "MUST",
+        "description": "If the server does not support sorting as specified in the query parameter sort, it **MUST** return `400 Bad Request`."
+      },
+      "relationships": {
+        "section": {
+          "data": { "id": "reading", "type": "sections" }
+        }
+      }
+    },
+    {
+      "id": "sorting-specified-order",
+      "type": "normative-statements",
+      "attributes": {
+        "level": "MUST",
+        "description": "If sorting is supported by the server and requested by the client via query parameter sort, the server **MUST** return elements of the top-level data array of the response ordered according to the criteria specified."
+      },
+      "relationships": {
+        "section": {
+          "data": { "id": "reading", "type": "sections" }
+        }
+      }
+    },
+    {
+      "id": "sorting-default",
+      "type": "normative-statements",
+      "attributes": {
+        "level": "MAY",
+        "description": "The server **MAY** apply default sorting rules to top-level data if request parameter sort is not specified."
+      },
+      "relationships": {
+        "section": {
+          "data": { "id": "reading", "type": "sections" }
+        }
+      }
+    },
+    {
+      "id": "pagination",
+      "type": "normative-statements",
+      "attributes": {
+        "level": "MAY",
+        "description": "A server **MAY** choose to limit the number of resources returned in a response to a subset (\"page\") of the whole set available."
+      },
+      "relationships": {
+        "section": {
+          "data": { "id": "reading", "type": "sections" }
+        }
+      }
+    },
+    {
+      "id": "pagination-links",
+      "type": "normative-statements",
+      "attributes": {
+        "level": "MAY",
+        "description": "A server **MAY** provide links to traverse a paginated data set (\"pagination links\")."
+      },
+      "relationships": {
+        "section": {
+          "data": { "id": "reading", "type": "sections" }
+        }
+      }
+    },
+    {
+      "id": "pagination-links-object",
+      "type": "normative-statements",
+      "attributes": {
+        "level": "MUST",
+        "description": "Pagination links **MUST** appear in the links object that corresponds to a collection."
+      },
+      "relationships": {
+        "section": {
+          "data": { "id": "reading", "type": "sections" }
+        }
+      }
+    },
+    {
+      "id": "pagination-keys",
+      "type": "normative-statements",
+      "attributes": {
+        "level": "MUST",
+        "description": "The following keys MUST be used for pagination links:\\n\\n- `first`: the first page of data\\n- `last`: the last page of data\\n- `prev`: the previous page of data\\n- `next`: the next page of data"
+      },
+      "relationships": {
+        "section": {
+          "data": { "id": "reading", "type": "sections" }
+        }
+      }
+    },
+    {
+      "id": "pagination-unavailable-link",
+      "type": "normative-statements",
+      "attributes": {
+        "level": "MUST",
+        "description": "Keys **MUST** either be omitted or have a `null` value to indicate that a particular link is unavailable."
+      },
+      "relationships": {
+        "section": {
+          "data": { "id": "reading", "type": "sections" }
+        }
+      }
+    },
+    {
+      "id": "pagination-order",
+      "type": "normative-statements",
+      "attributes": {
+        "level": "MUST",
+        "description": "Concepts of order, as expressed in the naming of pagination links, **MUST** remain consistent with JSON API's sorting rules."
+      },
+      "relationships": {
+        "section": {
+          "data": { "id": "reading", "type": "sections" }
+        }
+      }
+    },
+    {
+      "id": "pagination-page-parameter",
+      "type": "normative-statements",
+      "attributes": {
+        "level": "SHOULD",
+        "description": "The `page` query parameter is reserved for pagination. Servers and clients *SHOULD* use this key for pagination operations."
+      },
+      "relationships": {
+        "section": {
+          "data": { "id": "reading", "type": "sections" }
+        }
+      }
+    },
+    {
+      "id": "filtering",
+      "type": "normative-statements",
+      "attributes": {
+        "level": "SHOULD",
+        "description": "The `filter` query parameter is reserved for filtering data. Servers and clients **SHOULD** use this key for filtering operations."
+      },
+      "relationships": {
+        "section": {
+          "data": { "id": "reading", "type": "sections" }
+        }
+      }
+    },
+    {
+      "id": "create-support",
+      "type": "normative-statements",
+      "attributes": {
+        "level": "MAY",
+        "description": "A server **MAY** allow resources of a given type to be created."
+      },
+      "relationships": {
+        "section": {
+          "data": { "id": "creating-updating-deleting", "type": "sections" }
+        }
+      }
+    },
+    {
+      "id": "modify-delete-support",
+      "type": "normative-statements",
+      "attributes": {
+        "level": "MAY",
+        "description": "It **MAY** also allow existing resources to be modified or deleted."
+      },
+      "relationships": {
+        "section": {
+          "data": { "id": "creating-updating-deleting", "type": "sections" }
+        }
+      }
+    },
+    {
+      "id": "crud-atomic",
+      "type": "normative-statements",
+      "attributes": {
+        "level": "MUST",
+        "description": "A request **MUST** completely succeed or fail (in a single \"transaction\"). No partial updates are allowed."
+      },
+      "relationships": {
+        "section": {
+          "data": { "id": "creating-updating-deleting", "type": "sections" }
+        }
+      }
+    },
+    {
+      "id": "create-single-resource",
+      "type": "normative-statements",
+      "attributes": {
+        "level": "MUST",
+        "description": "The request **MUST** include a single resource object as primary data."
+      },
+      "relationships": {
+        "section": {
+          "data": { "id": "creating-updating-deleting", "type": "sections" }
+        }
+      }
+    },
+    {
+      "id": "create-type-member",
+      "type": "normative-statements",
+      "attributes": {
+        "level": "MUST",
+        "description": "The resource object **MUST** contain at least a type member."
+      },
+      "relationships": {
+        "section": {
+          "data": { "id": "creating-updating-deleting", "type": "sections" }
+        }
+      }
+    },
+    {
+      "id": "create-relationships-member",
+      "type": "normative-statements",
+      "attributes": {
+        "level": "MUST",
+        "description": "If a relationship is provided in the `relationships` member of the resource object, its value **MUST** be a relationship object with a `data` member."
+      },
+      "relationships": {
+        "section": {
+          "data": { "id": "creating-updating-deleting", "type": "sections" }
+        }
+      }
+    },
+    {
+      "id": "create-accept-client-generated-ids",
+      "type": "normative-statements",
+      "attributes": {
+        "level": "MAY",
+        "description": "A server **MAY** accept a client-generated ID along with a request to create a resource."
+      },
+      "relationships": {
+        "section": {
+          "data": { "id": "creating-updating-deleting", "type": "sections" }
+        }
+      }
+    },
+    {
+      "id": "create-client-generated-ids-key",
+      "type": "normative-statements",
+      "attributes": {
+        "level": "MUST",
+        "description": "An ID **MUST** be specified with an `id` key, the value of which **MUST** be a universally unique identifier."
+      },
+      "relationships": {
+        "section": {
+          "data": { "id": "creating-updating-deleting", "type": "sections" }
+        }
+      }
+    },
+    {
+      "id": "create-client-generated-ids-uuid",
+      "type": "normative-statements",
+      "attributes": {
+        "level": "SHOULD",
+        "description": "The client **SHOULD** use a properly generated and formatted *UUID* as described in RFC 4122 [RFC4122]."
+      },
+      "relationships": {
+        "section": {
+          "data": { "id": "creating-updating-deleting", "type": "sections" }
+        }
+      }
+    },
+    {
+      "id": "create-client-generated-ids-forbidden",
+      "type": "normative-statements",
+      "attributes": {
+        "level": "MUST",
+        "description": "A server **MUST** return `403 Forbidden` in response to an unsupported request to create a resource with a client-generated ID."
+      },
+      "relationships": {
+        "section": {
+          "data": { "id": "creating-updating-deleting", "type": "sections" }
+        }
+      }
+    },
+    {
+      "id": "create-responses-201-status",
+      "type": "normative-statements",
+      "attributes": {
+        "level": "MUST",
+        "description": "If a `POST` request did not include a Client-Generated ID and the requested resource has been created successfully, the server **MUST** return a `201 Created` status code."
+      },
+      "relationships": {
+        "section": {
+          "data": { "id": "creating-updating-deleting", "type": "sections" }
+        }
+      }
+    },
+    {
+      "id": "create-responses-201-location",
+      "type": "normative-statements",
+      "attributes": {
+        "level": "SHOULD",
+        "description": "The response **SHOULD** include a `Location` header identifying the location of the newly created resource."
+      },
+      "relationships": {
+        "section": {
+          "data": { "id": "creating-updating-deleting", "type": "sections" }
+        }
+      }
+    },
+    {
+      "id": "create-responses-201-document",
+      "type": "normative-statements",
+      "attributes": {
+        "level": "MUST",
+        "description": "The response **MUST** also include a document that contains the primary resource created."
+      },
+      "relationships": {
+        "section": {
+          "data": { "id": "creating-updating-deleting", "type": "sections" }
+        }
+      }
+    },
+    {
+      "id": "create-responses-201-self",
+      "type": "normative-statements",
+      "attributes": {
+        "level": "MUST",
+        "description": "If the resource object returned by the response contains a `self` key in its `links` member and a `Location` header is provided, the value of the `self` member **MUST** match the value of the `Location` header."
+      },
+      "relationships": {
+        "section": {
+          "data": { "id": "creating-updating-deleting", "type": "sections" }
+        }
+      }
+    },
+    {
+      "id": "create-responses-202",
+      "type": "normative-statements",
+      "attributes": {
+        "level": "MUST",
+        "description": "If a request to create a resource has been accepted for processing, but the processing has not been completed by the time the server responds, the server **MUST** return a `202 Accepted` status code."
+      },
+      "relationships": {
+        "section": {
+          "data": { "id": "creating-updating-deleting", "type": "sections" }
+        }
+      }
+    },
+    {
+      "id": "create-responses-204",
+      "type": "normative-statements",
+      "attributes": {
+        "level": "MUST",
+        "description": "If a `POST` request did include a Client-Generated ID and the requested resource has been created successfully, the server **MUST** return either a `201 Created` status code and response document (as described above) or a `204 No Content` status code with no response document."
+      },
+      "relationships": {
+        "section": {
+          "data": { "id": "creating-updating-deleting", "type": "sections" }
+        }
+      }
+    },
+    {
+      "id": "create-responses-403",
+      "type": "normative-statements",
+      "attributes": {
+        "level": "MAY",
+        "description": "A server **MAY** return `403 Forbidden` in response to an unsupported request to create a resource."
+      },
+      "relationships": {
+        "section": {
+          "data": { "id": "creating-updating-deleting", "type": "sections" }
+        }
+      }
+    },
+    {
+      "id": "create-responses-409-exists",
+      "type": "normative-statements",
+      "attributes": {
+        "level": "MUST",
+        "description": "A server **MUST** return `409 Conflict` when processing a `POST` request to create a resource with a client-generated ID that already exists."
+      },
+      "relationships": {
+        "section": {
+          "data": { "id": "creating-updating-deleting", "type": "sections" }
+        }
+      }
+    },
+    {
+      "id": "create-responses-409-bad-type",
+      "type": "normative-statements",
+      "attributes": {
+        "level": "MUST",
+        "description": "A server **MUST** return `409 Conflict` when processing a `POST` request in which the resource object's type is not among the type(s) that constitute the collection represented by the endpoint."
+      },
+      "relationships": {
+        "section": {
+          "data": { "id": "creating-updating-deleting", "type": "sections" }
+        }
+      }
+    },
+    {
+      "id": "create-responses-409-error-details",
+      "type": "normative-statements",
+      "attributes": {
+        "level": "SHOULD",
+        "description": "A server **SHOULD** include error details and provide enough information to recognize the source of the conflict."
+      },
+      "relationships": {
+        "section": {
+          "data": { "id": "creating-updating-deleting", "type": "sections" }
+        }
+      }
+    },
+    {
+      "id": "create-responses-other-status",
+      "type": "normative-statements",
+      "attributes": {
+        "level": "MAY",
+        "description": "A server **MAY** respond with other HTTP status codes."
+      },
+      "relationships": {
+        "section": {
+          "data": { "id": "creating-updating-deleting", "type": "sections" }
+        }
+      }
+    },
+    {
+      "id": "create-responses-other-error-details",
+      "type": "normative-statements",
+      "attributes": {
+        "level": "MAY",
+        "description": "A server **MAY** include error details with error responses."
+      },
+      "relationships": {
+        "section": {
+          "data": { "id": "creating-updating-deleting", "type": "sections" }
+        }
+      }
+    },
+    {
+      "id": "create-http-semantics",
+      "type": "normative-statements",
+      "attributes": {
+        "level": "MUST",
+        "description": "A server **MUST** prepare responses, and a client **MUST** interpret responses, in accordance with HTTP semantics."
+      },
+      "relationships": {
+        "section": {
+          "data": { "id": "creating-updating-deleting", "type": "sections" }
+        }
+      }
+    },
+    {
+      "id": "update-patch-resource",
+      "type": "normative-statements",
+      "attributes": {
+        "level": "MUST",
+        "description": "The `PATCH` request **MUST** include a single resource object as primary data."
+      },
+      "relationships": {
+        "section": {
+          "data": { "id": "creating-updating-deleting", "type": "sections" }
+        }
+      }
+    },
+    {
+      "id": "update-patch-resource-members",
+      "type": "normative-statements",
+      "attributes": {
+        "level": "MUST",
+        "description": "The resource object **MUST** contain `type` and `id` members."
+      },
+      "relationships": {
+        "section": {
+          "data": { "id": "creating-updating-deleting", "type": "sections" }
+        }
+      }
+    },
+    {
+      "id": "update-resource-attributes",
+      "type": "normative-statements",
+      "attributes": {
+        "level": "MAY",
+        "description": "Any or all of a resource's attributes **MAY** be included in the resource object included in a `PATCH` request."
+      },
+      "relationships": {
+        "section": {
+          "data": { "id": "creating-updating-deleting", "type": "sections" }
+        }
+      }
+    },
+    {
+      "id": "update-interpret-resource-attributes",
+      "type": "normative-statements",
+      "attributes": {
+        "level": "MUST",
+        "description": "If a request does not include all of the attributes for a resource, the server **MUST** interpret the missing attributes as if they were included with their current values. It **MUST NOT** interpret them as `null` values."
+      },
+      "relationships": {
+        "section": {
+          "data": { "id": "creating-updating-deleting", "type": "sections" }
+        }
+      }
+    },
+    {
+      "id": "update-resource-relationships",
+      "type": "normative-statements",
+      "attributes": {
+        "level": "MAY",
+        "description": "Any or all of a resource's relationships **MAY** be included in the resource object included in a `PATCH` request."
+      },
+      "relationships": {
+        "section": {
+          "data": { "id": "creating-updating-deleting", "type": "sections" }
+        }
+      }
+    },
+    {
+      "id": "update-interpret-resource-relationships",
+      "type": "normative-statements",
+      "attributes": {
+        "level": "MUST",
+        "description": "If a request does not include all of the relationships for a resource, the server **MUST** interpret the missing relationships as if they were included with their current values. It **MUST NOT** interpret them as `null` or empty values."
+      },
+      "relationships": {
+        "section": {
+          "data": { "id": "creating-updating-deleting", "type": "sections" }
+        }
+      }
+    },
+    {
+      "id": "update-resource-relationship-value",
+      "type": "normative-statements",
+      "attributes": {
+        "level": "MUST",
+        "description": "If a relationship is provided in the relationships member of a resource object in a `PATCH` request, its value **MUST** be a relationship object with a data member."
+      },
+      "relationships": {
+        "section": {
+          "data": { "id": "creating-updating-deleting", "type": "sections" }
+        }
+      }
+    },
+    {
+      "id": "update-resource-relationship-reject-full-replacement",
+      "type": "normative-statements",
+      "attributes": {
+        "level": "MAY",
+        "description": "A server **MAY** reject an attempt to do a full replacement of a to-many relationship."
+      },
+      "relationships": {
+        "section": {
+          "data": { "id": "creating-updating-deleting", "type": "sections" }
+        }
+      }
+    },
+    {
+      "id": "update-resource-relationship-reject-full-replacement-response",
+      "type": "normative-statements",
+      "attributes": {
+        "level": "MUST",
+        "description": "In such a case, the server **MUST** reject the entire update, and return a `403 Forbidden` response."
+      },
+      "relationships": {
+        "section": {
+          "data": { "id": "creating-updating-deleting", "type": "sections" }
+        }
+      }
+    },
+    {
+      "id": "update-resource-202-status",
+      "type": "normative-statements",
+      "attributes": {
+        "level": "MUST",
+        "description": "If an update request has been accepted for processing, but the processing has not been completed by the time the server responds, the server **MUST** return a `202 Accepted` status code."
+      },
+      "relationships": {
+        "section": {
+          "data": { "id": "creating-updating-deleting", "type": "sections" }
+        }
+      }
+    },
+    {
+      "id": "update-resource-200-status",
+      "type": "normative-statements",
+      "attributes": {
+        "level": "MUST",
+        "description": "If a server accepts an update but also changes the resource(s) in ways other than those specified by the request (for example, updating the `updated-at` attribute or a computed `sha`), it **MUST** return a `200 OK` response."
+      },
+      "relationships": {
+        "section": {
+          "data": { "id": "creating-updating-deleting", "type": "sections" }
+        }
+      }
+    },
+    {
+      "id": "update-resource-relationship-200-response",
+      "type": "normative-statements",
+      "attributes": {
+        "level": "MUST",
+        "description": "The response document **MUST** include a representation of the updated resource(s) as if a `GET` request was made to the request URL."
+      },
+      "relationships": {
+        "section": {
+          "data": { "id": "creating-updating-deleting", "type": "sections" }
+        }
+      }
+    },
+    {
+      "id": "update-resource-200-meta",
+      "type": "normative-statements",
+      "attributes": {
+        "level": "MUST",
+        "description": "A server **MUST** return a `200 OK` status code if an update is successful, the client's current attributes remain up to date, and the server responds only with top-level meta data."
+      },
+      "relationships": {
+        "section": {
+          "data": { "id": "creating-updating-deleting", "type": "sections" }
+        }
+      }
+    },
+    {
+      "id": "update-resource-200-meta-representation",
+      "type": "normative-statements",
+      "attributes": {
+        "level": "MUST",
+        "description": "In this case the server **MUST NOT** include a representation of the updated resource(s)."
+      },
+      "relationships": {
+        "section": {
+          "data": { "id": "creating-updating-deleting", "type": "sections" }
+        }
+      }
+    },
+    {
+      "id": "update-resource-204-status",
+      "type": "normative-statements",
+      "attributes": {
+        "level": "MUST",
+        "description": "If an update is successful and the server doesn't update any attributes besides those provided, the server **MUST** return either a `200 OK` status code and response document (as described above) or a `204 No Content` status code with no response document."
+      },
+      "relationships": {
+        "section": {
+          "data": { "id": "creating-updating-deleting", "type": "sections" }
+        }
+      }
+    },
+    {
+      "id": "update-resource-403-status",
+      "type": "normative-statements",
+      "attributes": {
+        "level": "MUST",
+        "description": "A server **MUST** return `403 Forbidden` in response to an unsupported request to update a resource or relationship."
+      },
+      "relationships": {
+        "section": {
+          "data": { "id": "creating-updating-deleting", "type": "sections" }
+        }
+      }
+    },
+    {
+      "id": "update-resource-404-status",
+      "type": "normative-statements",
+      "attributes": {
+        "level": "MUST",
+        "description": "A server **MUST** return `404 Not Found` when processing a request to modify a resource that does not exist."
+      },
+      "relationships": {
+        "section": {
+          "data": { "id": "creating-updating-deleting", "type": "sections" }
+        }
+      }
+    },
+    {
+      "id": "update-resource-404-related",
+      "type": "normative-statements",
+      "attributes": {
+        "level": "MUST",
+        "description": "A server **MUST** return `404 Not Found` when processing a request that references a related resource that does not exist."
+      },
+      "relationships": {
+        "section": {
+          "data": { "id": "creating-updating-deleting", "type": "sections" }
+        }
+      }
+    },
+    {
+      "id": "update-resource-409-status",
+      "type": "normative-statements",
+      "attributes": {
+        "level": "MAY",
+        "description": "A server **MAY** return `409 Conflict` when processing a `PATCH` request to update a resource if that update would violate other server-enforced constraints (such as a uniqueness constraint on a property other than `id`)."
+      },
+      "relationships": {
+        "section": {
+          "data": { "id": "creating-updating-deleting", "type": "sections" }
+        }
+      }
+    },
+    {
+      "id": "update-resource-409-no-match",
+      "type": "normative-statements",
+      "attributes": {
+        "level": "MUST",
+        "description": "A server **MUST** return `409 Conflict` when processing a `PATCH` request in which the resource object's `type` and `id` do not match the server's endpoint."
+      },
+      "relationships": {
+        "section": {
+          "data": { "id": "creating-updating-deleting", "type": "sections" }
+        }
+      }
+    },
+    {
+      "id": "update-resource-409-details",
+      "type": "normative-statements",
+      "attributes": {
+        "level": "SHOULD",
+        "description": "A server **SHOULD** include error details and provide enough information to recognize the source of the conflict."
+      },
+      "relationships": {
+        "section": {
+          "data": { "id": "creating-updating-deleting", "type": "sections" }
+        }
+      }
+    },
+    {
+      "id": "update-resource-409-details",
+      "type": "normative-statements",
+      "attributes": {
+        "level": "SHOULD",
+        "description": "A server **SHOULD** include error details and provide enough information to recognize the source of the conflict."
+      },
+      "relationships": {
+        "section": {
+          "data": { "id": "creating-updating-deleting", "type": "sections" }
+        }
+      }
+    },
+    {
+      "id": "update-resource-other-status",
+      "type": "normative-statements",
+      "attributes": {
+        "level": "MAY",
+        "description": "A server **MAY** respond with other `HTTP` status codes."
+      },
+      "relationships": {
+        "section": {
+          "data": { "id": "creating-updating-deleting", "type": "sections" }
+        }
+      }
+    },
+    {
+      "id": "update-resource-other-status",
+      "type": "normative-statements",
+      "attributes": {
+        "level": "MAY",
+        "description": "A server **MAY** include error details with error responses."
+      },
+      "relationships": {
+        "section": {
+          "data": { "id": "creating-updating-deleting", "type": "sections" }
+        }
+      }
+    },
+    {
+      "id": "update-resource-other-semantics",
+      "type": "normative-statements",
+      "attributes": {
+        "level": "MAY",
+        "description": "A server **MAY** include error details with error responses."
+      },
+      "relationships": {
+        "section": {
+          "data": { "id": "creating-updating-deleting", "type": "sections" }
+        }
+      }
+    },
+    {
+      "id": "update-resource-http-semantics",
+      "type": "normative-statements",
+      "attributes": {
+        "level": "MUST",
+        "description": "A server **MUST** prepare responses, and a client **MUST** interpret responses, in accordance with HTTP semantics."
+      },
+      "relationships": {
+        "section": {
+          "data": { "id": "creating-updating-deleting", "type": "sections" }
+        }
+      }
+    },
+    {
+      "id": "respond-patch-to-one-relationship-link",
+      "type": "normative-statements",
+      "attributes": {
+        "level": "MUST",
+        "description": "A server **MUST** respond to `PATCH` requests to a URL from a to-one relationship link as described below."
+      },
+      "relationships": {
+        "section": {
+          "data": { "id": "creating-updating-deleting", "type": "sections" }
+        }
+      }
+    },
+    {
+      "id": "patch-to-one-data-member",
+      "type": "normative-statements",
+      "attributes": {
+        "level": "MUST",
+        "description": "The PATCH request MUST include a top-level member named data containing one of:\\n\\n- a resource identifier object corresponding to the new related resource.\\n- `null`, to remove the relationship."
+      },
+      "relationships": {
+        "section": {
+          "data": { "id": "creating-updating-deleting", "type": "sections" }
+        }
+      }
+    },
+    {
+      "id": "patch-to-one-response",
+      "type": "normative-statements",
+      "attributes": {
+        "level": "MUST",
+        "description": "If the relationship is updated successfully then the server **MUST** return a successful response."
+      },
+      "relationships": {
+        "section": {
+          "data": { "id": "creating-updating-deleting", "type": "sections" }
+        }
+      }
+    },
+    {
+      "id": "respond-patch-post-delete-to-many-relationship-link",
+      "type": "normative-statements",
+      "attributes": {
+        "level": "MUST",
+        "description": "A server **MUST** respond to `PATCH`, `POST`, and `DELETE` requests to a URL from a to-many relationship link as described below."
+      },
+      "relationships": {
+        "section": {
+          "data": { "id": "creating-updating-deleting", "type": "sections" }
+        }
+      }
+    },
+    {
+      "id": "patch-post-delete-to-many-data-member",
+      "type": "normative-statements",
+      "attributes": {
+        "level": "MUST",
+        "description": "For all request types, the body **MUST** contain a `data` member whose value is an empty array or an array of resource identifier objects."
+      },
+      "relationships": {
+        "section": {
+          "data": { "id": "creating-updating-deleting", "type": "sections" }
+        }
+      }
+    },
+    {
+      "id": "patch-to-many-complete-replace",
+      "type": "normative-statements",
+      "attributes": {
+        "level": "MUST",
+        "description": "If a client makes a `PATCH` request to a URL from a to-many relationship link, the server **MUST** either completely replace every member of the relationship, return an appropriate error response if some resources can not be found or accessed, or return a `403 Forbidden` response if complete replacement is not allowed by the server."
+      },
+      "relationships": {
+        "section": {
+          "data": { "id": "creating-updating-deleting", "type": "sections" }
+        }
+      }
+    },
+    {
+      "id": "post-to-many-add",
+      "type": "normative-statements",
+      "attributes": {
+        "level": "MUST",
+        "description": "If a client makes a `POST` request to a URL from a relationship link, the server **MUST** add the specified members to the relationship unless they are already present."
+      },
+      "relationships": {
+        "section": {
+          "data": { "id": "creating-updating-deleting", "type": "sections" }
+        }
+      }
+    },
+    {
+      "id": "post-to-many-add-again",
+      "type": "normative-statements",
+      "attributes": {
+        "level": "MUST",
+        "description": "If a given `type` and `id` is already in the relationship, the server **MUST NOT** add it again."
+      },
+      "relationships": {
+        "section": {
+          "data": { "id": "creating-updating-deleting", "type": "sections" }
+        }
+      }
+    },
+    {
+      "id": "post-to-many-add-again",
+      "type": "normative-statements",
+      "attributes": {
+        "level": "MUST",
+        "description": "If a given `type` and `id` is already in the relationship, the server **MUST NOT** add it again."
+      },
+      "relationships": {
+        "section": {
+          "data": { "id": "creating-updating-deleting", "type": "sections" }
+        }
+      }
+    },
+    {
+      "id": "post-to-many-response",
+      "type": "normative-statements",
+      "attributes": {
+        "level": "MUST",
+        "description": "If all of the specified resources can be added to, or are already present in, the relationship then the server **MUST** return a successful response."
+      },
+      "relationships": {
+        "section": {
+          "data": { "id": "creating-updating-deleting", "type": "sections" }
+        }
+      }
+    },
+    {
+      "id": "delete-to-many",
+      "type": "normative-statements",
+      "attributes": {
+        "level": "MUST",
+        "description": "If the client makes a `DELETE` request to a URL from a relationship link the server **MUST** delete the specified members from the relationship or return a `403 Forbidden` response."
+      },
+      "relationships": {
+        "section": {
+          "data": { "id": "creating-updating-deleting", "type": "sections" }
+        }
+      }
+    },
+    {
+      "id": "delete-to-many",
+      "type": "normative-statements",
+      "attributes": {
+        "level": "MUST",
+        "description": "If the client makes a `DELETE` request to a URL from a relationship link the server **MUST** delete the specified members from the relationship or return a `403 Forbidden` response."
+      },
+      "relationships": {
+        "section": {
+          "data": { "id": "creating-updating-deleting", "type": "sections" }
+        }
+      }
+    },
+    {
+      "id": "delete-to-many-success",
+      "type": "normative-statements",
+      "attributes": {
+        "level": "MUST",
+        "description": "If all of the specified resources are able to be removed from, or are already missing from, the relationship then the server **MUST** return a successful response."
+      },
+      "relationships": {
+        "section": {
+          "data": { "id": "creating-updating-deleting", "type": "sections" }
+        }
+      }
+    },
+    {
+      "id": "updating-relationship-202-status",
+      "type": "normative-statements",
+      "attributes": {
+        "level": "MUST",
+        "description": "If a relationship update request has been accepted for processing, but the processing has not been completed by the time the server responds, the server **MUST** return a `202 Accepted` status code."
+      },
+      "relationships": {
+        "section": {
+          "data": { "id": "creating-updating-deleting", "type": "sections" }
+        }
+      }
+    },
+    {
+      "id": "updating-relationship-204-status",
+      "type": "normative-statements",
+      "attributes": {
+        "level": "MUST",
+        "description": "A server **MUST** return a `204 No Content` status code if an update is successful and the representation of the resource in the request matches the result."
+      },
+      "relationships": {
+        "section": {
+          "data": { "id": "creating-updating-deleting", "type": "sections" }
+        }
+      }
+    },
+    {
+      "id": "updating-relationship-200-status",
+      "type": "normative-statements",
+      "attributes": {
+        "level": "MUST",
+        "description": "If a server accepts an update but also changes the targeted relationship(s) in other ways than those specified by the request, it **MUST** return a `200 OK` response."
+      },
+      "relationships": {
+        "section": {
+          "data": { "id": "creating-updating-deleting", "type": "sections" }
+        }
+      }
+    },
+    {
+      "id": "updating-relationship-200-response",
+      "type": "normative-statements",
+      "attributes": {
+        "level": "MUST",
+        "description": "The response document **MUST** include a representation of the updated relationship(s)."
+      },
+      "relationships": {
+        "section": {
+          "data": { "id": "creating-updating-deleting", "type": "sections" }
+        }
+      }
+    },
+    {
+      "id": "updating-relationship-200-meta",
+      "type": "normative-statements",
+      "attributes": {
+        "level": "MUST",
+        "description": "A server **MUST** return a `200 OK` status code if an update is successful, the client's current data remain up to date, and the server responds only with top-level meta data."
+      },
+      "relationships": {
+        "section": {
+          "data": { "id": "creating-updating-deleting", "type": "sections" }
+        }
+      }
+    },
+    {
+      "id": "updating-relationship-200-meta-content",
+      "type": "normative-statements",
+      "attributes": {
+        "level": "MUST",
+        "description": "In this case the server **MUST NOT** include a representation of the updated relationship(s)."
+      },
+      "relationships": {
+        "section": {
+          "data": { "id": "creating-updating-deleting", "type": "sections" }
+        }
+      }
+    },
+    {
+      "id": "updating-relationship-403-status",
+      "type": "normative-statements",
+      "attributes": {
+        "level": "MUST",
+        "description": "A server **MUST** return `403 Forbidden` in response to an unsupported request to update a relationship."
+      },
+      "relationships": {
+        "section": {
+          "data": { "id": "creating-updating-deleting", "type": "sections" }
+        }
+      }
+    },
+    {
+      "id": "updating-relationship-other-status",
+      "type": "normative-statements",
+      "attributes": {
+        "level": "MAY",
+        "description": "A server **MAY** respond with other HTTP status codes."
+      },
+      "relationships": {
+        "section": {
+          "data": { "id": "creating-updating-deleting", "type": "sections" }
+        }
+      }
+    },
+    {
+      "id": "updating-relationship-other-details",
+      "type": "normative-statements",
+      "attributes": {
+        "level": "MAY",
+        "description": "A server **MAY** include error details with error responses."
+      },
+      "relationships": {
+        "section": {
+          "data": { "id": "creating-updating-deleting", "type": "sections" }
+        }
+      }
+    },
+    {
+      "id": "update-relationship-http-semantics",
+      "type": "normative-statements",
+      "attributes": {
+        "level": "MUST",
+        "description": "A server **MUST** prepare responses, and a client **MUST** interpret responses, in accordance with HTTP semantics."
+      },
+      "relationships": {
+        "section": {
+          "data": { "id": "creating-updating-deleting", "type": "sections" }
+        }
+      }
+    },
+    {
+      "id": "delete-202-status",
+      "type": "normative-statements",
+      "attributes": {
+        "level": "MUST",
+        "description": "If a deletion request has been accepted for processing, but the processing has not been completed by the time the server responds, the server **MUST** return a `202 Accepted` status code."
+      },
+      "relationships": {
+        "section": {
+          "data": { "id": "creating-updating-deleting", "type": "sections" }
+        }
+      }
+    },
+    {
+      "id": "delete-204-status",
+      "type": "normative-statements",
+      "attributes": {
+        "level": "MUST",
+        "description": "A server **MUST** return a `204 No Content` status code if a deletion request is successful and no content is returned."
+      },
+      "relationships": {
+        "section": {
+          "data": { "id": "creating-updating-deleting", "type": "sections" }
+        }
+      }
+    },
+    {
+      "id": "delete-200-status",
+      "type": "normative-statements",
+      "attributes": {
+        "level": "MUST",
+        "description": "A server **MUST** return a `200 OK` status code if a deletion request is successful and the server responds with only top-level meta data."
+      },
+      "relationships": {
+        "section": {
+          "data": { "id": "creating-updating-deleting", "type": "sections" }
+        }
+      }
+    },
+    {
+      "id": "deleting-other-status",
+      "type": "normative-statements",
+      "attributes": {
+        "level": "MAY",
+        "description": "A server **MAY** respond with other HTTP status codes."
+      },
+      "relationships": {
+        "section": {
+          "data": { "id": "creating-updating-deleting", "type": "sections" }
+        }
+      }
+    },
+    {
+      "id": "deleting-other-details",
+      "type": "normative-statements",
+      "attributes": {
+        "level": "MAY",
+        "description": "A server **MAY** include error details with error responses."
+      },
+      "relationships": {
+        "section": {
+          "data": { "id": "creating-updating-deleting", "type": "sections" }
+        }
+      }
+    },
+    {
+      "id": "deleting-http-semantics",
+      "type": "normative-statements",
+      "attributes": {
+        "level": "MUST",
+        "description": "A server **MUST** prepare responses, and a client **MUST** interpret responses, in accordance with HTTP semantics."
+      },
+      "relationships": {
+        "section": {
+          "data": { "id": "creating-updating-deleting", "type": "sections" }
+        }
+      }
+    },
+    {
+      "id": "query-parameters-non-alpha",
+      "type": "normative-statements",
+      "attributes": {
+        "level": "MUST",
+        "description": "Implementation specific query parameters **MUST** adhere to the same constraints as member names with the additional requirement that they **MUST** contain at least one non a-z character (U+0061 to U+007A)."
+      },
+      "relationships": {
+        "section": {
+          "data": { "id": "query-parameters", "type": "sections" }
+        }
+      }
+    },
+    {
+      "id": "query-parameters-under-camel",
+      "type": "normative-statements",
+      "attributes": {
+        "level": "RECOMMENDED",
+        "description": "It is RECOMMENDED that a U+002D HYPHEN-MINUS, \"-\", U+005F LOW LINE, \"_\", or capital letter is used (e.g. camelCasing)."
+      },
+      "relationships": {
+        "section": {
+          "data": { "id": "query-parameters", "type": "sections" }
+        }
+      }
+    },
+    {
+      "id": "query-parameters-bad-request",
+      "type": "normative-statements",
+      "attributes": {
+        "level": "RECOMMENDED",
+        "description": "If a server encounters a query parameter that does not follow the naming conventions above, and the server does not know how to process it as a query parameter from this specification, it **MUST** return `400 Bad Request`."
+      },
+      "relationships": {
+        "section": {
+          "data": { "id": "query-parameters", "type": "sections" }
+        }
+      }
+    },
+    {
+      "id": "error-stop-processing",
+      "type": "normative-statements",
+      "attributes": {
+        "level": "MAY",
+        "description": "A server **MAY** choose to stop processing as soon as a problem is encountered, or it **MAY** continue processing and encounter multiple problems."
+      },
+      "relationships": {
+        "section": {
+          "data": { "id": "errors", "type": "sections" }
+        }
+      }
+    },
+    {
+      "id": "error-general",
+      "type": "normative-statements",
+      "attributes": {
+        "level": "SHOULD",
+        "description": "When a server encounters multiple problems for a single request, the most generally applicable HTTP error code **SHOULD** be used in the response."
+      },
+      "relationships": {
+        "section": {
+          "data": { "id": "errors", "type": "sections" }
+        }
+      }
+    },
+    {
+      "id": "error-object-key",
+      "type": "normative-statements",
+      "attributes": {
+        "level": "SHOULD",
+        "description": "Error objects **MUST** be returned as an array keyed by `errors` in the top level of a JSON API document."
+      },
+      "relationships": {
+        "section": {
+          "data": { "id": "errors", "type": "sections" }
+        }
+      }
+    },
+    {
+      "id": "error-object-members",
+      "type": "normative-statements",
+      "attributes": {
+        "level": "MAY",
+        "description": "An error object **MAY** have the following members:\\n\\n- `id`: a unique identifier for this particular occurrence of the problem.\\n- `links`: a links object containing the following members:\\n  - `about`: a link that leads to further details about this particular occurrence of the problem.\\n- `status`: the HTTP status code applicable to this problem, expressed as a string value.\\n- `code`: an application-specific error code, expressed as a string value.\\n- `title`: a short, human-readable summary of the problem that **SHOULD NOT** change from occurrence to occurrence of the problem, except for purposes of localization.\\n- `detail`: a human-readable explanation specific to this occurrence of the problem.\\n- `source`: an object containing references to the source of the error, optionally including any of the following members:\\n  - `pointer`: a JSON Pointer [RFC6901] to the associated entity in the request document [e.g. \"/data\" for a primary data object, or \"/data/attributes/title\" for a specific attribute].\\n  - `parameter`: a string indicating which URI query parameter caused the error.\\n- `meta`: a meta object containing non-standard meta-information about the error."
+      },
+      "relationships": {
+        "section": {
+          "data": { "id": "errors", "type": "sections" }
+        }
+      }
+    }
+  ]
+}

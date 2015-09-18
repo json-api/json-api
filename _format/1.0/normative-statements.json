@@ -1,3 +1,7 @@
+---
+version: 1.0
+layout: null
+---
 {
   "jsonapi": {
     "version": "1.0"

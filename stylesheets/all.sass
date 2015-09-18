@@ -246,10 +246,40 @@ footer
     width: $sidebar-width
     overflow-y: auto
 
-  // Hide the sidebar on small viewports, but only after we've shrunk the
-  // main column to below a comfortable size (that's the -60px)
+  #version-picker-wrapper
+    width: $sidebar-width
+    margin-bottom: 20px
+    display: flex
+    flex-direction: row
+
+    label
+      display: none
+      margin-right: .5em
+
+    .version-picker
+      flex-direction: row
+      flex-grow: 1
+
+  // On small viewports, but only after we've shrunk the
+  // main column to below a comfortable size (that's the -60px)..
   @media screen and (max-width: $page-width + ($page-padding * 2) - 60px)
-    display: none
+    // Hide the sidebar's content, except for the version picker
+    nav > :not(#version-picker-wrapper)
+      display: none
+
+    // don't float or pad the nav the sidebar so that the version
+    // picker, which we are showing, goes full width
+    float: none
+    width: auto
+    nav
+      padding-right: 0
+
+    // bring back the label, which makes the version switcher's function
+    // a bit clearer when the sidebar isn't visible to offer context.
+    #version-picker-wrapper
+      width: auto
+      label
+        display: inline
 
 // Push the content to the right, except on small viewports
 // The padding-left: calc(...) functions to grow the gutter gradually by 25px
