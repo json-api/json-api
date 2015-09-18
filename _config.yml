@@ -15,7 +15,7 @@ exclude:
 markdown: redcarpet
 redcarpet:
   extensions: ["tables"]
-highlighter: null
+highlighter: pygments
 port: 9876
 
 collections:
