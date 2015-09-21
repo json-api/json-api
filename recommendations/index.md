@@ -8,16 +8,16 @@ This section contains recommendations for JSON API implementations. These
 recommendations are intended to establish a level of consistency in areas that
 are beyond the scope of the base JSON API specification.
 
-## Naming <a href="#naming" id="naming" class="headerlink"></a>
+## <a href="#naming" id="naming" class="headerlink"></a> Naming
 
 The allowed and recommended characters for an URL safe naming of members are defined in the format spec. To also standardize member names, the following (more restrictive) rules are recommended:
 
 - Member names **SHOULD** start and end with the characters "a-z" (U+0061 to U+007A)
 - Member names **SHOULD** contain only the characters "a-z" (U+0061 to U+007A), "0-9" (U+0030 to U+0039), and the hyphen minus (U+002D HYPHEN-MINUS, "-") as separator between multiple words.
 
-## URL Design <a href="#urls" id="urls" class="headerlink"></a>
+## <a href="#urls" id="urls" class="headerlink"></a> URL Design
 
-### Reference Document <a href="#urls-reference-document" id="urls-reference-document" class="headerlink"></a>
+### <a href="#urls-reference-document" id="urls-reference-document" class="headerlink"></a> Reference Document
 
 When determining an API's URL structure, it is helpful to consider that all of
 its resources exist in a single "reference document" in which each resource is
@@ -34,7 +34,7 @@ collections in the reference document are represented as sets because members
 must be addressable by ID, while collections are represented as arrays in
 transport documents because order is significant.
 
-### URLs for Resource Collections <a href="#urls-resource-collections" id="urls-resource-collections" class="headerlink"></a>
+### <a href="#urls-resource-collections" id="urls-resource-collections" class="headerlink"></a> URLs for Resource Collections
 
 It is recommended that the URL for a collection of resources be formed from
 the resource type.
@@ -45,7 +45,7 @@ For example, a collection of resources of type `photos` will have the URL:
 /photos
 ```
 
-### URLs for Individual Resources <a href="#urls-individual-resources" id="urls-individual-resources" class="headerlink"></a>
+### <a href="#urls-individual-resources" id="urls-individual-resources" class="headerlink"></a> URLs for Individual Resources
 
 Treat collections of resources as sets keyed by resource ID. The URL for an
 individual resource can be formed by appending the resource's ID to the
@@ -57,7 +57,7 @@ For example, a photo with an ID of `"1"` will have the URL:
 /photos/1
 ```
 
-### Relationship URLs and Related Resource URLs <a href="#urls-relationships" id="urls-relationships" class="headerlink"></a>
+### <a href="#urls-relationships" id="urls-relationships" class="headerlink"></a> Relationship URLs and Related Resource URLs
 
 As described in the base specification, there are two URLs that can be exposed
 for each relationship:
@@ -106,7 +106,7 @@ Because these URLs represent resources in relationships, they should not be
 used as `self` links for the resources themselves. Instead the recommendations
 for individual resource URLs should still apply when forming `self` links.
 
-## Filtering <a href="#filtering" id="filtering" class="headerlink"></a>
+## <a href="#filtering" id="filtering" class="headerlink"></a> Filtering
 
 The base specification is agnostic about filtering strategies supported by a
 server. The `filter` query parameter is reserved to be used as the basis for
@@ -135,7 +135,7 @@ Furthermore, multiple filters can be applied to a single request:
 GET /comments?filter[post]=1,2&filter[author]=12
 ```
 
-## Supporting Clients Lacking `PATCH` <a href="#patchless-clients" id="patchless-clients" class="headerlink"></a>
+## <a href="#patchless-clients" id="patchless-clients" class="headerlink"></a> Supporting Clients Lacking `PATCH`
 
 Some clients, like IE8, lack support for HTTP's `PATCH` method. API servers
 that wish to support these clients are recommended to treat `POST` requests as
@@ -143,14 +143,14 @@ that wish to support these clients are recommended to treat `POST` requests as
 header. This allows clients that lack `PATCH` support to have their update
 requests honored, simply by adding the header.
 
-## Formatting Date and Time Fields <a href="#date-and-time-fields" id="date-and-time-fields" class="headerlink"></a>
+## <a href="#date-and-time-fields" id="date-and-time-fields" class="headerlink"></a> Formatting Date and Time Fields
 
 Although JSON API does not specify the format of date and time fields, it is
 recommended that servers align with ISO 8601. [This W3C
 NOTE](http://www.w3.org/TR/NOTE-datetime) provides an overview of the
 recommended formats.
 
-## Asynchronous Processing <a href="#asynchronous-processing" id="asynchronous-processing" class="headerlink"></a>
+## <a href="#asynchronous-processing" id="asynchronous-processing" class="headerlink"></a> Asynchronous Processing
 
 Consider a situation when you need to create a resource and the operation takes long time to complete.
 

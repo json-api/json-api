@@ -11,9 +11,9 @@ pull request](https://github.com/json-api/json-api).
 below have not been verified for compliance, but a test suite is now being
 assembled to vet them.
 
-## Client libraries <a href="#client-libraries" id="client-libraries" class="headerlink"></a>
+## <a href="#client-libraries" id="client-libraries" class="headerlink"></a> Client libraries
 
-### JavaScript <a href="#client-libraries-javascript" id="client-libraries-javascript" class="headerlink"></a>
+### <a href="#client-libraries-javascript" id="client-libraries-javascript" class="headerlink"></a> JavaScript
 
 * [ember-data](https://github.com/emberjs/data) is one of the original exemplar implementations. There is now an [offical adapter](http://emberjs.com/blog/2015/06/18/ember-data-1-13-released.html#toc_json-api-support) to support json-api.
 * [backbone-jsonapi](https://github.com/guillaumervls/backbone-jsonapi) is a Backbone adapter for JSON API. Supports fetching Models & Collections from a JSON API source.
@@ -33,23 +33,23 @@ assembled to vet them.
 * [superagent-jsonapify](https://github.com/alex94puchades/superagent-jsonapify) A really lightweight (50 lines) JSON-API client addon for [superagent](https://github.com/visionmedia/superagent), the isomorphic ajax client.
 * [angular-jsonapi](https://github.com/jakubrohleder/angular-jsonapi) An Angular JSON API client
 
-### iOS <a href="#client-libraries-ios" id="client-libraries-ios" class="headerlink"></a>
+### <a href="#client-libraries-ios" id="client-libraries-ios" class="headerlink"></a> iOS
 
 * [jsonapi-ios](https://github.com/joshdholtz/jsonapi-ios) is a library for loading data from a JSON API datasource. Parses JSON API data into models with support for auto-linking of resources and custom model classes.
 * [Spine](https://github.com/wvteijlingen/spine) is a Swift library for working with JSON API APIs. It supports mapping to custom model classes, fetching, advanced querying, linking and persisting.
 
-### Ruby <a href="#client-libraries-ruby" id="client-libraries-ruby" class="headerlink"></a>
+### <a href="#client-libraries-ruby" id="client-libraries-ruby" class="headerlink"></a> Ruby
 
 * [jsonapi-consumer](https://github.com/jsmestad/jsonapi-consumer) a ruby library for consuming JSONAPI payloads.
 * [JsonApiClient](https://github.com/chingor13/json_api_client) attempts to give you a query building framework that is easy to understand (similar to ActiveRecord scopes)
 
-### PHP <a href="#client-libraries-php" id="client-libraries-php" class="headerlink"></a>
+### <a href="#client-libraries-php" id="client-libraries-php" class="headerlink"></a> PHP
 
 * [Art4 / json-api-client](https://github.com/Art4/json-api-client) is a library for validating and handling the response body in a simple OOP way.
 
-## Server libraries <a href="#server-libraries" id="server-libraries" class="headerlink"></a>
+## <a href="#server-libraries" id="server-libraries" class="headerlink"></a> Server libraries
 
-### PHP <a href="#server-libraries-php" id="server-libraries-php" class="headerlink"></a>
+### <a href="#server-libraries-php" id="server-libraries-php" class="headerlink"></a> PHP
 
 * [GOintegro / HATEOAS](https://github.com/gointegro/hateoas-bundle) is a library and Symfony 2 bundle that allows you to magically expose your Doctrine 2 mapped entities as resources in a HATEOAS API and supports the full spec of JSON-API for serializing and fetching.
 * [tobscure / json-api](https://github.com/tobscure/json-api)
@@ -61,7 +61,7 @@ assembled to vet them.
 * [nilportugues / symfony2-jsonapi-transformer](https://github.com/nilportugues/symfony2-jsonapi-transformer) Symfony 2 JSON API Transformer Bundle outputting valid API responses in JSON and JSON API formats.
 * [nilportugues / laravel5-jsonapi-transformer](https://github.com/nilportugues/laravel5-jsonapi-transformer) Laravel 5 JSON API Transformer Package outputting valid API responses in JSON and JSON API formats.
 
-### Node.js <a href="#server-libraries-node-js" id="server-libraries-node-js" class="headerlink"></a>
+### <a href="#server-libraries-node-js" id="server-libraries-node-js" class="headerlink"></a> Node.js
 * [Fortune.js](http://fortunejs.com) is a library that includes a [comprehensive implementation of JSON API](https://github.com/fortunejs/fortune-json-api).
 * [json-api](https://www.npmjs.org/package/json-api) turns an Express + Mongoose app into a JSON-API server.
 * [endpoints](https://github.com/endpoints) is an implementation of JSON API using [Bookshelf](http://bookshelfjs.org).
@@ -70,7 +70,7 @@ assembled to vet them.
 * [jsonapi-server](https://github.com/holidayextras/jsonapi-server) is a fully featured NodeJS sever implementation of json:api.
 * [jsonapify](https://github.com/alex94puchades/jsonapify) is an unintrusive, well-tested and easy-to-use library for the development of JSON API (or similar) APIs. It integrates nicely with Mongoose models as connect-compatible middleware. Its development is very recent though, which only means that feature requests and feedback is more than welcome!
 
-### Ruby <a href="#server-libraries-ruby" id="server-libraries-ruby" class="headerlink"></a>
+### <a href="#server-libraries-ruby" id="server-libraries-ruby" class="headerlink"></a> Ruby
 
 * [ActiveModel::Serializers](https://github.com/rails-api/active_model_serializers)
 is one of the original exemplar implementations, but is slightly out of date at
@@ -83,7 +83,7 @@ has a page describing how to emit conformant JSON.
 * [Yaks](https://github.com/plexus/yaks) Library for building hypermedia APIs, contains a JSON API output format.
 * [JSONAPI::Serializers](https://github.com/fotinakis/jsonapi-serializers) provides a pure Ruby, readonly serializer implementation.
 
-### Python <a href="#server-libraries-python" id="server-libraries-python" class="headerlink"></a>
+### <a href="#server-libraries-python" id="server-libraries-python" class="headerlink"></a> Python
 
 * [Hyp](https://github.com/kalasjocke/hyp) is a library for creating json-api responses.
 * [SQLAlchemy-JSONAPI](https://github.com/coltonprovias/sqlalchemy-jsonapi) provides JSON API serialization for SQLAlchemy models.
@@ -95,12 +95,12 @@ has a page describing how to emit conformant JSON.
 * [marshmallow-jsonapi](https://github.com/marshmallow-code/marshmallow-jsonapi) provides JSON API data formatting for any Python web framework.
 * [neoapi](https://pypi.python.org/pypi/neoapi/) serializes JSON API–compliant responses from neomodel StructuredNodes for Neo4j data
 
-### Go <a href="#server-libraries-go" id="server-libraries-go" class="headerlink"></a>
+### <a href="#server-libraries-go" id="server-libraries-go" class="headerlink"></a> Go
 
 * [api2go](https://github.com/univedo/api2go) is a small library to make it easier to provide a JSON API with your Golang project.
 * [jsonapi](https://github.com/shwoodard/jsonapi) serializes and deserializes jsonapi formatted payloads using struct tags to annotate the structs that you already have in your Golang project. [Godoc](http://godoc.org/github.com/shwoodard/jsonapi)
 
-### .NET <a href="#server-libraries-net" id="server-libraries-net" class="headerlink"></a>
+### <a href="#server-libraries-net" id="server-libraries-net" class="headerlink"></a> .NET
 
 * [JsonApiNet](https://github.com/l8nite/JsonApiNet) lets you quickly deserialize JSON API documents into C# entities. Supports compound documents, complex type mapping from attributes, attribute mapping, and more. [See the README](https://github.com/l8nite/JsonApiNet/blob/master/README.md) for full details.
 
@@ -110,30 +110,30 @@ has a page describing how to emit conformant JSON.
 
 * [Migrap.AspNet.Mvc.Jsonapi](https://github.com/migrap/Migrap.AspNet.Mvc.Jsonapi) is an ASP.NET 5 (vNext) library that allows for existing code to build JSON API responses through output formatters.
 
-### Java <a href="#server-libraries-java" id="server-libraries-java" class="headerlink"></a>
+### <a href="#server-libraries-java" id="server-libraries-java" class="headerlink"></a> Java
 
-* [katharsis](http://katharsis.io) has comprehensive coverage of standard allowing to create JSON:API compatible resources with dynamic relation based routing. 
+* [katharsis](http://katharsis.io) has comprehensive coverage of standard allowing to create JSON:API compatible resources with dynamic relation based routing.
 * [katharsis-core](https://github.com/katharsis-project/katharsis-core) is Java 8 based core library for [katharsis](http://katharsis.io) allowing to manage RESTful endpoints compliant with JSON API standard.
 * [katharsis-rs](https://github.com/katharsis-project/katharsis-rs) is adapter for [katharsis](http://katharsis.io) core module for all compatible JAX-RS based frameworks.
 * [katharsis-servlet](https://github.com/katharsis-project/katharsis-servlet) is a generic servlet/filter adapter for [katharsis](http://katharsis.io) core module. This module can be used in traditional servlet or filter based Java web applications, or even non-Servlet-API-based web applications such as Portal/Portlet, Wicket, etc.
 
-## Examples <a href="#examples" id="examples" class="headerlink"></a>
+## <a href="#examples" id="examples" class="headerlink"></a> Examples
 
 * [RestPack::Serializer provides examples](http://restpack-serializer-sample.herokuapp.com/) which demonstrate sample responses.
 * [Endpoints provides a fully working example API](http://github.com/endpoints/example/)
 
-## Related Tools <a href="#related-tools" id="related-tools" class="headerlink"></a>
+## <a href="#related-tools" id="related-tools" class="headerlink"></a> Related Tools
 
-### Ruby <a href="#related-tools-ruby" id="related-tools-ruby" class="headerlink"></a>
+### <a href="#related-tools-ruby" id="related-tools-ruby" class="headerlink"></a> Ruby
 
 * [json-patch](https://github.com/guillec/json-patch) implementation of JSON Patch (rfc6902)
 * [hana](https://github.com/tenderlove/hana) implementation of the JSON Patch and JSON pointer spec
 
-### Node.js <a href="#relted-tools-node-js" id="relted-tools-node-js" class="headerlink"></a>
+### <a href="#relted-tools-node-js" id="relted-tools-node-js" class="headerlink"></a> Node.js
 
 * [json-patch](https://www.npmjs.org/package/json-patch) implementation of JSON Patch (rfc6902)
 
-### Python <a href="#server-python" id="server-python" class="headerlink"></a>
+### <a href="#server-python" id="server-python" class="headerlink"></a> Python
 
 * [jsonpatch](https://python-json-patch.readthedocs.org) implementation of JSON Patch (rfc6902)
 * [drf-json-patch](https://drf-json-patch.readthedocs.org) integrates jsonpatch with Django REST Framework

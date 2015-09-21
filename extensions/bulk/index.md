@@ -3,13 +3,13 @@ layout: page
 title: "Bulk Extension"
 ---
 
-## Status <a href="#status" id="status" class="headerlink"></a>
+## <a href="#status" id="status" class="headerlink"></a> Status
 
 **Extensions are an experimental feature** and should be considered a work
 in progress. There is no official support for extensions in the base JSON
 API specification.
 
-## Introduction <a href="#introduction" id="introduction" class="headerlink"></a>
+## <a href="#introduction" id="introduction" class="headerlink"></a> Introduction
 
 The "Bulk extension" is an [official
 extension](/extensions/#official-extensions) of the JSON API specification.
@@ -20,7 +20,7 @@ Servers and clients **MUST** negotiate support for and use of the Bulk extension
 [as described in the base specification](/format/#extending) using `bulk` as the
 name of the extension.
 
-## Bulk Operations <a href="#bulk-operations" id="bulk-operations" class="headerlink"></a>
+## <a href="#bulk-operations" id="bulk-operations" class="headerlink"></a> Bulk Operations
 
 [As mentioned in the base specification](/format/#crud), a request **MUST**
 completely succeed or fail (in a single "transaction").
@@ -29,7 +29,7 @@ Therefore, any request that involves multiple operations **MUST** only
 succeed if all operations are performed successfully. The state of the
 server **MUST NOT** be changed by a request if any individual operation fails.
 
-## Creating Multiple Resources <a href="#creating-multiple-resources" id="creating-multiple-resources" class="headerlink"></a>
+## <a href="#creating-multiple-resources" id="creating-multiple-resources" class="headerlink"></a> Creating Multiple Resources
 
 Multiple resources can be created by sending a `POST` request to a URL that
 represents a collection of resources. The request **MUST** include an array
@@ -61,7 +61,7 @@ Accept: application/vnd.api+json; ext=bulk
 ```
 
 
-## Updating Multiple Resources <a href="#updating-multiple-resources" id="updating-multiple-resources" class="headerlink"></a>
+## <a href="#updating-multiple-resources" id="updating-multiple-resources" class="headerlink"></a> Updating Multiple Resources
 
 Multiple resources can be updated by sending a `PATCH` request to a URL that
 represents a collection of resources to which they all belong. The request
@@ -92,7 +92,7 @@ Accept: application/vnd.api+json; ext=bulk
 }
 ```
 
-## Deleting Multiple Resources <a href="#deleting-multiple-resources" id="deleting-multiple-resources" class="headerlink"></a>
+## <a href="#deleting-multiple-resources" id="deleting-multiple-resources" class="headerlink"></a> Deleting Multiple Resources
 
 Multiple resources can be deleted by sending a `DELETE` request to a URL that
 represents a collection of resources to which they all belong.

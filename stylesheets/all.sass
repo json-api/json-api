@@ -36,12 +36,20 @@ body
 
 h1, h2, h3, h4, h5
   font-weight: 300
+  position: relative
+  left: -1em
+  padding-left: 1em
 
   &:first-child
     margin-top: 0
 
-  &:hover .headerlink::after
-    content: "¶"
+  &:hover .headerlink, .headerlink:hover
+    font-size: inherit
+    &::after
+      margin-left: -.8em
+      width: .8em
+      position: absolute
+      content: "¶"
 
 h1
   text-transform: uppercase

@@ -3,13 +3,13 @@ layout: page
 title: "JSON Patch Extension"
 ---
 
-## Status <a href="#status" id="status" class="headerlink"></a>
+## <a href="#status" id="status" class="headerlink"></a> Status
 
 **Extensions are an experimental feature** and should be considered a work
 in progress. There is no official support for extensions in the base JSON
 API specification.
 
-## Introduction <a href="#introduction" id="introduction" class="headerlink"></a>
+## <a href="#introduction" id="introduction" class="headerlink"></a> Introduction
 
 The "JSON Patch extension" is an [official
 extension](/extensions/#official-extensions) of the JSON API specification.
@@ -24,13 +24,13 @@ Servers and clients **MUST** negotiate support for and use of the JSON Patch
 extension [as described in the base specification](/format/#extending) using
 `jsonpatch` as the name of the extension.
 
-## Patch Operations <a href="#patch-operations" id="patch-operations" class="headerlink"></a>
+## <a href="#patch-operations" id="patch-operations" class="headerlink"></a> Patch Operations
 
 Patch operations **MUST** be sent as an array to conform with the JSON
 Patch format. A server **MAY** limit the type, order, and count of
 operations allowed in this top level array.
 
-### Request URLs and Patch Paths <a href="#patch-urls" id="patch-urls" class="headerlink"></a>
+### <a href="#patch-urls" id="patch-urls" class="headerlink"></a> Request URLs and Patch Paths
 
 The request URL and each Patch operation's `path` are complementary and
 **MUST** combine to target a particular resource, collection, attribute, or
@@ -45,7 +45,7 @@ resource path relative to the root URL. This allows for general "fire hose"
 updates to any resource or relationship represented by an API. As stated
 above, a server **MAY** limit the type, order, and count of bulk operations.
 
-### Creating Resources <a href="#patch-creating" id="patch-creating" class="headerlink"></a>
+### <a href="#patch-creating" id="patch-creating" class="headerlink"></a> Creating Resources
 
 To create a resource, request an `add` operation with a `path` that points
 to the end of its corresponding resource collection (`/-`). The `value`
@@ -73,7 +73,7 @@ Accept: application/vnd.api+json; ext=jsonpatch
 ]
 ```
 
-### Updating Attributes <a href="#patch-updating-attributes" id="patch-updating-attributes" class="headerlink"></a>
+### <a href="#patch-updating-attributes" id="patch-updating-attributes" class="headerlink"></a> Updating Attributes
 
 To update an attribute, perform a `replace` operation with the attribute's
 name specified by the `path`.
@@ -91,7 +91,7 @@ Accept: application/vnd.api+json; ext=jsonpatch
 ]
 ```
 
-### Updating Relationships <a href="#patch-updating-relationships" id="patch-updating-relationships" class="headerlink"></a>
+### <a href="#patch-updating-relationships" id="patch-updating-relationships" class="headerlink"></a> Updating Relationships
 
 To update a relationship, send an appropriate Patch operation to the
 relationship's URL.
@@ -101,7 +101,7 @@ as the resource's URL or the API's root URL. As discussed above, the request
 URL and each Patch operation's `path` must be complementary and combine to
 target a particular relationship's URL.
 
-#### Updating To-One Relationships <a href="#patch-updating-to-one-relationships" id="patch-updating-to-one-relationships" class="headerlink"></a>
+#### <a href="#patch-updating-to-one-relationships" id="patch-updating-to-one-relationships" class="headerlink"></a> Updating To-One Relationships
 
 To update a to-one relationship, perform a `replace` operation with a URL
 and `path` that targets the relationship. The `value` **MUST** be a
@@ -132,7 +132,7 @@ Accept: application/vnd.api+json; ext=jsonpatch
 ]
 ```
 
-#### Updating To-Many Relationships <a href="#patch-updating-to-many-relationships" id="patch-updating-to-many-relationships" class="headerlink"></a>
+#### <a href="#patch-updating-to-many-relationships" id="patch-updating-to-many-relationships" class="headerlink"></a> Updating To-Many Relationships
 
 A server **MUST** respond to Patch operations that target a *to-many
 relationship URL* as described below.
@@ -212,7 +212,7 @@ Accept: application/vnd.api+json; ext=jsonpatch
 ]
 ```
 
-### Deleting a Resource <a href="#patch-deleting" id="patch-deleting" class="headerlink"></a>
+### <a href="#patch-deleting" id="patch-deleting" class="headerlink"></a> Deleting a Resource
 
 To delete a resource, perform a `remove` operation with a URL and `path`
 that targets the resource.
@@ -229,15 +229,15 @@ Accept: application/vnd.api+json; ext=jsonpatch
 ]
 ```
 
-### Responses <a href="#patch-responses" id="patch-responses" class="headerlink"></a>
+### <a href="#patch-responses" id="patch-responses" class="headerlink"></a> Responses
 
-#### 204 No Content <a href="#patch-responses-204" id="patch-responses-204" class="headerlink"></a>
+#### <a href="#patch-responses-204" id="patch-responses-204" class="headerlink"></a> 204 No Content
 
 A server **MUST** return a `204 No Content` status code in response to a
 successful Patch operation in which the client's current attributes remain up to
 date.
 
-#### 200 OK <a href="#patch-responses-200" id="patch-responses-200" class="headerlink"></a>
+#### <a href="#patch-responses-200" id="patch-responses-200" class="headerlink"></a> 200 OK
 
 If a server accepts an update but also changes the resource(s) in other ways
 than those specified by the request (for example, updating the `updatedAt`
@@ -313,7 +313,7 @@ Content-Type: application/vnd.api+json; ext=jsonpatch
 ]
 ```
 
-#### Errors <a href="#patch-responses-errors" id="patch-responses-errors" class="headerlink"></a>
+#### <a href="#patch-responses-errors" id="patch-responses-errors" class="headerlink"></a> Errors
 
 A server **MAY** return error objects that correspond to each operation. The
 body of the response **MUST** contain an array of JSON objects, which

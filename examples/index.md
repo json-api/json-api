@@ -6,7 +6,7 @@ show_sidebar: true
 
 This page contains additional examples of how to apply various parts of the specification.
 
-## Sparse Fieldsets <a href="#sparse-fieldsets" id="sparse-fieldsets" class="headerlink"></a>
+## <a href="#sparse-fieldsets" id="sparse-fieldsets" class="headerlink"></a> Sparse Fieldsets
 
 Examples of how [sparse fieldsets](http://jsonapi.org/format/#fetching-sparse-fieldsets) work.
 
@@ -127,7 +127,7 @@ Content-Type: application/vnd.api+json
 for readability. In practice, these characters must be percent-encoded, as
 noted in the base specification.
 
-## Pagination Links <a href="#pagination" id="pagination" class="headerlink"></a>
+## <a href="#pagination" id="pagination" class="headerlink"></a> Pagination Links
 
 Example of a page-based strategy on how to add [pagination links](http://jsonapi.org/format/#fetching-pagination).
 
@@ -177,11 +177,11 @@ the `"last"` link, which simply gives the URI of the last page). However, all
 `"meta"` values are implementation-specific, so you can call this member whatever
 you like (`"total"`, `"count"`, etc.) or not use it at all.
 
-## Error Objects <a href="#error-objects" id="error-objects" class="headerlink"></a>
+## <a href="#error-objects" id="error-objects" class="headerlink"></a> Error Objects
 
 Examples of how [error objects](http://jsonapi.org/format/#error-objects) work.
 
-### A Basic Error Object <a href="#error-objects-basics" id="error-objects-basics" class="headerlink"></a>
+### <a href="#error-objects-basics" id="error-objects-basics" class="headerlink"></a> A Basic Error Object
 
 In the response below, the server is indicating that it encountered an error
 while creating/updating the resource, and that this error was caused
@@ -219,7 +219,7 @@ useful for single errors, to save clients the trouble of consulting the HTTP
 headers, or for using JSON API over non-HTTP protocols, which may be officially
 supported in the near future.
 
-### Multiple Errors <a href="#error-objects-multiple-errors" id="error-objects-multiple-errors" class="headerlink"></a>
+### <a href="#error-objects-multiple-errors" id="error-objects-multiple-errors" class="headerlink"></a> Multiple Errors
 
 When multiple errors occur in response to a single request, the server
 can simply add each error to the `errors` array:
@@ -278,7 +278,7 @@ Content-Type: application/vnd.api+json
 also be acceptable. ([http://stackoverflow.com/a/20215807/1261879](More details.))
 JSON API doesn't take a position on 400 vs. 422.
 
-### Error Codes <a href="#error-objects-error-codes" id="error-objects-error-codes" class="headerlink"></a>
+### <a href="#error-objects-error-codes" id="error-objects-error-codes" class="headerlink"></a> Error Codes
 
 The `code` member of an error object contains an application-specific code
 representing the type of problem encountered. `code` is similar to `title`
@@ -334,7 +334,7 @@ JSON API defines.
 Also, notice that the third error object lacks a `detail` member (perhaps
 for security). Again, all error object members are optional.
 
-### Advanced `source` Usage <a href="#error-objects-source-usage" id="error-objects-source-usage" class="headerlink"></a>
+### <a href="#error-objects-source-usage" id="error-objects-source-usage" class="headerlink"></a> Advanced `source` Usage
 
 In the example below, the user is sending an invalid JSON API
 request, because it's missing the `data` member:
@@ -383,7 +383,7 @@ refer to). Here's how the server might respond to an invalid JSON document:
 }
 ```
 
-#### Invalid Query Parameters <a href="#error-objects-invalid-query-parameters" id="error-objects-invalid-query-parameters" class="headerlink"></a>
+#### <a href="#error-objects-invalid-query-parameters" id="error-objects-invalid-query-parameters" class="headerlink"></a> Invalid Query Parameters
 
 The `source` member can also be used to indicate that the error originated
 from a problem with a URI query parameter, like so:

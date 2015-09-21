@@ -7,7 +7,7 @@
 {% assign is_latest_version_page = include.is_latest_version %}
 {% assign is_upcoming_version_page = include.is_upcoming_version %}
 
-## Status <a href="#status" id="status" class="headerlink"></a>
+## <a href="#status" id="status" class="headerlink"></a> Status
 
 {% comment %}
   The first paragraph in each case, below, aims to explain what content
