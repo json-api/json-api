@@ -159,7 +159,6 @@ the client and represents a new resource to be created on the server.
 
 In addition, a resource object **MAY** contain any of these top-level members:
 
-* `revision`: a [revision string][revision] representing a specific version of an individual resource uniquely identified by `type` and `id`.
 * `attributes`: an [attributes object][attributes] representing some of the resource's data.
 * `relationships`: a [relationships object][relationships] describing relationships between
  the resource and other JSON API resources.
@@ -174,7 +173,6 @@ Here's how an article (i.e. a resource of type "articles") might appear in a doc
 {
   "type": "articles",
   "id": "1",
-  "revision": "1111111111",
   "attributes": {
     "title": "Rails is Omakase"
   },
@@ -210,27 +208,7 @@ The values of `type` members **MUST** adhere to the same constraints as
 can be either plural or singular. However, the same value should be used
 consistently throughout an implementation.
 
-#### Revision <a href="#document-resource-object-revision" id="document-resource-object-revision" class="headerlink"></a>
-
-The **OPTIONAL** `revision` member is an *opaque* string identifier assigned by
-the web server to represent a specific version of a resource. If the resource
-is *updated*, a new and different `revision` is assigned. This mechanism
-enables clients or servers to determine if two resources with the same `type`
-and `id` values are the same or different versions by comparing the `revision`
-value for equality.
-
-The purpose of the `revision` member is to enable *optimistic concurrency control*
-on resource updates. Therefore if a server supplies a `revision` member in a `GET`
-request, a client **SHOULD** pass the same `revision` member in a `PATCH` request
-when updating the resource.
-
-Another purpose of the `revision` member is to enable *caching* at the
-*fine-grained resource level* for clients or servers if desired. These caching
-mechanisms can leverage the ability to determine if two resources with the same
-`type` and `id` values are the same version by comparing the respective `revision`
-values for equality and apply caching policy as needed.
-
-#### Fields <a href="#document-resource-object-fields" id="document-resource-object-fields" class="headerlink"></a>
+#### <a href="#document-resource-object-fields" id="document-resource-object-fields" class="headerlink"></a> Fields
 
 A resource object's [attributes] and its [relationships] are collectively called
 its "[fields]".
@@ -1319,8 +1297,6 @@ primary data, the same request URL can be used for updates.
 
 The `PATCH` request **MUST** include a single [resource object][resource objects] as primary data.
 The [resource object][resource objects] **MUST** contain `type` and `id` members.
-The [resource object][resource objects] **SHOULD** contain `revision` member
-if the server supplied the **OPTIONAL** `revision` member in a `GET` request.
 
 For example:
 
@@ -1333,7 +1309,6 @@ Accept: application/vnd.api+json
   "data": {
     "type": "articles",
     "id": "1",
-    "revision": "1111111111",
     "attributes": {
       "title": "To TDD or Not"
     }
@@ -1363,7 +1338,6 @@ Accept: application/vnd.api+json
   "data": {
     "type": "articles",
     "id": "1",
-    "revision": "1111111111",
     "attributes": {
       "title": "To TDD or Not",
       "text": "TLDR; It's complicated... but check your test coverage regardless."
@@ -1397,7 +1371,6 @@ Accept: application/vnd.api+json
   "data": {
     "type": "articles",
     "id": "1",
-    "revision": "1111111111",
     "relationships": {
       "author": {
         "data": { "type": "people", "id": "1" }
@@ -1419,7 +1392,6 @@ Accept: application/vnd.api+json
   "data": {
     "type": "articles",
     "id": "1",
-    "revision": "1111111111",
     "relationships": {
       "tags": {
         "data": [
@@ -1490,14 +1462,6 @@ constraints (such as a uniqueness constraint on a property other than `id`).
 
 A server **MUST** return `409 Conflict` when processing a `PATCH` request in
 which the resource object's `type` and `id` do not match the server's endpoint.
-
-A server **SHOULD** return `409 Conflict` when processing a `PATCH` request in
-which the resource object's `revision` does not match the server's endpoint
-and the server was *unable to resolve* the `revision` mismatch for updating
-resources with the same `type` and `id` but mismatched `revision` members.
-
-> Note: Only applicable if a server supplied the **OPTIONAL** `revision` member
-> in the response of a `GET` request.
 
 A server **SHOULD** include error details and provide enough information to
 recognize the source of the conflict.
@@ -1817,7 +1781,6 @@ An error object **MAY** have the following members:
   error.
 
 [resource objects]: #document-resource-objects
-[revision]: #document-resource-object-revision
 [attributes]: #document-resource-object-attributes
 [relationships]: #document-resource-object-relationships
 [fields]: #document-resource-object-fields
