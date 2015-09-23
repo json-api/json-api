@@ -264,6 +264,9 @@
         },
         "id": {
           "type": "string"
+        },
+        "meta": {
+          "$ref": "#/definitions/meta"
         }
       },
       "additionalProperties": false
