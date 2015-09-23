@@ -1,0 +1,209 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "JSON API Schema",
+  "description": "This is a schema for clients updating resources in the JSON API format. For more, see http://jsonapi.org",
+  "type": "object",
+  "required": [
+    "data"
+  ],
+  "properties": {
+    "data": {
+      "$ref": "#/definitions/updateData"
+    },
+    "meta": {
+      "$ref": "#/definitions/meta"
+    },
+    "jsonapi": {
+      "$ref": "#/definitions/jsonapi"
+    }
+  },
+  "additionalProperties": false,
+  
+  "definitions": {
+    "meta": {
+      "description": "Non-standard meta-information that can not be represented as an attribute or relationship.",
+      "type": "object",
+      "additionalProperties": true
+    },
+    "updateData": {
+      "description": "The `PATCH` request **MUST** include a single resource object as primary data. A relationshp can be cleared by sending `null` data.",
+      "oneOf": [
+        {
+          "description": "Used to remove a relationship.",
+          "type": "null"
+        },
+        {
+          "$ref": "#/definitions/resource"
+        }
+      ]
+    },
+    
+    "resource": {
+      "description": "\"Resource objects\" appear in a JSON API document to represent resources.",
+      "type": "object",
+      "required": [
+        "type",
+        "id"
+      ],
+      "properties": {
+        "type": {
+          "type": "string"
+        },
+        "id": {
+          "type": "string"
+        },
+        "attributes": {
+          "$ref": "#/definitions/attributes"
+        },
+        "relationships": {
+          "$ref": "#/definitions/relationships"
+        },
+        "links": {
+          "$ref": "#/definitions/links"
+        },
+        "meta": {
+          "$ref": "#/definitions/meta"
+        }
+      },
+      "additionalProperties": false
+    },
+    
+    "links": {
+      "description": "A resource object **MAY** contain references to other resource objects (\"relationships\"). Relationships may be to-one or to-many. Relationships can be specified by including a member in a resource's links object.",
+      "type": "object",
+      "properties": {
+        "self": {
+          "description": "A `self` member, whose value is a URL for the relationship itself (a \"relationship URL\"). This URL allows the client to directly manipulate the relationship. For example, it would allow a client to remove an `author` from an `article` without deleting the people resource itself.",
+          "type": "string",
+          "format": "uri"
+        },
+        "related": {
+          "$ref": "#/definitions/link"
+        }
+      },
+      "additionalProperties": true
+    },
+    "link": {
+      "description": "A link **MUST** be represented as either: a string containing the link's URL or a link object.",
+      "oneOf": [
+        {
+          "description": "A string containing the link's URL.",
+          "type": "string",
+          "format": "uri"
+        },
+        {
+          "type": "object",
+          "required": [
+            "href"
+          ],
+          "properties": {
+            "href": {
+              "description": "A string containing the link's URL.",
+              "type": "string",
+              "format": "uri"
+            },
+            "meta": {
+              "$ref": "#/definitions/meta"
+            }
+          }
+        }
+      ]
+    },
+
+    "attributes": {
+      "description": "Members of the attributes object (\"attributes\") represent information about the resource object in which it's defined.",
+      "type": "object",
+      "patternProperties": {
+        "^(?!relationships$|links$)\\w[-\\w_]*$": {
+          "description": "Attributes may contain any valid JSON value."
+        }
+      },
+      "additionalProperties": false
+    },
+
+    "relationships": {
+      "description": "Members of the relationships object (\"relationships\") represent references from the resource object in which it's defined to other resource objects.",
+      "type": "object",
+      "patternProperties": {
+        "^\\w[-\\w_]*$": {
+          "properties": {
+            "links": {
+              "$ref": "#/definitions/links"
+            },
+            "data": {
+              "description": "Member, whose value represents \"resource linkage\".",
+              "oneOf": [
+                {
+                  "$ref": "#/definitions/relationshipToOne"
+                },
+                {
+                  "$ref": "#/definitions/relationshipToMany"
+                }
+              ]
+            },
+            "meta": {
+              "$ref": "#/definitions/meta"
+            }
+          },
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false
+    },
+    "relationshipToOne": {
+      "description": "References to other resource objects in a to-one (\"relationship\"). Relationships can be specified by including a member in a resource's links object.",
+      "anyOf": [
+        {
+          "$ref": "#/definitions/empty"
+        },
+        {
+          "$ref": "#/definitions/linkage"
+        }
+      ]
+    },
+    "relationshipToMany": {
+      "description": "An array of objects each containing \"type\" and \"id\" members for to-many relationships.",
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/linkage"
+      },
+      "uniqueItems": true
+    },
+    "empty": {
+      "description": "Describes an empty to-one relationship.",
+      "type": ["object", "null"],
+      "properties": {},
+      "additionalProperties": false
+    },
+    "linkage": {
+      "description": "The \"type\" and \"id\" to non-empty members.",
+      "type": "object",
+      "required": [
+        "type",
+        "id"
+      ],
+      "properties": {
+        "type": {
+          "type": "string"
+        },
+        "id": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "jsonapi": {
+      "description": "An object describing the server's implementation",
+      "type": "object",
+      "properties": {
+        "version": {
+          "type": "string"
+        },
+        "meta": {
+          "$ref": "#/definitions/meta"
+        }
+      },
+      "additionalProperties": false
+    }
+  }
+}
