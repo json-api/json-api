@@ -114,18 +114,19 @@
         }
       ]
     },
-    "resource": {
+    
+    "newResource": {
       "description": "\"Resource objects\" appear in a JSON API document to represent resources.",
       "type": "object",
       "required": [
-        "type",
-        "id"
+        "type"
       ],
       "properties": {
         "type": {
           "type": "string"
         },
         "id": {
+          "description": "A server **MAY** accept a client-generated ID along with a request to create a resource. An ID **MUST** be specified with an id key, the value of which **MUST** be a universally unique identifier. The client **SHOULD** use a properly generated and formatted UUID as described in RFC 4122.",
           "type": "string"
         },
         "attributes": {
@@ -142,6 +143,20 @@
         }
       },
       "additionalProperties": false
+    },
+    "resource": {
+      "description": "\"Resource objects\" appear in a JSON API document to represent resources.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/newResource"
+        },
+        {
+          "required": [
+            "type",
+            "id"
+          ]
+        }
+      ]
     },
     
     "links": {
