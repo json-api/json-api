@@ -275,7 +275,7 @@ Content-Type: application/vnd.api+json
 ```
 
 > Note: in the responses above with a 422 status code, `400 Bad Request` would
-also be acceptable. ([http://stackoverflow.com/a/20215807/1261879](More details.))
+also be acceptable. ([More details.](http://stackoverflow.com/a/20215807/1261879))
 JSON API doesn't take a position on 400 vs. 422.
 
 ### <a href="#error-objects-error-codes" id="error-objects-error-codes" class="headerlink"></a> Error Codes
