@@ -56,12 +56,12 @@
 {% if is_latest_version_page or (version and version <= site.latest_version) %}
   If you catch an error in the specification&rsquo;s text, or if you write an
   implementation, please let us know by opening an issue or pull request at our
-  [Github repository](https://github.com/json-api/json-api).
+  [GitHub repository](https://github.com/json-api/json-api).
 
 {% else %}
   If you have concerns about the changes in this draft, catch an error in the
   specification&rsquo;s text, or write an implementation, please let us know by
-  opening an issue or pull request at our [Github repository](https://github.com/json-api/json-api).
+  opening an issue or pull request at our [GitHub repository](https://github.com/json-api/json-api).
 
   You can also propose additions to JSON API in our [discussion forum](http://discuss.jsonapi.org/).
   Keep in mind, though, that all new versions of JSON API **must be backwards
