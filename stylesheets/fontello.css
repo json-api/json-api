@@ -39,11 +39,15 @@
 
 /* '' */
 .icon-github:before {
-  content: '\e806'; }
+  content: '\e806';
+  font-size: 130%;
+  position: relative;
+  top: .05em;
+  left: .05em; }
 
 /* '' */
-.icon-gplus:before {
-  content: '\e807'; }
+.icon-forum:before {
+  content: '\e801'; }
 
 /* '' */
 .icon-twitter:before {

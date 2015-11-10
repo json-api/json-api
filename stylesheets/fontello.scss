@@ -40,6 +40,6 @@
 
 .icon-search:before { content: '\e804'; } /* '' */
 .icon-fork:before { content: '\e800'; } /* '' */
-.icon-github:before { content: '\e806'; } /* '' */
-.icon-gplus:before { content: '\e807'; } /* '' */
+.icon-github:before { content: '\e806'; font-size: 130%; position: relative; top: .05em; left: .05em; } /* '' */
+.icon-forum:before { content: '\e801'; } /* '' */
 .icon-twitter:before { content: '\e805'; } /* '' */
