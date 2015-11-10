@@ -23,48 +23,31 @@
   display: inline-block;
   text-decoration: inherit;
   width: 1em;
-  margin-right: .2em;
   text-align: center;
-  /* opacity: .8; */
   /* For safety - reset parent styles, that can break glyph codes*/
   font-variant: normal;
   text-transform: none;
   /* fix buttons height, for twitter bootstrap */
-  line-height: 1em;
-  /* Animation center compensation - margins should be symmetric */
-  /* remove if not needed */
-  margin-left: .2em;
-  /* you can be more comfortable with increased icons size */
-  /* font-size: 120%; */
-  /* Uncomment for 3D effect */
-  /* text-shadow: 1px 1px 1px rgba(127, 127, 127, 0.3); */ }
+  line-height: 1em; }
 
 .icon-search:before {
   content: '\e804'; }
 
 /* '' */
-.icon-cancel:before {
-  content: '\e802'; }
-
-/* '' */
-.icon-link:before {
-  content: '\e803'; }
-
-/* '' */
-.icon-pencil:before {
-  content: '\e801'; }
-
-/* '' */
 .icon-fork:before {
   content: '\e800'; }
 
 /* '' */
 .icon-github:before {
-  content: '\e806'; }
+  content: '\e806';
+  font-size: 130%;
+  position: relative;
+  top: .05em;
+  left: .05em; }
 
 /* '' */
-.icon-gplus:before {
-  content: '\e807'; }
+.icon-forum:before {
+  content: '\e801'; }
 
 /* '' */
 .icon-twitter:before {
@@ -272,12 +255,22 @@ footer {
   footer span {
     display: inline-block;
     vertical-align: middle; }
-  footer .social-links span {
-    text-indent: -119988px;
-    overflow: hidden;
-    text-align: left;
-    text-transform: capitalize;
-    margin: 0 10px; }
+  footer .social-links {
+    text-align: justify;
+    width: 9em; }
+    footer .social-links:after {
+      content: "";
+      display: inline-block;
+      width: 100%; }
+    footer .social-links span {
+      text-indent: -119988px;
+      overflow: hidden;
+      text-align: left;
+      text-transform: capitalize;
+      width: 0; }
+    footer .social-links i {
+      width: 1em;
+      padding: 0.75em; }
 
 /** Content */
 .site-wrapper {
@@ -313,7 +306,7 @@ footer {
     .sidebar #version-picker-wrapper .version-picker {
       flex-direction: row;
       flex-grow: 1; }
-  @media screen and (max-width: 935px) {
+  @media screen and (max-width: 885px) {
     .sidebar {
       float: none;
       width: auto; }
@@ -326,11 +319,11 @@ footer {
         .sidebar #version-picker-wrapper label {
           display: inline; } }
 
-@media screen and (min-width: 936px) {
+@media screen and (min-width: 886px) {
   .sidebar + .content {
     margin-left: 235px;
-    padding-left: calc(100vw - 936px); } }
-@media screen and (min-width: 961px) {
+    padding-left: calc(100vw - 886px); } }
+@media screen and (min-width: 901px) {
   .sidebar + .content {
     padding-left: 25px; } }
 /** Document outline */

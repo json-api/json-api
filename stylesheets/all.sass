@@ -22,6 +22,14 @@ $border-radius-main: 4px
   margin: 0 auto
   padding: 0 $page-padding
 
+@mixin distribute-children()
+  text-align: justify
+
+  &:after
+    content: ''
+    display: inline-block
+    width: 100%
+
 body
   font-family: "Helvetica Neue", "Helvetica", "Open Sans", sans-serif
   font-size: 15px
@@ -215,20 +223,24 @@ footer
     margin-top: 0
     margin-bottom: 0
     line-height: 0
-    text-align: justify
-
-    &:after
-      content: ''
-      display: inline-block
-      width: 100%
+    +distribute-children
 
   span
     display: inline-block
     vertical-align: middle
 
-  .social-links span
-    +hide-text
-    margin: 0 10px
+  .social-links
+    +distribute-children
+    width: 9em
+
+    span
+      +hide-text
+      width: 0
+
+    // embiggen link targets
+    i
+      width: 1em
+      padding: .75em
 
 
 /** Content */
@@ -271,8 +283,8 @@ footer
       flex-grow: 1
 
   // On small viewports, but only after we've shrunk the
-  // main column to below a comfortable size (that's the -60px)..
-  @media screen and (max-width: $page-width + ($page-padding * 2) - 60px)
+  // main column to below a comfortable size (that's the -110px)..
+  @media screen and (max-width: $page-width + ($page-padding * 2) - 110px)
     // Hide the sidebar's content, except for the version picker
     nav > :not(#version-picker-wrapper)
       display: none
@@ -295,12 +307,12 @@ footer
 // The padding-left: calc(...) functions to grow the gutter gradually by 25px
 // as the window grows. If this isn't supported, it's ok; the gutter width will
 // just jump to its final size at the next media query.
-@media screen and (min-width: $page-width + ($page-padding * 2) - 59px)
+@media screen and (min-width: $page-width + ($page-padding * 2) - 109px)
   .sidebar + .content
     margin-left: $sidebar-width + 15px
-    padding-left: calc(100vw - #{$page-width + ($page-padding * 2) - 59px})
+    padding-left: calc(100vw - #{$page-width + ($page-padding * 2) - 109px})
 
-@media screen and (min-width: $page-width + ($page-padding * 2) - 34px)
+@media screen and (min-width: $page-width + ($page-padding * 2) - 94px)
   .sidebar + .content
     padding-left: 25px
 

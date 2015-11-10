@@ -1,5 +1,5 @@
 url: http://jsonapi.org
-safe: true
+
 lsi: false
 source: .
 destination: ./public
@@ -32,6 +32,15 @@ defaults:
       is_spec_page: true
 
 latest_version: 1.0
+
+
+# `safe `must be set false for jekyll-redirect-from
+# to run in development. (Github Pages will override
+# `safe` to be true on deploy, but it makes an
+# exception for jekyll-redirect from.)
+safe: false
+gems:
+  - jekyll-redirect-from
 
 navigation:
 - title: JSON API
