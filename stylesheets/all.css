@@ -313,7 +313,7 @@ footer {
     .sidebar #version-picker-wrapper .version-picker {
       flex-direction: row;
       flex-grow: 1; }
-  @media screen and (max-width: 935px) {
+  @media screen and (max-width: 885px) {
     .sidebar {
       float: none;
       width: auto; }
@@ -326,11 +326,11 @@ footer {
         .sidebar #version-picker-wrapper label {
           display: inline; } }
 
-@media screen and (min-width: 936px) {
+@media screen and (min-width: 886px) {
   .sidebar + .content {
     margin-left: 235px;
-    padding-left: calc(100vw - 936px); } }
-@media screen and (min-width: 961px) {
+    padding-left: calc(100vw - 886px); } }
+@media screen and (min-width: 901px) {
   .sidebar + .content {
     padding-left: 25px; } }
 /** Document outline */
