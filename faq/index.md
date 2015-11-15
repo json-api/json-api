@@ -42,20 +42,21 @@ It is extracted from a real-world library already used by a number of projects,
 which has informed both the request/response aspects (absent from HAL) and the
 interchange format itself.
 
-## <a href="#how-to-discover-resource-possible-actions" id="how-to-discover-resource-possible-actions" class="headerlink"></a> How to discover resource possible actions?
+## <a href="#how-to-discover-resource-possible-actions" id="how-to-discover-resource-possible-actions" class="headerlink"></a> How can I discover a resource's supported actions?
 
-You should use the OPTIONS HTTP method to discover what can be done with a
-particular resource. The semantics of the methods returned by OPTIONS is defined
-by the JSON API standard.
+Whenever a client requests a URI, the server can include an [`Allow` header](https://tools.ietf.org/html/rfc7231#section-7.4.1)
+in its response to indicate the methods the requested resource supports. Servers
+wishing to support method discovery should include this header. The client can
+then send a [`HEAD`](https://tools.ietf.org/html/rfc7231#section-4.3.2) request
+(or any other type of request) to the URI in order to discover its supported methods.
 
-For instance, if `GET,POST` is the response to an OPTIONS request to an URL,
-then you can get information about the resource and also create new resources.
+For instance, a client might request `HEAD /articles`, and the response could
+contain the header `Allow: GET,POST`, indicating that the client can GET the
+collection and also POST to it to create new resources.
 
-If you want to know what you can do with a specific resource attribute then
-you will have to use an application level profile to define the attribute meaning
-and capabilities and use the errors response to let users know. This error feature
-is still pending to be included in the standard since is still in
-[discussion](https://github.com/json-api/json-api/issues/7).
+JSON API is still working on a way to for resources to advertise and detail
+non-standard actions they support. Feel free to
+[join that discussion](https://github.com/json-api/json-api/issues/745)!
 
 ## <a href="#wheres-put" id="wheres-put" class="headerlink"></a> Where's PUT?
 
