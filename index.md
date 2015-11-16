@@ -5,7 +5,7 @@ show_masthead: true
 ---
 
 If you've ever argued with your team about the way your JSON responses
-should be formatted, JSON API is your anti-bikeshedding weapon.
+should be formatted, JSON API can be your anti-bikeshedding tool.
 
 By following shared conventions, you can increase productivity,
 take advantage of generalized tooling, and focus on what
