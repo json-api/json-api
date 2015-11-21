@@ -1,0 +1,54 @@
+@page {
+  margin-top: 1.5cm;
+  margin-right: 1cm;
+  margin-left: 1cm;
+  margin-bottom: 2cm; }
+body {
+  font-family: Georgia, "Times New Roman", Times, serif;
+  font-size: 11pt; }
+
+nav.site-nav, footer {
+  display: none; }
+
+div.sidebar {
+  float: none;
+  width: auto;
+  margin-bottom: 50px; }
+  div.sidebar h1, div.sidebar #version-picker-wrapper {
+    display: none; }
+  div.sidebar nav.document-outline:before {
+    content: "TABLE OF CONTENTS";
+    font-size: 18px; }
+  div.sidebar nav > ol {
+    width: auto; }
+  div.sidebar .document-outline {
+    font-size: 11pt; }
+
+header h1, p > code, li > code {
+  -webkit-print-color-adjust: exact; }
+
+h1, h2, h3, h4, h5 {
+  page-break-after: avoid; }
+
+blockquote {
+  page-break-inside: avoid; }
+
+p {
+  orphans: 2;
+  widows: 2; }
+
+ul {
+  list-style: disc outside none;
+  padding: 0; }
+
+a[href^="http://"]:after, a[href^="https://"]:after {
+  content: " <" attr(href) ">"; }
+
+a[href^="/"]:after {
+  content: " <http://jsonapi.org" attr(href) ">"; }
+
+a[href^="#"] {
+  text-decoration: none;
+  color: inherit; }
+
+/*# sourceMappingURL=print.css.map */

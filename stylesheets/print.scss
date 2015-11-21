@@ -1,0 +1,78 @@
+@page {
+  margin-top: 1.5cm;
+  margin-right: 1cm;
+  margin-left: 1cm;
+  margin-bottom: 2cm;
+}
+
+body {
+  font-family: Georgia, "Times New Roman", Times, serif;
+  font-size: 11pt;
+}
+
+nav.site-nav, footer {
+  display: none;
+}
+
+// reset sidebar position and width
+div.sidebar {
+  float: none;
+  width: auto;
+  margin-bottom: 50px;
+
+  h1, #version-picker-wrapper {
+    display: none;
+  }
+
+  nav.document-outline:before {
+    content:"TABLE OF CONTENTS";
+    font-size: 18px;
+  }
+
+  nav > ol {
+    width: auto;
+  }
+
+  // reset sidebar font
+  .document-outline {
+    font-size: 11pt;
+  }
+}
+
+// print background image and color
+header h1, p > code, li > code {
+  -webkit-print-color-adjust: exact;
+}
+
+h1, h2, h3, h4, h5 {
+  page-break-after: avoid;
+}
+
+blockquote {
+  page-break-inside: avoid;
+}
+
+p {
+  orphans: 2;
+  widows: 2;
+}
+
+// hanging punctation
+ul {
+  list-style: disc outside none;
+  padding: 0;
+}
+
+// link handling
+a[href^="http://"]:after, a[href^="https://"]:after {
+  content:" <" attr(href) ">";
+}
+
+a[href^="/"]:after {
+  content: " <http://jsonapi.org" attr(href) ">";
+}
+
+a[href^="#"] {
+  text-decoration: none;
+  color: inherit;
+}
