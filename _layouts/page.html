@@ -23,7 +23,6 @@
     {% endif %}
     <title>JSON API &mdash; {{page_title|strip }}</title>
 
-    <link href='http://fonts.googleapis.com/css?family=Titillium+Web:400,300,600' rel='stylesheet' type='text/css'>
     <link href="/stylesheets/normalize.css" rel="stylesheet" type="text/css" />
     <link href="/stylesheets/highlight.css" rel="stylesheet" type="text/css" />
     <link href="/stylesheets/all.css" rel="stylesheet" type="text/css" />
@@ -36,21 +35,23 @@
 
   <body>
      <nav class="site-nav">
-      <ul>
-        {% assign url = page.url|remove:'index.html' %}
-        {% for link in site.navigation %}
-          <li {% if url == link.url %}class="active"{% endif %}><a href="{{link.url}}" title="{{link.title}}">{{link.title}}</a></li>
-        {% endfor %}
-        <li class="version">
-          <a href="/format/#status" class="pill">v{{ site.latest_version }} <span class="stable">Stable</span></a>
-        </li>
-      </ul>
+      <div class="nav-inner">
+        <ul>
+          {% assign url = page.url|remove:'index.html' %}
+          {% for link in site.navigation %}
+            <li {% if url == link.url %}class="active"{% endif %}><a href="{{link.url}}" title="{{link.title}}">{{link.title}}</a></li>
+          {% endfor %}
+          <li class="version">
+            <a href="/format/#status" class="pill">v{{ site.latest_version }} <span class="stable">Stable</span></a>
+          </li>
+        </ul>
+      </div>
     </nav>
     {% if page.show_masthead %}
       <header>
         <div class="content">
           <h1>JSON API</h1>
-          <h2>A specification for building APIs in JSON.</h2>
+          <h2>A specification for building APIs in JSON</h2>
           <div class="quicklinks">
             {% for link in site.quicklinks %}
               <a href="{{link.url}}" title="{{link.title}}">{{link.title}}</a>
