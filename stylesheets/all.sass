@@ -21,13 +21,13 @@ $border-radius-main: 4px
 
 /** Mixins */
 
-@mixin centerbox()
+%centerbox
   display: block
   max-width: $page-width
   margin: 0 auto
   padding: 0 $page-padding
 
-@mixin distribute-children()
+%distribute-children
   text-align: justify
 
   &:after
@@ -35,9 +35,18 @@ $border-radius-main: 4px
     display: inline-block
     width: 100%
 
-@mixin capitalize()
+%capitalize
   text-transform: uppercase
   letter-spacing: .2px
+
+// Create placeholder versions of zero-argument
+// (compass) mixins to minimize duplicate output.
+%hide-text
+  +hide-text
+
+%display-flex
+  +display-flex
+
 
 body
   font-family: $fonts-body
@@ -105,7 +114,7 @@ a
 blockquote
   margin: 20px 0
   padding: 10px 15px 0 15px
-  +border-radius($border-radius-main)
+  border-radius: $border-radius-main
   color: lighten($color-main, 15%)
   background: rgba($color-main, 0.04)
   border: 1px solid $color-light-rule
@@ -124,10 +133,10 @@ p > code, li > code
   border-bottom: 1px solid $color-light-rule
 
   .nav-inner
-    +centerbox
+    @extend %centerbox
 
   ul
-    +display-flex
+    @extend %display-flex
     +justify-content(space-between)
     list-style: none
     margin: 0
@@ -158,12 +167,12 @@ p > code, li > code
     font-size: 12px
     font-weight: bold
     color: white
-    +border-radius($border-radius-main)
+    border-radius: $border-radius-main
     position: relative
     top: -1px
 
     .stable
-      +capitalize
+      @extend %capitalize
       text-rendering: optimizeLegibility
 
 
@@ -176,7 +185,7 @@ header
     border-bottom: 1px solid $color-light-rule
 
   h1
-    +hide-text
+    @extend %hide-text
     text-align: center
     height: 130px
     margin: 0
@@ -195,8 +204,8 @@ header
     text-transform: uppercase
 
   .quicklinks
-    +centerbox
-    +display-flex
+    @extend %centerbox
+    @extend %display-flex
     +align-items(center)
     +justify-content(center)
 
@@ -204,7 +213,7 @@ header
     display: block
     margin: 5px 15px
     padding: 6px 25px
-    +border-radius($border-radius-main)
+    border-radius: $border-radius-main
     border: 1px solid $color-med-rule
     background: white
     text-decoration: none
@@ -235,7 +244,7 @@ footer
     margin-top: 0
     margin-bottom: 0
     line-height: 0
-    +distribute-children
+    @extend %distribute-children
     padding: 8px 2px
     border-top: 1px solid $color-med-rule
 
@@ -244,13 +253,13 @@ footer
     vertical-align: middle
 
   .social-links
-    +distribute-children
+    @extend %distribute-children
     width: 9em
     position: relative
     left: .75em
 
     span
-      +hide-text
+      @extend %hide-text
       width: 0
 
     // embiggen link targets
@@ -262,7 +271,7 @@ footer
 /** Content */
 
 .site-wrapper
-  +centerbox
+  @extend %centerbox
   +clearfix
   margin-top: 50px
   margin-bottom: 50px
@@ -363,7 +372,7 @@ footer
 /** Code blocks highlighting */
 
 .highlight
-  +border-radius($border-radius-main)
+  border-radius: $border-radius-main
   position: relative
   margin: 2em 0
   padding: 10px 15px

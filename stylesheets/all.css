@@ -56,6 +56,33 @@
 /* '' */
 /** Config */
 /** Mixins */
+.site-nav .nav-inner, header .quicklinks, .site-wrapper {
+  display: block;
+  max-width: 955px;
+  margin: 0 auto;
+  padding: 0 20px; }
+
+footer .site-wrapper, footer .social-links {
+  text-align: justify; }
+  footer .site-wrapper:after, footer .social-links:after {
+    content: "";
+    display: inline-block;
+    width: 100%; }
+
+.site-nav .version .pill .stable {
+  text-transform: uppercase;
+  letter-spacing: 0.2px; }
+
+header h1, footer .social-links span {
+  text-indent: -119988px;
+  overflow: hidden;
+  text-align: left;
+  text-transform: capitalize; }
+
+.site-nav ul, header .quicklinks {
+  display: -webkit-flex;
+  display: flex; }
+
 body {
   font-family: "Helvetica Neue", "Helvetica", Arial, "Open Sans", sans-serif;
   font-size: 15px;
@@ -119,8 +146,6 @@ a {
 blockquote {
   margin: 20px 0;
   padding: 10px 15px 0 15px;
-  -moz-border-radius: 4px;
-  -webkit-border-radius: 4px;
   border-radius: 4px;
   color: gray;
   background: rgba(90, 90, 90, 0.04);
@@ -136,14 +161,7 @@ p > code, li > code {
   font-weight: 500;
   background: #0b4e22;
   border-bottom: 1px solid #cccccc; }
-  .site-nav .nav-inner {
-    display: block;
-    max-width: 955px;
-    margin: 0 auto;
-    padding: 0 20px; }
   .site-nav ul {
-    display: -webkit-flex;
-    display: flex;
     -webkit-justify-content: space-between;
     justify-content: space-between;
     list-style: none;
@@ -172,14 +190,10 @@ p > code, li > code {
     font-size: 12px;
     font-weight: bold;
     color: white;
-    -moz-border-radius: 4px;
-    -webkit-border-radius: 4px;
     border-radius: 4px;
     position: relative;
     top: -1px; }
     .site-nav .version .pill .stable {
-      text-transform: uppercase;
-      letter-spacing: 0.2px;
       text-rendering: optimizeLegibility; }
 
 /** Header */
@@ -188,10 +202,6 @@ header .content {
   background: #ebebeb;
   border-bottom: 1px solid #cccccc; }
 header h1 {
-  text-indent: -119988px;
-  overflow: hidden;
-  text-align: left;
-  text-transform: capitalize;
   text-align: center;
   height: 130px;
   margin: 0;
@@ -208,12 +218,6 @@ header h2 {
   font-weight: bold;
   text-transform: uppercase; }
 header .quicklinks {
-  display: block;
-  max-width: 955px;
-  margin: 0 auto;
-  padding: 0 20px;
-  display: -webkit-flex;
-  display: flex;
   -webkit-align-items: center;
   align-items: center;
   -webkit-justify-content: center;
@@ -222,8 +226,6 @@ header .quicklinks a {
   display: block;
   margin: 5px 15px;
   padding: 6px 25px;
-  -moz-border-radius: 4px;
-  -webkit-border-radius: 4px;
   border-radius: 4px;
   border: 1px solid #bbbbbb;
   background: white;
@@ -250,30 +252,16 @@ footer {
     margin-top: 0;
     margin-bottom: 0;
     line-height: 0;
-    text-align: justify;
     padding: 8px 2px;
     border-top: 1px solid #bbbbbb; }
-    footer .site-wrapper:after {
-      content: "";
-      display: inline-block;
-      width: 100%; }
   footer span {
     display: inline-block;
     vertical-align: middle; }
   footer .social-links {
-    text-align: justify;
     width: 9em;
     position: relative;
     left: 0.75em; }
-    footer .social-links:after {
-      content: "";
-      display: inline-block;
-      width: 100%; }
     footer .social-links span {
-      text-indent: -119988px;
-      overflow: hidden;
-      text-align: left;
-      text-transform: capitalize;
       width: 0; }
     footer .social-links i {
       width: 1em;
@@ -281,10 +269,6 @@ footer {
 
 /** Content */
 .site-wrapper {
-  display: block;
-  max-width: 955px;
-  margin: 0 auto;
-  padding: 0 20px;
   overflow: hidden;
   *zoom: 1;
   margin-top: 50px;
@@ -357,8 +341,6 @@ footer {
 
 /** Code blocks highlighting */
 .highlight {
-  -moz-border-radius: 4px;
-  -webkit-border-radius: 4px;
   border-radius: 4px;
   position: relative;
   margin: 2em 0;
