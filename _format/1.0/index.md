@@ -991,8 +991,9 @@ response on a per-type basis by including a `fields[TYPE]` parameter.
 The value of the `fields` parameter **MUST** be a comma-separated (U+002C
 COMMA, ",") list that refers to the name(s) of the fields to be returned.
 
-If a client requests a restricted set of [fields], an endpoint **MUST NOT**
-include additional [fields] in the response.
+If a client requests a restricted set of [fields] for a given resource type,
+an endpoint **MUST NOT** include additional [fields] in resource objects of
+that type in its response.
 
 ```http
 GET /articles?include=author&fields[articles]=title,body&fields[people]=name HTTP/1.1
