@@ -251,10 +251,11 @@ A "relationship object" **MUST** contain at least one of the following:
 * `links`: a [links object][links] containing at least one of the following:
   * `self`: a link for the relationship itself (a "relationship link"). This
     link allows the client to directly manipulate the relationship. For example,
-    it would allow a client to remove an `author` from an `article` without
-    deleting the `people` resource itself. When fetched successfully, this link
-    returns the [linkage][resource linkage] for the related resources as its
-    primary data. (See [Fetching Relationships](#fetching-relationships).)
+    removing an `author` through an `article`'s relationship URL would disconnect
+    the person from the `article` without deleting the `people` resource itself.
+    When fetched successfully, this link returns the [linkage][resource linkage]
+    for the related resources as its primary data.
+    (See [Fetching Relationships](#fetching-relationships).)
   * `related`: a [related resource link]
 * `data`: [resource linkage]
 * `meta`: a [meta object][meta] that contains non-standard meta-information about the
