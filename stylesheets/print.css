@@ -20,7 +20,8 @@ div.sidebar {
     content: "TABLE OF CONTENTS";
     font-size: 18px; }
   div.sidebar nav > ol {
-    width: auto; }
+    width: auto !important;
+    height: auto !important; }
   div.sidebar .document-outline {
     font-size: 11pt; }
 

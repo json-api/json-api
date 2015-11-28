@@ -30,7 +30,8 @@ div.sidebar {
   }
 
   nav > ol {
-    width: auto;
+    width: auto !important;
+    height: auto !important;
   }
 
   // reset sidebar font
