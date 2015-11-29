@@ -362,8 +362,14 @@ resource.
 
 A "resource identifier object" **MUST** contain `type` and `id` members.
 
-A "resource identifier object" **MAY** also include a `meta` member, whose value is a [meta] object that
-contains non-standard meta-information.
+A "resource identifier object" **MAY** also include the following members:
+
+* `href`: a URI that, when derefenced, retuns a JSON API resource object with
+  the same `type` and `id` as in the resource identifier object. If the
+  returned resource object contains a `"self"` link, that link's URI **SHOULD**
+  match the URI provided in this key.
+
+* `meta`: a [meta] object that contains non-standard meta-information.
 
 ### <a href="#document-compound-documents" id="document-compound-documents" class="headerlink"></a> Compound Documents
 

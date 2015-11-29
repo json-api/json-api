@@ -71,6 +71,8 @@ layout: null
             { "id": "resource-link-response", "type": "normative-statements" },
             { "id": "resource-identifier-required-members", "type": "normative-statements" },
             { "id": "resource-identifier-optional-member", "type": "normative-statements" },
+            { "id": "resource-identifier-optional-member-href", "type": "normative-statements" },
+            { "id": "resource-identifier-optional-member-href-self-match", "type": "normative-statements" },
             { "id": "compound-documents-allow", "type": "normative-statements" },
             { "id": "compound-documents-top-level-included", "type": "normative-statements" },
             { "id": "compound-documents-full-linkage", "type": "normative-statements" },
@@ -748,6 +750,32 @@ layout: null
       "attributes": {
         "level": "MAY",
         "description": "A \"resource identifier object\" **MAY** also include a meta member, whose value is a meta object that contains non-standard meta-information."
+      },
+      "relationships": {
+        "section": {
+          "data": { "id": "document-structure", "type": "sections" }
+        }
+      }
+    },
+    {
+      "id": "resource-identifier-optional-member-href",
+      "type": "normative-statements",
+      "attributes": {
+        "level": "MAY",
+        "description": "A \"resource identifier object\" **MAY** also include an `href` member whose value is a URI that, when derefenced, retuns a JSON API resource object with the same `type` and `id` as in the resource identifier object."
+      },
+      "relationships": {
+        "section": {
+          "data": { "id": "document-structure", "type": "sections" }
+        }
+      }
+    },
+    {
+      "id": "resource-identifier-optional-member-href-self-match",
+      "type": "normative-statements",
+      "attributes": {
+        "level": "SHOULD",
+        "description": "If the returned resource object contains a `\"self\"` link, that link's URI **SHOULD** match the URI provided in the resource identifier object's `\"href\"`."
       },
       "relationships": {
         "section": {
