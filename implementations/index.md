@@ -121,6 +121,10 @@ has a page describing how to emit conformant JSON.
 * [katharsis-rs](https://github.com/katharsis-project/katharsis-rs) is adapter for [katharsis](http://katharsis.io) core module for all compatible JAX-RS based frameworks.
 * [katharsis-servlet](https://github.com/katharsis-project/katharsis-servlet) is a generic servlet/filter adapter for [katharsis](http://katharsis.io) core module. This module can be used in traditional servlet or filter based Java web applications, or even non-Servlet-API-based web applications such as Portal/Portlet, Wicket, etc.
 
+### <a href="#server-libraries-elixir" id="server-libraries-elixir" class="headerlink"></a> Elixir
+
+* [ja_serializer](https://github.com/AgilionApps/ja_serializer) is a behaviour and DSL to emit conforming JSON. Suitable for use in a Phoenix view or in a Plug stack.
+
 ## <a href="#examples" id="examples" class="headerlink"></a> Examples
 
 * [RestPack::Serializer provides examples](http://restpack-serializer-sample.herokuapp.com/) which demonstrate sample responses.
