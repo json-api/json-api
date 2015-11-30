@@ -337,7 +337,7 @@ related to the resource.
 If present, this links object **MAY** contain a `self` [link][links] that
 identifies the resource represented by the resource object.
 
-```json
+```javascript
 // ...
 {
   "type": "articles",
@@ -388,7 +388,7 @@ objects][resource identifier object]) or to each other.
 
 A complete example document with multiple included relationships:
 
-```json
+```javascript
 {
   "data": [{
     "type": "articles",
@@ -516,7 +516,7 @@ either:
 
 The following `self` link is simply a URL:
 
-```json
+```javascript
 "links": {
   "self": "http://example.com/posts",
 }
@@ -525,7 +525,7 @@ The following `self` link is simply a URL:
 The following `related` link includes a URL as well as meta-information
 about a related resource collection:
 
-```json
+```javascript
 "links": {
   "related": {
     "href": "http://example.com/articles/1/comments",
@@ -550,7 +550,7 @@ contain a `version` member whose value is a string indicating the highest JSON
 API version supported. This object **MAY** also contain a `meta` member, whose
 value is a [meta] object that contains non-standard meta-information.
 
-```json
+```javascript
 {
   "jsonapi": {
     "version": "1.0"
