@@ -154,30 +154,46 @@ recommended formats.
 
 Consider a situation when you need to create a resource and the operation takes long time to complete.
 
-The request **SHOULD** return a status `202 Accepted` with a link in Content-Location.
-
-```text
-HTTP/1.1 202 Accepted
+```http
+POST /photos HTTP/1.1
+Accept: application/vnd.api+json
 Content-Type: application/vnd.api+json
-Content-Location: https://example.com/photos/queue/5234
+
+{ "data": { "type": "photos" } }
 ```
 
-```json
+The request **SHOULD** return a status `202 Accepted` with a link in the `Content-Location` header.
+
+```http
+HTTP/1.1 202 Accepted
+Content-Type: application/vnd.api+json
+Content-Location: https://example.com/photos/queue-jobs/5234
+
 {
-   "data":{
-      "type":"queue job",
-      "id":"5234",
-      "attributes": { "status": "Pending request, waiting other process" },
-      "links": { "self": "/photos/queue/5234"}
-      }
-   }
+  "data": {
+    "type": "queue-jobs",
+    "id": "5234",
+    "attributes": {
+      "status": "Pending request, waiting other process"
+    },
+    "links": {
+      "self": "/photos/queue-jobs/5234"
+    }
+  }
 }
 ```
 
-When job process is done the location given earlier **SHOULD** return `303 See other` with a link in Location.
+To check the status of the job process, a client can send a request to the location given earlier.
 
-```text
+```http
+GET /photos/queue-jobs/5234 HTTP/1.1
+Accept: application/vnd.api+json
+```
+
+When job process is done, the request **SHOULD** return a status `303 See other` with a link in `Location` header.
+
+```http
 HTTP/1.1 303 See other
-Location: https://example.com/photos/4577
 Content-Type: application/vnd.api+json
+Location: https://example.com/photos/4577
 ```
