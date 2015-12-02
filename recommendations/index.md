@@ -120,19 +120,19 @@ For example, the following is a request for all comments associated with a
 particular post:
 
 ```http
-GET /comments?filter[post]=1
+GET /comments?filter[post]=1 HTTP/1.1
 ```
 
 Multiple filter values can be combined in a comma-separated list. For example:
 
 ```http
-GET /comments?filter[post]=1,2
+GET /comments?filter[post]=1,2 HTTP/1.1
 ```
 
 Furthermore, multiple filters can be applied to a single request:
 
 ```http
-GET /comments?filter[post]=1,2&filter[author]=12
+GET /comments?filter[post]=1,2&filter[author]=12 HTTP/1.1
 ```
 
 ## <a href="#patchless-clients" id="patchless-clients" class="headerlink"></a> Supporting Clients Lacking `PATCH`
@@ -156,10 +156,6 @@ Consider a situation when you need to create a resource and the operation takes 
 
 ```http
 POST /photos HTTP/1.1
-Accept: application/vnd.api+json
-Content-Type: application/vnd.api+json
-
-{ "data": { "type": "photos" } }
 ```
 
 The request **SHOULD** return a status `202 Accepted` with a link in the `Content-Location` header.

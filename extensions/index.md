@@ -130,8 +130,8 @@ make some sort of profile page on your site, such as
 `http://api.example.com/profile`, and then include it in the `meta` key of
 your responses:
 
-```text
-GET http://api.example.com/posts
+```http
+GET http://api.example.com/posts HTTP/1.1
 
 {
   "meta": {
@@ -159,7 +159,7 @@ That document will de-reference to explain your link relations:
 GET http://api.example.com/profile HTTP/1.1
 ```
 
-```text
+```http
 HTTP/1.1 200 OK
 Content-Type: text/plain
 

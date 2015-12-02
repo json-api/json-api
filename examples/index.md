@@ -13,7 +13,7 @@ Examples of how [sparse fieldsets](http://jsonapi.org/format/#fetching-sparse-fi
 Basic request:
 
 ```http
-GET /articles?include=author
+GET /articles?include=author HTTP/1.1
 ```
 
 ```http
@@ -53,7 +53,7 @@ Content-Type: application/vnd.api+json
 Request with `fields` parameter:
 
 ```http
-GET /articles?include=author&fields[articles]=title,body,author&fields[people]=name
+GET /articles?include=author&fields[articles]=title,body,author&fields[people]=name HTTP/1.1
 ```
 
 > Note: The above example URI shows unencoded `[` and `]` characters simply
@@ -95,7 +95,7 @@ Content-Type: application/vnd.api+json
 Pay attention to the fact that you have to add a relationship name both in `include` and `fields` (since relationships are fields too), otherwise you'll get:
 
 ```http
-GET /articles?include=author&fields[articles]=title,body&fields[people]=name
+GET /articles?include=author&fields[articles]=title,body&fields[people]=name HTTP/1.1
 ```
 
 ```http
@@ -134,7 +134,7 @@ Example of a page-based strategy on how to add [pagination links](http://jsonapi
 Basic request:
 
 ```http
-GET /articles?page[number]=3&page[size]=1
+GET /articles?page[number]=3&page[size]=1 HTTP/1.1
 ```
 
 ```http
@@ -340,7 +340,7 @@ In the example below, the user is sending an invalid JSON API
 request, because it's missing the `data` member:
 
 ```http
-PATCH /posts/1
+PATCH /posts/1 HTTP/1.1
 Content-Type: application/vnd.api+json
 Accept: application/vnd.api+json
 
@@ -374,7 +374,7 @@ If the server cannot parse the request as valid JSON, including
 `source` doesn't make sense (because there's no JSON document for `source` to
 refer to). Here's how the server might respond to an invalid JSON document:
 
-```
+```json
 {
   "errors": [{
     "status": "400",
@@ -389,7 +389,7 @@ The `source` member can also be used to indicate that the error originated
 from a problem with a URI query parameter, like so:
 
 ```http
-GET /api/posts/1?include=auther
+GET /api/posts/1?include=auther HTTP/1.1
 ```
 
 ```http

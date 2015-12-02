@@ -1,4 +1,24 @@
 @charset "UTF-8";
+pre code {
+  display: block;
+  padding: 0.5em;
+  color: #333; }
+
+pre .language-json .attribute, pre .language-json .string, pre .language-http .attribute, pre .language-http .ne .status, pre .language-http .status .number {
+  color: #008080; }
+
+pre .language-json .value .string, pre .language-http .string {
+  color: #d14; }
+
+pre .language-json .err {
+  color: #998;
+  font-style: italic; }
+
+pre .language-http .request, pre .language-http .status {
+  font-weight: bold; }
+pre .language-http .sql .string {
+  color: #333; }
+
 @font-face {
   font-family: 'fontello';
   src: url("../fonts/fontello.eot?60624967");
