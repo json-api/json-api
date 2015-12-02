@@ -1,56 +1,54 @@
-/*
-
-Syntax highlighting styles for highlight.js.
-
-github.com style (c) Vasily Polovnyov <vast@whiteants.net>
-
-*/
-
 pre code {
   display: block; padding: 0.5em;
   color: #333;
 }
 
-pre .comment {
-  color: #998;
-  font-style: italic
-}
-
-pre .keyword,
-pre .css .rule .keyword,
-pre .winutils,
-pre .javascript .title,
-pre .nginx .title,
-pre .subst,
-pre .request,
-pre .status {
-  color: #333;
-  font-weight: bold
-}
-
-pre .number,
-pre .hexcolor,
-pre .ruby .constant {
-  color: #099;
-}
-
-pre .string,
-pre .tag .value,
-pre .phpdoc,
-pre .tex .formula {
-  color: #d14
-}
-
-pre .tag,
-pre .tag .title,
-pre .rules .property,
-pre .django .tag .keyword {
-  color: #000080;
-  font-weight: normal
-}
-
-pre .attribute,
-pre .variable,
-pre .lisp .body {
+%key-like {
   color: #008080
+}
+
+%value-like {
+  color: #d14;
+}
+
+pre .language-json {
+  // assume syntax errors are comments, and style accordingly.
+  .err {
+    color: #998;
+    font-style: italic
+  }
+
+  // style as keys: keys (i.e. .attribute) and strings that
+  // can't be explicitly determined to be keys or values
+  // (which some of our technically-invalid-json examples have)
+  .attribute, .string {
+    @extend %key-like;
+  }
+
+  .value .string {
+    @extend %value-like;
+  }
+}
+
+pre .language-http {
+  // the request & response lines
+  .request, .status {
+    font-weight: bold;
+  }
+
+  // the request uri and header values
+  .string {
+    @extend %value-like;
+  }
+
+  // header names and the status code
+  .attribute, .ne .status, .status .number {
+    @extend %key-like
+  }
+
+  // Sometimes pygments (stupidly) misidentifies an
+  // http response body; don't let that confuse the styles.
+  .sql .string {
+    color: #333;
+  }
 }
