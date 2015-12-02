@@ -38,8 +38,8 @@ at least a `type` member.
 
 For instance, multiple photos might be created with the following request:
 
-```text
-POST /photos
+```http
+POST /photos HTTP/1.1
 Content-Type: application/vnd.api+json; ext=bulk
 Accept: application/vnd.api+json; ext=bulk
 
@@ -70,8 +70,8 @@ object **MUST** contain at least `type` and `id` members.
 
 For example:
 
-```text
-PATCH /articles
+```http
+PATCH /articles HTTP/1.1
 Content-Type: application/vnd.api+json; ext=bulk
 Accept: application/vnd.api+json; ext=bulk
 
@@ -102,8 +102,8 @@ an array of resource identifier objects.
 
 For example:
 
-```text
-DELETE /articles
+```http
+DELETE /articles HTTP/1.1
 Content-Type: application/vnd.api+json; ext=bulk
 Accept: application/vnd.api+json; ext=bulk
 

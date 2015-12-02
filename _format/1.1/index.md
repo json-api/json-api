@@ -115,7 +115,7 @@ Primary data **MUST** be either:
 
 For example, the following primary data is a single resource object:
 
-```javascript
+```json
 {
   "data": {
     "type": "articles",
@@ -133,7 +133,7 @@ For example, the following primary data is a single resource object:
 The following primary data is a single [resource identifier object] that
 references the same resource:
 
-```javascript
+```json
 {
   "data": {
     "type": "articles",
@@ -168,7 +168,7 @@ In addition, a resource object **MAY** contain any of these top-level members:
 
 Here's how an article (i.e. a resource of type "articles") might appear in a document:
 
-```javascript
+```json
 // ...
 {
   "type": "articles",
@@ -301,7 +301,7 @@ object.
 
 For example, the following article is associated with an `author`:
 
-```javascript
+```json
 // ...
 {
   "type": "articles",
@@ -483,7 +483,7 @@ Any members **MAY** be specified within `meta` objects.
 
 For example:
 
-```javascript
+```json
 {
   "meta": {
     "copyright": "Copyright 2015 Example Corp.",

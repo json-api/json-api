@@ -53,8 +53,8 @@ should contain a resource object.
 
 For example, a new photo could be created with the following request:
 
-```text
-PATCH /photos
+```http
+PATCH /photos HTTP/1.1
 Content-Type: application/vnd.api+json; ext=jsonpatch
 Accept: application/vnd.api+json; ext=jsonpatch
 
@@ -81,8 +81,8 @@ name specified by the `path`.
 For instance, the following request should update just the `src` property of the
 photo at `/photos/1`:
 
-```text
-PATCH /photos/1
+```http
+PATCH /photos/1 HTTP/1.1
 Content-Type: application/vnd.api+json; ext=jsonpatch
 Accept: application/vnd.api+json; ext=jsonpatch
 
@@ -109,8 +109,8 @@ resource identifier object or `null`, to remove the relationship.
 
 For instance, the following request should update the `author` of an article:
 
-```text
-PATCH /article/1/relationships/author
+```http
+PATCH /article/1/relationships/author HTTP/1.1
 Content-Type: application/vnd.api+json; ext=jsonpatch
 Accept: application/vnd.api+json; ext=jsonpatch
 
@@ -122,8 +122,8 @@ Accept: application/vnd.api+json; ext=jsonpatch
 To remove a to-one relationship, perform a `replace` operation on the
 relationship to change its value to `null`. For example:
 
-```text
-PATCH /article/1/relationships/author
+```http
+PATCH /article/1/relationships/author HTTP/1.1
 Content-Type: application/vnd.api+json; ext=jsonpatch
 Accept: application/vnd.api+json; ext=jsonpatch
 
@@ -149,8 +149,8 @@ not allowed by the server.
 
 For example, the following request replaces every tag for an article:
 
-```text
-PATCH /photos/1/relationships/tags
+```http
+PATCH /photos/1/relationships/tags HTTP/1.1
 Content-Type: application/vnd.api+json; ext=jsonpatch
 Accept: application/vnd.api+json; ext=jsonpatch
 
@@ -173,8 +173,8 @@ collection, the `path` must end with `/-`.
 In the following example, the comment with ID `123` is added to the list of
 comments for the article with ID `1`:
 
-```text
-PATCH /articles/1/relationships/comments
+```http
+PATCH /articles/1/relationships/comments HTTP/1.1
 Content-Type: application/vnd.api+json; ext=jsonpatch
 Accept: application/vnd.api+json; ext=jsonpatch
 
@@ -195,8 +195,8 @@ the relationship's URL.
 In the following example, comments with IDs of `5` and `13` are removed
 from the list of comments for the article with ID `1`:
 
-```text
-PATCH /articles/1/relationships/comments
+```http
+PATCH /articles/1/relationships/comments HTTP/1.1
 Content-Type: application/vnd.api+json; ext=jsonpatch
 Accept: application/vnd.api+json; ext=jsonpatch
 
@@ -219,8 +219,8 @@ that targets the resource.
 
 For instance, photo `"1"` might be deleted with the following request:
 
-```text
-PATCH /photos/1
+```http
+PATCH /photos/1 HTTP/1.1
 Content-Type: application/vnd.api+json; ext=jsonpatch
 Accept: application/vnd.api+json; ext=jsonpatch
 
@@ -252,8 +252,8 @@ sequential order and correspond to the operations in the request document.
 
 For instance, a request may create two photos in separate operations:
 
-```text
-PATCH /photos
+```http
+PATCH /photos HTTP/1.1
 Content-Type: application/vnd.api+json; ext=jsonpatch
 Accept: application/vnd.api+json; ext=jsonpatch
 
@@ -286,7 +286,7 @@ Accept: application/vnd.api+json; ext=jsonpatch
 The response would then include corresponding JSON API documents contained
 within an array:
 
-```text
+```http
 HTTP/1.1 200 OK
 Content-Type: application/vnd.api+json; ext=jsonpatch
 
