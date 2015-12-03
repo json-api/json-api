@@ -111,6 +111,10 @@
             "$ref": "#/definitions/resource"
           },
           "uniqueItems": true
+        },
+        {
+          "description": "null if the request is one that might correspond to a single resource, but doesn't currently.",
+          "type": "null"
         }
       ]
     },
