@@ -114,6 +114,8 @@ has a page describing how to emit conformant JSON.
 
 * [Migrap.AspNet.Mvc.Jsonapi](https://github.com/migrap/Migrap.AspNet.Mvc.Jsonapi) is an ASP.NET 5 (vNext) library that allows for existing code to build JSON API responses through output formatters.
 
+* [Saule](https://github.com/joukevandermaas/saule/) is a small JSON API 1.0 compatible library that integrates well with established Web API conventions. It has complete documentation and near 100% test coverage.
+
 ### <a href="#server-libraries-java" id="server-libraries-java" class="headerlink"></a> Java
 
 * [katharsis](http://katharsis.io) has comprehensive coverage of standard allowing to create JSON:API compatible resources with dynamic relation based routing.
