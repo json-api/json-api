@@ -122,6 +122,7 @@ has a page describing how to emit conformant JSON.
 * [katharsis](http://katharsis.io) has comprehensive coverage of standard allowing to create JSON:API compatible resources with dynamic relation based routing.
 * [katharsis-core](https://github.com/katharsis-project/katharsis-core) is Java 8 based core library for [katharsis](http://katharsis.io) allowing to manage RESTful endpoints compliant with JSON API standard.
 * [katharsis-rs](https://github.com/katharsis-project/katharsis-rs) is adapter for [katharsis](http://katharsis.io) core module for all compatible JAX-RS based frameworks.
+* [katharsis-spring](https://github.com/katharsis-project/katharsis-spring) is adapter for [katharsis](http://katharsis.io) core module for Spring and Spring Boot framoworks.
 * [katharsis-servlet](https://github.com/katharsis-project/katharsis-servlet) is a generic servlet/filter adapter for [katharsis](http://katharsis.io) core module. This module can be used in traditional servlet or filter based Java web applications, or even non-Servlet-API-based web applications such as Portal/Portlet, Wicket, etc.
 * [Elide](http://elide.io) is a web framework supporting JSON API. Through annotation-based JSON API endpoint generation, Elide enables you to focus on your data model, security model, and business logic while avoiding unnecessary boilerplate. Moreover, through use of the JSON API Patch extension, [Elide](http://elide.io) provides full support for database transactions.
 
