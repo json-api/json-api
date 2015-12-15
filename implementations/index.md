@@ -130,6 +130,10 @@ has a page describing how to emit conformant JSON.
 
 * [ja_serializer](https://github.com/AgilionApps/ja_serializer) is a behaviour and DSL to emit conforming JSON. Suitable for use in a Phoenix view or in a Plug stack.
 
+### <a href="#server-libraries-perl" id="server-libraries-perl" class="headerlink"></a> Perl
+
+* [PONAPI](https://github.com/mickeyn/PONAPI/tree/master/Server) is a Plack-based web server, providing a generic service adhering to the spec. just plug your data-repository & play. currently trial-released, will be soon available on [CPAN](https://metacpan.org).
+
 ## <a href="#examples" id="examples" class="headerlink"></a> Examples
 
 * [RestPack::Serializer provides examples](http://restpack-serializer-sample.herokuapp.com/) which demonstrate sample responses.
