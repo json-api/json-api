@@ -1211,8 +1211,9 @@ to create a resource with a client-generated ID.
 
 ##### <a href="#crud-creating-responses-201" id="crud-creating-responses-201" class="headerlink"></a> 201 Created
 
-If a `POST` request did not include a [Client-Generated
-ID](#crud-creating-client-ids) and the requested resource has been created
+If the result of a `POST` request *doesn't match* the representation of the resource in the request 
+(which is the case when additional fields are added by the server on resource creation, e.g. when 
+no [Client-Generated ID](#crud-creating-client-ids) is used) and the requested resource has been created
 successfully, the server **MUST** return a `201 Created` status code.
 
 The response **SHOULD** include a `Location` header identifying the location
@@ -1253,11 +1254,10 @@ server **MUST** return a `202 Accepted` status code.
 
 ##### <a href="#crud-creating-responses-204" id="crud-creating-responses-204" class="headerlink"></a> 204 No Content
 
-If a `POST` request *did* include a [Client-Generated
-ID](#crud-creating-client-ids), and the requested resource has been created
-successfully, and the representation of the resource in the request matches the result 
-(no additional fields have been added by the server when creating the resource), 
-the server **MUST** return either a `201 Created` status code
+If the result of a `POST` request *matches* the representation of the resource (which is 
+the case when a [Client-Generated ID](#crud-creating-client-ids) is used and no additional 
+fields are added by the server on resource creation) and the requested resource has been
+created successfully, the server **MUST** return either a `201 Created` status code
 and response document (as described above) or a `204 No Content` status code
 with no response document.
 
