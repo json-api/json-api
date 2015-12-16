@@ -1211,16 +1211,14 @@ to create a resource with a client-generated ID.
 
 ##### <a href="#crud-creating-responses-201" id="crud-creating-responses-201" class="headerlink"></a> 201 Created
 
-If the result of a `POST` request *doesn't match* the representation of the resource in the request 
-(which is the case when additional fields are added by the server on resource creation, e.g. when 
-no [Client-Generated ID](#crud-creating-client-ids) is used) and the requested resource has been created
-successfully, the server **MUST** return a `201 Created` status code.
-
-The response **SHOULD** include a `Location` header identifying the location
-of the newly created resource.
+If the requested resource has been created successfully, the server **MUST** 
+return a `201 Created` status code.
 
 The response **MUST** also include a document that contains the primary
 resource created.
+
+The response **SHOULD** include a `Location` header identifying the location
+of the newly created resource.
 
 If the [resource object][resource objects] returned by the response contains a `self` key in its
 `links` member and a `Location` header is provided, the value of the `self`
@@ -1254,13 +1252,15 @@ server **MUST** return a `202 Accepted` status code.
 
 ##### <a href="#crud-creating-responses-204" id="crud-creating-responses-204" class="headerlink"></a> 204 No Content
 
-If the result of a `POST` request *matches* the representation of the resource (which is 
-the case when a [Client-Generated ID](#crud-creating-client-ids) is used and no additional 
-fields are added by the server on resource creation) and the requested resource has been
-created successfully, the server **MUST** return either a `201 Created` status code
-and response document (as described above) or a `204 No Content` status code
-with no response document.
+Notwithstanding the above, a server **MAY** choose to return a `204 No Content` status
+code instead of the `201 Created` status code without an accompanying response document 
+if the omitted document would have been - in regard to contents - identical to the 
+original request document sent by the client.
 
+> Note: In particular, usage of [client-generated IDs](#crud-creating-client-ids) is a 
+prerequisite for returning a 204 response, as a response document is necessary to 
+communicate server-generated IDs back to the client.
+    
 > Note: If a `204` response is received the client should consider the resource
 object sent in the request to be accepted by the server, as if the server
 had returned it back in a `201` response.
