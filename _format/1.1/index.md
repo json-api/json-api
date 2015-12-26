@@ -1811,7 +1811,6 @@ An error object **MAY** have the following members:
     of the general error.
 * `status`: the HTTP status code applicable to this problem, expressed as a
   string value.
-* `code`: an application-specific error code, expressed as a string value.
 * `title`: a short, human-readable summary of the problem that **SHOULD NOT**
   change from occurrence to occurrence of the problem, except for purposes of
   localization.
@@ -1826,6 +1825,15 @@ An error object **MAY** have the following members:
     the error.
 * `meta`: a [meta object][meta] containing non-standard meta-information about the
   error.
+
+> Note: Previous versions of this specification allowed a `code` member in
+  error objects. The role of that member is now played instead by the `type`
+  link.
+>
+> Old APIs that send the `code` member will continue to function with newer
+  clients, but these clients will likely ignore that member. Clients may choose
+  to continue to support `code` if they must interact with older APIs. However,
+  new APIs must not produce error objects with this member.
 
 [resource objects]: #document-resource-objects
 [attributes]: #document-resource-object-attributes
