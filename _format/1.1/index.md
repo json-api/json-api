@@ -31,6 +31,11 @@ media type parameters or with only the `profile` parameter, which is used to
 support [extensions]. This applies to both the `Content-Type` and `Accept`
 headers.
 
+> Note: A media type parameter is an extra piece of information that can
+accompany a media type. For example, in the header
+`Content-Type: text/html; charset="utf-8"`, the media type is `text/html` and
+`charset` is a parameter.
+
 ### <a href="#content-negotiation-clients" id="content-negotiation-clients" class="headerlink"></a> Client Responsibilities
 
 Clients that include the JSON API media type in their `Accept` header **MUST**
