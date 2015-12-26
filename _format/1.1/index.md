@@ -90,10 +90,11 @@ The members `data` and `errors` **MUST NOT** coexist in the same document.
 
 A document **MAY** contain any of these top-level members:
 
-* `jsonapi`: an object describing the server's implementation
-* `links`: a [links object][links] related to the primary data.
 * `included`: an array of [resource objects] that are related to the primary
   data and/or each other ("included resources").
+* `links`: a [links object][links] related to the primary data.
+* `mappings`: an object defining string aliases for referring to (longer) URIs
+* `jsonapi`: an object describing the server's implementation
 
 If a document does not contain a top-level `data` key, the `included` member
 **MUST NOT** be present either.
@@ -545,10 +546,42 @@ objects in the future. It is also possible that the allowed values of
 additional members will be expanded (e.g. a `collection` link may support an
 array of values, whereas a `self` link does not).
 
+### <a href="#document-mappings" id="document-mappings" class="headerlink"></a> URI Mappings
+
+The top level of a JSON API document **MAY** include an `mappings` member.
+If present, the value of this member **MUST** be an object (a "mappings object").
+
+Each key–value pair in the mappings object is a "mapping". The key is said to
+"be an alias for" or to "map to" the value, which **MUST** be a URI.
+
+Alias strings **MUST** adhere to the same constraints as all [member names],
+with the additional requirement that they **MUST** contain at least one non a-z
+character (i.e., outside U+0061 to U+007A).
+
+It is **RECOMMENDED** that a U+002D HYPHEN-MINUS ("-"), U+005F LOW LINE ("_"),
+or capital letter (e.g. camelCasing) be used to satisfy the above requirement.
+
+For example, the following object defines the string `"json-api"` as an alias
+for the URI `http://jsonapi.org/`:
+
+```json
+{
+  "mappings": {
+    // Note the non a-z character (the hyphen) in the alias...
+    "json-api": "http://jsonapi.org/"
+  }
+}
+```
+
+> Note: The requirements on alias strings are the same as those on
+  implementation-specific [query parameter][query parameters] names.
+  These requirements ensure that your implementation will remain compatible
+  with future base specification additions.
+
 ### <a href="#document-jsonapi-object" id="document-jsonapi-object" class="headerlink"></a> JSON API Object
 
 A JSON API document **MAY** include information about its implementation
-under a top level `jsonapi` member. If present, the value of the `jsonapi`
+under a top-level `jsonapi` member. If present, the value of the `jsonapi`
 member **MUST** be an object (a "jsonapi object"). The jsonapi object **MAY**
 contain a `version` member whose value is a string indicating the highest JSON
 API version supported. This object **MAY** also contain a `meta` member, whose
@@ -960,12 +993,12 @@ example, a response to a request for `comments.author` should include `comments`
 as well as the `author` of each of those `comments`.
 
 > Note: A server may choose to expose a deeply nested relationship such as
-`comments.author` as a direct relationship with an alias such as
+`comments.author` as a direct relationship with an alternative name such as
 `comment-authors`. This would allow a client to request
 `/articles/1?include=comment-authors` instead of
 `/articles/1?include=comments.author`. By abstracting the nested
-relationship with an alias, the server can still provide full linkage in
-compound documents without including potentially unwanted intermediate
+relationship with an alternate name, the server can still provide full linkage
+in compound documents without including potentially unwanted intermediate
 resources.
 
 Multiple related resources can be requested in a comma-separated list:
@@ -1805,6 +1838,8 @@ An error object **MAY** have the following members:
 [compound document]: #document-compound-documents
 [meta]: #document-meta
 [links]: #document-links
+[mappings]: #document-mappings
 [error details]: #errors
 [member names]: #document-member-names
 [pagination]: #fetching-pagination
+[query parameters]: #query-parameters
