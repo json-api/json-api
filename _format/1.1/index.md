@@ -101,7 +101,7 @@ If a document does not contain a top-level `data` key, the `included` member
 
 The top-level [links object][links] **MAY** contain the following members:
 
-* `self`: the [link][links] that generated the current response document.
+* `self`: the [link] that generated the current response document.
 * `related`: a [related resource link] when the primary data represents a
   resource relationship.
 * [pagination] links for the primary data.
@@ -338,7 +338,7 @@ link to fetch the resource objects, and linkage information.
 The optional `links` member within each [resource object][resource objects] contains [links]
 related to the resource.
 
-If present, this links object **MAY** contain a `self` [link][links] that
+If present, this links object **MAY** contain a `self` [link] that
 identifies the resource represented by the resource object.
 
 ```json
@@ -510,6 +510,7 @@ For example:
 Where specified, a `links` member can be used to represent links. The value
 of each `links` member **MUST** be an object (a "links object").
 
+<a href="#document-links-link" id="document-links-link"></a>
 Each member of a links object is a "link". A link **MUST** be represented as
 either:
 
@@ -1803,9 +1804,9 @@ An error object **MAY** have the following members:
 
 * `id`: a unique identifier for this particular occurrence of the problem.
 * `links`: a [links object][links] containing the following members:
-  * `about`: a [link][links] that leads to further details about this
+  * `about`: a [link] that leads to further details about this
     particular occurrence of the problem.
-  * <a id="error-objects-links-type"></a>`type`: a [link][link] whose URI
+  * <a id="error-objects-links-type"></a>`type`: a [link] whose URI
     identifies the type of error that this particular error is an instance of.
     When dereferenced, this URI **SHOULD** provide a human-readable explanation
     of the general error.
@@ -1845,6 +1846,7 @@ An error object **MAY** have the following members:
 [resource identifier object]: #document-resource-identifier-objects
 [compound document]: #document-compound-documents
 [meta]: #document-meta
+[link]: #document-links-link
 [links]: #document-links
 [mappings]: #document-mappings
 [error details]: #errors
