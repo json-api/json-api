@@ -1811,8 +1811,10 @@ An error object **MAY** have the following members:
 * `source`: an object containing references to the source of the error,
   optionally including any of the following members:
   * `pointer`: a JSON Pointer [[RFC6901](https://tools.ietf.org/html/rfc6901)]
-    to the associated entity in the request document [e.g. `"/data"` for a
-    primary data object, or `"/data/attributes/title"` for a specific attribute].
+    to the value in the request document that caused the error [e.g. `"/data"`
+    for a primary data object, or `"/data/attributes/title"` for a specific
+    attribute]. This **MUST** point to a value in the request document that
+    exists; if it doesn't, the client **SHOULD** simply ignore the pointer.
   * `parameter`: a string indicating which URI query parameter caused
     the error.
 * `meta`: a [meta object][meta] containing non-standard meta-information about the
