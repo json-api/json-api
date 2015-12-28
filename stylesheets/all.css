@@ -163,6 +163,9 @@ th {
 a {
   color: #5a5a5a; }
 
+b, strong {
+  font-weight: 500; }
+
 blockquote {
   margin: 20px 0;
   padding: 10px 15px 0 15px;
