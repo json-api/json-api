@@ -585,7 +585,7 @@ The following "globally allowed characters" **MAY** be used anywhere in a member
 - U+0061 to U+007A, "a-z"
 - U+0041 to U+005A, "A-Z"
 - U+0030 to U+0039, "0-9"
-- any UNICODE character except U+0000 to U+007F _(not recommended, not URL safe)_
+- U+0080 and above (non-ASCII Unicode characters; _not recommended, not URL safe_)
 
 Additionally, the following characters are allowed in member names, except as the
 first or last character:
@@ -628,6 +628,8 @@ The following characters **MUST NOT** be used in member names:
 - U+007C VERTICAL LINE, "|"
 - U+007D RIGHT CURLY BRACKET, "}"
 - U+007E TILDE, "~"
+- U+007F DELETE
+- U+0000 to U+001F (C0 Controls)
 
 ## <a href="#fetching" id="fetching" class="headerlink"></a> Fetching Data
 
