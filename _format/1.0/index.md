@@ -1777,7 +1777,7 @@ An error object **MAY** have the following members:
   change from occurrence to occurrence of the problem, except for purposes of
   localization.
 * `detail`: a human-readable explanation specific to this occurrence of the
-  problem.
+  problem. Like `title`, this field's value can be localized.
 * `source`: an object containing references to the source of the error,
   optionally including any of the following members:
   * `pointer`: a JSON Pointer [[RFC6901](https://tools.ietf.org/html/rfc6901)]
