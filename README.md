@@ -34,3 +34,10 @@ This standard is currently under development. To assist:
 
 The website is automatically built by [GitHub Pages](http://pages.github.com)
 when changes are pushed to the `gh-pages` branch.
+
+Archive
+-------
+
+older versions of the JSON-API documentations
+
+* RC3 - http://jsonapi-rc3.herokuapp.com/
