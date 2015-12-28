@@ -151,6 +151,8 @@ h5 {
   margin: 20px 0 10px 0;
   font-weight: 500;
   font-size: inherit; }
+  h5 code {
+    font-weight: 600; }
 
 p, table {
   line-height: 1.7333;
@@ -175,6 +177,9 @@ p > code, li > code {
   padding: 1px 4px;
   background: rgba(0, 0, 0, 0.06);
   white-space: nowrap; }
+
+code {
+  font-weight: inherit; }
 
 /** Navigation */
 .site-nav {
@@ -367,10 +372,10 @@ footer {
   padding: 10px 15px;
   background: #f9f9f9;
   border: 1px solid #d1d1d1;
-  font-size: 12px;
   line-height: 16px; }
   .highlight pre {
-    margin: 0;
-    font-family: Menlo, monospace; }
+    margin: 0; }
+  .highlight code {
+    font-size: 12px; }
 
 /*# sourceMappingURL=all.css.map */
