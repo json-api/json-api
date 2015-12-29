@@ -1824,8 +1824,24 @@ An error object **MAY** have the following members:
     for a primary data object, or `"/data/attributes/title"` for a specific
     attribute]. This **MUST** point to a value in the request document that
     exists; if it doesn't, the client **SHOULD** simply ignore the pointer.
-  * `parameter`: a string indicating which URI query parameter caused
-    the error.
+  * `parameter`: a string indicating which URI query parameter used in the
+    request caused the error.
+  * <a id="error-objects-source-missing"></a>`missing`: an object indicating
+    that the error was caused by a missing extension, key, or URI query parameter.
+    If present, this object **MUST** contain exactly one of the following keys:
+        * `extension`: the URI of a missing extension. This key **SHOULD** be
+          used with the `pointer` member to indicate which value in the request
+          document is missing the extension.
+        * `key`: the name of a missing key. This key **SHOULD** be used with the
+          `pointer` member to indicate which value in the request document is
+          missing the key.
+        * `parameter`: the name of a missing URI query parameter.
+
+        This object **MAY** also contain an `alternatives` key, whose value is an
+        array listing alternate extension URIs, key names, or parameter names
+        (depending on which type of value is missing) that can be added to resolve
+        this error.
+
 * `meta`: a [meta object][meta] containing non-standard meta-information about the
   error.
 
