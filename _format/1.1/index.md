@@ -254,6 +254,7 @@ objects.
 
 Relationships may be to-one or to-many.
 
+<a id="document-resource-object-relationships-relationship-object"></a>
 A "relationship object" **MUST** contain at least one of the following:
 
 * `links`: a [links object][links] containing at least one of the following:
@@ -518,7 +519,7 @@ of this member **MUST** be an object (a "links object").
 Within this object, a link **MUST** be represented as either:
 
 * a string containing the link's URL.
-* an object ("link object") which can contain the following members:
+* <a id="document-links-link-object"></a>an object ("link object") which can contain the following members:
   * `href`: a string containing the link's URL.
   * `meta`: a meta object containing non-standard meta-information about the
     link.
