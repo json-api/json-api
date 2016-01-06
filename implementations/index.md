@@ -67,7 +67,11 @@ assembled to vet them.
 * [endpoints](https://github.com/endpoints) is an implementation of JSON API using [Bookshelf](http://bookshelfjs.org).
 * [YAYSON](https://github.com/confetti/yayson) is an isomorphic library for serializing and reading JSON API data. Simply use it with plain objects or extend it to fit your ORM (currently it has an adapter for [Sequelize](http://sequelizejs.com)).
 * [jsonapi-serializer](https://github.com/SeyZ/jsonapi-serializer) is a Node.js framework agnostic library for serializing your data to JSON API.
-* [jsonapi-server](https://github.com/holidayextras/jsonapi-server) is a fully featured NodeJS sever implementation of json:api.
+* [jsonapi-server](https://github.com/holidayextras/jsonapi-server) A feature-rich config-driven json:api framework.
+  * [jsonapi-store-memoryhandler](https://github.com/holidayextras/jsonapi-server/blob/master/documentation/resources.md) An in-memory data store for rapid prototyping.
+  * [jsonapi-store-relationaldb](https://github.com/holidayextras/jsonapi-store-relationaldb) A relational database handler for jsonapi-server.
+  * [jsonapi-store-mongodb](https://github.com/holidayextras/jsonapi-store-mongodb) A mongodb handler for jsonapi-server.
+  * [jsonapi-store-elasticsearch](https://github.com/holidayextras/jsonapi-store-elasticsearch) An elasticsearch handler for jsonapi-server.
 * [jsonapify](https://github.com/alex94puchades/jsonapify) is an unintrusive, well-tested and easy-to-use library for the development of JSON API (or similar) APIs. It integrates nicely with Mongoose models as connect-compatible middleware. Its development is very recent though, which only means that feature requests and feedback is more than welcome!
 * [loopback-component-jsonapi](https://github.com/digitalsadhu/loopback-component-jsonapi) JSON API support for [loopback](https://github.com/strongloop/loopback) highly-extensible, open-source Node.js framework
 * [oh-my-jsonapi](https://github.com/jamesdixon/oh-my-jsonapi) JSON API-Compliant Serialization for your Node ORM.
