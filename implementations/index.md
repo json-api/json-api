@@ -47,6 +47,10 @@ assembled to vet them.
 
 * [Art4 / json-api-client](https://github.com/Art4/json-api-client) is a library for validating and handling the response body in a simple OOP way.
 
+### <a href="#client-libraries-perl" id="client-libraries-perl" class="headerlink"></a> Perl
+
+* [PONAPI::Client](https://metacpan.org/pod/PONAPI::Client) is a simple/extensible JSON API v1.0 client.
+
 ## <a href="#server-libraries" id="server-libraries" class="headerlink"></a> Server libraries
 
 ### <a href="#server-libraries-php" id="server-libraries-php" class="headerlink"></a> PHP
@@ -135,7 +139,7 @@ has a page describing how to emit conformant JSON.
 
 ### <a href="#server-libraries-perl" id="server-libraries-perl" class="headerlink"></a> Perl
 
-* [PONAPI](https://github.com/mickeyn/PONAPI/tree/master/Server) is a Plack-based web server, providing a generic service adhering to the spec. just plug your data-repository & play. currently trial-released, will be soon available on [CPAN](https://metacpan.org).
+* [PONAPI::Server](https://github.com/mickeyn/PONAPI/tree/master/Server) is a Plack-based web server, providing a generic service adhering to the spec. just plug your data-repository & play. currently trial-released, will be soon available on [CPAN](https://metacpan.org).
 
 ## <a href="#examples" id="examples" class="headerlink"></a> Examples
 
