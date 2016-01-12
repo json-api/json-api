@@ -1738,7 +1738,7 @@ U+002D HYPHEN-MINUS, "-", U+005F LOW LINE, "_", or capital letter is used
 (e.g. camelCasing).
 
 If a server encounters a query parameter that does not follow the naming
-conventions above, and the server does not know how to proccess it as a query
+conventions above, and the server does not know how to process it as a query
 parameter from this specification, it **MUST** return `400 Bad Request`.
 
 > Note: This is to preserve the ability of JSON API to make additive additions
