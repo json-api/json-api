@@ -136,7 +136,7 @@ has a page describing how to emit conformant JSON.
 
 ### <a href="#server-libraries-perl" id="server-libraries-perl" class="headerlink"></a> Perl
 
-* [PONAPI::Server](https://github.com/mickeyn/PONAPI/tree/master/Server) is a Plack-based web server, providing a generic service adhering to the spec. just plug your data-repository & play. currently trial-released, will be soon available on [CPAN](https://metacpan.org).
+* [PONAPI::Server](https://metacpan.org/pod/PONAPI::Server) is a Plack-based web server, providing a generic service adhering to the spec. just plug your data-repository & play. currently trial-released, will be soon available on [CPAN](https://metacpan.org).
 
 ## <a href="#examples" id="examples" class="headerlink"></a> Examples
 
