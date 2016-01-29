@@ -105,6 +105,7 @@ has a page describing how to emit conformant JSON.
 * [ripozo](https://github.com/vertical-knowledge/ripozo/) provides a framework for serving JSON API content (among other Hypermedia formats) in Flask, Django and more.
 * [marshmallow-jsonapi](https://github.com/marshmallow-code/marshmallow-jsonapi) provides JSON API data formatting for any Python web framework.
 * [neoapi](https://pypi.python.org/pypi/neoapi/) serializes JSON API–compliant responses from neomodel StructuredNodes for Neo4j data
+* [py-jsonapi](https://github.com/benediktschmitt/py-jsonapi) is a toolkit for building a JSON API. Can be extended easily to work with every web framework and database driver. Comes with support for flask, tornado, mongoengine and sqlalchemy.
 
 ### <a href="#server-libraries-go" id="server-libraries-go" class="headerlink"></a> Go
 
