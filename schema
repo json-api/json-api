@@ -206,30 +206,36 @@
       "type": "object",
       "patternProperties": {
         "^\\w[-\\w_]*$": {
-          "properties": {
-            "links": {
-              "$ref": "#/definitions/links"
-            },
-            "data": {
-              "description": "Member, whose value represents \"resource linkage\".",
-              "oneOf": [
-                {
-                  "$ref": "#/definitions/relationshipToOne"
-                },
-                {
-                  "$ref": "#/definitions/relationshipToMany"
-                }
-              ]
-            },
-            "meta": {
-              "$ref": "#/definitions/meta"
-            }
-          },
-          "additionalProperties": false
+          "$ref": "#/definitions/relationship"
         }
       },
       "additionalProperties": false
     },
+
+    "relationship": {
+      "type": "object",
+      "properties": {
+        "links": {
+          "$ref": "#/definitions/links"
+        },
+        "data": {
+          "description": "Member, whose value represents \"resource linkage\".",
+          "oneOf": [
+            {
+              "$ref": "#/definitions/relationshipToOne"
+            },
+            {
+              "$ref": "#/definitions/relationshipToMany"
+            }
+          ]
+        },
+        "meta": {
+          "$ref": "#/definitions/meta"
+        }
+      },
+      "additionalProperties": false
+    },
+
     "relationshipToOne": {
       "description": "References to other resource objects in a to-one (\"relationship\"). Relationships can be specified by including a member in a resource's links object.",
       "anyOf": [
