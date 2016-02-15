@@ -94,6 +94,7 @@ has a page describing how to emit conformant JSON.
 * [Yaks](https://github.com/plexus/yaks) Library for building hypermedia APIs, contains a JSON API output format.
 * [JSONAPI::Serializers](https://github.com/fotinakis/jsonapi-serializers) provides a pure Ruby, readonly serializer implementation.
 * [Roar](https://github.com/apotonick/roar) Renders and parses represenations of Ruby objects
+* [Jbuilder::JsonAPI](https://github.com/vladfaust/jbuilder-json_api) Simple & lightweight extension for Jbuilder
 
 ### <a href="#server-libraries-python" id="server-libraries-python" class="headerlink"></a> Python
 
