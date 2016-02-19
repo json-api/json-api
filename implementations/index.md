@@ -80,6 +80,7 @@ assembled to vet them.
 * [loopback-component-jsonapi](https://github.com/digitalsadhu/loopback-component-jsonapi) JSON API support for [loopback](https://github.com/strongloop/loopback) highly-extensible, open-source Node.js framework
 * [oh-my-jsonapi](https://github.com/jamesdixon/oh-my-jsonapi) JSON API-Compliant Serialization for your Node ORM.
 * [jaysonapi](https://github.com/digia/jaysonapi) jaysonapi is a framework agnostic JSON API v1.0.0 serializer. jaysonapi provides more of a functional approach to serializing your data. Define a serializer with a type and schema, and call serialize on it passing in the data, included, meta, errors, etc. as a plain object.
+* [json-api-ify](https://github.com/kutlerskaggs/json-api-ify) serialize the **** out of your data. json api v1.0 complaint.
 
 ### <a href="#server-libraries-ruby" id="server-libraries-ruby" class="headerlink"></a> Ruby
 
