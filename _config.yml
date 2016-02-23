@@ -32,7 +32,7 @@ defaults:
       is_spec_page: true
 
 latest_version: 1.0
-
+excerpt_separator: ""
 
 # `safe `must be set false for jekyll-redirect-from
 # to run in development. (Github Pages will override
