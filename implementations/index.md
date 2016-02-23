@@ -84,6 +84,8 @@ assembled to vet them.
 
 ### <a href="#server-libraries-ruby" id="server-libraries-ruby" class="headerlink"></a> Ruby
 
+* [Jsonapi-for-rails](https://github.com/doga/jsonapi_for_rails)
+empowers your JSONAPI compliant [Rails](http://rubyonrails.org/) APIs. Implement your APIs with very little coding.
 * [ActiveModel::Serializers](https://github.com/rails-api/active_model_serializers)
 is one of the original exemplar implementations, but is slightly out of date at
 the moment.
