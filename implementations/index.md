@@ -51,6 +51,11 @@ assembled to vet them.
 
 * [PONAPI::Client](https://metacpan.org/pod/PONAPI::Client) is a simple/extensible JSON API v1.0 client.
 
+### <a href="#client-libraries-net" id="client-libraries-net" class="headerlink"></a> .NET
+
+* [Hypermedia.JsonApi.Client](https://github.com/cosullivan/Hypermedia/) is a set of extension methods to the HttpClient which allow for reading
+and writing of JSON API documents.
+
 ## <a href="#server-libraries" id="server-libraries" class="headerlink"></a> Server libraries
 
 ### <a href="#server-libraries-php" id="server-libraries-php" class="headerlink"></a> PHP
@@ -121,14 +126,12 @@ has a page describing how to emit conformant JSON.
 ### <a href="#server-libraries-net" id="server-libraries-net" class="headerlink"></a> .NET
 
 * [JsonApiNet](https://github.com/l8nite/JsonApiNet) lets you quickly deserialize JSON API documents into C# entities. Supports compound documents, complex type mapping from attributes, attribute mapping, and more. [See the README](https://github.com/l8nite/JsonApiNet/blob/master/README.md) for full details.
-
 * [JSONAPI.NET](https://github.com/SphtKr/JSONAPI.NET) is a .NET library that integrates with ASP.NET WebAPI, Json.NET, and (optionally) Entity Framework to help you quickly create JSON API compliant web services.
-
 * [NJsonApi](https://github.com/jacek-gorgon/NJsonApi) is a .NET server implementation of the standard. It aims at good extensibility and performance while maintaining developer-friendliness with interchangable convenions and builder-style configuration.
-
 * [Migrap.AspNet.Mvc.Jsonapi](https://github.com/migrap/Migrap.AspNet.Mvc.Jsonapi) is an ASP.NET 5 (vNext) library that allows for existing code to build JSON API responses through output formatters.
-
 * [Saule](https://github.com/joukevandermaas/saule/) is a small JSON API 1.0 compatible library that integrates well with established Web API conventions. It has complete documentation and near 100% test coverage.
+* [Hypermedia.JsonApi.WebApi](https://github.com/cosullivan/Hypermedia/) is a Web API media type formatter for reading and writing JSON API. It supports an external resource model definition and natively 
+includes related resources. 
 
 ### <a href="#server-libraries-java" id="server-libraries-java" class="headerlink"></a> Java
 
@@ -151,6 +154,8 @@ has a page describing how to emit conformant JSON.
 
 * [RestPack::Serializer provides examples](http://restpack-serializer-sample.herokuapp.com/) which demonstrate sample responses.
 * [Endpoints provides a fully working example API](http://github.com/endpoints/example/)
+* [http://hypermedia.cainosullivan.com](http://hypermedia.cainosullivan.com/) is a live JSON API service that displays a subset of the data from the 
+mythology.stackexchange.com site.
 
 ## <a href="#related-tools" id="related-tools" class="headerlink"></a> Related Tools
 
