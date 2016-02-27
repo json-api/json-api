@@ -156,6 +156,9 @@ includes related resources.
 * [Endpoints provides a fully working example API](http://github.com/endpoints/example/)
 * [http://hypermedia.cainosullivan.com](http://hypermedia.cainosullivan.com/) is a live JSON API service that displays a subset of the data from the 
 mythology.stackexchange.com site.
+  * [http://hypermedia.cainosullivan.com/v1/users](http://hypermedia.cainosullivan.com/v1/users?$prettify=yes)
+  * [http://hypermedia.cainosullivan.com/v1/posts](http://hypermedia.cainosullivan.com/v1/posts?$prettify=yes)
+  * [http://hypermedia.cainosullivan.com/v1/comments](http://hypermedia.cainosullivan.com/v1/comments?$prettify=yes)
 
 ## <a href="#related-tools" id="related-tools" class="headerlink"></a> Related Tools
 
