@@ -1220,7 +1220,8 @@ ID](#crud-creating-client-ids) and the requested resource has been created
 successfully, the server **MUST** return a `201 Created` status code.
 
 The response **SHOULD** include a `Location` header identifying the location
-of the newly created resource.
+of the newly created resource, in order to comply with [RFC
+7231](http://tools.ietf.org/html/rfc7231#section-6.3.2).
 
 The response **MUST** also include a document that contains the primary
 resource created.
