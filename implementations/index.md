@@ -41,7 +41,8 @@ assembled to vet them.
 ### <a href="#client-libraries-ruby" id="client-libraries-ruby" class="headerlink"></a> Ruby
 
 * [jsonapi-consumer](https://github.com/jsmestad/jsonapi-consumer) a ruby library for consuming JSONAPI payloads.
-* [JsonApiClient](https://github.com/chingor13/json_api_client) attempts to give you a query building framework that is easy to understand (similar to ActiveRecord scopes)
+* [JsonApiClient](https://github.com/chingor13/json_api_client) attempts to give you a query building framework that is easy to understand (similar to ActiveRecord scopes).
+* [JsonApiParser](https://github.com/beauby/jsonapi_parser) a ruby library for parsing/validating/handling JSONAPI documents.
 
 ### <a href="#client-libraries-php" id="client-libraries-php" class="headerlink"></a> PHP
 
@@ -50,6 +51,16 @@ assembled to vet them.
 ### <a href="#client-libraries-perl" id="client-libraries-perl" class="headerlink"></a> Perl
 
 * [PONAPI::Client](https://metacpan.org/pod/PONAPI::Client) is a simple/extensible JSON API v1.0 client.
+
+### <a href="#client-libraries-java" id="client-libraries-java" class="headerlink"></a> Java
+
+* [jsonapi-converter](https://github.com/jasminb/jsonapi-converter) is a Java JSON API v1.0 client. Besides providing means for serialisation/deserialisation, client comes with Retrofit plugin.
+* [Morpheus](https://github.com/xamoom/Morpheus) library for deserializing your resources with automatic mapping for relationships.
+
+### <a href="#client-libraries-net" id="client-libraries-net" class="headerlink"></a> .NET
+
+* [Hypermedia.JsonApi.Client](https://github.com/cosullivan/Hypermedia/) is a set of extension methods to the HttpClient which allow for reading
+and writing of JSON API documents.
 
 ## <a href="#server-libraries" id="server-libraries" class="headerlink"></a> Server libraries
 
@@ -98,6 +109,7 @@ has a page describing how to emit conformant JSON.
 * [JSONAPI::Serializers](https://github.com/fotinakis/jsonapi-serializers) provides a pure Ruby, readonly serializer implementation.
 * [Roar](https://github.com/apotonick/roar) Renders and parses represenations of Ruby objects
 * [Jbuilder::JsonAPI](https://github.com/vladfaust/jbuilder-json_api) Simple & lightweight extension for Jbuilder
+* [JSONAPI::Utils](https://github.com/b2beauty/jsonapi-utils) works on top of the awesome [JSONAPI::Resources](https://github.com/cerebris/jsonapi-resources) gem bringing to controllers a Rails way to render JSON API-compliant responses.
 
 ### <a href="#server-libraries-python" id="server-libraries-python" class="headerlink"></a> Python
 
@@ -110,6 +122,7 @@ has a page describing how to emit conformant JSON.
 * [marshmallow-jsonapi](https://github.com/marshmallow-code/marshmallow-jsonapi) provides JSON API data formatting for any Python web framework.
 * [neoapi](https://pypi.python.org/pypi/neoapi/) serializes JSON API–compliant responses from neomodel StructuredNodes for Neo4j data
 * [py-jsonapi](https://github.com/benediktschmitt/py-jsonapi) is a toolkit for building a JSON API. Can be extended easily to work with every web framework and database driver. Comes with support for flask, tornado, mongoengine and sqlalchemy.
+* [xamoom-janus](https://github.com/xamoom/xamoom-janus) is a Python module to easily and fast extend Python web frameworks like Flask or BottlyPy with json:api functionality. Also offers a flexible mechanism for data mapping and hooks to intercept and extend its functionality according to your projects needs.
 
 ### <a href="#server-libraries-go" id="server-libraries-go" class="headerlink"></a> Go
 
@@ -121,14 +134,12 @@ has a page describing how to emit conformant JSON.
 ### <a href="#server-libraries-net" id="server-libraries-net" class="headerlink"></a> .NET
 
 * [JsonApiNet](https://github.com/l8nite/JsonApiNet) lets you quickly deserialize JSON API documents into C# entities. Supports compound documents, complex type mapping from attributes, attribute mapping, and more. [See the README](https://github.com/l8nite/JsonApiNet/blob/master/README.md) for full details.
-
 * [JSONAPI.NET](https://github.com/SphtKr/JSONAPI.NET) is a .NET library that integrates with ASP.NET WebAPI, Json.NET, and (optionally) Entity Framework to help you quickly create JSON API compliant web services.
-
 * [NJsonApi](https://github.com/jacek-gorgon/NJsonApi) is a .NET server implementation of the standard. It aims at good extensibility and performance while maintaining developer-friendliness with interchangable convenions and builder-style configuration.
-
 * [Migrap.AspNet.Mvc.Jsonapi](https://github.com/migrap/Migrap.AspNet.Mvc.Jsonapi) is an ASP.NET 5 (vNext) library that allows for existing code to build JSON API responses through output formatters.
-
 * [Saule](https://github.com/joukevandermaas/saule/) is a small JSON API 1.0 compatible library that integrates well with established Web API conventions. It has complete documentation and near 100% test coverage.
+* [Hypermedia.JsonApi.WebApi](https://github.com/cosullivan/Hypermedia/) is a Web API media type formatter for reading and writing JSON API. It supports an external resource model definition and natively 
+includes related resources. 
 
 ### <a href="#server-libraries-java" id="server-libraries-java" class="headerlink"></a> Java
 
@@ -151,6 +162,11 @@ has a page describing how to emit conformant JSON.
 
 * [RestPack::Serializer provides examples](http://restpack-serializer-sample.herokuapp.com/) which demonstrate sample responses.
 * [Endpoints provides a fully working example API](http://github.com/endpoints/example/)
+* [http://hypermedia.cainosullivan.com](http://hypermedia.cainosullivan.com/) is a live JSON API service that displays a subset of the data from the 
+mythology.stackexchange.com site.
+  * [http://hypermedia.cainosullivan.com/v1/users](http://hypermedia.cainosullivan.com/v1/users?$prettify=yes)
+  * [http://hypermedia.cainosullivan.com/v1/posts](http://hypermedia.cainosullivan.com/v1/posts?$prettify=yes)
+  * [http://hypermedia.cainosullivan.com/v1/comments](http://hypermedia.cainosullivan.com/v1/comments?$prettify=yes)
 
 ## <a href="#related-tools" id="related-tools" class="headerlink"></a> Related Tools
 
