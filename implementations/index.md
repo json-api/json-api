@@ -51,6 +51,10 @@ assembled to vet them.
 
 * [PONAPI::Client](https://metacpan.org/pod/PONAPI::Client) is a simple/extensible JSON API v1.0 client.
 
+### <a href="#client-libraries-java" id="client-libraries-java" class="headerlink"></a> Java
+
+* [jsonapi-converter](https://github.com/jasminb/jsonapi-converter) is a Java JSON API v1.0 client. Besides providing means for serialisation/deserialisation, client comes with Retrofit plugin.
+
 ## <a href="#server-libraries" id="server-libraries" class="headerlink"></a> Server libraries
 
 ### <a href="#server-libraries-php" id="server-libraries-php" class="headerlink"></a> PHP
