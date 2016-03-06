@@ -519,7 +519,7 @@ The following `self` link is simply a URL:
 
 ```json
 "links": {
-  "self": "http://example.com/posts",
+  "self": "http://example.com/posts"
 }
 ```
 
