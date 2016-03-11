@@ -99,11 +99,11 @@ has a page describing how to emit conformant JSON.
 * [RestPack::Serializer](https://github.com/RestPack/restpack_serializer) implements the read elements of json-api. It also supports paging and side-loading.
 * [Oat](https://github.com/ismasan/oat#adapters) ships with a JSON API adapter.
 * [JSONAPI::Resources](https://github.com/cerebris/jsonapi-resources) provides a complete framework for developing a JSON API server. It is designed to work with Rails, and provides routes, controllers, and serializers.
-* [JSONAPI::Utils](https://github.com/b2beauty/jsonapi-utils) `JSONAPI::Utils` works on top of the awesome `jsonapi-resources` gem bringing to controllers a Rails way to render JSON API responses.
 * [Yaks](https://github.com/plexus/yaks) Library for building hypermedia APIs, contains a JSON API output format.
 * [JSONAPI::Serializers](https://github.com/fotinakis/jsonapi-serializers) provides a pure Ruby, readonly serializer implementation.
 * [Roar](https://github.com/apotonick/roar) Renders and parses represenations of Ruby objects
 * [Jbuilder::JsonAPI](https://github.com/vladfaust/jbuilder-json_api) Simple & lightweight extension for Jbuilder
+* [JSONAPI::Utils](https://github.com/b2beauty/jsonapi-utils) `JSONAPI::Utils` works on top of the awesome `jsonapi-resources` gem bringing to controllers a Rails way to render JSON API-compliant responses.
 
 ### <a href="#server-libraries-python" id="server-libraries-python" class="headerlink"></a> Python
 
