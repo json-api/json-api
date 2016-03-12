@@ -103,6 +103,7 @@ has a page describing how to emit conformant JSON.
 * [JSONAPI::Serializers](https://github.com/fotinakis/jsonapi-serializers) provides a pure Ruby, readonly serializer implementation.
 * [Roar](https://github.com/apotonick/roar) Renders and parses represenations of Ruby objects
 * [Jbuilder::JsonAPI](https://github.com/vladfaust/jbuilder-json_api) Simple & lightweight extension for Jbuilder
+* [JSONAPI::Utils](https://github.com/b2beauty/jsonapi-utils) `JSONAPI::Utils` works on top of the awesome `jsonapi-resources` gem bringing to controllers a Rails way to render JSON API-compliant responses.
 
 ### <a href="#server-libraries-python" id="server-libraries-python" class="headerlink"></a> Python
 
