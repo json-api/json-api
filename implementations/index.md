@@ -55,6 +55,7 @@ assembled to vet them.
 ### <a href="#client-libraries-java" id="client-libraries-java" class="headerlink"></a> Java
 
 * [jsonapi-converter](https://github.com/jasminb/jsonapi-converter) is a Java JSON API v1.0 client. Besides providing means for serialisation/deserialisation, client comes with Retrofit plugin.
+* [Morpheus](https://github.com/xamoom/Morpheus)library for deserializing your resources with automatic mapping for relationships.
 
 ## <a href="#server-libraries" id="server-libraries" class="headerlink"></a> Server libraries
 
