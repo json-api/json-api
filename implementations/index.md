@@ -87,6 +87,7 @@ assembled to vet them.
 * [jsonapi-mapper](https://github.com/scoutforpets/jsonapi-mapper) JSON API-Compliant Serialization for your Node ORM.
 * [jaysonapi](https://github.com/digia/jaysonapi) jaysonapi is a framework agnostic JSON API v1.0.0 serializer. jaysonapi provides more of a functional approach to serializing your data. Define a serializer with a type and schema, and call serialize on it passing in the data, included, meta, errors, etc. as a plain object.
 * [json-api-ify](https://github.com/kutlerskaggs/json-api-ify) serialize the **** out of your data. json api v1.0 complaint.
+* [simple-jsonapi](https://github.com/allistercsmith/simple-jsonapi) A node.js module for serializing objects to JSON API compliant documents. Very flexible whilst not caring about your choice of framework or database layer. Aims to cover the latest published version of the spec, which is currently 1.0.
 
 ### <a href="#server-libraries-ruby" id="server-libraries-ruby" class="headerlink"></a> Ruby
 
