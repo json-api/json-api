@@ -285,7 +285,8 @@ footer {
       width: 0; }
     footer .social-links i {
       width: 1em;
-      padding: 0.75em; }
+      padding: 0.75em;
+      display: inline-block; }
 
 /** Content */
 .site-wrapper {
