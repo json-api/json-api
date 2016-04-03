@@ -82,7 +82,6 @@ assembled to vet them.
   * [jsonapi-store-relationaldb](https://github.com/holidayextras/jsonapi-store-relationaldb) A relational database handler for jsonapi-server.
   * [jsonapi-store-mongodb](https://github.com/holidayextras/jsonapi-store-mongodb) A mongodb handler for jsonapi-server.
   * [jsonapi-store-elasticsearch](https://github.com/holidayextras/jsonapi-store-elasticsearch) An elasticsearch handler for jsonapi-server.
-* [jsonapify](https://github.com/alex94puchades/jsonapify) is an unintrusive, well-tested and easy-to-use library for the development of JSON API (or similar) APIs. It integrates nicely with Mongoose models as connect-compatible middleware. Its development is very recent though, which only means that feature requests and feedback is more than welcome!
 * [loopback-component-jsonapi](https://github.com/digitalsadhu/loopback-component-jsonapi) JSON API support for [loopback](https://github.com/strongloop/loopback) highly-extensible, open-source Node.js framework
 * [jsonapi-mapper](https://github.com/scoutforpets/jsonapi-mapper) JSON API-Compliant Serialization for your Node ORM.
 * [jaysonapi](https://github.com/digia/jaysonapi) jaysonapi is a framework agnostic JSON API v1.0.0 serializer. jaysonapi provides more of a functional approach to serializing your data. Define a serializer with a type and schema, and call serialize on it passing in the data, included, meta, errors, etc. as a plain object.
