@@ -57,7 +57,7 @@ assembled to vet them.
 * [jsonapi-converter](https://github.com/jasminb/jsonapi-converter) is a Java JSON API v1.0 client. Besides providing means for serialisation/deserialisation, client comes with Retrofit plugin.
 * [Morpheus](https://github.com/xamoom/Morpheus)library for deserializing your resources with automatic mapping for relationships.
 
-### <a href="#client-libraries-android" id="client-libraries-android" class="headerlink"></a> Java
+### <a href="#client-libraries-android" id="client-libraries-android" class="headerlink"></a> Android
 * [faogustavo/JSONApi](https://github.com/faogustavo/JSONApi) library for deserializing automatic. It can be integrated with retrofit. It has some ideas from Morpheus and jsonapi-converter but has some aditionals.
 
 ## <a href="#server-libraries" id="server-libraries" class="headerlink"></a> Server libraries
