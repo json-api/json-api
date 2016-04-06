@@ -89,7 +89,11 @@ layout: null
             { "id": "member-name-globally-allowed", "type": "normative-statements" },
             { "id": "member-name-url-safe", "type": "normative-statements" },
             { "id": "member-name-allowed-characters", "type": "normative-statements" },
-            { "id": "member-name-reserved-characters", "type": "normative-statements" }
+            { "id": "member-name-reserved-characters", "type": "normative-statements" },
+            { "id": "member-name-at-members-definition", "type": "normative-statements" },
+            { "id": "member-name-at-members-where", "type": "normative-statements" },
+            { "id": "member-name-at-members-no-process", "type": "normative-statements" },
+            { "id": "member-name-at-members-ignore-for-definitions", "type": "normative-statements" }
           ]
         }
       }
@@ -995,6 +999,58 @@ layout: null
       "attributes": {
         "level": "MUST",
         "description": "The following characters **MUST NOT** be used in member names:\\n\\n- U+002B PLUS SIGN, \"+\" (used for ordering)\\n- U+002C COMMA, \",\" (used separator for multiple relationship paths)\\n- U+002E PERIOD, \".\" (used as relationship path separators)\\n- U+005B LEFT SQUARE BRACKET, \"[\" (use in sparse fieldsets)\\n- U+005D RIGHT SQUARE BRACKET, \"]\" (used in sparse fieldsets)\\n- U+0021 EXCLAMATION MARK, \"!\"\\n- U+0022 QUOTATION MARK, '\"'\\n- U+0023 NUMBER SIGN, \"#\"\\n- U+0024 DOLLAR SIGN, \"$\"\\n- U+0025 PERCENT SIGN, \"%\"\\n- U+0026 AMPERSAND, \"&\"\\n- U+0027 APOSTROPHE, \"'\"\\n- U+0028 LEFT PARENTHESIS, \"(\"\\n- U+0029 RIGHT PARENTHESIS, \")\"\\n- U+002A ASTERISK, \"*\"\\n- U+002F SOLIDUS, \"/\"\\n- U+003A COLON, \":\"\\n- U+003B SEMICOLON, \";\"\\n- U+003C LESS-THAN SIGN, \"<\"\\n- U+003D EQUALS SIGN, \"=\"\\n- U+003E GREATER-THAN SIGN, \">\"\\n- U+003F QUESTION MARK, \"?\"\\n- U+0040 COMMERCIAL AT, \"@\"\\n- U+005C REVERSE SOLIDUS, \"\\\"\\n- U+005E CIRCUMFLEX ACCENT, \"^\"\\n- U+0060 GRAVE ACCENT, \"`\"\\n- U+007B LEFT CURLY BRACKET, \"{\"\\n- U+007C VERTICAL LINE, \"|\"\\n- U+007D RIGHT CURLY BRACKET, \"}\"\\n- U+007E TILDE, \"~\""
+      },
+      "relationships": {
+        "section": {
+          "data": { "id": "document-structure", "type": "sections" }
+        }
+      }
+    },
+    {
+      "id": "member-name-at-members-definition",
+      "type": "normative-statements",
+      "attributes": {
+        "level": "MAY",
+        "description": "Member names **MAY** also begin with an at sign (U+0040 COMMERCIAL AT, \"@\"). Members named this way are called \"@-Members\"."
+      },
+      "relationships": {
+        "section": {
+          "data": { "id": "document-structure", "type": "sections" }
+        }
+      }
+    },
+    {
+      "id": "member-name-at-members-where",
+      "type": "normative-statements",
+      "attributes": {
+        "level": "MAY",
+        "description": "@-Members **MAY** appear anywhere in a JSON API document."
+      },
+      "relationships": {
+        "section": {
+          "data": { "id": "document-structure", "type": "sections" }
+        }
+      }
+    },
+    {
+      "id": "member-name-at-members-no-process",
+      "type": "normative-statements",
+      "attributes": {
+        "level": "MUST",
+        "description": "JSON API processors **MUST** completely ignore @-Members (i.e. not treat them as JSON API data)."
+      },
+      "relationships": {
+        "section": {
+          "data": { "id": "document-structure", "type": "sections" }
+        }
+      }
+    },
+    {
+      "id": "member-name-at-members-ignore-for-definitions",
+      "type": "normative-statements",
+      "attributes": {
+        "level": "MUST",
+        "description": "Moreover, the existence of @-Members **MUST** be ignored when interpreting all JSON API definitions and processing instructions given outside of the @-Members subsection."
       },
       "relationships": {
         "section": {
