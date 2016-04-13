@@ -10,7 +10,7 @@ show_sidebar: true
 latest work [here](https://github.com/json-api/json-api/tree/profile-extensions).
 There is no official support for extensions in the base JSON API specification.
 
-## <a href="#prior-extensions" id="deprecated-extensions" class="headerlink"></a> Prior Extensions
+## <a href="#prior-extensions" id="prior-extensions" class="headerlink"></a> Prior Extensions
 
 JSON API previously offered experimental support for a different extension
 negotiation system than the one now being discussed, and it provided a number of
