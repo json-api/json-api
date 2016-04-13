@@ -58,7 +58,7 @@ This section describes the structure of a JSON API document, which is identified
 by the media type [`application/vnd.api+json`]
 (http://www.iana.org/assignments/media-types/application/vnd.api+json).
 JSON API documents are defined in JavaScript Object Notation (JSON)
-[[RFC4627](http://tools.ietf.org/html/rfc4627)].
+[[RFC7159](http://tools.ietf.org/html/rfc7159)].
 
 Although the same media type is used for both request and response documents,
 certain aspects are only applicable to one or the other. These differences are
@@ -586,7 +586,7 @@ The following "globally allowed characters" **MAY** be used anywhere in a member
 - U+0061 to U+007A, "a-z"
 - U+0041 to U+005A, "A-Z"
 - U+0030 to U+0039, "0-9"
-- any UNICODE character except U+0000 to U+007F _(not recommended, not URL safe)_
+- U+0080 and above (non-ASCII Unicode characters; _not recommended, not URL safe_)
 
 Additionally, the following characters are allowed in member names, except as the
 first or last character:
@@ -629,6 +629,8 @@ The following characters **MUST NOT** be used in member names:
 - U+007C VERTICAL LINE, "|"
 - U+007D RIGHT CURLY BRACKET, "}"
 - U+007E TILDE, "~"
+- U+007F DELETE
+- U+0000 to U+001F (C0 Controls)
 
 ## <a href="#fetching" id="fetching" class="headerlink"></a> Fetching Data
 
@@ -1737,7 +1739,7 @@ U+002D HYPHEN-MINUS, "-", U+005F LOW LINE, "_", or capital letter is used
 (e.g. camelCasing).
 
 If a server encounters a query parameter that does not follow the naming
-conventions above, and the server does not know how to proccess it as a query
+conventions above, and the server does not know how to process it as a query
 parameter from this specification, it **MUST** return `400 Bad Request`.
 
 > Note: This is to preserve the ability of JSON API to make additive additions
@@ -1776,7 +1778,7 @@ An error object **MAY** have the following members:
   change from occurrence to occurrence of the problem, except for purposes of
   localization.
 * `detail`: a human-readable explanation specific to this occurrence of the
-  problem.
+  problem. Like `title`, this field's value can be localized.
 * `source`: an object containing references to the source of the error,
   optionally including any of the following members:
   * `pointer`: a JSON Pointer [[RFC6901](https://tools.ietf.org/html/rfc6901)]

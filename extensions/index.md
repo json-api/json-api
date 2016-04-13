@@ -115,7 +115,7 @@ otherwise can't or won't make changes that are important to the community, the
 JSON API editors may reassign responsibility for the extension, to allow it to
 continue to evolve.
 
-## <a href="#deprecated-extensions" id="deprecated-extensions" class="headerlink"></a> Deprecated Extensions
+## <a href="#prior-extensions" id="prior-extensions" class="headerlink"></a> Prior Extensions
 
 JSON API previously offered experimental support for a different extension
 negotiation system than the one now in the specification, and it provided a
