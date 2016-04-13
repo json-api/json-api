@@ -32,6 +32,7 @@ assembled to vet them.
 * [json-api-store](https://github.com/haydn/json-api-store) A lightweight JavaScript library for using JSON API in the browser.
 * [superagent-jsonapify](https://github.com/alex94puchades/superagent-jsonapify) A really lightweight (50 lines) JSON-API client addon for [superagent](https://github.com/visionmedia/superagent), the isomorphic ajax client.
 * [angular-jsonapi](https://github.com/jakubrohleder/angular-jsonapi) An Angular JSON API client
+* [redux-json-api](https://github.com/dixieio/redux-json-api) A library which integrated JSON APIs with Redux store
 
 ### <a href="#client-libraries-ios" id="client-libraries-ios" class="headerlink"></a> iOS
 
@@ -41,11 +42,24 @@ assembled to vet them.
 ### <a href="#client-libraries-ruby" id="client-libraries-ruby" class="headerlink"></a> Ruby
 
 * [jsonapi-consumer](https://github.com/jsmestad/jsonapi-consumer) a ruby library for consuming JSONAPI payloads.
-* [JsonApiClient](https://github.com/chingor13/json_api_client) attempts to give you a query building framework that is easy to understand (similar to ActiveRecord scopes)
+* [JsonApiClient](https://github.com/chingor13/json_api_client) attempts to give you a query building framework that is easy to understand (similar to ActiveRecord scopes).
+* [JsonApiParser](https://github.com/beauby/jsonapi_parser) a ruby library for parsing/validating/handling JSONAPI documents.
 
 ### <a href="#client-libraries-php" id="client-libraries-php" class="headerlink"></a> PHP
 
 * [Art4 / json-api-client](https://github.com/Art4/json-api-client) is a library for validating and handling the response body in a simple OOP way.
+
+### <a href="#client-libraries-perl" id="client-libraries-perl" class="headerlink"></a> Perl
+
+* [PONAPI::Client](https://metacpan.org/pod/PONAPI::Client) is a simple/extensible JSON API v1.0 client.
+
+### <a href="#client-libraries-java" id="client-libraries-java" class="headerlink"></a> Java
+
+* [jsonapi-converter](https://github.com/jasminb/jsonapi-converter) is a Java JSON API v1.0 client. Besides providing means for serialisation/deserialisation, client comes with Retrofit plugin.
+* [Morpheus](https://github.com/xamoom/Morpheus)library for deserializing your resources with automatic mapping for relationships.
+
+### <a href="#client-libraries-android" id="client-libraries-android" class="headerlink"></a> Android
+* [faogustavo/JSONApi](https://github.com/faogustavo/JSONApi) library for deserializing automatic. It can be integrated with retrofit. It has some ideas from Morpheus and jsonapi-converter but has some aditionals.
 
 ## <a href="#server-libraries" id="server-libraries" class="headerlink"></a> Server libraries
 
@@ -67,13 +81,22 @@ assembled to vet them.
 * [endpoints](https://github.com/endpoints) is an implementation of JSON API using [Bookshelf](http://bookshelfjs.org).
 * [YAYSON](https://github.com/confetti/yayson) is an isomorphic library for serializing and reading JSON API data. Simply use it with plain objects or extend it to fit your ORM (currently it has an adapter for [Sequelize](http://sequelizejs.com)).
 * [jsonapi-serializer](https://github.com/SeyZ/jsonapi-serializer) is a Node.js framework agnostic library for serializing your data to JSON API.
-* [jsonapi-server](https://github.com/holidayextras/jsonapi-server) is a fully featured NodeJS sever implementation of json:api.
-* [jsonapify](https://github.com/alex94puchades/jsonapify) is an unintrusive, well-tested and easy-to-use library for the development of JSON API (or similar) APIs. It integrates nicely with Mongoose models as connect-compatible middleware. Its development is very recent though, which only means that feature requests and feedback is more than welcome!
+* [jsonapi-server](https://github.com/holidayextras/jsonapi-server) A feature-rich config-driven json:api framework.
+  * [jsonapi-store-memoryhandler](https://github.com/holidayextras/jsonapi-server/blob/master/documentation/resources.md) An in-memory data store for rapid prototyping.
+  * [jsonapi-store-relationaldb](https://github.com/holidayextras/jsonapi-store-relationaldb) A relational database handler for jsonapi-server.
+  * [jsonapi-store-mongodb](https://github.com/holidayextras/jsonapi-store-mongodb) A mongodb handler for jsonapi-server.
+  * [jsonapi-store-elasticsearch](https://github.com/holidayextras/jsonapi-store-elasticsearch) An elasticsearch handler for jsonapi-server.
 * [loopback-component-jsonapi](https://github.com/digitalsadhu/loopback-component-jsonapi) JSON API support for [loopback](https://github.com/strongloop/loopback) highly-extensible, open-source Node.js framework
-* [oh-my-jsonapi](https://github.com/jamesdixon/oh-my-jsonapi) JSON API-Compliant Serialization for your Node ORM.
+* [jsonapi-mapper](https://github.com/scoutforpets/jsonapi-mapper) JSON API-Compliant Serialization for your Node ORM.
+* [jaysonapi](https://github.com/digia/jaysonapi) jaysonapi is a framework agnostic JSON API v1.0.0 serializer. jaysonapi provides more of a functional approach to serializing your data. Define a serializer with a type and schema, and call serialize on it passing in the data, included, meta, errors, etc. as a plain object.
+* [json-api-ify](https://github.com/kutlerskaggs/json-api-ify) serialize the **** out of your data. json api v1.0 complaint.
+* [simple-jsonapi](https://github.com/allistercsmith/simple-jsonapi) A node.js module for serializing objects to JSON API compliant documents. Very flexible whilst not caring about your choice of framework or database layer. Aims to cover the latest published version of the spec, which is currently 1.0.
+* [bookshelf-jsonapi-params](https://github.com/scoutforpets/bookshelf-jsonapi-params) automatically apply JSON API filtering, pagination, sparse fieldsets, includes, and sorting to your Bookshelf.js queries.
 
 ### <a href="#server-libraries-ruby" id="server-libraries-ruby" class="headerlink"></a> Ruby
 
+* [Jsonapi-for-rails](https://github.com/doga/jsonapi_for_rails)
+empowers your JSONAPI compliant [Rails](http://rubyonrails.org/) APIs. Implement your APIs with very little coding.
 * [ActiveModel::Serializers](https://github.com/rails-api/active_model_serializers)
 is one of the original exemplar implementations, but is slightly out of date at
 the moment.
@@ -85,18 +108,21 @@ has a page describing how to emit conformant JSON.
 * [Yaks](https://github.com/plexus/yaks) Library for building hypermedia APIs, contains a JSON API output format.
 * [JSONAPI::Serializers](https://github.com/fotinakis/jsonapi-serializers) provides a pure Ruby, readonly serializer implementation.
 * [Roar](https://github.com/apotonick/roar) Renders and parses represenations of Ruby objects
+* [Jbuilder::JsonAPI](https://github.com/vladfaust/jbuilder-json_api) Simple & lightweight extension for Jbuilder
+* [JSONAPI::Utils](https://github.com/b2beauty/jsonapi-utils) works on top of the awesome [JSONAPI::Resources](https://github.com/cerebris/jsonapi-resources) gem bringing to controllers a Rails way to render JSON API-compliant responses.
 
 ### <a href="#server-libraries-python" id="server-libraries-python" class="headerlink"></a> Python
 
 * [Hyp](https://github.com/kalasjocke/hyp) is a library for creating json-api responses.
 * [SQLAlchemy-JSONAPI](https://github.com/coltonprovias/sqlalchemy-jsonapi) provides JSON API serialization for SQLAlchemy models.
-* [Django REST Framework JSON API](http://drf-json-api.readthedocs.org) provides JSON API parsing and rendering for the Django REST Framework.
-* [django-rest-framework-json-api](https://github.com/django-json-api/django-rest-framework-json-api/tree/develop) (also) provides JSON API parsing and rendering for the Django REST Framework
+* [django-rest-framework-json-api](https://github.com/django-json-api/django-rest-framework-json-api) provides JSON API parsing and rendering for the Django REST Framework
 * [jsonapi](https://github.com/pavlov99/jsonapi) is a Django module with JSON API implementation.
 * [jsoongia](https://github.com/digia/jsoongia) is a framework agnostic JSON API implementation.
 * [ripozo](https://github.com/vertical-knowledge/ripozo/) provides a framework for serving JSON API content (among other Hypermedia formats) in Flask, Django and more.
 * [marshmallow-jsonapi](https://github.com/marshmallow-code/marshmallow-jsonapi) provides JSON API data formatting for any Python web framework.
 * [neoapi](https://pypi.python.org/pypi/neoapi/) serializes JSON API–compliant responses from neomodel StructuredNodes for Neo4j data
+* [py-jsonapi](https://github.com/benediktschmitt/py-jsonapi) is a toolkit for building a JSON API. Can be extended easily to work with every web framework and database driver. Comes with support for flask, tornado, mongoengine and sqlalchemy.
+* [xamoom-janus](https://github.com/xamoom/xamoom-janus) is a Python module to easily and fast extend Python web frameworks like Flask or BottlyPy with json:api functionality. Also offers a flexible mechanism for data mapping and hooks to intercept and extend its functionality according to your projects needs.
 
 ### <a href="#server-libraries-go" id="server-libraries-go" class="headerlink"></a> Go
 
@@ -120,7 +146,7 @@ has a page describing how to emit conformant JSON.
 ### <a href="#server-libraries-java" id="server-libraries-java" class="headerlink"></a> Java
 
 * [katharsis](http://katharsis.io) has comprehensive coverage of standard allowing to create JSON:API compatible resources with dynamic relation based routing.
-  * [katharsis-core](https://github.com/katharsis-project/katharsis-core) is Java 8 based core library for [katharsis](http://katharsis.io) allowing to manage RESTful endpoints compliant with JSON API standard.
+  * [katharsis-core](https://github.com/katharsis-project/katharsis-core) is Java based core library for [katharsis](http://katharsis.io) allowing to manage RESTful endpoints compliant with JSON API standard.
   * [katharsis-rs](https://github.com/katharsis-project/katharsis-rs) is adapter for [katharsis](http://katharsis.io) core module for all compatible JAX-RS based frameworks.
   * [katharsis-spring](https://github.com/katharsis-project/katharsis-spring) is adapter for [katharsis](http://katharsis.io) core module for Spring and Spring Boot framoworks.
   * [katharsis-servlet](https://github.com/katharsis-project/katharsis-servlet) is a generic servlet/filter adapter for [katharsis](http://katharsis.io) core module. This module can be used in traditional servlet or filter based Java web applications, or even non-Servlet-API-based web applications such as Portal/Portlet, Wicket, etc.
@@ -132,7 +158,7 @@ has a page describing how to emit conformant JSON.
 
 ### <a href="#server-libraries-perl" id="server-libraries-perl" class="headerlink"></a> Perl
 
-* [PONAPI](https://github.com/mickeyn/PONAPI/tree/master/Server) is a Plack-based web server, providing a generic service adhering to the spec. just plug your data-repository & play. currently trial-released, will be soon available on [CPAN](https://metacpan.org).
+* [PONAPI::Server](https://metacpan.org/pod/PONAPI::Server) is a Plack-based web server, providing a generic service adhering to the spec. just plug your data-repository & play. currently trial-released, will be soon available on [CPAN](https://metacpan.org).
 
 ## <a href="#examples" id="examples" class="headerlink"></a> Examples
 

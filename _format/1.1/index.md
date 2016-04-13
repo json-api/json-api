@@ -532,7 +532,7 @@ For example, the following `self` link is simply a URL:
 
 ```json
 "links": {
-  "self": "http://example.com/posts",
+  "self": "http://example.com/posts"
 }
 ```
 
@@ -641,7 +641,7 @@ The following "globally allowed characters" **MAY** be used anywhere in a member
 - U+0061 to U+007A, "a-z"
 - U+0041 to U+005A, "A-Z"
 - U+0030 to U+0039, "0-9"
-- any UNICODE character except U+0000 to U+007F _(not recommended, not URL safe)_
+- U+0080 and above (non-ASCII Unicode characters; _not recommended, not URL safe_)
 
 Additionally, the following characters are allowed in member names, except as the
 first or last character:
@@ -684,6 +684,28 @@ The following characters **MUST NOT** be used in member names:
 - U+007C VERTICAL LINE, "|"
 - U+007D RIGHT CURLY BRACKET, "}"
 - U+007E TILDE, "~"
+- U+007F DELETE
+- U+0000 to U+001F (C0 Controls)
+
+#### <a href="#document-member-names-at-members" id="document-member-names-at-members" class="headerlink"></a> @-Members
+
+Member names **MAY** also begin with an at sign (U+0040 COMMERCIAL AT, "@").
+Members named this way are called "@-Members". @-Members **MAY** appear
+anywhere in a JSON API document.
+
+However, JSON API processors **MUST** completely ignore @-Members (i.e. not
+treat them as JSON API data).
+
+Moreover, the existence of @-Members **MUST** be ignored when interpreting all
+JSON API definitions and processing instructions given outside of this
+subsection. For example, an [attribute][attributes] is defined above as any
+member of the attributes object. However, because @-Members must be ignored
+when interpreting that definition, an @-Member that occurs in an attributes
+object is not an attribute.
+
+> Note: Among other things, "@" members can be used to add JSON-LD data to a
+JSON API document. Such documents should be served with [an extra header](http://www.w3.org/TR/json-ld/#interpreting-json-as-json-ld)
+to convey to JSON-LD clients that they contain JSON-LD data.
 
 ## <a href="#fetching" id="fetching" class="headerlink"></a> Fetching Data
 
@@ -1274,7 +1296,8 @@ ID](#crud-creating-client-ids) and the requested resource has been created
 successfully, the server **MUST** return a `201 Created` status code.
 
 The response **SHOULD** include a `Location` header identifying the location
-of the newly created resource.
+of the newly created resource, in order to comply with [RFC
+7231](http://tools.ietf.org/html/rfc7231#section-6.3.2).
 
 The response **MUST** also include a document that contains the primary
 resource created.
@@ -1793,7 +1816,7 @@ It is **RECOMMENDED** that a U+002D HYPHEN-MINUS ("-"), U+005F LOW LINE ("_"),
 or capital letter (e.g. camelCasing) be used to satisfy the above requirement.
 
 If a server encounters a query parameter that does not follow the naming
-conventions above, and the server does not know how to proccess it as a query
+conventions above, and the server does not know how to process it as a query
 parameter from this specification, it **MUST** return `400 Bad Request`.
 
 > Note: This is to preserve the ability of JSON API to make additive additions
@@ -2054,7 +2077,7 @@ An error object **MAY** have the following members:
   change from occurrence to occurrence of the problem, except for purposes of
   localization.
 * `detail`: a human-readable explanation specific to this occurrence of the
-  problem.
+  problem. Like `title`, this field's value can be localized.
 * `source`: an object containing references to the source of the error,
   optionally including any of the following members:
   * `pointer`: a JSON Pointer [[RFC6901](https://tools.ietf.org/html/rfc6901)]
