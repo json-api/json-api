@@ -240,13 +240,14 @@ alongside other information to be represented in a resource object, these keys
 #### <a href="#document-resource-object-relationships" id="document-resource-object-relationships" class="headerlink"></a> Relationships
 
 The value of the `relationships` key **MUST** be an object (a "relationships
-object"). Members of the relationships object ("relationships") represent
-references from the [resource object][resource objects] in which it's defined to other resource
-objects.
+object"). Members of the relationships object represent "relationships", i.e.,
+references from the [resource object][resource objects] in which they are defined
+to other resource objects.
 
 Relationships may be to-one or to-many.
 
-A "relationship object" **MUST** contain at least one of the following:
+Each relationship **MUST** be represented by an object (a "relationship object")
+containing at least one of the following:
 
 * `links`: a [links object][links] containing at least one of the following:
   * `self`: a link for the relationship itself (a "relationship link"). This
@@ -268,7 +269,7 @@ A relationship object that represents a to-many relationship **MAY** also contai
 
 #### <a href="#document-resource-object-related-resource-links" id="document-resource-object-related-resource-links" class="headerlink"></a> Related Resource Links
 
-A "related resource link" provides access to [resource objects] [linked][links]
+A "related resource link" provides access to [resource objects][] [linked][links]
 in a [relationship][relationships]. When fetched, the related resource object(s)
 are returned as the response's primary data.
 
