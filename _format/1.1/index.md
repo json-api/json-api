@@ -633,22 +633,22 @@ The following characters **MUST NOT** be used in member names:
 
 #### <a href="#document-member-names-at-members" id="document-member-names-at-members" class="headerlink"></a> @-Members
 
-Member names **MAY** also begin with an at sign (U+0040 COMMERCIAL AT, "@"). 
-Members named this way are called "@-Members". @-Members **MAY** appear 
-anywhere in a JSON API document. 
+Member names **MAY** also begin with an at sign (U+0040 COMMERCIAL AT, "@").
+Members named this way are called "@-Members". @-Members **MAY** appear
+anywhere in a JSON API document.
 
-However, JSON API processors **MUST** completely ignore @-Members (i.e. not 
-treat them as JSON API data). 
+However, JSON API processors **MUST** completely ignore @-Members (i.e. not
+treat them as JSON API data).
 
-Moreover, the existence of @-Members **MUST** be ignored when interpreting all 
-JSON API definitions and processing instructions given outside of this 
-subsection. For example, an [attribute][attributes] is defined above as any 
-member of the attributes object. However, because @-Members must be ignored 
-when interpreting that definition, an @-Member that occurs in an attributes 
-object is not an attribute. 
+Moreover, the existence of @-Members **MUST** be ignored when interpreting all
+JSON API definitions and processing instructions given outside of this
+subsection. For example, an [attribute][attributes] is defined above as any
+member of the attributes object. However, because @-Members must be ignored
+when interpreting that definition, an @-Member that occurs in an attributes
+object is not an attribute.
 
-> Note: Among other things, "@" members can be used to add JSON-LD data to a 
-JSON API document. Such documents should be served with [an extra header](http://www.w3.org/TR/json-ld/#interpreting-json-as-json-ld) 
+> Note: Among other things, "@" members can be used to add JSON-LD data to a
+JSON API document. Such documents should be served with [an extra header](http://www.w3.org/TR/json-ld/#interpreting-json-as-json-ld)
 to convey to JSON-LD clients that they contain JSON-LD data.
 
 ## <a href="#fetching" id="fetching" class="headerlink"></a> Fetching Data
@@ -1739,6 +1739,11 @@ request is successful and no content is returned.
 
 A server **MUST** return a `200 OK` status code if a deletion request is
 successful and the server responds with only top-level [meta] data.
+
+##### <a href="#crud-deleting-responses-404" id="crud-deleting-responses-404" class="headerlink"></a> 404 NOT FOUND
+
+A server **SHOULD** return a `404 Not Found` status code if a deletion request fails
+due to the resource not existing.
 
 ##### <a href="#crud-deleting-responses-other" id="crud-deleting-responses-other" class="headerlink"></a> Other Responses
 

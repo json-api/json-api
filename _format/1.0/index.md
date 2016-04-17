@@ -1719,6 +1719,11 @@ request is successful and no content is returned.
 A server **MUST** return a `200 OK` status code if a deletion request is
 successful and the server responds with only top-level [meta] data.
 
+##### <a href="#crud-deleting-responses-404" id="crud-deleting-responses-404" class="headerlink"></a> 404 NOT FOUND
+
+A server **SHOULD** return a `404 Not Found` status code if a deletion request fails
+due to the resource not existing.
+
 ##### <a href="#crud-deleting-responses-other" id="crud-deleting-responses-other" class="headerlink"></a> Other Responses
 
 A server **MAY** respond with other HTTP status codes.
