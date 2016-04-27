@@ -2099,14 +2099,15 @@ An error object **MAY** have the following members:
 * `meta`: a [meta object][meta] containing non-standard meta-information about the
   error.
 
-> Note: Previous versions of this specification allowed a `code` member in
+> Note: Previous versions of this specification defined a `code` member in
   error objects. The role of that member is now played instead by the `type`
   link.
 >
 > Old APIs that send the `code` member will continue to function with newer
   clients, but these clients will likely ignore that member. Clients may choose
   to continue to support `code` if they must interact with older APIs. However,
-  new APIs must not produce error objects with this member.
+  new APIs should not produce error objects with this member, even though doing
+  so is technically allowed.
 
 [top level]: #document-top-level
 [resource objects]: #document-resource-objects
