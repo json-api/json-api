@@ -277,7 +277,7 @@ A relationship object that represents a to-many relationship **MAY** also contai
 
 #### <a href="#document-resource-object-related-resource-links" id="document-resource-object-related-resource-links" class="headerlink"></a> Related Resource Links
 
-A "related resource link" provides access to [resource objects] [linked][links]
+A "related resource link" provides access to [resource objects][resource objects] [linked][links]
 in a [relationship][relationships]. When fetched, the related resource object(s)
 are returned as the response's primary data.
 
