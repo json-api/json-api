@@ -1824,17 +1824,22 @@ A profile extension is a small, separate specification that defines a set of
 values that can be added to a JSON API document, and the meaning of those values
 at the different places they can occur.
 
-Each profile extension **MUST** be registered with the JSON API
-[extension registry](http://jsonapi.org/extensions/), so that others can find
-and reuse the extension.
-
-Upon completing registration, each extension is assigned a [URI](https://www.ietf.org/rfc/rfc3986.txt).
+A profile extension is identified by a URI [[RFC 3986](https://www.ietf.org/rfc/rfc3986.txt)].
+When dereferenced, this URI **SHOULD** return documentation on the extension.
 
 For requesting extensions and indicating those in use, the JSON API media type
 defines a `profile` parameter. If present, the value of this parameter, **MUST**
 be a  space-separated (U+0020 SPACE, " ") list of profile extension URIs. This
 list **MUST** be surrounded by quotation marks (U+0022 QUOTATION MARK, """), in
 accordance with the HTTP specification.
+
+> If no available extension fits your needs, and you decide to create your own,
+> we've provided a [template](/extensions/#extension-creation-drafting)
+> for formatting your extension's documentation.
+
+> If you author an extension, you are **strongly encouraged to [register](/extensions/#extension-creation-registration)
+> it** with the JSON API [extension registry](/extensions/), so that others can
+> find and reuse it.
 
 ### <a href="#extending-profile-extensions-processing" id="extending-profile-extensions-processing" class="headerlink"></a> Processing Extensions
 

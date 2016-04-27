@@ -16,30 +16,24 @@ extensions provide.
 
 Patience, my friend. A list of existing extensions is coming very soon.
 
-## <a href="#extension-registration" id="extension-registration" class="headerlink"></a> Registering a New Extension
+## <a href="#extension-creation" id="extension-creation" class="headerlink"></a> Creating a New Extension
 
-### <a href="#extension-registration-before" id="extension-registration-before" class="headerlink"></a> Before You Register
+### <a href="#extension-creation-before" id="extension-creation-before" class="headerlink"></a> Before Creating an Extension
 
-Please **check whether existing extension fits your needs or could be amended
-to fit your needs** before registering a new extension.
+Please **check whether an existing extension fits your needs or could be amended
+to fit your needs** before developing a new extension.
 
 - If a suitable extension already exists, consider using it. Having fewer, more
-widely-deployed extensions makes it easier to develop common tools.
+widely-deployed extensions makes it easier to create shared tooling.
 
 - If there's an existing extension that could be amented to fit your needs,
 consider asking the extension's author if they would be willing to modify it as
 needed. Contact them through the information in their extension's registration
 and give them a week or two to reply.
 
-### <a href="#extension-registration-template" id="extension-registration-template" class="headerlink"></a> Registration Template
+### <a href="#extension-creation-drafting" id="extension-creation-drafting" class="headerlink"></a> Drafting Your Extension
 
-If you do decide to create a new extension, you must register it. Your extension
-will be **approved within a week** by one of JSON API's editors, assuming it
-meets the [profile extension requirements](/format/1.1/#extending-profile-extensions-characteristics).
-
-To submit a registration request, simply copy the markdown template below, fill
-it out, and post the result as an issue on our [GitHub](https://github.com/json-api/json-api)
-or a new thread on our [discussion forum](http://discuss.jsonapi.org/).
+To author your extension, fill out the Markdown template below.
 
 > \# [Your Extension Name Here]
 >
@@ -48,10 +42,16 @@ or a new thread on our [discussion forum](http://discuss.jsonapi.org/).
 >
 > \# (Optional) Minimum JSON API Version
 >
-> If your extension only works with certain versions of JSON API, you may note
-> that here. Such a restriction would be appropriate if the values your
-> extension defines can only be used in objects that were not present
-> before a certain JSON API version.
+> Here, note if your extension only works with certain versions of JSON API.
+> Such a restriction would be appropriate if the values your extension defines
+> can only be used in objects that were not present before a certain JSON API
+> version.
+>
+> \# Suggested Alias
+>
+> Put a string here that you'd like users to use as the [alias](/format/#document-aliases)
+> for your extension. This can make it easier for readers to recognize your
+> extension without having to check the URI.
 >
 > \# Specification
 >
@@ -71,8 +71,8 @@ or a new thread on our [discussion forum](http://discuss.jsonapi.org/).
 >
 > Make sure your extension's specification follows the
 > [profile extension requirements](/format/1.1/#extending-profile-extensions-characteristics)
-> listed in the main specification, especially those on key naming and what an
-> extension is not allowed to do.
+> listed in the main specification, especially those on what an extension is
+> not allowed to do.
 >
 > Finally, it is **strongly encouraged** that your extension:
 >
@@ -89,31 +89,51 @@ or a new thread on our [discussion forum](http://discuss.jsonapi.org/).
 >   For this rule, JSON API recommends the text:
 >
 >     <i>Recipients of a document containing this extension MUST ignore members
->     in this extension's data that they do not recognize.</i>
+>     in this extension's data whose name or format they do not recognize.</i>
 >
-> \# Registrant Contact Information
+> \# Contact Information
 >
 > \- Name: <br />
 > \- Email: <br />
 > \- Website (Optional): <br/>
 > \- Phone (Optional):
 
-### <a href="#extension-registration-other" id="extension-registration-other" class="headerlink"></a> Other Information
 
-The community may give you feedback on your registration request before it's
-approved, but you are not required to act on this feedback; your extension _will_
-be approved if it meets the requirements.
+### <a href="#extension-creation-registration" id="extension-creation-registration" class="headerlink"></a> Registering/Using Your Extension
 
-One caveat about the process and timeline outlined above: if your extension
-defines a new, fundamental mechanism for doing something "architectural" that
-other extensions may need to do too, it may be held for extra consideration.
-This extra review is designed to check that the proposed mechanism, were it to
-become a convention, wouldn't have problematic ramifications.
+Once you've drafted your extension, you can either host the resulting document
+yourself or submit it to the JSON API extension registry. If you submit it to
+the registry, it will be given a URI on jsonapi.org and listed above.
 
-Finally, if the author of an extension has died, moved out of contact, or
-otherwise can't or won't make changes that are important to the community, the
-JSON API editors may reassign responsibility for the extension, to allow it to
-continue to evolve.
+You are _**strongly**_ encouraged to register your extension, for two reasons:
+
+ 1. Registration allows the community to find and reuse your extension.
+
+ 2. As part of registration, one of the JSON API's editors will review your
+    submission to check that it satisifies the [profile extension requirements](/format/1.1/#extending-profile-extensions-characteristics).
+    These requirements can be a bit tricky, so getting an expert review ensures
+    that your extension is legal for use with JSON API.
+
+**To submit a registration request**, just post your extension's definition
+(i.e., what you created by filling out the [template](#extension-creation-drafting)
+above) as an issue on our [GitHub](https://github.com/json-api/json-api) or a
+new thread on our [discussion forum](http://discuss.jsonapi.org/).
+
+Your submission will be **approved within a week** by one of JSON API's editors,
+assuming it meets the [profile extension requirements](/format/1.1/#extending-profile-extensions-characteristics)
+and follows the template above. The community may give you feedback on your
+submission before it's approved, but you are not required to act on this feedback.
+
+One caveat: if your extension defines a new, fundamental mechanism for doing
+something "architectural" that other extensions may need to do too, it may be
+held for extra consideration. This extra review is designed to check that the
+proposed mechanism, were it to become a convention, wouldn't have problematic
+ramifications.
+
+Finally, if the author of a registered extension dies, moves out of contact,
+or otherwise can't or won't make changes that are important to the community,
+the JSON API editors may reassign responsibility for the extension, to allow it
+to continue to evolve.
 
 ## <a href="#prior-extensions" id="prior-extensions" class="headerlink"></a> Prior Extensions
 
