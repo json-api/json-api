@@ -84,8 +84,8 @@ A document **MUST** contain at least one of the following top-level members:
 
 * `data`: the document's "primary data"
 * `errors`: an array of [error objects](#errors)
-* `meta`: a [meta object][meta] that contains non-standard
-  meta-information.
+* `meta`: a [meta object][meta] that contains additional information about
+  the document.
 
 The members `data` and `errors` **MUST NOT** coexist in the same document.
 
@@ -171,7 +171,7 @@ In addition, a resource object **MAY** contain any of these top-level members:
 * `relationships`: a [relationships object][relationships] describing relationships between
  the resource and other JSON API resources.
 * `links`: a [links object][links] containing links related to the resource.
-* `meta`: a [meta object][meta] containing non-standard meta-information about a
+* `meta`: a [meta object][meta] containing additional information about a
   resource that can not be represented as an attribute or relationship.
 
 Here's how an article (i.e. a resource of type "articles") might appear in a document:
@@ -267,7 +267,7 @@ A "relationship object" **MUST** contain at least one of the following:
     (See [Fetching Relationships](#fetching-relationships).)
   * `related`: a [related resource link]
 * `data`: [resource linkage]
-* `meta`: a [meta object][meta] that contains non-standard meta-information about the
+* `meta`: a [meta object][meta] that contains additional information about the
   relationship.
 
 A relationship object that represents a to-many relationship **MAY** also contain
@@ -371,8 +371,8 @@ resource.
 
 A "resource identifier object" **MUST** contain `type` and `id` members.
 
-A "resource identifier object" **MAY** also include a `meta` member, whose value is a [meta] object that
-contains non-standard meta-information.
+A "resource identifier object" **MAY** also include a `meta` member, whose value
+is a [meta] object.
 
 ### <a href="#document-compound-documents" id="document-compound-documents" class="headerlink"></a> Compound Documents
 
@@ -486,8 +486,8 @@ multiple times.
 ### <a href="#document-meta" id="document-meta" class="headerlink"></a> Meta Information
 
 Where specified, a `meta` member can be used to include non-standard
-meta-information. The value of each `meta` member **MUST** be an object (a
-"meta object").
+meta-information or additional information associated with a [profile extension](#extending).
+The value of each `meta` member **MUST** be an object (a "meta object").
 
 Any members **MAY** be specified within `meta` objects.
 
@@ -521,8 +521,7 @@ Within this object, a link **MUST** be represented as either:
 * a string containing the link's URL.
 * <a id="document-links-link-object"></a>an object ("link object") which can contain the following members:
   * `href`: a string containing the link's URL.
-  * `meta`: a meta object containing non-standard meta-information about the
-    link.
+  * `meta`: a [meta object][meta] containing additional information about the link.
 
 Except for the `profile` key, each key present in a links object **MUST** have
 a single link as its value. The `profile` key, if present, **MUST** hold an
@@ -595,10 +594,14 @@ the URI `http://example.org/`:
 
 A JSON API document **MAY** include information about its implementation
 under a top-level `jsonapi` member. If present, the value of the `jsonapi`
-member **MUST** be an object (a "jsonapi object"). The jsonapi object **MAY**
-contain a `version` member whose value is a string indicating the highest JSON
-API version supported. This object **MAY** also contain a `meta` member, whose
-value is a [meta] object that contains non-standard meta-information.
+member **MUST** be an object (a "jsonapi object").
+
+The jsonapi object **MAY** contain a `version` member whose value is a string
+indicating the highest JSON API version supported.
+
+This object **MAY** also contain a `meta` member, whose value is a [meta object][meta]
+that contains non-standard meta-information. The `meta` object in the jsonapi
+object **MAY NOT** contain [profile extension data](#extending-profile-extensions-applying).
 
 ```json
 {
@@ -1859,7 +1862,7 @@ them. When one or more profile extensions are used in a JSON API document:
 2. The document **MUST** define an [alias][aliases] for each extension's URI.
 
 The alias for an extension's URI **MAY** be used as a key (an "extension-associated
-key"). The value at any such key is interpreted according the specification of
+key") within a `meta` . The value at any such key is interpreted according the specification of
 the extension to which the key name maps.
 
 The same extension-associated key **MAY** appear more than once in a given
@@ -1868,12 +1871,10 @@ document.
 An extension-associated key **MUST NOT** be added at any location where the
 extension's specification does not define how to interpret the key's value.
 
-> In practice, extension-associated keys are only allowed in a subset of the
-  places where a meta object can occur. This is because extensions are also
-  [limited](#extending-profile-extensions-characteristics) in where they can
-  permit their data to appear. In particular, extension-associated keys are
-  _not_ allowed anywhere within attributes objects or meta objects, or as keys
-  directly under `relationships` and `links` objects.
+> In practice, extension-associated keys are only allowed as children of a
+  `"meta"` object, and only when that `"meta"` object is not within the
+  `"jsonapi"` object. This is because extensions are also [limited](#extending-profile-extensions-characteristics)
+  in where they can permit their data to appear.
 
 The following document demonstrates these rules by adding a hypothetical
 extension that has the URI `http://jsonapi.org/extensions/last-modified`:
@@ -1895,11 +1896,19 @@ extension that has the URI `http://jsonapi.org/extensions/last-modified`:
     },
     "relationships": {
       "father": {
-        "data": { "type": "people", "id": "7" },
-        "last-modified": "2013-09-24T00:00:00Z"
+        "data": {
+          "type": "people", "id": "7"
+        },
+        "meta": {
+          "last-modified": "2013-09-24T00:00:00Z"
+        }
       }
     },
-    "last-modified": { "date": "2015-01-01T00:00:00Z", "fields": ["first-name"] }
+    "meta": {
+      "last-modified": {
+        "date": "2015-01-01T00:00:00Z", "fields": ["first-name"]
+      }
+    }
   }
 }
 ```
@@ -1996,14 +2005,10 @@ particular order relative to the other extensions in use.
 
 A profile extension **MUST** only define a set of allowed values, and the
 meaning of those values. These values **MAY** be defined for use in any
-spec-defined object that allows a [meta object][meta], at the same level where
-that meta object is allowed to appear. The one exception is that an extension
-**MUST NOT** define values for use in the [`jsonapi` object](#document-jsonapi-object).
-
-> Note: the above restriction implies that profile extensions may not define
-  values for use within the specification-defined `"attributes"`, `"meta"`, or
-  `"aliases"` objects, or as a key in a [`links` object][links], because meta
-  objects are not allowed in these places.
+spec-defined [meta object][meta], with the exception is that an extension
+**MUST NOT** define values for use in the [`jsonapi` object](#document-jsonapi-object)'s
+meta object. A profile extension **MUST NOT** define any values for use outside
+of a meta object.
 
 The meaning of an extension-defined value **MAY** vary based on where it occurs
 in the document but **MUST NOT** vary based on the presence or absence of other
@@ -2021,10 +2026,6 @@ in objects added to the document by other profile extensions.
 
 The keys in any profile-extension-defined objects **MUST** only contain the
 characters a-z (U+0061 to U+007A).
-
-> Note: Future keys defined by this specification will also follow the above
-  restriction, gauranteeing that extension alias names are differentiable from
-  keys with a fixed meaning.
 
 Profile extensions **MAY** be updated over time to add new capabilities, by
 revising their registration. However, any such changes **MUST** be [backwards and
@@ -2101,8 +2102,7 @@ An error object **MAY** have the following members:
         (depending on which type of value is missing) that can be added to resolve
         this error.
 
-* `meta`: a [meta object][meta] containing non-standard meta-information about the
-  error.
+* `meta`: a [meta object][meta] containing additional information about the error.
 
 > Note: Previous versions of this specification defined a `code` member in
   error objects. The role of that member is now played instead by the `type`
