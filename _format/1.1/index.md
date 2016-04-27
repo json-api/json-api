@@ -94,7 +94,7 @@ A document **MAY** contain any of these top-level members:
 * `included`: an array of [resource objects] that are related to the primary
   data and/or each other ("included resources").
 * `links`: a [links object][links] related to the primary data.
-* `mappings`: an object defining string aliases for referring to (longer) URIs
+* `aliases`: an object defining string aliases for referring to (longer) URIs
 * `jsonapi`: an object describing the server's implementation
 
 If a document does not contain a top-level `data` key, the `included` member
@@ -563,40 +563,33 @@ objects in the future. It is also possible that the allowed values of
 additional members will be expanded (e.g. a `collection` link may support an
 array of values, whereas a `self` link does not).
 
-### <a href="#document-mappings" id="document-mappings" class="headerlink"></a> URI Mappings
+### <a href="#document-aliases" id="document-aliases" class="headerlink"></a> URI Aliases
 
-The top level of a JSON API document **MAY** include an `mappings` member.
-If present, the value of this member **MUST** be an object (a "mappings object").
+The top level of a JSON API document **MAY** include an `aliases` member.
+If present, the value of this member **MUST** be an object (a "aliases object").
 
-Each key–value pair in the mappings object is a "mapping". The key is said to
-"be an alias for" or to "map to" the value, which **MUST** be a URI.
+Each key–value pair in the aliases object is an "alias definition". The key,
+called the "alias", is said to "be an alias for" the value, which **MUST**
+be an absolute URI.
 
-Alias strings **MUST** adhere to the same constraints as all [member names],
-with the additional requirement that they **MUST** contain at least one non a-z
-character (i.e., outside U+0061 to U+007A).
+Aliases **MUST** adhere to the same constraints as all [member names].
 
-It is **RECOMMENDED** that a U+002D HYPHEN-MINUS ("-"), U+005F LOW LINE ("_"),
-or capital letter (e.g. camelCasing) be used to satisfy the above requirement.
+Additionally, the strings `"api"` and `"jsonapi"` are reserved and
+**MUST NOT** be used as aliases.
 
-For example, the following object defines the string `"json-api"` as an alias
-for the URI `http://jsonapi.org/`:
+For example, the following object defines the string `"ex"` as an alias for
+the URI `http://example.org/`:
 
 ```json
 {
-  "mappings": {
-    // Note the non a-z character (the hyphen) in the alias...
-    "json-api": "http://jsonapi.org/"
+  "aliases": {
+    "ex": "http://example.org/"
   }
 }
 ```
 
-> Note: The requirements on alias strings are the same as those on
-  implementation-specific [query parameter][query parameters] names.
-  These requirements ensure that your implementation will remain compatible
-  with future base specification additions.
-
-> Note: Mappings are currently only used as part of the [extension system][extensions].
-  However, their use will likely be expanded in the future.
+> Note: Aliases are currently only used as part of the [extension system][extensions].
+  However, their use may be expanded in the future.
 
 ### <a href="#document-jsonapi-object" id="document-jsonapi-object" class="headerlink"></a> JSON API Object
 
@@ -1858,7 +1851,7 @@ them. When one or more profile extensions are used in a JSON API document:
    with a `profile` key, and that `profile` key **MUST** include a [link] to the
    URI of each extension in use.
 
-2. The document **MUST** define an [alias][mappings] for each extension's URI.
+2. The document **MUST** define an [alias][aliases] for each extension's URI.
 
 The alias for an extension's URI **MAY** be used as a key (an "extension-associated
 key"). The value at any such key is interpreted according the specification of
@@ -1882,7 +1875,7 @@ extension that has the URI `http://jsonapi.org/extensions/last-modified`:
 
 ```json
 {
-  "mappings": {
+  "aliases": {
     "last-modified": "http://jsonapi.org/extensions/last-modified"
   },
   "links": {
@@ -1907,7 +1900,7 @@ extension that has the URI `http://jsonapi.org/extensions/last-modified`:
 ```
 
 The document above provides a [link] to the extension's URI in the `profile` key,
-and gives that URI the alias `"last-modified"` (though any legal [alias][mappings]
+and gives that URI the alias `"last-modified"` (though any legal [alias][aliases]
 name would do). Then, `"last-modified"` is used as an extension-associated
 key throughout the document. The `"last-modified"` key holds values that have
 different formats and meanings in each location that it appears, which is
@@ -2004,7 +1997,7 @@ that meta object is allowed to appear. The one exception is that an extension
 
 > Note: the above restriction implies that profile extensions may not define
   values for use within the specification-defined `"attributes"`, `"meta"`, or
-  `"mappings"` objects, or as a key in a [`links` object][links], because meta
+  `"aliases"` objects, or as a key in a [`links` object][links], because meta
   objects are not allowed in these places.
 
 The meaning of an extension-defined value **MAY** vary based on where it occurs
@@ -2128,7 +2121,7 @@ An error object **MAY** have the following members:
 [meta]: #document-meta
 [link]: #document-links-link
 [links]: #document-links
-[mappings]: #document-mappings
+[aliases]: #document-aliases
 [extensions]: #extending
 [error details]: #errors
 [error objects]: #errror-objects
