@@ -4,19 +4,19 @@ pre code {
   padding: 0.5em;
   color: #333; }
 
-pre .language-json .attribute, pre .language-json .string, pre .language-http .attribute, pre .language-http .ne .status, pre .language-http .status .number {
+pre .jsonlike .attribute, pre .jsonlike .string, pre .http .attribute, pre .http .ne .status, pre .http .status .number {
   color: #008080; }
 
-pre .language-json .value .string, pre .language-http .string {
+pre .jsonlike .value .string, pre .http .string {
   color: #d14; }
 
-pre .language-json .err {
+pre .jsonlike .comment {
   color: #998;
   font-style: italic; }
 
-pre .language-http .request, pre .language-http .status {
+pre .http .request, pre .http .status {
   font-weight: bold; }
-pre .language-http .sql .string {
+pre .http .sql .string {
   color: #333; }
 
 @font-face {
@@ -363,14 +363,12 @@ footer {
 .highlight {
   border-radius: 4px;
   position: relative;
-  margin: 2em 0;
   padding: 10px 15px;
   background: #f9f9f9;
   border: 1px solid #d1d1d1;
   font-size: 12px;
-  line-height: 16px; }
-  .highlight pre {
-    margin: 0;
-    font-family: Menlo, monospace; }
+  line-height: 16px;
+  margin: 2em 0;
+  font-family: Menlo, monospace; }
 
 /*# sourceMappingURL=all.css.map */

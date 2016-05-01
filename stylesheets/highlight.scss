@@ -11,9 +11,8 @@ pre code {
   color: #d14;
 }
 
-pre .language-json {
-  // assume syntax errors are comments, and style accordingly.
-  .err {
+pre .jsonlike {
+  .comment {
     color: #998;
     font-style: italic
   }
@@ -30,7 +29,7 @@ pre .language-json {
   }
 }
 
-pre .language-http {
+pre .http {
   // the request & response lines
   .request, .status {
     font-weight: bold;
