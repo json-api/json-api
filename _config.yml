@@ -16,23 +16,22 @@ whitelist:
   - jekyll-gist
   - jemoji
 incremental: false
-highlighter: rouge
 gist:
   noscript: false
 # customize github pages
 quiet: false
+markdown: kramdown
+highlighter: rouge
 kramdown:
   input: GFM
   hard_wrap: false
+  auto_ids: false
   template: '' # cannot customize
   math_engine: mathjax # cannot customize
   syntax_highligher: rouge # cannot customize
-jailed: false
+
 gems:
   - jekyll-redirect-from
-markdown: redcarpet
-redcarpet:
-  extensions: ["tables"]
 
 exclude:
   - Rakefile
@@ -43,6 +42,7 @@ exclude:
   - .gitignore
   - ./public
   - ./stylesheets/*.scss
+
 port: 9876
 
 collections:

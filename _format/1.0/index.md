@@ -55,8 +55,7 @@ and versioning.
 ## <a href="#document-structure" id="document-structure" class="headerlink"></a> Document Structure
 
 This section describes the structure of a JSON API document, which is identified
-by the media type [`application/vnd.api+json`]
-(http://www.iana.org/assignments/media-types/application/vnd.api+json).
+by the media type [`application/vnd.api+json`](http://www.iana.org/assignments/media-types/application/vnd.api+json).
 JSON API documents are defined in JavaScript Object Notation (JSON)
 [[RFC7159](http://tools.ietf.org/html/rfc7159)].
 
@@ -519,7 +518,7 @@ The following `self` link is simply a URL:
 
 ```json
 "links": {
-  "self": "http://example.com/posts",
+  "self": "http://example.com/posts"
 }
 ```
 
