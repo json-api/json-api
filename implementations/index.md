@@ -154,6 +154,7 @@ has a page describing how to emit conformant JSON.
 ### <a href="#server-libraries-elixir" id="server-libraries-elixir" class="headerlink"></a> Elixir
 
 * [ja_serializer](https://github.com/AgilionApps/ja_serializer) is a behaviour and DSL to emit conforming JSON. Suitable for use in a Phoenix view or in a Plug stack.
+* [jsonapi](https://github.com/jeregrine/jsonapi) is a serializer and query parser built with plain old functions. Can parse and validate a JSONAPI compliant query and serialize Ecto Models or Elixir Structs into conforming JSON. Suitable for use in a Phoenix view, Plug Stack or anywhere you can call functions. 
 
 ### <a href="#server-libraries-perl" id="server-libraries-perl" class="headerlink"></a> Perl
 
