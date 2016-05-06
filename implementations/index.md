@@ -33,6 +33,7 @@ assembled to vet them.
 * [superagent-jsonapify](https://github.com/alex94puchades/superagent-jsonapify) A really lightweight (50 lines) JSON-API client addon for [superagent](https://github.com/visionmedia/superagent), the isomorphic ajax client.
 * [angular-jsonapi](https://github.com/jakubrohleder/angular-jsonapi) An Angular JSON API client
 * [redux-json-api](https://github.com/dixieio/redux-json-api) A library which integrated JSON APIs with Redux store
+* [devour-client](https://github.com/twg/devour) A lightweight, framework agnostic, highly flexible JSON API client
 
 ### <a href="#client-libraries-ios" id="client-libraries-ios" class="headerlink"></a> iOS
 
@@ -154,7 +155,7 @@ has a page describing how to emit conformant JSON.
 ### <a href="#server-libraries-elixir" id="server-libraries-elixir" class="headerlink"></a> Elixir
 
 * [ja_serializer](https://github.com/AgilionApps/ja_serializer) is a behaviour and DSL to emit conforming JSON. Suitable for use in a Phoenix view or in a Plug stack.
-* [jsonapi](https://github.com/jeregrine/jsonapi) is a serializer and query parser built with plain old functions. Can parse and validate a JSONAPI compliant query and serialize Ecto Models or Elixir Structs into conforming JSON. Suitable for use in a Phoenix view, Plug Stack or anywhere you can call functions. 
+* [jsonapi](https://github.com/jeregrine/jsonapi) is a serializer and query parser built with plain old functions. Can parse and validate a JSONAPI compliant query and serialize Ecto Models or Elixir Structs into conforming JSON. Suitable for use in a Phoenix view, Plug Stack or anywhere you can call functions.
 
 ### <a href="#server-libraries-perl" id="server-libraries-perl" class="headerlink"></a> Perl
 
