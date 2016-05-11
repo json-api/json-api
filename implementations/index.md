@@ -61,6 +61,7 @@ assembled to vet them.
 
 ### <a href="#client-libraries-android" id="client-libraries-android" class="headerlink"></a> Android
 * [faogustavo/JSONApi](https://github.com/faogustavo/JSONApi) library for deserializing automatic. It can be integrated with retrofit. It has some ideas from Morpheus and jsonapi-converter but has some aditionals.
+* [moshi-jsonapi](https://github.com/kirisetsz/moshi-jsonapi) serialize/deserialize JSON API v1.0 using fantistic Moshi API! It provides a friendly Java interface to manipulate JSON document and elegant integration with AutoValue/Retrofit.
 
 ## <a href="#server-libraries" id="server-libraries" class="headerlink"></a> Server libraries
 
