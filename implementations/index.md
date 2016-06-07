@@ -125,6 +125,7 @@ has a page describing how to emit conformant JSON.
 * [neoapi](https://pypi.python.org/pypi/neoapi/) serializes JSON API–compliant responses from neomodel StructuredNodes for Neo4j data
 * [py-jsonapi](https://github.com/benediktschmitt/py-jsonapi) is a toolkit for building a JSON API. Can be extended easily to work with every web framework and database driver. Comes with support for flask, tornado, mongoengine and sqlalchemy.
 * [xamoom-janus](https://github.com/xamoom/xamoom-janus) is a Python module to easily and fast extend Python web frameworks like Flask or BottlyPy with json:api functionality. Also offers a flexible mechanism for data mapping and hooks to intercept and extend its functionality according to your projects needs.
+* [pyramid-jsonapi](https://github.com/colinhiggs/pyramid-jsonapi) Auto-build a JSON API from sqlalchemy models using the pyramid framework.
 
 ### <a href="#server-libraries-go" id="server-libraries-go" class="headerlink"></a> Go
 
