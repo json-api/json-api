@@ -50,6 +50,10 @@ assembled to vet them.
 
 * [Art4 / json-api-client](https://github.com/Art4/json-api-client) is a library for validating and handling the response body in a simple OOP way.
 
+### <a href="#client-libraries-dart" id="client-libraries-dart" class="headerlink"></a> Dart
+
+* [jsonapi_client](https://pub.dartlang.org/packages/jsonapi_client) is a simple JSON API v1.0 client written in Dart. 
+
 ### <a href="#client-libraries-perl" id="client-libraries-perl" class="headerlink"></a> Perl
 
 * [PONAPI::Client](https://metacpan.org/pod/PONAPI::Client) is a simple/extensible JSON API v1.0 client.
