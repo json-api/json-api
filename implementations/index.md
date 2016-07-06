@@ -159,6 +159,9 @@ has a page describing how to emit conformant JSON.
   * [katharsis-servlet](https://github.com/katharsis-project/katharsis-servlet) is a generic servlet/filter adapter for [katharsis](http://katharsis.io) core module. This module can be used in traditional servlet or filter based Java web applications, or even non-Servlet-API-based web applications such as Portal/Portlet, Wicket, etc.
 * [Elide](http://elide.io) is a web framework supporting JSON API. Through annotation-based JSON API endpoint generation, Elide enables you to focus on your data model, security model, and business logic while avoiding unnecessary boilerplate. Moreover, through use of the JSON API Patch extension, [Elide](http://elide.io) provides full support for database transactions.
 
+### <a href="#server-libraries-scala" id="server-libraries-scala" class="headerlink"></a> Scala
+* [scala-jsonapi](https://github.com/zalando/scala-jsonapi) A Scala library for producing JSON output (and deserializing JSON input) based on JSON API specification.
+
 ### <a href="#server-libraries-elixir" id="server-libraries-elixir" class="headerlink"></a> Elixir
 
 * [ja_serializer](https://github.com/AgilionApps/ja_serializer) is a behaviour and DSL to emit conforming JSON. Suitable for use in a Phoenix view or in a Plug stack.
