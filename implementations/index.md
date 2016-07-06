@@ -168,6 +168,10 @@ has a page describing how to emit conformant JSON.
 
 * [PONAPI::Server](https://metacpan.org/pod/PONAPI::Server) is a Plack-based web server, providing a generic service adhering to the spec. just plug your data-repository & play.
 
+### <a href="#server-libraries-vala" id="server-libraries-vala" class="headerlink"></a> Vala
+
+* [JSON-API-GLib](https://github.com/major-lab/json-api-glib) provides GObjects that can be serialized to and unserialized from payloads with [JSON-GLib](https://wiki.gnome.org/Projects/JsonGlib).
+
 ## <a href="#examples" id="examples" class="headerlink"></a> Examples
 
 * [RestPack::Serializer provides examples](http://restpack-serializer-sample.herokuapp.com/) which demonstrate sample responses.
