@@ -135,7 +135,7 @@ has a page describing how to emit conformant JSON.
 ### <a href="#server-libraries-go" id="server-libraries-go" class="headerlink"></a> Go
 
 * [api2go](https://github.com/manyminds/api2go) is a full-fledged library to make it simple to provide a JSON API with your Golang project.
-* [jsonapi](https://github.com/shwoodard/jsonapi) serializes and deserializes jsonapi formatted payloads using struct tags to annotate the structs that you already have in your Golang project. [Godoc](http://godoc.org/github.com/shwoodard/jsonapi)
+* [jsonapi](https://github.com/google/jsonapi) serializes and deserializes jsonapi formatted payloads using struct tags to annotate the structs that you already have in your Golang project. [Godoc](http://godoc.org/github.com/google/jsonapi)
 * [go-json-spec-handler](https://github.com/derekdowling/go-json-spec-handler) drop-in library for handling requests and sending responses in an existing API.
 * [jsh-api](https://github.com/derekdowling/jsh-api) deals with the dirty work of building JSON API resource endpoints. Built on top of [jsh](https://github.com/derekdowling/go-json-spec-handler)
 
