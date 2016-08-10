@@ -69,6 +69,10 @@ assembled to vet them.
 * [moshi-jsonapi](https://github.com/kirisetsz/moshi-jsonapi) serialize/deserialize JSON API v1.0 using fantistic Moshi API! It provides a friendly Java interface to manipulate JSON document and elegant integration with AutoValue/Retrofit.
 * [Morpheus](https://github.com/xamoom/Morpheus) library for deserializing your resources with automatic mapping for relationships. Uses gson to map objects in attributes.
 
+### <a href="#client-libraries-r" id="client-libraries-r" class="headerlink"></a> R
+
+* [rjsonapi](https://github.com/sckott/rjsonapi) is an R client to consume JSONAPI's.
+
 ## <a href="#server-libraries" id="server-libraries" class="headerlink"></a> Server libraries
 
 ### <a href="#server-libraries-php" id="server-libraries-php" class="headerlink"></a> PHP
