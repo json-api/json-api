@@ -173,6 +173,10 @@ has a page describing how to emit conformant JSON.
 * [ja_serializer](https://github.com/AgilionApps/ja_serializer) is a behaviour and DSL to emit conforming JSON. Suitable for use in a Phoenix view or in a Plug stack.
 * [jsonapi](https://github.com/jeregrine/jsonapi) is a serializer and query parser built with plain old functions. Can parse and validate a JSONAPI compliant query and serialize Ecto Models or Elixir Structs into conforming JSON. Suitable for use in a Phoenix view, Plug Stack or anywhere you can call functions.
 
+### <a href="#server-libraries-haskell" id="server-libraries-haskell" class="headerlink"></a> Haskell
+
+* [json-api](https://github.com/toddmohney/json-api) functions and datatypes for representing user-defined resources in accordance with the JSON-API specification.
+
 ### <a href="#server-libraries-perl" id="server-libraries-perl" class="headerlink"></a> Perl
 
 * [PONAPI::Server](https://metacpan.org/pod/PONAPI::Server) is a Plack-based web server, providing a generic service adhering to the spec. just plug your data-repository & play.
