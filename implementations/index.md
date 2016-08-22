@@ -54,7 +54,7 @@ assembled to vet them.
 
 ### <a href="#client-libraries-dart" id="client-libraries-dart" class="headerlink"></a> Dart
 
-* [jsonapi_client](https://pub.dartlang.org/packages/jsonapi_client) is a simple JSON API v1.0 client written in Dart. 
+* [jsonapi_client](https://pub.dartlang.org/packages/jsonapi_client) is a simple JSON API v1.0 client written in Dart.
 
 ### <a href="#client-libraries-perl" id="client-libraries-perl" class="headerlink"></a> Perl
 
@@ -87,7 +87,7 @@ assembled to vet them.
 * [nilportugues / laravel5-jsonapi-transformer](https://github.com/nilportugues/laravel5-jsonapi-transformer) Laravel 5 JSON API Transformer Package outputting valid API responses in JSON and JSON API formats.
 
 ### <a href="#server-libraries-node-js" id="server-libraries-node-js" class="headerlink"></a> Node.js
-* [Fortune.js](http://fortunejs.com) is a library that includes a [comprehensive implementation of JSON API](https://github.com/fortunejs/fortune-json-api).
+* [Fortune.js](http://fortune.js.org/) is a library that includes a [comprehensive implementation of JSON API](https://github.com/fortunejs/fortune-json-api).
 * [json-api](https://www.npmjs.org/package/json-api) turns an Express + Mongoose app into a JSON-API server.
 * [endpoints](https://github.com/endpoints) is an implementation of JSON API using [Bookshelf](http://bookshelfjs.org).
 * [YAYSON](https://github.com/confetti/yayson) is an isomorphic library for serializing and reading JSON API data. Simply use it with plain objects or extend it to fit your ORM (currently it has an adapter for [Sequelize](http://sequelizejs.com)).
