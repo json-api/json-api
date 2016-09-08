@@ -277,6 +277,9 @@ footer {
   footer span {
     display: inline-block;
     vertical-align: middle; }
+  footer .license a {
+    display: block;
+    padding: 0.75em; }
   footer .social-links {
     width: 9em;
     position: relative;
@@ -285,7 +288,8 @@ footer {
       width: 0; }
     footer .social-links i {
       width: 1em;
-      padding: 0.75em; }
+      padding: 0.75em;
+      display: inline-block; }
 
 /** Content */
 .site-wrapper {
