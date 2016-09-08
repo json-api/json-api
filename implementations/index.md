@@ -157,6 +157,8 @@ has a page describing how to emit conformant JSON.
 
 * [Saule](https://github.com/joukevandermaas/saule/) is a small JSON API 1.0 compatible library that integrates well with established Web API conventions. It has complete documentation and near 100% test coverage.
 
+* [JsonApiDotNetCore](https://github.com/Research-Institute/json-api-dotnet-core) is a .Net Core library built against Entity Framework. It creates the middleware routing and controller objects (which can be overriden) and can work as a replacement or an extension to the AspNetCore.MVC middleware.
+
 ### <a href="#server-libraries-java" id="server-libraries-java" class="headerlink"></a> Java
 
 * [katharsis](http://katharsis.io) has comprehensive coverage of standard allowing to create JSON:API compatible resources with dynamic relation based routing. Library consist of several integrations:
