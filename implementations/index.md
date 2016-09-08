@@ -73,6 +73,11 @@ assembled to vet them.
 
 * [rjsonapi](https://github.com/sckott/rjsonapi) is an R client to consume JSONAPI's.
 
+### <a href="#client-libraries-elm" id="client-libraries-elm" class="headerlink"></a> Elm
+
+* [elm-jsonapi](https://github.com/noahzgordon/elm-jsonapi) provides decoders and helper functions for clients receiving JSON API payloads.
+* [elm-jsonapi-http](https://github.com/noahzgordon/elm-jsonapi-http) wraps `elm-jsonapi` and handles the details of content negotiation with JSON API-compliant servers, providing a smoother inteface for consumers.
+
 ## <a href="#server-libraries" id="server-libraries" class="headerlink"></a> Server libraries
 
 ### <a href="#server-libraries-php" id="server-libraries-php" class="headerlink"></a> PHP
