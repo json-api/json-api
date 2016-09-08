@@ -80,7 +80,7 @@ assembled to vet them.
 
 ### <a href="#client-libraries-net" id="client-libraries-net" class="headerlink"></a> .NET
 
-* [JsonApiFramework [Client]](https://github.com/scott-mcdonald/JsonApiFramework) is a fast, extensible, and portable .NET *client-side* framework for the reading, writing, and building of JSON API 1.0 documents based on the CLR domain model of the hypermedia API resources. Main features include building JSON API *client-side* documents through a fluent-style progressive builder interface and automatic conversion between JSON API and CLR resources. Extreme high code quality with 1,800+ unit tests.
+* [JsonApiFramework [Client]](https://github.com/scott-mcdonald/JsonApiFramework) is a portable .NET *client-side* framework for the reading, writing, and building of JSON API 1.0 documents based on the CLR domain model of the hypermedia API resources. Main features include building documents through a fluent-style progressive builder interface and automatic conversion between JSON API and CLR resources.
 
 ## <a href="#server-libraries" id="server-libraries" class="headerlink"></a> Server libraries
 
@@ -168,7 +168,7 @@ has a page describing how to emit conformant JSON.
 
 * [JsonApiDotNetCore](https://github.com/Research-Institute/json-api-dotnet-core) is a .Net Core library built against Entity Framework. It creates the middleware routing and controller objects (which can be overriden) and can work as a replacement or an extension to the AspNetCore.MVC middleware.
 
-* [JsonApiFramework [Server]](https://github.com/scott-mcdonald/JsonApiFramework) is a fast, extensible, and portable .NET *server-side* framework for the reading, writing, and building of JSON API 1.0 documents based on the CLR domain model of the hypermedia API resources. Main features include building JSON API *server-side* documents through a fluent-style progressive builder interface, automatic generation of JSON API standard hypermedia in links and relationships, automatic conversion between JSON API and CLR resources, support for JSON API compound documents, and support of HATEOAS for resource relationships and links through lambda predicates. Extreme high code quality with 1,800+ unit tests.
+* [JsonApiFramework [Server]](https://github.com/scott-mcdonald/JsonApiFramework) is a portable .NET *server-side* framework for the reading, writing, and building of JSON API 1.0 documents based on the CLR domain model of the hypermedia API resources. Main features include building documents through a fluent-style progressive builder interface, automatic generation of JSON API standard hypermedia in links and relationships, automatic conversion between JSON API and CLR resources, support for JSON API compound documents, and support of HATEOAS for resource relationships and links through lambda predicates.
 
 ### <a href="#server-libraries-java" id="server-libraries-java" class="headerlink"></a> Java
 
