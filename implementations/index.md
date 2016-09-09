@@ -52,6 +52,10 @@ assembled to vet them.
 
 * [Art4 / json-api-client](https://github.com/Art4/json-api-client) is a library for validating and handling the response body in a simple OOP way.
 
+### <a href="#client-libraries-python" id="client-libraries-python" class="headerlink"></a> Python
+
+* [python-jsonapi-datastore](https://github.com/Tim-Erwin/python-jsonapi-datastore) is a lightweight standalone library for reading, serializing, and synchronizing relational JSON API data.
+
 ### <a href="#client-libraries-dart" id="client-libraries-dart" class="headerlink"></a> Dart
 
 * [jsonapi_client](https://pub.dartlang.org/packages/jsonapi_client) is a simple JSON API v1.0 client written in Dart.
