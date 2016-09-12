@@ -2687,7 +2687,7 @@ layout: null
       "id": "error-object-key",
       "type": "normative-statements",
       "attributes": {
-        "level": "SHOULD",
+        "level": "MUST",
         "description": "Error objects **MUST** be returned as an array keyed by `errors` in the top level of a JSON API document."
       },
       "relationships": {
