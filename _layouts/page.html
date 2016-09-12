@@ -7,19 +7,18 @@
 
     {% comment %}
       Below, we're either dealing with a generic page or a page from the
-      specification collection. Generic pages have a title, so we identify
-      them that way. For specification pages, we build the title dynamically to
-      take into account the version number and its relationship to the latest version.
+      specification collection. For generic pages, we get a title just by
+      reading page.title but, for specification pages, we build their title
+      dynamically to take into account the page's version number and its
+      relationship to the latest version.
     {% endcomment %}
 
-    {% if page.title %}
-      {% comment %}We're on a generic page.{% endcomment %}
-      {% assign page_title = page.title %}
-
-    {% else %}
+    {% if page.is_spec_page %}
       {% capture page_title %}
         {% include title_for_version.md is_latest_version=page.is_latest_version is_upcoming_version=page.is_upcoming_version version=page.version %}
       {% endcapture %}
+    {% else %}
+      {% assign page_title = page.title %}
     {% endif %}
     <title>JSON API &mdash; {{page_title|strip }}</title>
 
