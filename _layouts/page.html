@@ -116,7 +116,7 @@
                 </select>
               </div>
             {% else %}
-              <h1 class="sidebar-top">{{ page.title }}</h1>
+              <h1 class="sidebar-top">{{ page_title }}</h1>
             {% endif %}
           </nav>
         </div>
@@ -124,11 +124,7 @@
       <div class="content">
         {% unless page.show_masthead %}
           <h1>
-            {% if page.is_spec_page %}
-              {{ page_title }}
-            {% else %}
-              {{ page.title }}
-            {% endif %}
+            {{ page_title }}
           </h1>
         {% endunless %}
         <section>
