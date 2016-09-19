@@ -225,6 +225,11 @@
               "$ref": "#/definitions/meta"
             }
           },
+          "anyOf": [
+            {"required": ["data"]},
+            {"required": ["meta"]},
+            {"required": ["links"]}
+          ],
           "additionalProperties": false
         }
       },
