@@ -239,6 +239,7 @@ layout: null
             { "id": "delete-202-status", "type": "normative-statements" },
             { "id": "delete-204-status", "type": "normative-statements" },
             { "id": "delete-200-status", "type": "normative-statements" },
+            { "id": "delete-404-status", "type": "normative-statements" },
             { "id": "deleting-other-status", "type": "normative-statements" },
             { "id": "deleting-other-details", "type": "normative-statements" },
             { "id": "deleting-http-semantics", "type": "normative-statements" }
@@ -2516,6 +2517,19 @@ layout: null
       "attributes": {
         "level": "MUST",
         "description": "A server **MUST** return a `200 OK` status code if a deletion request is successful and the server responds with only top-level meta data."
+      },
+      "relationships": {
+        "section": {
+          "data": { "id": "creating-updating-deleting", "type": "sections" }
+        }
+      }
+    },
+    {
+      "id": "delete-404-status",
+      "type": "normative-statements",
+      "attributes": {
+        "level": "SHOULD",
+        "description": "A server **SHOULD** return a 404 Not Found status code if a deletion request fails due to the resource not existing."
       },
       "relationships": {
         "section": {
