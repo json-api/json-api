@@ -1292,6 +1292,11 @@ had returned it back in a `201` response.
 A server **MAY** return `403 Forbidden` in response to an unsupported request
 to create a resource.
 
+##### <a href="#crud-creating-responses-404" id="crud-creating-responses-404" class="headerlink"></a> 404 Not Found
+
+A server **MUST** return `404 Not Found` when processing a request that
+references a related resource that does not exist.
+
 ##### <a href="#crud-creating-responses-409" id="crud-creating-responses-409" class="headerlink"></a> 409 Conflict
 
 A server **MUST** return `409 Conflict` when processing a `POST` request to
