@@ -181,6 +181,7 @@ layout: null
             { "id": "create-responses-202", "type": "normative-statements" },
             { "id": "create-responses-204", "type": "normative-statements" },
             { "id": "create-responses-403", "type": "normative-statements" },
+            { "id": "create-responses-404-related", "type": "normative-statements" },
             { "id": "create-responses-409-exists", "type": "normative-statements" },
             { "id": "create-responses-409-bad-type", "type": "normative-statements" },
             { "id": "create-responses-409-error-details", "type": "normative-statements" },
@@ -1763,6 +1764,19 @@ layout: null
       "attributes": {
         "level": "MAY",
         "description": "A server **MAY** return `403 Forbidden` in response to an unsupported request to create a resource."
+      },
+      "relationships": {
+        "section": {
+          "data": { "id": "creating-updating-deleting", "type": "sections" }
+        }
+      }
+    },
+    {
+      "id": "create-responses-404-related",
+      "type": "normative-statements",
+      "attributes": {
+        "level": "MAY",
+        "description": "A server **MUST** return `404 Not Found` when processing a request that references a related resource that does not exist."
       },
       "relationships": {
         "section": {
