@@ -333,7 +333,7 @@ link to fetch the resource objects, and linkage information.
 The optional `links` member within each [resource object][resource objects] contains [links]
 related to the resource.
 
-If present, this links object **MAY** contain a `self` [link][links] that
+If present, this links object **MAY** only contain a `self` [link][links] that
 identifies the resource represented by the resource object.
 
 ```json
