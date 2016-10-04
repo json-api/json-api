@@ -204,6 +204,10 @@ includes related resources.
 
 ## <a href="#related-tools" id="related-tools" class="headerlink"></a> Related Tools
 
+### <a href="#related-tools-playground" id="related-tools-playground" class="headerlink"></a> Playground
+
+* [jsonapi-validator](https://jsonapi-validator.herokuapp.com) is a playground service for quick prototyping and validating JSON responses with jsonapi.org specification.
+
 ### <a href="#related-tools-ruby" id="related-tools-ruby" class="headerlink"></a> Ruby
 
 * [json-patch](https://github.com/guillec/json-patch) implementation of JSON Patch (rfc6902)
