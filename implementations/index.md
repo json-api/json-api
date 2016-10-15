@@ -35,6 +35,7 @@ assembled to vet them.
 * [redux-json-api](https://github.com/dixieio/redux-json-api) A library which integrated JSON APIs with Redux store
 * [devour-client](https://github.com/twg/devour) A lightweight, framework agnostic, highly flexible JSON API client
 * [ts-angular-jsonapi](https://github.com/reyesoft/ts-angular-jsonapi) A JSON API library developed for AngularJS in Typescript
+* [ngrx-json-api](https://github.com/abdulhaq-e/ngrx-json-api) A JSON API client for Angular 2 ngrx toolset.
 
 ### <a href="#client-libraries-ios" id="client-libraries-ios" class="headerlink"></a> iOS
 
@@ -166,7 +167,7 @@ has a page describing how to emit conformant JSON.
 * [Saule](https://github.com/joukevandermaas/saule/) is a small JSON API 1.0 compatible library that integrates well with established Web API conventions. It has complete documentation and near 100% test coverage.
 * [JsonApiDotNetCore](https://github.com/Research-Institute/json-api-dotnet-core) is a .Net Core library built against Entity Framework. It creates the middleware routing and controller objects (which can be overriden) and can work as a replacement or an extension to the AspNetCore.MVC middleware.
 * [JsonApiFramework [Server]](https://github.com/scott-mcdonald/JsonApiFramework) is a portable .NET *server-side* framework for the reading, writing, and building of JSON API 1.0 documents based on the CLR domain model of the hypermedia API resources. Main features include building documents through a fluent-style progressive builder interface, automatic generation of JSON API standard hypermedia in links and relationships, automatic conversion between JSON API and CLR resources, support for JSON API compound documents, and support of HATEOAS for resource relationships and links through lambda predicates.
-* [Hypermedia.JsonApi.WebApi](https://github.com/cosullivan/Hypermedia/) is a Web API media type formatter for reading and writing JSON API. It supports an external resource model definition and natively 
+* [Hypermedia.JsonApi.WebApi](https://github.com/cosullivan/Hypermedia/) is a Web API media type formatter for reading and writing JSON API. It supports an external resource model definition and natively
 includes related resources.
 
 ### <a href="#server-libraries-java" id="server-libraries-java" class="headerlink"></a> Java
