@@ -37,8 +37,8 @@ assembled to vet them.
 * [ngrx-json-api](https://github.com/abdulhaq-e/ngrx-json-api) A JSON API client for Angular 2 ngrx toolset.
 
 ### <a href="#client-libraries-typescript" id="client-libraries-typescript" class="headerlink"></a> Typescript
-* [ts-jsonapi](https://github.com/mohuk/ts-jsonapi) JSON API (De)Serializer in Typescript 
 * [ts-angular-jsonapi](https://github.com/reyesoft/ts-angular-jsonapi) A JSON API library developed for AngularJS in Typescript
+* [ts-jsonapi](https://github.com/mohuk/ts-jsonapi) JSON API (De)Serializer in Typescript
 
 ### <a href="#client-libraries-ios" id="client-libraries-ios" class="headerlink"></a> iOS
 
