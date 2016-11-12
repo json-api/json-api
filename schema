@@ -194,7 +194,7 @@
       "description": "Members of the attributes object (\"attributes\") represent information about the resource object in which it's defined.",
       "type": "object",
       "patternProperties": {
-        "^(?!relationships$|links$)\\w[-\\w_]*$": {
+        "^(?!relationships$|links$)\\w[-\\w]*$": {
           "description": "Attributes may contain any valid JSON value."
         }
       },
@@ -205,7 +205,7 @@
       "description": "Members of the relationships object (\"relationships\") represent references from the resource object in which it's defined to other resource objects.",
       "type": "object",
       "patternProperties": {
-        "^\\w[-\\w_]*$": {
+        "^\\w[-\\w]*$": {
           "properties": {
             "links": {
               "$ref": "#/definitions/links"
