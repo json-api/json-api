@@ -211,6 +211,10 @@ includes related resources.
 
 ## <a href="#related-tools" id="related-tools" class="headerlink"></a> Related Tools
 
+### <a href="#related-tools-playground" id="related-tools-playground" class="headerlink"></a> Playground
+
+* [json-api-document-viewer](https://tadast.github.io/json-api-document-viewer) the flat json:api structure is a good way to express complex relationships between objects. However the same flatness makes it difficult for humans to "parse" these relationships. This tool visualises object relationships by visually nesting them.
+
 ### <a href="#related-tools-ruby" id="related-tools-ruby" class="headerlink"></a> Ruby
 
 * [json-patch](https://github.com/guillec/json-patch) implementation of JSON Patch (rfc6902)
