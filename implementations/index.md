@@ -103,6 +103,7 @@ and writing of JSON API documents.
 * [nilportugues / json-api](https://github.com/nilportugues/json-api) Serializer transformers outputting valid API responses in JSON and JSON API formats.
 * [nilportugues / symfony2-jsonapi-transformer](https://github.com/nilportugues/symfony2-jsonapi-transformer) Symfony 2 JSON API Transformer Bundle outputting valid API responses in JSON and JSON API formats.
 * [nilportugues / laravel5-jsonapi-transformer](https://github.com/nilportugues/laravel5-jsonapi-transformer) Laravel 5 JSON API Transformer Package outputting valid API responses in JSON and JSON API formats.
+* [tuyakhov / yii2-json-api](https://github.com/tuyakhov/yii2-json-api) Implementation of JSON API specification for the Yii framework.
 
 ### <a href="#server-libraries-node-js" id="server-libraries-node-js" class="headerlink"></a> Node.js
 * [Fortune.js](http://fortune.js.org/) is a library that includes a [comprehensive implementation of JSON API](https://github.com/fortunejs/fortune-json-api).
