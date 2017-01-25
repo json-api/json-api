@@ -32,6 +32,7 @@ assembled to vet them.
 * [json-api-store](https://github.com/haydn/json-api-store) A lightweight JavaScript library for using JSON API in the browser.
 * [superagent-jsonapify](https://github.com/alex94puchades/superagent-jsonapify) A really lightweight (50 lines) JSON-API client addon for [superagent](https://github.com/visionmedia/superagent), the isomorphic ajax client.
 * [angular-jsonapi](https://github.com/jakubrohleder/angular-jsonapi) An Angular JSON API client
+* [json-api-normalizer](https://github.com/yury-dymov/json-api-normalizer) Normalizes JSON API documents for state management solutions like Redux and Mobx 
 * [redux-json-api](https://github.com/dixieio/redux-json-api) A library which integrated JSON APIs with Redux store
 * [devour-client](https://github.com/twg/devour) A lightweight, framework agnostic, highly flexible JSON API client
 * [ts-angular-jsonapi](https://github.com/reyesoft/ts-angular-jsonapi) A JSON API library developed for AngularJS in Typescript
