@@ -36,6 +36,7 @@ assembled to vet them.
 * [devour-client](https://github.com/twg/devour) A lightweight, framework agnostic, highly flexible JSON API client
 * [ts-angular-jsonapi](https://github.com/reyesoft/ts-angular-jsonapi) A JSON API library developed for AngularJS in Typescript
 * [ngrx-json-api](https://github.com/abdulhaq-e/ngrx-json-api) A JSON API client for Angular 2 ngrx toolset.
+* [json-api-normalizer](https://github.com/yury-dymov/json-api-normalizer) Normalizes JSON API documents for state management solutions like Redux and Mobx
 
 ### <a href="#client-libraries-ios" id="client-libraries-ios" class="headerlink"></a> iOS
 
