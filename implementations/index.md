@@ -209,6 +209,10 @@ includes related resources.
 
 * [JSON-API-GLib](https://github.com/major-lab/json-api-glib) provides GObjects that can be serialized to and unserialized from payloads with [JSON-GLib](https://wiki.gnome.org/Projects/JsonGlib).
 
+### <a href="#server-libraries-rust" id="server-libraries-rust" class="headerlink"></a> Rust
+
+* [jsonapi-rust](https://github.com/michiel/jsonapi-rust) A Rust library for serializing, deserializing and working with JSON-API data
+
 ## <a href="#examples" id="examples" class="headerlink"></a> Examples
 
 * [RestPack::Serializer provides examples](http://restpack-serializer-sample.herokuapp.com/) which demonstrate sample responses.
