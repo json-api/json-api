@@ -196,7 +196,7 @@ recommended formats.
 
 ## <a href="#asynchronous-processing" id="asynchronous-processing" class="headerlink"></a> Asynchronous Processing
 
-Consider a situation when you need to create a resource and the operation takes long time to complete.
+Consider a situation when you need to create a resource and the operation takes a long time to complete.
 
 ```http
 POST /photos HTTP/1.1
