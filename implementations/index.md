@@ -94,6 +94,7 @@ and writing of JSON API documents.
 ### <a href="#client-libraries-python" id="client-libraries-python" class="headerlink"></a> Python
 
 * [jsonapi-requests](https://github.com/socialwifi/jsonapi-requests/) Simple and fun high-level JSONAPI client for Python. Contains ORM which makes consuming the API even easier, in a DRY manner. It has a low-level API similiar to requests as well, which gives you all the flexibility that you may need.
+* [jsonapi-client](https://github.com/qvantel/jsonapi-client) Comprehensive yet easy-to-use, pythonic, ORM-like access to JSON API services
 
 ## <a href="#server-libraries" id="server-libraries" class="headerlink"></a> Server libraries
 
