@@ -21,6 +21,7 @@ layout: null
           "data": [
             { "id": "request-content-type", "type": "normative-statements" },
             { "id": "request-accept", "type": "normative-statements" },
+            { "id": "request-ignore-charset", "type": "normative-statements" },
             { "id": "response-ignore-parameters", "type": "normative-statements" },
             { "id": "response-content-type", "type": "normative-statements"},
             { "id": "response-unsupported-media-type", "type": "normative-statements"},
@@ -312,6 +313,19 @@ layout: null
       "attributes": {
         "level": "MUST",
         "description": "Clients that include the JSON API media type in their `Accept` header **MUST** specify the media type there at least once without any media type parameters."
+      },
+      "relationships": {
+        "section": {
+          "data": { "id": "content-negotiation", "type": "sections" }
+        }
+      }
+    },
+    {
+      "id": "request-ignore-charset",
+      "type": "normative-statements",
+      "attributes": {
+        "level": "SHOULD",
+        "description": "Servers **SHOULD** accept requests that include the `charset` parameter but **SHOULD** ignore its value."
       },
       "relationships": {
         "section": {
