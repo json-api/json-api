@@ -414,6 +414,6 @@ ignore an invalid parameter and have the request succeed, rather than respond wi
 an error. [API-specific query parameters must contain one non a-z
 character.](http://jsonapi.org/format/#query-parameters)
 
-Other examples of invalid parameters include: `?felds[people]=` (invalid parameter name; 
+Other examples of invalid parameters include: `?fields[people]=` (invalid parameter name; 
 should be `fields[people]`) and `?redirect_to=http%3A%2F%2Fwww.owasp.org` (invalid parameter, 
 in this case, a phishing attack), etc.
