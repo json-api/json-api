@@ -254,8 +254,7 @@
       "type": "array",
       "items": {
         "$ref": "#/definitions/linkage"
-      },
-      "uniqueItems": true
+      }
     },
     "empty": {
       "description": "Describes an empty to-one relationship.",
