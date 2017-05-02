@@ -150,21 +150,26 @@
       },
       "additionalProperties": false
     },
-    
-    "links": {
+
+    "relationshipLinks": {
       "description": "A resource object **MAY** contain references to other resource objects (\"relationships\"). Relationships may be to-one or to-many. Relationships can be specified by including a member in a resource's links object.",
       "type": "object",
       "properties": {
         "self": {
           "description": "A `self` member, whose value is a URL for the relationship itself (a \"relationship URL\"). This URL allows the client to directly manipulate the relationship. For example, it would allow a client to remove an `author` from an `article` without deleting the people resource itself.",
-          "type": "string",
-          "format": "uri"
+          "$ref": "#/definitions/link"
         },
         "related": {
           "$ref": "#/definitions/link"
         }
       },
       "additionalProperties": true
+    },
+    "links": {
+      "type": "object",
+      "additionalProperties": {
+        "$ref": "#/definitions/link"
+      }
     },
     "link": {
       "description": "A link **MUST** be represented as either: a string containing the link's URL or a link object.",
@@ -211,7 +216,7 @@
         "^\\w[-\\w_]*$": {
           "properties": {
             "links": {
-              "$ref": "#/definitions/links"
+              "$ref": "#/definitions/relationshipLinks"
             },
             "data": {
               "description": "Member, whose value represents \"resource linkage\".",
