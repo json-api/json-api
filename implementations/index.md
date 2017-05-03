@@ -90,6 +90,7 @@ assembled to vet them.
 * [JsonApiFramework [Client]](https://github.com/scott-mcdonald/JsonApiFramework) is a portable .NET *client-side* framework for the reading, writing, and building of JSON API 1.0 documents based on the CLR domain model of the hypermedia API resources. Main features include building documents through a fluent-style progressive builder interface and automatic conversion between JSON API and CLR resources.
 * [Hypermedia.JsonApi.Client](https://github.com/cosullivan/Hypermedia/) is a set of extension methods to the HttpClient which allow for reading
 and writing of JSON API documents.
+* [JsonApiSerializer](https://github.com/codecutout/JsonApiSerializer) is a configurationless JSON API serialization and deserialization library implemented as a Json.NET `JsonSerializerSetting`. It leverages the existing power and flexiability of Json.NET while providing a sensible default mapping between JSON API and CLR objects.  
 
 ### <a href="#client-libraries-python" id="client-libraries-python" class="headerlink"></a> Python
 
@@ -185,6 +186,7 @@ has a page describing how to emit conformant JSON.
 * [JsonApiFramework [Server]](https://github.com/scott-mcdonald/JsonApiFramework) is a portable .NET *server-side* framework for the reading, writing, and building of JSON API 1.0 documents based on the CLR domain model of the hypermedia API resources. Main features include building documents through a fluent-style progressive builder interface, automatic generation of JSON API standard hypermedia in links and relationships, automatic conversion between JSON API and CLR resources, support for JSON API compound documents, and support of HATEOAS for resource relationships and links through lambda predicates.
 * [Hypermedia.JsonApi.WebApi](https://github.com/cosullivan/Hypermedia/) is a Web API media type formatter for reading and writing JSON API. It supports an external resource model definition and natively
 includes related resources.
+* [JsonApiSerializer](https://github.com/codecutout/JsonApiSerializer) is a configurationless JSON API serialization and deserialization library implemented as a Json.NET `JsonSerializerSetting`. It leverages the existing power and flexiability of Json.NET while providing a sensible default mapping between JSON API and CLR objects.  
 
 ### <a href="#server-libraries-java" id="server-libraries-java" class="headerlink"></a> Java
 
