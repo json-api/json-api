@@ -1191,7 +1191,7 @@ Accept: application/vnd.api+json
 
 If a relationship is provided in the `relationships` member of the
 [resource object][resource objects], its value **MUST** be a relationship object with a `data`
-member. The value of this key represents the linkage the new resource is to
+member. The value of this key represents the [linkage][resource linkage] the new resource is to
 have.
 
 #### <a href="#crud-creating-client-ids" id="crud-creating-client-ids" class="headerlink"></a> Client-Generated IDs
