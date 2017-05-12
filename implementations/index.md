@@ -112,6 +112,7 @@ and writing of JSON API documents.
 * [json-api-php/json-api](https://github.com/json-api-php/json-api) An attempt to translate the JSON API specification into a set of high quality unit/functional tests and implement it in PHP 7 strictly following TDD and SOLID OOP principles.
 * [cloudcreativity/json-api](https://github.com/cloudcreativity/json-api) Framework agnostic JSON API serialisation and deserialisation. This project extends neomerx/json-api, adding in several additional framework-agnostic features.
 * [cloudcreativity/laravel-json-api](https://github.com/cloudcreativity/laravel-json-api) JSON API (jsonapi.org) package for Laravel applications. This project extends cloudcreativity/json-api, adding in framework-specific features.
+* [FriendsOfCake/crud-json-api](https://github.com/FriendsOfCake/crud-json-api) CakePHP Crud Listener for building maintainable JSON API compliant APIs.
 
 ### <a href="#server-libraries-node-js" id="server-libraries-node-js" class="headerlink"></a> Node.js
 * [Fortune.js](http://fortune.js.org/) is a library that includes a [comprehensive implementation of JSON API](https://github.com/fortunejs/fortune-json-api).
