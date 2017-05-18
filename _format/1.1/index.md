@@ -553,7 +553,7 @@ value is a [meta] object that contains non-standard meta-information.
 ```json
 {
   "jsonapi": {
-    "version": "1.0"
+    "version": "1.1"
   }
 }
 ```
