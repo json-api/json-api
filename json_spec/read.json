@@ -1,0 +1,367 @@
+[
+  {
+    "config": {
+      "fixture": "only_posts"
+    },
+
+    "expectedRequest": {
+      "method": "GET",
+      "path":   "/posts/1",
+      "contentType": "application/json"
+    },
+
+    "expectedResponse": {
+      "statusCode": 200,
+      "body": {
+        "posts": [{
+          "id": "1",
+          "title": "Rails is Omakase",
+          "body":  "body text here"
+        }]
+      }
+    }
+  },
+
+  {
+    "config": {
+      "fixture": "only_posts"
+    },
+
+    "expectedRequest": {
+      "method": "GET",
+      "path":   "/posts",
+      "contentType": "application/json"
+    },
+
+    "expectedResponse": {
+      "statusCode": 200,
+      "body": {
+        "posts": [{
+          "id": "1",
+          "title": "Rails is Omakase",
+          "body":  "body text here"
+        }, {
+          "id": "2",
+          "title": "Rails is not Omakase",
+          "body": "body text here"
+        }]
+      }
+    }
+  },
+
+  {
+    "config": {
+      "fixture": "only_posts",
+      "client-ids": true
+    },
+
+    "expectedRequest": {
+      "method": "GET",
+      "path":   "/posts/1",
+      "contentType": "application/json"
+    },
+
+    "expectedResponse": {
+      "statusCode": 200,
+      "body": {
+        "posts": [{
+          "id": "1",
+          "title": "Rails is Omakase",
+          "body":  "body text here"
+        }],
+        "meta": {
+          "client-ids": true
+        }
+      }
+    }
+  },
+
+  {
+    "config": {
+      "fixture": "only_posts",
+      "client-ids": true
+    },
+
+    "expectedRequest": {
+      "method": "GET",
+      "path":   "/posts",
+      "contentType": "application/json"
+    },
+
+    "expectedResponse": {
+      "statusCode": 200,
+      "body": {
+        "posts": [{
+          "id": "1",
+          "title": "Rails is Omakase",
+          "body":  "body text here"
+        }, {
+          "id": "2",
+          "title": "Rails is not Omakase",
+          "body": "body text here"
+        }],
+        "meta": {
+          "client-ids": true
+        }
+      }
+    }
+  },
+
+  {
+    "config": {
+      "fixture": "only_posts"
+    },
+
+    "expectedRequest": {
+      "method": "GET",
+      "path":   "/posts/1,2",
+      "contentType": "application/json"
+    },
+
+    "expectedResponse": {
+      "statusCode": 200,
+      "body": {
+        "posts": [{
+          "id": "1",
+          "title": "Rails is Omakase",
+          "body":  "body text here"
+        }, {
+          "id": "2",
+          "title": "Rails is not Omakase",
+          "body": "body text here"
+        }]
+      }
+    }
+  },
+
+  {
+    "config": {
+      "fixture": "only_posts",
+      "client-ids": true
+    },
+
+    "expectedRequest": {
+      "method": "GET",
+      "path":   "/posts/1,2",
+      "contentType": "application/json"
+    },
+
+    "expectedResponse": {
+      "statusCode": 200,
+      "body": {
+        "posts": [{
+          "id": "1",
+          "title": "Rails is Omakase",
+          "body":  "body text here"
+        }, {
+          "id": "2",
+          "title": "Rails is not Omakase",
+          "body": "body text here"
+        }],
+        "meta": {
+          "client-ids": true
+        }
+      }
+    }
+  },
+
+  {
+    "config": {
+      "fixture": "posts_and_one_author"
+    },
+
+    "expectedRequest": {
+      "method": "GET",
+      "path":   "/posts",
+      "contentType": "application/json"
+    },
+
+    "expectedResponse": {
+      "statusCode": 200,
+      "body": {
+        "posts": [{
+          "id": "1",
+          "title": "Rails is Omakase",
+          "body":  "body text here"
+        }, {
+          "id": "2",
+          "title": "Rails is not Omakase",
+          "body":  "body text here",
+          "links": {
+            "author": "1"
+          }
+        }]
+      }
+    }
+  },
+
+  {
+    "config": {
+      "fixture": "posts_and_one_author",
+      "url_based": true
+    },
+
+    "expectedRequest": {
+      "method": "GET",
+      "path":   "/posts",
+      "contentType": "application/json"
+    },
+
+    "expectedResponse": {
+      "statusCode": 200,
+      "body": {
+        "posts": [{
+          "id": "1",
+          "title": "Rails is Omakase",
+          "body":  "body text here"
+        }, {
+          "id": "2",
+          "title": "Rails is not Omakase",
+          "body":  "body text here",
+          "links": {
+            "author": "http://example.com/author/1"
+          }
+        }]
+      }
+    }
+  },
+
+  {
+    "config": {
+      "fixture": "posts_and_one_author",
+      "url_based": true,
+      "compound": true
+    },
+
+    "expectedRequest": {
+      "method": "GET",
+      "path":   "/posts",
+      "contentType": "application/json"
+    },
+
+    "expectedResponse": {
+      "statusCode": 200,
+      "body": {
+        "posts": [{
+          "id": "1",
+          "title": "Rails is Omakase",
+          "body":  "body text here"
+        }, {
+          "id": "2",
+          "title": "Rails is not Omakase",
+          "body":  "body text here",
+          "links": {
+            "authors": "http://example.com/author/1"
+          }
+        }],
+        "authors": [{
+          "id": "1",
+          "name": "d2h"
+        }]
+      }
+    }
+  },
+
+  {
+    "config": {
+      "fixture": "posts_one_author_and_comments"
+    },
+
+    "expectedRequest": {
+      "method": "GET",
+      "path":   "/posts",
+      "contentType": "application/json"
+    },
+
+    "expectedResponse": {
+      "statusCode": 200,
+      "body": {
+        "posts": [{
+          "id": "1",
+          "title": "Rails is Omakase",
+          "body":  "body text here",
+          "links": {
+            "author": "1",
+            "comments": ["1", "2"]
+          }
+        }]
+      }
+    }
+  },
+
+  {
+    "config": {
+      "fixture": "posts_one_author_and_comments",
+      "url_based": true
+    },
+
+    "expectedRequest": {
+      "method": "GET",
+      "path":   "/posts",
+      "contentType": "application/json"
+    },
+
+    "expectedResponse": {
+      "statusCode": 200,
+      "body": {
+        "posts": [{
+          "id": "1",
+          "title": "Rails is Omakase",
+          "body":  "body text here"
+        }, {
+          "id": "2",
+          "title": "Rails is not Omakase",
+          "body":  "body text here",
+          "links": {
+            "author": "http://example.com/author/1",
+            "comments": "http://example.com/posts/2/comments"
+          }
+        }]
+      }
+    }
+  },
+
+  {
+    "config": {
+      "fixture": "posts_one_author_and_comments",
+      "url_based": true,
+      "compound": true
+    },
+
+    "expectedRequest": {
+      "method": "GET",
+      "path":   "/posts",
+      "contentType": "application/json"
+    },
+
+    "expectedResponse": {
+      "statusCode": 200,
+      "body": {
+        "posts": [{
+          "id": "1",
+          "title": "Rails is Omakase",
+          "body":  "body text here"
+        }, {
+          "id": "2",
+          "title": "Rails is not Omakase",
+          "body":  "body text here",
+          "links": {
+            "author": "http://example.com/author/1",
+            "comments": "http://example.com/posts/2/comments"
+          }
+        }],
+        "authors": [{
+          "id": "1",
+          "name": "d2h"
+        }],
+        "comments": [{
+          "id": "1",
+          "body": "Mmmmmakase"
+        }, {
+          "id": "2",
+          "body": "I prefer unagi"
+        }]
+      }
+    }
+  }
+]
