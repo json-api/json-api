@@ -132,6 +132,7 @@ and writing of JSON API documents.
 * [simple-jsonapi](https://github.com/allistercsmith/simple-jsonapi) A node.js module for serializing objects to JSON API compliant documents. Very flexible whilst not caring about your choice of framework or database layer. Aims to cover the latest published version of the spec, which is currently 1.0.
 * [bookshelf-jsonapi-params](https://github.com/scoutforpets/bookshelf-jsonapi-params) automatically apply JSON API filtering, pagination, sparse fieldsets, includes, and sorting to your Bookshelf.js queries.
 * [Lux](https://github.com/postlight/lux) is a MVC style Node.js framework for building lightning fast JSON APIs.
+* [transformalizer](https://github.com/GaiamTV/transformalizer) a bare bones node module for transforming raw data into JSON API compliant payloads that makes no assumption regarding the shape of your data and sdks used, supports the full v1.0 specification, and supports dynamic transformations, links, and meta at all levels of a document.
 
 ### <a href="#server-libraries-ruby" id="server-libraries-ruby" class="headerlink"></a> Ruby
 
