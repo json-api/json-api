@@ -232,6 +232,7 @@ includes related resources.
 
 * [json-api-document-viewer](https://tadast.github.io/json-api-document-viewer) the flat json:api structure is a good way to express complex relationships between objects. However the same flatness makes it difficult for humans to "parse" these relationships. This tool visualises object relationships by visually nesting them.
 * [jsonapi-validator](https://jsonapi-validator.herokuapp.com) is a playground service for quick prototyping and validating JSON responses with jsonapi.org specification.
+* [corroborate](http://corroborate.arenpatel.com/) JSON API request/response payload validator - warns when there is a specification violation and informs when a recommendation is has not been followed.
 
 ### <a href="#related-tools-ruby" id="related-tools-ruby" class="headerlink"></a> Ruby
 
