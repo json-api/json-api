@@ -73,6 +73,10 @@ assembled to vet them.
 ### <a href="#client-libraries-java" id="client-libraries-java" class="headerlink"></a> Java
 
 * [jsonapi-converter](https://github.com/jasminb/jsonapi-converter) is a Java JSON API v1.0 client. Besides providing means for serialisation/deserialisation, client comes with Retrofit plugin.
+* [crnk.io](https://www.crnk.io) is a JSON API framework for clients and servers. On the client-side it targets 
+  both Java and Android development. As for the backend side a rich set of modules helps with the integration of various
+  Java frameworks. 
+
 
 ### <a href="#client-libraries-android" id="client-libraries-android" class="headerlink"></a> Android
 * [faogustavo/JSONApi](https://github.com/faogustavo/JSONApi) library for deserializing automatic. It can be integrated with retrofit. It has some ideas from Morpheus and jsonapi-converter but has some aditionals.
@@ -207,6 +211,9 @@ includes related resources.
   * katharsis-spring - adapter for Katharsis core module for Spring and Spring Boot framoworks.
   * katharsis-servlet - generic servlet/filter adapter for Katharsis core module. This module can be used in traditional servlet or filter based Java web applications, or even non-Servlet-API-based web applications such as Portal/Portlet, Wicket, etc.
 * [Elide](http://elide.io) is a web framework supporting JSON API. Through annotation-based JSON API endpoint generation, Elide enables you to focus on your data model, security model, and business logic while avoiding unnecessary boilerplate. Moreover, through use of the JSON API Patch extension, [Elide](http://elide.io) provides full support for database transactions.
+* [crnk.io](https://www.crnk.io) is a JSON API framework for clients and servers. On the server-side it comes, among others, 
+  with a rich set of integrations (Servlet, JAX-RS, Spring, JPA, Bean Validation, Zipkin and more), bulk updates with JSON Patch,
+  a meta-model for automation purposes, client stub generation for TypeScript and a module API for third-party contributions.
 
 ### <a href="#server-libraries-scala" id="server-libraries-scala" class="headerlink"></a> Scala
 * [scala-jsonapi](https://github.com/zalando/scala-jsonapi) A Scala library for producing JSON output (and deserializing JSON input) based on JSON API specification.
