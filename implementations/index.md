@@ -36,6 +36,7 @@ assembled to vet them.
 * [devour-client](https://github.com/twg/devour) A lightweight, framework agnostic, highly flexible JSON API client
 * [json-api-normalizer](https://github.com/yury-dymov/json-api-normalizer) Normalizes JSON API documents for state management solutions like Redux and Mobx
 * [jsona](https://github.com/olosegres/jsona) Data formatter that creates customizable, simplified objects from JSON or stored reduxObject (result object of [json-api-normalizer](https://github.com/yury-dymov/json-api-normalizer)), and creates correct JSON from the same simplified objects.
+* [redux-bees](https://github.com/cantierecreativo/redux-bees) A nice, short and declarative way to interact with JSON APIs in React+Redux
 
 ### <a href="#client-libraries-typescript" id="client-libraries-typescript" class="headerlink"></a> Typescript
 * [ts-angular-jsonapi](https://github.com/reyesoft/ts-angular-jsonapi) A JSON API library developed for AngularJS in Typescript
