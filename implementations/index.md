@@ -99,6 +99,9 @@ and writing of JSON API documents.
 
 ## <a href="#server-libraries" id="server-libraries" class="headerlink"></a> Server libraries
 
+### <a href="#server-libraries-swift" id="server-libraries-swift" class="headerlink"></a> Swift
+* [aonawale / JSONAPISerializer](https://github.com/aonawale/JSONAPISerializer) is a server side swift framework agnostic library that implements JSON API v1.0.
+
 ### <a href="#server-libraries-php" id="server-libraries-php" class="headerlink"></a> PHP
 
 * [tobscure / json-api](https://github.com/tobscure/json-api)
