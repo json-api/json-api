@@ -36,6 +36,7 @@ assembled to vet them.
 * [devour-client](https://github.com/twg/devour) A lightweight, framework agnostic, highly flexible JSON API client
 * [json-api-normalizer](https://github.com/yury-dymov/json-api-normalizer) Normalizes JSON API documents for state management solutions like Redux and Mobx
 * [jsona](https://github.com/olosegres/jsona) Data formatter that creates customizable, simplified objects from JSON or stored reduxObject (result object of [json-api-normalizer](https://github.com/yury-dymov/json-api-normalizer)), and creates correct JSON from the same simplified objects.
+* [active-resource](https://github.com/nicklandgrebe/activeresource.js) A standalone, convention-driven JavaScript ORM that maps to your JSON API server and allows for advanced queries and relational management through a smooth interface.
 
 ### <a href="#client-libraries-typescript" id="client-libraries-typescript" class="headerlink"></a> Typescript
 * [ts-angular-jsonapi](https://github.com/reyesoft/ts-angular-jsonapi) A JSON API library developed for AngularJS in Typescript
@@ -157,6 +158,7 @@ has a page describing how to emit conformant JSON.
 * [JSONAPI::Utils](https://github.com/b2beauty/jsonapi-utils) works on top of [JSONAPI::Resources](https://github.com/cerebris/jsonapi-resources) taking advantage of its resource-driven style and bringing a Rails way to build modern APIs with no or less learning curve.
 * [Sinja](https://github.com/mwpastore/sinja) extends [Sinatra](http://www.sinatrarb.com) and leverages [JSONAPI::Serializers](https://github.com/fotinakis/jsonapi-serializers) to enable rapid development of comprehensive, read-and-write, and JSON API v1.0-compliant web services using the DAL/ORM of your choice. It includes a simple role-based authorization scheme, support for client-generated IDs, patchless clients, and coalesced find requests, exception handling, and more.
 * [jsonapi-rb](http://jsonapi-rb.org) Ruby library for efficiently building and consuming JSON API documents - with Rails and Hanami integrations.
+* [Caprese](https://github.com/nicklandgrebe/caprese) An opinionated Rails library for creating JSON API servers that lets you focus on customizing the behavior of your endpoints rather than the dirty work of setting them up. Leverages the power of [ActiveModel::Serializer](https://github.com/rails-api/active_model_serializers).
 
 ### <a href="#server-libraries-python" id="server-libraries-python" class="headerlink"></a> Python
 
