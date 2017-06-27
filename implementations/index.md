@@ -35,6 +35,7 @@ assembled to vet them.
 * [redux-json-api](https://github.com/dixieio/redux-json-api) A library which integrated JSON APIs with Redux store
 * [devour-client](https://github.com/twg/devour) A lightweight, framework agnostic, highly flexible JSON API client
 * [json-api-normalizer](https://github.com/yury-dymov/json-api-normalizer) Normalizes JSON API documents for state management solutions like Redux and Mobx
+* [jsona](https://github.com/olosegres/jsona) Data formatter that creates customizable, simplified objects from JSON or stored reduxObject (result object of [json-api-normalizer](https://github.com/yury-dymov/json-api-normalizer)), and creates correct JSON from the same simplified objects.
 * [active-resource](https://github.com/nicklandgrebe/activeresource.js) A standalone, convention-driven JavaScript ORM that maps to your JSON API server and allows for advanced queries and relational management through a smooth interface.
 
 ### <a href="#client-libraries-typescript" id="client-libraries-typescript" class="headerlink"></a> Typescript
@@ -99,11 +100,14 @@ and writing of JSON API documents.
 
 ## <a href="#server-libraries" id="server-libraries" class="headerlink"></a> Server libraries
 
+### <a href="#server-libraries-swift" id="server-libraries-swift" class="headerlink"></a> Swift
+* [aonawale / JSONAPISerializer](https://github.com/aonawale/JSONAPISerializer) is a server side swift framework agnostic library that implements JSON API v1.0.
+
 ### <a href="#server-libraries-php" id="server-libraries-php" class="headerlink"></a> PHP
 
 * [tobscure / json-api](https://github.com/tobscure/json-api)
 * [neomerx / json-api](https://github.com/neomerx/json-api) is a framework agnostic library that fully implements JSON API v1.0.
-* [neomerx / limoncello-collins](https://github.com/neomerx/limoncello-collins) (Laravel-based) and [neomerx / limoncello-shot](https://github.com/neomerx/limoncello-shot) (Lumen-based) are pre-configured JSON API v1.0 quick start server application that use [neomerx / json-api](https://github.com/neomerx/json-api).
+* [limoncello-php / app](https://github.com/limoncello-php/app) is a JSON API v1.0 quick start server application for [neomerx / json-api](https://github.com/neomerx/json-api).
 * [lode / jsonapi](https://github.com/lode/jsonapi) a simple and friendly library, easy to understand for people without knowledge of the specification.
 * [woohoolabs / yin](https://github.com/woohoolabs/yin) is a library for advanced users aiming for efficiency and elegance.
 * [nilportugues / json-api](https://github.com/nilportugues/json-api) Serializer transformers outputting valid API responses in JSON and JSON API formats.
@@ -113,6 +117,7 @@ and writing of JSON API documents.
 * [json-api-php/json-api](https://github.com/json-api-php/json-api) An attempt to translate the JSON API specification into a set of high quality unit/functional tests and implement it in PHP 7 strictly following TDD and SOLID OOP principles.
 * [cloudcreativity/json-api](https://github.com/cloudcreativity/json-api) Framework agnostic JSON API serialisation and deserialisation. This project extends neomerx/json-api, adding in several additional framework-agnostic features.
 * [cloudcreativity/laravel-json-api](https://github.com/cloudcreativity/laravel-json-api) JSON API (jsonapi.org) package for Laravel applications. This project extends cloudcreativity/json-api, adding in framework-specific features.
+* [thephpleague/fractal](http://fractal.thephpleague.com/) A partial implementation of the JSON API spec allowing for an easy drop in JSON rendering solution.
 
 ### <a href="#server-libraries-node-js" id="server-libraries-node-js" class="headerlink"></a> Node.js
 * [Fortune.js](http://fortune.js.org/) is a library that includes a [comprehensive implementation of JSON API](https://github.com/fortunejs/fortune-json-api).
@@ -169,6 +174,7 @@ has a page describing how to emit conformant JSON.
 * [xamoom-janus](https://github.com/xamoom/xamoom-janus) is a Python module to easily and fast extend Python web frameworks like Flask or BottlyPy with json:api functionality. Also offers a flexible mechanism for data mapping and hooks to intercept and extend its functionality according to your projects needs.
 * [pyramid-jsonapi](https://github.com/colinhiggs/pyramid-jsonapi) Auto-build a JSON API from sqlalchemy models using the pyramid framework.
 * [Flask-REST-JSONAPI](https://github.com/miLibris/flask-rest-jsonapi) Flask extension to create web api according to jsonapi specification with Flask, Marshmallow and data provider of your choice (SQLAlchemy, MongoDB, ...)
+* [Flump](https://github.com/rolepoint/flump) Database agnostic JSON API builder which depends on Flask and Marshmallow.
 
 ### <a href="#server-libraries-go" id="server-libraries-go" class="headerlink"></a> Go
 
@@ -233,6 +239,7 @@ includes related resources.
 
 * [json-api-document-viewer](https://tadast.github.io/json-api-document-viewer) the flat json:api structure is a good way to express complex relationships between objects. However the same flatness makes it difficult for humans to "parse" these relationships. This tool visualises object relationships by visually nesting them.
 * [jsonapi-validator](https://jsonapi-validator.herokuapp.com) is a playground service for quick prototyping and validating JSON responses with jsonapi.org specification.
+* [corroborate](http://corroborate.arenpatel.com/) JSON API request/response payload validator. It warns when there is a specification violation and also informs when a recommendation has not been followed.
 
 ### <a href="#related-tools-ruby" id="related-tools-ruby" class="headerlink"></a> Ruby
 
