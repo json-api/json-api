@@ -172,6 +172,7 @@ has a page describing how to emit conformant JSON.
 * [xamoom-janus](https://github.com/xamoom/xamoom-janus) is a Python module to easily and fast extend Python web frameworks like Flask or BottlyPy with json:api functionality. Also offers a flexible mechanism for data mapping and hooks to intercept and extend its functionality according to your projects needs.
 * [pyramid-jsonapi](https://github.com/colinhiggs/pyramid-jsonapi) Auto-build a JSON API from sqlalchemy models using the pyramid framework.
 * [Flask-REST-JSONAPI](https://github.com/miLibris/flask-rest-jsonapi) Flask extension to create web api according to jsonapi specification with Flask, Marshmallow and data provider of your choice (SQLAlchemy, MongoDB, ...)
+* [Flump](https://github.com/rolepoint/flump) Database agnostic JSON API builder which depends on Flask and Marshmallow.
 
 ### <a href="#server-libraries-go" id="server-libraries-go" class="headerlink"></a> Go
 
