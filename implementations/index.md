@@ -94,7 +94,7 @@ assembled to vet them.
 
 ### <a href="#client-libraries-net" id="client-libraries-net" class="headerlink"></a> .NET
 
-* [JsonApiFramework [Client]](https://github.com/scott-mcdonald/JsonApiFramework) is a portable .NET *client-side* framework for the reading, writing, and building of JSON API 1.0 documents based on the CLR domain model of the hypermedia API resources. Main features include building documents through a fluent-style progressive builder interface and automatic conversion between JSON API and CLR resources.
+* [JsonApiFramework](https://github.com/scott-mcdonald/JsonApiFramework) is a portable .NET framework for the reading, writing, and building of client-side and server-side JSON API 1.0 documents based on the CLR domain model of the hypermedia API resources. Main features include building documents through a fluent-style progressive builder interface and automatic conversion between JSON API and CLR resources.
 * [Hypermedia.JsonApi.Client](https://github.com/cosullivan/Hypermedia/) is a set of extension methods to the HttpClient which allow for reading
 and writing of JSON API documents.
 * [JsonApiSerializer](https://github.com/codecutout/JsonApiSerializer) is a configurationless JSON API serialization and deserialization library implemented as a Json.NET `JsonSerializerSetting`. It leverages the existing power and flexiability of Json.NET while providing a sensible default mapping between JSON API and CLR objects.  
