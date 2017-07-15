@@ -55,8 +55,7 @@ and versioning.
 ## <a href="#document-structure" id="document-structure" class="headerlink"></a> Document Structure
 
 This section describes the structure of a JSON API document, which is identified
-by the media type [`application/vnd.api+json`]
-(http://www.iana.org/assignments/media-types/application/vnd.api+json).
+by the media type [`application/vnd.api+json`](http://www.iana.org/assignments/media-types/application/vnd.api+json).
 JSON API documents are defined in JavaScript Object Notation (JSON)
 [[RFC7159](http://tools.ietf.org/html/rfc7159)].
 
@@ -520,7 +519,7 @@ The following `self` link is simply a URL:
 
 ```json
 "links": {
-  "self": "http://example.com/posts",
+  "self": "http://example.com/posts"
 }
 ```
 
@@ -622,11 +621,11 @@ The following characters **MUST NOT** be used in member names:
 - U+003E GREATER-THAN SIGN, ">"
 - U+003F QUESTION MARK, "?"
 - U+0040 COMMERCIAL AT, "@"
-- U+005C REVERSE SOLIDUS, "\"
+- U+005C REVERSE SOLIDUS, "&#x5c;"
 - U+005E CIRCUMFLEX ACCENT, "^"
 - U+0060 GRAVE ACCENT, "&#x60;"
 - U+007B LEFT CURLY BRACKET, "{"
-- U+007C VERTICAL LINE, "|"
+- U+007C VERTICAL LINE, "&#x7c;"
 - U+007D RIGHT CURLY BRACKET, "}"
 - U+007E TILDE, "~"
 - U+007F DELETE
@@ -1173,7 +1172,7 @@ Accept: application/vnd.api+json
 
 If a relationship is provided in the `relationships` member of the
 [resource object][resource objects], its value **MUST** be a relationship object with a `data`
-member. The value of this key represents the linkage the new resource is to
+member. The value of this key represents the [linkage][resource linkage] the new resource is to
 have.
 
 #### <a href="#crud-creating-client-ids" id="crud-creating-client-ids" class="headerlink"></a> Client-Generated IDs
@@ -1272,6 +1271,11 @@ had returned it back in a `201` response.
 
 A server **MAY** return `403 Forbidden` in response to an unsupported request
 to create a resource.
+
+##### <a href="#crud-creating-responses-404" id="crud-creating-responses-404" class="headerlink"></a> 404 Not Found
+
+A server **MUST** return `404 Not Found` when processing a request that
+references a related resource that does not exist.
 
 ##### <a href="#crud-creating-responses-409" id="crud-creating-responses-409" class="headerlink"></a> 409 Conflict
 
@@ -1719,6 +1723,11 @@ request is successful and no content is returned.
 
 A server **MUST** return a `200 OK` status code if a deletion request is
 successful and the server responds with only top-level [meta] data.
+
+##### <a href="#crud-deleting-responses-404" id="crud-deleting-responses-404" class="headerlink"></a> 404 NOT FOUND
+
+A server **SHOULD** return a `404 Not Found` status code if a deletion request fails
+due to the resource not existing.
 
 ##### <a href="#crud-deleting-responses-other" id="crud-deleting-responses-other" class="headerlink"></a> Other Responses
 

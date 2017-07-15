@@ -185,6 +185,7 @@ layout: null
             { "id": "create-responses-202", "type": "normative-statements" },
             { "id": "create-responses-204", "type": "normative-statements" },
             { "id": "create-responses-403", "type": "normative-statements" },
+            { "id": "create-responses-404-related", "type": "normative-statements" },
             { "id": "create-responses-409-exists", "type": "normative-statements" },
             { "id": "create-responses-409-bad-type", "type": "normative-statements" },
             { "id": "create-responses-409-error-details", "type": "normative-statements" },
@@ -243,6 +244,7 @@ layout: null
             { "id": "delete-202-status", "type": "normative-statements" },
             { "id": "delete-204-status", "type": "normative-statements" },
             { "id": "delete-200-status", "type": "normative-statements" },
+            { "id": "delete-404-status", "type": "normative-statements" },
             { "id": "deleting-other-status", "type": "normative-statements" },
             { "id": "deleting-other-details", "type": "normative-statements" },
             { "id": "deleting-http-semantics", "type": "normative-statements" }
@@ -1826,6 +1828,19 @@ layout: null
       }
     },
     {
+      "id": "create-responses-404-related",
+      "type": "normative-statements",
+      "attributes": {
+        "level": "MAY",
+        "description": "A server **MUST** return `404 Not Found` when processing a request that references a related resource that does not exist."
+      },
+      "relationships": {
+        "section": {
+          "data": { "id": "creating-updating-deleting", "type": "sections" }
+        }
+      }
+    },
+    {
       "id": "create-responses-409-exists",
       "type": "normative-statements",
       "attributes": {
@@ -2580,6 +2595,19 @@ layout: null
       }
     },
     {
+      "id": "delete-404-status",
+      "type": "normative-statements",
+      "attributes": {
+        "level": "SHOULD",
+        "description": "A server **SHOULD** return a 404 Not Found status code if a deletion request fails due to the resource not existing."
+      },
+      "relationships": {
+        "section": {
+          "data": { "id": "creating-updating-deleting", "type": "sections" }
+        }
+      }
+    },
+    {
       "id": "deleting-other-status",
       "type": "normative-statements",
       "attributes": {
@@ -2687,7 +2715,7 @@ layout: null
       "id": "error-object-key",
       "type": "normative-statements",
       "attributes": {
-        "level": "SHOULD",
+        "level": "MUST",
         "description": "Error objects **MUST** be returned as an array keyed by `errors` in the top level of a JSON API document."
       },
       "relationships": {

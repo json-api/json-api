@@ -258,6 +258,11 @@ footer
     display: inline-block
     vertical-align: middle
 
+  .license
+    a
+      display: block
+      padding: .75em
+
   .social-links
     @extend %distribute-children
     width: 9em
@@ -272,7 +277,7 @@ footer
     i
       width: 1em
       padding: .75em
-
+      display: inline-block
 
 /** Content */
 
@@ -380,14 +385,9 @@ footer
 .highlight
   border-radius: $border-radius-main
   position: relative
-  margin: 2em 0
   padding: 10px 15px
   background: #f9f9f9
   border: 1px solid #d1d1d1
   line-height: 16px
-
-  pre
-    margin: 0
-
-  code
-    font-size: 12px
+  margin: 2em 0
+  font-family: Menlo, monospace

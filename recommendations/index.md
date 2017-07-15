@@ -135,6 +135,50 @@ Furthermore, multiple filters can be applied to a single request:
 GET /comments?filter[post]=1,2&filter[author]=12 HTTP/1.1
 ```
 
+## <a href="#including-links" id="including-links" class="headerlink"></a> Including Top-level, Resource-level and Relationship Links
+
+The base specification is agnostic about including links with a resource response. However, it is recommended that the following links be included within response documents:
+
+- **Top-level links** like a self-link (for the whole response) as well as relative pagination links (if appropriate).
+- **Resource-level links** like a self-link for each resource (which differs from the top-level, if the resource is part of a collection).
+- **Relationship links** for all available relationships of a resource.
+
+For example, a request for a collection of comments could prompt the following response:
+
+```http
+GET /comments HTTP/1.1
+
+{
+  "data": [{
+      "type": "comments",
+      "id": "1",
+      "attributes": {
+          "text": "HATEOS are the thing!"
+      },
+      "links": {
+          "self": "/comments/1"
+      },
+      "relationships": {
+        "author": {
+          "links": {
+            "self": "/comments/1/relationships/author",
+            "related": "/comments/1/author"
+          }
+        },
+        "articles": {
+          "links": {
+            "self": "/comments/1/relationships/articles",
+            "related": "/comments/1/articles"
+          }
+        }
+      }
+  }],
+  "links": {
+      "self": "/comments"
+  }
+}
+```
+
 ## <a href="#patchless-clients" id="patchless-clients" class="headerlink"></a> Supporting Clients Lacking `PATCH`
 
 Some clients, like IE8, lack support for HTTP's `PATCH` method. API servers
@@ -152,7 +196,7 @@ recommended formats.
 
 ## <a href="#asynchronous-processing" id="asynchronous-processing" class="headerlink"></a> Asynchronous Processing
 
-Consider a situation when you need to create a resource and the operation takes long time to complete.
+Consider a situation when you need to create a resource and the operation takes a long time to complete.
 
 ```http
 POST /photos HTTP/1.1
