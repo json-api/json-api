@@ -1827,6 +1827,29 @@ use profile extensions in subsequent interactions with the same API.
 support JSON API at all or that the client has failed to provide a
 [required extension](#extending-profile-extensions-required).
 
+
+### <a href="#extending-profile-extensions-negotiation" id="extending-profile-extensions-negotiation" class="headerlink"></a> Negotiating Extensions
+
+#### <a href="#extending-profile-extensions-requesting" id="extending-profile-extensions-requesting" class="headerlink"></a> Requesting Extensions
+
+The client **MAY** request that certain profile extensions be applied to the
+server's response by listing those extensions in a `profile` parameter in one
+of its references to the JSON API media type in the `Accept` header.
+
+For example, in the following request the client, the client asks that the
+server apply the `http://jsonapi.org/extensions/last-modified` extension if
+it is able to.
+
+```http
+Accept: application/vnd.api+json;profile="http://jsonapi.org/extensions/last-modified", application/vnd.api+json
+```
+
+> Note: The second instance of the JSON API media type in the example above is
+  required under the [client's content negotiation responsibilities](#content-negotiation-clients).
+  It is used to support old servers that don't understand the profile parameter.
+
+The server **SHOULD** include as many of the requested extensions as it supports.
+
 ## <a href="#errors" id="errors" class="headerlink"></a> Errors
 
 ### <a href="#errors-processing" id="errors-processing" class="headerlink"></a> Processing Errors
