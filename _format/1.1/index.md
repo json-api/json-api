@@ -93,20 +93,21 @@ The members `data` and `errors` **MUST NOT** coexist in the same document.
 
 A document **MAY** contain any of these top-level members:
 
-* `jsonapi`: an object describing the server's implementation
-* `links`: a [links object][links] related to the primary data.
 * `included`: an array of [resource objects] that are related to the primary
   data and/or each other ("included resources").
+* `links`: a [links object][links] related to the primary data.
 * `aliases`: an object defining string aliases for referring to (longer) URIs
+* `jsonapi`: an object describing the server's implementation
 
 If a document does not contain a top-level `data` key, the `included` member
 **MUST NOT** be present either.
 
 The top-level [links object][links] **MAY** contain the following members:
 
-* `self`: the [link][links] that generated the current response document.
-* `related`: a [related resource link] when the primary data represents a
-  resource relationship.
+* `self`: a [link][links] whose URL is the URL that was requested to
+   produce the current response document.
+* `related`: a [related resource link], allowed when the primary data
+  represents a resource relationship.
 * [pagination] links for the primary data.
 
 The document's "primary data" is a representation of the resource or collection
@@ -523,7 +524,7 @@ either:
   * `href`: a string containing the link's URL.
   * `meta`: a [meta object][meta] containing additional information about the link.
 
-The following `self` link is simply a URL:
+For example, the following `self` link is simply a URL:
 
 ```json
 "links": {
@@ -531,8 +532,8 @@ The following `self` link is simply a URL:
 }
 ```
 
-The following `related` link includes a URL as well as meta-information
-about a related resource collection:
+By contrast, the following `related` link includes a URL as well as
+meta-information about a related resource collection:
 
 ```json
 "links": {
@@ -1988,7 +1989,7 @@ added to a JSON API document, and the meaning of those values at the different
 places they can occur.
 
 These values **MAY** be defined for use in any spec-defined [meta object][meta], 
-with the exception is that an extension **MUST NOT** define values for use in 
+with the exception that an extension **MUST NOT** define values for use in 
 the [`jsonapi` object](#document-jsonapi-object)'s meta object. A profile extension
 **MUST NOT** define any values for use outside of a meta object.
 
@@ -2186,6 +2187,7 @@ An error object **MAY** have the following members:
   new APIs should not produce error objects with this member, even though doing
   so is technically allowed.
 
+[top level]: #document-top-level
 [resource objects]: #document-resource-objects
 [attributes]: #document-resource-object-attributes
 [relationships]: #document-resource-object-relationships
@@ -2200,5 +2202,7 @@ An error object **MAY** have the following members:
 [aliases]: #document-aliases
 [extensions]: #extending
 [error details]: #errors
+[error objects]: #errror-objects
 [member names]: #document-member-names
 [pagination]: #fetching-pagination
+[query parameters]: #query-parameters
