@@ -11,10 +11,6 @@ JSON API is designed to minimize both the number of requests and the amount of
 data transmitted between clients and servers. This efficiency is achieved
 without compromising readability, flexibility, or discoverability.
 
-JSON API requires use of the JSON API media type
-([`application/vnd.api+json`](http://www.iana.org/assignments/media-types/application/vnd.api+json))
-for exchanging data.
-
 ## <a href="#conventions" id="conventions" class="headerlink"></a> Conventions
 
 The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD",
@@ -24,33 +20,43 @@ interpreted as described in RFC 2119
 
 ## <a href="#content-negotiation" id="content-negotiation" class="headerlink"></a> Content Negotiation
 
-### <a href="#content-negotiation-clients" id="content-negotiation-clients" class="headerlink"></a> Client Responsibilities
+### <a href="#content-negotiation-all" id="content-negotiation-all" class="headerlink"></a> Universal Responsibilities
 
-Clients **MUST** send all JSON API data in request documents with the header
-`Content-Type: application/vnd.api+json` without any media type parameters.
+The JSON API media type is [`application/vnd.api+json`](http://www.iana.org/assignments/media-types/application/vnd.api+json).
+Clients and servers **MUST** send all JSON API data using this media type in the
+`Content-Type` header.
+
+Further, the JSON API media type **MUST** always be specified with either no
+media type parameters or with only the `profile` parameter, which is used to
+support [extensions]. This applies to both the `Content-Type` and `Accept`
+headers.
+
+> Note: A media type parameter is an extra piece of information that can
+accompany a media type. For example, in the header
+`Content-Type: text/html; charset="utf-8"`, the media type is `text/html` and
+`charset` is a parameter.
+
+### <a href="#content-negotiation-clients" id="content-negotiation-clients" class="headerlink"></a> Client Responsibilities
 
 Clients that include the JSON API media type in their `Accept` header **MUST**
 specify the media type there at least once without any media type parameters.
 
-Clients **MUST** ignore any parameters for the `application/vnd.api+json`
-media type received in the `Content-Type` header of response documents.
+When processing a JSON API response document, clients **MUST** ignore any
+parameters other than `profile` in the server's `Content-Type` header.
 
 ### <a href="#content-negotiation-servers" id="content-negotiation-servers" class="headerlink"></a> Server Responsibilities
 
-Servers **MUST** send all JSON API data in response documents with the header
-`Content-Type: application/vnd.api+json` without any media type parameters.
-
 Servers **MUST** respond with a `415 Unsupported Media Type` status code if
 a request specifies the header `Content-Type: application/vnd.api+json`
-with any media type parameters.
+with any media type parameters other than `profile`.
 
 Servers **MUST** respond with a `406 Not Acceptable` status code if a
 request's `Accept` header contains the JSON API media type and all instances
 of that media type are modified with media type parameters.
 
-> Note: The content negotiation requirements exist to allow future versions
-of this specification to use media type parameters for extension negotiation
-and versioning.
+> Note: These content negotiation requirements exist to allow future versions
+of this specification to add other media type parameters for extension
+negotiation and versioning.
 
 ## <a href="#document-structure" id="document-structure" class="headerlink"></a> Document Structure
 
@@ -1776,6 +1782,50 @@ parameter from this specification, it **MUST** return `400 Bad Request`.
 
 > Note: This is to preserve the ability of JSON API to make additive additions
 to standard query parameters without conflicting with existing implementations.
+
+## <a href="#extending" id="extending" class="headerlink"></a> Extending JSON API
+
+An API **MAY** support one or more "profile extensions" to supplement the
+capabalities of this specification.
+
+A profile extension is identified by a URI [[RFC 3986](https://www.ietf.org/rfc/rfc3986.txt)].
+When dereferenced, this URI **SHOULD** return documentation on the extension.
+
+For requesting extensions and indicating those in use, the JSON API media type
+defines a `profile` parameter. If present, the value of this parameter, **MUST**
+be a space-separated (U+0020 SPACE, " ") list of profile extension URIs. This
+list **MUST** be surrounded by quotation marks (U+0022 QUOTATION MARK, "\""), in
+accordance with the HTTP specification.
+
+### <a href="#extending-profile-extensions-sending" id="extending-profile-extensions-sending" class="headerlink"></a> Sending Extended Documents
+
+When sending a JSON API document that uses profile extensions, whether from the
+server to the client or vice-versa, the `profile` parameter **MUST** be used in
+the `Content-Type` header to indicate which extensions are in use.
+
+For instance, the following header would be sent with a document that makes use
+of the `http://jsonapi.org/ext/example-1/` and `http://jsonapi.org/ext/example-2/`
+extensions:
+
+```http
+Content-Type: application/vnd.api+json; profile="http://jsonapi.org/ext/example-1/ http://jsonapi.org/ext/example-2/"
+```
+
+##### Handling `415 Unsupported Media Type`
+
+When an older JSON API server that doesn't support the `profile` parameter
+receives a document with profile extensions, it will respond with a
+`415 Unsupported Media Type` error.
+
+After attempting to rule out other possible causes of this error, a client that
+receives a `415 Unsupported Media Type` **SHOULD** remove the profile extensions
+it has applied to the document and retry its request without the `profile` media
+type parameter. If this resolves the error, the client **SHOULD NOT** attempt to
+use profile extensions in subsequent interactions with the same API.
+
+> The most likely other causes of a 415 error are that the server doesn't
+support JSON API at all or that the client has failed to provide a
+[required extension](#extending-profile-extensions-required).
 
 ## <a href="#errors" id="errors" class="headerlink"></a> Errors
 
