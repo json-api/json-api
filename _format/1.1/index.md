@@ -1817,6 +1817,10 @@ to standard query parameters without conflicting with existing implementations.
 An API **MAY** support one or more "profile extensions" to supplement the
 capabalities of this specification.
 
+A profile extension is a small, separate specification that defines a set of
+values that can be added to a JSON API document, and the meaning of those values
+at the different places they can occur.
+
 A profile extension is identified by a URI [[RFC 3986](https://www.ietf.org/rfc/rfc3986.txt)].
 When dereferenced, this URI **SHOULD** return documentation on the extension.
 
@@ -1878,6 +1882,87 @@ Accept: application/vnd.api+json;profile="http://jsonapi.org/extensions/last-mod
   It is used to support old servers that don't understand the profile parameter.
 
 The server **SHOULD** include as many of the requested extensions as it supports.
+
+### <a href="#extending-profile-extensions-authoring" id="extending-profile-extensions-authoring" class="headerlink"></a> Authoring Profile Extensions
+
+As mentioned above, a profile extension defines a set of values that can be 
+added to a JSON API document, and the meaning of those values at the different 
+places they can occur.
+
+These values **MAY** be defined for use in any spec-defined [meta object][meta], 
+with the exception is that an extension **MUST NOT** define values for use in 
+the [`jsonapi` object](#document-jsonapi-object)'s meta object. A profile extension
+**MUST NOT** define any values for use outside of a meta object.
+
+The meaning of an extension-defined value **MAY** vary based on where it occurs
+in the document but **MUST NOT** vary based on the presence or absence of other
+profile extensions.
+
+The keys in any profile-extension-defined objects **MUST** meet this specification's
+requirements for [member names].
+
+> If you author an extension, you are **strongly encouraged to [register](/extensions/#extension-creation-registration)
+> it** with the JSON API [extension registry](/extensions/), so that others can
+> find and reuse it.
+
+#### <a href="#extending-profile-extensions-authoring-restrictions" id="extending-profile-extensions-authoring-restrictions" class="headerlink"></a> Restrictions on Profile Extensions
+
+Profile extensions are limited in how they can interact with this specification
+and one another. These limitations have been chosen carefully to ensure that
+multiple profile extensions can be used together safely; that changes to this
+specification will not conflict with a profile extension's semantics; and that
+profile extensions don't interfere with the interoperability of JSON API
+implementations. Accordingly:
+
+Profile extension designers **MUST NOT** assume that their extension will be
+understood by the recipient, or that their extension will be processed in any
+particular order relative to the other extensions in use. 
+
+An extension also **MUST NOT** assume that, if it is supported, then other 
+profile extensions will be supported as well. With the exception of extensions 
+that allow other extensions to nest data inside of their data, extensions 
+should be totally independent.
+
+Additionally, profile extensions **MUST NOT** define new query parameters, 
+fixed endpoints, or HTTP headers or header values. 
+
+Finally, profile extensions **MUST NOT**:
+
+- alter the JSON structure of any concept defined in this specification, 
+  including to allow a superset of JSON structures.
+
+- alter the meaning or processing rules associated with any concept defined 
+  in this specification, including to add additional meanings or constraints.
+
+####  <a href="#extending-profile-extensions-authoring-nesting" id="extending-profile-extensions-authoring-nesting" class="headerlink"></a> Nesting Profile Extensions
+
+A profile extension **MAY** declare that data from other extensions can be added
+to an object it defines. An extension-defined object that holds data from other 
+extensions must have a `meta` member, whose value must be an object. The data 
+from the foreign extension **MUST** be added under that `meta` member at a key 
+associated with foreign extension. 
+
+If a profile extension allows foreign extension data, it **MAY** require that the 
+extension whose data is being embedded meet certain functional requirements. 
+However, it **MUST NOT** require that the extension being embedded be on a list 
+of explicitly allowed extensions that it maintains.
+
+Conversely, a profile extension **MAY** define a set of values that can be used
+in objects added to the document by other profile extensions.
+
+#### <a href="#extending-profile-extensions-authoring-updating" id="extending-profile-extensions-authoring-updating" class="headerlink"></a> Updating a Profile Extension
+
+Profile extensions **MAY** be updated over time to add new capabilities, by
+revising their specification/registration. However, any such changes **MUST** be 
+[backwards and forwards compatible](http://www.w3.org/2001/tag/doc/versioning-compatibility-strategies#terminology).
+
+This restriction ensures that an updating an extension does not break existing 
+users of the extension. 
+
+> Note: Designing extensions that can be updated in this manner can be tricky.
+  To help with this, we encourage you to submit your extension for registration;
+  during the review, an editor will check that your extension follows the right
+  practices.
 
 ## <a href="#errors" id="errors" class="headerlink"></a> Errors
 
