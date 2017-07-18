@@ -1987,12 +1987,14 @@ keyed by `errors` in the top level of a JSON API document.
 An error object **MAY** have the following members:
 
 * `id`: a unique identifier for this particular occurrence of the problem.
+* `type`: a URI that identifies the type of error that this particular error 
+  is an instance of. When dereferenced, this URI **SHOULD** provide a 
+  human-readable explanation of the general error.
 * `links`: a [links object][links] containing the following members:
   * `about`: a [link][links] that leads to further details about this
     particular occurrence of the problem.
 * `status`: the HTTP status code applicable to this problem, expressed as a
   string value.
-* `code`: an application-specific error code, expressed as a string value.
 * `title`: a short, human-readable summary of the problem that **SHOULD NOT**
   change from occurrence to occurrence of the problem, except for purposes of
   localization.
@@ -2005,10 +2007,33 @@ An error object **MAY** have the following members:
     for a primary data object, or `"/data/attributes/title"` for a specific
     attribute]. This **MUST** point to a value in the request document that
     exists; if it doesn't, the client **SHOULD** simply ignore the pointer.
-  * `parameter`: a string indicating which URI query parameter caused
-    the error.
-* `meta`: a [meta object][meta] containing non-standard meta-information about the
-  error.
+  * `parameter`: a string indicating which URI query parameter used in the
+    request caused the error.
+  * <a id="error-objects-source-missing"></a>`missing`: an object indicating
+    that the error was caused by a missing extension, key, or URI query parameter.
+    If present, this object **MUST** contain exactly one of the following keys:
+        * `extension`: the URI of a missing extension. This key **SHOULD** be
+          used with the `pointer` member to indicate which value in the request
+          document is missing the extension.
+        * `key`: the name of a missing key. This key **SHOULD** be used with the
+          `pointer` member to indicate which value in the request document is
+          missing the key.
+        * `parameter`: the name of a missing URI query parameter.
+
+    This object **MAY** also contain an `alternatives` key, whose value is an
+    array listing alternate extension URIs, key names, or parameter names
+    (depending on which type of value is missing) that can be added to resolve
+    this error.
+* `meta`: a [meta object][meta] containing additional information about the error.
+
+> Note: Previous versions of this specification defined a `code` member in
+  error objects. The role of that member is now played instead by the `type`.
+>
+> Old APIs that send the `code` member will continue to function with newer
+  clients, but these clients will likely ignore that member. Clients may choose
+  to continue to support `code` if they must interact with older APIs. However,
+  new APIs should not produce error objects with this member, even though doing
+  so is technically allowed.
 
 [resource objects]: #document-resource-objects
 [attributes]: #document-resource-object-attributes
