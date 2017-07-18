@@ -85,8 +85,8 @@ A document **MUST** contain at least one of the following top-level members:
 
 * `data`: the document's "primary data"
 * `errors`: an array of [error objects](#errors)
-* `meta`: a [meta object][meta] that contains non-standard
-  meta-information.
+* `meta`: a [meta object][meta] that contains additional information about
+  the document.
 
 The members `data` and `errors` **MUST NOT** coexist in the same document.
 
@@ -169,7 +169,7 @@ In addition, a resource object **MAY** contain any of these top-level members:
 * `relationships`: a [relationships object][relationships] describing relationships between
  the resource and other JSON API resources.
 * `links`: a [links object][links] containing links related to the resource.
-* `meta`: a [meta object][meta] containing non-standard meta-information about a
+* `meta`: a [meta object][meta] containing additional information about a
   resource that can not be represented as an attribute or relationship.
 
 Here's how an article (i.e. a resource of type "articles") might appear in a document:
@@ -265,7 +265,7 @@ A "relationship object" **MUST** contain at least one of the following:
     (See [Fetching Relationships](#fetching-relationships).)
   * `related`: a [related resource link]
 * `data`: [resource linkage]
-* `meta`: a [meta object][meta] that contains non-standard meta-information about the
+* `meta`: a [meta object][meta] that contains additional information about the
   relationship.
 
 A relationship object that represents a to-many relationship **MAY** also contain
@@ -369,8 +369,8 @@ resource.
 
 A "resource identifier object" **MUST** contain `type` and `id` members.
 
-A "resource identifier object" **MAY** also include a `meta` member, whose value is a [meta] object that
-contains non-standard meta-information.
+A "resource identifier object" **MAY** also include a `meta` member, whose value
+is a [meta] object.
 
 ### <a href="#document-compound-documents" id="document-compound-documents" class="headerlink"></a> Compound Documents
 
@@ -484,8 +484,8 @@ multiple times.
 ### <a href="#document-meta" id="document-meta" class="headerlink"></a> Meta Information
 
 Where specified, a `meta` member can be used to include non-standard
-meta-information. The value of each `meta` member **MUST** be an object (a
-"meta object").
+meta-information or additional information associated with a [profile extension](#extending).
+The value of each `meta` member **MUST** be an object (a "meta object").
 
 Any members **MAY** be specified within `meta` objects.
 
@@ -520,8 +520,7 @@ either:
 * <a id="document-links-link-object"></a>an object ("link object") which can 
   contain the following members:
   * `href`: a string containing the link's URL.
-  * `meta`: a meta object containing non-standard meta-information about the
-    link.
+  * `meta`: a [meta object][meta] containing additional information about the link.
 
 The following `self` link is simply a URL:
 
@@ -581,11 +580,15 @@ the URI `http://example.org/`:
 ### <a href="#document-jsonapi-object" id="document-jsonapi-object" class="headerlink"></a> JSON API Object
 
 A JSON API document **MAY** include information about its implementation
-under a top level `jsonapi` member. If present, the value of the `jsonapi`
-member **MUST** be an object (a "jsonapi object"). The jsonapi object **MAY**
-contain a `version` member whose value is a string indicating the highest JSON
-API version supported. This object **MAY** also contain a `meta` member, whose
-value is a [meta] object that contains non-standard meta-information.
+under a top-level `jsonapi` member. If present, the value of the `jsonapi`
+member **MUST** be an object (a "jsonapi object").
+
+The jsonapi object **MAY** contain a `version` member whose value is a string
+indicating the highest JSON API version supported.
+
+This object **MAY** also contain a `meta` member, whose value is a [meta object][meta]
+that contains non-standard meta-information. The `meta` object in the jsonapi
+object **MUST NOT** contain [profile extension data](#extending-profile-extensions-applying).
 
 ```json
 {
