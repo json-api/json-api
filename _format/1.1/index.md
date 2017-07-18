@@ -1830,6 +1830,14 @@ be a space-separated (U+0020 SPACE, " ") list of profile extension URIs. This
 list **MUST** be surrounded by quotation marks (U+0022 QUOTATION MARK, "\""), in
 accordance with the HTTP specification.
 
+### <a href="#extending-profile-extensions-processing" id="extending-profile-extensions-processing" class="headerlink"></a> Processing Extensions
+
+The recipient of a document **MUST** ignore any profile extensions in that
+document that it does not understand.
+
+Recipients **MAY** process in parallel the data from different profile extensions
+in use in a document.
+
 ### <a href="#extending-profile-extensions-applying" id="extending-profile-extensions-applying" class="headerlink"></a> Adding Extensions to a Document
 
 The client or the server **MAY** add profile extensions to a JSON API document,
