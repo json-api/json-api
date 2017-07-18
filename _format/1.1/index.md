@@ -1948,6 +1948,23 @@ Accept: application/vnd.api+json;profile="http://jsonapi.org/extensions/last-mod
 
 The server **SHOULD** include as many of the requested extensions as it supports.
 
+#### <a href="#extending-profile-extensions-required" id="extending-profile-extensions-required" class="headerlink"></a> Required Extensions
+
+A server **SHOULD NOT** require that clients send documents containing certain
+extensions, as such requirements reduce interoperability.
+
+However, in the event that the server does require one or more extensions (e.g.
+for  authentication), and the client fails to use those extensions, the server
+**MUST** send a `415 Unsupported Media Type` error. In the error's response body,
+there **MUST** be an [error object][error objects] for each required extension
+that is missing, and this error object **MUST**:
+
+  - have a [`type`](#error-objects) who's URI is
+    `http://jsonapi.org/errors/missing-profile-extension`
+
+  - include the URI of the missing extension in the `extension` member of the
+    [`missing` object](#error-objects-source-missing).
+
 ### <a href="#extending-profile-extensions-authoring" id="extending-profile-extensions-authoring" class="headerlink"></a> Authoring Profile Extensions
 
 As mentioned above, a profile extension defines a set of values that can be 
