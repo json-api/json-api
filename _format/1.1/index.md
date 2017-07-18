@@ -5,7 +5,8 @@ version: 1.1
 ## <a href="#introduction" id="introduction" class="headerlink"></a> Introduction
 
 JSON API is a specification for how a client should request that resources be
-fetched or modified, and how a server should respond to those requests.
+fetched or modified, and how a server should respond to those requests. JSON API
+can also be easily [extended](#extending).
 
 JSON API is designed to minimize both the number of requests and the amount of
 data transmitted between clients and servers. This efficiency is achieved
