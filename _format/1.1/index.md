@@ -1830,6 +1830,71 @@ be a space-separated (U+0020 SPACE, " ") list of profile extension URIs. This
 list **MUST** be surrounded by quotation marks (U+0022 QUOTATION MARK, "\""), in
 accordance with the HTTP specification.
 
+### <a href="#extending-profile-extensions-applying" id="extending-profile-extensions-applying" class="headerlink"></a> Adding Extensions to a Document
+
+The client or the server **MAY** add profile extensions to a JSON API document,
+whether or not the other party [requests](#extending-profile-extensions-requesting)
+them. 
+
+When one or more profile extensions are used in a JSON API document, the document 
+**MUST** define at least one [alias][aliases] for each extension's URI.
+
+An alias for an extension's URI **MAY** be used as a key (an "extension-associated
+key") within a `meta` object. The value at any such key is interpreted according the 
+specification of the extension to which the key name maps.
+
+The same extension-associated key **MAY** appear more than once in a given
+document.
+
+An extension-associated key **MUST NOT** be added at any location where the
+extension's specification does not define how to interpret the key's value.
+
+> In practice, extension-associated keys are only allowed as children of a
+  `"meta"` object, and only when that `"meta"` object is not within the
+  `"jsonapi"` object. This is because extensions are also [limited](#extending-profile-extensions-authoring)
+  in where they can permit their data to appear.
+
+The following document demonstrates these rules by adding a hypothetical
+extension that has the URI `http://example.org/extensions/last-modified`:
+
+```json
+{
+  "aliases": {
+    "last-modified": "http://example.org/extensions/last-modified"
+  },
+  "data": {
+    "type": "people",
+    "id": "9",
+    "attributes": {
+      "first-name": "Dan",
+      "last-name": "Gebhardt"
+    },
+    "relationships": {
+      "father": {
+        "data": {
+          "type": "people", "id": "7"
+        },
+        "meta": {
+          "last-modified": "2013-09-24T00:00:00Z"
+        }
+      }
+    },
+    "meta": {
+      "last-modified": {
+        "date": "2015-01-01T00:00:00Z", "fields": ["first-name"]
+      }
+    }
+  }
+}
+```
+
+The document above defines `"last-modified"` as an alias for the exension's
+URI (though any legal [alias][aliases] name would do). Then, `"last-modified"`
+is used as an extension-associated key throughout the document. The 
+`"last-modified"` key holds values that have different formats and meanings 
+in each location that it appears, which is allowed assuming the extension's 
+specification describes those formats.
+
 ### <a href="#extending-profile-extensions-sending" id="extending-profile-extensions-sending" class="headerlink"></a> Sending Extended Documents
 
 When sending a JSON API document that uses profile extensions, whether from the
@@ -1949,6 +2014,59 @@ of explicitly allowed extensions that it maintains.
 
 Conversely, a profile extension **MAY** define a set of values that can be used
 in objects added to the document by other profile extensions.
+
+For example, imagine an extension that defines a template format that servers
+can insert into their responses to tell clients how to construct valid requests
+to trigger various "actions" associated with a resource. Imagine also that this 
+extension allows the server to use other JSON:API extensions to communicate 
+validation constraints for the request, rather than the extension definining its 
+own validation format. In that case, applying this hypothentical extension to a 
+document might look like:
+
+```http
+GET /articles/1 HTTP/1.1
+```
+
+```json
+{
+  "aliases": {
+    "templates": "http://example.org/extensions/request-template",
+    "common-validators": "http://example.org/extensions/validators"
+  },
+  "meta": {
+    "templates": [{
+      "name": "publish",
+      "method": "PATCH",
+      "uri": "/articles/1"
+      "fields": [{
+        "name": "publish-date",
+        "meta": {
+          "common-validators": { "type": "date" }
+        }
+      }]
+    }
+  },
+  "data": {
+    "type": "articles",
+    "id": "1",
+    "attributes": {
+      // ... this article's attributes
+    },
+    "relationships": {
+      // ... this article's relationships
+    }
+  }
+}
+```
+
+In the example above, the server has added the `http://example.org/extensions/request-template`
+extension to its response to communicate that the client can publish the 
+article by making a `PATCH` request to `/articles/1` that includes a 
+`"publish-date"` field. The request template extension has also speficied a 
+`meta` member in its field objects, allowing foreign extensions to add extra 
+information. The server has used this opportunity to communicate that the 
+`"publish-date"` field must contain a date, by applying the 
+`http://example.org/extensions/validators` extension.
 
 #### <a href="#extending-profile-extensions-authoring-updating" id="extending-profile-extensions-authoring-updating" class="headerlink"></a> Updating a Profile Extension
 
