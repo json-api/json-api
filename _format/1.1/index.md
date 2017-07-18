@@ -1834,6 +1834,10 @@ be a space-separated (U+0020 SPACE, " ") list of profile extension URIs. This
 list **MUST** be surrounded by quotation marks (U+0022 QUOTATION MARK, "\""), in
 accordance with the HTTP specification.
 
+> If no available extension fits your needs, and you decide to create your own,
+> we've provided a [template](/extensions/#extension-creation-drafting)
+> for formatting your extension's documentation.
+
 ### <a href="#extending-profile-extensions-processing" id="extending-profile-extensions-processing" class="headerlink"></a> Processing Extensions
 
 The recipient of a document **MUST** ignore any profile extensions in that
