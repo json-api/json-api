@@ -96,6 +96,7 @@ A document **MAY** contain any of these top-level members:
 * `links`: a [links object][links] related to the primary data.
 * `included`: an array of [resource objects] that are related to the primary
   data and/or each other ("included resources").
+* `aliases`: an object defining string aliases for referring to (longer) URIs
 
 If a document does not contain a top-level `data` key, the `included` member
 **MUST NOT** be present either.
@@ -549,6 +550,34 @@ objects in the future. It is also possible that the allowed values of
 additional members will be expanded (e.g. a `collection` link may support an
 array of values, whereas a `self` link does not).
 
+### <a href="#document-aliases" id="document-aliases" class="headerlink"></a> URI Aliases
+
+The top level of a JSON API document **MAY** include an `aliases` member.
+If present, the value of this member **MUST** be an object (an "aliases object").
+
+Each key–value pair in the aliases object is an "alias definition". The key,
+called the "alias", is said to "be an alias for" the value, which **MUST**
+be an absolute URI.
+
+Aliases **MUST** adhere to the same constraints as all [member names].
+
+Additionally, the strings `"api"` and `"jsonapi"` are reserved and
+**MUST NOT** be used as aliases.
+
+For example, the following object defines the string `"ex"` as an alias for
+the URI `http://example.org/`:
+
+```json
+{
+  "aliases": {
+    "ex": "http://example.org/"
+  }
+}
+```
+
+> Note: Aliases are currently only used as part of the [extension system][extensions].
+  However, their use may be expanded in the future.
+
 ### <a href="#document-jsonapi-object" id="document-jsonapi-object" class="headerlink"></a> JSON API Object
 
 A JSON API document **MAY** include information about its implementation
@@ -986,12 +1015,12 @@ example, a response to a request for `comments.author` should include `comments`
 as well as the `author` of each of those `comments`.
 
 > Note: A server may choose to expose a deeply nested relationship such as
-`comments.author` as a direct relationship with an alias such as
+`comments.author` as a direct relationship with an alternative name such as
 `comment-authors`. This would allow a client to request
 `/articles/1?include=comment-authors` instead of
 `/articles/1?include=comments.author`. By abstracting the nested
-relationship with an alias, the server can still provide full linkage in
-compound documents without including potentially unwanted intermediate
+relationship with an alternate name, the server can still provide full linkage
+in compound documents without including potentially unwanted intermediate
 resources.
 
 Multiple related resources can be requested in a comma-separated list:
@@ -1907,6 +1936,8 @@ An error object **MAY** have the following members:
 [compound document]: #document-compound-documents
 [meta]: #document-meta
 [links]: #document-links
+[aliases]: #document-aliases
+[extensions]: #extending
 [error details]: #errors
 [member names]: #document-member-names
 [pagination]: #fetching-pagination
