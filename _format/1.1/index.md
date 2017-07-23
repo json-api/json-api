@@ -1819,7 +1819,7 @@ to standard query parameters without conflicting with existing implementations.
 ## <a href="#extending" id="extending" class="headerlink"></a> Extending JSON API
 
 An API **MAY** support one or more "profile extensions" to supplement the
-capabalities of this specification.
+capabilities of this specification.
 
 A profile extension is a small, separate specification that defines a set of
 values that can be added to a JSON API document, and the meaning of those values
@@ -2066,7 +2066,7 @@ GET /articles/1 HTTP/1.1
     "templates": [{
       "name": "publish",
       "method": "PATCH",
-      "uri": "/articles/1"
+      "uri": "/articles/1",
       "fields": [{
         "name": "publish-date",
         "meta": {
