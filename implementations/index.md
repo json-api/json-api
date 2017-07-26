@@ -61,6 +61,7 @@ assembled to vet them.
 
 * [Art4 / json-api-client](https://github.com/Art4/json-api-client) is a library for validating and handling the response body in a simple OOP way.
 * [woohoolabs / yang](https://github.com/woohoolabs/yang) is a PSR-7 compatible library that is able to build and send requests, and handle responses.
+* [enm/json-api-client](https://eosnewmedia.github.io/JSON-API-Client/) is an abstract client-side PHP implementation of the json api specification, based on the PSR-7 HTTP message interface.
 
 ### <a href="#client-libraries-dart" id="client-libraries-dart" class="headerlink"></a> Dart
 
@@ -126,6 +127,8 @@ and writing of JSON API documents.
 * [FriendsOfCake/crud-json-api](https://github.com/FriendsOfCake/crud-json-api) CakePHP Crud Listener for building maintainable JSON API compliant APIs.
 * [thephpleague/fractal](http://fractal.thephpleague.com/) A partial implementation of the JSON API spec allowing for an easy drop in JSON rendering solution.
 * [oligus/jad](https://github.com/oligus/jad) A library that turns doctrine entities into json api resource, or collection of resources, automagically.
+* [enm/json-api-server](https://eosnewmedia.github.io/JSON-API-Server/) is an abstract server-side PHP (>= 7.0) implementation of the json api specification. It offers an entry point which will handle PSR-7 requests and will respond with a PSR-7 response. A Request can be logged by a PSR-3 logger if needed. All structures (resources, documents etc.) are implemented by default but of course you are able to use your own implementations.
+* [enm/json-api-server-bundle](https://eosnewmedia.github.io/JSON-API-Server-Bundle/) is a symfony bundle which integrates [enm/json-api-server](https://eosnewmedia.github.io/JSON-API-Server/) into your symfony application (symfony version ~2.7|~3.0).
 
 ### <a href="#server-libraries-node-js" id="server-libraries-node-js" class="headerlink"></a> Node.js
 * [Fortune.js](http://fortune.js.org/) is a library that includes a [comprehensive implementation of JSON API](https://github.com/fortunejs/fortune-json-api).
