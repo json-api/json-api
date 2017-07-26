@@ -1244,6 +1244,45 @@ otherwise (that is an object with a single `pointer` member the value of which i
 JSON pointer to a resource object). The document **MUST** still respect the full
 linkage requirement.
 
+For instance, a new article might be created along with two tags with the following 
+request:
+
+```http
+POST /articles HTTP/1.1
+Content-Type: application/vnd.api+json
+Accept: application/vnd.api+json
+
+{
+  "data": {
+    "type": "articles",
+    "attributes": {
+      "title": "Sideposting with json:api"
+    },
+    "relationships": {
+      "tags": {
+        "data": [{ "type": "tags", "id": "9" },
+                 { "pointer": "/included/0" },
+                 { "pointer": "/included/1" }]
+      }
+    }
+  },
+  "included": [
+    {
+      "type": "tags",
+      "attributes": {
+        "label": "JSON"
+      }
+    },
+    {
+      "type": "tags",
+      "attributes": {
+        "label": "REST"
+      }
+    }
+  ]
+}
+```
+
 A server **MUST** handle sideposting requests transactionally, and either create all
 requested resources or none.
 
