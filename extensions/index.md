@@ -40,14 +40,20 @@ To author your extension, fill out the Markdown template below.
 > Add a description here (no more than a paragraph) about your extension's
 > purpose and features to help other users determine if it will work for them.
 >
-> \# (Optional) Minimum JSON API Version
+> \# Minimum JSON API Version (Optional) 
 >
 > Here, note if your extension only works with certain versions of JSON API.
 > Such a restriction would be appropriate if the values your extension defines
 > can only be used in objects that were not present before a certain JSON API
 > version.
 >
-> \# Suggested Alias
+> \# Github Repository / Discussion Channel (Optional)
+> 
+> If the specification you're submitting below also lives in a Github repository,
+> or if there's some other place where people can ask questions/start discussions
+> about your extension, please provide the URL for that here.
+> 
+> \# Suggested Alias (Optional)
 >
 > Put a string here that you'd like users to use as the [alias](/format/#document-aliases)
 > for your extension. This can make it easier for readers to recognize your
