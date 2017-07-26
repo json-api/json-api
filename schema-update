@@ -1,0 +1,36 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "JSON API Schema",
+  "description": "This is a schema for clients updating resources in the JSON API format. For more, see http://jsonapi.org",
+  "type": "object",
+  "required": [
+    "data"
+  ],
+  "properties": {
+    "data": {
+      "$ref": "#/definitions/updateData"
+    },
+    "meta": {
+      "$ref": "http://jsonapi.org/schema#/definitions/meta"
+    },
+    "jsonapi": {
+      "$ref": "http://jsonapi.org/schema#/definitions/jsonapi"
+    }
+  },
+  "additionalProperties": false,
+  
+  "definitions": {
+    "updateData": {
+      "description": "The `PATCH` request **MUST** include a single resource object as primary data. A relationshp can be cleared by sending `null` data.",
+      "oneOf": [
+        {
+          "description": "Used to remove a relationship.",
+          "type": "null"
+        },
+        {
+          "$ref": "http://jsonapi.org/schema#/definitions/resource"
+        }
+      ]
+    }
+  }
+}

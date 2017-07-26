@@ -1,0 +1,28 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "JSON API Schema",
+  "description": "This is a schema for clients creating resources in the JSON API format. For more, see http://jsonapi.org",
+  "type": "object",
+  "required": [
+    "data"
+  ],
+  "properties": {
+    "data": {
+      "$ref": "#/definitions/newData"
+    },
+    "meta": {
+      "$ref": "http://jsonapi.org/schema#/definitions/meta"
+    },
+    "jsonapi": {
+      "$ref": "http://jsonapi.org/schema#/definitions/jsonapi"
+    }
+  },
+  "additionalProperties": false,
+  
+  "definitions": {
+    "newData": {
+      "description": "A resource can be created by sending a `POST` request to a URL that represents a collection of resources. The request **MUST** include a single resource object as primary data.",
+      "$ref": "http://jsonapi.org/schema#/definitions/newResource"
+    }
+  }
+}
