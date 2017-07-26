@@ -177,7 +177,7 @@
         {
           "description": "A string containing the link's URL.",
           "type": "string",
-          "format": "uri"
+          "format": "uri-reference"
         },
         {
           "type": "object",
@@ -188,7 +188,7 @@
             "href": {
               "description": "A string containing the link's URL.",
               "type": "string",
-              "format": "uri"
+              "format": "uri-reference"
             },
             "meta": {
               "$ref": "#/definitions/meta"
@@ -202,7 +202,7 @@
       "description": "Members of the attributes object (\"attributes\") represent information about the resource object in which it's defined.",
       "type": "object",
       "patternProperties": {
-        "^(?!relationships$|links$)\\w[-\\w_]*$": {
+        "^(?!relationships$|links$|id$|type$)\\w[-\\w_]*$": {
           "description": "Attributes may contain any valid JSON value."
         }
       },
@@ -213,7 +213,7 @@
       "description": "Members of the relationships object (\"relationships\") represent references from the resource object in which it's defined to other resource objects.",
       "type": "object",
       "patternProperties": {
-        "^\\w[-\\w_]*$": {
+        "^(?!id$|type$)\\w[-\\w_]*$": {
           "properties": {
             "links": {
               "$ref": "#/definitions/relationshipLinks"
@@ -292,28 +292,28 @@
         "first": {
           "description": "The first page of data",
           "oneOf": [
-            { "type": "string", "format": "uri" },
+            { "type": "string", "format": "uri-reference" },
             { "type": "null" }
           ]
         },
         "last": {
           "description": "The last page of data",
           "oneOf": [
-            { "type": "string", "format": "uri" },
+            { "type": "string", "format": "uri-reference" },
             { "type": "null" }
           ]
         },
         "prev": {
           "description": "The previous page of data",
           "oneOf": [
-            { "type": "string", "format": "uri" },
+            { "type": "string", "format": "uri-reference" },
             { "type": "null" }
           ]
         },
         "next": {
           "description": "The next page of data",
           "oneOf": [
-            { "type": "string", "format": "uri" },
+            { "type": "string", "format": "uri-reference" },
             { "type": "null" }
           ]
         }
