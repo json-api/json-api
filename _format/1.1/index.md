@@ -1232,6 +1232,24 @@ Accept: application/vnd.api+json
 A server **MUST** return `403 Forbidden` in response to an unsupported request
 to create a resource with a client-generated ID.
 
+#### <a href="#crud-sideposting" id="crud-sideposting" class="headerlink"></a> Sideposting
+
+A server **MAY** accept a request to create related resources along with the primary
+resource, which is referred to as *sideposting*. The related resources **MUST**
+be placed within the `included` member. A sideposted resource **MUST** be referred to
+(from the linkage data of resource relationships) either via standard
+[resource identifier objects][resource identifier object] when using a
+client-generated ID, or as a [resource pointer object][resource pointer object]
+otherwise (that is an object with a single `pointer` member the value of which is a
+JSON pointer to a resource object). The document **MUST** still respect the full
+linkage requirement.
+
+A server **MUST** handle sideposting requests transactionally, and either create all
+requested resources or none.
+
+A server **MUST** return `403 Forbidden` in response to an unsupported request to
+create a resource with sideposting.
+
 #### <a href="#crud-creating-responses" id="crud-creating-responses" class="headerlink"></a> Responses
 
 ##### <a href="#crud-creating-responses-201" id="crud-creating-responses-201" class="headerlink"></a> 201 Created
