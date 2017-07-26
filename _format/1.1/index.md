@@ -1241,8 +1241,9 @@ be placed within the `included` member. A sideposted resource **MUST** be referr
 [resource identifier objects][resource identifier object] when using a
 client-generated ID, or as a [resource pointer object][resource pointer object]
 otherwise (that is an object with a single `pointer` member the value of which is a
-JSON Pointer [[RFC6901](https://tools.ietf.org/html/rfc6901)] to a resource object). The document **MUST** still respect the full
-linkage requirement.
+JSON Pointer [[RFC6901](https://tools.ietf.org/html/rfc6901)] to a resource object).
+
+The document **MUST** still respect the full linkage requirement.
 
 For instance, a new article might be created along with two tags with the following 
 request:
