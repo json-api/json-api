@@ -1803,6 +1803,9 @@ An error object **MAY** have the following members:
 * `links`: a [links object][links] containing the following members:
   * `about`: a [link][links] that leads to further details about this
     particular occurrence of the problem.
+  * `type`: a [link][links] whose URI that identifies the type of error that 
+     this particular error is an instance of. When dereferenced, this URI 
+     **SHOULD** provide a human-readable explanation of the general error.
 * `status`: the HTTP status code applicable to this problem, expressed as a
   string value.
 * `code`: an application-specific error code, expressed as a string value.
