@@ -1330,6 +1330,14 @@ Content-Type: application/vnd.api+json
 }
 ```
 
+If a `POST` request *did* include some [Sideposted resources](#sideposting), the server
+**MAY** default to including the created related resources within the `included`
+member.
+
+If a sideposted resource is present in the response document, then it **MUST**
+have a `temp-id` member that identifies the corresponding resource from the request
+document.
+
 ##### <a href="#crud-creating-responses-202" id="crud-creating-responses-202" class="headerlink"></a> 202 Accepted
 
 If a request to create a resource has been accepted for processing, but the
