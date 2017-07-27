@@ -1235,13 +1235,12 @@ to create a resource with a client-generated ID.
 #### <a href="#crud-sideposting" id="crud-sideposting" class="headerlink"></a> Sideposting
 
 A server **MAY** accept a request to create related resources along with the primary
-resource, which is referred to as *sideposting*. The related resources **MUST**
-be placed within the `included` member. A sideposted resource **MUST** be referred to
-(from the linkage data of resource relationships) either via standard
-[resource identifier objects][resource identifier object] when using a
-client-generated ID, or as a [resource pointer object][resource pointer object]
-otherwise (that is an object with a single `pointer` member the value of which is a
-JSON Pointer [[RFC6901](https://tools.ietf.org/html/rfc6901)] to a resource object).
+resource, which is referred to as *sideposting*. A related resource **MUST**
+be placed within the `included` member, and have a `temp-id` member the value of which
+is an arbitrary string that uniquely identifies a related resource within the request
+document. The related resources **MUST** be referred to (from the linkage data of
+resource relationships) via a *temporary resource identifier object* (that is an
+object with a single `temp-id` member referring to a related resource).
 
 The document **MUST** still respect the full linkage requirement.
 
@@ -1262,20 +1261,22 @@ Accept: application/vnd.api+json
     "relationships": {
       "tags": {
         "data": [{ "type": "tags", "id": "9" },
-                 { "pointer": "/included/0" },
-                 { "pointer": "/included/1" }]
+                 { "temp-id": "1" },
+                 { "temp-id": "2" }]
       }
     }
   },
   "included": [
     {
       "type": "tags",
+      "temp-id": "1",
       "attributes": {
         "label": "JSON"
       }
     },
     {
       "type": "tags",
+      "temp-id": "2",
       "attributes": {
         "label": "REST"
       }
