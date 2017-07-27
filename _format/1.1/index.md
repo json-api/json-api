@@ -1338,6 +1338,46 @@ If a sideposted resource is present in the response document, then it **MUST**
 have a `temp-id` member that identifies the corresponding resource from the request
 document.
 
+```http
+HTTP/1.1 201 Created
+Content-Type: application/vnd.api+json
+
+{
+  "data": {
+    "type": "articles",
+    "id": "123",
+    "attributes": {
+      "title": "Sideposting with json:api"
+    },
+    "relationships": {
+      "tags": {
+        "data": [{ "type": "tags", "id": "9" },
+                 { "type": "tags", "id": "14" },
+                 { "type": "tags", "id": "42" }]
+      }
+    }
+  },
+  "included": [
+    {
+      "type": "tags",
+      "id": "14",
+      "temp-id": "1",
+      "attributes": {
+        "label": "JSON"
+      }
+    },
+    {
+      "type": "tags",
+      "id": "42",
+      "temp-id": "2",
+      "attributes": {
+        "label": "REST"
+      }
+    }
+  ]
+}
+```
+
 ##### <a href="#crud-creating-responses-202" id="crud-creating-responses-202" class="headerlink"></a> 202 Accepted
 
 If a request to create a resource has been accepted for processing, but the
