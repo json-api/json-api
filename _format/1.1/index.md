@@ -1235,12 +1235,17 @@ to create a resource with a client-generated ID.
 #### <a href="#crud-sideposting" id="crud-sideposting" class="headerlink"></a> Sideposting
 
 A server **MAY** accept a request to create related resources along with the primary
-resource, which is referred to as *sideposting*. A related resource **MUST**
-be placed within the `included` member, and have a `temp-id` member the value of which
-is an arbitrary string that uniquely identifies a related resource within the request
-document. The related resources **MUST** be referred to (from the linkage data of
-resource relationships) via a *temporary resource identifier object* (that is an
-object with a single `temp-id` member referring to a related resource).
+resource, which is referred to as *sideposting*. Related resources **MUST**
+be placed within the `included` section, and have a `temp-id` member the value of
+which is an arbitrary string.
+Linkage with sideposted resources **MUST** be expressed via *temporary resource
+identifier objects*, that is [resource identifier objects][resource identifier object]
+where the `id` member is replaced with a `temp-id` member. A temporary resource
+identifier object **MUST** identify an individual resource within a request document.
+
+In case a sideposted resource refers to the primary resource, the primary resource
+**MUST** have a `temp-id` member, and linkage **MUST** be expressed using a
+temporary resource identifier object.
 
 The document **MUST** still respect the full linkage requirement.
 
@@ -1261,8 +1266,8 @@ Accept: application/vnd.api+json
     "relationships": {
       "tags": {
         "data": [{ "type": "tags", "id": "9" },
-                 { "temp-id": "1" },
-                 { "temp-id": "2" }]
+                 { "type": "tags", "temp-id": "1" },
+                 { "type": "tags", "temp-id": "2" }]
       }
     }
   },
