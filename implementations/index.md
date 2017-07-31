@@ -34,11 +34,11 @@ assembled to vet them.
 * [angular-jsonapi](https://github.com/jakubrohleder/angular-jsonapi) An Angular JSON API client
 * [redux-json-api](https://github.com/dixieio/redux-json-api) A library which integrated JSON APIs with Redux store
 * [devour-client](https://github.com/twg/devour) A lightweight, framework agnostic, highly flexible JSON API client
-* [Coloquent](https://github.com/DavidDuwaer/Coloquent) A library mapping objects and their interrelations to JSON API, with a fluent syntax inspired by Laravel's Eloquent.
 * [json-api-normalizer](https://github.com/yury-dymov/json-api-normalizer) Normalizes JSON API documents for state management solutions like Redux and Mobx
 * [jsona](https://github.com/olosegres/jsona) Data formatter that creates customizable, simplified objects from JSON or stored reduxObject (result object of [json-api-normalizer](https://github.com/yury-dymov/json-api-normalizer)), and creates correct JSON from the same simplified objects.
 * [active-resource](https://github.com/nicklandgrebe/activeresource.js) A standalone, convention-driven JavaScript ORM that maps to your JSON API server and allows for advanced queries and relational management through a smooth interface.
 * [redux-bees](https://github.com/cantierecreativo/redux-bees) A nice, short and declarative way to interact with JSON APIs in React+Redux
+* [Coloquent](https://github.com/DavidDuwaer/Coloquent) A library mapping objects and their interrelations to JSON API, with a fluent syntax inspired by Laravel's Eloquent.
 
 ### <a href="#client-libraries-typescript" id="client-libraries-typescript" class="headerlink"></a> Typescript
 * [ts-angular-jsonapi](https://github.com/reyesoft/ts-angular-jsonapi) A JSON API library developed for AngularJS in Typescript
