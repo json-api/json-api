@@ -243,7 +243,6 @@ includes related resources.
 
 ## <a href="#examples" id="examples" class="headerlink"></a> Examples
 
-* [RestPack::Serializer provides examples](http://restpack-serializer-sample.herokuapp.com/) which demonstrate sample responses.
 * [Endpoints provides a fully working example API](http://github.com/endpoints/example/)
 * [Sinja provides a fully-working example API](https://github.com/mwpastore/sinja/tree/master/demo-app)
 
