@@ -161,7 +161,6 @@ is one of the original exemplar implementations, but is slightly out of date at
 the moment.
 * [The rabl wiki](https://github.com/nesquena/rabl/wiki/Conforming-to-jsonapi.org-format)
 has a page describing how to emit conformant JSON.
-* [Oat](https://github.com/ismasan/oat#adapters) ships with a JSON API adapter.
 * [JSONAPI::Resources](https://github.com/cerebris/jsonapi-resources) provides a complete framework for developing a JSON API server. It is designed to work with Rails, and provides routes, controllers, and serializers.
 * [Yaks](https://github.com/plexus/yaks) Library for building hypermedia APIs, contains a JSON API output format.
 * [JSONAPI::Serializers](https://github.com/fotinakis/jsonapi-serializers) provides a pure Ruby, readonly serializer implementation.
