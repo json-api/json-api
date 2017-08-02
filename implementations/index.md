@@ -159,8 +159,7 @@ empowers your JSONAPI compliant [Rails](http://rubyonrails.org/) APIs. Implement
 * [ActiveModel::Serializers](https://github.com/rails-api/active_model_serializers)
 is one of the original exemplar implementations, but is slightly out of date at
 the moment.
-* [The rabl wiki](https://github.com/nesquena/rabl/wiki/Conforming-to-jsonapi.org-format)
-has a page describing how to emit conformant JSON.
+* [RestPack::Serializer](https://github.com/RestPack/restpack_serializer) implements the read elements of json-api. It also supports paging and side-loading.
 * [Oat](https://github.com/ismasan/oat#adapters) ships with a JSON API adapter.
 * [JSONAPI::Resources](https://github.com/cerebris/jsonapi-resources) provides a complete framework for developing a JSON API server. It is designed to work with Rails, and provides routes, controllers, and serializers.
 * [Yaks](https://github.com/plexus/yaks) Library for building hypermedia APIs, contains a JSON API output format.
