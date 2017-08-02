@@ -1,0 +1,39 @@
+---
+version: 1.0
+layout: null
+---
+{
+  "jsonapi" : {
+    "version" : "1.0"
+  },
+  "specs" : [
+    {
+      "id" : "1",
+      "description" : "Resource creation",
+      "resources" : {
+        "users" : [ ... ],
+        "tweets" : [ ... ],
+      },
+      "request" : {
+        "method" : "POST",
+        "uri" : "/users",
+        "headers" : {
+          "Content-Type" : "application/vnd.api+json",
+          "Accept" : "application/vnd.api+json"
+        },
+        "body" : {
+          "data" : {
+            "type" : "users",
+            "attributes" : { ... },
+            "relationships" : { ... }
+          }
+        }
+      },
+      "response" : {
+        "status" : 200,
+        "headers" : { ... },
+        "body" : { ... }
+      }
+    }
+  ]
+}
