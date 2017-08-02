@@ -39,6 +39,7 @@ assembled to vet them.
 * [active-resource](https://github.com/nicklandgrebe/activeresource.js) A standalone, convention-driven JavaScript ORM that maps to your JSON API server and allows for advanced queries and relational management through a smooth interface.
 * [redux-bees](https://github.com/cantierecreativo/redux-bees) A nice, short and declarative way to interact with JSON APIs in React+Redux
 * [Coloquent](https://github.com/DavidDuwaer/Coloquent) A library mapping objects and their interrelations to JSON API, with a fluent syntax inspired by Laravel's Eloquent.
+* [kitsu](https://github.com/wopian/kitsu) A simple, lightweight & framework agnostic JSON API client
 
 ### <a href="#client-libraries-typescript" id="client-libraries-typescript" class="headerlink"></a> Typescript
 * [ts-angular-jsonapi](https://github.com/reyesoft/ts-angular-jsonapi) A JSON API library developed for AngularJS in Typescript
