@@ -155,20 +155,25 @@ and writing of JSON API documents.
 
 ### <a href="#server-libraries-ruby" id="server-libraries-ruby" class="headerlink"></a> Ruby
 
-* [Jsonapi-for-rails](https://github.com/doga/jsonapi_for_rails)
+* Plain Ruby
+  * [Yaks](https://github.com/plexus/yaks) Library for building hypermedia APIs, contains a JSON API output format.
+  * [JSONAPI::Serializers](https://github.com/fotinakis/jsonapi-serializers) provides a pure Ruby, readonly serializer implementation.
+  * [Roar](https://github.com/apotonick/roar) Renders and parses represenations of Ruby objects
+  * [Jbuilder::JsonAPI](https://github.com/vladfaust/jbuilder-json_api) Simple & lightweight extension for Jbuilder
+  * [jsonapi-rb](http://jsonapi-rb.org) Ruby library for efficiently building and consuming JSON API documents - with Rails and Hanami integrations.
+
+* Ruby on Rails
+  * [Jsonapi-for-rails](https://github.com/doga/jsonapi_for_rails)
 empowers your JSONAPI compliant [Rails](http://rubyonrails.org/) APIs. Implement your APIs with very little coding.
-* [ActiveModel::Serializers](https://github.com/rails-api/active_model_serializers)
+  * [ActiveModel::Serializers](https://github.com/rails-api/active_model_serializers)
 is one of the original exemplar implementations, but is slightly out of date at
 the moment.
-* [JSONAPI::Resources](https://github.com/cerebris/jsonapi-resources) provides a complete framework for developing a JSON API server. It is designed to work with Rails, and provides routes, controllers, and serializers.
-* [Yaks](https://github.com/plexus/yaks) Library for building hypermedia APIs, contains a JSON API output format.
-* [JSONAPI::Serializers](https://github.com/fotinakis/jsonapi-serializers) provides a pure Ruby, readonly serializer implementation.
-* [Roar](https://github.com/apotonick/roar) Renders and parses represenations of Ruby objects
-* [Jbuilder::JsonAPI](https://github.com/vladfaust/jbuilder-json_api) Simple & lightweight extension for Jbuilder
-* [JSONAPI::Utils](https://github.com/b2beauty/jsonapi-utils) works on top of [JSONAPI::Resources](https://github.com/cerebris/jsonapi-resources) taking advantage of its resource-driven style and bringing a Rails way to build modern APIs with no or less learning curve.
-* [Sinja](https://github.com/mwpastore/sinja) extends [Sinatra](http://www.sinatrarb.com) and leverages [JSONAPI::Serializers](https://github.com/fotinakis/jsonapi-serializers) to enable rapid development of comprehensive, read-and-write, and JSON API v1.0-compliant web services using the DAL/ORM of your choice. It includes a simple role-based authorization scheme, support for client-generated IDs, patchless clients, and coalesced find requests, exception handling, and more.
-* [jsonapi-rb](http://jsonapi-rb.org) Ruby library for efficiently building and consuming JSON API documents - with Rails and Hanami integrations.
-* [Caprese](https://github.com/nicklandgrebe/caprese) An opinionated Rails library for creating JSON API servers that lets you focus on customizing the behavior of your endpoints rather than the dirty work of setting them up. Leverages the power of [ActiveModel::Serializer](https://github.com/rails-api/active_model_serializers).
+  * [JSONAPI::Resources](https://github.com/cerebris/jsonapi-resources) provides a complete framework for developing a JSON API server. It is designed to work with Rails, and provides routes, controllers, and serializers.
+  * [JSONAPI::Utils](https://github.com/b2beauty/jsonapi-utils) works on top of [JSONAPI::Resources](https://github.com/cerebris/jsonapi-resources) taking advantage of its resource-driven style and bringing a Rails way to build modern APIs with no or less learning curve.
+  * [Caprese](https://github.com/nicklandgrebe/caprese) An opinionated Rails library for creating JSON API servers that lets you focus on customizing the behavior of your endpoints rather than the dirty work of setting them up. Leverages the power of [ActiveModel::Serializer](https://github.com/rails-api/active_model_serializers).
+
+* Sinatra
+  * [Sinja](https://github.com/mwpastore/sinja) extends [Sinatra](http://www.sinatrarb.com) and leverages [JSONAPI::Serializers](https://github.com/fotinakis/jsonapi-serializers) to enable rapid development of comprehensive, read-and-write, and JSON API v1.0-compliant web services using the DAL/ORM of your choice. It includes a simple role-based authorization scheme, support for client-generated IDs, patchless clients, and coalesced find requests, exception handling, and more.
 
 ### <a href="#server-libraries-python" id="server-libraries-python" class="headerlink"></a> Python
 
