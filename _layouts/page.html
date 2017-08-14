@@ -7,19 +7,18 @@
 
     {% comment %}
       Below, we're either dealing with a generic page or a page from the
-      specification collection. Generic pages have a title, so we identify
-      them that way. For specification pages, we build the title dynamically to
-      take into account the version number and its relationship to the latest version.
+      specification collection. For generic pages, we get a title just by
+      reading page.title but, for specification pages, we build their title
+      dynamically to take into account the page's version number and its
+      relationship to the latest version.
     {% endcomment %}
 
-    {% if page.title %}
-      {% comment %}We're on a generic page.{% endcomment %}
-      {% assign page_title = page.title %}
-
-    {% else %}
+    {% if page.is_spec_page %}
       {% capture page_title %}
         {% include title_for_version.md is_latest_version=page.is_latest_version is_upcoming_version=page.is_upcoming_version version=page.version %}
       {% endcapture %}
+    {% else %}
+      {% assign page_title = page.title %}
     {% endif %}
     <title>JSON API &mdash; {{page_title|strip }}</title>
 
@@ -30,6 +29,28 @@
     <script src="/javascripts/all.js" type="text/javascript"></script>
     <script src="/javascripts/highlight.pack.js"></script>
     <script>hljs.configure({classPrefix: ''}); hljs.initHighlightingOnLoad();</script>
+
+    <link rel="apple-touch-icon" sizes="57x57" href="/alt-favicons/apple-touch-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="/alt-favicons/apple-touch-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="/alt-favicons/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="/alt-favicons/apple-touch-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="/alt-favicons/apple-touch-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="/alt-favicons/apple-touch-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="/alt-favicons/apple-touch-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="/alt-favicons/apple-touch-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/alt-favicons/apple-touch-icon-180x180.png">
+    <link rel="icon" type="image/png" href="/alt-favicons/favicon-32x32.png" sizes="32x32">
+    <link rel="icon" type="image/png" href="/alt-favicons/favicon-194x194.png" sizes="194x194">
+    <link rel="icon" type="image/png" href="/alt-favicons/favicon-96x96.png" sizes="96x96">
+    <link rel="icon" type="image/png" href="/alt-favicons/android-chrome-192x192.png" sizes="192x192">
+    <link rel="icon" type="image/png" href="/alt-favicons/favicon-16x16.png" sizes="16x16">
+    <link rel="manifest" href="/alt-favicons/manifest.json">
+    <link rel="mask-icon" href="/alt-favicons/safari-pinned-tab.svg" color="#0b4e22">
+    <link rel="shortcut icon" href="/favicon.ico">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="msapplication-TileImage" content="/alt-favicons/mstile-144x144.png">
+    <meta name="msapplication-config" content="/alt-favicons/browserconfig.xml">
+    <meta name="theme-color" content="#0b4e22">
   </head>
 
   <body>
@@ -95,7 +116,7 @@
                 </select>
               </div>
             {% else %}
-              <h1 class="sidebar-top">{{ page.title }}</h1>
+              <h1 class="sidebar-top">{{ page_title }}</h1>
             {% endif %}
           </nav>
         </div>
@@ -103,11 +124,7 @@
       <div class="content">
         {% unless page.show_masthead %}
           <h1>
-            {% if page.is_spec_page %}
-              {{ page_title }}
-            {% else %}
-              {{ page.title }}
-            {% endif %}
+            {{ page_title }}
           </h1>
         {% endunless %}
         <section>

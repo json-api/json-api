@@ -1,8 +1,38 @@
 url: http://jsonapi.org
-
-lsi: false
 source: .
 destination: ./public
+
+# github pages we cannot customize
+lsi: false
+whitelist:
+  - jekyll-coffeescript
+  - jekyll-gist
+  - jekyll-paginate
+  - jekyll-redirect-from
+  - jekyll-mentions
+  - jekyll-sitemap
+  - jekyll-feed
+  - jekyll-seo-tag
+  - jekyll-gist
+  - jemoji
+incremental: false
+gist:
+  noscript: false
+# customize github pages
+quiet: false
+markdown: kramdown
+highlighter: rouge
+kramdown:
+  input: GFM
+  hard_wrap: false
+  auto_ids: false
+  template: '' # cannot customize
+  math_engine: mathjax # cannot customize
+  syntax_highligher: rouge # cannot customize
+
+gems:
+  - jekyll-redirect-from
+
 exclude:
   - Rakefile
   - README.md
@@ -12,10 +42,7 @@ exclude:
   - .gitignore
   - ./public
   - ./stylesheets/*.scss
-markdown: redcarpet
-redcarpet:
-  extensions: ["tables"]
-highlighter: pygments
+
 port: 9876
 
 collections:
@@ -32,15 +59,7 @@ defaults:
       is_spec_page: true
 
 latest_version: 1.0
-
-
-# `safe `must be set false for jekyll-redirect-from
-# to run in development. (Github Pages will override
-# `safe` to be true on deploy, but it makes an
-# exception for jekyll-redirect from.)
-safe: false
-gems:
-  - jekyll-redirect-from
+excerpt_separator: ""
 
 navigation:
 - title: JSON API

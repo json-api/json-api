@@ -101,6 +101,9 @@ h5
   font-weight: 500
   font-size: inherit
 
+  code
+    font-weight: 600
+
 p, table
   line-height: 1.7333
   margin: 0 0 13px 0
@@ -125,6 +128,8 @@ p > code, li > code
   background: rgba(0, 0, 0, 0.06)
   white-space: nowrap
 
+code
+  font-weight: inherit
 
 /** Navigation */
 
@@ -253,6 +258,11 @@ footer
     display: inline-block
     vertical-align: middle
 
+  .license
+    a
+      display: block
+      padding: .75em
+
   .social-links
     @extend %distribute-children
     width: 9em
@@ -267,7 +277,7 @@ footer
     i
       width: 1em
       padding: .75em
-
+      display: inline-block
 
 /** Content */
 
@@ -375,13 +385,10 @@ footer
 .highlight
   border-radius: $border-radius-main
   position: relative
-  margin: 2em 0
   padding: 10px 15px
   background: #f9f9f9
   border: 1px solid #d1d1d1
   font-size: 12px
   line-height: 16px
-
-  pre
-    margin: 0
-    font-family: Menlo, monospace
+  margin: 2em 0
+  font-family: Menlo, monospace

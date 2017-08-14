@@ -55,10 +55,9 @@ and versioning.
 ## <a href="#document-structure" id="document-structure" class="headerlink"></a> Document Structure
 
 This section describes the structure of a JSON API document, which is identified
-by the media type [`application/vnd.api+json`]
-(http://www.iana.org/assignments/media-types/application/vnd.api+json).
+by the media type [`application/vnd.api+json`](http://www.iana.org/assignments/media-types/application/vnd.api+json).
 JSON API documents are defined in JavaScript Object Notation (JSON)
-[[RFC4627](http://tools.ietf.org/html/rfc4627)].
+[[RFC7159](http://tools.ietf.org/html/rfc7159)].
 
 Although the same media type is used for both request and response documents,
 certain aspects are only applicable to one or the other. These differences are
@@ -246,6 +245,7 @@ objects.
 
 Relationships may be to-one or to-many.
 
+<a id="document-resource-object-relationships-relationship-object"></a>
 A "relationship object" **MUST** contain at least one of the following:
 
 * `links`: a [links object][links] containing at least one of the following:
@@ -268,7 +268,7 @@ A relationship object that represents a to-many relationship **MAY** also contai
 
 #### <a href="#document-resource-object-related-resource-links" id="document-resource-object-related-resource-links" class="headerlink"></a> Related Resource Links
 
-A "related resource link" provides access to [resource objects] [linked][links]
+A "related resource link" provides access to [resource objects][resource objects] [linked][links]
 in a [relationship][relationships]. When fetched, the related resource object(s)
 are returned as the response's primary data.
 
@@ -378,9 +378,10 @@ Compound documents require "full linkage", meaning that every included
 resource **MUST** be identified by at least one [resource identifier object]
 in the same document. These resource identifier objects could either be
 primary data or represent resource linkage contained within primary or
-included resources. The only exception to the full linkage requirement is
-when relationship fields that would otherwise contain linkage data are
-excluded via [sparse fieldsets](#fetching-sparse-fieldsets).
+included resources.
+
+The only exception to the full linkage requirement is when relationship fields
+that would otherwise contain linkage data are excluded via [sparse fieldsets](#fetching-sparse-fieldsets).
 
 > Note: Full linkage ensures that included resources are related to either
 the primary data (which could be [resource objects] or [resource identifier
@@ -509,7 +510,8 @@ Each member of a links object is a "link". A link **MUST** be represented as
 either:
 
 * a string containing the link's URL.
-* an object ("link object") which can contain the following members:
+* <a id="document-links-link-object"></a>an object ("link object") which can
+  contain the following members:
   * `href`: a string containing the link's URL.
   * `meta`: a meta object containing non-standard meta-information about the
     link.
@@ -518,7 +520,7 @@ The following `self` link is simply a URL:
 
 ```json
 "links": {
-  "self": "http://example.com/posts",
+  "self": "http://example.com/posts"
 }
 ```
 
@@ -584,7 +586,7 @@ The following "globally allowed characters" **MAY** be used anywhere in a member
 - U+0061 to U+007A, "a-z"
 - U+0041 to U+005A, "A-Z"
 - U+0030 to U+0039, "0-9"
-- any UNICODE character except U+0000 to U+007F _(not recommended, not URL safe)_
+- U+0080 and above (non-ASCII Unicode characters; _not recommended, not URL safe_)
 
 Additionally, the following characters are allowed in member names, except as the
 first or last character:
@@ -620,13 +622,15 @@ The following characters **MUST NOT** be used in member names:
 - U+003E GREATER-THAN SIGN, ">"
 - U+003F QUESTION MARK, "?"
 - U+0040 COMMERCIAL AT, "@"
-- U+005C REVERSE SOLIDUS, "\"
+- U+005C REVERSE SOLIDUS, "&#x5c;"
 - U+005E CIRCUMFLEX ACCENT, "^"
 - U+0060 GRAVE ACCENT, "&#x60;"
 - U+007B LEFT CURLY BRACKET, "{"
-- U+007C VERTICAL LINE, "|"
+- U+007C VERTICAL LINE, "&#x7c;"
 - U+007D RIGHT CURLY BRACKET, "}"
 - U+007E TILDE, "~"
+- U+007F DELETE
+- U+0000 to U+001F (C0 Controls)
 
 ## <a href="#fetching" id="fetching" class="headerlink"></a> Fetching Data
 
@@ -916,8 +920,8 @@ An endpoint **MAY** return resources related to the primary data by default.
 An endpoint **MAY** also support an `include` request parameter to allow the
 client to customize which related resources should be returned.
 
-If an endpoint does not support the `include` parameter, it must respond with
-`400 Bad Request` to any requests that include it.
+If an endpoint does not support the `include` parameter, it **MUST** respond
+with `400 Bad Request` to any requests that include it.
 
 If an endpoint supports the `include` parameter and a client supplies it,
 the server **MUST NOT** include unrequested [resource objects] in the `included`
@@ -949,10 +953,11 @@ GET /articles/1?include=comments.author HTTP/1.1
 Accept: application/vnd.api+json
 ```
 
-> Note: Because [compound documents][compound document] require full linkage,
-intermediate resources in a multi-part path must be returned along with the leaf
-nodes. For example, a response to a request for `comments.author` should
-include `comments` as well as the `author` of each of those `comments`.
+> Note: Because [compound documents][compound document] require full linkage
+(except when relationship linkage is excluded by sparse fieldsets), intermediate
+resources in a multi-part path must be returned along with the leaf nodes. For
+example, a response to a request for `comments.author` should include `comments`
+as well as the `author` of each of those `comments`.
 
 > Note: A server may choose to expose a deeply nested relationship such as
 `comments.author` as a direct relationship with an alias such as
@@ -1168,7 +1173,7 @@ Accept: application/vnd.api+json
 
 If a relationship is provided in the `relationships` member of the
 [resource object][resource objects], its value **MUST** be a relationship object with a `data`
-member. The value of this key represents the linkage the new resource is to
+member. The value of this key represents the [linkage][resource linkage] the new resource is to
 have.
 
 #### <a href="#crud-creating-client-ids" id="crud-creating-client-ids" class="headerlink"></a> Client-Generated IDs
@@ -1267,6 +1272,11 @@ had returned it back in a `201` response.
 
 A server **MAY** return `403 Forbidden` in response to an unsupported request
 to create a resource.
+
+##### <a href="#crud-creating-responses-404" id="crud-creating-responses-404" class="headerlink"></a> 404 Not Found
+
+A server **MUST** return `404 Not Found` when processing a request that
+references a related resource that does not exist.
 
 ##### <a href="#crud-creating-responses-409" id="crud-creating-responses-409" class="headerlink"></a> 409 Conflict
 
@@ -1715,6 +1725,11 @@ request is successful and no content is returned.
 A server **MUST** return a `200 OK` status code if a deletion request is
 successful and the server responds with only top-level [meta] data.
 
+##### <a href="#crud-deleting-responses-404" id="crud-deleting-responses-404" class="headerlink"></a> 404 NOT FOUND
+
+A server **SHOULD** return a `404 Not Found` status code if a deletion request fails
+due to the resource not existing.
+
 ##### <a href="#crud-deleting-responses-other" id="crud-deleting-responses-other" class="headerlink"></a> Other Responses
 
 A server **MAY** respond with other HTTP status codes.
@@ -1734,7 +1749,7 @@ U+002D HYPHEN-MINUS, "-", U+005F LOW LINE, "_", or capital letter is used
 (e.g. camelCasing).
 
 If a server encounters a query parameter that does not follow the naming
-conventions above, and the server does not know how to proccess it as a query
+conventions above, and the server does not know how to process it as a query
 parameter from this specification, it **MUST** return `400 Bad Request`.
 
 > Note: This is to preserve the ability of JSON API to make additive additions
@@ -1773,7 +1788,7 @@ An error object **MAY** have the following members:
   change from occurrence to occurrence of the problem, except for purposes of
   localization.
 * `detail`: a human-readable explanation specific to this occurrence of the
-  problem.
+  problem. Like `title`, this field's value can be localized.
 * `source`: an object containing references to the source of the error,
   optionally including any of the following members:
   * `pointer`: a JSON Pointer [[RFC6901](https://tools.ietf.org/html/rfc6901)]

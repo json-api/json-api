@@ -5,7 +5,7 @@ show_masthead: true
 ---
 
 If you've ever argued with your team about the way your JSON responses
-should be formatted, JSON API can be your anti-bikeshedding tool.
+should be formatted, JSON API can be your anti-[bikeshedding](http://bikeshed.org) tool.
 
 By following shared conventions, you can increase productivity,
 take advantage of generalized tooling, and focus on what
@@ -96,9 +96,9 @@ Here's an example response from a blog that implements JSON API:
 }
 ```
 
-The response above contains the first in a collection of "posts", as well as
+The response above contains the first in a collection of "articles", as well as
 links to subsequent members in that collection. It also contains resources
-linked to the post, including its author and comments. Last but not least,
+linked to the article, including its author and comments. Last but not least,
 links are provided that can be used to fetch or update any of these
 resources.
 

@@ -25,7 +25,6 @@ There are five primary editors of this specification:
 ## <a href="#roadmap" id="roadmap" class="headerlink"></a> Roadmap
 
 ### <a href="#roadmap-1-1" id="roadmap-1-1" class="headerlink"></a> 1.1
-**Targeted Release Date:** September 30th, 2015
 
 * Embedding / creating multiple related resources in a single request
 * Extension support
