@@ -38,7 +38,7 @@ assembled to vet them.
 * [jsona](https://github.com/olosegres/jsona) Data formatter that creates customizable, simplified objects from JSON or stored reduxObject (result object of [json-api-normalizer](https://github.com/yury-dymov/json-api-normalizer)), and creates correct JSON from the same simplified objects.
 * [active-resource](https://github.com/nicklandgrebe/activeresource.js) A standalone, convention-driven JavaScript ORM that maps to your JSON API server and allows for advanced queries and relational management through a smooth interface.
 * [redux-bees](https://github.com/cantierecreativo/redux-bees) A nice, short and declarative way to interact with JSON APIs in React+Redux
-* [Coloquent](https://github.com/DavidDuwaer/Coloquent) A library mapping objects and their interrelations to JSON API, with a fluent syntax inspired by Laravel's Eloquent.
+* [Coloquent](https://github.com/DavidDuwaer/Coloquent) Javascript/Typescript library mapping objects and their interrelations to JSON API, with a clean, fluent ActiveRecord-like (e.g. similar to Laravel's Eloquent) syntax  for creating, retrieving, updating and deleting model objects.
 * [kitsu](https://github.com/wopian/kitsu) A simple, lightweight & framework agnostic JSON API client
 
 ### <a href="#client-libraries-typescript" id="client-libraries-typescript" class="headerlink"></a> Typescript
