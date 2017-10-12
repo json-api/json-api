@@ -107,6 +107,10 @@ and writing of JSON API documents.
 * [jsonapi-requests](https://github.com/socialwifi/jsonapi-requests/) Simple and fun high-level JSONAPI client for Python. Contains ORM which makes consuming the API even easier, in a DRY manner. It has a low-level API similiar to requests as well, which gives you all the flexibility that you may need.
 * [jsonapi-client](https://github.com/qvantel/jsonapi-client) Comprehensive yet easy-to-use, pythonic, ORM-like access to JSON API services
 
+### <a href="#client-libraries-elixir" id="client-libraries-elixir" class="headerlink"></a> Elixir
+
+* [JsonApiClient](https://github.com/Decisiv/json_api_client) JSON API Client Library For Elixir
+
 ## <a href="#server-libraries" id="server-libraries" class="headerlink"></a> Server libraries
 
 ### <a href="#server-libraries-swift" id="server-libraries-swift" class="headerlink"></a> Swift
