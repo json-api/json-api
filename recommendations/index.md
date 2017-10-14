@@ -230,6 +230,27 @@ GET /photos/queue-jobs/5234 HTTP/1.1
 Accept: application/vnd.api+json
 ```
 
+Requests for still-pending jobs **SHOULD** return a status `200 OK`, as the server is reporting the status successfully. Optionally, the server can return a `Retry-After` header to provide guidance to the client as to how long it should wait before checking again. Recommendations to retry sooner than 1 second can be accomplised with `Retry-After: 0`.
+
+```http
+HTTP/1.1 200 OK
+Content-Type: application/vnd.api+json
+Retry-After: 1
+
+{
+  "data": {
+    "type": "queue-jobs",
+    "id": "5234",
+    "attributes": {
+      "status": "Pending request, waiting other process"
+    },
+    "links": {
+      "self": "/photos/queue-jobs/5234"
+    }
+  }
+}
+```
+
 When job process is done, the request **SHOULD** return a status `303 See other` with a link in `Location` header.
 
 ```http
