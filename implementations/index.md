@@ -80,7 +80,6 @@ assembled to vet them.
   both Java and Android development. As for the backend side a rich set of modules helps with the integration of various
   Java frameworks. 
 
-
 ### <a href="#client-libraries-android" id="client-libraries-android" class="headerlink"></a> Android
 * [faogustavo/JSONApi](https://github.com/faogustavo/JSONApi) library for deserializing automatic. It can be integrated with retrofit. It has some ideas from Morpheus and jsonapi-converter but has some aditionals.
 * [moshi-jsonapi](https://github.com/kamikat/moshi-jsonapi) serialize/deserialize JSON API v1.0 using fantistic Moshi API! With friendly Java interface and easy integration with Retrofit.
@@ -135,6 +134,7 @@ and writing of JSON API documents.
 * [oligus/jad](https://github.com/oligus/jad) A library that turns doctrine entities into json api resource, or collection of resources, automagically.
 * [enm/json-api-server](https://eosnewmedia.github.io/JSON-API-Server/) is an abstract server-side PHP (>= 7.0) implementation of the json api specification. It offers an entry point which will handle PSR-7 requests and will respond with a PSR-7 response. A Request can be logged by a PSR-3 logger if needed. All structures (resources, documents etc.) are implemented by default but of course you are able to use your own implementations.
 * [enm/json-api-server-bundle](https://eosnewmedia.github.io/JSON-API-Server-Bundle/) is a symfony bundle which integrates [enm/json-api-server](https://eosnewmedia.github.io/JSON-API-Server/) into your symfony application (symfony version ~2.7|~3.0).
+* [RJAPI/raml-json-api](https://github.com/RJAPI/raml-json-api) RAML based JSON API code generator for Laravel. Generates controllers, middlewares, models, routes, migrations and serves JSON API.
 
 ### <a href="#server-libraries-node-js" id="server-libraries-node-js" class="headerlink"></a> Node.js
 * [Fortune.js](http://fortune.js.org/) is a library that includes a [comprehensive implementation of JSON API](https://github.com/fortunejs/fortune-json-api).
