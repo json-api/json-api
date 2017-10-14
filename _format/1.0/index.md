@@ -971,7 +971,7 @@ resources.
 Multiple related resources can be requested in a comma-separated list:
 
 ```http
-GET /articles/1?include=author,comments.author HTTP/1.1
+GET /articles/1?include=ratings,comments.author HTTP/1.1
 Accept: application/vnd.api+json
 ```
 
