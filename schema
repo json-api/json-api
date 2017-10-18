@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/draft-04/schema#",
-  "id": "http://jsonapi.org/schema/1.0",
+  "id": "http://jsonapi.org/schema/1.0#",
   "title": "JSON API Schema",
   "description": "This is a schema for responses in the JSON API format. For more, see http://jsonapi.org",
   "oneOf": [
