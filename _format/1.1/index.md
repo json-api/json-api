@@ -945,7 +945,8 @@ with `400 Bad Request` to any requests that include it.
 
 If an endpoint supports the `include` parameter and a client supplies it:
 
- - The server **MUST** respond with the `included` section of the [compound document] -- even if there are no [resource objects] to include (represented as an empty array `[]`.)
+ - The server **MUST** respond with the `included` section of the [compound document] — even if
+there are no [resource objects] to include (represented as an empty array `[]`.)
  - The server **MUST NOT** include unrequested [resource objects] in the `included`
 section of the [compound document].
 
