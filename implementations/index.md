@@ -38,7 +38,7 @@ assembled to vet them.
 * [jsona](https://github.com/olosegres/jsona) Data formatter that creates customizable, simplified objects from JSON or stored reduxObject (result object of [json-api-normalizer](https://github.com/yury-dymov/json-api-normalizer)), and creates correct JSON from the same simplified objects.
 * [active-resource](https://github.com/nicklandgrebe/activeresource.js) A standalone, convention-driven JavaScript ORM that maps to your JSON API server and allows for advanced queries and relational management through a smooth interface.
 * [redux-bees](https://github.com/cantierecreativo/redux-bees) A nice, short and declarative way to interact with JSON APIs in React+Redux
-* [Coloquent](https://github.com/DavidDuwaer/Coloquent) A library mapping objects and their interrelations to JSON API, with a fluent syntax inspired by Laravel's Eloquent.
+* [Coloquent](https://github.com/DavidDuwaer/Coloquent) Javascript/Typescript library mapping objects and their interrelations to JSON API, with a clean, fluent ActiveRecord-like (e.g. similar to Laravel's Eloquent) syntax  for creating, retrieving, updating and deleting model objects.
 * [kitsu](https://github.com/wopian/kitsu) A simple, lightweight & framework agnostic JSON API client
 
 ### <a href="#client-libraries-typescript" id="client-libraries-typescript" class="headerlink"></a> Typescript
@@ -46,6 +46,7 @@ assembled to vet them.
 * [ngrx-json-api](https://github.com/abdulhaq-e/ngrx-json-api) A JSON API client for Angular 2 ngrx toolset
 * [ts-jsonapi](https://github.com/mohuk/ts-jsonapi) JSON API (De)Serializer in Typescript
 * [ngx-jsonapi](https://github.com/reyesoft/ngx-jsonapi) A JSON API fast client library for Angular with storage+memory cache.
+* [@crnk/angular-ngrx](https://www.npmjs.com/package/@crnk/angular-ngrx) Angular helper library for ngrx-json-api and (optionally) crnk. Facilitates the binding of UI components to ngrx-json-api, most notably tables and forms.
 
 ### <a href="#client-libraries-ios" id="client-libraries-ios" class="headerlink"></a> iOS
 
@@ -65,6 +66,7 @@ assembled to vet them.
 * [Art4 / json-api-client](https://github.com/Art4/json-api-client) is a library for validating and handling the response body in a simple OOP way.
 * [woohoolabs / yang](https://github.com/woohoolabs/yang) is a PSR-7 compatible library that is able to build and send requests, and handle responses.
 * [enm/json-api-client](https://eosnewmedia.github.io/JSON-API-Client/) is an abstract client-side PHP implementation of the json api specification, based on the PSR-7 HTTP message interface.
+* [pz/doctrine-rest](https://github.com/R3VoLuT1OneR/doctrine-rest) library provides basic tools for implementation of JSON API with Doctrine 2
 
 ### <a href="#client-libraries-dart" id="client-libraries-dart" class="headerlink"></a> Dart
 
@@ -136,6 +138,7 @@ and writing of JSON API documents.
 * [oligus/jad](https://github.com/oligus/jad) A library that turns doctrine entities into json api resource, or collection of resources, automagically.
 * [enm/json-api-server](https://eosnewmedia.github.io/JSON-API-Server/) is an abstract server-side PHP (>= 7.0) implementation of the json api specification. It offers an entry point which will handle PSR-7 requests and will respond with a PSR-7 response. A Request can be logged by a PSR-3 logger if needed. All structures (resources, documents etc.) are implemented by default but of course you are able to use your own implementations.
 * [enm/json-api-server-bundle](https://eosnewmedia.github.io/JSON-API-Server-Bundle/) is a symfony bundle which integrates [enm/json-api-server](https://eosnewmedia.github.io/JSON-API-Server/) into your symfony application (symfony version ~2.7|~3.0).
+* [raml-json-api](https://github.com/RJAPI/raml-json-api) RAML based JSON API code generator for Laravel. Generates controllers, middlewares, models, routes, migrations and serves JSON API.
 
 ### <a href="#server-libraries-node-js" id="server-libraries-node-js" class="headerlink"></a> Node.js
 * [Fortune.js](http://fortune.js.org/) is a library that includes a [comprehensive implementation of JSON API](https://github.com/fortunejs/fortune-json-api).
@@ -157,6 +160,7 @@ and writing of JSON API documents.
 * [bookshelf-jsonapi-params](https://github.com/scoutforpets/bookshelf-jsonapi-params) automatically apply JSON API filtering, pagination, sparse fieldsets, includes, and sorting to your Bookshelf.js queries.
 * [Lux](https://github.com/postlight/lux) is a MVC style Node.js framework for building lightning fast JSON APIs.
 * [transformalizer](https://github.com/GaiamTV/transformalizer) a bare bones node module for transforming raw data into JSON API compliant payloads that makes no assumption regarding the shape of your data and sdks used, supports the full v1.0 specification, and supports dynamic transformations, links, and meta at all levels of a document.
+* [jsonapi-mock](https://github.com/Thomas-X/jsonapi-mock) A [json-server](https://github.com/typicode/json-server) inspired jsonapi mock server. Setup a jsonapi mock server in almost no time, uses lowdb.
 
 ### <a href="#server-libraries-ruby" id="server-libraries-ruby" class="headerlink"></a> Ruby
 
@@ -209,7 +213,7 @@ the moment.
 * [NJsonApi](https://github.com/jacek-gorgon/NJsonApi) is a .NET server implementation of the standard. It aims at good extensibility and performance while maintaining developer-friendliness with interchangable convenions and builder-style configuration.
 * [Migrap.AspNet.Mvc.Jsonapi](https://github.com/migrap/Migrap.AspNet.Mvc.Jsonapi) is an ASP.NET 5 (vNext) library that allows for existing code to build JSON API responses through output formatters.
 * [Saule](https://github.com/joukevandermaas/saule/) is a small JSON API 1.0 compatible library that integrates well with established Web API conventions. It has complete documentation and near 100% test coverage.
-* [JsonApiDotNetCore](https://github.com/Research-Institute/json-api-dotnet-core) is a .Net Core library built against Entity Framework. It creates the middleware routing and controller objects (which can be overriden) and can work as a replacement or an extension to the AspNetCore.MVC middleware.
+* [JsonApiDotNetCore](https://github.com/json-api-dotnet/JsonApiDotNetCore) is an ASP.Net Core server implementation targeting .Net Standard. Based on the [JR](https://github.com/cerebris/jsonapi-resources) implementation, it provides all the required controllers and middleware to get your application up and running with as little boilerplate as possible. 
 * [Hypermedia.JsonApi.WebApi](https://github.com/cosullivan/Hypermedia/) is a Web API media type formatter for reading and writing JSON API. It supports an external resource model definition and natively
 includes related resources.
 * [JsonApiSerializer](https://github.com/codecutout/JsonApiSerializer) is a configurationless JSON API serialization and deserialization library implemented as a Json.NET `JsonSerializerSetting`. It leverages the existing power and flexiability of Json.NET while providing a sensible default mapping between JSON API and CLR objects.
