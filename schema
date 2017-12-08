@@ -37,7 +37,7 @@
         },
         "links": {
           "description": "Link members related to the primary data.",
-          "allOf": [
+          "anyOf": [
             {
               "$ref": "#/definitions/links"
             },
