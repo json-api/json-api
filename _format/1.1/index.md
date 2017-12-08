@@ -164,6 +164,8 @@ In addition, a resource object **MAY** contain any of these top-level members:
 * `links`: a [links object][links] containing links related to the resource.
 * `meta`: a [meta object][meta] containing non-standard meta-information about a
   resource that can not be represented as an attribute or relationship.
+* `lid`: a local identifier that, together with `type`, uniquely
+  identifies a resource within the document.
 
 Here's how an article (i.e. a resource of type "articles") might appear in a document:
 
@@ -190,8 +192,18 @@ Here's how an article (i.e. a resource of type "articles") might appear in a doc
 
 #### <a href="#document-resource-object-identification" id="document-resource-object-identification" class="headerlink"></a> Identification
 
-Every [resource object][resource objects] **MUST** contain an `id` member and a `type` member.
-The values of the `id` and `type` members **MUST** be strings.
+As noted above, every [resource object][resource objects] **MUST** contain a
+`type` member. Every resource object **MUST** also contain an `id` member,
+except when the resource object originates at the client and represents a new
+resource to be created on the server. The values of the `id` and `type` members
+**MUST** be strings.
+
+A [resource object][resource objects] **MAY** contain a `lid` member that,
+together with `type`, uniquely identifies the resource _locally_ within the
+document. If a [resource object][resource objects] contains a `lid` member, then
+every representation of that resource, including other [resource objects] and
+[resource identifier objects], **MUST** also contain the `lid` member with the
+same value. The value of the `lid` member **MUST** be a string.
 
 Within a given API, each resource object's `type` and `id` pair **MUST**
 identify a single, unique resource. (The set of URIs controlled by a server,
@@ -360,10 +372,21 @@ response that includes the resource as the primary data.
 A "resource identifier object" is an object that identifies an individual
 resource.
 
-A "resource identifier object" **MUST** contain `type` and `id` members.
+A "resource identifier object" **MUST** contain a `type` member. A resource
+identifier object **MUST** also contain an `id` member, except when it contains
+a `lid` that identifies it as matching a new resource to be created on the
+server.
 
-A "resource identifier object" **MAY** also include a `meta` member, whose value is a [meta] object that
-contains non-standard meta-information.
+A "resource identifier object" **MAY** contain a `lid` member. If `id` is
+omitted due to the exception described above, a `lid` member **MUST** be
+included. A `lid` member **MUST** also be included if the referenced resource is
+represented elsewhere in the document with a `lid`. The value of a `lid` member
+**MUST** be identical for every representation of the resource in the document.
+
+The values of the `id`, `lid`, and `type` members **MUST** be strings.
+
+A "resource identifier object" **MAY** also include a `meta` member, whose value
+is a [meta] object that contains non-standard meta-information.
 
 ### <a href="#document-compound-documents" id="document-compound-documents" class="headerlink"></a> Compound Documents
 
@@ -470,6 +493,11 @@ each `type` and `id` pair.
 composite key that uniquely references [resource objects] in another part of
 the document.
 
+> Note: For resources that do not contain an `id` member but do contain a `lid`,
+the `type` and `lid` are sufficient to establish resource identity and thus
+linkage between resource objects and resource identifier objects throughout the
+document.
+
 > Note: This approach ensures that a single canonical [resource object][resource objects] is
 returned with each response, even when the same resource is referenced
 multiple times.
@@ -510,7 +538,7 @@ Each member of a links object is a "link". A link **MUST** be represented as
 either:
 
 * a string containing the link's URL.
-* <a id="document-links-link-object"></a>an object ("link object") which can 
+* <a id="document-links-link-object"></a>an object ("link object") which can
   contain the following members:
   * `href`: a string containing the link's URL.
   * `meta`: a meta object containing non-standard meta-information about the
@@ -1155,6 +1183,11 @@ also allow existing resources to be modified or deleted.
 
 A request **MUST** completely succeed or fail (in a single "transaction"). No
 partial updates are allowed.
+
+If a [resource object][resource objects] or [resource identifier object] in a
+request document includes a `lid` member, then the server **MUST** include the
+matching `lid` member and value in every representation of that resource or
+resource identifier in the response document.
 
 > Note: The `type` member is required in every [resource object][resource objects] throughout requests and
 responses in JSON API. There are some cases, such as when `POST`ing to an
