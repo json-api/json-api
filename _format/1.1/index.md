@@ -943,8 +943,10 @@ client to customize which related resources should be returned.
 If an endpoint does not support the `include` parameter, it **MUST** respond
 with `400 Bad Request` to any requests that include it.
 
-If an endpoint supports the `include` parameter and a client supplies it,
-the server **MUST NOT** include unrequested [resource objects] in the `included`
+If an endpoint supports the `include` parameter and a client supplies it:
+
+ - The server's response **MUST** be a [compound document] with an `included` key — even if that `included` key holds an empty array (because the requested relationships are empty).
+ - The server **MUST NOT** include unrequested [resource objects] in the `included`
 section of the [compound document].
 
 The value of the `include` parameter **MUST** be a comma-separated (U+002C
