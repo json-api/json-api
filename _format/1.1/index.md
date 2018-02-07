@@ -512,7 +512,7 @@ Each member of a links object is a "link". A link **MUST** be represented as
 either:
 
 * a string containing the link's URL.
-* <a id="document-links-link-object"></a>an object ("link object") which can 
+* <a id="document-links-link-object"></a>an object ("link object") which can
   contain the following members:
   * `href`: a string containing the link's URL.
   * `meta`: a meta object containing non-standard meta-information about the
