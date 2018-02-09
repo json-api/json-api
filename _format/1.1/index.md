@@ -81,8 +81,13 @@ A document **MUST** contain at least one of the following top-level members:
 * `errors`: an array of [error objects](#errors)
 * `meta`: a [meta object][meta] that contains non-standard
   meta-information.
+* `operations`: an array of [operation objects](#operations).
 
-The members `data` and `errors` **MUST NOT** coexist in the same document.
+The `data` member **MUST NOT** coexist with either the `errors` or `operations`
+members in the same document.
+
+The `operations` member **MUST NOT** coexist with the `errors` member in the
+same document.
 
 A document **MAY** contain any of these top-level members:
 
@@ -1872,3 +1877,572 @@ An error object **MAY** have the following members:
 [error details]: #errors
 [member names]: #document-member-names
 [pagination]: #fetching-pagination
+
+## <a href="#operations" id="operations" class="headerlink"></a> Operations
+
+A server **MAY** support usage of the `operations` array to complete one or more
+fetch or mutation operations in a single request.
+
+All HTTP requests that include an `operations` array **MUST** be issued with
+`PATCH`.
+
+For the sake of clarity, requests that include operations are called
+"operations requests" while requests that perform a single fetch or mutation are
+called "singular requests".
+
+### <a href="#operation-objects" id="operation-objects" class="headerlink"></a> Operation Objects
+
+An operation object **MAY** contain any of the following members:
+
+* `op`: an operation code, expressed as a string, that indicates the type of
+  operation to perform. Valid values include:
+  - `"get"`: fetches a resource, resource identity, collection of resources, or
+     collection of resource identitities
+  - `"add"`: creates a new resource or relationship
+  - `"update"`: updates a resource or relationship
+  - `"remove"`: removes a resource or relationship
+
+* `data`: the operation's "primary data".
+
+* `included`: an array of [resource
+  objects](#document-resource-objects) that are
+  related to the operation's primary data and/or each other
+  ("included resources").
+
+* `ref`: the resource or resource collection that is the target of the
+  operation. This member serves to disambiguate the target at a particular
+  endpoint if that endpoint represents multiple resources. `ref` **MUST** be
+  expressed as an object that **MAY** contain any of the following members:
+  - `type`: resource `type`
+  - `id` or `lid`: resource identifier or local identifier
+  - `relationship`: the name of the relationship
+
+* `params`: all of the query parameters allowed for singular requests can be
+  represented in JSON form in an operation's `params` object. Possible members
+  include:
+  - `include`
+  - `sort`
+  - `filter`
+  - `page`
+  - `fields`
+
+* `links`: a [links object](#document-links) related to the operation's primary
+  data.
+
+* `meta`: a [meta object](#document-meta) that contains non-standard
+  meta-information about the operation.
+
+Different members are required for processing different types of operations, as
+described below.
+
+> Note: `op` codes are used instead of the HTTP methods prescribed for singular
+  requests. The values `"get"`, `"add"`, `"update"`, and `"remove"` align with
+  the HTTP methods `GET`, `POST`, `PATCH`, and `DELETE` used for singular
+  requests.
+
+### <a href="#processing-operations" id="processing-operations" class="headerlink"></a> Processing Operations
+
+A server **MUST** perform operations in the order they appear in the
+`operations` array.
+
+All operations in a request **MUST** be performed atomically, so that a failure
+to perform any operation **MUST** invalidate any effects of preceding
+operations.
+
+A successful operation's `data` and `included` members **MUST** conform with the
+requirements for the analogous singular request and response.
+
+A server **MUST** respond to successful operations requests with `200 OK` if
+any operations are required to have `data` in a response. An array of resultant
+operation objects **MUST** be returned that correspond positionally to the
+requested operations.
+
+A server **MAY** respond to successful requests that include operations with
+`204 No Content` and no response document if no operations are required to
+return `data`.
+
+If any operation in a request fails, the server **MUST** respond as described
+in [Errors].
+
+> Note: An empty object (`{}`) is a valid operation object, and thus can be
+returned as a result to an operation request.
+
+> Note: The server can decide which operations and target resources are allowed
+  at each endpoint. Servers may use resource-specific endpoints like `/articles`
+  and `/authors` or generic endpoints for all resources like `/operations` or
+  `/bulk`.
+
+### Fetching Data
+
+An operation for fetching a resource, resource collection, resource identity, or
+resource identity collection **MUST** include an `op` code of `"get"`.
+
+#### Fetching Resources
+
+An operation that fetches an individual resource **MUST** target that resource
+either through the request endpoint or the operation's `ref` object.
+
+For example:
+
+```json
+PATCH /bulk HTTP/1.1
+Host: example.org
+Content-Type: application/vnd.api+json
+
+{
+  "operations": [{
+    "op": "get",
+    "ref": {
+      "type": "articles",
+      "id": "1"
+    }
+  }]
+}
+```
+
+An example response:
+
+```json
+HTTP/1.1 200 OK
+Content-Type: application/vnd.api+json
+
+{
+  "operations": [{
+    "links": {
+      "self": "http://example.com/articles/1"
+    },
+    "data": {
+      "type": "articles",
+      "id": "1",
+      "attributes": {
+        "title": "JSON API paints my bikeshed!"
+      }
+    }
+  }]
+}
+```
+
+An operation that fetches a resource collection **MUST** target that collection
+either through the request endpoint or the operation's `ref` object.
+
+For example:
+
+```json
+PATCH /bulk HTTP/1.1
+Host: example.org
+Content-Type: application/vnd.api+json
+
+{
+  "operations": [{
+    "op": "get",
+    "ref": {
+      "type": "articles"
+    }
+  }]
+}
+```
+
+An example response:
+
+```json
+HTTP/1.1 200 OK
+Content-Type: application/vnd.api+json
+
+{
+  "operations": [{
+    "links": {
+      "self": "http://example.com/articles"
+    },
+    "data": [{
+      "type": "articles",
+      "id": "1",
+      "attributes": {
+        "title": "JSON API paints my bikeshed!"
+      }
+    }, {
+      "type": "articles",
+      "id": "2",
+      "attributes": {
+        "title": "Rails is Omakase"
+      }
+    }]
+  }]
+}
+```
+
+#### Fetching Relationships
+
+An operation that fetches relationship data **MUST** target a relationship
+either through the request endpoint or the operation's `ref` object. For
+example:
+
+```json
+PATCH /bulk HTTP/1.1
+Host: example.org
+Content-Type: application/vnd.api+json
+
+{
+  "operations": [{
+    "op": "get",
+    "ref": {
+      "type": "articles",
+      "id": "1",
+      "relationship": "author"
+    }
+  }]
+}
+```
+
+An example response:
+
+```json
+HTTP/1.1 200 OK
+Content-Type: application/vnd.api+json
+
+{
+  "operations": [{
+    "links": {
+      "self": "http://example.com/articles/1/relationships/author"
+    },
+    "data": {
+      "type": "people",
+      "id": "9"
+    }
+  }]
+}
+```
+
+### Creating Resources
+
+An operation that creates a resource **MUST** target a resource collection
+either through the request endpoint or the operation's `ref` object. The
+operation **MUST** include an `op` code of `"add"`.
+
+For example:
+
+```json
+PATCH /bulk HTTP/1.1
+Host: example.org
+Content-Type: application/vnd.api+json
+
+{
+  "operations": [{
+    "op": "add",
+    "ref": {
+      "type": "articles"
+    },
+    "data": {
+      "type": "articles",
+      "attributes": {
+        "title": "JSON API paints my bikeshed!"
+      }
+    }
+  }]
+}
+```
+
+An example response:
+
+```json
+HTTP/1.1 200 OK
+Content-Type: application/vnd.api+json
+
+{
+  "operations": [{
+    "links": {
+      "self": "http://example.com/articles/13"
+    },
+    "data": {
+      "type": "articles",
+      "id": "13",
+      "attributes": {
+        "title": "JSON API paints my bikeshed!"
+      }
+    }
+  }]
+}
+```
+
+### Updating Resources
+
+An operation that updates a resource **MUST** target that resource
+either through the request endpoint or the operation's `ref` object. The
+operation **MUST** include an `op` code of `"update"`.
+
+For example:
+
+```json
+PATCH /bulk HTTP/1.1
+Host: example.org
+Content-Type: application/vnd.api+json
+
+{
+  "operations": [{
+    "op": "update",
+    "ref": {
+      "type": "articles",
+      "id": "13"
+    },
+    "data": {
+      "type": "articles",
+      "id": "13",
+      "attributes": {
+        "title": "To TDD or Not"
+      }
+    }
+  }]
+}
+```
+
+A server could respond with `204 No Content`.
+
+### Deleting Resources
+
+An operation that deletes a resource **MUST** target that resource
+either through the request endpoint or the operation's `ref` object. The
+operation **MUST** include an `op` code of `"remove"`.
+
+For example:
+
+```json
+PATCH /bulk HTTP/1.1
+Host: example.org
+Content-Type: application/vnd.api+json
+
+{
+  "operations": [{
+    "op": "remove",
+    "ref": {
+      "type": "articles",
+      "id": "13"
+    }
+  }]
+}
+```
+
+A server could respond with `204 No Content`.
+
+### Updating To-One Relationships
+
+An operation that updates a resource's to-one relationship **MUST** target that
+relationship either through the request endpoint or the operation's `ref`
+object. The operation **MUST** include an `op` code of `"update"`.
+
+For example, the following request adds a to-one relationship:
+
+```json
+PATCH /bulk HTTP/1.1
+Host: example.org
+Content-Type: application/vnd.api+json
+
+{
+  "operations": [{
+    "op": "update",
+    "ref": {
+      "type": "articles",
+      "id": "13",
+      "relationship": "author"
+    },
+    "data": {
+      "type": "people",
+      "id": "9"
+    }
+  }]
+}
+```
+
+And the following request removes a to-one relationship:
+
+```json
+PATCH /bulk HTTP/1.1
+Host: example.org
+Content-Type: application/vnd.api+json
+
+{
+  "operations": [{
+    "op": "update",
+    "ref": {
+      "type": "articles",
+      "id": "13",
+      "relationship": "author"
+    },
+    "data": null
+  }]
+}
+```
+
+A server could respond to either request with `204 No Content`.
+
+### Updating To-Many Relationships
+
+An operation that updates a resource's to-many relationship **MUST** target that
+relationship either through the request endpoint or the operation's `ref`
+object.
+
+To add members to a to-many relationship, the operation **MUST** include an
+`op` code of `"add"`. For example:
+
+```json
+PATCH /bulk HTTP/1.1
+Host: example.org
+Content-Type: application/vnd.api+json
+
+{
+  "operations": [{
+    "op": "add",
+    "ref": {
+      "type": "articles",
+      "id": "1",
+      "relationship": "comments"
+    },
+    "data": [
+      { "type": "comments", "id": "123" }
+    ]
+  }]
+}
+```
+
+To replace all the members of a to-many relationship, the operation **MUST**
+include an `op` code of `"update"`. For example:
+
+```json
+PATCH /bulk HTTP/1.1
+Host: example.org
+Content-Type: application/vnd.api+json
+
+{
+  "operations": [{
+    "op": "update",
+    "ref": {
+      "type": "articles",
+      "id": "1",
+      "relationship": "tags"
+    },
+    "data": [
+      { "type": "tags", "id": "2" },
+      { "type": "tags", "id": "3" }
+    ]
+  }]
+}
+```
+
+To remove members from a to-many relationship, the operation **MUST** include an
+`op` code of `"remove"`. For example:
+
+```json
+PATCH /bulk HTTP/1.1
+Host: example.org
+Content-Type: application/vnd.api+json
+
+{
+  "operations": [{
+    "op": "remove",
+    "ref": {
+      "type": "articles",
+      "id": "1",
+      "relationship": "comments"
+    },
+    "data": [
+      { "type": "comments", "id": "12" },
+      { "type": "comments", "id": "13" }
+    ]
+  }]
+}
+```
+
+A server could respond to any of these requests with `204 No Content`.
+
+### Performing Multiple Operations
+
+The above examples all perform a single operation that aligns with an equivalent
+singular request. The primary value of operations is that they unlock the
+ability to perform more than one action serially and transactionally.
+
+Here's an example request that adds two resources in one request, including a
+relationship between them:
+
+```json
+PATCH /bulk HTTP/1.1
+Host: example.org
+Content-Type: application/vnd.api+json
+
+{
+  "operations": [{
+    "op": "add",
+    "ref": {
+      "type": "authors"
+    },
+    "data": {
+      "type": "authors",
+      "lid": "a",
+      "attributes": {
+        "name": "dgeb"
+      }
+    }
+  }, {
+    "op": "add",
+    "ref": {
+      "type": "articles"
+    },
+    "data": {
+      "type": "articles",
+      "attributes": {
+        "title": "JSON API paints my bikeshed!"
+      },
+      "relationships": {
+        "author": {
+          "data": {
+            "type": "authors",
+            "lid": "a"
+          }
+        }
+      }
+    }
+  }]
+}
+```
+
+An example response:
+
+```json
+HTTP/1.1 200 OK
+Content-Type: application/vnd.api+json
+
+{
+  "operations": [{
+    "links": {
+      "self": "http://example.com/authors/9"
+    },
+    "data": {
+      "type": "authors",
+      "lid": "a",
+      "id": "9",
+      "attributes": {
+        "name": "dgeb"
+      }
+    }
+  }, {
+    "links": {
+      "self": "http://example.com/articles/13"
+    },
+    "data": {
+      "type": "articles",
+      "id": "13",
+      "attributes": {
+        "title": "JSON API paints my bikeshed!"
+      },
+      "relationships": {
+        "author": {
+          "links": {
+            "self": "http://example.com/articles/13/relationships/author",
+            "related": "http://example.com/articles/13/author"
+          }
+        }
+      }
+    }
+  }]
+}
+```
+
+Note that this operations request could also have been structured to add the
+author, then add the article, then add the relationship between them.
