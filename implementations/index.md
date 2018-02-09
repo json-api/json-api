@@ -110,7 +110,6 @@ and writing of JSON API documents.
 
 * [jsonapi-requests](https://github.com/socialwifi/jsonapi-requests/) Simple and fun high-level JSONAPI client for Python. Contains ORM which makes consuming the API even easier, in a DRY manner. It has a low-level API similiar to requests as well, which gives you all the flexibility that you may need.
 * [jsonapi-client](https://github.com/qvantel/jsonapi-client) Comprehensive yet easy-to-use, pythonic, ORM-like access to JSON API services
-* [SAFRS JSON API Framework](https://github.com/thomaxxl/safrs) self-documenting swagger-based jsonapi implementation 
 
 ### <a href="#client-libraries-elixir" id="client-libraries-elixir" class="headerlink"></a> Elixir
 
@@ -201,6 +200,7 @@ the moment.
 * [pyramid-jsonapi](https://github.com/colinhiggs/pyramid-jsonapi) Auto-build a JSON API from sqlalchemy models using the pyramid framework.
 * [Flask-REST-JSONAPI](https://github.com/miLibris/flask-rest-jsonapi) Flask extension to create web api according to jsonapi specification with Flask, Marshmallow and data provider of your choice (SQLAlchemy, MongoDB, ...)
 * [Flump](https://github.com/rolepoint/flump) Database agnostic JSON API builder which depends on Flask and Marshmallow.
+* [SAFRS JSON API Framework](https://github.com/thomaxxl/safrs) Flask-SQLAlchemy jsonapi implementation with auto-generated openapi (fka swagger) interface. 
 
 ### <a href="#server-libraries-go" id="server-libraries-go" class="headerlink"></a> Go
 
