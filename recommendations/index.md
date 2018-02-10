@@ -20,16 +20,14 @@ The allowed and recommended characters for an URL safe naming of members are def
 
 ### JSON  
 
-Naming format should follows the [Google JSON Style Guide](https://google.github.io/styleguide/jsoncstyleguide.xml?showone=Property_Name_Format#Property_Name_Format), where:
+It is important to adhere to a defined convention. Recommended property names **SHOULD** conform to the following guidelines:
 
-> Property names must conform to the following guidelines:
+- Property names **SHOULD** be camel-cased, ascii strings.
+- First characters **SHOULD** be "a-z" (U+0061 to U+007A).
+- Property names **SHOULD** be meaningful names with defined semantics.
 
-> * Property names should be meaningful names with defined semantics.
-> * Property names must be camel-cased, ascii strings.
-> * The first character must be a letter, an underscore (_) or a dollar sign ($).
-> * Subsequent characters can be a letter, a digit, an underscore, or a dollar sign.
-> * Reserved JavaScript keywords should be avoided (A list of reserved JavaScript keywords can be found below).
-> * These guidelines mirror the guidelines for naming JavaScript identifiers. This allows JavaScript clients to access properties using dot notation. (for example, result.thisIsAnInstanceVariable). 
+
+These guidelines mirror the guidelines for naming JavaScript identifiers. This allows JavaScript clients to access properties using dot notation.
 
 > Here's an example of an object with one property:
 
