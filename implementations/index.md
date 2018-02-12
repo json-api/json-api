@@ -60,7 +60,6 @@ assembled to vet them.
 * [JsonApiParser](https://github.com/beauby/jsonapi_parser) a ruby library for parsing/validating/handling JSONAPI documents.
 * [Munson](https://github.com/coryodaniel/munson) is a ruby JSONAPI client that can act as an ORM or integrate with your models via fine-grained agnosticism. Easy to configure and customize. Includes a chainable/customizable query builder, attributes API and dirty tracking.
 * [json-api-vanilla](https://github.com/trainline/json-api-vanilla) a reference-aware ruby library for JSONAPI deserialization that doesn't require setting up classes.
-* [fast_jsonapi](https://github.com/Netflix/fast_jsonapi) A lightning fast JSON:API serializer for Ruby Objects.
 
 ### <a href="#client-libraries-php" id="client-libraries-php" class="headerlink"></a> PHP
 
@@ -80,9 +79,9 @@ assembled to vet them.
 ### <a href="#client-libraries-java" id="client-libraries-java" class="headerlink"></a> Java
 
 * [jsonapi-converter](https://github.com/jasminb/jsonapi-converter) is a Java JSON API v1.0 client. Besides providing means for serialisation/deserialisation, client comes with Retrofit plugin.
-* [crnk.io](http://www.crnk.io) is a JSON API framework for clients and servers. On the client-side it targets 
+* [crnk.io](http://www.crnk.io) is a JSON API framework for clients and servers. On the client-side it targets
   both Java and Android development. As for the backend side a rich set of modules helps with the integration of various
-  Java frameworks. 
+  Java frameworks.
 
 
 ### <a href="#client-libraries-android" id="client-libraries-android" class="headerlink"></a> Android
@@ -171,6 +170,7 @@ and writing of JSON API documents.
   * [Roar](https://github.com/apotonick/roar) Renders and parses represenations of Ruby objects
   * [Jbuilder::JsonAPI](https://github.com/vladfaust/jbuilder-json_api) Simple & lightweight extension for Jbuilder
   * [jsonapi-rb](http://jsonapi-rb.org) Ruby library for efficiently building and consuming JSON API documents - with Rails and Hanami integrations.
+  * [fast_jsonapi](https://github.com/Netflix/fast_jsonapi) A lightning fast JSON:API serializer for Ruby Objects.
 
 * Ruby on Rails
   * [Jsonapi-for-rails](https://github.com/doga/jsonapi_for_rails)
@@ -200,7 +200,7 @@ the moment.
 * [pyramid-jsonapi](https://github.com/colinhiggs/pyramid-jsonapi) Auto-build a JSON API from sqlalchemy models using the pyramid framework.
 * [Flask-REST-JSONAPI](https://github.com/miLibris/flask-rest-jsonapi) Flask extension to create web api according to jsonapi specification with Flask, Marshmallow and data provider of your choice (SQLAlchemy, MongoDB, ...)
 * [Flump](https://github.com/rolepoint/flump) Database agnostic JSON API builder which depends on Flask and Marshmallow.
-* [SAFRS JSON API Framework](https://github.com/thomaxxl/safrs) Flask-SQLAlchemy jsonapi implementation with auto-generated openapi (fka swagger) interface. 
+* [SAFRS JSON API Framework](https://github.com/thomaxxl/safrs) Flask-SQLAlchemy jsonapi implementation with auto-generated openapi (fka swagger) interface.
 
 ### <a href="#server-libraries-go" id="server-libraries-go" class="headerlink"></a> Go
 
@@ -215,7 +215,7 @@ the moment.
 * [NJsonApi](https://github.com/jacek-gorgon/NJsonApi) is a .NET server implementation of the standard. It aims at good extensibility and performance while maintaining developer-friendliness with interchangable convenions and builder-style configuration.
 * [Migrap.AspNet.Mvc.Jsonapi](https://github.com/migrap/Migrap.AspNet.Mvc.Jsonapi) is an ASP.NET 5 (vNext) library that allows for existing code to build JSON API responses through output formatters.
 * [Saule](https://github.com/joukevandermaas/saule/) is a small JSON API 1.0 compatible library that integrates well with established Web API conventions. It has complete documentation and near 100% test coverage.
-* [JsonApiDotNetCore](https://github.com/json-api-dotnet/JsonApiDotNetCore) is an ASP.Net Core server implementation targeting .Net Standard. Based on the [JR](https://github.com/cerebris/jsonapi-resources) implementation, it provides all the required controllers and middleware to get your application up and running with as little boilerplate as possible. 
+* [JsonApiDotNetCore](https://github.com/json-api-dotnet/JsonApiDotNetCore) is an ASP.Net Core server implementation targeting .Net Standard. Based on the [JR](https://github.com/cerebris/jsonapi-resources) implementation, it provides all the required controllers and middleware to get your application up and running with as little boilerplate as possible.
 * [Hypermedia.JsonApi.WebApi](https://github.com/cosullivan/Hypermedia/) is a Web API media type formatter for reading and writing JSON API. It supports an external resource model definition and natively
 includes related resources.
 * [JsonApiSerializer](https://github.com/codecutout/JsonApiSerializer) is a configurationless JSON API serialization and deserialization library implemented as a Json.NET `JsonSerializerSetting`. It leverages the existing power and flexiability of Json.NET while providing a sensible default mapping between JSON API and CLR objects.
@@ -229,7 +229,7 @@ includes related resources.
   * katharsis-spring - adapter for Katharsis core module for Spring and Spring Boot framoworks.
   * katharsis-servlet - generic servlet/filter adapter for Katharsis core module. This module can be used in traditional servlet or filter based Java web applications, or even non-Servlet-API-based web applications such as Portal/Portlet, Wicket, etc.
 * [Elide](http://elide.io) is a web framework supporting JSON API. Through annotation-based JSON API endpoint generation, Elide enables you to focus on your data model, security model, and business logic while avoiding unnecessary boilerplate. Moreover, through use of the JSON API Patch extension, [Elide](http://elide.io) provides full support for database transactions.
-* [crnk.io](http://www.crnk.io) is a JSON API framework for clients and servers. On the server-side it comes, among others, 
+* [crnk.io](http://www.crnk.io) is a JSON API framework for clients and servers. On the server-side it comes, among others,
   with a rich set of integrations (Servlet, JAX-RS, Spring, JPA, Bean Validation, Zipkin and more), bulk updates with JSON Patch,
   a meta-model for automation purposes, client stub generation for TypeScript and a module API for third-party contributions.
 
