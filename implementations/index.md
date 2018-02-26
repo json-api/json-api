@@ -236,7 +236,7 @@ includes related resources.
   a meta-model for automation purposes, client stub generation for TypeScript and a module API for third-party contributions.
 
 ### <a href="#server-libraries-scala" id="server-libraries-scala" class="headerlink"></a> Scala
-* [scala-jsonapi](https://github.com/zalando/scala-jsonapi) A Scala library for producing JSON output (and deserializing JSON input) based on JSON API specification.
+* [scala-jsonapi](https://github.com/scala-jsonapi/scala-jsonapi) A Scala library for producing JSON output (and deserializing JSON input) based on JSON API specification.
 
 ### <a href="#server-libraries-elixir" id="server-libraries-elixir" class="headerlink"></a> Elixir
 
