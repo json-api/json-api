@@ -54,6 +54,7 @@ assembled to vet them.
 
 * [jsonapi-ios](https://github.com/joshdholtz/jsonapi-ios) is a library for loading data from a JSON API datasource. Parses JSON API data into models with support for auto-linking of resources and custom model classes.
 * [Spine](https://github.com/wvteijlingen/spine) is a Swift library for working with JSON API APIs. It supports mapping to custom model classes, fetching, advanced querying, linking and persisting.
+* [Vox](https://github.com/aronbalog/Vox) is a Swift JSON API client framework with custom model classes support and nice networking interface.
 
 ### <a href="#client-libraries-ruby" id="client-libraries-ruby" class="headerlink"></a> Ruby
 
