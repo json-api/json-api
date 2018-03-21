@@ -165,6 +165,7 @@ and writing of JSON API documents.
 * [Lux](https://github.com/postlight/lux) is a MVC style Node.js framework for building lightning fast JSON APIs.
 * [transformalizer](https://github.com/GaiamTV/transformalizer) a bare bones node module for transforming raw data into JSON API compliant payloads that makes no assumption regarding the shape of your data and sdks used, supports the full v1.0 specification, and supports dynamic transformations, links, and meta at all levels of a document.
 * [jsonapi-mock](https://github.com/Thomas-X/jsonapi-mock) A [json-server](https://github.com/typicode/json-server) inspired jsonapi mock server. Setup a jsonapi mock server in almost no time, uses lowdb.
+* [DenaliJS](http://denalijs.org) A layered-conventions framework for building ambitious APIs. Includes a powerful addon system, best-in-class developer experience, and extensive documentation.
 
 ### <a href="#server-libraries-ruby" id="server-libraries-ruby" class="headerlink"></a> Ruby
 
