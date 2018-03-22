@@ -504,10 +504,10 @@ For example:
 ### <a href="#document-links" id="document-links" class="headerlink"></a> Links
 
 Where specified, a `links` member can be used to represent links. The value
-of each `links` member **MUST** be an object (a "links object").
+of this member **MUST** be an object (a "links object").
 
-Each member of a links object is a "link". A link **MUST** be represented as
-either:
+<a href="#document-links-link" id="document-links-link"></a>
+Within this object, a link **MUST** be represented as either:
 
 * a string containing the link's URL.
 * <a id="document-links-link-object"></a>an object ("link object") which can 
@@ -516,7 +516,11 @@ either:
   * `meta`: a meta object containing non-standard meta-information about the
     link.
 
-The following `self` link is simply a URL:
+Except for the `type` key in an [error object]'s links object, each key present
+in a links object  **MUST** have a single link as its value. The  `type` key, 
+if present, **MAY** hold an array of links.
+
+For example, The following `self` link is simply a URL:
 
 ```json
 "links": {
@@ -540,8 +544,7 @@ about a related resource collection:
 
 > Note: Additional members may be specified for links objects and link
 objects in the future. It is also possible that the allowed values of
-additional members will be expanded (e.g. a `collection` link may support an
-array of values, whereas a `self` link does not).
+additional members will be further expanded.
 
 ### <a href="#document-jsonapi-object" id="document-jsonapi-object" class="headerlink"></a> JSON API Object
 
@@ -1801,11 +1804,12 @@ An error object **MAY** have the following members:
 
 * `id`: a unique identifier for this particular occurrence of the problem.
 * `links`: a [links object][links] containing the following members:
-  * `about`: a [link][links] that leads to further details about this
-    particular occurrence of the problem.
-  * `type`: a [link][links] whose URI that identifies the type of error that 
-     this particular error is an instance of. When dereferenced, this URI 
-     **SHOULD** provide a human-readable explanation of the general error.
+  * `about`: a [link][link] that leads to further details about this
+    particular occurrence of the problem. When derefenced, this URI **SHOULD**
+    return a human-readable description of the error.
+  * `type`: a [link][link] or array of links that identifies the type of error 
+    that this particular error is an instance of. This URI **SHOULD** be 
+    dereferencable to a human-readable explanation of the general error.
 * `status`: the HTTP status code applicable to this problem, expressed as a
   string value.
 * `code`: an application-specific error code, expressed as a string value.
@@ -1837,6 +1841,8 @@ An error object **MAY** have the following members:
 [compound document]: #document-compound-documents
 [meta]: #document-meta
 [links]: #document-links
+[link]: #document-links-link
+[error object]: #error-objects
 [error details]: #errors
 [member names]: #document-member-names
 [pagination]: #fetching-pagination
