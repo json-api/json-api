@@ -24,33 +24,44 @@ interpreted as described in RFC 2119
 
 ## <a href="#content-negotiation" id="content-negotiation" class="headerlink"></a> Content Negotiation
 
-### <a href="#content-negotiation-clients" id="content-negotiation-clients" class="headerlink"></a> Client Responsibilities
+### <a href="#content-negotiation-all" id="content-negotiation-all" class="headerlink"></a> Universal Responsibilities
 
-Clients **MUST** send all JSON API data in request documents with the header
-`Content-Type: application/vnd.api+json` without any media type parameters.
+The JSON API media type is [`application/vnd.api+json`](http://www.iana.org/assignments/media-types/application/vnd.api+json).
+Clients and servers **MUST** send all JSON API data using this media type in the
+`Content-Type` header.
+
+Further, the JSON API media type **MUST** always be specified with either no
+media type parameters or with only the `profile` parameter. This applies to both
+the `Content-Type` and `Accept` headers.
+
+> Note: A media type parameter is an extra piece of information that can
+accompany a media type. For example, in the header
+`Content-Type: text/html; charset="utf-8"`, the media type is `text/html` and
+`charset` is a parameter.
+
+The `profile` parameter is used to support [profiles].
+
+### <a href="#content-negotiation-clients" id="content-negotiation-clients" class="headerlink"></a> Client Responsibilities
 
 Clients that include the JSON API media type in their `Accept` header **MUST**
 specify the media type there at least once without any media type parameters.
 
-Clients **MUST** ignore any parameters for the `application/vnd.api+json`
-media type received in the `Content-Type` header of response documents.
+When processing a JSON API response document, clients **MUST** ignore any
+parameters other than `profile` in the server's `Content-Type` header.
 
 ### <a href="#content-negotiation-servers" id="content-negotiation-servers" class="headerlink"></a> Server Responsibilities
 
-Servers **MUST** send all JSON API data in response documents with the header
-`Content-Type: application/vnd.api+json` without any media type parameters.
-
 Servers **MUST** respond with a `415 Unsupported Media Type` status code if
 a request specifies the header `Content-Type: application/vnd.api+json`
-with any media type parameters.
+with any media type parameters other than `profile`.
 
 Servers **MUST** respond with a `406 Not Acceptable` status code if a
 request's `Accept` header contains the JSON API media type and all instances
 of that media type are modified with media type parameters.
 
-> Note: The content negotiation requirements exist to allow future versions
-of this specification to use media type parameters for extension negotiation
-and versioning.
+> Note: These content negotiation requirements exist to allow future versions
+of this specification to add other media type parameters for extension
+negotiation and versioning.
 
 ## <a href="#document-structure" id="document-structure" class="headerlink"></a> Document Structure
 
@@ -549,15 +560,30 @@ array of values, whereas a `self` link does not).
 
 A JSON API document **MAY** include information about its implementation
 under a top level `jsonapi` member. If present, the value of the `jsonapi`
-member **MUST** be an object (a "jsonapi object"). The jsonapi object **MAY**
-contain a `version` member whose value is a string indicating the highest JSON
-API version supported. This object **MAY** also contain a `meta` member, whose
-value is a [meta] object that contains non-standard meta-information.
+member **MUST** be an object (a "jsonapi object").
+
+The jsonapi object **MAY** contain any of the following members:
+
+* `version` - whose value is a string indicating the highest JSON API version
+  supported.
+* `meta` - a [meta] object that contains non-standard meta-information.
+* `profiles` - an object with profile URIs as keys and corresponding
+  [profile descriptors](profile-descriptors) as values.
+
+A simple example appears below:
 
 ```json
 {
   "jsonapi": {
-    "version": "1.1"
+    "version": "1.1",
+    "profiles": {
+      "http://example.com/profiles/resource-versioning": {
+        "aliases": {
+          "version": "v"
+        }
+      },
+      "http://example.com/profiles/offset-limit-pagination": {}
+    }
   }
 }
 ```
@@ -1780,6 +1806,122 @@ parameter from this specification, it **MUST** return `400 Bad Request`.
 
 > Note: This is to preserve the ability of JSON API to make additive additions
 to standard query parameters without conflicting with existing implementations.
+
+## <a href="#profiles" id="profiles" class="headerlink"></a> Profiles
+
+JSON API supports the use of "profiles" as a means to describe additional
+semantics to the media type, without altering the basic semantics described in
+this specification.
+
+[RFC 6906](https://tools.ietf.org/html/rfc6906) covers the nature of profile
+identification:
+
+> Profiles are identified by URI.  However, as is the case with, for
+  example, XML namespace URIs, the URI in this case only serves as an
+  identifier, meaning that the presence of a specific URI has to be
+  sufficient for a client to assert that a resource representation
+  conforms to a profile.  Thus, clients SHOULD treat profile URIs as
+  identifiers and not as links, but profiles MAY be defined in a way
+  that the URIs do identify retrievable profile description and thus
+  can be accessed by clients by dereferencing the profile URI.  For
+  profiles intended for use in environments where clients may encounter
+  unknown profile URIs, profile maintainers SHOULD consider to make the
+  profile URI dereferencable and provide useful documentation at that
+  URI.  The design and representation of such profile descriptions,
+  however, is outside the scope of this specification.
+
+A profile **MAY** assign meaning to particular elements of the document
+structure, such as resource attributes or members of meta objects, and even
+reserved query parameters, such as `filter`. The scope of a profile **MUST** be
+clearly delineated. The elements reserved by a profile, and the meaning assigned
+to those elements, **MUST NOT** change over time or else the profile **MUST** be
+considered a new profile with a new URI. However, a profile **MAY** evolve
+additively within the scope originally claimed by the profile.
+
+For example, let's say that a profile reserves a `timestamps` member in the
+`meta` object of every resource. Originally, this profile defines the value
+of `timestamps` as an object that must contain one member: `created`. The
+profile could evolve to allow an optional member, `updated`, in the `timestamps`
+object. But it could not make that member required, nor could it introduce
+a new sibling to `timestamps`.
+
+### <a href="#profile-keywords" id="profile-keywords" class="headerlink"></a> Profile Keywords
+
+A profile **SHOULD** explicitly declare "keywords" for any elements that it
+introduces to the document structure. If a profile does not explicitly declare a
+keyword for an element, then the name of the element itself can be considered a
+keyword. Keywords **MAY** be aliased in any representation through the use of
+[profile descriptors](profile-descriptors), as described below.
+
+### <a href="#profile-media-type-parameter" id="profile-media-type-parameter" class="headerlink"></a> `profile` Media Type Parameter
+
+The `profile` media type parameter is used to describe the application of
+one or more profiles to the JSON API media type. The value of the `profile`
+parameter **MUST** equal a whitespace-separated list of profile URIs.
+
+Clients and servers **SHOULD** use the `profile` media type parameter in
+conjunction with the JSON API media type in a `Content-Type` header to specify
+the application of one or more profiles to a JSON API document.
+
+A client **MAY** use the `profile` media type parameter in conjunction with the
+JSON API media type in an `Accept` header to _request_, but not _require_, that
+the server apply one or more profiles to the response. When such a request is
+received, a server **SHOULD** attempt to apply the requested profiles in
+processing a response.
+
+### <a href="#profile-query-parameter" id="profile-query-parameter" class="headerlink"></a> `profile` Query Parameter
+
+A client **MAY** use the `profile` query parameter to _require_ the application
+of one or more profiles to the JSON API media type in processing a request. The
+value of the `profile` query parameter **MUST** equal a URI-encoded
+whitespace-separated list of profile URIs.
+
+If a server receives a request requiring the application of a profile or
+combination of profiles that it can not apply, it **MUST** respond with a `400
+Bad Request` status code.
+
+### <a href="#profile-descriptors" id="profile-descriptors" class="headerlink"></a> Profile Descriptors
+
+As described above, the top-level [`jsonapi`](document-jsonapi-object) object
+**MAY** contain a `profiles` member that contains a map of profile descriptor
+objects, keyed by profile URI.
+
+Each profile descriptor object **MAY** contain an `aliases` object. The key of
+each member in `aliases` **MUST** be a [keyword](profile-keywords) explicitly
+declared by the profile, and the value **MUST** be an alias that applies to this
+particular representation. This aliasing mechanism allows profiles to be applied
+in a way that is both consistent with the rest of the representation and does
+not conflict with other profiles.
+
+For instance, the following document includes a single profile descriptor for a
+profile that, let's say, assigns meaning to a `version` keyword that can be
+included in any resource's `meta` object. This descriptor provides an alias for
+`version`: `v`. In other words, interpreters of this representation should treat
+the key `v` as if it were the key `version` described in the profile:
+
+```json
+{
+  "data": {
+    "type": "contacts",
+    "id": "345",
+    "meta": {
+      "v": "2018-04-14-879976658"
+    },
+    "attributes": {
+      "name": "Ethan"
+    }
+  },
+  "jsonapi": {
+    "profiles": {
+      "http://example.com/profiles/resource-versioning": {
+        "aliases": {
+          "version": "v"
+        }
+      }
+    }
+  }
+}
+```
 
 ## <a href="#errors" id="errors" class="headerlink"></a> Errors
 
