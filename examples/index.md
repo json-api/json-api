@@ -389,7 +389,7 @@ The `source` member can also be used to indicate that the error originated
 from a problem with a URI query parameter, like so:
 
 ```http
-GET /api/posts/1?include=auther HTTP/1.1
+GET /api/posts/1?include=author HTTP/1.1
 ```
 
 ```http
@@ -401,7 +401,7 @@ Content-Type: application/vnd.api+json
     {
       "source": { "parameter": "include" },
       "title":  "Invalid Query Parameter",
-      "detail": "The resource does not have an `auther` relationship path."
+      "detail": "The resource does not have an `author` relationship path."
     }
   ]
 }

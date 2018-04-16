@@ -270,7 +270,9 @@ A "relationship object" **MUST** contain at least one of the following:
   relationship.
 
 A relationship object that represents a to-many relationship **MAY** also contain
-[pagination] links under the `links` member, as described below.
+[pagination] links under the `links` member, as described below. Any
+[pagination] links in a relationship object **MUST** paginate the relationship
+data, not the related resources.
 
 > Note: See [fields] and [member names] for more restrictions on this container.
 
@@ -518,7 +520,7 @@ Each member of a links object is a "link". A link **MUST** be represented as
 either:
 
 * a string containing the link's URL.
-* <a id="document-links-link-object"></a>an object ("link object") which can 
+* <a id="document-links-link-object"></a>an object ("link object") which can
   contain the following members:
   * `href`: a string containing the link's URL.
   * `meta`: a [meta object][meta] containing additional information about the link.
@@ -594,7 +596,7 @@ object **MUST NOT** contain [profile extension data](#extending-profile-extensio
 ```json
 {
   "jsonapi": {
-    "version": "1.0"
+    "version": "1.1"
   }
 }
 ```
@@ -982,8 +984,10 @@ client to customize which related resources should be returned.
 If an endpoint does not support the `include` parameter, it **MUST** respond
 with `400 Bad Request` to any requests that include it.
 
-If an endpoint supports the `include` parameter and a client supplies it,
-the server **MUST NOT** include unrequested [resource objects] in the `included`
+If an endpoint supports the `include` parameter and a client supplies it:
+
+ - The server's response **MUST** be a [compound document] with an `included` key — even if that `included` key holds an empty array (because the requested relationships are empty).
+ - The server **MUST NOT** include unrequested [resource objects] in the `included`
 section of the [compound document].
 
 The value of the `include` parameter **MUST** be a comma-separated (U+002C
