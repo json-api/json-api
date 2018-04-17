@@ -1869,6 +1869,10 @@ The `profile` media type parameter is used to describe the application of
 one or more profiles to the JSON API media type. The value of the `profile`
 parameter **MUST** equal a whitespace-separated list of profile URIs.
 
+> Note: When serializing the `profile` media type parameter, the HTTP 
+> specification requires that its value be surrounded by quotation marks 
+> (U+0022 QUOTATION MARK, "\"") if it contains more than one URI.
+
 Clients and servers **SHOULD** use the `profile` media type parameter in
 conjunction with the JSON API media type in a `Content-Type` header to specify
 the application of one or more profiles to a JSON API document.
