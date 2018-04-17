@@ -1863,6 +1863,8 @@ keyword for an element, then the name of the element itself is considered to be 
 keyword. Keywords **MAY** be aliased in any representation through the use of
 [profile descriptors](profile-descriptors), as described below.
 
+All profile keywords **MUST** meet this specification's requirements for [member names].
+
 ### <a href="#profile-media-type-parameter" id="profile-media-type-parameter" class="headerlink"></a> `profile` Media Type Parameter
 
 The `profile` media type parameter is used to describe the application of
