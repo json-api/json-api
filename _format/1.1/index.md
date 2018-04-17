@@ -1878,10 +1878,6 @@ parameter **MUST** equal a whitespace-separated list of profile URIs.
 > specification requires that its value be surrounded by quotation marks 
 > (U+0022 QUOTATION MARK, "\"") if it contains more than one URI.
 
-Clients and servers **MUST** include the `profile` media type parameter in
-conjunction with the JSON API media type in a `Content-Type` header to indicate
-that they have applied one or more profiles to a JSON API document.
-
 A client **MAY** use the `profile` media type parameter in conjunction with the
 JSON API media type in an `Accept` header to _request_, but not _require_, that
 the server apply one or more profiles to the response document. When such a 
@@ -1903,6 +1899,26 @@ Servers **MAY** add profiles to a JSON API document even if the client has not
 requested them. The recipient of a document **MUST** ignore any profile extensions 
 in that document that it does not understand. The only exception to this is profiles
 whose support is required using the `profile` query parameter, as described below.
+
+#### <a href="#profiles-sending" id="profiles-sending" class="headerlink"></a> Sending Profiled Documents
+
+Clients and servers **MUST** include the `profile` media type parameter in
+conjunction with the JSON API media type in a `Content-Type` header to indicate
+that they have applied one or more profiles to a JSON API document.
+
+When an older JSON API server that doesn't support the `profile` media type 
+parameter receives a document with one or more profiles, it will respond with a
+`415 Unsupported Media Type` error.
+
+After attempting to rule out other possible causes of this error, a client that
+receives a `415 Unsupported Media Type` **SHOULD** remove the profile extensions
+it has applied to the document and retry its request without the `profile` media
+type parameter. If this resolves the error, the client **SHOULD NOT** attempt to
+use profile extensions in subsequent interactions with the same API.
+
+> The most likely other causes of a 415 error are that the server doesn't
+support JSON API at all or that the client has failed to provide a required 
+profile.
 
 ### <a href="#profile-query-parameter" id="profile-query-parameter" class="headerlink"></a> `profile` Query Parameter
 
