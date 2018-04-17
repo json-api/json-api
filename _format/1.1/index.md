@@ -1809,34 +1809,34 @@ to standard query parameters without conflicting with existing implementations.
 
 ## <a href="#profiles" id="profiles" class="headerlink"></a> Profiles
 
-JSON API supports the use of "profiles" as a means to describe additional
-semantics to the media type, without altering the basic semantics described in
-this specification.
+JSON API supports the use of "profiles" as a way to indicate additional
+semantics that apply to a JSON:API request/document, without altering the 
+basic semantics described in this specification.
 
 [RFC 6906](https://tools.ietf.org/html/rfc6906) covers the nature of profile
 identification:
 
-> Profiles are identified by URI.  However, as is the case with, for
+> Profiles are identified by URI. However, as is the case with, for
   example, XML namespace URIs, the URI in this case only serves as an
   identifier, meaning that the presence of a specific URI has to be
   sufficient for a client to assert that a resource representation
-  conforms to a profile.  Thus, clients SHOULD treat profile URIs as
-  identifiers and not as links, but profiles MAY be defined in a way
-  that the URIs do identify retrievable profile description and thus
-  can be accessed by clients by dereferencing the profile URI.  For
-  profiles intended for use in environments where clients may encounter
-  unknown profile URIs, profile maintainers SHOULD consider to make the
-  profile URI dereferencable and provide useful documentation at that
-  URI.  The design and representation of such profile descriptions,
-  however, is outside the scope of this specification.
+  conforms to a profile. Thus, clients SHOULD treat profile URIs as
+  identifiers and not as links.
+
+However, to aid human understanding, profile URIs **SHOULD** return 
+documentation of the profile.
 
 A profile **MAY** assign meaning to particular elements of the document
 structure, such as resource attributes or members of meta objects, and even
-reserved query parameters, such as `filter`. The scope of a profile **MUST** be
-clearly delineated. The elements reserved by a profile, and the meaning assigned
-to those elements, **MUST NOT** change over time or else the profile **MUST** be
-considered a new profile with a new URI. However, a profile **MAY** evolve
-additively within the scope originally claimed by the profile.
+to query parameters whose behavior is left up to each implementation, such 
+as `filter` and all those that contain a non a-z character.
+
+The scope of a profile **MUST** be clearly delineated. The elements reserved by 
+a profile, and the meaning assigned to those elements, **MUST NOT** change over 
+time or else the profile **MUST** be considered a new profile with a new URI. 
+
+However, a profile **MAY** evolve additively within the scope originally claimed 
+by the profile.
 
 For example, let's say that a profile reserves a `timestamps` member in the
 `meta` object of every resource. Originally, this profile defines the value
