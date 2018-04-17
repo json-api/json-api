@@ -1883,6 +1883,11 @@ the server apply one or more profiles to the response document. When such a
 request is received, a server **SHOULD** attempt to apply the requested profiles 
 to its response.
 
+Servers **MAY** add profiles to a JSON API document even if the client has not
+requested them. The recipient of a document **MUST** ignore any profile extensions 
+in that document that it does not understand. The only exception to this is profiles
+whose support is required using the `profile` query parameter, as described below.
+
 ### <a href="#profile-query-parameter" id="profile-query-parameter" class="headerlink"></a> `profile` Query Parameter
 
 A client **MAY** use the `profile` query parameter to _require_ the server to
