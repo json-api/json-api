@@ -1883,6 +1883,17 @@ the server apply one or more profiles to the response document. When such a
 request is received, a server **SHOULD** attempt to apply the requested profiles 
 to its response.
 
+For example, in the following request, the client asks that the server apply the
+`http://jsonapi.org/extensions/last-modified` profile if it is able to.
+
+```http
+Accept: application/vnd.api+json;profile="http://jsonapi.org/extensions/last-modified", application/vnd.api+json
+```
+
+> Note: The second instance of the JSON API media type in the example above is
+  required under the [client's content negotiation responsibilities](#content-negotiation-clients).
+  It is used to support old servers that don't understand the profile parameter.
+
 Servers **MAY** add profiles to a JSON API document even if the client has not
 requested them. The recipient of a document **MUST** ignore any profile extensions 
 in that document that it does not understand. The only exception to this is profiles
