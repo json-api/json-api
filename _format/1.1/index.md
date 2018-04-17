@@ -1835,8 +1835,11 @@ The scope of a profile **MUST** be clearly delineated. The elements reserved by
 a profile, and the meaning assigned to those elements, **MUST NOT** change over 
 time or else the profile **MUST** be considered a new profile with a new URI. 
 
-However, a profile **MAY** evolve additively within the scope originally claimed 
-by the profile.
+Profiles **MAY** be updated over time to add new capabilities. However, any such 
+changes **MUST** be [backwards and forwards compatible](http://www.w3.org/2001/tag/doc/versioning-compatibility-strategies#terminology),
+in order to not break existing users of the profile. This requirement usually
+limits changes to adding optional keys within objects specified in the profile's
+original definition.
 
 For example, let's say that a profile reserves a `timestamps` member in the
 `meta` object of every resource. Originally, this profile defines the value
