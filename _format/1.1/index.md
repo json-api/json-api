@@ -1879,20 +1879,25 @@ that they have applied one or more profiles to a JSON API document.
 
 A client **MAY** use the `profile` media type parameter in conjunction with the
 JSON API media type in an `Accept` header to _request_, but not _require_, that
-the server apply one or more profiles to the response. When such a request is
-received, a server **SHOULD** attempt to apply the requested profiles in
-processing a response.
+the server apply one or more profiles to the response document. When such a 
+request is received, a server **SHOULD** attempt to apply the requested profiles 
+to its response.
 
 ### <a href="#profile-query-parameter" id="profile-query-parameter" class="headerlink"></a> `profile` Query Parameter
 
-A client **MAY** use the `profile` query parameter to _require_ the application
-of one or more profiles to the JSON API media type in processing a request. The
-value of the `profile` query parameter **MUST** equal a URI-encoded
-whitespace-separated list of profile URIs.
+A client **MAY** use the `profile` query parameter to _require_ the server to
+apply one or more profiles when processing the request. The value of the `profile` 
+query parameter **MUST** equal a URI-encoded whitespace-separated list of profile URIs.
 
 If a server receives a request requiring the application of a profile or
 combination of profiles that it can not apply, it **MUST** respond with a `400
 Bad Request` status code.
+
+> Note: When a client lists a profile in the `Accept` header, it's asking the server
+> to compute its response as normal, but then send the response document with some
+> extra information, as described in the requested profile. By contrarst, when a client 
+> lists a profile in the `profile` *query parameter*, it's asking the server to *process
+> the incoming request* according to the rules of the profile.
 
 ### <a href="#profile-descriptors" id="profile-descriptors" class="headerlink"></a> Profile Descriptors
 
