@@ -1845,6 +1845,16 @@ profile could evolve to allow an optional member, `updated`, in the `timestamps`
 object. But it could not make that member required, nor could it introduce
 a new sibling to `timestamps`.
 
+Profiles **SHOULD** reserve at least one object-valued member, and **SHOULD**
+consider reserving an object-valued member anywhere they expect to potentially 
+add new features over time.
+
+> Note: hen a profile changes its URI, a huge amount of interoperability is lost.
+> Users that reference the new URI will have their messages not understood by
+> implementations still aware only of the old URI, and vice-versa. 
+> Accordingly, the advice above is aimed at allowing profifiles to grow
+> without needing to change their URI.
+
 ### <a href="#profile-keywords" id="profile-keywords" class="headerlink"></a> Profile Keywords
 
 A profile **SHOULD** explicitly declare "keywords" for any elements that it
