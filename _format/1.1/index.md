@@ -1859,7 +1859,7 @@ add new features over time.
 
 A profile **SHOULD** explicitly declare "keywords" for any elements that it
 introduces to the document structure. If a profile does not explicitly declare a
-keyword for an element, then the name of the element itself can be considered a
+keyword for an element, then the name of the element itself is considered to be its
 keyword. Keywords **MAY** be aliased in any representation through the use of
 [profile descriptors](profile-descriptors), as described below.
 
@@ -1873,9 +1873,9 @@ parameter **MUST** equal a whitespace-separated list of profile URIs.
 > specification requires that its value be surrounded by quotation marks 
 > (U+0022 QUOTATION MARK, "\"") if it contains more than one URI.
 
-Clients and servers **SHOULD** use the `profile` media type parameter in
-conjunction with the JSON API media type in a `Content-Type` header to specify
-the application of one or more profiles to a JSON API document.
+Clients and servers **MUST** include the `profile` media type parameter in
+conjunction with the JSON API media type in a `Content-Type` header to indicate
+that they have applied one or more profiles to a JSON API document.
 
 A client **MAY** use the `profile` media type parameter in conjunction with the
 JSON API media type in an `Accept` header to _request_, but not _require_, that
