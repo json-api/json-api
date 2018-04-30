@@ -5,7 +5,8 @@ version: 1.1
 ## <a href="#introduction" id="introduction" class="headerlink"></a> Introduction
 
 JSON API is a specification for how a client should request that resources be
-fetched or modified, and how a server should respond to those requests.
+fetched or modified, and how a server should respond to those requests. JSON API
+can also be easily extended with [profiles].
 
 JSON API is designed to minimize both the number of requests and the amount of
 data transmitted between clients and servers. This efficiency is achieved
@@ -110,6 +111,8 @@ The top-level [links object][links] **MAY** contain the following members:
 * `self`: the [link][links] that generated the current response document.
 * `related`: a [related resource link] when the primary data represents a
   resource relationship.
+* `profile`: an array of [links][link], each giving the URI of a
+  [profile][profiles] in use in the document.
 * [pagination] links for the primary data.
 
 The document's "primary data" is a representation of the resource or collection
@@ -517,10 +520,10 @@ For example:
 ### <a href="#document-links" id="document-links" class="headerlink"></a> Links
 
 Where specified, a `links` member can be used to represent links. The value
-of each `links` member **MUST** be an object (a "links object").
+of this member **MUST** be an object (a "links object").
 
-Each member of a links object is a "link". A link **MUST** be represented as
-either:
+<a href="#document-links-link" id="document-links-link"></a>
+Within this object, a link **MUST** be represented as either:
 
 * a string containing the link's URL.
 * <a id="document-links-link-object"></a>an object ("link object") which can
@@ -529,7 +532,11 @@ either:
   * `meta`: a meta object containing non-standard meta-information about the
     link.
 
-The following `self` link is simply a URL:
+Except for the `profile` key, each key present in a links object **MUST** have
+a single link as its value. The `profile` key, if present, **MUST** hold an
+array of links.
+
+For example, the following `self` link is simply a URL:
 
 ```json
 "links": {
@@ -537,8 +544,8 @@ The following `self` link is simply a URL:
 }
 ```
 
-The following `related` link includes a URL as well as meta-information
-about a related resource collection:
+By contrast, the following `related` link includes a URL as well as
+meta-information about a related resource collection:
 
 ```json
 "links": {
@@ -548,6 +555,14 @@ about a related resource collection:
       "count": 10
     }
   }
+}
+```
+
+Here, the `profile` key specifies an array of `profile` links:
+
+```json
+"links": {
+  "profile": [{ "href": "http://jsonapi.org/ext/example-ext" }]
 }
 ```
 
@@ -1852,7 +1867,7 @@ Profiles **SHOULD** reserve at least one object-valued member, and **SHOULD**
 consider reserving an object-valued member anywhere they expect to potentially 
 add new features over time.
 
-> Note: hen a profile changes its URI, a huge amount of interoperability is lost.
+> Note: When a profile changes its URI, a huge amount of interoperability is lost.
 > Users that reference the new URI will have their messages not understood by
 > implementations still aware only of the old URI, and vice-versa. 
 > Accordingly, the advice above is aimed at allowing profifiles to grow
@@ -1872,7 +1887,7 @@ All profile keywords **MUST** meet this specification's requirements for [member
 
 The `profile` media type parameter is used to describe the application of
 one or more profiles to the JSON API media type. The value of the `profile`
-parameter **MUST** equal a whitespace-separated list of profile URIs.
+parameter **MUST** equal a space-separated (U+0020 SPACE, " ") list of profile URIs.
 
 > Note: When serializing the `profile` media type parameter, the HTTP 
 > specification requires that its value be surrounded by quotation marks 
@@ -1905,6 +1920,11 @@ whose support is required using the `profile` query parameter, as described belo
 Clients and servers **MUST** include the `profile` media type parameter in
 conjunction with the JSON API media type in a `Content-Type` header to indicate
 that they have applied one or more profiles to a JSON API document.
+
+Likewise, clients and servers applying profiles to a JSON API document **MUST** 
+include a [top-level][top level] [`links` object][links] with a `profile` key, 
+and that `profile` key **MUST** include a [link] to the URI of each profile 
+that has been applied.
 
 When an older JSON API server that doesn't support the `profile` media type 
 parameter receives a document with one or more profiles, it will respond with a
@@ -2025,6 +2045,7 @@ An error object **MAY** have the following members:
 * `meta`: a [meta object][meta] containing non-standard meta-information about the
   error.
 
+[top level]: #document-top-level
 [resource objects]: #document-resource-objects
 [attributes]: #document-resource-object-attributes
 [relationships]: #document-resource-object-relationships
@@ -2036,6 +2057,8 @@ An error object **MAY** have the following members:
 [compound document]: #document-compound-documents
 [meta]: #document-meta
 [links]: #document-links
+[profiles]: #profiles
 [error details]: #errors
+[error objects]: #errror-objects
 [member names]: #document-member-names
 [pagination]: #fetching-pagination
