@@ -42,6 +42,8 @@ assembled to vet them.
 * [kitsu](https://github.com/wopian/kitsu) A simple, lightweight & framework agnostic JSON API client
 * [Sarala JSON API data formatter](https://github.com/milroyfraser/sarala-json-api-data-formatter) is a simple and fluent framework agnostic javascript library to transform standard JSON API responses to simple JSON objects and vice versa.
 * [Sarala](https://github.com/milroyfraser/sarala) is a javascript package which gives you a [Laravel Eloquent](https://laravel.com/docs/5.6/eloquent) like syntax to perform CRUD operations against an JSON API built according to [JSON API specification](http://jsonapi.org/format/).
+* [JSORM](https://jsonapi-suite.github.io/jsonapi_suite/js/home) is an
+isomorphic ActiveRecord clone that issues JSON API requests instead of SQL and is part of the larger [JSONAPI Suite](https://jsonapi-suite.github.io/jsonapi_suite).
 
 ### <a href="#client-libraries-typescript" id="client-libraries-typescript" class="headerlink"></a> Typescript
 * [ts-angular-jsonapi](https://github.com/reyesoft/ts-angular-jsonapi) A JSON API library developed for AngularJS in Typescript
@@ -187,6 +189,10 @@ the moment.
   * [JSONAPI::Resources](https://github.com/cerebris/jsonapi-resources) provides a complete framework for developing a JSON API server. It is designed to work with Rails, and provides routes, controllers, and serializers.
   * [JSONAPI::Utils](https://github.com/b2beauty/jsonapi-utils) works on top of [JSONAPI::Resources](https://github.com/cerebris/jsonapi-resources) taking advantage of its resource-driven style and bringing a Rails way to build modern APIs with no or less learning curve.
   * [Caprese](https://github.com/nicklandgrebe/caprese) An opinionated Rails library for creating JSON API servers that lets you focus on customizing the behavior of your endpoints rather than the dirty work of setting them up. Leverages the power of [ActiveModel::Serializer](https://github.com/rails-api/active_model_serializers).
+  * [JSONAPI Suite](https://jsonapi-suite.github.io/jsonapi_suite)
+  facilitates a server capable of deep querying and nested writes. Works
+  with any ORM or datastore; comes with integration test helpers and
+  automatic swagger documentation.
 
 * Sinatra
   * [Sinja](https://github.com/mwpastore/sinja) extends [Sinatra](http://www.sinatrarb.com) and leverages [JSONAPI::Serializers](https://github.com/fotinakis/jsonapi-serializers) to enable rapid development of comprehensive, read-and-write, and JSON API v1.0-compliant web services using the DAL/ORM of your choice. It includes a simple role-based authorization scheme, support for client-generated IDs, patchless clients, and coalesced find requests, exception handling, and more.
