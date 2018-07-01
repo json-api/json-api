@@ -562,7 +562,7 @@ Here, the `profile` key specifies an array of `profile` links:
 
 ```json
 "links": {
-  "profile": [{ "href": "http://jsonapi.org/ext/example-ext" }]
+  "profile": [{ "href": "http://jsonapi.org/profiles/example-profile" }]
 }
 ```
 
