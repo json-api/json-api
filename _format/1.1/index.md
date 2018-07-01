@@ -1825,7 +1825,7 @@ to standard query parameters without conflicting with existing implementations.
 ## <a href="#profiles" id="profiles" class="headerlink"></a> Profiles
 
 JSON API supports the use of "profiles" as a way to indicate additional
-semantics that apply to a JSON:API request/document, without altering the 
+semantics that apply to a JSON:API request/document, without altering the
 basic semantics described in this specification.
 
 [RFC 6906](https://tools.ietf.org/html/rfc6906) covers the nature of profile
@@ -1838,19 +1838,19 @@ identification:
   conforms to a profile. Thus, clients SHOULD treat profile URIs as
   identifiers and not as links.
 
-However, to aid human understanding, profile URIs **SHOULD** return 
+However, to aid human understanding, profile URIs **SHOULD** return
 documentation of the profile.
 
 A profile **MAY** assign meaning to particular elements of the document
 structure, such as resource attributes or members of meta objects, and even
-to query parameters whose behavior is left up to each implementation, such 
+to query parameters whose behavior is left up to each implementation, such
 as `filter` and all those that contain a non a-z character.
 
-The scope of a profile **MUST** be clearly delineated. The elements reserved by 
-a profile, and the meaning assigned to those elements, **MUST NOT** change over 
-time or else the profile **MUST** be considered a new profile with a new URI. 
+The scope of a profile **MUST** be clearly delineated. The elements reserved by
+a profile, and the meaning assigned to those elements, **MUST NOT** change over
+time or else the profile **MUST** be considered a new profile with a new URI.
 
-Profiles **MAY** be updated over time to add new capabilities. However, any such 
+Profiles **MAY** be updated over time to add new capabilities. However, any such
 changes **MUST** be [backwards and forwards compatible](http://www.w3.org/2001/tag/doc/versioning-compatibility-strategies#terminology),
 in order to not break existing users of the profile. This requirement usually
 limits changes to adding optional keys within objects specified in the profile's
@@ -1864,12 +1864,12 @@ object. But it could not make that member required, nor could it introduce
 a new sibling to `timestamps`.
 
 Profiles **SHOULD** reserve at least one object-valued member, and **SHOULD**
-consider reserving an object-valued member anywhere they expect to potentially 
+consider reserving an object-valued member anywhere they expect to potentially
 add new features over time.
 
 > Note: When a profile changes its URI, a huge amount of interoperability is lost.
 > Users that reference the new URI will have their messages not understood by
-> implementations still aware only of the old URI, and vice-versa. 
+> implementations still aware only of the old URI, and vice-versa.
 > Accordingly, the advice above is aimed at allowing profifiles to grow
 > without needing to change their URI.
 
@@ -1889,14 +1889,14 @@ The `profile` media type parameter is used to describe the application of
 one or more profiles to the JSON API media type. The value of the `profile`
 parameter **MUST** equal a space-separated (U+0020 SPACE, " ") list of profile URIs.
 
-> Note: When serializing the `profile` media type parameter, the HTTP 
-> specification requires that its value be surrounded by quotation marks 
+> Note: When serializing the `profile` media type parameter, the HTTP
+> specification requires that its value be surrounded by quotation marks
 > (U+0022 QUOTATION MARK, "\"") if it contains more than one URI.
 
 A client **MAY** use the `profile` media type parameter in conjunction with the
 JSON API media type in an `Accept` header to _request_, but not _require_, that
-the server apply one or more profiles to the response document. When such a 
-request is received, a server **SHOULD** attempt to apply the requested profiles 
+the server apply one or more profiles to the response document. When such a
+request is received, a server **SHOULD** attempt to apply the requested profiles
 to its response.
 
 For example, in the following request, the client asks that the server apply the
@@ -1911,7 +1911,7 @@ Accept: application/vnd.api+json;profile="http://jsonapi.org/extensions/last-mod
   It is used to support old servers that don't understand the profile parameter.
 
 Servers **MAY** add profiles to a JSON API document even if the client has not
-requested them. The recipient of a document **MUST** ignore any profile extensions 
+requested them. The recipient of a document **MUST** ignore any profile extensions
 in that document that it does not understand. The only exception to this is profiles
 whose support is required using the `profile` query parameter, as described below.
 
@@ -1921,12 +1921,12 @@ Clients and servers **MUST** include the `profile` media type parameter in
 conjunction with the JSON API media type in a `Content-Type` header to indicate
 that they have applied one or more profiles to a JSON API document.
 
-Likewise, clients and servers applying profiles to a JSON API document **MUST** 
-include a [top-level][top level] [`links` object][links] with a `profile` key, 
-and that `profile` key **MUST** include a [link] to the URI of each profile 
+Likewise, clients and servers applying profiles to a JSON API document **MUST**
+include a [top-level][top level] [`links` object][links] with a `profile` key,
+and that `profile` key **MUST** include a [link] to the URI of each profile
 that has been applied.
 
-When an older JSON API server that doesn't support the `profile` media type 
+When an older JSON API server that doesn't support the `profile` media type
 parameter receives a document with one or more profiles, it will respond with a
 `415 Unsupported Media Type` error.
 
@@ -1937,24 +1937,25 @@ type parameter. If this resolves the error, the client **SHOULD NOT** attempt to
 use profile extensions in subsequent interactions with the same API.
 
 > The most likely other causes of a 415 error are that the server doesn't
-support JSON API at all or that the client has failed to provide a required 
+support JSON API at all or that the client has failed to provide a required
 profile.
 
 ### <a href="#profile-query-parameter" id="profile-query-parameter" class="headerlink"></a> `profile` Query Parameter
 
 A client **MAY** use the `profile` query parameter to _require_ the server to
-apply one or more profiles when processing the request. The value of the `profile` 
+apply one or more profiles when processing the request. The value of the `profile`
 query parameter **MUST** equal a URI-encoded whitespace-separated list of profile URIs.
 
 If a server receives a request requiring the application of a profile or
 combination of profiles that it can not apply, it **MUST** respond with a `400
 Bad Request` status code.
 
-> Note: When a client lists a profile in the `Accept` header, it's asking the server
-> to compute its response as normal, but then send the response document with some
-> extra information, as described in the requested profile. By contrarst, when a client 
-> lists a profile in the `profile` *query parameter*, it's asking the server to *process
-> the incoming request* according to the rules of the profile.
+> Note: When a client lists a profile in the `Accept` header, it's asking the
+> server to compute its response as normal, but then send the response document
+> with some extra information, as described in the requested profile. By
+> contrast, when a client lists a profile in the `profile` *query parameter*,
+> it's asking the server to *process the incoming request* according to the
+> rules of the profile.
 
 ### <a href="#profile-descriptors" id="profile-descriptors" class="headerlink"></a> Profile Descriptors
 
