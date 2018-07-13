@@ -111,8 +111,8 @@ The top-level [links object][links] **MAY** contain the following members:
 * `self`: the [link][links] that generated the current response document.
 * `related`: a [related resource link] when the primary data represents a
   resource relationship.
-* `profile`: an array of [links][link], each giving the URI of a
-  [profile][profiles] in use in the document.
+* `profile`: an array of [links][link], each specifying a [profile][profiles]
+  in use in the document.
 * [pagination] links for the primary data.
 
 The document's "primary data" is a representation of the resource or collection
@@ -525,10 +525,10 @@ of this member **MUST** be an object (a "links object").
 <a href="#document-links-link" id="document-links-link"></a>
 Within this object, a link **MUST** be represented as either:
 
-* a string containing the link's URL.
+* a string containing the link's URI.
 * <a id="document-links-link-object"></a>an object ("link object") which can
   contain the following members:
-  * `href`: a string containing the link's URL.
+  * `href`: a string containing the link's URI.
   * `meta`: a meta object containing non-standard meta-information about the
     link.
 
@@ -536,7 +536,7 @@ Except for the `profile` key, each key present in a links object **MUST** have
 a single link as its value. The `profile` key, if present, **MUST** hold an
 array of links.
 
-For example, the following `self` link is simply a URL:
+For example, the following `self` link is simply a URI:
 
 ```json
 "links": {
@@ -544,7 +544,7 @@ For example, the following `self` link is simply a URL:
 }
 ```
 
-By contrast, the following `related` link includes a URL as well as
+By contrast, the following `related` link includes a URI as well as
 meta-information about a related resource collection:
 
 ```json
