@@ -531,6 +531,7 @@ Within this object, a link **MUST** be represented as either:
   * `href`: a string containing the link's URI.
   * `meta`: a meta object containing non-standard meta-information about the
     link.
+  * Any link-specific target attributes described below.
 
 Except for the `profile` key, each key present in a links object **MUST** have
 a single link as its value. The `profile` key, if present, **MUST** hold an
@@ -558,18 +559,31 @@ meta-information about a related resource collection:
 }
 ```
 
-Here, the `profile` key specifies an array of `profile` links:
+#### <a href="#profile-links" id="profile-links" class="headerlink"></a> Profile Links
+
+Each link in an array of `profile` links **MAY** be represented by a links
+object. This object **MAY** contain an `aliases` member to represent
+any [profile aliases].
+
+Here, the `profile` key specifies an array of `profile` links, including one
+that includes a [profile alias][profile aliases]:
 
 ```json
 "links": {
-  "profile": [{ "href": "http://jsonapi.org/profiles/example-profile" }]
+  "profile": [
+    "http://example.com/profiles/flexible-pagination",
+    {
+      "href": "http://example.com/profiles/resource-versioning",
+      "aliases": {
+        "version": "v"
+      }
+    }
+  ]
 }
 ```
 
-> Note: Additional members may be specified for links objects and link
-objects in the future. It is also possible that the allowed values of
-additional members will be expanded (e.g. a `collection` link may support an
-array of values, whereas a `self` link does not).
+> Note: Additional link types, similar to `profile` links, may be specified in
+the future.
 
 ### <a href="#document-jsonapi-object" id="document-jsonapi-object" class="headerlink"></a> JSON API Object
 
@@ -582,23 +596,13 @@ The jsonapi object **MAY** contain any of the following members:
 * `version` - whose value is a string indicating the highest JSON API version
   supported.
 * `meta` - a [meta] object that contains non-standard meta-information.
-* `profiles` - an object with profile URIs as keys and corresponding
-  [profile descriptors](profile-descriptors) as values.
 
 A simple example appears below:
 
 ```json
 {
   "jsonapi": {
-    "version": "1.1",
-    "profiles": {
-      "http://example.com/profiles/resource-versioning": {
-        "aliases": {
-          "version": "v"
-        }
-      },
-      "http://example.com/profiles/offset-limit-pagination": {}
-    }
+    "version": "1.1"
   }
 }
 ```
@@ -1856,32 +1860,51 @@ in order to not break existing users of the profile. This requirement usually
 limits changes to adding optional keys within objects specified in the profile's
 original definition.
 
-For example, let's say that a profile reserves a `timestamps` member in the
-`meta` object of every resource. Originally, this profile defines the value
-of `timestamps` as an object that must contain one member: `created`. The
-profile could evolve to allow an optional member, `updated`, in the `timestamps`
-object. But it could not make that member required, nor could it introduce
-a new sibling to `timestamps`.
+The following example profile reserves a `timestamps` member in the `meta`
+object of every resource:
 
-Profiles **SHOULD** reserve at least one object-valued member, and **SHOULD**
-consider reserving an object-valued member anywhere they expect to potentially
-add new features over time.
+```text
+# Timestamps profile
+
+## Introduction
+
+This page specifies a profile for the `application/vnd.api+json` media type,
+as described in the [JSON:API specification](http://jsonapi.org/format/).
+
+This profile allows every resource in a JSON:API document to represent
+significant timestamps in a consistent way.
+
+## Document Structure
+
+Every resource **MAY** include a `timestamps` member in its associated `meta`
+object. If this member is present, its value **MUST** be an object that **MAY**
+contain any of the following members:
+
+* `created`
+* `updated`
+
+The value of each member **MUST** comply with the ISO 8601 standard.
+
+## Keywords
+
+This profile defines the following keywords:
+
+* `timestamps`
+```
+
+This profile could evolve to allow other optional members, such as `deleted`,
+in the `timestamps` object. But it could not make that member required, nor
+could it introduce a new sibling to `timestamps`.
+
+To aid evoluation and interoperability, profiles **SHOULD** reserve an
+object-valued member anywhere they expect to potentially add new features over
+time.
 
 > Note: When a profile changes its URI, a huge amount of interoperability is lost.
 > Users that reference the new URI will have their messages not understood by
 > implementations still aware only of the old URI, and vice-versa.
 > Accordingly, the advice above is aimed at allowing profifiles to grow
 > without needing to change their URI.
-
-### <a href="#profile-keywords" id="profile-keywords" class="headerlink"></a> Profile Keywords
-
-A profile **SHOULD** explicitly declare "keywords" for any elements that it
-introduces to the document structure. If a profile does not explicitly declare a
-keyword for an element, then the name of the element itself is considered to be its
-keyword. Keywords **MAY** be aliased in any representation through the use of
-[profile descriptors](profile-descriptors), as described below.
-
-All profile keywords **MUST** meet this specification's requirements for [member names].
 
 ### <a href="#profile-media-type-parameter" id="profile-media-type-parameter" class="headerlink"></a> `profile` Media Type Parameter
 
@@ -1903,7 +1926,7 @@ For example, in the following request, the client asks that the server apply the
 `http://jsonapi.org/extensions/last-modified` profile if it is able to.
 
 ```http
-Accept: application/vnd.api+json;profile="http://jsonapi.org/extensions/last-modified", application/vnd.api+json
+Accept: application/vnd.api+json;profile="http://example.com/extensions/last-modified", application/vnd.api+json
 ```
 
 > Note: The second instance of the JSON API media type in the example above is
@@ -1957,24 +1980,73 @@ Bad Request` status code.
 > it's asking the server to *process the incoming request* according to the
 > rules of the profile.
 
-### <a href="#profile-descriptors" id="profile-descriptors" class="headerlink"></a> Profile Descriptors
+### <a href="#profile-keywords-and-aliases" id="profile-keywords-and-aliases" class="headerlink"></a> Profile Keywords and Aliases
 
-As described above, the top-level [`jsonapi`](document-jsonapi-object) object
-**MAY** contain a `profiles` member that contains a map of profile descriptor
-objects, keyed by profile URI.
+A profile **SHOULD** explicitly declare "keywords" for any elements that it
+introduces to the document structure. If a profile does not explicitly declare a
+keyword for an element, then the name of the element itself is considered to be
+its keyword. All profile keywords **MUST** meet this specification's
+requirements for [member names].
 
-Each profile descriptor object **MAY** contain an `aliases` object. The key of
-each member in `aliases` **MUST** be a [keyword](profile-keywords) explicitly
-declared by the profile, and the value **MUST** be an alias that applies to this
-particular representation. This aliasing mechanism allows profiles to be applied
-in a way that is both consistent with the rest of the representation and does
-not conflict with other profiles.
+The following example profile defines a single keyword, `version`:
 
-For instance, the following document includes a single profile descriptor for a
-profile that, let's say, assigns meaning to a `version` keyword that can be
-included in any resource's `meta` object. This descriptor provides an alias for
-`version`: `v`. In other words, interpreters of this representation should treat
-the key `v` as if it were the key `version` described in the profile:
+```text
+# Resource versioning profile
+
+## Introduction
+
+This page specifies a profile for the `application/vnd.api+json` media type,
+as described in the [JSON:API specification](http://jsonapi.org/format/).
+
+This profile ensures that every resource represented in a JSON:API document
+includes a version.
+
+## Document Structure
+
+Every resource **MUST** include a `meta` object containing a `version` member.
+The value of this member **MUST** be a string that represents a unique version
+for that resource.
+
+## Keywords
+
+This profile defines the following keywords:
+
+* `version`
+```
+
+This profile might be applied as follows:
+
+```json
+{
+  "data": {
+    "type": "contacts",
+    "id": "345",
+    "meta": {
+      "version": "2018-04-14-879976658"
+    },
+    "attributes": {
+      "name": "Ethan"
+    }
+  },
+  "links": {
+    "profile": ["http://example.com/profiles/resource-versioning"]
+  }
+}
+```
+
+Documents that apply a particular profile **MAY** represent each keyword with an
+alternatively named member, or "alias". An alias fully assumes any meaning
+specified for a keyword, which no longer retains that meaning. Any aliases
+associated with a profile **MUST** be represented in the profile's corresponding
+`aliases` object within its [link object][links]. The key of each alias **MUST**
+be a keyword from the profile, and the value **MUST** be an alias that applies
+to this particular representation. This aliasing mechanism allows profiles to be
+applied in a way that is both consistent with the rest of the representation and
+does not conflict with other profiles.
+
+For instance, the following document provides an alias for `version`: `v`.
+Interpreters of this representation should treat the key `v` as if it were the
+key `version` described in the profile:
 
 ```json
 {
@@ -1988,14 +2060,13 @@ the key `v` as if it were the key `version` described in the profile:
       "name": "Ethan"
     }
   },
-  "jsonapi": {
-    "profiles": {
-      "http://example.com/profiles/resource-versioning": {
-        "aliases": {
-          "version": "v"
-        }
+  "links": {
+    "profile": [{
+      "href": "http://example.com/profiles/resource-versioning",
+      "aliases": {
+        "version": "v"
       }
-    }
+    }]
   }
 }
 ```
@@ -2059,6 +2130,7 @@ An error object **MAY** have the following members:
 [meta]: #document-meta
 [links]: #document-links
 [profiles]: #profiles
+[profile aliases]: #profile-keywords-and-aliases
 [error details]: #errors
 [error objects]: #errror-objects
 [member names]: #document-member-names
