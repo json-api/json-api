@@ -1029,13 +1029,12 @@ example, a response to a request for `comments.author` should include `comments`
 as well as the `author` of each of those `comments`.
 
 > Note: A server may choose to expose a deeply nested relationship such as
-`comments.author` as a direct relationship with an alias such as
+`comments.author` as a direct relationship with an alternative name such as
 `comment-authors`. This would allow a client to request
 `/articles/1?include=comment-authors` instead of
-`/articles/1?include=comments.author`. By abstracting the nested
-relationship with an alias, the server can still provide full linkage in
-compound documents without including potentially unwanted intermediate
-resources.
+`/articles/1?include=comments.author`. By exposing the nested relationship with 
+an alternative name, the server can still provide full linkage in compound 
+documents without including potentially unwanted intermediate resources.
 
 Multiple related resources can be requested in a comma-separated list:
 
