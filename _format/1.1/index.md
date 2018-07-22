@@ -2129,6 +2129,7 @@ An error object **MAY** have the following members:
 [compound document]: #document-compound-documents
 [meta]: #document-meta
 [links]: #document-links
+[link]: #document-links-link
 [profiles]: #profiles
 [profile aliases]: #profile-keywords-and-aliases
 [error details]: #errors
