@@ -1805,7 +1805,7 @@ responses, in accordance with
 
 ## <a href="#query-parameters" id="query-parameters" class="headerlink"></a> Query Parameters
 
-Implementation specific query parameter names **MUST** adhere to the same
+Implementation-specific query parameter names **MUST** adhere to the same
 constraints as [member names], with the additional requirement that they
 **MUST** contain at least one non a-z character (i.e., outside U+0061 to U+007A).
 
@@ -1816,8 +1816,9 @@ If a server encounters a query parameter that does not follow the naming
 conventions above, and the server does not know how to process it as a query
 parameter from this specification, it **MUST** return `400 Bad Request`.
 
-> Note: This is to preserve the ability of JSON API to make additive additions
-to standard query parameters without conflicting with existing implementations.
+> Note: By forbidding the use of query parameters that contain only the characters
+> \[a-z\], JSON API is reserving the ability to standardize additional query
+> parameters later without conflicting with existing implementations.
 
 ## <a href="#profiles" id="profiles" class="headerlink"></a> Profiles
 
@@ -2042,14 +2043,36 @@ key `version` described in the profile:
 
 ### <a href="#profiles-authoring" id="profiles-authoring" class="headerlink"></a> Authoring Profiles
 
-A profile **MAY** assign meaning to particular elements of the document
-structure, such as resource attributes or members of meta objects, and even
-to query parameters whose behavior is left up to each implementation, such
-as `filter` and all those that contain a non a-z character.
+A profile **MAY** assign meaning to elements of the document structure whose use
+is left up to each implementation, such as resource fields or members of meta
+objects. A profile **MUST NOT** define/assign a meaning to document members 
+in areas of the document reserved for future use by the JSON API specification. 
+
+For example, it would be illegal for a profile to define a new key in a 
+document's [top-level][top level] object, or in a [links object], as JSON API 
+implementations are not allowed to add custom keys in those areas.
+
+Likewise, a profile **MAY** assign a meaning to query parameters whose behavior 
+is left up to each implementation, such as `filter` and all those that contain a 
+non a-z character. However, profiles **MUST NOT** assign a meaning to query 
+parameters that [are reserved](#query-parameters).
+
+The meaning of an element defined by a profile **MUST NOT** vary based on the 
+presence or absence of other profiles.
 
 The scope of a profile **MUST** be clearly delineated. The elements reserved by
 a profile, and the meaning assigned to those elements, **MUST NOT** change over
 time or else the profile **MUST** be considered a new profile with a new URI.
+
+Finally, a profile **MUST NOT**:
+
+1. assume that, if it is supported, then other specific profiles will be 
+supported as well.
+
+2. define fixed endpoints, HTTP headers, or header values.
+
+3. alter the JSON structure of any concept defined in this specification, 
+including to allow a superset of JSON structures.
 
 Profiles **MAY** be updated over time to add new capabilities. However, any such
 changes **MUST** be [backwards and forwards compatible](http://www.w3.org/2001/tag/doc/versioning-compatibility-strategies#terminology),
