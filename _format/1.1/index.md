@@ -537,19 +537,13 @@ Except for the `profile` key, each key present in a links object **MUST** have
 a single link as its value. The `profile` key, if present, **MUST** hold an
 array of links.
 
-For example, the following `self` link is simply a URI:
+In the example below, the `self` link is simply a URI string, whereas the 
+`related` link uses the object form to provide meta information about a 
+related resource collection:
 
 ```json
 "links": {
-  "self": "http://example.com/posts"
-}
-```
-
-By contrast, the following `related` link includes a URI as well as
-meta-information about a related resource collection:
-
-```json
-"links": {
+  "self": "http://example.com/articles/1",
   "related": {
     "href": "http://example.com/articles/1/comments",
     "meta": {
@@ -561,9 +555,9 @@ meta-information about a related resource collection:
 
 #### <a href="#profile-links" id="profile-links" class="headerlink"></a> Profile Links
 
-Each link in an array of `profile` links **MAY** be represented by a links
-object. This object **MAY** contain an `aliases` member to represent
-any [profile aliases].
+Like all [links][link], a link in an array of `profile` links can be represented
+with a [link object]. In that case, the link object **MAY** contain an `aliases` 
+member listing any [profile aliases].
 
 Here, the `profile` key specifies an array of `profile` links, including one
 that includes a [profile alias][profile aliases]:
@@ -1875,9 +1869,9 @@ significant timestamps in a consistent way.
 
 ## Document Structure
 
-Every resource **MAY** include a `timestamps` member in its associated `meta`
-object. If this member is present, its value **MUST** be an object that **MAY**
-contain any of the following members:
+Every resource object **MAY** include a `timestamps` member in its associated 
+`meta` object. If this member is present, its value **MUST** be an object that 
+**MAY** contain any of the following members:
 
 * `created`
 * `updated`
@@ -1908,7 +1902,7 @@ time.
 ### <a href="#profile-media-type-parameter" id="profile-media-type-parameter" class="headerlink"></a> `profile` Media Type Parameter
 
 The `profile` media type parameter is used to describe the application of
-one or more profiles to the JSON API media type. The value of the `profile`
+one or more profiles to a JSON API document. The value of the `profile`
 parameter **MUST** equal a space-separated (U+0020 SPACE, " ") list of profile URIs.
 
 > Note: When serializing the `profile` media type parameter, the HTTP
@@ -2129,6 +2123,7 @@ An error object **MAY** have the following members:
 [meta]: #document-meta
 [links]: #document-links
 [link]: #document-links-link
+[link object]: #document-links-link-object
 [profiles]: #profiles
 [profile aliases]: #profile-keywords-and-aliases
 [error details]: #errors
