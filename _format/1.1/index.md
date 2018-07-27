@@ -1878,7 +1878,9 @@ Every resource object **MAY** include a `timestamps` member in its associated
 * `created`
 * `updated`
 
-The value of each member **MUST** comply with the ISO 8601 standard.
+The value of each member **MUST** comply with the ISO 8601 standard. Any 
+unrecognized members in this object **MUST** be ignored by the application 
+processing the document. 
 
 ## Keywords
 
