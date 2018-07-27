@@ -1840,24 +1840,10 @@ identification:
 However, to aid human understanding, profile URIs **SHOULD** return
 documentation of the profile.
 
-A profile **MAY** assign meaning to particular elements of the document
-structure, such as resource attributes or members of meta objects, and even
-to query parameters whose behavior is left up to each implementation, such
-as `filter` and all those that contain a non a-z character.
-
-The scope of a profile **MUST** be clearly delineated. The elements reserved by
-a profile, and the meaning assigned to those elements, **MUST NOT** change over
-time or else the profile **MUST** be considered a new profile with a new URI.
-
-Profiles **MAY** be updated over time to add new capabilities. However, any such
-changes **MUST** be [backwards and forwards compatible](http://www.w3.org/2001/tag/doc/versioning-compatibility-strategies#terminology),
-in order to not break existing users of the profile. This requirement usually
-limits changes to adding optional keys within objects specified in the profile's
-original definition.
-
 The following example profile reserves a `timestamps` member in the `meta`
 object of every resource:
 
+<a id="profiles-timestamp-profile"></a>
 ```text
 # Timestamps profile
 
@@ -1888,20 +1874,6 @@ This profile defines the following keywords:
 
 * `timestamps`
 ```
-
-This profile could evolve to allow other optional members, such as `deleted`,
-in the `timestamps` object. But it could not make that member required, nor
-could it introduce a new sibling to `timestamps`.
-
-To aid evoluation and interoperability, profiles **SHOULD** reserve an
-object-valued member anywhere they expect to potentially add new features over
-time.
-
-> Note: When a profile changes its URI, a huge amount of interoperability is lost.
-> Users that reference the new URI will have their messages not understood by
-> implementations still aware only of the old URI, and vice-versa.
-> Accordingly, the advice above is aimed at allowing profifiles to grow
-> without needing to change their URI.
 
 ### <a href="#profile-media-type-parameter" id="profile-media-type-parameter" class="headerlink"></a> `profile` Media Type Parameter
 
@@ -2068,6 +2040,36 @@ key `version` described in the profile:
 }
 ```
 
+### <a href="#profiles-authoring" id="profiles-authoring" class="headerlink"></a> Authoring Profiles
+
+A profile **MAY** assign meaning to particular elements of the document
+structure, such as resource attributes or members of meta objects, and even
+to query parameters whose behavior is left up to each implementation, such
+as `filter` and all those that contain a non a-z character.
+
+The scope of a profile **MUST** be clearly delineated. The elements reserved by
+a profile, and the meaning assigned to those elements, **MUST NOT** change over
+time or else the profile **MUST** be considered a new profile with a new URI.
+
+Profiles **MAY** be updated over time to add new capabilities. However, any such
+changes **MUST** be [backwards and forwards compatible](http://www.w3.org/2001/tag/doc/versioning-compatibility-strategies#terminology),
+in order to not break existing users of the profile. This requirement usually
+limits changes to adding optional keys within objects specified in the profile's
+original definition.
+
+The hypothetical [timestamps profile], for example, could evolve to allow other 
+optional members, such as `deleted`, in the `timestamps` object. But it could 
+not make that member required, nor could it introduce a new sibling to `timestamps`.
+
+To aid evoluation and interoperability, profiles **SHOULD** reserve an
+object-valued member anywhere they expect to potentially add new features over
+time.
+
+> Note: When a profile changes its URI, a huge amount of interoperability is lost.
+> Users that reference the new URI will have their messages not understood by
+> implementations still aware only of the old URI, and vice-versa.
+> Accordingly, the advice above is aimed at allowing profifiles to grow
+> without needing to change their URI.
 ## <a href="#errors" id="errors" class="headerlink"></a> Errors
 
 ### <a href="#errors-processing" id="errors-processing" class="headerlink"></a> Processing Errors
@@ -2129,6 +2131,7 @@ An error object **MAY** have the following members:
 [link]: #document-links-link
 [link object]: #document-links-link-object
 [profiles]: #profiles
+[timestamps profile]: #profiles-timestamp-profile
 [profile aliases]: #profile-keywords-and-aliases
 [error details]: #errors
 [error objects]: #errror-objects
