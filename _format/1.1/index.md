@@ -1825,6 +1825,8 @@ JSON API supports the use of "profiles" as a way to indicate additional
 semantics that apply to a JSON:API request/document, without altering the
 basic semantics described in this specification.
 
+A profile is a separate specification defining these additional semantics. 
+
 [RFC 6906](https://tools.ietf.org/html/rfc6906) covers the nature of profile
 identification:
 
