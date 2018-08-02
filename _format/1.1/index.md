@@ -60,7 +60,7 @@ and versioning.
 This section describes the structure of a JSON API document, which is identified
 by the media type [`application/vnd.api+json`](http://www.iana.org/assignments/media-types/application/vnd.api+json).
 JSON API documents are defined in JavaScript Object Notation (JSON)
-[[RFC7159](http://tools.ietf.org/html/rfc7159)].
+[[RFC8259](http://tools.ietf.org/html/rfc8259)].
 
 Although the same media type is used for both request and response documents,
 certain aspects are only applicable to one or the other. These differences are
