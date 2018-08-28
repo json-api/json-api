@@ -1831,18 +1831,16 @@ A profile is a separate specification defining these additional semantics.
 [RFC 6906](https://tools.ietf.org/html/rfc6906) covers the nature of profile
 identification:
 
-> Profiles are identified by URI. However, as is the case with, for
-  example, XML namespace URIs, the URI in this case only serves as an
-  identifier, meaning that the presence of a specific URI has to be
-  sufficient for a client to assert that a resource representation
-  conforms to a profile. Thus, clients SHOULD treat profile URIs as
-  identifiers and not as links.
+> Profiles are identified by URI... The presence of a specific URI has to be
+  sufficient for a client to assert that a resource representation conforms to 
+  a profile [regardless of any content that may or may not be available at that 
+  URI].
 
-However, to aid human understanding, profile URIs **SHOULD** return
+However, to aid human understanding, visiting a profile's URI **SHOULD** return
 documentation of the profile.
 
 The following example profile reserves a `timestamps` member in the `meta`
-object of every resource:
+object of every resource object:
 
 <a id="profiles-timestamp-profile"></a>
 ```text
@@ -1865,8 +1863,10 @@ Every resource object **MAY** include a `timestamps` member in its associated
 * `created`
 * `updated`
 
-The value of each member **MUST** comply with the ISO 8601 standard. Any 
-unrecognized members in this object **MUST** be ignored by the application 
+The value of each member **MUST** comply with the variant of ISO 8601 used by 
+JavaScript's `JSON.stringify` method to format Javascript `Date` objects. 
+
+Any unrecognized members in this object **MUST** be ignored by the application 
 processing the document. 
 
 ## Keywords
@@ -1906,7 +1906,7 @@ Accept: application/vnd.api+json;profile="http://example.com/extensions/last-mod
 Servers **MAY** add profiles to a JSON API document even if the client has not
 requested them. The recipient of a document **MUST** ignore any profile extensions
 in that document that it does not understand. The only exception to this is profiles
-whose support is required using the `profile` query parameter, as described below.
+whose support is required using the `profile` query parameter, as described later.
 
 #### <a href="#profiles-sending" id="profiles-sending" class="headerlink"></a> Sending Profiled Documents
 
@@ -2052,10 +2052,10 @@ For example, it would be illegal for a profile to define a new key in a
 document's [top-level][top level] object, or in a [links object], as JSON API 
 implementations are not allowed to add custom keys in those areas.
 
-Likewise, a profile **MAY** assign a meaning to query parameters whose behavior 
-is left up to each implementation, such as `filter` and all those that contain a 
-non a-z character. However, profiles **MUST NOT** assign a meaning to query 
-parameters that [are reserved](#query-parameters).
+Likewise, a profile **MAY** assign a meaning to query parameters or parameter 
+values whose details are left up to each implementation, such as `filter` and 
+all those that parameters that contain a non a-z character. However, profiles 
+**MUST NOT** assign a meaning to query parameters that [are reserved](#query-parameters).
 
 The meaning of an element defined by a profile **MUST NOT** vary based on the 
 presence or absence of other profiles.
