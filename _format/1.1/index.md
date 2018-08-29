@@ -1866,9 +1866,6 @@ Every resource object **MAY** include a `timestamps` member in its associated
 The value of each member **MUST** comply with the variant of ISO 8601 used by 
 JavaScript's `JSON.stringify` method to format Javascript `Date` objects. 
 
-Any unrecognized members in this object **MUST** be ignored by the application 
-processing the document. 
-
 ## Keywords
 
 This profile defines the following keywords:
@@ -2040,6 +2037,102 @@ key `version` described in the profile:
   }
 }
 ```
+
+### <a href="#profiles-processing" id="profiles-processing" class="headerlink"></a> Processing Profiled Documents/Requests
+
+When a profile is applied to a request and/or document, the value used for each 
+of the profile's elements (document members or query parameters) is said to be 
+"a recognized value" if that value, including all parts of it, has a legal, 
+defined meaning *according to the latest revision of the profile that the 
+application is aware of*.
+
+> Note: The set of recognized values is also/more technically known as the 
+> [defined text set](http://www.w3.org/2001/tag/doc/versioning-compatibility-strategies#terminology).
+
+For example, the hypothetical [timestamps profile] specifies the `timestamps` 
+element, and the meaning for two keys within it -- `created` and `updated`. 
+Therefore, in the following use of the profile, the value for the timestamps 
+element would be a recognized value: 
+
+```json
+{
+    "type": "contacts",
+    "id": "345",
+    "meta": {
+      "timestamps": { "created": "2018-08-29T18:38:17.567Z" }
+    }
+    //...
+  }
+```
+
+However, in the following case, the value for `timestamps` is *not* a recognized 
+value because one of the keys in it, `createdUnixEpoch`, doesn't have a meaning
+assigned to it in the timestamps profile:
+
+```json
+{
+    "type": "contacts",
+    "id": "345",
+    "meta": {
+      "timestamps": { 
+        "createdUnixEpoch": 1535567910201, 
+        "created": "2018-08-29T18:38:17.567Z" 
+      }
+    }
+    //...
+  }
+```
+
+Likewise, if a profile defines an element and enumerates `true` and `false`
+as legal values with a specific meaning, then a string appearing as that 
+element's value would be an unrecognized value.
+
+> Note: unrecognized values are not necessarily invalid or erroneous values.
+> For example, the timestamps profile might be revised later to actually define 
+> a "createdUnixEpoch" key. This key would be unrecognized by all existing 
+> applications at the time, but not by ones created/deployed later.
+
+Each profile **MAY** define its own rules for how applications should proceed
+when encountering unrecognized values.
+
+If a profile does not define its own rules for handling unrecognized values, 
+the following rule applies by default:
+
+  1. If the unrecognized value is a JSON object, and the only thing that makes 
+     it unrecognized is that it contains one or more keys that have no meaning
+     assigned to them (in the latest revision of the profile that the application 
+     is aware of), then the application **MUST** simply ignore those unknown 
+     keys and continue processing the profile.
+
+  2. However, in all other cases, the application **MUST** assume that the 
+     profile has been applied erroneously and **MUST** totally ignore the 
+     profile (i.e., process the document as if the profile were not there).
+
+In the case of our example [timestamps profile], it does not define its own 
+rules, so the above defaults would apply. 
+
+Under the first of these default rules, the unrecognized value we saw 
+above (with the `createdUnixEpoch` key) would be processed as though the 
+`createdUnixEpoch` key simply weren't present, and the application would still 
+be able to use the data in the `created` key. 
+
+However, if the user instead provided the following value, the whole timestamps
+profile would need to be ignored:
+
+```json
+{
+  //...
+  "timestamps": { 
+    "modified": "Wed Aug 29 2018 15:00:05 GMT-0400", 
+    "created": "2018-08-29T18:38:17.567Z" 
+  }
+}
+```
+
+Ignoring the profile in this case is required by the second default rule, 
+because the value for the `modified` key is not recognized under the profile's
+requirement that the `modified` key hold a string of the form produced by 
+`JSON.stringify`.
 
 ### <a href="#profiles-authoring" id="profiles-authoring" class="headerlink"></a> Authoring Profiles
 
