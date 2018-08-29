@@ -2157,6 +2157,12 @@ The scope of a profile **MUST** be clearly delineated. The elements reserved by
 a profile, and the meaning assigned to those elements, **MUST NOT** change over
 time or else the profile **MUST** be considered a new profile with a new URI.
 
+> Note: When a profile changes its URI, a huge amount of interoperability is lost.
+> Users that reference the new URI will not have their messages understood by
+> implementations still aware only of the old URI, and vice-versa. Accordingly,
+> it's important to design your profile so that it can evolve without its URI
+> needing to change. See ["Revising a Profile"](#profiles-updating) for details.
+
 Finally, a profile **MUST NOT**:
 
 1. assume that, if it is supported, then other specific profiles will be 
@@ -2167,25 +2173,60 @@ supported as well.
 3. alter the JSON structure of any concept defined in this specification, 
 including to allow a superset of JSON structures.
 
-Profiles **MAY** be updated over time to add new capabilities. However, any such
-changes **MUST** be [backwards and forwards compatible](http://www.w3.org/2001/tag/doc/versioning-compatibility-strategies#terminology),
-in order to not break existing users of the profile. This requirement usually
-limits changes to adding optional keys within objects specified in the profile's
-original definition.
+#### <a href="#profiles-updating" id="profiles-updating" class="headerlink"></a> Revising a Profile
 
-The hypothetical [timestamps profile], for example, could evolve to allow other 
-optional members, such as `deleted`, in the `timestamps` object. But it could 
-not make that member required, nor could it introduce a new sibling to `timestamps`.
+Profiles **MAY** be revised over time, e.g., to add new capabilities. However, 
+any such changes **MUST** be [backwards and forwards compatible](http://www.w3.org/2001/tag/doc/versioning-compatibility-strategies#terminology) 
+("compatible evolution"), in order to not break existing users of the profile.
 
-To aid evoluation and interoperability, profiles **SHOULD** reserve an
-object-valued member anywhere they expect to potentially add new features over
-time.
+For example, the hypothetical [timestamps profile] *could not* introduce a new,
+required `deleted` member within the `timestamps` object, as that would be 
+incompatible with existing deployments of the profile, which would not include 
+this new member.
 
-> Note: When a profile changes its URI, a huge amount of interoperability is lost.
-> Users that reference the new URI will have their messages not understood by
-> implementations still aware only of the old URI, and vice-versa.
-> Accordingly, the advice above is aimed at allowing profifiles to grow
-> without needing to change their URI.
+The timestamps profile also *could not* evolve to define a new element as a 
+sibling of the `timestamps` key, as that would be incompatible with the rule 
+that "The elements reserved by profile... **MUST NOT** change over time."
+
+> The practical issue with adding a sibling element is that another profile 
+> in use on the document might already define a sibling element of the same 
+> name, and existing documents would not have any aliases defined to resolve 
+> this conflict.
+
+However, the timestamps profile could evolve to allow other optional members, 
+such as `deleted`, in the `timestamps` object. This is possible because the 
+`timestamps` object is already a reserved element of the profile, and the profile
+is subject to the default rule that new (previously unrecognized) keys will
+simply be ignored by existing applications.
+
+##### <a href="#profiles-design-for-evolution" id="profiles-design-for-evolution" class="headerlink"></a> Designing Profiles to Evolve Over Time
+
+Fundamentally, for a profile to be able to change in a compatible way over time, 
+it must define -- from the beginning -- a rule describing how an application 
+that is only familiar with the original version of the profile should process 
+documents/requests that use features from an updated version of the profile.
+
+One major approach is to simply have applications ignore (at least some types of) 
+unrecognized data. This allows the profile to define new, optional features; 
+old applications will continue to work, but simply won't process/"see" these new 
+capabilities.
+
+This is essentially the strategy that JSON:API itself uses when it says that:
+
+> Client and server implementations **MUST** ignore members not recognized by 
+> this specification.
+
+Other protocols use analogous strategies. E.g., in HTTP, unknown headers are 
+simply ignored; they don't crash the processing of the request/response.
+
+As a profile author, you may define your own rules for how applications should 
+process uses of the profile that contain unrecognized data, or you may simply 
+allow the default rules described in the ["Processing Profiled Documents/Requests"](#profiles-processing)
+to take effect.
+
+If you choose to use the default rules, you **SHOULD** reserve an object-valued 
+element anywhere you expect to potentially add new features over time.
+
 ## <a href="#errors" id="errors" class="headerlink"></a> Errors
 
 ### <a href="#errors-processing" id="errors-processing" class="headerlink"></a> Processing Errors
