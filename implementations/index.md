@@ -15,7 +15,7 @@ assembled to vet them.
 
 ### <a href="#client-libraries-javascript" id="client-libraries-javascript" class="headerlink"></a> JavaScript
 
-* [ember-data](https://github.com/emberjs/data) is one of the original exemplar implementations. There is now an [offical adapter](http://emberjs.com/blog/2015/06/18/ember-data-1-13-released.html#toc_json-api-support) to support json-api.
+* [ember-data](https://github.com/emberjs/data) is one of the original exemplar implementations. There is now an [offical adapter](https://emberjs.com/api/ember-data/release/classes/DS.JSONAPIAdapter) to support json-api.
 * [backbone-jsonapi](https://github.com/guillaumervls/backbone-jsonapi) is a Backbone adapter for JSON API. Supports fetching Models & Collections from a JSON API source.
 * [backbone-relational-jsonapi](https://github.com/xbill82/backbone-relational-jsonapi) is a parsing layer for Backbone.Relational. Entities specified in JSON API are automatically parsed to be injected into Backbone.Relational relations.
 * [orbit.js](https://github.com/orbitjs/orbit.js) is a standalone library for
