@@ -159,6 +159,8 @@ and writing of JSON API documents.
   * [jsonapi-store-relationaldb](https://github.com/holidayextras/jsonapi-store-relationaldb) A relational database handler for jsonapi-server.
   * [jsonapi-store-mongodb](https://github.com/holidayextras/jsonapi-store-mongodb) A mongodb handler for jsonapi-server.
   * [jsonapi-store-elasticsearch](https://github.com/holidayextras/jsonapi-store-elasticsearch) An elasticsearch handler for jsonapi-server.
+* [jagql](https://jagql.github.io) A resource driven framework to set up a {json:api} + GraphQL endpoint in record time.
+  * [jagql/store-sequelize](https://npmjs.com/@jagql/store-sequelize) persist jagql resources to Postgres/MySQL/MSSQL/SQLite
 * [loopback-component-jsonapi](https://github.com/digitalsadhu/loopback-component-jsonapi) JSON API support for [loopback](https://github.com/strongloop/loopback) highly-extensible, open-source Node.js framework
 * [loopback-jsonapi-model-serializer](https://www.npmjs.com/package/loopback-jsonapi-model-serializer) JSON API serializer for loopback models.
 * [jsonapi-mapper](https://github.com/scoutforpets/jsonapi-mapper) JSON API-Compliant Serialization for your Node ORM.
