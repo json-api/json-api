@@ -147,6 +147,7 @@ and writing of JSON API documents.
 * [enm/json-api-server](https://eosnewmedia.github.io/JSON-API-Server/) is an abstract server-side PHP (>= 7.0) implementation of the json api specification. It offers an entry point which will handle PSR-7 requests and will respond with a PSR-7 response. A Request can be logged by a PSR-3 logger if needed. All structures (resources, documents etc.) are implemented by default but of course you are able to use your own implementations.
 * [enm/json-api-server-bundle](https://eosnewmedia.github.io/JSON-API-Server-Bundle/) is a symfony bundle which integrates [enm/json-api-server](https://eosnewmedia.github.io/JSON-API-Server/) into your symfony application (symfony version ~2.7|~3.0).
 * [raml-json-api](https://github.com/RJAPI/raml-json-api) RAML based JSON API code generator for Laravel. Generates controllers, middlewares, models, routes, migrations and serves JSON API.
+* [paknahad/jsonapi-bundle](https://github.com/paknahad/jsonapi-bundle) is a Symfony bundle. It is the fastest way to generate API.
 
 ### <a href="#server-libraries-node-js" id="server-libraries-node-js" class="headerlink"></a> Node.js
 * [Fortune.js](http://fortune.js.org/) is a library that includes a [comprehensive implementation of JSON API](https://github.com/fortunejs/fortune-json-api).
