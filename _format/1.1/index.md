@@ -5,15 +5,12 @@ version: 1.1
 ## <a href="#introduction" id="introduction" class="headerlink"></a> Introduction
 
 JSON API is a specification for how a client should request that resources be
-fetched or modified, and how a server should respond to those requests.
+fetched or modified, and how a server should respond to those requests. JSON API
+can also be easily [extended](#extending).
 
 JSON API is designed to minimize both the number of requests and the amount of
 data transmitted between clients and servers. This efficiency is achieved
 without compromising readability, flexibility, or discoverability.
-
-JSON API requires use of the JSON API media type
-([`application/vnd.api+json`](http://www.iana.org/assignments/media-types/application/vnd.api+json))
-for exchanging data.
 
 ## <a href="#conventions" id="conventions" class="headerlink"></a> Conventions
 
@@ -27,33 +24,43 @@ when, and only when, they appear in all capitals, as shown here.
 
 ## <a href="#content-negotiation" id="content-negotiation" class="headerlink"></a> Content Negotiation
 
-### <a href="#content-negotiation-clients" id="content-negotiation-clients" class="headerlink"></a> Client Responsibilities
+### <a href="#content-negotiation-all" id="content-negotiation-all" class="headerlink"></a> Universal Responsibilities
 
-Clients **MUST** send all JSON API data in request documents with the header
-`Content-Type: application/vnd.api+json` without any media type parameters.
+The JSON API media type is [`application/vnd.api+json`](http://www.iana.org/assignments/media-types/application/vnd.api+json).
+Clients and servers **MUST** send all JSON API data using this media type in the
+`Content-Type` header.
+
+Further, the JSON API media type **MUST** always be specified with either no
+media type parameters or with only the `profile` parameter, which is used to
+support [extensions]. This applies to both the `Content-Type` and `Accept`
+headers.
+
+> Note: A media type parameter is an extra piece of information that can
+accompany a media type. For example, in the header
+`Content-Type: text/html; charset="utf-8"`, the media type is `text/html` and
+`charset` is a parameter.
+
+### <a href="#content-negotiation-clients" id="content-negotiation-clients" class="headerlink"></a> Client Responsibilities
 
 Clients that include the JSON API media type in their `Accept` header **MUST**
 specify the media type there at least once without any media type parameters.
 
-Clients **MUST** ignore any parameters for the `application/vnd.api+json`
-media type received in the `Content-Type` header of response documents.
+When processing a JSON API response document, clients **MUST** ignore any
+parameters other than `profile` in the server's `Content-Type` header.
 
 ### <a href="#content-negotiation-servers" id="content-negotiation-servers" class="headerlink"></a> Server Responsibilities
 
-Servers **MUST** send all JSON API data in response documents with the header
-`Content-Type: application/vnd.api+json` without any media type parameters.
-
 Servers **MUST** respond with a `415 Unsupported Media Type` status code if
 a request specifies the header `Content-Type: application/vnd.api+json`
-with any media type parameters.
+with any media type parameters other than `profile`.
 
 Servers **MUST** respond with a `406 Not Acceptable` status code if a
 request's `Accept` header contains the JSON API media type and all instances
 of that media type are modified with media type parameters.
 
-> Note: The content negotiation requirements exist to allow future versions
-of this specification to use media type parameters for extension negotiation
-and versioning.
+> Note: These content negotiation requirements exist to allow future versions
+of this specification to add other media type parameters for extension
+negotiation and versioning.
 
 ## <a href="#document-structure" id="document-structure" class="headerlink"></a> Document Structure
 
@@ -82,8 +89,8 @@ A document **MUST** contain at least one of the following top-level members:
 
 * `data`: the document's "primary data"
 * `errors`: an array of [error objects](#errors)
-* `meta`: a [meta object][meta] that contains non-standard
-  meta-information.
+* `meta`: a [meta object][meta] that contains additional information about
+  the document.
 
 The members `data` and `errors` **MUST NOT** coexist in the same document.
 
@@ -93,6 +100,7 @@ A document **MAY** contain any of these top-level members:
 * `links`: a [links object][links] related to the primary data.
 * `included`: an array of [resource objects] that are related to the primary
   data and/or each other ("included resources").
+* `aliases`: an object defining string aliases for referring to (longer) URIs
 
 If a document does not contain a top-level `data` key, the `included` member
 **MUST NOT** be present either.
@@ -165,7 +173,7 @@ In addition, a resource object **MAY** contain any of these top-level members:
 * `relationships`: a [relationships object][relationships] describing relationships between
  the resource and other JSON API resources.
 * `links`: a [links object][links] containing links related to the resource.
-* `meta`: a [meta object][meta] containing non-standard meta-information about a
+* `meta`: a [meta object][meta] containing additional information about a
   resource that can not be represented as an attribute or relationship.
 
 Here's how an article (i.e. a resource of type "articles") might appear in a document:
@@ -261,7 +269,7 @@ A "relationship object" **MUST** contain at least one of the following:
     (See [Fetching Relationships](#fetching-relationships).)
   * `related`: a [related resource link]
 * `data`: [resource linkage]
-* `meta`: a [meta object][meta] that contains non-standard meta-information about the
+* `meta`: a [meta object][meta] that contains additional information about the
   relationship.
 
 A relationship object that represents a to-many relationship **MAY** also contain
@@ -367,8 +375,8 @@ resource.
 
 A "resource identifier object" **MUST** contain `type` and `id` members.
 
-A "resource identifier object" **MAY** also include a `meta` member, whose value is a [meta] object that
-contains non-standard meta-information.
+A "resource identifier object" **MAY** also include a `meta` member, whose value
+is a [meta] object.
 
 ### <a href="#document-compound-documents" id="document-compound-documents" class="headerlink"></a> Compound Documents
 
@@ -482,8 +490,8 @@ multiple times.
 ### <a href="#document-meta" id="document-meta" class="headerlink"></a> Meta Information
 
 Where specified, a `meta` member can be used to include non-standard
-meta-information. The value of each `meta` member **MUST** be an object (a
-"meta object").
+meta-information or additional information associated with a [profile extension](#extending).
+The value of each `meta` member **MUST** be an object (a "meta object").
 
 Any members **MAY** be specified within `meta` objects.
 
@@ -518,8 +526,7 @@ either:
 * <a id="document-links-link-object"></a>an object ("link object") which can
   contain the following members:
   * `href`: a string containing the link's URL.
-  * `meta`: a meta object containing non-standard meta-information about the
-    link.
+  * `meta`: a [meta object][meta] containing additional information about the link.
 
 The following `self` link is simply a URL:
 
@@ -548,14 +555,46 @@ objects in the future. It is also possible that the allowed values of
 additional members will be expanded (e.g. a `collection` link may support an
 array of values, whereas a `self` link does not).
 
+### <a href="#document-aliases" id="document-aliases" class="headerlink"></a> URI Aliases
+
+The top level of a JSON API document **MAY** include an `aliases` member.
+If present, the value of this member **MUST** be an object (an "aliases object").
+
+Each key–value pair in the aliases object is an "alias definition". The key,
+called the "alias", is said to "be an alias for" the value, which **MUST**
+be an absolute URI.
+
+Aliases **MUST** adhere to the same constraints as all [member names].
+
+Additionally, the strings `"api"` and `"jsonapi"` are reserved and
+**MUST NOT** be used as aliases.
+
+For example, the following object defines the string `"ex"` as an alias for
+the URI `http://example.org/`:
+
+```json
+{
+  "aliases": {
+    "ex": "http://example.org/"
+  }
+}
+```
+
+> Note: Aliases are currently only used as part of the [extension system][extensions].
+  However, their use may be expanded in the future.
+
 ### <a href="#document-jsonapi-object" id="document-jsonapi-object" class="headerlink"></a> JSON API Object
 
 A JSON API document **MAY** include information about its implementation
-under a top level `jsonapi` member. If present, the value of the `jsonapi`
-member **MUST** be an object (a "jsonapi object"). The jsonapi object **MAY**
-contain a `version` member whose value is a string indicating the highest JSON
-API version supported. This object **MAY** also contain a `meta` member, whose
-value is a [meta] object that contains non-standard meta-information.
+under a top-level `jsonapi` member. If present, the value of the `jsonapi`
+member **MUST** be an object (a "jsonapi object").
+
+The jsonapi object **MAY** contain a `version` member whose value is a string
+indicating the highest JSON API version supported.
+
+This object **MAY** also contain a `meta` member, whose value is a [meta object][meta]
+that contains non-standard meta-information. The `meta` object in the jsonapi
+object **MUST NOT** contain [profile extension data](#extending-profile-extensions-applying).
 
 ```json
 {
@@ -987,12 +1026,12 @@ example, a response to a request for `comments.author` should include `comments`
 as well as the `author` of each of those `comments`.
 
 > Note: A server may choose to expose a deeply nested relationship such as
-`comments.author` as a direct relationship with an alias such as
+`comments.author` as a direct relationship with an alternative name such as
 `comment-authors`. This would allow a client to request
 `/articles/1?include=comment-authors` instead of
 `/articles/1?include=comments.author`. By abstracting the nested
-relationship with an alias, the server can still provide full linkage in
-compound documents without including potentially unwanted intermediate
+relationship with an alternate name, the server can still provide full linkage
+in compound documents without including potentially unwanted intermediate
 resources.
 
 Multiple related resources can be requested in a comma-separated list:
@@ -1784,6 +1823,301 @@ parameter from this specification, it **MUST** return `400 Bad Request`.
 > Note: This is to preserve the ability of JSON API to make additive additions
 to standard query parameters without conflicting with existing implementations.
 
+## <a href="#extending" id="extending" class="headerlink"></a> Extending JSON API
+
+An API **MAY** support one or more "profile extensions" to supplement the
+capabilities of this specification.
+
+A profile extension is a small, separate specification that defines a set of
+values that can be added to a JSON API document, and the meaning of those values
+at the different places they can occur.
+
+A profile extension is identified by a URI [[RFC 3986](https://www.ietf.org/rfc/rfc3986.txt)].
+When dereferenced, this URI **SHOULD** return documentation on the extension.
+
+For requesting extensions and indicating those in use, the JSON API media type
+defines a `profile` parameter. If present, the value of this parameter, **MUST**
+be a space-separated (U+0020 SPACE, " ") list of profile extension URIs. This
+list **MUST** be surrounded by quotation marks (U+0022 QUOTATION MARK, "\""), in
+accordance with the HTTP specification.
+
+### <a href="#extending-profile-extensions-processing" id="extending-profile-extensions-processing" class="headerlink"></a> Processing Extensions
+
+The recipient of a document **MUST** ignore any profile extensions in that
+document that it does not understand.
+
+Recipients **MAY** process in parallel the data from different profile extensions
+in use in a document.
+
+### <a href="#extending-profile-extensions-applying" id="extending-profile-extensions-applying" class="headerlink"></a> Adding Extensions to a Document
+
+The client or the server **MAY** add profile extensions to a JSON API document,
+whether or not the other party [requests](#extending-profile-extensions-requesting)
+them. 
+
+When one or more profile extensions are used in a JSON API document, the document 
+**MUST** define at least one [alias][aliases] for each extension's URI.
+
+An alias for an extension's URI **MAY** be used as a key (an "extension-associated
+key") within a `meta` object. The value at any such key is interpreted according the 
+specification of the extension to which the key name maps.
+
+The same extension-associated key **MAY** appear more than once in a given
+document.
+
+An extension-associated key **MUST NOT** be added at any location where the
+extension's specification does not define how to interpret the key's value.
+
+> In practice, extension-associated keys are only allowed as children of a
+  `"meta"` object, and only when that `"meta"` object is not within the
+  `"jsonapi"` object. This is because extensions are also [limited](#extending-profile-extensions-authoring)
+  in where they can permit their data to appear.
+
+The following document demonstrates these rules by adding a hypothetical
+extension that has the URI `http://example.org/extensions/last-modified`:
+
+```json
+{
+  "aliases": {
+    "last-modified": "http://example.org/extensions/last-modified"
+  },
+  "data": {
+    "type": "people",
+    "id": "9",
+    "attributes": {
+      "first-name": "Dan",
+      "last-name": "Gebhardt"
+    },
+    "relationships": {
+      "father": {
+        "data": {
+          "type": "people", "id": "7"
+        },
+        "meta": {
+          "last-modified": "2013-09-24T00:00:00Z"
+        }
+      }
+    },
+    "meta": {
+      "last-modified": {
+        "date": "2015-01-01T00:00:00Z", "fields": ["first-name"]
+      }
+    }
+  }
+}
+```
+
+The document above defines `"last-modified"` as an alias for the exension's
+URI (though any legal [alias][aliases] name would do). Then, `"last-modified"`
+is used as an extension-associated key throughout the document. The 
+`"last-modified"` key holds values that have different formats and meanings 
+in each location that it appears, which is allowed assuming the extension's 
+specification describes those formats.
+
+### <a href="#extending-profile-extensions-sending" id="extending-profile-extensions-sending" class="headerlink"></a> Sending Extended Documents
+
+When sending a JSON API document that uses profile extensions, whether from the
+server to the client or vice-versa, the `profile` parameter **MUST** be used in
+the `Content-Type` header to indicate which extensions are in use.
+
+For instance, the following header would be sent with a document that makes use
+of the `http://jsonapi.org/ext/example-1/` and `http://jsonapi.org/ext/example-2/`
+extensions:
+
+```http
+Content-Type: application/vnd.api+json; profile="http://jsonapi.org/ext/example-1/ http://jsonapi.org/ext/example-2/"
+```
+
+##### Handling `415 Unsupported Media Type`
+
+When an older JSON API server that doesn't support the `profile` parameter
+receives a document with profile extensions, it will respond with a
+`415 Unsupported Media Type` error.
+
+After attempting to rule out other possible causes of this error, a client that
+receives a `415 Unsupported Media Type` **SHOULD** remove the profile extensions
+it has applied to the document and retry its request without the `profile` media
+type parameter. If this resolves the error, the client **SHOULD NOT** attempt to
+use profile extensions in subsequent interactions with the same API.
+
+> The most likely other causes of a 415 error are that the server doesn't
+support JSON API at all or that the client has failed to provide a
+[required extension](#extending-profile-extensions-required).
+
+
+### <a href="#extending-profile-extensions-negotiation" id="extending-profile-extensions-negotiation" class="headerlink"></a> Negotiating Extensions
+
+#### <a href="#extending-profile-extensions-requesting" id="extending-profile-extensions-requesting" class="headerlink"></a> Requesting Extensions
+
+The client **MAY** request that certain profile extensions be applied to the
+server's response by listing those extensions in a `profile` parameter in one
+of its references to the JSON API media type in the `Accept` header.
+
+For example, in the following request the client, the client asks that the
+server apply the `http://jsonapi.org/extensions/last-modified` extension if
+it is able to.
+
+```http
+Accept: application/vnd.api+json;profile="http://jsonapi.org/extensions/last-modified", application/vnd.api+json
+```
+
+> Note: The second instance of the JSON API media type in the example above is
+  required under the [client's content negotiation responsibilities](#content-negotiation-clients).
+  It is used to support old servers that don't understand the profile parameter.
+
+The server **SHOULD** include as many of the requested extensions as it supports.
+
+#### <a href="#extending-profile-extensions-required" id="extending-profile-extensions-required" class="headerlink"></a> Required Extensions
+
+A server **SHOULD NOT** require that clients send documents containing certain
+extensions, as such requirements reduce interoperability.
+
+However, in the event that the server does require one or more extensions (e.g.
+for  authentication), and the client fails to use those extensions, the server
+**MUST** send a `415 Unsupported Media Type` error. In the error's response body,
+there **MUST** be an [error object][error objects] for each required extension
+that is missing, and this error object **MUST**:
+
+  - have a [`type`](#error-objects) who's URI is
+    `http://jsonapi.org/errors/missing-profile-extension`
+
+  - include the URI of the missing extension in the `extension` member of the
+    [`missing` object](#error-objects-source-missing).
+
+### <a href="#extending-profile-extensions-authoring" id="extending-profile-extensions-authoring" class="headerlink"></a> Authoring Profile Extensions
+
+As mentioned above, a profile extension defines a set of values that can be 
+added to a JSON API document, and the meaning of those values at the different 
+places they can occur.
+
+These values **MAY** be defined for use in any spec-defined [meta object][meta], 
+with the exception is that an extension **MUST NOT** define values for use in 
+the [`jsonapi` object](#document-jsonapi-object)'s meta object. A profile extension
+**MUST NOT** define any values for use outside of a meta object.
+
+The meaning of an extension-defined value **MAY** vary based on where it occurs
+in the document but **MUST NOT** vary based on the presence or absence of other
+profile extensions.
+
+The keys in any profile-extension-defined objects **MUST** meet this specification's
+requirements for [member names].
+
+> If you author an extension, you are **strongly encouraged to [register](/extensions/#extension-creation-registration)
+> it** with the JSON API [extension registry](/extensions/), so that others can
+> find and reuse it.
+
+#### <a href="#extending-profile-extensions-authoring-restrictions" id="extending-profile-extensions-authoring-restrictions" class="headerlink"></a> Restrictions on Profile Extensions
+
+Profile extensions are limited in how they can interact with this specification
+and one another. These limitations have been chosen carefully to ensure that
+multiple profile extensions can be used together safely; that changes to this
+specification will not conflict with a profile extension's semantics; and that
+profile extensions don't interfere with the interoperability of JSON API
+implementations. Accordingly:
+
+Profile extension designers **MUST NOT** assume that their extension will be
+understood by the recipient, or that their extension will be processed in any
+particular order relative to the other extensions in use. 
+
+An extension also **MUST NOT** assume that, if it is supported, then other 
+profile extensions will be supported as well. With the exception of extensions 
+that allow other extensions to nest data inside of their data, extensions 
+should be totally independent.
+
+Additionally, profile extensions **MUST NOT** define new query parameters, 
+fixed endpoints, or HTTP headers or header values. 
+
+Finally, profile extensions **MUST NOT**:
+
+- alter the JSON structure of any concept defined in this specification, 
+  including to allow a superset of JSON structures.
+
+- alter the meaning or processing rules associated with any concept defined 
+  in this specification, including to add additional meanings or constraints.
+
+####  <a href="#extending-profile-extensions-authoring-nesting" id="extending-profile-extensions-authoring-nesting" class="headerlink"></a> Nesting Profile Extensions
+
+A profile extension **MAY** declare that data from other extensions can be added
+to an object it defines. An extension-defined object that holds data from other 
+extensions must have a `meta` member, whose value must be an object. The data 
+from the foreign extension **MUST** be added under that `meta` member at a key 
+associated with foreign extension. 
+
+If a profile extension allows foreign extension data, it **MAY** require that the 
+extension whose data is being embedded meet certain functional requirements. 
+However, it **MUST NOT** require that the extension being embedded be on a list 
+of explicitly allowed extensions that it maintains.
+
+Conversely, a profile extension **MAY** define a set of values that can be used
+in objects added to the document by other profile extensions.
+
+For example, imagine an extension that defines a template format that servers
+can insert into their responses to tell clients how to construct valid requests
+to trigger various "actions" associated with a resource. Imagine also that this 
+extension allows the server to use other JSON:API extensions to communicate 
+validation constraints for the request, rather than the extension definining its 
+own validation format. In that case, applying this hypothentical extension to a 
+document might look like:
+
+```http
+GET /articles/1 HTTP/1.1
+```
+
+```json
+{
+  "aliases": {
+    "templates": "http://example.org/extensions/request-template",
+    "common-validators": "http://example.org/extensions/validators"
+  },
+  "meta": {
+    "templates": [{
+      "name": "publish",
+      "method": "PATCH",
+      "uri": "/articles/1",
+      "fields": [{
+        "name": "publish-date",
+        "meta": {
+          "common-validators": { "type": "date" }
+        }
+      }]
+    }
+  },
+  "data": {
+    "type": "articles",
+    "id": "1",
+    "attributes": {
+      // ... this article's attributes
+    },
+    "relationships": {
+      // ... this article's relationships
+    }
+  }
+}
+```
+
+In the example above, the server has added the `http://example.org/extensions/request-template`
+extension to its response to communicate that the client can publish the 
+article by making a `PATCH` request to `/articles/1` that includes a 
+`"publish-date"` field. The request template extension has also speficied a 
+`meta` member in its field objects, allowing foreign extensions to add extra 
+information. The server has used this opportunity to communicate that the 
+`"publish-date"` field must contain a date, by applying the 
+`http://example.org/extensions/validators` extension.
+
+#### <a href="#extending-profile-extensions-authoring-updating" id="extending-profile-extensions-authoring-updating" class="headerlink"></a> Updating a Profile Extension
+
+Profile extensions **MAY** be updated over time to add new capabilities, by
+revising their specification/registration. However, any such changes **MUST** be 
+[backwards and forwards compatible](http://www.w3.org/2001/tag/doc/versioning-compatibility-strategies#terminology).
+
+This restriction ensures that an updating an extension does not break existing 
+users of the extension. 
+
+> Note: Designing extensions that can be updated in this manner can be tricky.
+  To help with this, we encourage you to submit your extension for registration;
+  during the review, an editor will check that your extension follows the right
+  practices.
+
 ## <a href="#errors" id="errors" class="headerlink"></a> Errors
 
 ### <a href="#errors-processing" id="errors-processing" class="headerlink"></a> Processing Errors
@@ -1807,12 +2141,14 @@ keyed by `errors` in the top level of a JSON API document.
 An error object **MAY** have the following members:
 
 * `id`: a unique identifier for this particular occurrence of the problem.
+* `type`: a URI that identifies the type of error that this particular error 
+  is an instance of. When dereferenced, this URI **SHOULD** provide a 
+  human-readable explanation of the general error.
 * `links`: a [links object][links] containing the following members:
   * `about`: a [link][links] that leads to further details about this
     particular occurrence of the problem.
 * `status`: the HTTP status code applicable to this problem, expressed as a
   string value.
-* `code`: an application-specific error code, expressed as a string value.
 * `title`: a short, human-readable summary of the problem that **SHOULD NOT**
   change from occurrence to occurrence of the problem, except for purposes of
   localization.
@@ -1825,10 +2161,33 @@ An error object **MAY** have the following members:
     for a primary data object, or `"/data/attributes/title"` for a specific
     attribute]. This **MUST** point to a value in the request document that
     exists; if it doesn't, the client **SHOULD** simply ignore the pointer.
-  * `parameter`: a string indicating which URI query parameter caused
-    the error.
-* `meta`: a [meta object][meta] containing non-standard meta-information about the
-  error.
+  * `parameter`: a string indicating which URI query parameter used in the
+    request caused the error.
+  * <a id="error-objects-source-missing"></a>`missing`: an object indicating
+    that the error was caused by a missing extension, key, or URI query parameter.
+    If present, this object **MUST** contain exactly one of the following keys:
+        * `extension`: the URI of a missing extension. This key **SHOULD** be
+          used with the `pointer` member to indicate which value in the request
+          document is missing the extension.
+        * `key`: the name of a missing key. This key **SHOULD** be used with the
+          `pointer` member to indicate which value in the request document is
+          missing the key.
+        * `parameter`: the name of a missing URI query parameter.
+
+    This object **MAY** also contain an `alternatives` key, whose value is an
+    array listing alternate extension URIs, key names, or parameter names
+    (depending on which type of value is missing) that can be added to resolve
+    this error.
+* `meta`: a [meta object][meta] containing additional information about the error.
+
+> Note: Previous versions of this specification defined a `code` member in
+  error objects. The role of that member is now played instead by the `type`.
+>
+> Old APIs that send the `code` member will continue to function with newer
+  clients, but these clients will likely ignore that member. Clients may choose
+  to continue to support `code` if they must interact with older APIs. However,
+  new APIs should not produce error objects with this member, even though doing
+  so is technically allowed.
 
 [resource objects]: #document-resource-objects
 [attributes]: #document-resource-object-attributes
@@ -1841,6 +2200,8 @@ An error object **MAY** have the following members:
 [compound document]: #document-compound-documents
 [meta]: #document-meta
 [links]: #document-links
+[aliases]: #document-aliases
+[extensions]: #extending
 [error details]: #errors
 [member names]: #document-member-names
 [pagination]: #fetching-pagination
