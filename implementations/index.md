@@ -74,6 +74,7 @@ isomorphic ActiveRecord clone that issues JSON API requests instead of SQL and i
 * [woohoolabs / yang](https://github.com/woohoolabs/yang) is a PSR-7 compatible library that is able to build and send requests, and handle responses.
 * [enm/json-api-client](https://eosnewmedia.github.io/JSON-API-Client/) is an abstract client-side PHP implementation of the json api specification, based on the PSR-7 HTTP message interface.
 * [pz/doctrine-rest](https://github.com/R3VoLuT1OneR/doctrine-rest) library provides basic tools for implementation of JSON API with Doctrine 2
+* [swisnl/json-api-client](https://github.com/swisnl/json-api-client) Is a package for mapping remote {json:api} resources to Eloquent like models and collections.
 * [jsonapi](https://www.drupal.org/project/jsonapi) is a Drupal module that exposes all data managed by Drupal (entities) according to the JSON API specification. [jsonapi_extras](https://www.drupal.org/project/jsonapi_extras) is an optional extra module to change resource type names, field names and more. And [openapi](https://www.drupal.org/project/openapi) is another optional module, that is able to generate an OpenAPI/Swagger representation of the API provided by the `jsonapi` module with a ReDoc-powered UI.
 
 ### <a href="#client-libraries-dart" id="client-libraries-dart" class="headerlink"></a> Dart
