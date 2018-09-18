@@ -15,7 +15,7 @@ assembled to vet them.
 
 ### <a href="#client-libraries-javascript" id="client-libraries-javascript" class="headerlink"></a> JavaScript
 
-* [ember-data](https://github.com/emberjs/data) is one of the original exemplar implementations. There is now an [offical adapter](http://emberjs.com/blog/2015/06/18/ember-data-1-13-released.html#toc_json-api-support) to support json-api.
+* [ember-data](https://github.com/emberjs/data) is one of the original exemplar implementations. There is now an [offical adapter](https://emberjs.com/api/ember-data/release/classes/DS.JSONAPIAdapter) to support json-api.
 * [backbone-jsonapi](https://github.com/guillaumervls/backbone-jsonapi) is a Backbone adapter for JSON API. Supports fetching Models & Collections from a JSON API source.
 * [backbone-relational-jsonapi](https://github.com/xbill82/backbone-relational-jsonapi) is a parsing layer for Backbone.Relational. Entities specified in JSON API are automatically parsed to be injected into Backbone.Relational relations.
 * [orbit.js](https://github.com/orbitjs/orbit.js) is a standalone library for
@@ -43,6 +43,8 @@ assembled to vet them.
 * [Sarala JSON API data formatter](https://github.com/milroyfraser/sarala-json-api-data-formatter) is a simple and fluent framework agnostic javascript library to transform standard JSON API responses to simple JSON objects and vice versa.
 * [Sarala](https://github.com/milroyfraser/sarala) is a javascript package which gives you a [Laravel Eloquent](https://laravel.com/docs/5.6/eloquent) like syntax to perform CRUD operations against an JSON API built according to [JSON API specification](http://jsonapi.org/format/).
 * [jsonapi-client](https://github.com/itsfadnis/jsonapi-client) A convenient module to consume a jsonapi service
+* [JSORM](https://jsonapi-suite.github.io/jsonapi_suite/js/home) is an
+isomorphic ActiveRecord clone that issues JSON API requests instead of SQL and is part of the larger [JSONAPI Suite](https://jsonapi-suite.github.io/jsonapi_suite).
 
 ### <a href="#client-libraries-typescript" id="client-libraries-typescript" class="headerlink"></a> Typescript
 * [ts-angular-jsonapi](https://github.com/reyesoft/ts-angular-jsonapi) A JSON API library developed for AngularJS in Typescript
@@ -72,6 +74,7 @@ assembled to vet them.
 * [woohoolabs / yang](https://github.com/woohoolabs/yang) is a PSR-7 compatible library that is able to build and send requests, and handle responses.
 * [enm/json-api-client](https://eosnewmedia.github.io/JSON-API-Client/) is an abstract client-side PHP implementation of the json api specification, based on the PSR-7 HTTP message interface.
 * [pz/doctrine-rest](https://github.com/R3VoLuT1OneR/doctrine-rest) library provides basic tools for implementation of JSON API with Doctrine 2
+* [jsonapi](https://www.drupal.org/project/jsonapi) is a Drupal module that exposes all data managed by Drupal (entities) according to the JSON API specification. [jsonapi_extras](https://www.drupal.org/project/jsonapi_extras) is an optional extra module to change resource type names, field names and more. And [openapi](https://www.drupal.org/project/openapi) is another optional module, that is able to generate an OpenAPI/Swagger representation of the API provided by the `jsonapi` module with a ReDoc-powered UI.
 
 ### <a href="#client-libraries-dart" id="client-libraries-dart" class="headerlink"></a> Dart
 
@@ -107,13 +110,14 @@ assembled to vet them.
 
 * [Hypermedia.JsonApi.Client](https://github.com/cosullivan/Hypermedia/) is a set of extension methods to the HttpClient which allow for reading
 and writing of JSON API documents.
-* [JsonApiSerializer](https://github.com/codecutout/JsonApiSerializer) is a configurationless JSON API serialization and deserialization library implemented as a Json.NET `JsonSerializerSetting`. It leverages the existing power and flexiability of Json.NET while providing a sensible default mapping between JSON API and CLR objects.  
+* [JsonApiSerializer](https://github.com/codecutout/JsonApiSerializer) is a configurationless JSON API serialization and deserialization library implemented as a Json.NET `JsonSerializerSetting`. It leverages the existing power and flexiability of Json.NET while providing a sensible default mapping between JSON API and CLR objects.
 * [JsonApiFramework.Client](https://github.com/scott-mcdonald/JsonApiFramework) is a *portable* .NET Standard/Core client-side framework where developers define the domain model of the resources of a hypermedia API server either through configuration and/or conventions called a *service model*. With a *service model* developers can use a *document context* that represents a session with a JSON API compound *document* for reading or writing of various JSON API abstractions such as resources, resource identifiers, relationships, links, meta information, error objects, and version information all serialized/deserialized as high level CLR objects.
 
 ### <a href="#client-libraries-python" id="client-libraries-python" class="headerlink"></a> Python
 
 * [jsonapi-requests](https://github.com/socialwifi/jsonapi-requests/) Simple and fun high-level JSONAPI client for Python. Contains ORM which makes consuming the API even easier, in a DRY manner. It has a low-level API similiar to requests as well, which gives you all the flexibility that you may need.
 * [jsonapi-client](https://github.com/qvantel/jsonapi-client) Comprehensive yet easy-to-use, pythonic, ORM-like access to JSON API services
+* [json-api-doc](https://github.com/noplay/json-api-doc) JSON API parser returning a simple Python dictionary
 
 ### <a href="#client-libraries-elixir" id="client-libraries-elixir" class="headerlink"></a> Elixir
 
@@ -144,6 +148,7 @@ and writing of JSON API documents.
 * [enm/json-api-server](https://eosnewmedia.github.io/JSON-API-Server/) is an abstract server-side PHP (>= 7.0) implementation of the json api specification. It offers an entry point which will handle PSR-7 requests and will respond with a PSR-7 response. A Request can be logged by a PSR-3 logger if needed. All structures (resources, documents etc.) are implemented by default but of course you are able to use your own implementations.
 * [enm/json-api-server-bundle](https://eosnewmedia.github.io/JSON-API-Server-Bundle/) is a symfony bundle which integrates [enm/json-api-server](https://eosnewmedia.github.io/JSON-API-Server/) into your symfony application (symfony version ~2.7|~3.0).
 * [raml-json-api](https://github.com/RJAPI/raml-json-api) RAML based JSON API code generator for Laravel. Generates controllers, middlewares, models, routes, migrations and serves JSON API.
+* [paknahad/jsonapi-bundle](https://github.com/paknahad/jsonapi-bundle) is a Symfony bundle. It is the fastest way to generate API.
 
 ### <a href="#server-libraries-node-js" id="server-libraries-node-js" class="headerlink"></a> Node.js
 * [Fortune.js](http://fortune.js.org/) is a library that includes a [comprehensive implementation of JSON API](https://github.com/fortunejs/fortune-json-api).
@@ -156,12 +161,13 @@ and writing of JSON API documents.
   * [jsonapi-store-relationaldb](https://github.com/holidayextras/jsonapi-store-relationaldb) A relational database handler for jsonapi-server.
   * [jsonapi-store-mongodb](https://github.com/holidayextras/jsonapi-store-mongodb) A mongodb handler for jsonapi-server.
   * [jsonapi-store-elasticsearch](https://github.com/holidayextras/jsonapi-store-elasticsearch) An elasticsearch handler for jsonapi-server.
+* [jagql](https://jagql.github.io) A resource driven framework to set up a {json:api} + GraphQL endpoint in record time.
+  * [jagql/store-sequelize](https://npmjs.com/@jagql/store-sequelize) persist jagql resources to Postgres/MySQL/MSSQL/SQLite
 * [loopback-component-jsonapi](https://github.com/digitalsadhu/loopback-component-jsonapi) JSON API support for [loopback](https://github.com/strongloop/loopback) highly-extensible, open-source Node.js framework
 * [loopback-jsonapi-model-serializer](https://www.npmjs.com/package/loopback-jsonapi-model-serializer) JSON API serializer for loopback models.
 * [jsonapi-mapper](https://github.com/scoutforpets/jsonapi-mapper) JSON API-Compliant Serialization for your Node ORM.
 * [jaysonapi](https://github.com/digia/jaysonapi) jaysonapi is a framework agnostic JSON API v1.0.0 serializer. jaysonapi provides more of a functional approach to serializing your data. Define a serializer with a type and schema, and call serialize on it passing in the data, included, meta, errors, etc. as a plain object.
 * [json-api-ify](https://github.com/kutlerskaggs/json-api-ify) serialize the **** out of your data. json api v1.0 complaint.
-* [simple-jsonapi](https://github.com/allistercsmith/simple-jsonapi) A node.js module for serializing objects to JSON API compliant documents. Very flexible whilst not caring about your choice of framework or database layer. Aims to cover the latest published version of the spec, which is currently 1.0.
 * [bookshelf-jsonapi-params](https://github.com/scoutforpets/bookshelf-jsonapi-params) automatically apply JSON API filtering, pagination, sparse fieldsets, includes, and sorting to your Bookshelf.js queries.
 * [Lux](https://github.com/postlight/lux) is a MVC style Node.js framework for building lightning fast JSON APIs.
 * [transformalizer](https://github.com/GaiamTV/transformalizer) a bare bones node module for transforming raw data into JSON API compliant payloads that makes no assumption regarding the shape of your data and sdks used, supports the full v1.0 specification, and supports dynamic transformations, links, and meta at all levels of a document.
@@ -188,6 +194,10 @@ the moment.
   * [JSONAPI::Resources](https://github.com/cerebris/jsonapi-resources) provides a complete framework for developing a JSON API server. It is designed to work with Rails, and provides routes, controllers, and serializers.
   * [JSONAPI::Utils](https://github.com/b2beauty/jsonapi-utils) works on top of [JSONAPI::Resources](https://github.com/cerebris/jsonapi-resources) taking advantage of its resource-driven style and bringing a Rails way to build modern APIs with no or less learning curve.
   * [Caprese](https://github.com/nicklandgrebe/caprese) An opinionated Rails library for creating JSON API servers that lets you focus on customizing the behavior of your endpoints rather than the dirty work of setting them up. Leverages the power of [ActiveModel::Serializer](https://github.com/rails-api/active_model_serializers).
+  * [JSONAPI Suite](https://jsonapi-suite.github.io/jsonapi_suite)
+  facilitates a server capable of deep querying and nested writes. Works
+  with any ORM or datastore; comes with integration test helpers and
+  automatic swagger documentation.
 
 * Sinatra
   * [Sinja](https://github.com/mwpastore/sinja) extends [Sinatra](http://www.sinatrarb.com) and leverages [JSONAPI::Serializers](https://github.com/fotinakis/jsonapi-serializers) to enable rapid development of comprehensive, read-and-write, and JSON API v1.0-compliant web services using the DAL/ORM of your choice. It includes a simple role-based authorization scheme, support for client-generated IDs, patchless clients, and coalesced find requests, exception handling, and more.
