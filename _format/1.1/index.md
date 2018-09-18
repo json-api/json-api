@@ -1945,7 +1945,41 @@ Bad Request` status code.
 > with some extra information, as described in the requested profile. By
 > contrast, when a client lists a profile in the `profile` *query parameter*,
 > it's asking the server to *process the incoming request* according to the
-> rules of the profile.
+> rules of the profile. This can fundamentally change the meaning of the 
+> server's response.
+
+#### <a href="#profile-query-parameter-omitting" id="profile-query-parameter" class="headerlink"></a> Omitting the `profile` Query Parameter
+
+A server **MAY** define an internal mapping from query parameter names to 
+profile URIs. The profile URI for a query parameter name in this mapping 
+**MUST NOT** change over time.
+
+If a requested URL does not contain the `profile` query parameter and does 
+contain one or more query parameters in the server's internal mapping, the 
+server may act as though the request URL contained a `profile` query parameter 
+whose value was the comma-separated list of each profile URI found in the 
+server's internal mapping for the query parameters in use on the request.
+
+For example, the server might support a profile that defines a meaning for the
+values of the `filter` query param. Then, it could define its internal 
+param name to profile uri mapping like so:
+
+```json
+{ "filter": "https://example.com/my-filter-profile" }
+```
+
+Accordingly, when a request for 
+
+```
+https://example.com/?filter=xyz
+```
+
+would be interpreted by the server as:
+
+```
+https://example.com/?filter=xyz&profile=https://example.com/my-filter-profile
+```
+
 
 ### <a href="#profile-keywords-and-aliases" id="profile-keywords-and-aliases" class="headerlink"></a> Profile Keywords and Aliases
 
