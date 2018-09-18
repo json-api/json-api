@@ -42,6 +42,7 @@ assembled to vet them.
 * [kitsu](https://github.com/wopian/kitsu) A simple, lightweight & framework agnostic JSON API client
 * [Sarala JSON API data formatter](https://github.com/milroyfraser/sarala-json-api-data-formatter) is a simple and fluent framework agnostic javascript library to transform standard JSON API responses to simple JSON objects and vice versa.
 * [Sarala](https://github.com/milroyfraser/sarala) is a javascript package which gives you a [Laravel Eloquent](https://laravel.com/docs/5.6/eloquent) like syntax to perform CRUD operations against an JSON API built according to [JSON API specification](http://jsonapi.org/format/).
+* [jsonapi-client](https://github.com/itsfadnis/jsonapi-client) A convenient module to consume a jsonapi service
 * [JSORM](https://jsonapi-suite.github.io/jsonapi_suite/js/home) is an
 isomorphic ActiveRecord clone that issues JSON API requests instead of SQL and is part of the larger [JSONAPI Suite](https://jsonapi-suite.github.io/jsonapi_suite).
 
