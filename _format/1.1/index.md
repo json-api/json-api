@@ -1961,8 +1961,9 @@ to profile URIs. The profile URI for a query parameter name in this mapping
 If a requested URL does not contain the `profile` query parameter and does 
 contain one or more query parameters in the server's internal mapping, the 
 server may act as though the request URL contained a `profile` query parameter 
-whose value was the comma-separated list of each unique profile URI found in the 
-server's internal mapping for the query parameters in use on the request.
+whose value was the URI-encoded space-separated list of each unique profile URI 
+found in the server's internal mapping for the query parameters in use on the 
+request.
 
 For example, the server might support a profile that defines a meaning for the
 values of the `filter` query param. Then, it could define its internal 
