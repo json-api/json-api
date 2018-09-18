@@ -1950,14 +1950,18 @@ Bad Request` status code.
 
 #### <a href="#profile-query-parameter-omitting" id="profile-query-parameter" class="headerlink"></a> Omitting the `profile` Query Parameter
 
-A server **MAY** define an internal mapping from query parameter names to 
-profile URIs. The profile URI for a query parameter name in this mapping 
+Requiring the client to specify the `profile` query parameter would be 
+cumbersome. Accordingly, JSON:API defines a way that server's may infer its 
+value in many cases.
+
+To do so, a server **MAY** define an internal mapping from query parameter names 
+to profile URIs. The profile URI for a query parameter name in this mapping 
 **MUST NOT** change over time.
 
 If a requested URL does not contain the `profile` query parameter and does 
 contain one or more query parameters in the server's internal mapping, the 
 server may act as though the request URL contained a `profile` query parameter 
-whose value was the comma-separated list of each profile URI found in the 
+whose value was the comma-separated list of each unique profile URI found in the 
 server's internal mapping for the query parameters in use on the request.
 
 For example, the server might support a profile that defines a meaning for the
@@ -1968,7 +1972,7 @@ param name to profile uri mapping like so:
 { "filter": "https://example.com/my-filter-profile" }
 ```
 
-Accordingly, when a request for 
+Accordingly, a request for:
 
 ```
 https://example.com/?filter=xyz
@@ -1989,7 +1993,7 @@ keyword for an element, then the name of the element itself (i.e., its key in
 the document) is considered to be its keyword. All profile keywords **MUST** 
 meet this specification's requirements for [member names].
 
-For the purposes of aliasing, a profiles elements are defined shallowly. 
+For the purposes of aliasing, a profile's elements are defined shallowly. 
 In other words, if a profile introduces an object-valued document member, that 
 member is an element (and so subject to aliasing), but any keys in it are not 
 themselves elements. Likewise, if the profile defines an array-valued element, 
