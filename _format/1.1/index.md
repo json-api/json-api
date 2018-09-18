@@ -1985,9 +1985,15 @@ https://example.com/?filter=xyz&profile=https://example.com/my-filter-profile
 
 A profile **SHOULD** explicitly declare "keywords" for any elements that it
 introduces to the document structure. If a profile does not explicitly declare a
-keyword for an element, then the name of the element itself is considered to be
-its keyword. All profile keywords **MUST** meet this specification's
-requirements for [member names].
+keyword for an element, then the name of the element itself (i.e., its key in
+the document) is considered to be its keyword. All profile keywords **MUST** 
+meet this specification's requirements for [member names].
+
+For the purposes of aliasing, a profiles elements are defined shallowly. 
+In other words, if a profile introduces an object-valued document member, that 
+member is an element (and so subject to aliasing), but any keys in it are not 
+themselves elements. Likewise, if the profile defines an array-valued element, 
+the keys in nested objects within that array are not elements.
 
 The following example profile defines a single keyword, `version`:
 
@@ -2075,10 +2081,10 @@ key `version` described in the profile:
 ### <a href="#profiles-processing" id="profiles-processing" class="headerlink"></a> Processing Profiled Documents/Requests
 
 When a profile is applied to a request and/or document, the value used for each 
-of the profile's elements (document members or query parameters) is said to be 
-"a recognized value" if that value, including all parts of it, has a legal, 
-defined meaning *according to the latest revision of the profile that the 
-application is aware of*.
+of the profile's document members or query parameters is said to be "a 
+recognized value" if that value, including all parts of it, has a legal, defined
+meaning *according to the latest revision of the profile that the application is 
+aware of*.
 
 > Note: The set of recognized values is also/more technically known as the 
 > [defined text set](http://www.w3.org/2001/tag/doc/versioning-compatibility-strategies#terminology).
@@ -2184,11 +2190,11 @@ values whose details are left up to each implementation, such as `filter` and
 all those that parameters that contain a non a-z character. However, profiles 
 **MUST NOT** assign a meaning to query parameters that [are reserved](#query-parameters).
 
-The meaning of an element defined by a profile **MUST NOT** vary based on the 
-presence or absence of other profiles.
+The meaning of an element or query parameter defined by a profile **MUST NOT** 
+vary based on the presence or absence of other profiles.
 
-The scope of a profile **MUST** be clearly delineated. The elements reserved by
-a profile, and the meaning assigned to those elements, **MUST NOT** change over
+The scope of a profile **MUST** be clearly delineated. The elements and query 
+parameters specified by a profile, and their meanings, **MUST NOT** change over
 time or else the profile **MUST** be considered a new profile with a new URI.
 
 > Note: When a profile changes its URI, a huge amount of interoperability is lost.
@@ -2220,7 +2226,7 @@ this new member.
 
 The timestamps profile also *could not* evolve to define a new element as a 
 sibling of the `timestamps` key, as that would be incompatible with the rule 
-that "The elements reserved by profile... **MUST NOT** change over time."
+that "The elements... specified by a profile... **MUST NOT** change over time."
 
 > The practical issue with adding a sibling element is that another profile 
 > in use on the document might already define a sibling element of the same 
