@@ -143,7 +143,7 @@ Content-Type: application/vnd.api+json
 
 {
   "meta": {
-    "total-pages": 13
+    "totalPages": 13
   },
   "data": [
     {
@@ -171,7 +171,7 @@ Content-Type: application/vnd.api+json
 for readability. In practice, these characters must be percent-encoded, as
 noted in the base specification.
 
-> Note: Putting a property like `"total-pages"` in `"meta"` can be a convenient way
+> Note: Putting a property like `"totalPages"` in `"meta"` can be a convenient way
 to indicate to clients the total number of pages in a collection (as opposed to
 the `"last"` link, which simply gives the URI of the last page). However, all
 `"meta"` values are implementation-specific, so you can call this member whatever
@@ -185,7 +185,7 @@ Examples of how [error objects](http://jsonapi.org/format/#error-objects) work.
 
 In the response below, the server is indicating that it encountered an error
 while creating/updating the resource, and that this error was caused
-by an invalid `"first-name"` attribute:
+by an invalid `"firstName"` attribute:
 
 ```http
 HTTP/1.1 422 Unprocessable Entity
@@ -195,7 +195,7 @@ Content-Type: application/vnd.api+json
   "errors": [
     {
       "status": "422",
-      "source": { "pointer": "/data/attributes/first-name" },
+      "source": { "pointer": "/data/attributes/firstName" },
       "title":  "Invalid Attribute",
       "detail": "First name must contain at least three characters."
     }
@@ -252,7 +252,7 @@ Content-Type: application/vnd.api+json
 
 The only uniqueness constraint on error objects is the `id` field. Thus,
 multiple errors on the same attribute can each be given their own error
-object. The example below shows multiple errors on the `"first-name"` attribute:
+object. The example below shows multiple errors on the `"firstName"` attribute:
 
 ```http
 HTTP/1.1 422 Unprocessable Entity
@@ -261,12 +261,12 @@ Content-Type: application/vnd.api+json
 {
   "errors": [
     {
-      "source": { "pointer": "/data/attributes/first-name" },
+      "source": { "pointer": "/data/attributes/firstName" },
       "title": "Invalid Attribute",
       "detail": "First name must contain at least three characters."
     },
     {
-      "source": { "pointer": "/data/attributes/first-name" },
+      "source": { "pointer": "/data/attributes/firstName" },
       "title": "Invalid Attribute",
       "detail": "First name must contain an emoji."
     }
@@ -307,7 +307,7 @@ Content-Type: application/vnd.api+json
   "errors": [
     {
       "code":   "123",
-      "source": { "pointer": "/data/attributes/first-name" },
+      "source": { "pointer": "/data/attributes/firstName" },
       "title":  "Value is too short",
       "detail": "First name must contain at least three characters."
     },
