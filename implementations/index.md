@@ -80,6 +80,7 @@ isomorphic ActiveRecord clone that issues JSON API requests instead of SQL and i
 ### <a href="#client-libraries-dart" id="client-libraries-dart" class="headerlink"></a> Dart
 
 * [jsonapi_client](https://pub.dartlang.org/packages/jsonapi_client) is a simple JSON API v1.0 client written in Dart.
+* [json_api_document](https://pub.dartlang.org/packages/json_api_document) is a JSON API Document model/parser implemented in Dart.
 
 ### <a href="#client-libraries-perl" id="client-libraries-perl" class="headerlink"></a> Perl
 
