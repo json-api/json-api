@@ -10,10 +10,33 @@ are beyond the scope of the base JSON API specification.
 
 ## <a href="#naming" id="naming" class="headerlink"></a> Naming
 
+
+### URLs
+
 The allowed and recommended characters for an URL safe naming of members are defined in the format spec. To also standardize member names, the following (more restrictive) rules are recommended:
 
 - Member names **SHOULD** start and end with the characters "a-z" (U+0061 to U+007A)
 - Member names **SHOULD** contain only the characters "a-z" (U+0061 to U+007A), "0-9" (U+0030 to U+0039), and the hyphen minus (U+002D HYPHEN-MINUS, "-") as separator between multiple words.
+
+### JSON  
+
+It is important to adhere to a defined convention. Recommended property names **SHOULD** conform to the following guidelines:
+
+- Property names **SHOULD** be camel-cased, ascii strings.
+- First characters **SHOULD** be "a-z" (U+0061 to U+007A).
+- Property names **SHOULD** be meaningful names with defined semantics.
+
+
+These guidelines mirror the guidelines for naming JavaScript identifiers. This allows JavaScript clients to access properties using dot notation.
+
+> Here's an example of an object with one property:
+
+```json
+{
+  "thisPropertyIsAnIdentifier": "identifier value"
+}
+```
+
 
 ## <a href="#urls" id="urls" class="headerlink"></a> URL Design
 
