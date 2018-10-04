@@ -10,10 +10,14 @@ are beyond the scope of the base JSON API specification.
 
 ## <a href="#naming" id="naming" class="headerlink"></a> Naming
 
-The allowed and recommended characters for an URL safe naming of members are defined in the format spec. To also standardize member names, the following (more restrictive) rules are recommended:
+The specification places certain [hard restrictions](http://jsonapi.org/format/#document-member-names) 
+on how members (i.e., keys) in a JSON:API document may named. To further 
+standardize member names, which is especially important when mixing profiles
+authored by different parties, the following rules are also recommended:
 
-- Member names **SHOULD** start and end with the characters "a-z" (U+0061 to U+007A)
-- Member names **SHOULD** contain only the characters "a-z" (U+0061 to U+007A), "0-9" (U+0030 to U+0039), and the hyphen minus (U+002D HYPHEN-MINUS, "-") as separator between multiple words.
+- Member names **SHOULD** be camel-cased (i.e., `wordWordWord`)
+- Member names **SHOULD** start and end with a character "a-z" (U+0061 to U+007A)
+- Member names **SHOULD** contain only ASCII alphanumeric characters (i.e., "a-z", "A-Z", and "0-9")
 
 ## <a href="#urls" id="urls" class="headerlink"></a> URL Design
 
