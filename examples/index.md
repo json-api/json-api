@@ -232,7 +232,7 @@ Content-Type: application/vnd.api+json
   "errors": [
     {
       "status": "403",
-      "source": { "pointer": "/data/attributes/secret-powers" },
+      "source": { "pointer": "/data/attributes/secretPowers" },
       "detail": "Editing secret powers is not authorized on Sundays."
     },
     {
