@@ -1893,10 +1893,10 @@ request is received, a server **SHOULD** attempt to apply the requested profiles
 to its response.
 
 For example, in the following request, the client asks that the server apply the
-`http://jsonapi.org/extensions/last-modified` profile if it is able to.
+`http://example.com/last-modified` profile if it is able to.
 
 ```http
-Accept: application/vnd.api+json;profile="http://example.com/extensions/last-modified", application/vnd.api+json
+Accept: application/vnd.api+json;profile="http://example.com/last-modified", application/vnd.api+json
 ```
 
 > Note: The second instance of the JSON API media type in the example above is
