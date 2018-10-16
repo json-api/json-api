@@ -2303,7 +2303,7 @@ An error object **MAY** have the following members:
   * `about`: a [link][link] that leads to further details about this
     particular occurrence of the problem. When derefenced, this URI **SHOULD**
     return a human-readable description of the error.
-  * `type`: a [link][link] or array of links that identifies the type of error 
+  * `type`: an array of [links][link] that identify the type of error 
     that this particular error is an instance of. This URI **SHOULD** be 
     dereferencable to a human-readable explanation of the general error.
 * `status`: the HTTP status code applicable to this problem, expressed as a
