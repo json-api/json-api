@@ -536,9 +536,10 @@ Within this object, a link **MUST** be represented as either:
     link.
   * Any link-specific target attributes described below.
 
-Except for the `profile` key, each key present in a links object **MUST** have
-a single link as its value. The `profile` key, if present, **MUST** hold an
-array of links.
+Except for the `profile` key in the top-level links object and the `type` 
+key in an [error object]'s links object, each key present in a links object 
+**MUST** have a single link as its value. The aforementioned `profile` and
+`type` keys, if present, **MUST** hold an array of links.
 
 In the example below, the `self` link is simply a URI string, whereas the 
 `related` link uses the object form to provide meta information about a 
@@ -2299,8 +2300,12 @@ An error object **MAY** have the following members:
 
 * `id`: a unique identifier for this particular occurrence of the problem.
 * `links`: a [links object][links] containing the following members:
-  * `about`: a [link][links] that leads to further details about this
-    particular occurrence of the problem.
+  * `about`: a [link][link] that leads to further details about this
+    particular occurrence of the problem. When derefenced, this URI **SHOULD**
+    return a human-readable description of the error.
+  * `type`: an array of [links][link] that identify the type of error 
+    that this particular error is an instance of. This URI **SHOULD** be 
+    dereferencable to a human-readable explanation of the general error.
 * `status`: the HTTP status code applicable to this problem, expressed as a
   string value.
 * `code`: an application-specific error code, expressed as a string value.
@@ -2339,6 +2344,7 @@ An error object **MAY** have the following members:
 [timestamps profile]: #profiles-timestamp-profile
 [profile aliases]: #profile-keywords-and-aliases
 [error details]: #errors
+[error object]: #error-objects
 [error objects]: #errror-objects
 [member names]: #document-member-names
 [pagination]: #fetching-pagination
