@@ -50,15 +50,15 @@ Content-Type: application/vnd.api+json
 }
 ```
 
-Request with `fields` parameter:
+Request with `fields[articles]` and `fields[people]` parameters:
 
 ```http
 GET /articles?include=author&fields[articles]=title,body,author&fields[people]=name HTTP/1.1
 ```
 
 > Note: The above example URI shows unencoded `[` and `]` characters simply
-for readability. In practice, these characters must be percent-encoded, as
-noted in the base specification.
+for readability. In practice, these characters should be percent-encoded, as
+noted in the base specification. See "[Square Brackets in Parameter Names](/format/1.1/#appendix-query-details-square-brackets)".
 
 Here we want `articles` objects to have fields `title`, `body` and `author` only and `people` objects to have `name` field only.
 
@@ -124,8 +124,8 @@ Content-Type: application/vnd.api+json
 ```
 
 > Note: The above example URI shows unencoded `[` and `]` characters simply
-for readability. In practice, these characters must be percent-encoded, as
-noted in the base specification.
+for readability. In practice, these characters should be percent-encoded, as
+noted in the base specification. See "[Square Brackets in Parameter Names](/format/1.1/#appendix-query-details-square-brackets)".
 
 ## <a href="#pagination" id="pagination" class="headerlink"></a> Pagination Links
 
@@ -168,8 +168,8 @@ Content-Type: application/vnd.api+json
 ```
 
 > Note: The above example URIs show unencoded `[` and `]` characters simply
-for readability. In practice, these characters must be percent-encoded, as
-noted in the base specification.
+for readability. In practice, these characters should be percent-encoded, as
+noted in the base specification. See "[Square Brackets in Parameter Names](/format/1.1/#appendix-query-details-square-brackets)".
 
 > Note: Putting a property like `"totalPages"` in `"meta"` can be a convenient way
 to indicate to clients the total number of pages in a collection (as opposed to
