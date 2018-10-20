@@ -57,8 +57,8 @@ Here's an example response from a blog that implements JSON API:
     "type": "people",
     "id": "9",
     "attributes": {
-      "first-name": "Dan",
-      "last-name": "Gebhardt",
+      "firstName": "Dan",
+      "lastName": "Gebhardt",
       "twitter": "dgeb"
     },
     "links": {

@@ -369,7 +369,7 @@ footer {
   padding: 0 0 5px 0; }
 
 /** Code blocks highlighting */
-.highlight {
+pre.highlight {
   border-radius: 4px;
   position: relative;
   padding: 10px 15px;
