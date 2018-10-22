@@ -12,7 +12,6 @@ $(document).ready(function() {
 
     // Sidebar scroll affix
     fixElement($(".sidebar"), $("footer"), 52);
-
     activateVersionPicker();
 });
 
@@ -89,6 +88,14 @@ function createOutlineFromElement(element) {
                 children: []
             };
 
+            $(this).nextUntil('h3', 'h4').each(function() {
+                childItem.children.push({
+                    title: $(this).not('a').text(),
+                    href: $(this).find('a').attr('href') || "#",
+                    children: []
+                });
+            });
+
             item.children.push(childItem);
         });
 
@@ -97,10 +104,6 @@ function createOutlineFromElement(element) {
 
     return outline;
 }
-
-/**
- * Creates a nested list from an array in the form returned by `createOutlineFromElement`.
- */
 
 /**
  * Creates a nested list from an array in the form returned by `createOutlineFromElement`.

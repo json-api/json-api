@@ -234,7 +234,7 @@ other and with `type` and `id`. In other words, a resource can not have an
 attribute and relationship with the same name, nor can it have an attribute
 or relationship named `type` or `id`.
 
-#### <a href="#document-resource-object-attributes" id="document-resource-object-attributes" class="headerlink"></a> Attributes
+##### <a href="#document-resource-object-attributes" id="document-resource-object-attributes" class="headerlink"></a> Attributes
 
 The value of the `attributes` key **MUST** be an object (an "attributes
 object"). Members of the attributes object ("attributes") represent information
@@ -253,7 +253,7 @@ alongside other information to be represented in a resource object, these keys
 
 > Note: See [fields] and [member names] for more restrictions on this container.
 
-#### <a href="#document-resource-object-relationships" id="document-resource-object-relationships" class="headerlink"></a> Relationships
+##### <a href="#document-resource-object-relationships" id="document-resource-object-relationships" class="headerlink"></a> Relationships
 
 The value of the `relationships` key **MUST** be an object (a "relationships
 object"). Members of the relationships object ("relationships") represent
@@ -285,7 +285,7 @@ data, not the related resources.
 
 > Note: See [fields] and [member names] for more restrictions on this container.
 
-#### <a href="#document-resource-object-related-resource-links" id="document-resource-object-related-resource-links" class="headerlink"></a> Related Resource Links
+##### <a href="#document-resource-object-related-resource-links" id="document-resource-object-related-resource-links" class="headerlink"></a> Related Resource Links
 
 A "related resource link" provides access to [resource objects][resource objects] [linked][links]
 in a [relationship][relationships]. When fetched, the related resource object(s)
@@ -300,7 +300,7 @@ relationship isn't currently associated with any target resources. Additionally,
 a related resource link **MUST NOT** change because its relationship's content
 changes.
 
-#### <a href="#document-resource-object-linkage" id="document-resource-object-linkage" class="headerlink"></a> Resource Linkage
+##### <a href="#document-resource-object-linkage" id="document-resource-object-linkage" class="headerlink"></a> Resource Linkage
 
 Resource linkage in a [compound document] allows a client to link together all
 of the included [resource objects] without having to `GET` any URLs via [links].

@@ -6,7 +6,7 @@
 /** Config */
 
 $page-width: 955px
-$sidebar-width: 220px
+$sidebar-width: 235px
 $page-padding: 20px
 
 $mobile-breakpoint: 800px
@@ -307,7 +307,7 @@ footer
     overflow-y: auto
 
   #version-picker-wrapper
-    width: $sidebar-width
+    width: 200px
     margin-bottom: 20px
     display: flex
     flex-direction: row
@@ -347,7 +347,7 @@ footer
 // just jump to its final size at the next media query.
 @media screen and (min-width: $page-width + ($page-padding * 2) - 109px)
   .sidebar + .content
-    margin-left: $sidebar-width + 15px
+    margin-left: $sidebar-width + 10px
     padding-left: calc(100vw - #{$page-width + ($page-padding * 2) - 109px})
 
 @media screen and (min-width: $page-width + ($page-padding * 2) - 94px)

@@ -304,21 +304,21 @@ footer {
   margin-bottom: 50px; }
 
 .sidebar {
-  width: 220px;
+  width: 235px;
   margin-top: 8px;
   float: left; }
   .sidebar h1 {
     font-size: 15px;
     background-color: white;
     z-index: 1;
-    width: 220px;
+    width: 235px;
     color: inherit;
     font-weight: 300; }
   .sidebar nav > ol {
-    width: 220px;
+    width: 235px;
     overflow-y: auto; }
   .sidebar #version-picker-wrapper {
-    width: 220px;
+    width: 200px;
     margin-bottom: 20px;
     display: flex;
     flex-direction: row; }
@@ -343,7 +343,7 @@ footer {
 
 @media screen and (min-width: 886px) {
   .sidebar + .content {
-    margin-left: 235px;
+    margin-left: 245px;
     padding-left: calc(100vw - 886px); } }
 @media screen and (min-width: 901px) {
   .sidebar + .content {
