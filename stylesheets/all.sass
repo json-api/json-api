@@ -19,6 +19,7 @@ $color-masthead: rgb(235, 235, 235)
 
 $fonts-body: "Helvetica Neue", "Helvetica", Arial, "Open Sans", sans-serif
 $border-radius-main: 4px
+$h2-margin-top: 2em
 
 /** Mixins */
 
@@ -83,7 +84,7 @@ h1
   color: $color-accent
 
 h2
-  margin: 50px 0 15px 0
+  margin: $h2-margin-top 0 15px 0
   color: $color-main
   font-size: 22px
   line-height: 1.3
@@ -115,13 +116,22 @@ th
 a
   color: $color-main
 
-blockquote
+blockquote, .note
   margin: 20px 0
-  padding: 10px 15px 0 15px
+  padding: 10px 15px 10px 15px
   border-radius: $border-radius-main
   color: lighten($color-main, 15%)
   background: rgba($color-main, 0.04)
   border: 1px solid $color-light-rule
+
+  code
+    background: inherit !important
+
+  p
+    margin-bottom: 6px
+
+  p:last-child
+    margin-bottom: 0
 
 p > code, li > code
   padding: 1px 4px
@@ -130,6 +140,9 @@ p > code, li > code
 
 code
   font-weight: inherit
+
+address
+  font-style: normal
 
 /** Navigation */
 
@@ -190,7 +203,7 @@ header
     background: $color-masthead
     border-bottom: 1px solid $color-light-rule
 
-  h1
+  h1#json-api
     @extend %hide-text
     text-align: center
     height: 130px
@@ -392,3 +405,33 @@ pre.highlight
   line-height: 16px
   margin: 2em 0
   font-family: Menlo, monospace
+
+
+/**  Extensions page */
+.profiles-list
+  dt, dd
+    display: inline
+    margin-left: 0
+
+  dd::after
+    display: block
+    content: " "
+    height: .8em
+
+  dt::before
+    content: "\2022"
+    font-size: 1.56em
+    margin-right: 1em
+    position: absolute
+    margin-left: -.66em
+    line-height: 1.1em
+
+/** Individual profile page */
+// Our profile pages have more sophisticated markup than our
+// main format pages, necessitating slightly different CSS.
+// This is a bit of a mess.. but so is this whole file.
+.profile-page h2
+  margin-top: $h2-margin-top
+
+.profile-page h1 + section h2
+  margin-top: 1em

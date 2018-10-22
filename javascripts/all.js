@@ -1,6 +1,17 @@
 //= require_tree .
 
 $(document).ready(function() {
+    // Add links within headings from user-provided profiles markup for
+    // easy jumping and so outline generation works.
+    $('h2, h3, h4, h5', document.querySelector('#profile-spec-container')).each(function() {
+      var $this = $(this);
+
+      if($this.find("a.headerlink").length === 0 && $this.attr('id')) {
+          $this.prepend('<a class="headerlink" href="#' + $this.attr('id') + '"></a>');
+      }
+    });
+
+
     // Build navigation list
     var documentOutlineElement = $("#document-outline");
 

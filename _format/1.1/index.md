@@ -2222,6 +2222,11 @@ supported as well.
 3. alter the JSON structure of any concept defined in this specification, 
 including to allow a superset of JSON structures.
 
+
+> If you create your own profile, you are **strongly encouraged to [register](/extensions/#profile-registration) 
+> it** with the JSON API [profile registry](/extensions/), so that others can
+> find and reuse it.
+
 #### <a href="#profiles-updating" id="profiles-updating" class="headerlink"></a> Revising a Profile
 
 Profiles **MAY** be revised over time, e.g., to add new capabilities. However, 
