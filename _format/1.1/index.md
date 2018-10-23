@@ -1806,7 +1806,7 @@ Although "query parameter" is a common term in everyday web development, it is
 not a well-standardized concept. Therefore, JSON:API provides its own 
 [definition of a query parameter](#appendix-query-details).
 
-For the most part, JSON:API's definition coincides with coloquial usage, and its 
+For the most part, JSON:API's definition coincides with colloquial usage, and its 
 details can be safely ignored. However, one important consequence of this 
 definition is that a URL like the following is considered to have two distinct
 query parameters:
