@@ -1836,7 +1836,7 @@ etc. However, `filter[_]` is not a valid parameter name in the family, because
 ### <a href="#query-parameters-custom" id="query-parameters-custom" class="headerlink"></a>   Implementation-Specific Query Parameters
 Implementations **MAY** support custom query parameters. However, the names of 
 these query parameters **MUST** come from a [family][query parameter family] 
-whose base name is a legal [member names] and also contains at least 
+whose base name is a legal [member name][member names] and also contains at least 
 one non a-z character (i.e., outside U+0061 to U+007A).
 
 It is **RECOMMENDED** that a capital letter (e.g. camelCasing) be used to 
