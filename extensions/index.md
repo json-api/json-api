@@ -8,11 +8,11 @@ show_sidebar: true
 
 **An extension system is currently under development,** and you can view the
 latest work [here](https://github.com/json-api/json-api/tree/profile-extensions).
-There is no official support for extensions in the base JSON API specification.
+There is no official support for extensions in the base JSON:API specification.
 
 ## <a href="#prior-extensions" id="prior-extensions" class="headerlink"></a> Prior Extensions
 
-JSON API previously offered experimental support for a different extension
+JSON:API previously offered experimental support for a different extension
 negotiation system than the one now being discussed, and it provided a number of
 extensions for use with that old negotiation system. However, this system was
 always experimental and has now been deprecated.

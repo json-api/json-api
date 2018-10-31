@@ -25,7 +25,7 @@ Content-Type: application/vnd.api+json
     "type": "articles",
     "id": "1",
     "attributes": {
-      "title": "JSON API paints my bikeshed!",
+      "title": "JSON:API paints my bikeshed!",
       "body": "The shortest article. Ever.",
       "created": "2015-05-22T14:56:29.000Z",
       "updated": "2015-05-22T14:56:28.000Z"
@@ -71,7 +71,7 @@ Content-Type: application/vnd.api+json
     "type": "articles",
     "id": "1",
     "attributes": {
-      "title": "JSON API paints my bikeshed!",
+      "title": "JSON:API paints my bikeshed!",
       "body": "The shortest article. Ever."
     },
     "relationships": {
@@ -107,7 +107,7 @@ Content-Type: application/vnd.api+json
     "type": "articles",
     "id": "1",
     "attributes": {
-      "title": "JSON API paints my bikeshed!",
+      "title": "JSON:API paints my bikeshed!",
       "body": "The shortest article. Ever."
     }
   }],
@@ -150,7 +150,7 @@ Content-Type: application/vnd.api+json
       "type": "articles",
       "id": "3",
       "attributes": {
-        "title": "JSON API paints my bikeshed!",
+        "title": "JSON:API paints my bikeshed!",
         "body": "The shortest article. Ever.",
         "created": "2015-05-22T14:56:29.000Z",
         "updated": "2015-05-22T14:56:28.000Z"
@@ -216,7 +216,7 @@ The `status` member represents the HTTP status code associated with the problem.
 It's very helpful when multiple errors are returned at once (see below), as the
 HTTP response itself can only have one status code. However, it can also be
 useful for single errors, to save clients the trouble of consulting the HTTP
-headers, or for using JSON API over non-HTTP protocols, which may be officially
+headers, or for using JSON:API over non-HTTP protocols, which may be officially
 supported in the near future.
 
 ### <a href="#error-objects-multiple-errors" id="error-objects-multiple-errors" class="headerlink"></a> Multiple Errors
@@ -276,7 +276,7 @@ Content-Type: application/vnd.api+json
 
 > Note: in the responses above with a 422 status code, `400 Bad Request` would
 also be acceptable. ([More details.](http://stackoverflow.com/a/20215807/1261879))
-JSON API doesn't take a position on 400 vs. 422.
+JSON:API doesn't take a position on 400 vs. 422.
 
 ### <a href="#error-objects-error-codes" id="error-objects-error-codes" class="headerlink"></a> Error Codes
 
@@ -329,14 +329,14 @@ Content-Type: application/vnd.api+json
 Notice that this response includes not only the `errors` top-level member,
 but the `jsonapi` top-level member. Error responses may not contain the
 top-level `data` member, but can include all the other top-level members
-JSON API defines.
+JSON:API defines.
 
 Also, notice that the third error object lacks a `detail` member (perhaps
 for security). Again, all error object members are optional.
 
 ### <a href="#error-objects-source-usage" id="error-objects-source-usage" class="headerlink"></a> Advanced `source` Usage
 
-In the example below, the user is sending an invalid JSON API
+In the example below, the user is sending an invalid JSON:API
 request, because it's missing the `data` member:
 
 ```http
@@ -407,9 +407,9 @@ Content-Type: application/vnd.api+json
 }
 ```
 
-In most cases, JSON API requires the server to return an error when it encounters
-an invalid value for a JSON API–defined query parameter. However, for API-specific
-query parameters (i.e. those not defined by JSON API), a server may choose to
+In most cases, JSON:API requires the server to return an error when it encounters
+an invalid value for a JSON:API–defined query parameter. However, for API-specific
+query parameters (i.e. those not defined by JSON:API), a server may choose to
 ignore an invalid parameter and have the request succeed, rather than respond with
 an error. [API-specific query parameters must contain one non a-z
 character.](http://jsonapi.org/format/#query-parameters)
