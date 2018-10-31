@@ -1,4 +1,4 @@
-JSON API
+JSON:API
 ========
 
 Documentation for the [application/vnd.api+json media
@@ -38,6 +38,6 @@ when changes are pushed to the `gh-pages` branch.
 Archive
 -------
 
-older versions of the JSON-API documentations
+older versions of the JSON:API documentations
 
 * RC3 - http://jsonapi-rc3.herokuapp.com/
