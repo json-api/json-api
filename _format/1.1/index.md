@@ -4,15 +4,15 @@ version: 1.1
 
 ## <a href="#introduction" id="introduction" class="headerlink"></a> Introduction
 
-JSON API is a specification for how a client should request that resources be
-fetched or modified, and how a server should respond to those requests. JSON API
+JSON:API is a specification for how a client should request that resources be
+fetched or modified, and how a server should respond to those requests. JSON:API
 can also be easily extended with [profiles].
 
-JSON API is designed to minimize both the number of requests and the amount of
+JSON:API is designed to minimize both the number of requests and the amount of
 data transmitted between clients and servers. This efficiency is achieved
 without compromising readability, flexibility, or discoverability.
 
-JSON API requires use of the JSON API media type
+JSON:API requires use of the JSON:API media type
 ([`application/vnd.api+json`](http://www.iana.org/assignments/media-types/application/vnd.api+json))
 for exchanging data.
 
@@ -30,11 +30,11 @@ when, and only when, they appear in all capitals, as shown here.
 
 ### <a href="#content-negotiation-all" id="content-negotiation-all" class="headerlink"></a> Universal Responsibilities
 
-The JSON API media type is [`application/vnd.api+json`](http://www.iana.org/assignments/media-types/application/vnd.api+json).
-Clients and servers **MUST** send all JSON API data using this media type in the
+The JSON:API media type is [`application/vnd.api+json`](http://www.iana.org/assignments/media-types/application/vnd.api+json).
+Clients and servers **MUST** send all JSON:API data using this media type in the
 `Content-Type` header.
 
-Further, the JSON API media type **MUST** always be specified with either no
+Further, the JSON:API media type **MUST** always be specified with either no
 media type parameters or with only the `profile` parameter. This applies to both
 the `Content-Type` and `Accept` headers.
 
@@ -47,10 +47,10 @@ The `profile` parameter is used to support [profiles].
 
 ### <a href="#content-negotiation-clients" id="content-negotiation-clients" class="headerlink"></a> Client Responsibilities
 
-Clients that include the JSON API media type in their `Accept` header **MUST**
+Clients that include the JSON:API media type in their `Accept` header **MUST**
 specify the media type there at least once without any media type parameters.
 
-When processing a JSON API response document, clients **MUST** ignore any
+When processing a JSON:API response document, clients **MUST** ignore any
 parameters other than `profile` in the server's `Content-Type` header.
 
 ### <a href="#content-negotiation-servers" id="content-negotiation-servers" class="headerlink"></a> Server Responsibilities
@@ -60,7 +60,7 @@ a request specifies the header `Content-Type: application/vnd.api+json`
 with any media type parameters other than `profile`.
 
 Servers **MUST** respond with a `406 Not Acceptable` status code if a
-request's `Accept` header contains the JSON API media type and all instances
+request's `Accept` header contains the JSON:API media type and all instances
 of that media type are modified with media type parameters.
 
 > Note: These content negotiation requirements exist to allow future versions
@@ -69,9 +69,9 @@ negotiation and versioning.
 
 ## <a href="#document-structure" id="document-structure" class="headerlink"></a> Document Structure
 
-This section describes the structure of a JSON API document, which is identified
+This section describes the structure of a JSON:API document, which is identified
 by the media type [`application/vnd.api+json`](http://www.iana.org/assignments/media-types/application/vnd.api+json).
-JSON API documents are defined in JavaScript Object Notation (JSON)
+JSON:API documents are defined in JavaScript Object Notation (JSON)
 [[RFC8259](http://tools.ietf.org/html/rfc8259)].
 
 Although the same media type is used for both request and response documents,
@@ -87,7 +87,7 @@ changes.
 
 ### <a href="#document-top-level" id="document-top-level" class="headerlink"></a> Top Level
 
-A JSON object **MUST** be at the root of every JSON API request and response
+A JSON object **MUST** be at the root of every JSON:API request and response
 containing data. This object defines a document's "top level".
 
 A document **MUST** contain at least one of the following top-level members:
@@ -163,7 +163,7 @@ it only contains one item or is empty.
 
 ### <a href="#document-resource-objects" id="document-resource-objects" class="headerlink"></a> Resource Objects
 
-"Resource objects" appear in a JSON API document to represent resources.
+"Resource objects" appear in a JSON:API document to represent resources.
 
 A resource object **MUST** contain at least the following top-level members:
 
@@ -177,7 +177,7 @@ In addition, a resource object **MAY** contain any of these top-level members:
 
 * `attributes`: an [attributes object][attributes] representing some of the resource's data.
 * `relationships`: a [relationships object][relationships] describing relationships between
- the resource and other JSON API resources.
+ the resource and other JSON:API resources.
 * `links`: a [links object][links] containing links related to the resource.
 * `meta`: a [meta object][meta] containing non-standard meta-information about a
   resource that can not be represented as an attribute or relationship.
@@ -414,7 +414,7 @@ A complete example document with multiple included relationships:
     "type": "articles",
     "id": "1",
     "attributes": {
-      "title": "JSON API paints my bikeshed!"
+      "title": "JSON:API paints my bikeshed!"
     },
     "links": {
       "self": "http://example.com/articles/1"
@@ -583,15 +583,15 @@ that includes a [profile alias][profile aliases]:
 > Note: Additional link types, similar to `profile` links, may be specified in
 the future.
 
-### <a href="#document-jsonapi-object" id="document-jsonapi-object" class="headerlink"></a> JSON API Object
+### <a href="#document-jsonapi-object" id="document-jsonapi-object" class="headerlink"></a> JSON:API Object
 
-A JSON API document **MAY** include information about its implementation
+A JSON:API document **MAY** include information about its implementation
 under a top level `jsonapi` member. If present, the value of the `jsonapi`
 member **MUST** be an object (a "jsonapi object").
 
 The jsonapi object **MAY** contain any of the following members:
 
-* `version` - whose value is a string indicating the highest JSON API version
+* `version` - whose value is a string indicating the highest JSON:API version
   supported.
 * `meta` - a [meta] object that contains non-standard meta-information.
 
@@ -608,12 +608,12 @@ A simple example appears below:
 If the `version` member is not present, clients should assume the server
 implements at least version 1.0 of the specification.
 
-> Note: Because JSON API is committed to making additive changes only, the
+> Note: Because JSON:API is committed to making additive changes only, the
 version string primarily indicates which new features a server may support.
 
 ### <a href="#document-member-names" id="document-member-names" class="headerlink"></a> Member Names
 
-All member names used in a JSON API document **MUST** be treated as case sensitive
+All member names used in a JSON:API document **MUST** be treated as case sensitive
 by clients and servers, and they **MUST** meet all of the following conditions:
 
 - Member names **MUST** contain at least one character.
@@ -681,20 +681,20 @@ The following characters **MUST NOT** be used in member names:
 
 Member names **MAY** also begin with an at sign (U+0040 COMMERCIAL AT, "@").
 Members named this way are called "@-Members". @-Members **MAY** appear
-anywhere in a JSON API document.
+anywhere in a JSON:API document.
 
-However, JSON API processors **MUST** completely ignore @-Members (i.e. not
-treat them as JSON API data).
+However, JSON:API processors **MUST** completely ignore @-Members (i.e. not
+treat them as JSON:API data).
 
 Moreover, the existence of @-Members **MUST** be ignored when interpreting all
-JSON API definitions and processing instructions given outside of this
+JSON:API definitions and processing instructions given outside of this
 subsection. For example, an [attribute][attributes] is defined above as any
 member of the attributes object. However, because @-Members must be ignored
 when interpreting that definition, an @-Member that occurs in an attributes
 object is not an attribute.
 
 > Note: Among other things, "@" members can be used to add JSON-LD data to a
-JSON API document. Such documents should be served with [an extra header](http://www.w3.org/TR/json-ld/#interpreting-json-as-json-ld)
+JSON:API document. Such documents should be served with [an extra header](http://www.w3.org/TR/json-ld/#interpreting-json-as-json-ld)
 to convey to JSON-LD clients that they contain JSON-LD data.
 
 ## <a href="#fetching" id="fetching" class="headerlink"></a> Fetching Data
@@ -758,7 +758,7 @@ Content-Type: application/vnd.api+json
     "type": "articles",
     "id": "1",
     "attributes": {
-      "title": "JSON API paints my bikeshed!"
+      "title": "JSON:API paints my bikeshed!"
     }
   }, {
     "type": "articles",
@@ -810,7 +810,7 @@ Content-Type: application/vnd.api+json
     "type": "articles",
     "id": "1",
     "attributes": {
-      "title": "JSON API paints my bikeshed!"
+      "title": "JSON:API paints my bikeshed!"
     },
     "relationships": {
       "author": {
@@ -1163,7 +1163,7 @@ Keys **MUST** either be omitted or have a `null` value to indicate that a
 particular link is unavailable.
 
 Concepts of order, as expressed in the naming of pagination links, **MUST**
-remain consistent with JSON API's [sorting rules](#fetching-sorting).
+remain consistent with JSON:API's [sorting rules](#fetching-sorting).
 
 The `page` [query parameter family] is reserved for pagination. Servers and 
 clients **SHOULD** use these parameters for pagination operations.
@@ -1193,7 +1193,7 @@ A request **MUST** completely succeed or fail (in a single "transaction"). No
 partial updates are allowed.
 
 > Note: The `type` member is required in every [resource object][resource objects] throughout requests and
-responses in JSON API. There are some cases, such as when `POST`ing to an
+responses in JSON:API. There are some cases, such as when `POST`ing to an
 endpoint representing heterogenous data, when the `type` could not be inferred
 from the endpoint. However, picking and choosing when it is required would be
 confusing; it would be hard to remember when it was required and when it was
@@ -1552,7 +1552,7 @@ responses, in accordance with
 ### <a href="#crud-updating-relationships" id="crud-updating-relationships" class="headerlink"></a> Updating Relationships
 
 Although relationships can be modified along with resources (as described
-above), JSON API also supports updating of relationships independently at
+above), JSON:API also supports updating of relationships independently at
 URLs from [relationship links][relationships].
 
 > Note: Relationships are updated without exposing the underlying server
@@ -1562,7 +1562,7 @@ has many authors, it is possible to remove one of the authors from the article
 without deleting the person itself. Similarly, if an article has many tags, it
 is possible to add or remove tags. Under the hood on the server, the first
 of these examples might be implemented with a foreign key, while the second
-could be implemented with a join table, but the JSON API protocol would be
+could be implemented with a join table, but the JSON:API protocol would be
 the same in both cases.
 
 > Note: A server may choose to delete the underlying resource if a
@@ -1707,7 +1707,7 @@ Accept: application/vnd.api+json
 
 > Note: RFC 7231 specifies that a DELETE request may include a body, but
 that a server may reject the request. This spec defines the semantics of a
-server, and we are defining its semantics for JSON API.
+server, and we are defining its semantics for JSON:API.
 
 #### <a href="#crud-updating-relationship-responses" id="crud-updating-relationship-responses" class="headerlink"></a> Responses
 
@@ -1847,12 +1847,12 @@ conventions above, and the server does not know how to process it as a query
 parameter from this specification, it **MUST** return `400 Bad Request`.
 
 > Note: By forbidding the use of query parameters that contain only the characters
-> \[a-z\], JSON API is reserving the ability to standardize additional query
+> \[a-z\], JSON:API is reserving the ability to standardize additional query
 > parameters later without conflicting with existing implementations.
 
 ## <a href="#profiles" id="profiles" class="headerlink"></a> Profiles
 
-JSON API supports the use of "profiles" as a way to indicate additional
+JSON:API supports the use of "profiles" as a way to indicate additional
 semantics that apply to a JSON:API request/document, without altering the
 basic semantics described in this specification.
 
@@ -1906,7 +1906,7 @@ This profile defines the following keywords:
 ### <a href="#profile-media-type-parameter" id="profile-media-type-parameter" class="headerlink"></a> `profile` Media Type Parameter
 
 The `profile` media type parameter is used to describe the application of
-one or more profiles to a JSON API document. The value of the `profile`
+one or more profiles to a JSON:API document. The value of the `profile`
 parameter **MUST** equal a space-separated (U+0020 SPACE, " ") list of profile URIs.
 
 > Note: When serializing the `profile` media type parameter, the HTTP
@@ -1914,7 +1914,7 @@ parameter **MUST** equal a space-separated (U+0020 SPACE, " ") list of profile U
 > (U+0022 QUOTATION MARK, "\"") if it contains more than one URI.
 
 A client **MAY** use the `profile` media type parameter in conjunction with the
-JSON API media type in an `Accept` header to _request_, but not _require_, that
+JSON:API media type in an `Accept` header to _request_, but not _require_, that
 the server apply one or more profiles to the response document. When such a
 request is received, a server **SHOULD** attempt to apply the requested profiles
 to its response.
@@ -1926,11 +1926,11 @@ For example, in the following request, the client asks that the server apply the
 Accept: application/vnd.api+json;profile="http://example.com/extensions/last-modified", application/vnd.api+json
 ```
 
-> Note: The second instance of the JSON API media type in the example above is
+> Note: The second instance of the JSON:API media type in the example above is
   required under the [client's content negotiation responsibilities](#content-negotiation-clients).
   It is used to support old servers that don't understand the profile parameter.
 
-Servers **MAY** add profiles to a JSON API document even if the client has not
+Servers **MAY** add profiles to a JSON:API document even if the client has not
 requested them. The recipient of a document **MUST** ignore any profile extensions
 in that document that it does not understand. The only exception to this is profiles
 whose support is required using the `profile` query parameter, as described later.
@@ -1938,15 +1938,15 @@ whose support is required using the `profile` query parameter, as described late
 #### <a href="#profiles-sending" id="profiles-sending" class="headerlink"></a> Sending Profiled Documents
 
 Clients and servers **MUST** include the `profile` media type parameter in
-conjunction with the JSON API media type in a `Content-Type` header to indicate
-that they have applied one or more profiles to a JSON API document.
+conjunction with the JSON:API media type in a `Content-Type` header to indicate
+that they have applied one or more profiles to a JSON:API document.
 
-Likewise, clients and servers applying profiles to a JSON API document **MUST**
+Likewise, clients and servers applying profiles to a JSON:API document **MUST**
 include a [top-level][top level] [`links` object][links] with a `profile` key,
 and that `profile` key **MUST** include a [link] to the URI of each profile
 that has been applied.
 
-When an older JSON API server that doesn't support the `profile` media type
+When an older JSON:API server that doesn't support the `profile` media type
 parameter receives a document with one or more profiles, it will respond with a
 `415 Unsupported Media Type` error.
 
@@ -1957,7 +1957,7 @@ type parameter. If this resolves the error, the client **SHOULD NOT** attempt to
 use profile extensions in subsequent interactions with the same API.
 
 > The most likely other causes of a 415 error are that the server doesn't
-support JSON API at all or that the client has failed to provide a required
+support JSON:API at all or that the client has failed to provide a required
 profile.
 
 ### <a href="#profile-query-parameter" id="profile-query-parameter" class="headerlink"></a> `profile` Query Parameter
@@ -2218,7 +2218,7 @@ requirement that the `modified` key hold a string of the form produced by
 A profile **MAY** assign meaning to elements of the document structure whose use
 is left up to each implementation, such as resource fields or members of meta
 objects. A profile **MUST NOT** define/assign a meaning to document members 
-in areas of the document reserved for future use by the JSON API specification. 
+in areas of the document reserved for future use by the JSON:API specification. 
 
 For example, it would be illegal for a profile to define a new key in a 
 document's [top-level][top level] object, or in a [links object][links], as 
@@ -2324,7 +2324,7 @@ or `500 Internal Server Error` might be appropriate for multiple 5xx errors.
 
 Error objects provide additional information about problems encountered while
 performing an operation. Error objects **MUST** be returned as an array
-keyed by `errors` in the top level of a JSON API document.
+keyed by `errors` in the top level of a JSON:API document.
 
 An error object **MAY** have the following members:
 
