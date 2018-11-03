@@ -113,8 +113,8 @@ for individual resource URLs should still apply when forming `self` links.
 ## <a href="#filtering" id="filtering" class="headerlink"></a> Filtering
 
 The base specification is agnostic about filtering strategies supported by a
-server. The `filter` query parameter is reserved to be used as the basis for
-any filtering strategy.
+server. The `filter` query parameter family is reserved to be used as the basis 
+for any filtering strategy.
 
 It's recommended that servers that wish to support filtering of a resource
 collection based upon associations do so by allowing query parameters that

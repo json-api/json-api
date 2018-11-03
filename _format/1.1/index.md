@@ -644,7 +644,7 @@ first or last character:
 
 The following characters **MUST NOT** be used in member names:
 
-- U+002B PLUS SIGN, "+" _(used for ordering)_
+- U+002B PLUS SIGN, "+" _(has overloaded meaning in URL query strings)_
 - U+002C COMMA, "," _(used as a separator between relationship paths)_
 - U+002E PERIOD, "." _(used as a separator within relationship paths)_
 - U+005B LEFT SQUARE BRACKET, "[" _(used in sparse fieldsets)_
@@ -982,7 +982,7 @@ responses, in accordance with
 
 An endpoint **MAY** return resources related to the primary data by default.
 
-An endpoint **MAY** also support an `include` request parameter to allow the
+An endpoint **MAY** also support an `include` query parameter to allow the
 client to customize which related resources should be returned.
 
 If an endpoint does not support the `include` parameter, it **MUST** respond
@@ -1060,9 +1060,9 @@ resource or relationship.
 ### <a href="#fetching-sparse-fieldsets" id="fetching-sparse-fieldsets" class="headerlink"></a> Sparse Fieldsets
 
 A client **MAY** request that an endpoint return only specific [fields] in the
-response on a per-type basis by including a `fields[TYPE]` parameter.
+response on a per-type basis by including a `fields[TYPE]` query parameter.
 
-The value of the `fields` parameter **MUST** be a comma-separated (U+002C
+The value of any `fields[TYPE]` parameter **MUST** be a comma-separated (U+002C
 COMMA, ",") list that refers to the name(s) of the fields to be returned.
 
 If a client requests a restricted set of [fields] for a given resource type,
@@ -1075,8 +1075,8 @@ Accept: application/vnd.api+json
 ```
 
 > Note: The above example URI shows unencoded `[` and `]` characters simply for
-readability. In practice, these characters must be percent-encoded, per the
-requirements [in RFC 3986](http://tools.ietf.org/html/rfc3986#section-3.4).
+readability. In practice, these characters should be percent-encoded. See 
+"[Square Brackets in Parameter Names](#appendix-query-details-square-brackets)".
 
 > Note: This section applies to any endpoint that responds with resources as
 primary or included data, regardless of the request type. For instance, a
@@ -1089,7 +1089,7 @@ A server **MAY** choose to support requests to sort resource collections
 according to one or more criteria ("sort fields").
 
 > Note: Although recommended, sort fields do not necessarily need to
-correspond to resource attribute and association names.
+correspond to resource attribute and relationship names.
 
 > Note: It is recommended that dot-separated (U+002E FULL-STOP, ".") sort
 fields be used to request sorting based upon relationship attributes. For
@@ -1165,32 +1165,24 @@ particular link is unavailable.
 Concepts of order, as expressed in the naming of pagination links, **MUST**
 remain consistent with JSON:API's [sorting rules](#fetching-sorting).
 
-The `page` query parameter is reserved for pagination. Servers and clients
-**SHOULD** use this key for pagination operations.
+The `page` [query parameter family] is reserved for pagination. Servers and 
+clients **SHOULD** use these parameters for pagination operations.
 
-> Note: JSON:API is agnostic about the pagination strategy used by a server.
-Effective pagination strategies include (but are not limited to):
-page-based, offset-based, and cursor-based. The `page` query parameter can
-be used as a basis for any of these strategies. For example, a page-based
-strategy might use query parameters such as `page[number]` and `page[size]`,
-an offset-based strategy might use `page[offset]` and `page[limit]`, while a
-cursor-based strategy might use `page[cursor]`.
-
-> Note: The example query parameters above use unencoded `[` and `]` characters
-simply for readability. In practice, these characters must be percent-encoded,
-per the requirements in [RFC 3986](http://tools.ietf.org/html/rfc3986#section-3.4).
+> Note: JSON API is agnostic about the pagination strategy used by a server, but
+> the `page` query parameter family can be used regardless of the strategy 
+> employed. For example, a page-based strategy might use query parameters such 
+> as `page[number]` and `page[size]`, while a cursor-based strategy might use 
+> `page[cursor]`.
 
 > Note: This section applies to any endpoint that responds with a resource
 collection as primary data, regardless of the request type.
 
 ### <a href="#fetching-filtering" id="fetching-filtering" class="headerlink"></a> Filtering
 
-The `filter` query parameter is reserved for filtering data. Servers and clients
-**SHOULD** use this key for filtering operations.
+The `filter` [query parameter family] is reserved for filtering data. Servers 
+and clients **SHOULD** use these parameters for filtering operations.
 
-> Note: JSON:API is agnostic about the strategies supported by a server. The
-`filter` query parameter can be used as the basis for any number of filtering
-strategies.
+> Note: JSON API is agnostic about the strategies supported by a server.
 
 ## <a href="#crud" id="crud" class="headerlink"></a> Creating, Updating and Deleting Resources
 
@@ -1809,9 +1801,43 @@ responses, in accordance with
 
 ## <a href="#query-parameters" id="query-parameters" class="headerlink"></a> Query Parameters
 
-Implementation-specific query parameter names **MUST** adhere to the same
-constraints as [member names], with the additional requirement that they
-**MUST** contain at least one non a-z character (i.e., outside U+0061 to U+007A).
+### <a href="#query-parameters-families" id="query-parameters-families" class="headerlink"></a>  Query Parameter Families
+Although "query parameter" is a common term in everyday web development, it is
+not a well-standardized concept. Therefore, JSON:API provides its own 
+[definition of a query parameter](#appendix-query-details).
+
+For the most part, JSON:API's definition coincides with colloquial usage, and its 
+details can be safely ignored. However, one important consequence of this 
+definition is that a URL like the following is considered to have two distinct
+query parameters:
+
+```
+/?page[offset]=0&page[limit]=10
+```
+
+The two parameters are named `page[offset]` and `page[limit]`; there is no 
+single `page` parameter.
+
+In practice, however, parameters like `page[offset]` and `page[limit]` are 
+usually defined and processed together, and it's convenient to refer to them 
+collectively. Therefore, JSON:API introduces the concept of a query parameter 
+family.
+
+A "query parameter family" is the set of all query parameters whose name starts 
+with a "base name", followed by zero or more instances of empty square brackets 
+(i.e. `[]`) or square-bracketed legal member names. The family is referred to 
+by its base name.
+
+For example, the `filter` query parameter family includes parameters named:
+`filter`, `filter[x]`, `filter[]`, `filter[x][]`, `filter[][]`, `filter[x][y]`, 
+etc. However, `filter[_]` is not a valid parameter name in the family, because
+`_` is not a valid [member name][member names].
+
+### <a href="#query-parameters-custom" id="query-parameters-custom" class="headerlink"></a>   Implementation-Specific Query Parameters
+Implementations **MAY** support custom query parameters. However, the names of 
+these query parameters **MUST** come from a [family][query parameter family] 
+whose base name is a legal [member name][member names] and also contains at least 
+one non a-z character (i.e., outside U+0061 to U+007A).
 
 It is **RECOMMENDED** that a capital letter (e.g. camelCasing) be used to 
 satisfy the above requirement.
@@ -1962,6 +1988,10 @@ To do so, a server **MAY** define an internal mapping from query parameter names
 to profile URIs. The profile URI for a query parameter name in this mapping 
 **MUST NOT** change over time.
 
+> Note: the server may choose to map all query parameter names from the same 
+> [family][query parameter family] to one profile URI. Or, it may choose to map
+> only specific query parameter names. 
+
 If a requested URL does not contain the `profile` query parameter and does 
 contain one or more query parameters in the server's internal mapping, the 
 server may act as though the request URL contained a `profile` query parameter 
@@ -1970,23 +2000,23 @@ found in the server's internal mapping for the query parameters in use on the
 request.
 
 For example, the server might support a profile that defines a meaning for the
-values of the `filter` query param. Then, it could define its internal 
+values of the `page[cursor]` query param. Then, it could define its internal 
 param name to profile uri mapping like so:
 
 ```json
-{ "filter": "https://example.com/my-filter-profile" }
+{ "page[cursor]": "https://example.com/pagination-profile" }
 ```
 
 Accordingly, a request for:
 
 ```
-https://example.com/?filter=xyz
+https://example.com/?page[cursor]=xyz
 ```
 
 would be interpreted by the server as:
 
 ```
-https://example.com/?filter=xyz&profile=https://example.com/my-filter-profile
+https://example.com/?page[cursor]=xyz&profile=https://example.com/pagination-profile
 ```
 
 
@@ -2191,8 +2221,8 @@ objects. A profile **MUST NOT** define/assign a meaning to document members
 in areas of the document reserved for future use by the JSON:API specification. 
 
 For example, it would be illegal for a profile to define a new key in a 
-document's [top-level][top level] object, or in a [links object], as JSON:API 
-implementations are not allowed to add custom keys in those areas.
+document's [top-level][top level] object, or in a [links object][links], as 
+JSON API implementations are not allowed to add custom keys in those areas.
 
 Likewise, a profile **MAY** assign a meaning to query parameters or parameter 
 values whose details are left up to each implementation, such as `filter` and 
@@ -2326,6 +2356,51 @@ An error object **MAY** have the following members:
 * `meta`: a [meta object][meta] containing non-standard meta-information about the
   error.
 
+## <a href="#appendix" id="appendix" class="headerlink"></a> Appendix
+### <a href="#appendix-query-details" id="appendix-query-details" class="headerlink"></a> Query Parameters Details
+#### <a href="#appendix-query-details-parsing" id="appendix-query-details-parsing" class="headerlink"></a> Parsing/Serialization
+A query parameter is a name–value pair extracted from, or serialized into, a 
+URI's query string. 
+
+To extract the query parameters from a URI, an implementation **MUST** run the 
+URI's query string, excluding the leading question mark, through the 
+[`application/x-www-form-urlencoded` parsing algorithm](https://url.spec.whatwg.org/#urlencoded-parsing),
+with one exception: JSON:API allows the specification that defines a query 
+parameter's usage to provide its own rules for parsing the parameter's value 
+from the `value` bytes identified in steps 3.2 and and 3.3 of the `application/x-www-form-urlencoded` 
+parsing algorithm. The resulting value might not be a string.
+
+> Note: In general, the query string parsing built in to servers and browsers
+> will match the process specified above, so most implementations do not need
+> to worry about this.
+> 
+> The `application/x-www-form-urlencoded` format is referenced because it is
+> the basis for the `a=b&c=d` style that almost all query strings use today. 
+> 
+> However, `application/x-www-form-urlencoded` parsing contains the bizarre 
+> historical artifact that `+` characters must be treated as spaces, and it 
+> requires that all values be percent-decoded during parsing, which makes it
+> impossible to use [RFC 3986 delimiter characters](https://tools.ietf.org/html/rfc3986#section-2.2)
+> as delimiters. These issues motivate the exception that JSON:API defines above.
+
+Similarly, to serialize a query parameter into a URI, an implementation **MUST**
+use the [the `application/x-www-form-urlencoded` serializer](https://url.spec.whatwg.org/#concept-urlencoded-serializer),
+with the corresponding exception that a parameter's value — but not its name —
+may be serialized differently than that algorithm requires, provided the 
+serialization does not interfere with the ability to parse back the resulting URI.
+
+#### <a href="#appendix-query-details-square-brackets" id="appendix-query-details-square-brackets" class="headerlink"></a> Square Brackets in Parameter Names
+With [query parameter families][query parameter family], JSON:API allows for 
+query parameters whose names contain square brackets (i.e., U+005B "[" and 
+U+005D "]").
+
+According to the query parameter serialization rules above, a compliant 
+implementation will percent-encode these square brackets. However, some URI 
+producers — namely browsers — do not always encode them. Servers **SHOULD** 
+accept requests in which these square brackets are left unencoded in a query 
+parameter's name. If a server does accept these requests, it **MUST** treat the 
+request as equivalent to one in which the square brackets were percent-encoded.
+
 [top level]: #document-top-level
 [resource objects]: #document-resource-objects
 [attributes]: #document-resource-object-attributes
@@ -2348,3 +2423,4 @@ An error object **MAY** have the following members:
 [error objects]: #errror-objects
 [member names]: #document-member-names
 [pagination]: #fetching-pagination
+[query parameter family]: #query-parameters-families
