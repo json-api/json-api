@@ -245,11 +245,6 @@ includes related resources.
 
 ### <a href="#server-libraries-java" id="server-libraries-java" class="headerlink"></a> Java
 
-* [katharsis](http://katharsis.io) has comprehensive coverage of standard allowing to create JSON:API compatible resources with dynamic relation based routing. Library consist of several integrations:
-  * katharsis-core - Java based core library for Katharsis allowing to manage RESTful endpoints compliant with JSON:API standard.
-  * katharsis-rs - adapter for Katharsis core module for all compatible JAX-RS based frameworks.
-  * katharsis-spring - adapter for Katharsis core module for Spring and Spring Boot framoworks.
-  * katharsis-servlet - generic servlet/filter adapter for Katharsis core module. This module can be used in traditional servlet or filter based Java web applications, or even non-Servlet-API-based web applications such as Portal/Portlet, Wicket, etc.
 * [Elide](http://elide.io) is a web framework supporting JSON:API. Through annotation-based JSON:API endpoint generation, Elide enables you to focus on your data model, security model, and business logic while avoiding unnecessary boilerplate. Moreover, through use of the JSON:API Patch extension, [Elide](http://elide.io) provides full support for database transactions.
 * [crnk.io](http://www.crnk.io) is a JSON:API framework for clients and servers. On the server-side it comes, among others,
   with a rich set of integrations (Servlet, JAX-RS, Spring, JPA, Bean Validation, Zipkin and more), bulk updates with JSON Patch,
