@@ -136,7 +136,6 @@ and writing of JSON:API documents.
 
 ### <a href="#server-libraries-php" id="server-libraries-php" class="headerlink"></a> PHP
 
-* [hackerboy / json-api](https://github.com/hackerboydotcom/json-api) is a lightweight library that helps you to implement JSONAPI easily
 * [tobscure / json-api](https://github.com/tobscure/json-api)
 * [neomerx / json-api](https://github.com/neomerx/json-api) is a framework agnostic library that fully implements JSON:API v1.0.
 * [limoncello-php / app](https://github.com/limoncello-php/app) is a JSON:API v1.0 quick start server application for [neomerx / json-api](https://github.com/neomerx/json-api).
@@ -156,6 +155,8 @@ and writing of JSON:API documents.
 * [raml-json-api](https://github.com/RJAPI/raml-json-api) RAML based JSON:API code generator for Laravel. Generates controllers, middlewares, models, routes, migrations and serves JSON:API.
 * [paknahad/jsonapi-bundle](https://github.com/paknahad/jsonapi-bundle) is a Symfony bundle. It is the fastest way to generate API.
 * [swisnl/json-api-server](https://github.com/swisnl/json-api-server) is a Laravel package to get a JSON:API up and running in minutes.
+* [hackerboy/json-api](https://github.com/hackerboydotcom/json-api) is a lightweight library that helps you to implement JSONAPI easily
+
 
 ### <a href="#server-libraries-node-js" id="server-libraries-node-js" class="headerlink"></a> Node.js
 * [Fortune.js](http://fortune.js.org/) is a library that includes a [comprehensive implementation of JSON:API](https://github.com/fortunejs/fortune-json-api).
