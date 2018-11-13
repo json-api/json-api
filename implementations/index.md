@@ -65,7 +65,6 @@ isomorphic ActiveRecord clone that issues JSON:API requests instead of SQL and i
 
 * [jsonapi-consumer](https://github.com/jsmestad/jsonapi-consumer) a ruby library for consuming JSONAPI payloads.
 * [JsonApiClient](https://github.com/chingor13/json_api_client) attempts to give you a query building framework that is easy to understand (similar to ActiveRecord scopes).
-* [JsonApiParser](https://github.com/beauby/jsonapi_parser) a ruby library for parsing/validating/handling JSONAPI documents.
 * [Munson](https://github.com/coryodaniel/munson) is a ruby JSONAPI client that can act as an ORM or integrate with your models via fine-grained agnosticism. Easy to configure and customize. Includes a chainable/customizable query builder, attributes API and dirty tracking.
 * [json-api-vanilla](https://github.com/trainline/json-api-vanilla) a reference-aware ruby library for JSONAPI deserialization that doesn't require setting up classes.
 * [SimpleJSONAPIClient](https://github.com/amcaplan/simple_jsonapi_client) gives you lower-level control for API operations, while your models and their relationships maintain a neat, ActiveRecord-inspired interface.
