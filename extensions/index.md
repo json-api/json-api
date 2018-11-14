@@ -58,7 +58,7 @@ By registering your profile:
 2. it will be given an official url on jsonapi.org. This will be the URL you and
    others use to apply/identify the profile.
 
-3. one of the JSON API's editors will review your submission to check that it
+3. one of the JSON:API's editors will review your submission to check that it
    follows the [profile extension requirements](/format/1.1/#profiles-authoring).
    These requirements can be a bit tricky, so getting an expert review ensures
    that your profile is legal for use with JSON:API.
@@ -108,7 +108,7 @@ self-host the filled out template at this URL.
 
 ## <a href="#prior-extensions" id="prior-extensions" class="headerlink"></a> Prior Extensions
 
-JSON API previously offered experimental support for a different extension
+JSON:API previously offered experimental support for a different extension
 negotiation system than the one now in the specification, and it provided a
 number of extensions for use with that old negotiation system. However, this
 system was always experimental and has now been deprecated.

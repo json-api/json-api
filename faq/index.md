@@ -4,9 +4,9 @@ title: Frequently Asked Questions
 show_sidebar: true
 ---
 
-## <a href="#what-is-the-meaning-of-json-apis-version" id="what-is-the-meaning-of-json-apis-version" class="headerlink"></a> What is the meaning of JSON API's version?
+## <a href="#what-is-the-meaning-of-json-apis-version" id="what-is-the-meaning-of-json-apis-version" class="headerlink"></a> What is the meaning of JSON:API's version?
 
-Now that JSON API has reached a stable version 1.0, it will always be
+Now that JSON:API has reached a stable version 1.0, it will always be
 backwards compatible using a _never remove, only add_ strategy.
 
 A version is maintained in order to:
@@ -18,22 +18,22 @@ A version is maintained in order to:
 
 There are several reasons:
 
-* HAL embeds child documents recursively, while JSON API flattens the entire
+* HAL embeds child documents recursively, while JSON:API flattens the entire
 graph of objects at the top level. This means that if the same "people" are
 referenced from different kinds of objects (say, the author of both posts and
 comments), this format ensures that there is only a single representation of
 each person document in the payload.
-* Similarly, JSON API uses IDs for linkage, which makes it possible to cache
+* Similarly, JSON:API uses IDs for linkage, which makes it possible to cache
 documents from compound responses and then limit subsequent requests to only
 the documents that aren't already present locally. If you're lucky, this can
 even completely eliminate HTTP requests.
 * HAL is a serialization format, but says nothing about how to update
-documents. JSON API thinks through how to update existing records (leaning on
+documents. JSON:API thinks through how to update existing records (leaning on
 PATCH and JSON Patch), and how those updates interact with compound documents
 returned from GET requests. It also describes how to create and delete
 documents, and what 200 and 204 responses from those updates mean.
 
-In short, JSON API is an attempt to formalize similar ad hoc client-server
+In short, JSON:API is an attempt to formalize similar ad hoc client-server
 interfaces that use JSON as an interchange format. It is specifically focused
 around using those APIs with a smart client that knows how to cache documents it
 has already seen and avoid asking for them again.
@@ -54,7 +54,7 @@ For instance, a client might request `HEAD /articles`, and the response could
 contain the header `Allow: GET,POST`, indicating that the client can GET the
 collection and also POST to it to create new resources.
 
-JSON API is still working on a way to for resources to advertise and detail
+JSON:API is still working on a way to for resources to advertise and detail
 non-standard actions they support. Feel free to
 [join that discussion](https://github.com/json-api/json-api/issues/745)!
 
@@ -71,15 +71,15 @@ Instead, PUT is supposed to completely replace the state of a resource:
   target resource will result in an equivalent representation being sent…”
 
 The correct method for partial updates, therefore, is [PATCH](http://tools.ietf.org/html/rfc5789),
-which is what JSON API uses. And because PATCH can also be used compliantly for
-full resource replacement, JSON API hasn't needed to define any behavior for
+which is what JSON:API uses. And because PATCH can also be used compliantly for
+full resource replacement, JSON:API hasn't needed to define any behavior for
 PUT so far. However, it may define PUT semantics in the future.
 
 In the past, many APIs used PUT for partial updates because PATCH wasn’t yet
 well-supported. However, almost all clients now support PATCH, and those that
 don’t can be easily [worked around](/recommendations/#patchless-clients).
 
-## <a href="#is-there-a-json-schema-describing-json-api" id="is-there-a-json-schema-describing-json-api" class="headerlink"></a> Is there a JSON Schema describing JSON API?
+## <a href="#is-there-a-json-schema-describing-json-api" id="is-there-a-json-schema-describing-json-api" class="headerlink"></a> Is there a JSON Schema describing JSON:API?
 
 Yes, you can find the JSON Schema definition at
 [http://jsonapi.org/schema](http://jsonapi.org/schema). This schema is as
@@ -104,6 +104,6 @@ than type because it's possible that a primary resource may have related
 resources of the same type (e.g. the "parents" of a "person"). Nesting related
 resources in `included` prevents this possible conflict.
 
-## <a href="#position-uri-structure-custom-endpoints" id="position-uri-structure-custom-endpoints" class="headerlink"></a> Does JSON API take any position on URI structure, on rules for custom endpoints, which do not fit the paradigm of GET/POST/PATCH/DELETE on the resource URI, etc.?
+## <a href="#position-uri-structure-custom-endpoints" id="position-uri-structure-custom-endpoints" class="headerlink"></a> Does JSON:API take any position on URI structure, on rules for custom endpoints, which do not fit the paradigm of GET/POST/PATCH/DELETE on the resource URI, etc.?
 
-JSON API has no requirements about URI structure, implementations are free to use whatever form they wish.
+JSON:API has no requirements about URI structure, implementations are free to use whatever form they wish.

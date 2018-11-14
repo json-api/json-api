@@ -4,9 +4,9 @@ title: "Recommendations"
 show_sidebar: true
 ---
 
-This section contains recommendations for JSON API implementations. These
+This section contains recommendations for JSON:API implementations. These
 recommendations are intended to establish a level of consistency in areas that
-are beyond the scope of the base JSON API specification.
+are beyond the scope of the base JSON:API specification.
 
 ## <a href="#naming" id="naming" class="headerlink"></a> Naming
 
@@ -113,8 +113,8 @@ for individual resource URLs should still apply when forming `self` links.
 ## <a href="#filtering" id="filtering" class="headerlink"></a> Filtering
 
 The base specification is agnostic about filtering strategies supported by a
-server. The `filter` query parameter is reserved to be used as the basis for
-any filtering strategy.
+server. The `filter` query parameter family is reserved to be used as the basis 
+for any filtering strategy.
 
 It's recommended that servers that wish to support filtering of a resource
 collection based upon associations do so by allowing query parameters that
@@ -193,7 +193,7 @@ requests honored, simply by adding the header.
 
 ## <a href="#date-and-time-fields" id="date-and-time-fields" class="headerlink"></a> Formatting Date and Time Fields
 
-Although JSON API does not specify the format of date and time fields, it is
+Although JSON:API does not specify the format of date and time fields, it is
 recommended that servers align with ISO 8601. [This W3C
 NOTE](http://www.w3.org/TR/NOTE-datetime) provides an overview of the
 recommended formats.

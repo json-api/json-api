@@ -5,17 +5,17 @@ show_masthead: true
 ---
 
 If you've ever argued with your team about the way your JSON responses
-should be formatted, JSON API can be your anti-[bikeshedding](http://bikeshed.org) tool.
+should be formatted, JSON:API can be your anti-[bikeshedding](http://bikeshed.org) tool.
 
 By following shared conventions, you can increase productivity,
 take advantage of generalized tooling, and focus on what
 matters: your application.
 
-Clients built around JSON API are able to take
+Clients built around JSON:API are able to take
 advantage of its features around efficiently caching responses,
 sometimes eliminating network requests entirely.
 
-Here's an example response from a blog that implements JSON API:
+Here's an example response from a blog that implements JSON:API:
 
 ```json
 {
@@ -28,7 +28,7 @@ Here's an example response from a blog that implements JSON API:
     "type": "articles",
     "id": "1",
     "attributes": {
-      "title": "JSON API paints my bikeshed!"
+      "title": "JSON:API paints my bikeshed!"
     },
     "relationships": {
       "author": {
@@ -102,22 +102,23 @@ linked to the article, including its author and comments. Last but not least,
 links are provided that can be used to fetch or update any of these
 resources.
 
-JSON API covers creating and updating resources as well, not just responses.
+JSON:API covers creating and updating resources as well, not just responses.
 
 ## <a href="#mime-types" id="mime-types" class="headerlink"></a> MIME Types
 
-JSON API has been properly registered with the IANA. Its media
+JSON:API has been properly registered with the IANA. Its media
 type designation is [`application/vnd.api+json`](http://www.iana.org/assignments/media-types/application/vnd.api+json).
 
 ## <a href="#format-documentation" id="format-documentation" class="headerlink"></a> Format documentation
 
-To get started with JSON API, check out [documentation for the base
+To get started with JSON:API, check out [documentation for the base
 specification](/format).
 
 ## <a href="#extensions" id="extensions" class="headerlink"></a> Extensions
 
-The JSON API community has created a collection of extensions that APIs can use
-to provide clients with information or functionality beyond that described in the base JSON API specification. These extensions are called profiles.
+The JSON:API community has created a collection of extensions that APIs can use
+to provide clients with information or functionality beyond that described in the 
+base JSON:API specification. These extensions are called profiles.
 
 You can [browse existing profiles](/extensions/#existing-profiles) or
 [create a new one](/extensions/#profile-creation).
