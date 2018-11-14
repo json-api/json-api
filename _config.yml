@@ -13,11 +13,11 @@ whitelist:
   - jekyll-sitemap
   - jekyll-feed
   - jekyll-seo-tag
-  - jekyll-gist
   - jemoji
 incremental: false
 gist:
   noscript: false
+
 # customize github pages
 quiet: false
 markdown: kramdown
@@ -25,7 +25,9 @@ highlighter: rouge
 kramdown:
   input: GFM
   hard_wrap: false
-  auto_ids: false
+  auto_ids: true
+  auto_id_prefix: auto-id-
+  auto_id_stripping: true
   template: '' # cannot customize
   math_engine: mathjax # cannot customize
   syntax_highligher: rouge # cannot customize
@@ -48,6 +50,9 @@ port: 9876
 collections:
   format:
     output: true
+  profiles:
+    output: true
+    permalink: /:collection/:path
 
 defaults:
   - scope:
@@ -57,6 +62,20 @@ defaults:
       layout: page
       show_sidebar: true
       is_spec_page: true
+  - scope:
+      path: ""
+      type: "profiles"
+    values:
+      layout: profile_error
+      is_spec_page: false
+      show_sidebar: false
+  - scope:
+      path: "*/*/*/index.md"
+      type: "profiles"
+    values:
+      layout: profile
+      is_spec_page: false
+      show_sidebar: true
 
 latest_version: 1.0
 excerpt_separator: ""
@@ -84,3 +103,12 @@ quicklinks:
   url: /format/
 - title: Contribute on GitHub
   url: https://github.com/json-api/json-api
+
+profile_categories:
+  - Pagination
+  # these are some other potential categories.
+  # Uncomment them if you're adding a profile in one of these categories.
+  # - Filtering
+  # - Actions/Hypermedia
+  # - Data Modeling
+  # - Deep Querying

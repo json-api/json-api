@@ -116,10 +116,12 @@ specification](/format).
 
 ## <a href="#extensions" id="extensions" class="headerlink"></a> Extensions
 
-JSON:API has [experimental support for extensions](/extensions).
+The JSON:API community has created a collection of extensions that APIs can use
+to provide clients with information or functionality beyond that described in the 
+base JSON:API specification. These extensions are called profiles.
 
-Official extensions are being developed for [Bulk](/extensions/bulk/) and
-[JSON Patch](/extensions/jsonpatch/) operations.
+You can [browse existing profiles](/extensions/#existing-profiles) or
+[create a new one](/extensions/#profile-creation).
 
 ## <a href="#update-history" id="update-history" class="headerlink"></a> Update history
 
