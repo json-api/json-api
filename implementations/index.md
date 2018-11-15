@@ -47,6 +47,9 @@ assembled to vet them.
 isomorphic ActiveRecord clone that issues JSON:API requests instead of SQL and is part of the larger [JSONAPI Suite](https://jsonapi-suite.github.io/jsonapi_suite).
 * [jsonapi-vuex](https://github.com/mrichar1/jsonapi-vuex) A module for interacting with a jsonapi service using a Vuex store, restructuring/normalizing records to make life easier.
 * [heather-js](https://github.com/bitex-la/heather-js) A library for parsing JSONAPI into objects from ES6 classes.
+* [@reststate/client](https://client.reststate.org/) - a stateless client providing easy access to standard JSON:API operations for a configured resource.
+* [@reststate/mobx](https://mobx.reststate.org/) - a zero-configuration way to fetch and store JSON:API data in objects implemented with the MobX state management library, for use in React or other apps.
+* [@reststate/vuex](https://vuex.reststate.org/) - a zero-configuration way to fetch and store JSON_API data in Vuex stores.
 
 ### <a href="#client-libraries-typescript" id="client-libraries-typescript" class="headerlink"></a> Typescript
 * [ts-angular-jsonapi](https://github.com/reyesoft/ts-angular-jsonapi) A JSON:API library developed for AngularJS in Typescript
