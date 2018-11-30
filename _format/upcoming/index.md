@@ -1,5 +1,7 @@
 ---
 is_upcoming_version: true
+status: rc
+release_date: 2019-01-31
 ---
 {% for spec_draft in site.format %}
   {% if spec_draft.version > site.latest_version and spec_draft.path contains 'index' %}

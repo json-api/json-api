@@ -87,7 +87,7 @@
         <section>
           {% if page.is_spec_page %}
             {% capture status %}
-              {% include status.md version=page.version is_latest_version=page.is_latest_version is_upcoming_version=page.is_upcoming_version %}
+              {% include status.md release_date=page.release_date status=page.status version=page.version is_latest_version=page.is_latest_version is_upcoming_version=page.is_upcoming_version %}
             {% endcapture %}
             {{ status|strip|markdownify }}
           {% endif %}
