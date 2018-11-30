@@ -5,6 +5,8 @@ show_sidebar: true
 redirect_from: /profiles
 ---
 
+> Note: This page describes features from [version 1.1](/format/1.1/) of the JSON:API spec, and links to profiles that use those new features. Version 1.1 is in its release candidate stage, so there is a (very small) probability that the spec and/or these profiles could change before v1.1 is released on January 31, 2019 (provided there are two compliant implementations by that date; if not the release will wait until such implementations exist to prove its viability).
+
 JSON:API can be extended with profiles. These profiles enable an API to
 provide clients with information or functionality beyond that described
 in the base JSON:API specification.
