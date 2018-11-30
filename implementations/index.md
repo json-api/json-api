@@ -47,6 +47,9 @@ assembled to vet them.
 isomorphic ActiveRecord clone that issues JSON:API requests instead of SQL and is part of the larger [JSONAPI Suite](https://jsonapi-suite.github.io/jsonapi_suite).
 * [jsonapi-vuex](https://github.com/mrichar1/jsonapi-vuex) A module for interacting with a jsonapi service using a Vuex store, restructuring/normalizing records to make life easier.
 * [heather-js](https://github.com/bitex-la/heather-js) A library for parsing JSONAPI into objects from ES6 classes.
+* [@reststate/client](https://client.reststate.org/) - a stateless client providing easy access to standard JSON:API operations for a configured resource.
+* [@reststate/mobx](https://mobx.reststate.org/) - a zero-configuration way to fetch and store JSON:API data in objects implemented with the MobX state management library, for use in React or other apps.
+* [@reststate/vuex](https://vuex.reststate.org/) - a zero-configuration way to fetch and store JSON:API data in Vuex stores.
 
 ### <a href="#client-libraries-typescript" id="client-libraries-typescript" class="headerlink"></a> Typescript
 * [ts-angular-jsonapi](https://github.com/reyesoft/ts-angular-jsonapi) A JSON:API library developed for AngularJS in Typescript
@@ -155,6 +158,8 @@ and writing of JSON:API documents.
 * [raml-json-api](https://github.com/RJAPI/raml-json-api) RAML based JSON:API code generator for Laravel. Generates controllers, middlewares, models, routes, migrations and serves JSON:API.
 * [paknahad/jsonapi-bundle](https://github.com/paknahad/jsonapi-bundle) is a Symfony bundle. It is the fastest way to generate API.
 * [swisnl/json-api-server](https://github.com/swisnl/json-api-server) is a Laravel package to get a JSON:API up and running in minutes.
+* [hackerboy/json-api](https://github.com/hackerboydotcom/json-api) is a lightweight library that helps you to implement JSONAPI easily
+
 
 ### <a href="#server-libraries-node-js" id="server-libraries-node-js" class="headerlink"></a> Node.js
 * [Fortune.js](http://fortune.js.org/) is a library that includes a [comprehensive implementation of JSON:API](https://github.com/fortunejs/fortune-json-api).
