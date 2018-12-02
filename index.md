@@ -125,6 +125,10 @@ You can [browse existing profiles](/extensions/#existing-profiles) or
 
 ## <a href="#update-history" id="update-history" class="headerlink"></a> Update history
 
+- 2018-12-01: 1.1 Release candidate announced. 
+  - New features include: [profiles](https://jsonapi.org/format/1.1/#profiles), ["@-Members"](https://jsonapi.org/format/1.1/#document-member-names-at-members), and [error object `type` links](https://jsonapi.org/format/1.1/#error-objects). 
+  - There are editorial clarifications around: [query parameters](https://jsonapi.org/format/1.1/#query-parameters) (their parsing/serialization, and reserved parameter names), the appropriate status code for [specific](https://github.com/json-api/json-api/pull/1036) [responses](https://github.com/json-api/json-api/pull/1029), and the [presence of the `included` key](https://github.com/json-api/json-api/pull/1236) even when its value is an empty array.
+  - JSON:API switched to [recommending camelCased names](https://jsonapi.org/recommendations/#naming).
 - 2015-05-29: 1.0 final released.
 - 2015-05-21: Release candidate 4 released.
 - 2015-03-16: Release candidate 3 released.
