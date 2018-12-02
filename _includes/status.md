@@ -5,7 +5,6 @@
 
 {% assign version = include.version %}
 {% assign is_latest_version_page = include.is_latest_version %}
-{% assign is_upcoming_version_page = include.is_upcoming_version %}
 {% assign status = include.status %}
 
 ## <a href="#status" id="status" class="headerlink"></a> Status
@@ -24,25 +23,19 @@
   always be backwards compatible** using a _never remove, only add_ strategy.
   Additions can be proposed in our [discussion forum](http://discuss.jsonapi.org/).
 
-{% elsif is_upcoming_version_page %}
-  This page presents the **{% if status == "rc" %}release candidate{% else %}
-  working draft{% endif %}** for the next version of JSON:API, which is 
-  expected to be {{ site.latest_version|plus:0.1 }}. {% if status != "rc" %}
-  As a draft, the content on this page is subject to change.{% else %}As a 
-  release candidate, the content on this page is unlikely to change. However, 
-  some changes may still occur if implementation experience proves that they are 
-  necessary before this version is finalized.{% endif %}
+{% elsif version and version > site.latest_version %}
+  This page will always present the most recent text for JSON:API v{{ site.latest_version|plus:0.1 }}.
+  Version {{ site.latest_version|plus:0.1 }} is a **{% if status == "rc" %}release 
+  candidate{% else %}working draft{% endif %}**. As such, the content on this 
+  page {% if status != "rc" %}is subject to change.{% else %}is unlikely to 
+  change. However, some changes may still occur if implementation experience 
+  proves that they are necessary before this version is finalized.{% endif %}
 
   {% if include.release_date %}
-  This version is expected to be finalized and released on 
-  **{{ include.release_date | date: "%B %e, %Y" }}** (provided there are two compliant implementations by that date; if not the release will wait until such implementations exist to prove its viability).
+  This version is expected to be finalized and released on **{{ include.release_date | date: "%B %e, %Y" }}** 
+  (provided there are two compliant implementations by that date; if not the 
+  release will wait until such implementations exist to prove its viability).
   {% endif %}
-
-
-{% elsif version and version > site.latest_version %}
-  This page will always present the most recent text for JSON:API
-  v{{ site.latest_version|plus:0.1 }}. Version {{ site.latest_version|plus:0.1 }}
-  has not been finalized, so the text here may change.
 
 {% elsif version and version == site.latest_version %}
   This page presents an archived copy of JSON:API version {{ version }}. None
@@ -55,7 +48,6 @@
   of the normative text on this page will change. While {{ version }} is no
   longer the [latest version](/format/) of JSON:API, **new versions will remain
   compatible with this one**, as JSON:API uses a _never remove, only add_ strategy.
-
 {% endif %}
 
 {% comment %}

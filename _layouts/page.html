@@ -13,7 +13,7 @@
 
     {% if page.is_spec_page %}
       {% capture page_title %}
-        {% include title_for_version.md is_latest_version=page.is_latest_version is_upcoming_version=page.is_upcoming_version version=page.version %}
+        {% include title_for_version.md is_latest_version=page.is_latest_version version=page.version %}
       {% endcapture %}
     {% else %}
       {% assign page_title = page.title %}
@@ -53,15 +53,15 @@
                     Latest Version (v{{ site.latest_version }})
                   </option>
                   <option
-                    value="/format/upcoming/"
-                    {% if page.is_upcoming_version %}selected{% endif %}
+                    value="/format/{{ site.latest_version|plus:0.1 }}/"
+                    {% if page.version > site.latest_version %}selected{% endif %}
                   >
                     Upcoming Version (v{{ site.latest_version|plus:0.1 }})
                   </option>
                   <optgroup label="Old Versions/Permalinks">
                     {% assign sorted_formats = site.format|sort:'version' %}
                     {% for spec_draft in sorted_formats %}
-                      {% if spec_draft.version and spec_draft.path contains 'index' %}
+                      {% if spec_draft.version <= site.latest_version and spec_draft.path contains 'index' %}
                         <option value="/format/{{spec_draft.version}}"
                           {% if page.version == spec_draft.version %}selected{% endif%}
                         >
@@ -87,7 +87,7 @@
         <section>
           {% if page.is_spec_page %}
             {% capture status %}
-              {% include status.md release_date=page.release_date status=page.status version=page.version is_latest_version=page.is_latest_version is_upcoming_version=page.is_upcoming_version %}
+              {% include status.md release_date=page.release_date status=page.status version=page.version is_latest_version=page.is_latest_version %}
             {% endcapture %}
             {{ status|strip|markdownify }}
           {% endif %}

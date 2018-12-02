@@ -1,17 +1,8 @@
 ---
-is_upcoming_version: true
-status: rc
-release_date: 2019-01-31
+# Note: We have to do a `redirect_to` here rather than a redirect_from
+# in the file for the latest spec version, as the latter causes jekyll 
+# generate a redirect to `/format/{version}/index.html`, which is an ugly
+# and non-canonical url, and jekyll's url config settings aren't flexible
+# enough to prevent this. 
+redirect_to: /format/1.1/
 ---
-{% for spec_draft in site.format %}
-  {% if spec_draft.version > site.latest_version and spec_draft.path contains 'index' %}
-    {% comment %}
-      The line below must be outdented (ugly as that is) or it will be parsed
-      differently, since indentation can be significant in markdown (e.g. to
-      indicate code blocks).
-    {% endcomment %}
-
-{{ spec_draft.content }}
-
-  {% endif %}
-{% endfor %}
