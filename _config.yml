@@ -32,7 +32,7 @@ kramdown:
   math_engine: mathjax # cannot customize
   syntax_highligher: rouge # cannot customize
 
-gems:
+plugins:
   - jekyll-redirect-from
 
 exclude:
@@ -79,6 +79,10 @@ defaults:
 
 latest_version: 1.0
 excerpt_separator: ""
+announcement: |
+  **[JSON:API v1.1 RC1](/format/1.1/) has been published!** Please review and
+  try out this upcoming version of the spec before its planned release date of
+  January 31, 2019.
 
 navigation:
 - title: JSON API

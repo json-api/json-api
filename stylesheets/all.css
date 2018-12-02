@@ -232,7 +232,7 @@ address {
 
 /** Header */
 header .content {
-  padding: 29px 20px 41px;
+  padding: 32px 20px 41px;
   background: #ebebeb;
   border-bottom: 1px solid #cccccc; }
 header h1#json-api {
@@ -245,7 +245,7 @@ header h1#json-api {
   background-size: contain; }
 header h2 {
   text-align: center;
-  margin: 15px 0 40px 0;
+  margin: 17px 0 37px 0;
   padding: 0;
   left: 0;
   font-size: 124%;
@@ -265,6 +265,16 @@ header .quicklinks a {
   background: white;
   text-decoration: none;
   text-align: center; }
+header .announcement {
+  margin: 22px auto 0;
+  max-width: 38em;
+  text-align: center;
+  position: relative;
+  top: 15px;
+  color: #5a5a5a; }
+  header .announcement * {
+    color: inherit;
+    margin: 0; }
 @media screen and (max-width: 800px) {
   header .content {
     padding-top: 20px;

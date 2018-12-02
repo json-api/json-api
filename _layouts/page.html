@@ -33,6 +33,11 @@
               <a href="{{link.url}}" title="{{link.title}}">{{link.title}}</a>
             {% endfor %}
           </div>
+          {% if site.announcement %}
+          <div class="announcement">
+            {{ site.announcement|markdownify }}
+          </div>
+          {% endif %}
         </div>
       </header>
     {% endif %}

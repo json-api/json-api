@@ -199,7 +199,7 @@ address
 
 header
   .content
-    padding: 29px $page-padding 41px
+    padding: 32px $page-padding 41px
     background: $color-masthead
     border-bottom: 1px solid $color-light-rule
 
@@ -215,7 +215,7 @@ header
 
   h2
     text-align: center
-    margin: 15px 0 40px 0
+    margin: 17px 0 37px 0
     padding: 0
     left: 0
     font-size: 124%
@@ -237,6 +237,18 @@ header
     background: white
     text-decoration: none
     text-align: center
+
+  .announcement
+    margin: 22px auto 0
+    max-width: 38em
+    text-align: center
+    position: relative
+    top: 15px // intentionally eat into parent's padding-bottom
+    color: $color-main
+
+    *
+      color: inherit
+      margin: 0
 
   @media screen and (max-width: $mobile-breakpoint)
     .content
