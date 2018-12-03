@@ -61,7 +61,7 @@ By registering your profile:
    others use to apply/identify the profile.
 
 3. one of the JSON:API's editors will review your submission to check that it
-   follows the [profile extension requirements](/format/1.1/#profiles-authoring).
+   follows the [requirements for profiles](/format/1.1/#profiles-authoring).
    These requirements can be a bit tricky, so getting an expert review ensures
    that your profile is legal for use with JSON:API.
 
@@ -77,7 +77,7 @@ To register your profile:
 2. Create a PR to [the json-api repository](https://github.com/json-api/json-api).
    In the PR, make a directory at `_profiles/{NAMESPACE}/{PROFILE_NAME}` (where
    `PROFILE_NAME` is the name of your profile, dasherized), and put your filled
-   out template as the `index.md` file in that directory folder. (See [an example](https://github.com/json-api/json-api/tree/1.1/_profiles/ethanresnick/cursor-pagination).)
+   out template as the `index.md` file in that directory folder. (See [an example](https://github.com/json-api/json-api/tree/gh-pages/_profiles/ethanresnick/cursor-pagination).)
 
 Once submitted, one of JSON:API's editors will review your profile to check that
 it: 1) follows the template above; 2) complies with JSON:API's [requirements for profiles](/format/1.1/#profiles-authoring);
@@ -99,9 +99,9 @@ If you do change your submission after it's been reviewed, it will be re-reviewe
 to make sure it still complies with the requirements for approval given above.
 
 JSON:API's editors may occasionally reassign responsibility for a registered
-profile. The most common case of this will be to enable changes to be made to
-profiles where the author of the registration has died, moved out of contact or
-is otherwise unable to make changes that are important to the community.
+profile. The most common reason for this will be to enable changes to be made
+to profiles where the author of the registration has died, moved out of contact 
+or is otherwise unable to make changes that are important to the community.
 
 Even though profile registration is strongly encouraged, it is not mandatory.
 If you choose not to register your profile, you can create your own URL, on

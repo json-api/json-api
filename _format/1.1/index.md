@@ -1933,8 +1933,8 @@ Accept: application/vnd.api+json;profile="http://example.com/last-modified", app
   It is used to support old servers that don't understand the profile parameter.
 
 Servers **MAY** add profiles to a JSON:API document even if the client has not
-requested them. The recipient of a document **MUST** ignore any profile extensions
-in that document that it does not understand. The only exception to this is profiles
+requested them. The recipient of a document **MUST** ignore any profiles in that
+document that it does not understand. The only exception to this is profiles
 whose support is required using the `profile` query parameter, as described later.
 
 #### <a href="#profiles-sending" id="profiles-sending" class="headerlink"></a> Sending Profiled Documents
@@ -2002,8 +2002,8 @@ found in the server's internal mapping for the query parameters in use on the
 request.
 
 For example, the server might support a profile that defines a meaning for the
-values of the `page[cursor]` query param. Then, it could define its internal 
-param name to profile uri mapping like so:
+values of the `page[cursor]` query parameter. Then, it could define its internal 
+param name to profile URI mapping like so:
 
 ```json
 { "page[cursor]": "https://example.com/pagination-profile" }
@@ -2137,13 +2137,13 @@ element would be a recognized value:
 
 ```json
 {
-    "type": "contacts",
-    "id": "345",
-    "meta": {
-      "timestamps": { "created": "2018-08-29T18:38:17.567Z" }
-    }
-    //...
+  "type": "contacts",
+  "id": "345",
+  "meta": {
+    "timestamps": { "created": "2018-08-29T18:38:17.567Z" }
   }
+  //...
+}
 ```
 
 However, in the following case, the value for `timestamps` is *not* a recognized 
@@ -2170,8 +2170,8 @@ element's value would be an unrecognized value.
 
 > Note: unrecognized values are not necessarily invalid or erroneous values.
 > For example, the timestamps profile might be revised later to actually define 
-> a "createdUnixEpoch" key. This key would be unrecognized by all existing 
-> applications at the time, but not by ones created/deployed later.
+> a "createdUnixEpoch" key. This key would be unrecognized by all applications
+> that existed at the time it was defined, but not by ones created/deployed later.
 
 Each profile **MAY** define its own rules for how applications should proceed
 when encountering unrecognized values.
@@ -2209,21 +2209,21 @@ profile would need to be ignored:
 {
   //...
   "timestamps": { 
-    "modified": "Wed Aug 29 2018 15:00:05 GMT-0400", 
+    "updated": "Wed Aug 29 2018 15:00:05 GMT-0400", 
     "created": "2018-08-29T18:38:17.567Z" 
   }
 }
 ```
 
 Ignoring the profile in this case is required by the second default rule, 
-because the value for the `modified` key is not recognized under the profile's
-requirement that the `modified` key hold a string of the form produced by 
+because the value for the `updated` key is not recognized under the profile's
+requirement that the `updated` key hold a string of the form produced by 
 `JSON.stringify`.
 
 ### <a href="#profiles-authoring" id="profiles-authoring" class="headerlink"></a> Authoring Profiles
 
 A profile **MAY** assign meaning to elements of the document structure whose use
-is left up to each implementation, such as resource fields or members of meta
+is left up to each implementation, such as resource fields or members of `meta`
 objects. A profile **MUST NOT** define/assign a meaning to document members 
 in areas of the document reserved for future use by the JSON:API specification. 
 
@@ -2260,7 +2260,7 @@ supported as well.
 including to allow a superset of JSON structures.
 
 
-> If you create your own profile, you are **strongly encouraged to [register](/extensions/#profile-registration) 
+> If you create your own profile, you are **strongly encouraged to [register](/extensions/#profile-creation) 
 > it** with the JSON API [profile registry](/extensions/), so that others can
 > find and reuse it.
 
