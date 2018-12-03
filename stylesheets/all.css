@@ -93,7 +93,7 @@ footer .site-wrapper, footer .social-links {
   text-transform: uppercase;
   letter-spacing: 0.2px; }
 
-header h1, footer .social-links span {
+header h1#json-api, footer .social-links span {
   text-indent: -119988px;
   overflow: hidden;
   text-align: left;
@@ -134,7 +134,7 @@ h1 {
   color: #0b4e22; }
 
 h2 {
-  margin: 50px 0 15px 0;
+  margin: 2em 0 15px 0;
   color: #5a5a5a;
   font-size: 22px;
   line-height: 1.3; }
@@ -165,13 +165,19 @@ th {
 a {
   color: #5a5a5a; }
 
-blockquote {
+blockquote, .note {
   margin: 20px 0;
-  padding: 10px 15px 0 15px;
+  padding: 10px 15px 10px 15px;
   border-radius: 4px;
   color: gray;
   background: rgba(90, 90, 90, 0.04);
   border: 1px solid #cccccc; }
+  blockquote code, .note code {
+    background: inherit !important; }
+  blockquote p, .note p {
+    margin-bottom: 6px; }
+  blockquote p:last-child, .note p:last-child {
+    margin-bottom: 0; }
 
 p > code, li > code {
   padding: 1px 4px;
@@ -180,6 +186,9 @@ p > code, li > code {
 
 code {
   font-weight: inherit; }
+
+address {
+  font-style: normal; }
 
 /** Navigation */
 .site-nav {
@@ -223,10 +232,10 @@ code {
 
 /** Header */
 header .content {
-  padding: 29px 20px 41px;
+  padding: 32px 20px 41px;
   background: #ebebeb;
   border-bottom: 1px solid #cccccc; }
-header h1 {
+header h1#json-api {
   text-align: center;
   height: 130px;
   margin: 0;
@@ -236,7 +245,7 @@ header h1 {
   background-size: contain; }
 header h2 {
   text-align: center;
-  margin: 15px 0 40px 0;
+  margin: 17px 0 37px 0;
   padding: 0;
   left: 0;
   font-size: 124%;
@@ -256,6 +265,16 @@ header .quicklinks a {
   background: white;
   text-decoration: none;
   text-align: center; }
+header .announcement {
+  margin: 22px auto 0;
+  max-width: 38em;
+  text-align: center;
+  position: relative;
+  top: 15px;
+  color: #5a5a5a; }
+  header .announcement * {
+    color: inherit;
+    margin: 0; }
 @media screen and (max-width: 800px) {
   header .content {
     padding-top: 20px;
@@ -304,21 +323,21 @@ footer {
   margin-bottom: 50px; }
 
 .sidebar {
-  width: 220px;
+  width: 235px;
   margin-top: 8px;
   float: left; }
   .sidebar h1 {
     font-size: 15px;
     background-color: white;
     z-index: 1;
-    width: 220px;
+    width: 235px;
     color: inherit;
     font-weight: 300; }
   .sidebar nav > ol {
-    width: 220px;
+    width: 235px;
     overflow-y: auto; }
   .sidebar #version-picker-wrapper {
-    width: 220px;
+    width: 200px;
     margin-bottom: 20px;
     display: flex;
     flex-direction: row; }
@@ -343,7 +362,7 @@ footer {
 
 @media screen and (min-width: 886px) {
   .sidebar + .content {
-    margin-left: 235px;
+    margin-left: 245px;
     padding-left: calc(100vw - 886px); } }
 @media screen and (min-width: 901px) {
   .sidebar + .content {
@@ -379,5 +398,28 @@ pre.highlight {
   line-height: 16px;
   margin: 2em 0;
   font-family: Menlo, monospace; }
+
+/**  Extensions page */
+.profiles-list dt, .profiles-list dd {
+  display: inline;
+  margin-left: 0; }
+.profiles-list dd::after {
+  display: block;
+  content: " ";
+  height: 0.8em; }
+.profiles-list dt::before {
+  content: "•";
+  font-size: 1.56em;
+  margin-right: 1em;
+  position: absolute;
+  margin-left: -0.66em;
+  line-height: 1.1em; }
+
+/** Individual profile page */
+.profile-page h2 {
+  margin-top: 2em; }
+
+.profile-page h1 + section h2 {
+  margin-top: 1em; }
 
 /*# sourceMappingURL=all.css.map */

@@ -1,0 +1,71 @@
+<!doctype html>
+<html>
+  <head>
+    {% include global_head_assets.html %}
+    {% capture page_title %}&ldquo;{{ page.name | smartify }}&rdquo; Profile{% endcapture %}
+    <title>JSON API &mdash; {{ page_title|strip }}</title>
+  </head>
+
+  <body>
+    {% include site_navigation.html %}
+    <div class="site-wrapper">
+      <div class="sidebar">
+        <nav class="document-outline" id="document-outline">
+          <h1 class="sidebar-top">{{ page.name }}</h1>
+        </nav>
+      </div>
+      <main class="content profile-page">
+        <h1>
+          {{ page_title }}
+        </h1>
+        <section>
+          <h2><a href="#profile-intro" id="profile-intro" class="headerlink"></a>Introduction</h2>
+          <p>This is the specification of <a href="http://jsonapi.org/format/1.1/#profiles">a profile</a> for the JSON:API specification.</p>
+          <p>The url for this profile is <code>{% include profile_url.md page=page %}</code>.</p>
+
+          {% capture extended_description_markdown %}
+            {{ page.extended_description | markdownify }}
+          {% endcapture %}
+          {% include header_offset_2.md content=extended_description_markdown %}
+        </section>
+        {% if page.minimum_jsonapi_version > 1.0 %}
+          <section>
+            <h2>
+              <a href="#profile-jsonapi-req" id="profile-jsonapi-req" class="headerlink"></a>
+              Minimum JSON:API Version
+            </h2>
+
+            <p>This profile requires at least JSON:API version {{ page.minimum_jsonapi_version }}.</p>
+            {% capture minimum_version_markdown %}
+              {{ page.minimum_jsonapi_version_explanation | markdownify }}
+            {% endcapture %}
+            {% include header_offset_2.md content=minimum_version_markdown %}
+          </section>
+        {% endif %}
+        <section id="profile-spec-container">
+          <h2><a href="#profile-spec" id="profile-spec" class="headerlink"></a>Specification</h2>
+          {% include header_offset_2.md content=content %}
+        </section>
+        <section>
+          <h2><a href="#profile-contact" id="profile-contact" class="headerlink"></a>Contact the Author</h2>
+          {% if page.discussion_url %}
+            <p>To discuss or ask questions about this extension, visit
+              <a href="{{ page.discussion_url }}">{{ page.discussion_url }}</a>.</p>
+            <p>You can also contact the author directly:</p>
+          {% endif %}
+          <address>
+            {{ page.author_name }}<br/>
+            <a href="mailto:{{ page.author_email }}">{{ page.author_email }}</a><br/>
+            {% if page.author_website %}
+              <a href="{{ page.author_website }}">{{ page.author_website }}</a><br/>
+            {% endif %}
+            {% if page.author_phone %}
+              <a href="tel:{{ page.author_phone }}">{{ page.author_phone }}</a><br/>
+            {% endif %}
+          </address>
+        </section>
+      </main>
+    </div>
+    {% include global_html_footer.html %}
+  </body>
+</html>

@@ -13,13 +13,9 @@
 {% endcomment %}
 {% assign version = include.version %}
 {% assign is_latest_version_page = include.is_latest_version %}
-{% assign is_upcoming_version_page = include.is_upcoming_version %}
 
 {% if is_latest_version_page %}
   Latest Specification (v{{ site.latest_version }})
-
-{% elsif is_upcoming_version_page %}
-  Draft for Next Specification Release
 
 {% elsif version and version > site.latest_version %}
   Specification v{{site.latest_version|plus:0.1}} (Still in Development)
