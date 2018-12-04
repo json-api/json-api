@@ -1970,7 +1970,13 @@ query parameter **MUST** equal a URI-encoded whitespace-separated list of profil
 
 If a server receives a request requiring the application of a profile or
 combination of profiles that it can not apply, it **MUST** respond with a `400
-Bad Request` status code.
+Bad Request` status code. The response **MUST** contain an [error object] that
+identifies the `profile` query parameter as the `source` and has the following
+URI as (one of) its `type`s:
+
+```
+https://jsonapi.org/errors/profile-not-supported
+```
 
 > Note: When a client lists a profile in the `Accept` header, it's asking the
 > server to compute its response as normal, but then send the response document

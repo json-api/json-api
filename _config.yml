@@ -50,6 +50,8 @@ port: 9876
 collections:
   format:
     output: true
+  errors:
+    output: true
   profiles:
     output: true
     permalink: /:collection/:path
@@ -66,7 +68,14 @@ defaults:
       path: ""
       type: "profiles"
     values:
-      layout: profile_error
+      layout: error
+      is_spec_page: false
+      show_sidebar: false
+  - scope:
+      path: ""
+      type: "errors"
+    values:
+      layout: error
       is_spec_page: false
       show_sidebar: false
   - scope:
