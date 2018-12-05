@@ -50,10 +50,6 @@ extended_description: |
 minimum_jsonapi_version: 1.0
 minimum_jsonapi_version_explanation:
 
-# Url of a Github repo or some other place where people can
-# ask questions/start discussions about your extension.
-discussion_url: http://tets.com
-
 author_name: Ethan Resnick
 author_email: ethan.resnick@gmail.com
 # Optional fields
