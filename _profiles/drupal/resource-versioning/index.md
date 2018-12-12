@@ -1,0 +1,166 @@
+---
+name: Resource Versioning
+short_description: |
+  Defines a protocol for requesting versioned resources via a JSON:API
+  server.
+
+extended_description: |
+  # Overview
+  JSON:API servers that are capable of tracking a record of changes to a
+  resource object may afford the capability of requesting a resource object
+  as it existed in a prior or successive state. This capability is herein
+  defined as _resource versioning_.
+  
+  This profile establishes a protocol for resource versioning by defining a
+  query parameter and its semantics in order to identify arbitrary revisions
+  of a resource and how a server should interpret this query parameter.
+
+minimum_jsonapi_version: 1.0
+minimum_jsonapi_version_explanation:
+
+discussion_url: https://www.drupal.org/project/issues/jsonapi
+
+author_name: Gabriel SULLICE
+author_email: gabriel@sullice.com
+
+categories:
+  - Resource Versioning
+---
+  
+# Concepts
+Resources on a server may undergo changes and the state of a resource with an
+arbitrary number of changes may be accessible. It is often useful to retrieve
+resources as they existed at the time of their creation or in various states of
+change for editorial or archival purposes. This profile establishes a protocol
+for accessing resources in those various states.
+
+For the purpose of understanding this profile, it is helpful to establish a
+vocabulary for describing various possible states of a resource.
+
+A _revision_ is to be understood as an identifiable state of a resource after
+its creation or after some number of changes.
+
+A _version_ is to be understood as a revision of a resource that is available,
+or was previously available, without any version negotiation. In other words, as
+a revision that is or was the default revision of a resource.
+
+A _working copy_ is the revision to which new changes can be made or to which
+they will be applied. Colloquially, a working copy is often thought of as the
+"tip" of a version history.
+
+For example, a resource which existed as a draft and underwent multiple changes
+before the resource was published may have many revisions. Only the published
+revision would be considered a version. The revisions prior to first version
+would have been known as the working copy as each one was created.
+
+If the version is then checked out for further changes (which may or may not be
+published) each new revision becomes the working copy.
+
+Sophisticated servers may support multiple versions of a resource as well as
+multiple working copies of a resource (e.g., to support multiple
+languages or within a version control system which supports multiple branches).
+
+This profile creates a standard for JSON:API to support these diverse versioning
+schemes.
+# Query Parameter
+
+## Usage
+
+An endpoint **MAY** support a `resource_version` query parameter to allow a
+client to indicate which version(s) of a resource should be returned.
+
+If an endpoint does not support the `resource_version` parameter, it **MUST**
+respond with `400 Bad Request` to any requests that include it.
+
+If an endpoint supports the `resource_version` parameter and a client supplies
+it:
+
+  - The server’s response **MUST** contain the most appropriate version of the
+    resource requested.
+  - The server **MUST NOT** include a version of a resource inappropriate for the
+    requested version.
+  - The server **MUST** respond with `404 Not Found` if an appropriate version of
+    the resource requested cannot be located. 
+    
+> Note: This means that a server should not provide "fallbacks" unless the
+> behavior is well defined by the version negotiation mechanism (see below).
+> These rules apply to individual and collection endpoints alike.
+
+## Format
+  
+The value of the `resource_version` parameter **MUST** be a colon-separated
+(U+003A COLON, “:”) string. The first segment of the string **SHOULD** be
+interpreted as an identifier for a _version negotiation mechanism_. A version
+negotiation mechanism defines how a server will locate an appropriate resource
+version. Subsequent segments of the string **SHOULD** be interpreted as version
+negotiation arguments for the preceding mechanism. Collectively, this query
+parameter value is known as the _version identifier_.
+
+> Note: For example, a server may support both ID-based and time-based
+> mechanisms for requesting a resource version. The former mechanism would be
+> useful for comparing versions and the latter could be useful for requesting a
+> resource as it existed at an arbitrary point in time. This profile does not
+> attempt to define every possible mechanism for versioning resources.
+
+```
+                   version-identifier
+                   _______|_________
+                  /                \
+?resource_version=rel:latest-version
+                  \_/ \____________/
+                   |        |
+         version-negotiator |
+                     version-argument
+```
+
+## Server Responsibilities
+
+A server **MUST** respond with `400 Bad Request` if a version negotiator is not
+supported.
+   
+If a server cannot process the given version argument for the given negotiation
+mechanism, it **MUST** respond with a `400 Bad Request`.
+
+If a server is able to process the version argument but an appropriate version
+cannot be located, the server **MUST** respond with a `404 Not Found`.
+
+If a server knows a version argument to be invalid for the requested version
+negotiation mechanism, it **MUST** respond with a `400 Bad Request`.
+
+If the server cannot establish a version argument to be invalid for the
+requested version negotiation mechanism, it **MUST** respond with a
+`501 Not Implemented`.
+
+# Version Negotiators
+
+## ID-Based Version Negotiator
+
+This profile establishes the `id` version negotiator. An `id`-based version
+identifier is composed of two segments—the `id` version negotiator and a single
+version argument. Any colons (U+003A COLON, “:”) present in the version
+identifier after the first occurrence **MUST** be interpreted as part of the
+single version argument and **MUST NOT** be interpreted as a segment delimiter.
+
+The resource version returned for any given version argument in an `id`-based
+version identifier **MUST NOT** change over time.
+
+> Note: This profile is agnostic about the format of the version argument in
+> `id`-based version identifiers. For example, one server may use integers as
+> revision IDs, another may use UUIDs and yet another may use content-based
+> hashes.
+
+## Relative Version Negotiator
+
+This profile establishes the `rel` version negotiator. A `rel`-based version
+identifier is composed of two or more segments. The first segment **MUST** be
+`rel` and the following version arguments describe a resource version that is
+relative to the version history.
+
+The resource version returned for any given version argument in a `rel`-based
+version identifier **MAY** change over time.
+
+The `rel` version negotiator has the following valid version argument strings:
+
+  - `latest-version`: requests the latest default revision of a resource.
+  - `working-copy`: requests revision of a resource to which changes can be
+    made.
