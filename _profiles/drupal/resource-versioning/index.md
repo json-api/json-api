@@ -21,17 +21,17 @@ minimum_jsonapi_version_explanation:
 discussion_url: https://www.drupal.org/project/issues/jsonapi
 
 editor_name: |
- Gabriel Sullice
- Mateu Aguiló Bosch
- Wim Leers
+  Gabriel Sullice
+  Mateu Aguiló Bosch
+  Wim Leers
 editor_email: |
- gabriel@sullice.com
- mateu.aguilo.bosch@gmail.com
- work@wimleers.com
+  gabriel@sullice.com
+  mateu.aguilo.bosch@gmail.com
+  work@wimleers.com
 editor_website:
- n/a
- http://humanbits.es/
- https://wimleers.com
+  n/a
+  http://humanbits.es/
+  https://wimleers.com
 
 categories:
   - Resource Versioning
