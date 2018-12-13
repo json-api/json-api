@@ -119,6 +119,7 @@ quicklinks:
 
 profile_categories:
   - Pagination
+  - Resource Versioning
   # these are some other potential categories.
   # Uncomment them if you're adding a profile in one of these categories.
   # - Filtering
