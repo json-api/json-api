@@ -22,11 +22,19 @@ minimum_jsonapi_version_explanation:
 # ask questions/start discussions about your extension.
 discussion_url: http://tets.com
 
-author_name: Ethan Resnick
-author_email: ethan.resnick@gmail.com
+# For multiple editors, use a pipe (|) and place each editor on a new line. Use
+# "n/a" to preserve empty rows. For example:
+#   editor_name: |
+#     Jane Doe
+#     John Doe
+#   editor_website: |
+#     n/a
+#     john.doe@example.com
+editor_name: Ethan Resnick
+editor_email: ethan.resnick@gmail.com
 # Optional fields
-author_website: https://ethanresnick.com/
-author_phone: +13104398032 # use `tel` url format.
+editor_website: https://ethanresnick.com/
+editor_phone: +13104398032 # use `tel` url format.
 
 # Valid categories are listed under the profile_categories section
 # in https://github.com/json-api/json-api/blob/gh-pages/_config.yml
