@@ -549,7 +549,7 @@ represented as an object which can contain the following members:
   [[RFC8288 Section 3.2]](https://tools.ietf.org/html/rfc8288#section-3.2). When the `anchor` member is not present and the link belongs
   to a resource object or relationship object, it **MUST** be interpreted to contain
   the URI of the resource that generated the current response document with the
-  addition of the URI fragment identifying the object of which the link is a
+  addition of the [URI fragment](fragments) identifying the object of which the link is a
   member.
 * Any other valid target attribute name as explained in [RFC8288 Section 2.2](https://tools.ietf.org/html/rfc8288#section-3).
 
