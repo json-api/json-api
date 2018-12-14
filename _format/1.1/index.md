@@ -533,9 +533,30 @@ Within this object, a link **MUST** be represented as either:
 * <a id="document-links-link-object"></a>an object ("link object") which can
   contain the following members:
   * `href`: a string containing the link's URI.
+  * `params`: a [link parameter object](link-parameter-object).
   * `meta`: a meta object containing non-standard meta-information about the
     link.
   * Any link-specific target attributes described below.
+
+A <a id="document-links-link-parameter-object"></a>link parameter object **MUST** be
+represented as an object which can contain the following members:
+
+* `rel`: a string or an array of strings. Each value **MUST** be a valid link
+  relation type as defined in [RFC8288 Section 2.1](https://tools.ietf.org/html/rfc8288#section-3.3) to include both registered
+  and extension relation types. When the `rel` member is not present, it **SHOULD** be
+  interpreted to contain the parent link object's key name.
+* `anchor`: a string containing URI reference as specified in
+  [[RFC8288 Section 3.2]](https://tools.ietf.org/html/rfc8288#section-3.2). When the `anchor` member is not present and the link belongs
+  to a resource object or relationship object, it **MUST** be interpreted to contain
+  the URI of the resource that generated the current response document with the
+  addition of the URI fragment identifying the object of which the link is a
+  member.
+* Any other valid target attribute name as explained in [RFC8288 Section 2.2](https://tools.ietf.org/html/rfc8288#section-3).
+
+A link parameter object **SHOULD NOT** contain a `rev` member.
+
+Link parameter object members with multiple values **MUST** be represented with an
+array.
 
 Except for the `profile` key in the top-level links object and the `type` 
 key in an [error object]'s links object, each key present in a links object 
@@ -604,6 +625,12 @@ implements at least version 1.0 of the specification.
 
 > Note: Because JSON:API is committed to making additive changes only, the
 version string primarily indicates which new features a server may support.
+
+### <a href="#document-fragment-syntax" id="document-fragment-syntax" class="headerlink"></a> URI Fragment Syntax
+
+A JSON:API URI fragment **MUST** be a JSON Pointer [[RFC6901](https://tools.ietf.org/html/rfc6901)] which points to a
+[resource object](resource objects) or [relationships object](relationships) in the response document and it **MUST NOT**
+point to any child members within it.
 
 ### <a href="#document-member-names" id="document-member-names" class="headerlink"></a> Member Names
 
@@ -2387,6 +2414,8 @@ request as equivalent to one in which the square brackets were percent-encoded.
 [links]: #document-links
 [link]: #document-links-link
 [link object]: #document-links-link-object
+[link parameter object]: #document-links-link-parameter-object
+[fragments]: #document-fragment-syntax
 [profiles]: #profiles
 [timestamps profile]: #profiles-timestamp-profile
 [profile keywords]: #profile-keywords
