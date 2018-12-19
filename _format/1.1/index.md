@@ -1986,47 +1986,31 @@ https://jsonapi.org/errors/profile-not-supported
 > rules of the profile. This can fundamentally change the meaning of the 
 > server's response.
 
-#### <a href="#profile-query-parameter-omitting" id="profile-query-parameter" class="headerlink"></a> Omitting the `profile` Query Parameter
+#### <a href="#profile-query-parameter-omitting" id="profile-query-parameter-omitting" class="headerlink"></a> Omitting the `profile` Query Parameter
 
-Requiring the client to specify the `profile` query parameter would be 
-cumbersome. Accordingly, JSON:API defines a way that server's may infer its 
-value in many cases.
+Requiring the client to provide the `profile` query parameter would be 
+cumbersome. Accordingly, a server **MAY** advertise in its documentation that
+certain profiles will be automatically applied to certain requests on the basis
+of the request URI.
 
-To do so, a server **MAY** define an internal mapping from query parameter names 
-to profile URIs. The profile URI for a query parameter name in this mapping 
-**MUST NOT** change over time.
+For example, the server might say:
 
-> Note: the server may choose to map all query parameter names from the same 
-> [family][query parameter family] to one profile URI. Or, it may choose to map
-> only specific query parameter names. 
+> On all requests to URLs that match the pattern `/articles/:id`, the presence 
+> of a `version` query parameter will trigger the application of the 
+> `https://example.com/resource-versioning` profile.
 
-If a requested URL does not contain the `profile` query parameter and does 
-contain one or more query parameters in the server's internal mapping, the 
-server may act as though the request URL contained a `profile` query parameter 
-whose value was the URI-encoded space-separated list of each unique profile URI 
-found in the server's internal mapping for the query parameters in use on the 
-request.
+However, if a request contains the `profile` query parameter, and that parameter 
+lists a profile that defines a meaning for one of the query parameters in the 
+request URI ("parameter x"), the server **MUST NOT** apply a different profile 
+that also defines a meaning for parameter x. 
 
-For example, the server might support a profile that defines a meaning for the
-values of the `page[cursor]` query parameter. Then, it could define its internal 
-param name to profile URI mapping like so:
+Once the server advertises that a specific profile will be automatically applied
+in certain cases, it **MUST** continue to apply that profile to those same cases 
+in the future.
 
-```json
-{ "page[cursor]": "https://example.com/pagination-profile" }
-```
-
-Accordingly, a request for:
-
-```
-https://example.com/?page[cursor]=xyz
-```
-
-would be interpreted by the server as:
-
-```
-https://example.com/?page[cursor]=xyz&profile=https://example.com/pagination-profile
-```
-
+When the server applies a profile to a request on the basis of the request's 
+URI, it **MUST** indicate that it has done so in the response's `Content-Type` 
+header and the response document's `profile` links.
 
 ### <a href="#profile-keywords-and-aliases" id="profile-keywords-and-aliases" class="headerlink"></a> Profile Keywords and Aliases
 
