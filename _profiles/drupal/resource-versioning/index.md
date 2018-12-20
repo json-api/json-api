@@ -167,8 +167,8 @@ same:
 ```
 
 A server **MAY** provide a `version-history` link in a resource object's links
-object. This link must reference a collection resource providing all revisions
-of the context resource object.
+object if a [version history](version-history) endpoint is available for the context resource
+object.
 
 A server **MAY** provide the following resource object links so that a client may
 navigate a resource object's version history:
@@ -201,7 +201,8 @@ a           e       g
 No other revisions were ever the latest version. In this example, the following
 links could be provided:
 
-| revision | `latest-version` | `working-copy` | `predecessor-version` | `successor-version` | `prior-working-copy` | `subsequent-working-copy` |
+| Revision | `latest-version` | `working-copy` | `predecessor-version` | `successor-version` | `prior-working-copy` | `subsequent-working-copy` |
+| :------: | :--------------: | :------------: | :-------------------: | :-----------------: | :------------------: | :-----------------------: |
 | `a`      | `g`              | `h`            | no link               | `e`                 | no link              | `b`                       |
 | `b`      | `g`              | `h`            | `a`                   | `e`                 | `a`                  | `c`                       |
 | `c`      | `g`              | `h`            | `a`                   | `e`                 | `b`                  | `d`                       |
@@ -218,7 +219,7 @@ links could be provided:
 # Version History
 
 A server **MAY** provide a "version history" endpoint. The primary data
-of a response document from a version history endpoing must be a collection of
+of a response document from a version history endpoint must be a collection of
 resource objects.
 
 Unless an `id` contains version information, the `type` and `id` members of each
