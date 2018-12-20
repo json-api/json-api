@@ -203,14 +203,14 @@ links could be provided:
 
 | Revision | `latest-version` | `working-copy` | `predecessor-version` | `successor-version` | `prior-working-copy` | `subsequent-working-copy` |
 | :------: | :--------------: | :------------: | :-------------------: | :-----------------: | :------------------: | :-----------------------: |
-| `a`      | `g`              | `h`            | no link               | `e`                 | no link              | `b`                       |
+| `a`      | `g`              | `h`            | no link               | `e`                 | no link              | `b`, `c`                  |
 | `b`      | `g`              | `h`            | `a`                   | `e`                 | `a`                  | `c`                       |
 | `c`      | `g`              | `h`            | `a`                   | `e`                 | `b`                  | `d`                       |
-| `d`      | `g`              | `h`            | `a`                   | `e`                 | `c`                  | `e`                       |
+| `d`      | `g`              | `h`            | `a`                   | `e`                 | `b`, `c`             | `e`                       |
 | `e`      | `g`              | `h`            | `a`                   | `g`                 | `d`                  | `f`                       |
 | `f`      | `g`              | `h`            | `e`                   | `g`                 | `e`                  | `g`                       |
 | `g`      | no link          | `h`            | `e`                   | no link             | `f`                  | `h`                       |
-| `h`      | `g`              | no link        | `e`                   | no link             | `g`                  | no link                   |
+| `h`      | `g`              | no link        | `g`                   | no link             | `g`                  | no link                   |
 
 > Note: In this example, `f` has both a `predecessor-version` and
 > `prior-working-copy` link to `e` because `e` was a version but it also was the
