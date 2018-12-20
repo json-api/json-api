@@ -83,6 +83,7 @@ Once submitted, one of JSON:API's editors will review your profile to check that
 it: 
 
 1. follows the template above; 
+2. is specified precisely enough to enable interoperable implementations;
 2. complies with JSON:API's [requirements for profiles](/format/1.1/#profiles-authoring);
 3. follows JSON:API's [recommended naming conventions](https://jsonapi.org/recommendations/#naming); and
 4. wouldn't cause any problems were it to become widely adopted. 
