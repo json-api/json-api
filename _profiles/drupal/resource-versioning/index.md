@@ -122,11 +122,16 @@ parameter value is known as the _version identifier_.
 
 ## Server Responsibilities
 
-A server **MUST** respond with `400 Bad Request` if a version negotiator is not
-supported.
+<a id="bad-version-negotiator"></a>A server **MUST** respond with `400 Bad Request` if a version negotiator is not
+supported. In this case, an error object that includes a `type` link to
+`https://jsonapi.org/profiles/drupal/resource-versioning#bad-version-negotiator`
+**MUST** be included in the response document.
    
-If a server cannot process the given version argument for the given negotiation
-mechanism, it **MUST** respond with a `400 Bad Request`.
+<a id="bad-version-argument"></a>If a server cannot process the given version argument for the given negotiation
+mechanism, it **MUST** respond with a `400 Bad Request`. In this case, an error
+object that includes a `type` link to
+`https://jsonapi.org/profiles/drupal/resource-versioning#bad-version-argument`
+**MUST** be included in the response document.
 
 If a server is able to process the version argument but an appropriate version
 cannot be located, the server **MUST** respond with a `404 Not Found`.
