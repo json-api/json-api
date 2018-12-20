@@ -143,7 +143,7 @@ a `self` link is provided for a top-level links object, the link's `href`
 **MUST** include the `resource_version` query parameter with the same version
 identifier that was requested.
 
-When a server processes a request with a `resource_version` query parameter and
+When a server processes a request with a `resource_version` query parameter
 all resource object `self` links **SHOULD** contain a `resource_version` query
 parameter which identifies the specific revision represented by that resource
 object.
@@ -213,8 +213,8 @@ links could be provided:
 | `h`      | `g`              | no link        | `g`                   | no link             | `g`                  | no link                   |
 
 > Note: In this example, `f` has both a `predecessor-version` and
-> `prior-working-copy` link to `e` because `e` was a version but it also was the
-> revision to which changes could be applied before `f` was created.
+> `prior-working-copy` link to `e` because `e` was a version and `e` was also the
+> revision to which changes could be applied prior to `f`'s creation.
 
 # Version History
 
@@ -268,3 +268,6 @@ identifier, the server **MUST** respond with a `501 Not Implemented`:
   - `successor-version`
   - `prior-working-copy`
   - `subsequent-working-copy`
+
+> Note: Future versions of this profile may define the behavior of these version
+> arguments.
