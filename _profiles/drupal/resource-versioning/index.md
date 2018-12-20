@@ -73,13 +73,13 @@ schemes.
 
 ## Usage
 
-An endpoint **MAY** support a `resource_version` query parameter to allow a
+An endpoint **MAY** support a `resourceVersion` query parameter to allow a
 client to indicate which version(s) of a resource should be returned.
 
-If an endpoint does not support the `resource_version` parameter, it **MUST**
+If an endpoint does not support the `resourceVersion` parameter, it **MUST**
 respond with `400 Bad Request` to any requests that include it.
 
-If an endpoint supports the `resource_version` parameter and a client supplies
+If an endpoint supports the `resourceVersion` parameter and a client supplies
 it:
 
   - The server’s response **MUST** contain the most appropriate version of the
@@ -95,7 +95,7 @@ it:
 
 ## Format
   
-The value of the `resource_version` parameter **MUST** be a colon-separated
+The value of the `resourceVersion` parameter **MUST** be a colon-separated
 (U+003A COLON, “:”) string. The first segment of the string **SHOULD** be
 interpreted as an identifier for a _version negotiation mechanism_. A version
 negotiation mechanism defines how a server will locate an appropriate resource
@@ -113,7 +113,7 @@ parameter value is known as the _version identifier_.
                    version-identifier
                    _______|_________
                   /                \
-?resource_version=rel:latest-version
+?resourceVersion=rel:latest-version
                   \_/ \____________/
                    |        |
          version-negotiator |
@@ -138,13 +138,13 @@ cannot be located, the server **MUST** respond with a `404 Not Found`.
 
 # Links
 
-When a server processes a request with a `resource_version` query parameter and
+When a server processes a request with a `resourceVersion` query parameter and
 a `self` link is provided for a top-level links object, the link's `href`
-**MUST** include the `resource_version` query parameter with the same version
+**MUST** include the `resourceVersion` query parameter with the same version
 identifier that was requested.
 
-When a server processes a request with a `resource_version` query parameter
-all resource object `self` links **SHOULD** contain a `resource_version` query
+When a server processes a request with a `resourceVersion` query parameter
+all resource object `self` links **SHOULD** contain a `resourceVersion` query
 parameter which identifies the specific revision represented by that resource
 object.
 
@@ -157,11 +157,11 @@ same:
     "type": "article",
     "id": 1,
     "links": {
-      "self": "/article/1?resource_version=id:42"
+      "self": "/article/1?resourceVersion=id:42"
     }
   },
   "links": {
-    "self": "/article/1?resource_version=rel:latest-version"
+    "self": "/article/1?resourceVersion=rel:latest-version"
   }
 }
 ```
