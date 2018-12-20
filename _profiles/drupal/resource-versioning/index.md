@@ -136,6 +136,96 @@ object that includes a `type` link to
 If a server is able to process the version argument but an appropriate version
 cannot be located, the server **MUST** respond with a `404 Not Found`.
 
+# Links
+
+When a server processes a request with a `resource_version` query parameter and
+a `self` link is provided for a top-level links object, the link's `href`
+**MUST** include the `resource_version` query parameter with the same version
+identifier that was requested.
+
+When a server processes a request with a `resource_version` query parameter and
+all resource object `self` links **SHOULD** contain a `resource_version` query
+parameter which identifies the specific revision represented by that resource
+object.
+
+For example, in the following response document the `self` links are not the
+same:
+
+```json
+{
+  "data": {
+    "type": "article",
+    "id": 1,
+    "links": {
+      "self": "/article/1?resource_version=id:42"
+    }
+  },
+  "links": {
+    "self": "/article/1?resource_version=rel:latest-version"
+  }
+}
+```
+
+A server **MAY** provide a `version-history` link in a resource object's links
+object. This link must reference a collection resource providing all revisions
+of the context resource object.
+
+A server **MAY** provide the following resource object links so that a client may
+navigate a resource object's version history:
+
+  - `latest-version`: links to the latest version of the context resource
+    object.
+  - `working-copy`: links to the working copy of the context resource object.
+  - `predecessor-version`: links to the version which immediately preceded the
+    context resource object.
+  - `successor-version`: links to the version which immediately succeeded the
+    context resource object.
+  - `prior-working-copy`: links to the working copy which immediately preceded
+    the context resource object.
+  - `subsequent-working-copy`: links to the working copy which immediately
+    preceded the context resource object.
+
+A server **MAY** provide an array of any of these links to support branching.
+
+For example, in the following version history:
+
+```
+    _c_
+   /   \
+  /__b__d__   __f__   __h
+ /         \ /     \ /
+a           e       g
+```
+
+`g` is the latest version. Both `a` and `e` were previously the latest version.
+No other revisions were ever the latest version. In this example, the following
+links could be provided:
+
+| revision | `latest-version` | `working-copy` | `predecessor-version` | `successor-version` | `prior-working-copy` | `subsequent-working-copy` |
+| `a`      | `g`              | `h`            | no link               | `e`                 | no link              | `b`                       |
+| `b`      | `g`              | `h`            | `a`                   | `e`                 | `a`                  | `c`                       |
+| `c`      | `g`              | `h`            | `a`                   | `e`                 | `b`                  | `d`                       |
+| `d`      | `g`              | `h`            | `a`                   | `e`                 | `c`                  | `e`                       |
+| `e`      | `g`              | `h`            | `a`                   | `g`                 | `d`                  | `f`                       |
+| `f`      | `g`              | `h`            | `e`                   | `g`                 | `e`                  | `g`                       |
+| `g`      | no link          | `h`            | `e`                   | no link             | `f`                  | `h`                       |
+| `h`      | `g`              | no link        | `e`                   | no link             | `g`                  | no link                   |
+
+> Note: In this example, `f` has both a `predecessor-version` and
+> `prior-working-copy` link to `e` because `e` was a version but it also was the
+> revision to which changes could be applied before `f` was created.
+
+# Version History
+
+A server **MAY** provide a "version history" endpoint. The primary data
+of a response document from a version history endpoing must be a collection of
+resource objects.
+
+Unless an `id` contains version information, the `type` and `id` members of each
+resource object in the collection **MUST** be the same.
+
+If provided, resource objects' `self` links **MUST NOT** be the same.
+
 # Version Negotiators
 
 ## ID-Based Version Negotiator
