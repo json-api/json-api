@@ -131,13 +131,6 @@ mechanism, it **MUST** respond with a `400 Bad Request`.
 If a server is able to process the version argument but an appropriate version
 cannot be located, the server **MUST** respond with a `404 Not Found`.
 
-If a server knows a version argument to be invalid for the requested version
-negotiation mechanism, it **MUST** respond with a `400 Bad Request`.
-
-If the server cannot establish a version argument to be invalid for the
-requested version negotiation mechanism, it **MUST** respond with a
-`501 Not Implemented`.
-
 # Version Negotiators
 
 ## ID-Based Version Negotiator
@@ -171,3 +164,11 @@ The `rel` version negotiator has the following valid version argument strings:
   - `latest-version`: requests the latest default revision of a resource.
   - `working-copy`: requests revision of a resource to which changes can be
     made.
+
+If any of the following version arguments is received in a `rel`-based version
+identifier, the server **MUST** respond with a `501 Not Implemented`:
+
+  - `predecessor-version`
+  - `successor-version`
+  - `prior-working-copy`
+  - `subsequent-working-copy`
