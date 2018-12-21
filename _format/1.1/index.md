@@ -2226,6 +2226,28 @@ because the value for the `updated` key is not recognized under the profile's
 requirement that the `updated` key hold a string of the form produced by 
 `JSON.stringify`.
 
+### <a href="#profiles-required" id="profiles-required" class="headerlink"></a> Server-Required Profiles 
+
+Generally, servers should not require that clients apply specific profiles to 
+their requests, as such requirements reduce interoperability.
+
+However, in many common cases, a server does require that clients provide 
+certain data (e.g., authentication credentials), and it **MAY** require that 
+this data be provided by applying a specific profile (or any one profile from 
+a set of supported profiles) to the request. 
+
+In the event that the server requires the client to apply a profile to its 
+request, and the client fails to do so, the server **MUST** send a
+`415 Unsupported Media Type` error. 
+
+In the error's response body, there **MUST** be an [error object] for each 
+required profile that is missing, and this error object **MUST**:
+
+1. have a `type` who's URI is `http://jsonapi.org/errors/missing-required-profile`
+2. include the URI of the missing profile in the `extension` member of the 
+   `missing` object, with the `alternatives` key provided if the client could've 
+   used other profiles instead to satisfy the server's requirements.
+
 ### <a href="#profiles-authoring" id="profiles-authoring" class="headerlink"></a> Authoring Profiles
 
 A profile **MAY** assign meaning to elements of the document structure whose use
@@ -2371,6 +2393,23 @@ An error object **MAY** have the following members:
     exists; if it doesn't, the client **SHOULD** simply ignore the pointer.
   * `parameter`: a string indicating which URI query parameter caused
     the error.
+  * <a id="error-objects-source-missing"></a>`missing`: an object indicating
+    that the error was caused by a missing profile, JSON object key (or array 
+    index), or URI query parameter. If present, this object **MUST** contain 
+    exactly one of the following keys:
+      * `extension`: the URI of a missing profile. This key **SHOULD** be
+        used with the `pointer` member to indicate which value in the request
+        document is missing the profile.
+      * `key`: the name of a missing key in a JSON object, or a missing index in 
+        a JSON array, expressed as a string. This key **SHOULD** be used with 
+        the `pointer` member to indicate which object/array in the request 
+        document is missing the key.
+      * `parameter`: the name of a missing URI query parameter.
+    
+      This object **MAY** also contain an `alternatives` key, whose value is an
+      array listing alternate profile URIs, key names, or query parameter names
+      (depending on which type of value is missing) that can be added to resolve
+      this error.
 * `meta`: a [meta object][meta] containing non-standard meta-information about the
   error.
 
