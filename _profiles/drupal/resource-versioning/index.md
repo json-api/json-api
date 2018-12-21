@@ -87,8 +87,6 @@ it:
 
   - The server’s response **MUST** contain the most appropriate version of the
     resource requested.
-  - The server **MUST NOT** include a version of a resource inappropriate for the
-    requested version.
   - The server **MUST** respond with `404 Not Found` if an appropriate version of
     the resource requested cannot be located. 
     
