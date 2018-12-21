@@ -47,22 +47,27 @@
           {% include header_offset_2.md content=content %}
         </section>
         <section>
-          <h2><a href="#profile-contact" id="profile-contact" class="headerlink"></a>Contact the Author</h2>
+          <h2>
+            <a href="#profile-contact" id="profile-contact" class="headerlink"></a>
+            Contact the Editor{% if page.editors.size > 1 %}s{% endif %}
+          </h2>
           {% if page.discussion_url %}
             <p>To discuss or ask questions about this extension, visit
               <a href="{{ page.discussion_url }}">{{ page.discussion_url }}</a>.</p>
             <p>You can also contact the author directly:</p>
           {% endif %}
-          <address>
-            {{ page.author_name }}<br/>
-            <a href="mailto:{{ page.author_email }}">{{ page.author_email }}</a><br/>
-            {% if page.author_website %}
-              <a href="{{ page.author_website }}">{{ page.author_website }}</a><br/>
-            {% endif %}
-            {% if page.author_phone %}
-              <a href="tel:{{ page.author_phone }}">{{ page.author_phone }}</a><br/>
-            {% endif %}
-          </address>
+          {% for editor in page.editors %}
+            <address class="editor">
+              {{ editor.name }}<br/>
+              <a href="mailto:{{ editor.email }}">{{ editor.email }}</a><br/>
+              {% if editor.website %}
+                <a href="{{ editor.website }}">{{ editor.website }}</a><br/>
+              {% endif %}
+              {% if editor.phone %}
+                <a href="tel:{{ editor.phone }}">{{ editor.phone }}</a><br/>
+              {% endif %}
+            </address>
+          {% endfor %}
         </section>
       </main>
     </div>
