@@ -100,8 +100,8 @@ it:
   
 The value of the `resourceVersion` parameter **MUST** be a colon-separated
 (U+003A COLON, “:”) string composed of one or more segments. The first segment
-of the string **SHOULD** be interpreted as an identifier for a _version
-negotiation mechanism_. A version negotiation mechanism defines how a server will
+of the string **MUST** be interpreted as an identifier for a _version negotiation
+mechanism_. A version negotiation mechanism defines how a server will
 locate an appropriate resource version. Subsequent segments of the string
 **SHOULD** be interpreted as version negotiation arguments for the preceding
 mechanism. Collectively, this query parameter value is known as the _version
