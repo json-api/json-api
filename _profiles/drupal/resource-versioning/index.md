@@ -151,6 +151,9 @@ all resource object `self` links **SHOULD** contain a `resourceVersion` query
 parameter which identifies the specific revision represented by that resource
 object.
 
+A server **MUST** use the most specific version negotiator it supports for any
+resource object `self` links that it provides.
+
 For example, in the following response document the `self` links are not the
 same:
 
@@ -267,6 +270,8 @@ This profile establishes the `rel` version negotiator. A `rel`-based version
 identifier is composed of two or more segments. The first segment **MUST** be
 `rel` and the following version arguments describe a resource version that is
 relative to the version history.
+
+The `rel` version negotiator **MUST NOT** appear in a resource object's `self` link.
 
 The resource version returned for any given version argument in a `rel`-based
 version identifier **MAY** change over time.
