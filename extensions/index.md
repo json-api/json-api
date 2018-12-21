@@ -87,7 +87,7 @@ Once submitted, one of JSON:API's editors will review your profile to check that
 3. follows JSON:API's [recommended naming conventions](https://jsonapi.org/recommendations/#naming); and
 4. wouldn't cause any problems were it to become widely adopted. 
 
-If your profile meets these three criteria, it will generally be **approved within a week**.
+If your profile meets these criteria, it will generally be **approved within a week**.
 
 In limited cases (e.g., if your profile defines a new, fundamental mechanism for
 doing something "architectural" that other profiles may need to do too), it might
