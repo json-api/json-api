@@ -232,6 +232,19 @@ If provided, resource objects' `self` links **MUST NOT** be the same.
 
 # Version Negotiators
 
+This profile defines a number of version negotiators which a server **MAY**
+implement. Additional version negotiator's may be added to this profile at a
+later date.
+
+Version negotiators which are not defined by this profile **MUST** adhere to the
+same constraints as [implementation-specific query parameter names](https://jsonapi.org/format/1.1/#query-parameters-custom).
+
+It is **RECOMMENDED** that any alternative version negotiators be added to this
+profile. New version negotiators may be registered by sending one, joint email
+to the profile editors with the subject line: "New JSON:API Resource Version
+Negotiator: {negotiator name}". This will begin a process of refinement and/or
+result in a determination of fitness for addition to this profile.
+
 ## ID-Based Version Negotiator
 
 This profile establishes the `id` version negotiator. An `id`-based version
