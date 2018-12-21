@@ -114,14 +114,14 @@ identifier_.
 > attempt to define every possible mechanism for versioning resources.
 
 ```
-                   version-identifier
-                   _______|_________
-                  /                \
+                 version-identifier
+                  _______|________
+                 /                \
 ?resourceVersion=rel:latest-version
-                  \_/ \____________/
-                   |        |
-         version-negotiator |
-                     version-argument
+                 \_/ \____________/
+                  |        |
+        version-negotiator |
+                    version-argument
 ```
 
 ## Server Responsibilities
