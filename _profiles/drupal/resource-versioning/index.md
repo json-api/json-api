@@ -63,7 +63,7 @@ would have been known as the working copy as each one was created.
 If the version is then checked out for further changes each new revision becomes
 the working copy. When the working copy is checked in and made the default
 revision, this revision becomes the latest version and the version before it is
-its _predecessor version _. If no other revisions come after the latest version,
+its _predecessor version_. If no other revisions come after the latest version,
 it may also be considered the working copy.
 
 Sophisticated servers may support multiple versions of a resource as well as
