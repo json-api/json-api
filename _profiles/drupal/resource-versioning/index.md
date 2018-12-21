@@ -294,8 +294,8 @@ identifier, the server **MUST** respond with a `501 Not Implemented`:
   - `prior-working-copy`
   - `subsequent-working-copy`
 
-If any version argument is receieved other than the version arguments in this
-section, a server **MUST** respond appropriately for a [bad version argument](#bad-version-argument).
-
 > Note: Future versions of this profile may define the behavior of these version
 > arguments.
+
+If any version argument is receieved other than the version arguments in this
+section, a server **MUST** respond appropriately for a [bad version argument](#bad-version-argument).
