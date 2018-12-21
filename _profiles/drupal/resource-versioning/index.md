@@ -47,9 +47,9 @@ vocabulary for describing various possible states of a resource.
 A _revision_ is to be understood as an identifiable state of a resource after
 its creation or after some number of changes.
 
-A _version_ is to be understood as a revision of a resource that is available,
-or was previously available, without any version negotiation. In other words, as
-a revision that is or was the default revision of a resource.
+A _version_ is to be understood as a revision that is or was the default
+revision of a resource. In other words, as a revision of a resource that is
+available, or was previously available, without any version negotiation.
 
 A _working copy_ is the revision to which new changes can be made or to which
 they will be applied. Colloquially, a working copy is often thought of as the
