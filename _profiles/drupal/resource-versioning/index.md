@@ -24,8 +24,8 @@ editors:
   - name: Gabriel Sullice
     email: gabriel@sullice.com
   - name: Mateu Aguiló Bosch
-    email: mateu.aguilo.bosch@gmail.com
-    website: https://humanbits.es
+    email: mateu@mateuaguilo.com
+    website: https://mateuaguilo.com
   - name: Wim Leers
     email: work@wimleers.com
     website: https://wimleers.com
