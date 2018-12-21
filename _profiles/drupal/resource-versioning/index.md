@@ -80,7 +80,9 @@ An endpoint **MAY** support a `resourceVersion` query parameter to allow a
 client to indicate which version(s) of a resource should be returned.
 
 If an endpoint does not support the `resourceVersion` parameter, it **MUST**
-respond with `400 Bad Request` to any requests that include it.
+respond with `400 Bad Request` to any requests that include it. An error object
+detailing the source of the error **SHOULD** include a `source` member referencing
+the `resourceVersion` query parameter.
 
 If an endpoint supports the `resourceVersion` parameter and a client supplies
 it:
@@ -127,12 +129,16 @@ identifier_.
 <a id="bad-version-negotiator"></a>A server **MUST** respond with `400 Bad Request` if a version negotiator is not
 supported. An error object detailing the source of the error **SHOULD** include a
 `type` link to
-`https://jsonapi.org/profiles/drupal/resource-versioning/#bad-version-negotiator`.
+`https://jsonapi.org/profiles/drupal/resource-versioning/#bad-version-negotiator`
+and **SHOULD** include a `source` member referencing the `resourceVersion` query
+parameter.
    
 <a id="bad-version-argument"></a>If a server cannot process the given version argument for the given negotiation
 mechanism, it **MUST** respond with a `400 Bad Request`. An error object detailing the
 source of the error **SHOULD** include a `type` link to
-`https://jsonapi.org/profiles/drupal/resource-versioning/#bad-version-argument`.
+`https://jsonapi.org/profiles/drupal/resource-versioning/#bad-version-argument`
+and **SHOULD** include a `source` member referencing the `resourceVersion` query
+parameter.
 
 If a server is able to process the version argument but an appropriate version
 cannot be located, the server **MUST** respond with a `404 Not Found`.
