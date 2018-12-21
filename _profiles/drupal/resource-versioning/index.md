@@ -177,7 +177,7 @@ same:
 ```
 
 A server **MAY** provide a `version-history` link in a resource object's links
-object if a [version history](version-history) endpoint is available for the context resource
+object if a [version history](#version-history) endpoint is available for the context resource
 object.
 
 A server **MAY** provide the following resource object links so that a client may
@@ -293,6 +293,9 @@ identifier, the server **MUST** respond with a `501 Not Implemented`:
   - `successor-version`
   - `prior-working-copy`
   - `subsequent-working-copy`
+
+If any version argument is receieved other than the version arguments in this
+section, a server **MUST** respond appropriately for a [bad version argument](#bad-version-argument).
 
 > Note: Future versions of this profile may define the behavior of these version
 > arguments.
