@@ -1953,10 +1953,10 @@ parameter receives a document with one or more profiles, it will respond with a
 `415 Unsupported Media Type` error.
 
 After attempting to rule out other possible causes of this error, a client that
-receives a `415 Unsupported Media Type` **SHOULD** remove the profile extensions
-it has applied to the document and retry its request without the `profile` media
-type parameter. If this resolves the error, the client **SHOULD NOT** attempt to
-use profile extensions in subsequent interactions with the same API.
+receives a `415 Unsupported Media Type` **SHOULD** remove the profiles it has 
+applied to the document and retry its request without the `profile` media type 
+parameter. If this resolves the error, the client **SHOULD NOT** attempt to
+apply profiles in subsequent interactions with the same API.
 
 > The most likely other causes of a 415 error are that the server doesn't
 support JSON:API at all or that the client has failed to provide a required
