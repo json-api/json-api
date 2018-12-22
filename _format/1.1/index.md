@@ -2203,7 +2203,7 @@ the following rule applies by default:
 In the case of our example [timestamps profile], it does not define its own 
 rules, so the above defaults would apply. 
 
-Under the first of these default rules, the unrecognized value we saw 
+Under the second of these default rules, the unrecognized value we saw 
 above (with the `createdUnixEpoch` key) would be processed as though the 
 `createdUnixEpoch` key simply weren't present, and the application would still 
 be able to use the data in the `created` key. 
@@ -2221,7 +2221,7 @@ profile would need to be ignored:
 }
 ```
 
-Ignoring the profile in this case is required by the second default rule, 
+Ignoring the profile in this case is required by the third default rule, 
 because the value for the `updated` key is not recognized under the profile's
 requirement that the `updated` key hold a string of the form produced by 
 `JSON.stringify`.
