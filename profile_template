@@ -20,13 +20,17 @@ minimum_jsonapi_version_explanation:
 
 # Url of a Github repo or some other place where people can
 # ask questions/start discussions about your extension.
-discussion_url: http://tets.com
+discussion_url: http://example.com
 
-author_name: Ethan Resnick
-author_email: ethan.resnick@gmail.com
-# Optional fields
-author_website: https://ethanresnick.com/
-author_phone: +13104398032 # use `tel` url format.
+# Name and email are required for each editor;
+# phone and website are optional.
+editors:
+  - name: Editor 1
+    email: editor1@gmail.com
+  - name: Editor 2
+    email: editor2@gmail.com
+    website: https://example.com
+    phone: +15554443333 # use `tel` url format.
 
 # Valid categories are listed under the profile_categories section
 # in https://github.com/json-api/json-api/blob/gh-pages/_config.yml

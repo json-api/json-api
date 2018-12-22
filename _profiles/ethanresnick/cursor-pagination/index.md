@@ -52,13 +52,13 @@ minimum_jsonapi_version_explanation:
 
 # Url of a Github repo or some other place where people can
 # ask questions/start discussions about your extension.
-discussion_url: http://tets.com
+# discussion_url: https://github.com/json-api/json-api
 
-author_name: Ethan Resnick
-author_email: ethan.resnick@gmail.com
-# Optional fields
-author_website: https://ethanresnick.com/
-author_phone: +13104398032 # use `tel` url format.
+editors:
+  - name: Ethan Resnick
+    email: ethan.resnick@gmail.com
+    website: https://ethanresnick.com/
+    phone: +13104398032 # use `tel` url format.
 
 # Valid categories are listed under the profile_categories section
 # in https://github.com/json-api/json-api/blob/gh-pages/_config.yml

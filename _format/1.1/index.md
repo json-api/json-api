@@ -2239,8 +2239,8 @@ JSON API implementations are not allowed to add custom keys in those areas.
 
 Likewise, a profile **MAY** assign a meaning to query parameters or parameter 
 values whose details are left up to each implementation, such as `filter` and 
-all those that parameters that contain a non a-z character. However, profiles 
-**MUST NOT** assign a meaning to query parameters that [are reserved](#query-parameters).
+all parameters that contain a non a-z character. However, profiles **MUST NOT** 
+assign a meaning to query parameters that [are reserved](#query-parameters).
 
 The meaning of an element or query parameter defined by a profile **MUST NOT** 
 vary based on the presence or absence of other profiles.
