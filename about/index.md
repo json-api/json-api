@@ -5,7 +5,7 @@ title: About
 
 ## <a href="#channels" id="channels" class="headerlink"></a> Channels
 
-JSON API is:
+JSON:API is:
 
   * [@jsonapi](http://twitter.com/jsonapi) on
 [Twitter](http://twitter.com)
@@ -31,7 +31,7 @@ There are five primary editors of this specification:
 
 ## <a href="#history" id="history" class="headerlink"></a> History
 
-JSON API was originally drafted by [Yehuda Katz](http://twitter.com/wycats)
+JSON:API was originally drafted by [Yehuda Katz](http://twitter.com/wycats)
 in May 2013. This first draft was extracted from the JSON transport
 implicitly defined by [Ember](http://emberjs.com/) Data's REST adapter.
 

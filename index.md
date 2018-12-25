@@ -5,17 +5,17 @@ show_masthead: true
 ---
 
 If you've ever argued with your team about the way your JSON responses
-should be formatted, JSON API can be your anti-[bikeshedding](http://bikeshed.org) tool.
+should be formatted, JSON:API can be your anti-[bikeshedding](http://bikeshed.org) tool.
 
 By following shared conventions, you can increase productivity,
 take advantage of generalized tooling, and focus on what
 matters: your application.
 
-Clients built around JSON API are able to take
+Clients built around JSON:API are able to take
 advantage of its features around efficiently caching responses,
 sometimes eliminating network requests entirely.
 
-Here's an example response from a blog that implements JSON API:
+Here's an example response from a blog that implements JSON:API:
 
 ```json
 {
@@ -28,7 +28,7 @@ Here's an example response from a blog that implements JSON API:
     "type": "articles",
     "id": "1",
     "attributes": {
-      "title": "JSON API paints my bikeshed!"
+      "title": "JSON:API paints my bikeshed!"
     },
     "relationships": {
       "author": {
@@ -57,8 +57,8 @@ Here's an example response from a blog that implements JSON API:
     "type": "people",
     "id": "9",
     "attributes": {
-      "first-name": "Dan",
-      "last-name": "Gebhardt",
+      "firstName": "Dan",
+      "lastName": "Gebhardt",
       "twitter": "dgeb"
     },
     "links": {
@@ -102,27 +102,33 @@ linked to the article, including its author and comments. Last but not least,
 links are provided that can be used to fetch or update any of these
 resources.
 
-JSON API covers creating and updating resources as well, not just responses.
+JSON:API covers creating and updating resources as well, not just responses.
 
 ## <a href="#mime-types" id="mime-types" class="headerlink"></a> MIME Types
 
-JSON API has been properly registered with the IANA. Its media
+JSON:API has been properly registered with the IANA. Its media
 type designation is [`application/vnd.api+json`](http://www.iana.org/assignments/media-types/application/vnd.api+json).
 
 ## <a href="#format-documentation" id="format-documentation" class="headerlink"></a> Format documentation
 
-To get started with JSON API, check out [documentation for the base
+To get started with JSON:API, check out [documentation for the base
 specification](/format).
 
 ## <a href="#extensions" id="extensions" class="headerlink"></a> Extensions
 
-JSON API has [experimental support for extensions](/extensions).
+The JSON:API community has created a collection of extensions that APIs can use
+to provide clients with information or functionality beyond that described in the 
+base JSON:API specification. These extensions are called profiles.
 
-Official extensions are being developed for [Bulk](/extensions/bulk/) and
-[JSON Patch](/extensions/jsonpatch/) operations.
+You can [browse existing profiles](/extensions/#existing-profiles) or
+[create a new one](/extensions/#profile-creation).
 
 ## <a href="#update-history" id="update-history" class="headerlink"></a> Update history
 
+- 2018-12-01: 1.1 Release candidate announced. 
+  - New features include: [profiles](https://jsonapi.org/format/1.1/#profiles), ["@-Members"](https://jsonapi.org/format/1.1/#document-member-names-at-members), and [error object `type` links](https://jsonapi.org/format/1.1/#error-objects). 
+  - There are editorial clarifications around: [query parameters](https://jsonapi.org/format/1.1/#query-parameters) (their parsing/serialization, and reserved parameter names), the appropriate status code for [specific](https://github.com/json-api/json-api/pull/1036) [responses](https://github.com/json-api/json-api/pull/1029), and the [presence of the `included` key](https://github.com/json-api/json-api/pull/1236) even when its value is an empty array.
+  - JSON:API switched to [recommending camelCased names](https://jsonapi.org/recommendations/#naming).
 - 2015-05-29: 1.0 final released.
 - 2015-05-21: Release candidate 4 released.
 - 2015-03-16: Release candidate 3 released.

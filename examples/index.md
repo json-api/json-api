@@ -25,7 +25,7 @@ Content-Type: application/vnd.api+json
     "type": "articles",
     "id": "1",
     "attributes": {
-      "title": "JSON API paints my bikeshed!",
+      "title": "JSON:API paints my bikeshed!",
       "body": "The shortest article. Ever.",
       "created": "2015-05-22T14:56:29.000Z",
       "updated": "2015-05-22T14:56:28.000Z"
@@ -50,15 +50,15 @@ Content-Type: application/vnd.api+json
 }
 ```
 
-Request with `fields` parameter:
+Request with `fields[articles]` and `fields[people]` parameters:
 
 ```http
 GET /articles?include=author&fields[articles]=title,body,author&fields[people]=name HTTP/1.1
 ```
 
 > Note: The above example URI shows unencoded `[` and `]` characters simply
-for readability. In practice, these characters must be percent-encoded, as
-noted in the base specification.
+for readability. In practice, these characters should be percent-encoded, as
+noted in the base specification. See "[Square Brackets in Parameter Names](/format/1.1/#appendix-query-details-square-brackets)".
 
 Here we want `articles` objects to have fields `title`, `body` and `author` only and `people` objects to have `name` field only.
 
@@ -71,7 +71,7 @@ Content-Type: application/vnd.api+json
     "type": "articles",
     "id": "1",
     "attributes": {
-      "title": "JSON API paints my bikeshed!",
+      "title": "JSON:API paints my bikeshed!",
       "body": "The shortest article. Ever."
     },
     "relationships": {
@@ -107,7 +107,7 @@ Content-Type: application/vnd.api+json
     "type": "articles",
     "id": "1",
     "attributes": {
-      "title": "JSON API paints my bikeshed!",
+      "title": "JSON:API paints my bikeshed!",
       "body": "The shortest article. Ever."
     }
   }],
@@ -124,8 +124,8 @@ Content-Type: application/vnd.api+json
 ```
 
 > Note: The above example URI shows unencoded `[` and `]` characters simply
-for readability. In practice, these characters must be percent-encoded, as
-noted in the base specification.
+for readability. In practice, these characters should be percent-encoded, as
+noted in the base specification. See "[Square Brackets in Parameter Names](/format/1.1/#appendix-query-details-square-brackets)".
 
 ## <a href="#pagination" id="pagination" class="headerlink"></a> Pagination Links
 
@@ -143,14 +143,14 @@ Content-Type: application/vnd.api+json
 
 {
   "meta": {
-    "total-pages": 13
+    "totalPages": 13
   },
   "data": [
     {
       "type": "articles",
       "id": "3",
       "attributes": {
-        "title": "JSON API paints my bikeshed!",
+        "title": "JSON:API paints my bikeshed!",
         "body": "The shortest article. Ever.",
         "created": "2015-05-22T14:56:29.000Z",
         "updated": "2015-05-22T14:56:28.000Z"
@@ -168,10 +168,10 @@ Content-Type: application/vnd.api+json
 ```
 
 > Note: The above example URIs show unencoded `[` and `]` characters simply
-for readability. In practice, these characters must be percent-encoded, as
-noted in the base specification.
+for readability. In practice, these characters should be percent-encoded, as
+noted in the base specification. See "[Square Brackets in Parameter Names](/format/1.1/#appendix-query-details-square-brackets)".
 
-> Note: Putting a property like `"total-pages"` in `"meta"` can be a convenient way
+> Note: Putting a property like `"totalPages"` in `"meta"` can be a convenient way
 to indicate to clients the total number of pages in a collection (as opposed to
 the `"last"` link, which simply gives the URI of the last page). However, all
 `"meta"` values are implementation-specific, so you can call this member whatever
@@ -185,7 +185,7 @@ Examples of how [error objects](http://jsonapi.org/format/#error-objects) work.
 
 In the response below, the server is indicating that it encountered an error
 while creating/updating the resource, and that this error was caused
-by an invalid `"first-name"` attribute:
+by an invalid `"firstName"` attribute:
 
 ```http
 HTTP/1.1 422 Unprocessable Entity
@@ -195,7 +195,7 @@ Content-Type: application/vnd.api+json
   "errors": [
     {
       "status": "422",
-      "source": { "pointer": "/data/attributes/first-name" },
+      "source": { "pointer": "/data/attributes/firstName" },
       "title":  "Invalid Attribute",
       "detail": "First name must contain at least three characters."
     }
@@ -216,7 +216,7 @@ The `status` member represents the HTTP status code associated with the problem.
 It's very helpful when multiple errors are returned at once (see below), as the
 HTTP response itself can only have one status code. However, it can also be
 useful for single errors, to save clients the trouble of consulting the HTTP
-headers, or for using JSON API over non-HTTP protocols, which may be officially
+headers, or for using JSON:API over non-HTTP protocols, which may be officially
 supported in the near future.
 
 ### <a href="#error-objects-multiple-errors" id="error-objects-multiple-errors" class="headerlink"></a> Multiple Errors
@@ -232,7 +232,7 @@ Content-Type: application/vnd.api+json
   "errors": [
     {
       "status": "403",
-      "source": { "pointer": "/data/attributes/secret-powers" },
+      "source": { "pointer": "/data/attributes/secretPowers" },
       "detail": "Editing secret powers is not authorized on Sundays."
     },
     {
@@ -252,7 +252,7 @@ Content-Type: application/vnd.api+json
 
 The only uniqueness constraint on error objects is the `id` field. Thus,
 multiple errors on the same attribute can each be given their own error
-object. The example below shows multiple errors on the `"first-name"` attribute:
+object. The example below shows multiple errors on the `"firstName"` attribute:
 
 ```http
 HTTP/1.1 422 Unprocessable Entity
@@ -261,12 +261,12 @@ Content-Type: application/vnd.api+json
 {
   "errors": [
     {
-      "source": { "pointer": "/data/attributes/first-name" },
+      "source": { "pointer": "/data/attributes/firstName" },
       "title": "Invalid Attribute",
       "detail": "First name must contain at least three characters."
     },
     {
-      "source": { "pointer": "/data/attributes/first-name" },
+      "source": { "pointer": "/data/attributes/firstName" },
       "title": "Invalid Attribute",
       "detail": "First name must contain an emoji."
     }
@@ -276,7 +276,7 @@ Content-Type: application/vnd.api+json
 
 > Note: in the responses above with a 422 status code, `400 Bad Request` would
 also be acceptable. ([More details.](http://stackoverflow.com/a/20215807/1261879))
-JSON API doesn't take a position on 400 vs. 422.
+JSON:API doesn't take a position on 400 vs. 422.
 
 ### <a href="#error-objects-error-codes" id="error-objects-error-codes" class="headerlink"></a> Error Codes
 
@@ -307,7 +307,7 @@ Content-Type: application/vnd.api+json
   "errors": [
     {
       "code":   "123",
-      "source": { "pointer": "/data/attributes/first-name" },
+      "source": { "pointer": "/data/attributes/firstName" },
       "title":  "Value is too short",
       "detail": "First name must contain at least three characters."
     },
@@ -329,14 +329,14 @@ Content-Type: application/vnd.api+json
 Notice that this response includes not only the `errors` top-level member,
 but the `jsonapi` top-level member. Error responses may not contain the
 top-level `data` member, but can include all the other top-level members
-JSON API defines.
+JSON:API defines.
 
 Also, notice that the third error object lacks a `detail` member (perhaps
 for security). Again, all error object members are optional.
 
 ### <a href="#error-objects-source-usage" id="error-objects-source-usage" class="headerlink"></a> Advanced `source` Usage
 
-In the example below, the user is sending an invalid JSON API
+In the example below, the user is sending an invalid JSON:API
 request, because it's missing the `data` member:
 
 ```http
@@ -389,7 +389,7 @@ The `source` member can also be used to indicate that the error originated
 from a problem with a URI query parameter, like so:
 
 ```http
-GET /api/posts/1?include=auther HTTP/1.1
+GET /api/posts/1?include=author HTTP/1.1
 ```
 
 ```http
@@ -401,15 +401,15 @@ Content-Type: application/vnd.api+json
     {
       "source": { "parameter": "include" },
       "title":  "Invalid Query Parameter",
-      "detail": "The resource does not have an `auther` relationship path."
+      "detail": "The resource does not have an `author` relationship path."
     }
   ]
 }
 ```
 
-In most cases, JSON API requires the server to return an error when it encounters
-an invalid value for a JSON API–defined query parameter. However, for API-specific
-query parameters (i.e. those not defined by JSON API), a server may choose to
+In most cases, JSON:API requires the server to return an error when it encounters
+an invalid value for a JSON:API–defined query parameter. However, for API-specific
+query parameters (i.e. those not defined by JSON:API), a server may choose to
 ignore an invalid parameter and have the request succeed, rather than respond with
 an error. [API-specific query parameters must contain one non a-z
 character.](http://jsonapi.org/format/#query-parameters)

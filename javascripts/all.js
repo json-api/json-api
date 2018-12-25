@@ -1,6 +1,17 @@
 //= require_tree .
 
 $(document).ready(function() {
+    // Add links within headings from user-provided profiles markup for
+    // easy jumping and so outline generation works.
+    $('h2, h3, h4, h5', document.querySelector('#profile-spec-container')).each(function() {
+      var $this = $(this);
+
+      if($this.find("a.headerlink").length === 0 && $this.attr('id')) {
+          $this.prepend('<a class="headerlink" href="#' + $this.attr('id') + '"></a>');
+      }
+    });
+
+
     // Build navigation list
     var documentOutlineElement = $("#document-outline");
 
@@ -12,7 +23,6 @@ $(document).ready(function() {
 
     // Sidebar scroll affix
     fixElement($(".sidebar"), $("footer"), 52);
-
     activateVersionPicker();
 });
 
@@ -89,6 +99,14 @@ function createOutlineFromElement(element) {
                 children: []
             };
 
+            $(this).nextUntil('h3', 'h4').each(function() {
+                childItem.children.push({
+                    title: $(this).not('a').text(),
+                    href: $(this).find('a').attr('href') || "#",
+                    children: []
+                });
+            });
+
             item.children.push(childItem);
         });
 
@@ -97,10 +115,6 @@ function createOutlineFromElement(element) {
 
     return outline;
 }
-
-/**
- * Creates a nested list from an array in the form returned by `createOutlineFromElement`.
- */
 
 /**
  * Creates a nested list from an array in the form returned by `createOutlineFromElement`.

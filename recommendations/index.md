@@ -4,16 +4,20 @@ title: "Recommendations"
 show_sidebar: true
 ---
 
-This section contains recommendations for JSON API implementations. These
+This section contains recommendations for JSON:API implementations. These
 recommendations are intended to establish a level of consistency in areas that
-are beyond the scope of the base JSON API specification.
+are beyond the scope of the base JSON:API specification.
 
 ## <a href="#naming" id="naming" class="headerlink"></a> Naming
 
-The allowed and recommended characters for an URL safe naming of members are defined in the format spec. To also standardize member names, the following (more restrictive) rules are recommended:
+The specification places certain [hard restrictions](http://jsonapi.org/format/#document-member-names) 
+on how members (i.e., keys) in a JSON:API document may named. To further 
+standardize member names, which is especially important when mixing profiles
+authored by different parties, the following rules are also recommended:
 
-- Member names **SHOULD** start and end with the characters "a-z" (U+0061 to U+007A)
-- Member names **SHOULD** contain only the characters "a-z" (U+0061 to U+007A), "0-9" (U+0030 to U+0039), and the hyphen minus (U+002D HYPHEN-MINUS, "-") as separator between multiple words.
+- Member names **SHOULD** be camel-cased (i.e., `wordWordWord`)
+- Member names **SHOULD** start and end with a character "a-z" (U+0061 to U+007A)
+- Member names **SHOULD** contain only ASCII alphanumeric characters (i.e., "a-z", "A-Z", and "0-9")
 
 ## <a href="#urls" id="urls" class="headerlink"></a> URL Design
 
@@ -109,8 +113,8 @@ for individual resource URLs should still apply when forming `self` links.
 ## <a href="#filtering" id="filtering" class="headerlink"></a> Filtering
 
 The base specification is agnostic about filtering strategies supported by a
-server. The `filter` query parameter is reserved to be used as the basis for
-any filtering strategy.
+server. The `filter` query parameter family is reserved to be used as the basis 
+for any filtering strategy.
 
 It's recommended that servers that wish to support filtering of a resource
 collection based upon associations do so by allowing query parameters that
@@ -189,7 +193,7 @@ requests honored, simply by adding the header.
 
 ## <a href="#date-and-time-fields" id="date-and-time-fields" class="headerlink"></a> Formatting Date and Time Fields
 
-Although JSON API does not specify the format of date and time fields, it is
+Although JSON:API does not specify the format of date and time fields, it is
 recommended that servers align with ISO 8601. [This W3C
 NOTE](http://www.w3.org/TR/NOTE-datetime) provides an overview of the
 recommended formats.
@@ -228,6 +232,27 @@ To check the status of the job process, a client can send a request to the locat
 ```http
 GET /photos/queue-jobs/5234 HTTP/1.1
 Accept: application/vnd.api+json
+```
+
+Requests for still-pending jobs **SHOULD** return a status `200 OK`, as the server is reporting the status successfully. Optionally, the server can return a `Retry-After` header to provide guidance to the client as to how long it should wait before checking again. Recommendations to retry sooner than 1 second can be accomplised with `Retry-After: 0`.
+
+```http
+HTTP/1.1 200 OK
+Content-Type: application/vnd.api+json
+Retry-After: 1
+
+{
+  "data": {
+    "type": "queue-jobs",
+    "id": "5234",
+    "attributes": {
+      "status": "Pending request, waiting other process"
+    },
+    "links": {
+      "self": "/photos/queue-jobs/5234"
+    }
+  }
+}
 ```
 
 When job process is done, the request **SHOULD** return a status `303 See other` with a link in `Location` header.

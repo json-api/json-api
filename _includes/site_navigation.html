@@ -1,0 +1,13 @@
+<nav class="site-nav">
+  <div class="nav-inner">
+    <ul>
+      {% assign url = page.url|remove:'index.html' %}
+      {% for link in site.navigation %}
+        <li {% if url == link.url or url contains "/profiles/" and link.url contains "/extensions" %}class="active"{% endif %}><a href="{{link.url}}" title="{{link.title}}">{{link.title}}</a></li>
+      {% endfor %}
+      <li class="version">
+        <a href="/format/#status" class="pill">v{{ site.latest_version }} <span class="stable">Stable</span></a>
+      </li>
+    </ul>
+  </div>
+</nav>

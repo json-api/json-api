@@ -1,0 +1,58 @@
+---
+permalink: /profile_template.md
+---
+---
+name: Your Profile's Name
+short_description: |
+  A short descriptions (1-3 sentences) about your profile's purpose and
+  features, to help others determine if it will work for them.
+
+extended_description: |
+  A description used in the introduction section on the profile's dedicated
+  page. This can be as long as you want, and can contain markdown.
+
+# If your profile defines values that can only be used in document members that
+# were introduced after JSON:API v1.0, change the minimum_jsonapi_version field
+# and fill in the minimum_jsonapi_version_explanation field with an explanation
+# of the features you're relying on from the JSON:API version you've indicated.
+minimum_jsonapi_version: 1.0
+minimum_jsonapi_version_explanation:
+
+# Url of a Github repo or some other place where people can
+# ask questions/start discussions about your extension.
+discussion_url: http://example.com
+
+# Name and email are required for each editor;
+# phone and website are optional.
+editors:
+  - name: Editor 1
+    email: editor1@gmail.com
+  - name: Editor 2
+    email: editor2@gmail.com
+    website: https://example.com
+    phone: +15554443333 # use `tel` url format.
+
+# Valid categories are listed under the profile_categories section
+# in https://github.com/json-api/json-api/blob/gh-pages/_config.yml
+categories:
+  - Filtering
+---
+
+Here, specify your profile. This description should be detailed enough to allow
+for interoperable implementations, but it otherwise doesn't need to be formal.
+At the very least, describe the elements (document data or query parameters)
+your profile defines and the allowed values for each.
+
+Make sure you __follow the authoring guidelines__, which describe what profiles
+are and are not allowed to do, and how they should be designed to evolve over time.
+
+Those authoring guidelines are at:
+  http://jsonapi.org/format/1.1/#profiles-authoring
+
+Finally, it is **strongly encouraged** that your profile reuse objects,
+patterns, and key names from the main JSON API specification where appropriate.
+
+For instance, if your profile defines a field that points to another JSON API
+resource, that field should hold a resource identifier object. Or, if your
+extension defines a "type" key, it should use that key as JSON API does
+(i.e. to hold a string indicating a resource's type).

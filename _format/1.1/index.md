@@ -1,63 +1,80 @@
 ---
 version: 1.1
+status: rc
+release_date: 2019-01-31
 ---
 
 ## <a href="#introduction" id="introduction" class="headerlink"></a> Introduction
 
-JSON API is a specification for how a client should request that resources be
-fetched or modified, and how a server should respond to those requests.
+JSON:API is a specification for how a client should request that resources be
+fetched or modified, and how a server should respond to those requests. JSON:API
+can also be easily extended with [profiles].
 
-JSON API is designed to minimize both the number of requests and the amount of
+JSON:API is designed to minimize both the number of requests and the amount of
 data transmitted between clients and servers. This efficiency is achieved
 without compromising readability, flexibility, or discoverability.
 
-JSON API requires use of the JSON API media type
+JSON:API requires use of the JSON:API media type
 ([`application/vnd.api+json`](http://www.iana.org/assignments/media-types/application/vnd.api+json))
 for exchanging data.
 
 ## <a href="#conventions" id="conventions" class="headerlink"></a> Conventions
 
 The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD",
-"SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this document are to be
-interpreted as described in RFC 2119
-[[RFC2119](http://tools.ietf.org/html/rfc2119)].
+"SHOULD NOT", "RECOMMENDED", "NOT RECOMMENDED", "MAY", and "OPTIONAL" in this
+document are to be interpreted as described in
+[BCP 14](https://tools.ietf.org/html/bcp14)
+[[RFC2119](https://tools.ietf.org/html/rfc2119)]
+[[RFC8174](https://tools.ietf.org/html/rfc8174)]
+when, and only when, they appear in all capitals, as shown here.
 
 ## <a href="#content-negotiation" id="content-negotiation" class="headerlink"></a> Content Negotiation
 
+### <a href="#content-negotiation-all" id="content-negotiation-all" class="headerlink"></a> Universal Responsibilities
+
+The JSON:API media type is [`application/vnd.api+json`](http://www.iana.org/assignments/media-types/application/vnd.api+json).
+Clients and servers **MUST** send all JSON:API data using this media type in the
+`Content-Type` header.
+
+Further, the JSON:API media type **MUST** always be specified with either no
+media type parameters or with only the `profile` parameter. This applies to both
+the `Content-Type` and `Accept` headers.
+
+> Note: A media type parameter is an extra piece of information that can
+accompany a media type. For example, in the header
+`Content-Type: text/html; charset="utf-8"`, the media type is `text/html` and
+`charset` is a parameter.
+
+The `profile` parameter is used to support [profiles].
+
 ### <a href="#content-negotiation-clients" id="content-negotiation-clients" class="headerlink"></a> Client Responsibilities
 
-Clients **MUST** send all JSON API data in request documents with the header
-`Content-Type: application/vnd.api+json` without any media type parameters.
-
-Clients that include the JSON API media type in their `Accept` header **MUST**
+Clients that include the JSON:API media type in their `Accept` header **MUST**
 specify the media type there at least once without any media type parameters.
 
-Clients **MUST** ignore any parameters for the `application/vnd.api+json`
-media type received in the `Content-Type` header of response documents.
+When processing a JSON:API response document, clients **MUST** ignore any
+parameters other than `profile` in the server's `Content-Type` header.
 
 ### <a href="#content-negotiation-servers" id="content-negotiation-servers" class="headerlink"></a> Server Responsibilities
 
-Servers **MUST** send all JSON API data in response documents with the header
-`Content-Type: application/vnd.api+json` without any media type parameters.
-
 Servers **MUST** respond with a `415 Unsupported Media Type` status code if
 a request specifies the header `Content-Type: application/vnd.api+json`
-with any media type parameters.
+with any media type parameters other than `profile`.
 
 Servers **MUST** respond with a `406 Not Acceptable` status code if a
-request's `Accept` header contains the JSON API media type and all instances
+request's `Accept` header contains the JSON:API media type and all instances
 of that media type are modified with media type parameters.
 
-> Note: The content negotiation requirements exist to allow future versions
-of this specification to use media type parameters for extension negotiation
-and versioning.
+> Note: These content negotiation requirements exist to allow future versions
+of this specification to add other media type parameters for extension
+negotiation and versioning.
 
 ## <a href="#document-structure" id="document-structure" class="headerlink"></a> Document Structure
 
-This section describes the structure of a JSON API document, which is identified
+This section describes the structure of a JSON:API document, which is identified
 by the media type [`application/vnd.api+json`](http://www.iana.org/assignments/media-types/application/vnd.api+json).
-JSON API documents are defined in JavaScript Object Notation (JSON)
-[[RFC7159](http://tools.ietf.org/html/rfc7159)].
+JSON:API documents are defined in JavaScript Object Notation (JSON)
+[[RFC8259](http://tools.ietf.org/html/rfc8259)].
 
 Although the same media type is used for both request and response documents,
 certain aspects are only applicable to one or the other. These differences are
@@ -72,7 +89,7 @@ changes.
 
 ### <a href="#document-top-level" id="document-top-level" class="headerlink"></a> Top Level
 
-A JSON object **MUST** be at the root of every JSON API request and response
+A JSON object **MUST** be at the root of every JSON:API request and response
 containing data. This object defines a document's "top level".
 
 A document **MUST** contain at least one of the following top-level members:
@@ -99,6 +116,8 @@ The top-level [links object][links] **MAY** contain the following members:
 * `self`: the [link][links] that generated the current response document.
 * `related`: a [related resource link] when the primary data represents a
   resource relationship.
+* `profile`: an array of [links][link], each specifying a [profile][profiles]
+  in use in the document.
 * [pagination] links for the primary data.
 
 The document's "primary data" is a representation of the resource or collection
@@ -146,7 +165,7 @@ it only contains one item or is empty.
 
 ### <a href="#document-resource-objects" id="document-resource-objects" class="headerlink"></a> Resource Objects
 
-"Resource objects" appear in a JSON API document to represent resources.
+"Resource objects" appear in a JSON:API document to represent resources.
 
 A resource object **MUST** contain at least the following top-level members:
 
@@ -160,7 +179,7 @@ In addition, a resource object **MAY** contain any of these top-level members:
 
 * `attributes`: an [attributes object][attributes] representing some of the resource's data.
 * `relationships`: a [relationships object][relationships] describing relationships between
- the resource and other JSON API resources.
+ the resource and other JSON:API resources.
 * `links`: a [links object][links] containing links related to the resource.
 * `meta`: a [meta object][meta] containing non-standard meta-information about a
   resource that can not be represented as an attribute or relationship.
@@ -217,7 +236,7 @@ other and with `type` and `id`. In other words, a resource can not have an
 attribute and relationship with the same name, nor can it have an attribute
 or relationship named `type` or `id`.
 
-#### <a href="#document-resource-object-attributes" id="document-resource-object-attributes" class="headerlink"></a> Attributes
+##### <a href="#document-resource-object-attributes" id="document-resource-object-attributes" class="headerlink"></a> Attributes
 
 The value of the `attributes` key **MUST** be an object (an "attributes
 object"). Members of the attributes object ("attributes") represent information
@@ -236,7 +255,7 @@ alongside other information to be represented in a resource object, these keys
 
 > Note: See [fields] and [member names] for more restrictions on this container.
 
-#### <a href="#document-resource-object-relationships" id="document-resource-object-relationships" class="headerlink"></a> Relationships
+##### <a href="#document-resource-object-relationships" id="document-resource-object-relationships" class="headerlink"></a> Relationships
 
 The value of the `relationships` key **MUST** be an object (a "relationships
 object"). Members of the relationships object ("relationships") represent
@@ -262,11 +281,13 @@ A "relationship object" **MUST** contain at least one of the following:
   relationship.
 
 A relationship object that represents a to-many relationship **MAY** also contain
-[pagination] links under the `links` member, as described below.
+[pagination] links under the `links` member, as described below. Any
+[pagination] links in a relationship object **MUST** paginate the relationship
+data, not the related resources.
 
 > Note: See [fields] and [member names] for more restrictions on this container.
 
-#### <a href="#document-resource-object-related-resource-links" id="document-resource-object-related-resource-links" class="headerlink"></a> Related Resource Links
+##### <a href="#document-resource-object-related-resource-links" id="document-resource-object-related-resource-links" class="headerlink"></a> Related Resource Links
 
 A "related resource link" provides access to [resource objects][resource objects] [linked][links]
 in a [relationship][relationships]. When fetched, the related resource object(s)
@@ -281,7 +302,7 @@ relationship isn't currently associated with any target resources. Additionally,
 a related resource link **MUST NOT** change because its relationship's content
 changes.
 
-#### <a href="#document-resource-object-linkage" id="document-resource-object-linkage" class="headerlink"></a> Resource Linkage
+##### <a href="#document-resource-object-linkage" id="document-resource-object-linkage" class="headerlink"></a> Resource Linkage
 
 Resource linkage in a [compound document] allows a client to link together all
 of the included [resource objects] without having to `GET` any URLs via [links].
@@ -395,7 +416,7 @@ A complete example document with multiple included relationships:
     "type": "articles",
     "id": "1",
     "attributes": {
-      "title": "JSON API paints my bikeshed!"
+      "title": "JSON:API paints my bikeshed!"
     },
     "links": {
       "self": "http://example.com/articles/1"
@@ -424,8 +445,8 @@ A complete example document with multiple included relationships:
     "type": "people",
     "id": "9",
     "attributes": {
-      "first-name": "Dan",
-      "last-name": "Gebhardt",
+      "firstName": "Dan",
+      "lastName": "Gebhardt",
       "twitter": "dgeb"
     },
     "links": {
@@ -504,31 +525,31 @@ For example:
 ### <a href="#document-links" id="document-links" class="headerlink"></a> Links
 
 Where specified, a `links` member can be used to represent links. The value
-of each `links` member **MUST** be an object (a "links object").
+of this member **MUST** be an object (a "links object").
 
-Each member of a links object is a "link". A link **MUST** be represented as
-either:
+<a href="#document-links-link" id="document-links-link"></a>
+Within this object, a link **MUST** be represented as either:
 
-* a string containing the link's URL.
-* <a id="document-links-link-object"></a>an object ("link object") which can 
+* a string containing the link's URI.
+* <a id="document-links-link-object"></a>an object ("link object") which can
   contain the following members:
-  * `href`: a string containing the link's URL.
+  * `href`: a string containing the link's URI.
   * `meta`: a meta object containing non-standard meta-information about the
     link.
+  * Any link-specific target attributes described below.
 
-The following `self` link is simply a URL:
+Except for the `profile` key in the top-level links object and the `type` 
+key in an [error object]'s links object, each key present in a links object 
+**MUST** have a single link as its value. The aforementioned `profile` and
+`type` keys, if present, **MUST** hold an array of links.
+
+In the example below, the `self` link is simply a URI string, whereas the 
+`related` link uses the object form to provide meta information about a 
+related resource collection:
 
 ```json
 "links": {
-  "self": "http://example.com/posts"
-}
-```
-
-The following `related` link includes a URL as well as meta-information
-about a related resource collection:
-
-```json
-"links": {
+  "self": "http://example.com/articles/1",
   "related": {
     "href": "http://example.com/articles/1/comments",
     "meta": {
@@ -538,19 +559,45 @@ about a related resource collection:
 }
 ```
 
-> Note: Additional members may be specified for links objects and link
-objects in the future. It is also possible that the allowed values of
-additional members will be expanded (e.g. a `collection` link may support an
-array of values, whereas a `self` link does not).
+#### <a href="#profile-links" id="profile-links" class="headerlink"></a> Profile Links
 
-### <a href="#document-jsonapi-object" id="document-jsonapi-object" class="headerlink"></a> JSON API Object
+Like all [links][link], a link in an array of `profile` links can be represented
+with a [link object]. In that case, the link object **MAY** contain an `aliases` 
+member listing any [profile aliases].
 
-A JSON API document **MAY** include information about its implementation
+Here, the `profile` key specifies an array of `profile` links, including one
+that includes a [profile alias][profile aliases]:
+
+```json
+"links": {
+  "profile": [
+    "http://example.com/profiles/flexible-pagination",
+    {
+      "href": "http://example.com/profiles/resource-versioning",
+      "aliases": {
+        "version": "v"
+      }
+    }
+  ]
+}
+```
+
+> Note: Additional link types, similar to `profile` links, may be specified in
+the future.
+
+### <a href="#document-jsonapi-object" id="document-jsonapi-object" class="headerlink"></a> JSON:API Object
+
+A JSON:API document **MAY** include information about its implementation
 under a top level `jsonapi` member. If present, the value of the `jsonapi`
-member **MUST** be an object (a "jsonapi object"). The jsonapi object **MAY**
-contain a `version` member whose value is a string indicating the highest JSON
-API version supported. This object **MAY** also contain a `meta` member, whose
-value is a [meta] object that contains non-standard meta-information.
+member **MUST** be an object (a "jsonapi object").
+
+The jsonapi object **MAY** contain any of the following members:
+
+* `version` - whose value is a string indicating the highest JSON:API version
+  supported.
+* `meta` - a [meta] object that contains non-standard meta-information.
+
+A simple example appears below:
 
 ```json
 {
@@ -563,12 +610,12 @@ value is a [meta] object that contains non-standard meta-information.
 If the `version` member is not present, clients should assume the server
 implements at least version 1.0 of the specification.
 
-> Note: Because JSON API is committed to making additive changes only, the
+> Note: Because JSON:API is committed to making additive changes only, the
 version string primarily indicates which new features a server may support.
 
 ### <a href="#document-member-names" id="document-member-names" class="headerlink"></a> Member Names
 
-All member names used in a JSON API document **MUST** be treated as case sensitive
+All member names used in a JSON:API document **MUST** be treated as case sensitive
 by clients and servers, and they **MUST** meet all of the following conditions:
 
 - Member names **MUST** contain at least one character.
@@ -599,7 +646,7 @@ first or last character:
 
 The following characters **MUST NOT** be used in member names:
 
-- U+002B PLUS SIGN, "+" _(used for ordering)_
+- U+002B PLUS SIGN, "+" _(has overloaded meaning in URL query strings)_
 - U+002C COMMA, "," _(used as a separator between relationship paths)_
 - U+002E PERIOD, "." _(used as a separator within relationship paths)_
 - U+005B LEFT SQUARE BRACKET, "[" _(used in sparse fieldsets)_
@@ -636,20 +683,20 @@ The following characters **MUST NOT** be used in member names:
 
 Member names **MAY** also begin with an at sign (U+0040 COMMERCIAL AT, "@").
 Members named this way are called "@-Members". @-Members **MAY** appear
-anywhere in a JSON API document.
+anywhere in a JSON:API document.
 
-However, JSON API processors **MUST** completely ignore @-Members (i.e. not
-treat them as JSON API data).
+However, JSON:API processors **MUST** completely ignore @-Members (i.e. not
+treat them as JSON:API data).
 
 Moreover, the existence of @-Members **MUST** be ignored when interpreting all
-JSON API definitions and processing instructions given outside of this
+JSON:API definitions and processing instructions given outside of this
 subsection. For example, an [attribute][attributes] is defined above as any
 member of the attributes object. However, because @-Members must be ignored
 when interpreting that definition, an @-Member that occurs in an attributes
 object is not an attribute.
 
 > Note: Among other things, "@" members can be used to add JSON-LD data to a
-JSON API document. Such documents should be served with [an extra header](http://www.w3.org/TR/json-ld/#interpreting-json-as-json-ld)
+JSON:API document. Such documents should be served with [an extra header](http://www.w3.org/TR/json-ld/#interpreting-json-as-json-ld)
 to convey to JSON-LD clients that they contain JSON-LD data.
 
 ## <a href="#fetching" id="fetching" class="headerlink"></a> Fetching Data
@@ -713,7 +760,7 @@ Content-Type: application/vnd.api+json
     "type": "articles",
     "id": "1",
     "attributes": {
-      "title": "JSON API paints my bikeshed!"
+      "title": "JSON:API paints my bikeshed!"
     }
   }, {
     "type": "articles",
@@ -765,7 +812,7 @@ Content-Type: application/vnd.api+json
     "type": "articles",
     "id": "1",
     "attributes": {
-      "title": "JSON API paints my bikeshed!"
+      "title": "JSON:API paints my bikeshed!"
     },
     "relationships": {
       "author": {
@@ -937,14 +984,16 @@ responses, in accordance with
 
 An endpoint **MAY** return resources related to the primary data by default.
 
-An endpoint **MAY** also support an `include` request parameter to allow the
+An endpoint **MAY** also support an `include` query parameter to allow the
 client to customize which related resources should be returned.
 
 If an endpoint does not support the `include` parameter, it **MUST** respond
 with `400 Bad Request` to any requests that include it.
 
-If an endpoint supports the `include` parameter and a client supplies it,
-the server **MUST NOT** include unrequested [resource objects] in the `included`
+If an endpoint supports the `include` parameter and a client supplies it:
+
+ - The server's response **MUST** be a [compound document] with an `included` key — even if that `included` key holds an empty array (because the requested relationships are empty).
+ - The server **MUST NOT** include unrequested [resource objects] in the `included`
 section of the [compound document].
 
 The value of the `include` parameter **MUST** be a comma-separated (U+002C
@@ -980,13 +1029,12 @@ example, a response to a request for `comments.author` should include `comments`
 as well as the `author` of each of those `comments`.
 
 > Note: A server may choose to expose a deeply nested relationship such as
-`comments.author` as a direct relationship with an alias such as
-`comment-authors`. This would allow a client to request
-`/articles/1?include=comment-authors` instead of
-`/articles/1?include=comments.author`. By abstracting the nested
-relationship with an alias, the server can still provide full linkage in
-compound documents without including potentially unwanted intermediate
-resources.
+`comments.author` as a direct relationship with an alternative name such as
+`commentAuthors`. This would allow a client to request
+`/articles/1?include=commentAuthors` instead of
+`/articles/1?include=comments.author`. By exposing the nested relationship with 
+an alternative name, the server can still provide full linkage in compound 
+documents without including potentially unwanted intermediate resources.
 
 Multiple related resources can be requested in a comma-separated list:
 
@@ -1014,9 +1062,9 @@ resource or relationship.
 ### <a href="#fetching-sparse-fieldsets" id="fetching-sparse-fieldsets" class="headerlink"></a> Sparse Fieldsets
 
 A client **MAY** request that an endpoint return only specific [fields] in the
-response on a per-type basis by including a `fields[TYPE]` parameter.
+response on a per-type basis by including a `fields[TYPE]` query parameter.
 
-The value of the `fields` parameter **MUST** be a comma-separated (U+002C
+The value of any `fields[TYPE]` parameter **MUST** be a comma-separated (U+002C
 COMMA, ",") list that refers to the name(s) of the fields to be returned.
 
 If a client requests a restricted set of [fields] for a given resource type,
@@ -1029,8 +1077,8 @@ Accept: application/vnd.api+json
 ```
 
 > Note: The above example URI shows unencoded `[` and `]` characters simply for
-readability. In practice, these characters must be percent-encoded, per the
-requirements [in RFC 3986](http://tools.ietf.org/html/rfc3986#section-3.4).
+readability. In practice, these characters should be percent-encoded. See 
+"[Square Brackets in Parameter Names](#appendix-query-details-square-brackets)".
 
 > Note: This section applies to any endpoint that responds with resources as
 primary or included data, regardless of the request type. For instance, a
@@ -1043,7 +1091,7 @@ A server **MAY** choose to support requests to sort resource collections
 according to one or more criteria ("sort fields").
 
 > Note: Although recommended, sort fields do not necessarily need to
-correspond to resource attribute and association names.
+correspond to resource attribute and relationship names.
 
 > Note: It is recommended that dot-separated (U+002E FULL-STOP, ".") sort
 fields be used to request sorting based upon relationship attributes. For
@@ -1117,34 +1165,26 @@ Keys **MUST** either be omitted or have a `null` value to indicate that a
 particular link is unavailable.
 
 Concepts of order, as expressed in the naming of pagination links, **MUST**
-remain consistent with JSON API's [sorting rules](#fetching-sorting).
+remain consistent with JSON:API's [sorting rules](#fetching-sorting).
 
-The `page` query parameter is reserved for pagination. Servers and clients
-**SHOULD** use this key for pagination operations.
+The `page` [query parameter family] is reserved for pagination. Servers and 
+clients **SHOULD** use these parameters for pagination operations.
 
-> Note: JSON API is agnostic about the pagination strategy used by a server.
-Effective pagination strategies include (but are not limited to):
-page-based, offset-based, and cursor-based. The `page` query parameter can
-be used as a basis for any of these strategies. For example, a page-based
-strategy might use query parameters such as `page[number]` and `page[size]`,
-an offset-based strategy might use `page[offset]` and `page[limit]`, while a
-cursor-based strategy might use `page[cursor]`.
-
-> Note: The example query parameters above use unencoded `[` and `]` characters
-simply for readability. In practice, these characters must be percent-encoded,
-per the requirements in [RFC 3986](http://tools.ietf.org/html/rfc3986#section-3.4).
+> Note: JSON API is agnostic about the pagination strategy used by a server, but
+> the `page` query parameter family can be used regardless of the strategy 
+> employed. For example, a page-based strategy might use query parameters such 
+> as `page[number]` and `page[size]`, while a cursor-based strategy might use 
+> `page[cursor]`.
 
 > Note: This section applies to any endpoint that responds with a resource
 collection as primary data, regardless of the request type.
 
 ### <a href="#fetching-filtering" id="fetching-filtering" class="headerlink"></a> Filtering
 
-The `filter` query parameter is reserved for filtering data. Servers and clients
-**SHOULD** use this key for filtering operations.
+The `filter` [query parameter family] is reserved for filtering data. Servers 
+and clients **SHOULD** use these parameters for filtering operations.
 
-> Note: JSON API is agnostic about the strategies supported by a server. The
-`filter` query parameter can be used as the basis for any number of filtering
-strategies.
+> Note: JSON API is agnostic about the strategies supported by a server.
 
 ## <a href="#crud" id="crud" class="headerlink"></a> Creating, Updating and Deleting Resources
 
@@ -1155,7 +1195,7 @@ A request **MUST** completely succeed or fail (in a single "transaction"). No
 partial updates are allowed.
 
 > Note: The `type` member is required in every [resource object][resource objects] throughout requests and
-responses in JSON API. There are some cases, such as when `POST`ing to an
+responses in JSON:API. There are some cases, such as when `POST`ing to an
 endpoint representing heterogenous data, when the `type` could not be inferred
 from the endpoint. However, picking and choosing when it is required would be
 confusing; it would be hard to remember when it was required and when it was
@@ -1514,7 +1554,7 @@ responses, in accordance with
 ### <a href="#crud-updating-relationships" id="crud-updating-relationships" class="headerlink"></a> Updating Relationships
 
 Although relationships can be modified along with resources (as described
-above), JSON API also supports updating of relationships independently at
+above), JSON:API also supports updating of relationships independently at
 URLs from [relationship links][relationships].
 
 > Note: Relationships are updated without exposing the underlying server
@@ -1524,7 +1564,7 @@ has many authors, it is possible to remove one of the authors from the article
 without deleting the person itself. Similarly, if an article has many tags, it
 is possible to add or remove tags. Under the hood on the server, the first
 of these examples might be implemented with a foreign key, while the second
-could be implemented with a join table, but the JSON API protocol would be
+could be implemented with a join table, but the JSON:API protocol would be
 the same in both cases.
 
 > Note: A server may choose to delete the underlying resource if a
@@ -1669,7 +1709,7 @@ Accept: application/vnd.api+json
 
 > Note: RFC 7231 specifies that a DELETE request may include a body, but
 that a server may reject the request. This spec defines the semantics of a
-server, and we are defining its semantics for JSON API.
+server, and we are defining its semantics for JSON:API.
 
 #### <a href="#crud-updating-relationship-responses" id="crud-updating-relationship-responses" class="headerlink"></a> Responses
 
@@ -1763,19 +1803,526 @@ responses, in accordance with
 
 ## <a href="#query-parameters" id="query-parameters" class="headerlink"></a> Query Parameters
 
-Implementation specific query parameter names **MUST** adhere to the same
-constraints as [member names], with the additional requirement that they
-**MUST** contain at least one non a-z character (i.e., outside U+0061 to U+007A).
+### <a href="#query-parameters-families" id="query-parameters-families" class="headerlink"></a>  Query Parameter Families
+Although "query parameter" is a common term in everyday web development, it is
+not a well-standardized concept. Therefore, JSON:API provides its own 
+[definition of a query parameter](#appendix-query-details).
 
-It is **RECOMMENDED** that a U+002D HYPHEN-MINUS ("-"), U+005F LOW LINE ("_"),
-or capital letter (e.g. camelCasing) be used to satisfy the above requirement.
+For the most part, JSON:API's definition coincides with colloquial usage, and its 
+details can be safely ignored. However, one important consequence of this 
+definition is that a URL like the following is considered to have two distinct
+query parameters:
+
+```
+/?page[offset]=0&page[limit]=10
+```
+
+The two parameters are named `page[offset]` and `page[limit]`; there is no 
+single `page` parameter.
+
+In practice, however, parameters like `page[offset]` and `page[limit]` are 
+usually defined and processed together, and it's convenient to refer to them 
+collectively. Therefore, JSON:API introduces the concept of a query parameter 
+family.
+
+A "query parameter family" is the set of all query parameters whose name starts 
+with a "base name", followed by zero or more instances of empty square brackets 
+(i.e. `[]`) or square-bracketed legal member names. The family is referred to 
+by its base name.
+
+For example, the `filter` query parameter family includes parameters named:
+`filter`, `filter[x]`, `filter[]`, `filter[x][]`, `filter[][]`, `filter[x][y]`, 
+etc. However, `filter[_]` is not a valid parameter name in the family, because
+`_` is not a valid [member name][member names].
+
+### <a href="#query-parameters-custom" id="query-parameters-custom" class="headerlink"></a>   Implementation-Specific Query Parameters
+Implementations **MAY** support custom query parameters. However, the names of 
+these query parameters **MUST** come from a [family][query parameter family] 
+whose base name is a legal [member name][member names] and also contains at least 
+one non a-z character (i.e., outside U+0061 to U+007A).
+
+It is **RECOMMENDED** that a capital letter (e.g. camelCasing) be used to 
+satisfy the above requirement.
 
 If a server encounters a query parameter that does not follow the naming
 conventions above, and the server does not know how to process it as a query
 parameter from this specification, it **MUST** return `400 Bad Request`.
 
-> Note: This is to preserve the ability of JSON API to make additive additions
-to standard query parameters without conflicting with existing implementations.
+> Note: By forbidding the use of query parameters that contain only the characters
+> \[a-z\], JSON:API is reserving the ability to standardize additional query
+> parameters later without conflicting with existing implementations.
+
+## <a href="#profiles" id="profiles" class="headerlink"></a> Profiles
+
+JSON:API supports the use of "profiles" as a way to indicate additional
+semantics that apply to a JSON:API request/document, without altering the
+basic semantics described in this specification.
+
+A profile is a separate specification defining these additional semantics. 
+
+[RFC 6906](https://tools.ietf.org/html/rfc6906) covers the nature of profile
+identification:
+
+> Profiles are identified by URI... The presence of a specific URI has to be
+  sufficient for a client to assert that a resource representation conforms to 
+  a profile [regardless of any content that may or may not be available at that 
+  URI].
+
+However, to aid human understanding, visiting a profile's URI **SHOULD** return
+documentation of the profile.
+
+The following example profile reserves a `timestamps` member in the `meta`
+object of every resource object:
+
+<a id="profiles-timestamp-profile"></a>
+```text
+# Timestamps profile
+
+## Introduction
+
+This page specifies a profile for the `application/vnd.api+json` media type,
+as described in the [JSON:API specification](http://jsonapi.org/format/).
+
+This profile allows every resource in a JSON:API document to represent
+significant timestamps in a consistent way.
+
+## Document Structure
+
+Every resource object **MAY** include a `timestamps` member in its associated 
+`meta` object. If this member is present, its value **MUST** be an object that 
+**MAY** contain any of the following members:
+
+* `created`
+* `updated`
+
+The value of each member **MUST** comply with the variant of ISO 8601 used by 
+JavaScript's `JSON.stringify` method to format Javascript `Date` objects. 
+
+## Keywords
+
+This profile defines the following keywords:
+
+* `timestamps`
+```
+
+### <a href="#profile-media-type-parameter" id="profile-media-type-parameter" class="headerlink"></a> `profile` Media Type Parameter
+
+The `profile` media type parameter is used to describe the application of
+one or more profiles to a JSON:API document. The value of the `profile`
+parameter **MUST** equal a space-separated (U+0020 SPACE, " ") list of profile URIs.
+
+> Note: When serializing the `profile` media type parameter, the HTTP
+> specification requires that its value be surrounded by quotation marks
+> (U+0022 QUOTATION MARK, "\"") if it contains more than one URI.
+
+A client **MAY** use the `profile` media type parameter in conjunction with the
+JSON:API media type in an `Accept` header to _request_, but not _require_, that
+the server apply one or more profiles to the response document. When such a
+request is received, a server **SHOULD** attempt to apply the requested profiles
+to its response.
+
+For example, in the following request, the client asks that the server apply the
+`http://example.com/last-modified` profile if it is able to.
+
+```http
+Accept: application/vnd.api+json;profile="http://example.com/last-modified", application/vnd.api+json
+```
+
+> Note: The second instance of the JSON:API media type in the example above is
+  required under the [client's content negotiation responsibilities](#content-negotiation-clients).
+  It is used to support old servers that don't understand the profile parameter.
+
+Servers **MAY** add profiles to a JSON:API document even if the client has not
+requested them. The recipient of a document **MUST** ignore any profiles in that
+document that it does not understand. The only exception to this is profiles
+whose support is required using the `profile` query parameter, as described later.
+
+#### <a href="#profiles-sending" id="profiles-sending" class="headerlink"></a> Sending Profiled Documents
+
+Clients and servers **MUST** include the `profile` media type parameter in
+conjunction with the JSON:API media type in a `Content-Type` header to indicate
+that they have applied one or more profiles to a JSON:API document.
+
+Likewise, clients and servers applying profiles to a JSON:API document **MUST**
+include a [top-level][top level] [`links` object][links] with a `profile` key,
+and that `profile` key **MUST** include a [link] to the URI of each profile
+that has been applied.
+
+When an older JSON:API server that doesn't support the `profile` media type
+parameter receives a document with one or more profiles, it will respond with a
+`415 Unsupported Media Type` error.
+
+After attempting to rule out other possible causes of this error, a client that
+receives a `415 Unsupported Media Type` **SHOULD** remove the profile extensions
+it has applied to the document and retry its request without the `profile` media
+type parameter. If this resolves the error, the client **SHOULD NOT** attempt to
+use profile extensions in subsequent interactions with the same API.
+
+> The most likely other causes of a 415 error are that the server doesn't
+support JSON:API at all or that the client has failed to provide a required
+profile.
+
+### <a href="#profile-query-parameter" id="profile-query-parameter" class="headerlink"></a> `profile` Query Parameter
+
+A client **MAY** use the `profile` query parameter to _require_ the server to
+apply one or more profiles when processing the request. The value of the `profile`
+query parameter **MUST** equal a URI-encoded whitespace-separated list of profile URIs.
+
+If a server receives a request requiring the application of a profile or
+combination of profiles that it can not apply, it **MUST** respond with a `400
+Bad Request` status code. The response **MUST** contain an [error object] that
+identifies the `profile` query parameter as the `source` and has the following
+URI as (one of) its `type`s:
+
+```
+https://jsonapi.org/errors/profile-not-supported
+```
+
+> Note: When a client lists a profile in the `Accept` header, it's asking the
+> server to compute its response as normal, but then send the response document
+> with some extra information, as described in the requested profile. By
+> contrast, when a client lists a profile in the `profile` *query parameter*,
+> it's asking the server to *process the incoming request* according to the
+> rules of the profile. This can fundamentally change the meaning of the 
+> server's response.
+
+#### <a href="#profile-query-parameter-omitting" id="profile-query-parameter" class="headerlink"></a> Omitting the `profile` Query Parameter
+
+Requiring the client to specify the `profile` query parameter would be 
+cumbersome. Accordingly, JSON:API defines a way that server's may infer its 
+value in many cases.
+
+To do so, a server **MAY** define an internal mapping from query parameter names 
+to profile URIs. The profile URI for a query parameter name in this mapping 
+**MUST NOT** change over time.
+
+> Note: the server may choose to map all query parameter names from the same 
+> [family][query parameter family] to one profile URI. Or, it may choose to map
+> only specific query parameter names. 
+
+If a requested URL does not contain the `profile` query parameter and does 
+contain one or more query parameters in the server's internal mapping, the 
+server may act as though the request URL contained a `profile` query parameter 
+whose value was the URI-encoded space-separated list of each unique profile URI 
+found in the server's internal mapping for the query parameters in use on the 
+request.
+
+For example, the server might support a profile that defines a meaning for the
+values of the `page[cursor]` query parameter. Then, it could define its internal 
+param name to profile URI mapping like so:
+
+```json
+{ "page[cursor]": "https://example.com/pagination-profile" }
+```
+
+Accordingly, a request for:
+
+```
+https://example.com/?page[cursor]=xyz
+```
+
+would be interpreted by the server as:
+
+```
+https://example.com/?page[cursor]=xyz&profile=https://example.com/pagination-profile
+```
+
+
+### <a href="#profile-keywords-and-aliases" id="profile-keywords-and-aliases" class="headerlink"></a> Profile Keywords and Aliases
+
+A profile **SHOULD** explicitly declare "keywords" for any elements that it
+introduces to the document structure. If a profile does not explicitly declare a
+keyword for an element, then the name of the element itself (i.e., its key in
+the document) is considered to be its keyword. All profile keywords **MUST** 
+meet this specification's requirements for [member names].
+
+For the purposes of aliasing, a profile's elements are defined shallowly. 
+In other words, if a profile introduces an object-valued document member, that 
+member is an element (and so subject to aliasing), but any keys in it are not 
+themselves elements. Likewise, if the profile defines an array-valued element, 
+the keys in nested objects within that array are not elements.
+
+The following example profile defines a single keyword, `version`:
+
+```text
+# Resource versioning profile
+
+## Introduction
+
+This page specifies a profile for the `application/vnd.api+json` media type,
+as described in the [JSON:API specification](http://jsonapi.org/format/).
+
+This profile ensures that every resource represented in a JSON:API document
+includes a version.
+
+## Document Structure
+
+Every resource **MUST** include a `meta` object containing a `version` member.
+The value of this member **MUST** be a string that represents a unique version
+for that resource.
+
+## Keywords
+
+This profile defines the following keywords:
+
+* `version`
+```
+
+This profile might be applied as follows:
+
+```json
+{
+  "data": {
+    "type": "contacts",
+    "id": "345",
+    "meta": {
+      "version": "2018-04-14-879976658"
+    },
+    "attributes": {
+      "name": "Ethan"
+    }
+  },
+  "links": {
+    "profile": ["http://example.com/profiles/resource-versioning"]
+  }
+}
+```
+
+Documents that apply a particular profile **MAY** represent each keyword with an
+alternatively named member, or "alias". An alias fully assumes any meaning
+specified for a keyword, which no longer retains that meaning. Any aliases
+associated with a profile **MUST** be represented in the profile's corresponding
+`aliases` object within its [link object][links]. The key of each alias **MUST**
+be a keyword from the profile, and the value **MUST** be an alias that applies
+to this particular representation. This aliasing mechanism allows profiles to be
+applied in a way that is both consistent with the rest of the representation and
+does not conflict with other profiles.
+
+For instance, the following document provides an alias for `version`: `v`.
+Interpreters of this representation should treat the key `v` as if it were the
+key `version` described in the profile:
+
+```json
+{
+  "data": {
+    "type": "contacts",
+    "id": "345",
+    "meta": {
+      "v": "2018-04-14-879976658"
+    },
+    "attributes": {
+      "name": "Ethan"
+    }
+  },
+  "links": {
+    "profile": [{
+      "href": "http://example.com/profiles/resource-versioning",
+      "aliases": {
+        "version": "v"
+      }
+    }]
+  }
+}
+```
+
+### <a href="#profiles-processing" id="profiles-processing" class="headerlink"></a> Processing Profiled Documents/Requests
+
+When a profile is applied to a request and/or document, the value used for each 
+of the profile's document members or query parameters is said to be "a 
+recognized value" if that value, including all parts of it, has a legal, defined
+meaning *according to the latest revision of the profile that the application is 
+aware of*.
+
+> Note: The set of recognized values is also/more technically known as the 
+> [defined text set](http://www.w3.org/2001/tag/doc/versioning-compatibility-strategies#terminology).
+
+For example, the hypothetical [timestamps profile] specifies the `timestamps` 
+element, and the meaning for two keys within it -- `created` and `updated`. 
+Therefore, in the following use of the profile, the value for the timestamps 
+element would be a recognized value: 
+
+```json
+{
+  "type": "contacts",
+  "id": "345",
+  "meta": {
+    "timestamps": { "created": "2018-08-29T18:38:17.567Z" }
+  }
+  //...
+}
+```
+
+However, in the following case, the value for `timestamps` is *not* a recognized 
+value because one of the keys in it, `createdUnixEpoch`, doesn't have a meaning
+assigned to it in the timestamps profile:
+
+```json
+{
+    "type": "contacts",
+    "id": "345",
+    "meta": {
+      "timestamps": { 
+        "createdUnixEpoch": 1535567910201, 
+        "created": "2018-08-29T18:38:17.567Z" 
+      }
+    }
+    //...
+  }
+```
+
+Likewise, if a profile defines an element and enumerates `true` and `false`
+as legal values with a specific meaning, then a string appearing as that 
+element's value would be an unrecognized value.
+
+> Note: unrecognized values are not necessarily invalid or erroneous values.
+> For example, the timestamps profile might be revised later to actually define 
+> a "createdUnixEpoch" key. This key would be unrecognized by all applications
+> that existed at the time it was defined, but not by ones created/deployed later.
+
+Each profile **MAY** define its own rules for how applications should proceed
+when encountering unrecognized values.
+
+If a profile does not define its own rules for handling unrecognized values, 
+the following rule applies by default:
+
+  1. If the value of a profile-defined query parameter is unrecognized, the 
+     server **MUST** fail the request and respond with a `400 Bad Request` and 
+     an [error object][error objects] indicating the problematic parameter.
+     
+  2. Otherwise, if the unrecognized value is a JSON object in the 
+     request/response document, and the only thing that makes it unrecognized 
+     is that it contains one or more keys that have no meaning assigned to them
+     (in the latest revision of the profile that the application is aware of),
+     then the application **MUST** simply ignore those unknown keys and 
+     continue processing the profile.
+
+  3. In all other cases, the application **MUST** assume that the profile has
+     been applied erroneously and **MUST** totally ignore the profile (i.e.,
+     process the request as if the profile were not there).
+
+In the case of our example [timestamps profile], it does not define its own 
+rules, so the above defaults would apply. 
+
+Under the first of these default rules, the unrecognized value we saw 
+above (with the `createdUnixEpoch` key) would be processed as though the 
+`createdUnixEpoch` key simply weren't present, and the application would still 
+be able to use the data in the `created` key. 
+
+However, if the user instead provided the following value, the whole timestamps
+profile would need to be ignored:
+
+```json
+{
+  //...
+  "timestamps": { 
+    "updated": "Wed Aug 29 2018 15:00:05 GMT-0400", 
+    "created": "2018-08-29T18:38:17.567Z" 
+  }
+}
+```
+
+Ignoring the profile in this case is required by the second default rule, 
+because the value for the `updated` key is not recognized under the profile's
+requirement that the `updated` key hold a string of the form produced by 
+`JSON.stringify`.
+
+### <a href="#profiles-authoring" id="profiles-authoring" class="headerlink"></a> Authoring Profiles
+
+A profile **MAY** assign meaning to elements of the document structure whose use
+is left up to each implementation, such as resource fields or members of `meta`
+objects. A profile **MUST NOT** define/assign a meaning to document members 
+in areas of the document reserved for future use by the JSON:API specification. 
+
+For example, it would be illegal for a profile to define a new key in a 
+document's [top-level][top level] object, or in a [links object][links], as 
+JSON API implementations are not allowed to add custom keys in those areas.
+
+Likewise, a profile **MAY** assign a meaning to query parameters or parameter 
+values whose details are left up to each implementation, such as `filter` and 
+all parameters that contain a non a-z character. However, profiles **MUST NOT** 
+assign a meaning to query parameters that [are reserved](#query-parameters).
+
+The meaning of an element or query parameter defined by a profile **MUST NOT** 
+vary based on the presence or absence of other profiles.
+
+The scope of a profile **MUST** be clearly delineated. The elements and query 
+parameters specified by a profile, and their meanings, **MUST NOT** change over
+time or else the profile **MUST** be considered a new profile with a new URI.
+
+> Note: When a profile changes its URI, a huge amount of interoperability is lost.
+> Users that reference the new URI will not have their messages understood by
+> implementations still aware only of the old URI, and vice-versa. Accordingly,
+> it's important to design your profile so that it can evolve without its URI
+> needing to change. See ["Revising a Profile"](#profiles-updating) for details.
+
+Finally, a profile **MUST NOT**:
+
+1. assume that, if it is supported, then other specific profiles will be 
+supported as well.
+
+2. define fixed endpoints, HTTP headers, or header values.
+
+3. alter the JSON structure of any concept defined in this specification, 
+including to allow a superset of JSON structures.
+
+
+> If you create your own profile, you are **strongly encouraged to [register](/extensions/#profile-creation) 
+> it** with the JSON API [profile registry](/extensions/), so that others can
+> find and reuse it.
+
+#### <a href="#profiles-updating" id="profiles-updating" class="headerlink"></a> Revising a Profile
+
+Profiles **MAY** be revised over time, e.g., to add new capabilities. However, 
+any such changes **MUST** be [backwards and forwards compatible](http://www.w3.org/2001/tag/doc/versioning-compatibility-strategies#terminology) 
+("compatible evolution"), in order to not break existing users of the profile.
+
+For example, the hypothetical [timestamps profile] *could not* introduce a new,
+required `deleted` member within the `timestamps` object, as that would be 
+incompatible with existing deployments of the profile, which would not include 
+this new member.
+
+The timestamps profile also *could not* evolve to define a new element as a 
+sibling of the `timestamps` key, as that would be incompatible with the rule 
+that "The elements... specified by a profile... **MUST NOT** change over time."
+
+> The practical issue with adding a sibling element is that another profile 
+> in use on the document might already define a sibling element of the same 
+> name, and existing documents would not have any aliases defined to resolve 
+> this conflict.
+
+However, the timestamps profile could evolve to allow other optional members, 
+such as `deleted`, in the `timestamps` object. This is possible because the 
+`timestamps` object is already a reserved element of the profile, and the profile
+is subject to the default rule that new (previously unrecognized) keys will
+simply be ignored by existing applications.
+
+##### <a href="#profiles-design-for-evolution" id="profiles-design-for-evolution" class="headerlink"></a> Designing Profiles to Evolve Over Time
+
+Fundamentally, for a profile to be able to change in a compatible way over time, 
+it must define -- from the beginning -- a rule describing how an application 
+that is only familiar with the original version of the profile should process 
+documents/requests that use features from an updated version of the profile.
+
+One major approach is to simply have applications ignore (at least some types of) 
+unrecognized data. This allows the profile to define new, optional features; 
+old applications will continue to work, but simply won't process/"see" these new 
+capabilities.
+
+This is essentially the strategy that JSON:API itself uses when it says that:
+
+> Client and server implementations **MUST** ignore members not recognized by 
+> this specification.
+
+Other protocols use analogous strategies. E.g., in HTTP, unknown headers are 
+simply ignored; they don't crash the processing of the request/response.
+
+As a profile author, you may define your own rules for how applications should 
+process uses of the profile that contain unrecognized data, or you may simply 
+allow the default rules described in the ["Processing Profiled Documents/Requests"](#profiles-processing)
+to take effect.
+
+If you choose to use the default rules, you **SHOULD** reserve an object-valued 
+element anywhere you expect to potentially add new features over time.
 
 ## <a href="#errors" id="errors" class="headerlink"></a> Errors
 
@@ -1795,14 +2342,18 @@ or `500 Internal Server Error` might be appropriate for multiple 5xx errors.
 
 Error objects provide additional information about problems encountered while
 performing an operation. Error objects **MUST** be returned as an array
-keyed by `errors` in the top level of a JSON API document.
+keyed by `errors` in the top level of a JSON:API document.
 
 An error object **MAY** have the following members:
 
 * `id`: a unique identifier for this particular occurrence of the problem.
 * `links`: a [links object][links] containing the following members:
-  * `about`: a [link][links] that leads to further details about this
-    particular occurrence of the problem.
+  * `about`: a [link][link] that leads to further details about this
+    particular occurrence of the problem. When derefenced, this URI **SHOULD**
+    return a human-readable description of the error.
+  * `type`: an array of [links][link] that identify the type of error 
+    that this particular error is an instance of. This URI **SHOULD** be 
+    dereferencable to a human-readable explanation of the general error.
 * `status`: the HTTP status code applicable to this problem, expressed as a
   string value.
 * `code`: an application-specific error code, expressed as a string value.
@@ -1823,6 +2374,52 @@ An error object **MAY** have the following members:
 * `meta`: a [meta object][meta] containing non-standard meta-information about the
   error.
 
+## <a href="#appendix" id="appendix" class="headerlink"></a> Appendix
+### <a href="#appendix-query-details" id="appendix-query-details" class="headerlink"></a> Query Parameters Details
+#### <a href="#appendix-query-details-parsing" id="appendix-query-details-parsing" class="headerlink"></a> Parsing/Serialization
+A query parameter is a name–value pair extracted from, or serialized into, a 
+URI's query string. 
+
+To extract the query parameters from a URI, an implementation **MUST** run the 
+URI's query string, excluding the leading question mark, through the 
+[`application/x-www-form-urlencoded` parsing algorithm](https://url.spec.whatwg.org/#urlencoded-parsing),
+with one exception: JSON:API allows the specification that defines a query 
+parameter's usage to provide its own rules for parsing the parameter's value 
+from the `value` bytes identified in steps 3.2 and and 3.3 of the `application/x-www-form-urlencoded` 
+parsing algorithm. The resulting value might not be a string.
+
+> Note: In general, the query string parsing built in to servers and browsers
+> will match the process specified above, so most implementations do not need
+> to worry about this.
+> 
+> The `application/x-www-form-urlencoded` format is referenced because it is
+> the basis for the `a=b&c=d` style that almost all query strings use today. 
+> 
+> However, `application/x-www-form-urlencoded` parsing contains the bizarre 
+> historical artifact that `+` characters must be treated as spaces, and it 
+> requires that all values be percent-decoded during parsing, which makes it
+> impossible to use [RFC 3986 delimiter characters](https://tools.ietf.org/html/rfc3986#section-2.2)
+> as delimiters. These issues motivate the exception that JSON:API defines above.
+
+Similarly, to serialize a query parameter into a URI, an implementation **MUST**
+use the [the `application/x-www-form-urlencoded` serializer](https://url.spec.whatwg.org/#concept-urlencoded-serializer),
+with the corresponding exception that a parameter's value — but not its name —
+may be serialized differently than that algorithm requires, provided the 
+serialization does not interfere with the ability to parse back the resulting URI.
+
+#### <a href="#appendix-query-details-square-brackets" id="appendix-query-details-square-brackets" class="headerlink"></a> Square Brackets in Parameter Names
+With [query parameter families][query parameter family], JSON:API allows for 
+query parameters whose names contain square brackets (i.e., U+005B "[" and 
+U+005D "]").
+
+According to the query parameter serialization rules above, a compliant 
+implementation will percent-encode these square brackets. However, some URI 
+producers — namely browsers — do not always encode them. Servers **SHOULD** 
+accept requests in which these square brackets are left unencoded in a query 
+parameter's name. If a server does accept these requests, it **MUST** treat the 
+request as equivalent to one in which the square brackets were percent-encoded.
+
+[top level]: #document-top-level
 [resource objects]: #document-resource-objects
 [attributes]: #document-resource-object-attributes
 [relationships]: #document-resource-object-relationships
@@ -1834,6 +2431,14 @@ An error object **MAY** have the following members:
 [compound document]: #document-compound-documents
 [meta]: #document-meta
 [links]: #document-links
+[link]: #document-links-link
+[link object]: #document-links-link-object
+[profiles]: #profiles
+[timestamps profile]: #profiles-timestamp-profile
+[profile aliases]: #profile-keywords-and-aliases
 [error details]: #errors
+[error object]: #error-objects
+[error objects]: #errror-objects
 [member names]: #document-member-names
 [pagination]: #fetching-pagination
+[query parameter family]: #query-parameters-families

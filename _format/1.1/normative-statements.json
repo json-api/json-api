@@ -298,7 +298,7 @@ layout: null
       "type": "normative-statements",
       "attributes": {
         "level": "MUST",
-        "description": "Clients **MUST** send all JSON API data in request documents with the header `Content-Type: application/vnd.api+json` without any media type parameters."
+        "description": "Clients **MUST** send all JSON:API data in request documents with the header `Content-Type: application/vnd.api+json` without any media type parameters."
       },
       "relationships": {
         "section": {
@@ -311,7 +311,7 @@ layout: null
       "type": "normative-statements",
       "attributes": {
         "level": "MUST",
-        "description": "Clients that include the JSON API media type in their `Accept` header **MUST** specify the media type there at least once without any media type parameters."
+        "description": "Clients that include the JSON:API media type in their `Accept` header **MUST** specify the media type there at least once without any media type parameters."
       },
       "relationships": {
         "section": {
@@ -337,7 +337,7 @@ layout: null
       "type": "normative-statements",
       "attributes": {
         "level": "MUST",
-        "description": "Servers **MUST** send all JSON API data in response documents with the header `Content-Type: application/vnd.api+json` without any media type parameters."
+        "description": "Servers **MUST** send all JSON:API data in response documents with the header `Content-Type: application/vnd.api+json` without any media type parameters."
       },
       "relationships": {
         "section": {
@@ -363,7 +363,7 @@ layout: null
       "type": "normative-statements",
       "attributes": {
         "level": "MUST",
-        "description": "Servers **MUST** respond with a `406 Not Acceptable` status code if a request's `Accept` header contains the JSON API media type and all instances of that media type are modified with media type parameters."
+        "description": "Servers **MUST** respond with a `406 Not Acceptable` status code if a request's `Accept` header contains the JSON:API media type and all instances of that media type are modified with media type parameters."
       },
       "relationships": {
         "section": {
@@ -402,7 +402,7 @@ layout: null
       "type": "normative-statements",
       "attributes": {
         "level": "MUST",
-        "description": "A JSON object MUST be at the root of every JSON API request and response containing data. This object defines a document's \"top level\"."
+        "description": "A JSON object MUST be at the root of every JSON:API request and response containing data. This object defines a document's \"top level\"."
       },
       "relationships": {
         "section": {
@@ -519,7 +519,7 @@ layout: null
       "type": "normative-statements",
       "attributes": {
         "level": "MUST",
-        "description": "In addition, a resource object MAY contain any of these top-level members:\\n\\n- `attributes`: an attributes object representing some of the resource's data.\\n- `relationships`: a relationships object describing relationships between the resource and other JSON API resources.\\n -`links`: a links object containing links related to the resource.\\n- `meta`: a meta object containing non-standard meta-information about a resource that can not be represented as an attribute or relationship."
+        "description": "In addition, a resource object MAY contain any of these top-level members:\\n\\n- `attributes`: an attributes object representing some of the resource's data.\\n- `relationships`: a relationships object describing relationships between the resource and other JSON:API resources.\\n -`links`: a links object containing links related to the resource.\\n- `meta`: a meta object containing non-standard meta-information about a resource that can not be represented as an attribute or relationship."
       },
       "relationships": {
         "section": {
@@ -870,7 +870,7 @@ layout: null
       "type": "normative-statements",
       "attributes": {
         "level": "MAY",
-        "description": "A JSON API document **MAY** include information about its implementation under a top level `jsonapi` member."
+        "description": "A JSON:API document **MAY** include information about its implementation under a top level `jsonapi` member."
       },
       "relationships": {
         "section": {
@@ -896,7 +896,7 @@ layout: null
       "type": "normative-statements",
       "attributes": {
         "level": "MAY",
-        "description": "The jsonapi object **MAY** contain a `version` member whose value is a string indicating the highest JSON API version supported."
+        "description": "The jsonapi object **MAY** contain a `version` member whose value is a string indicating the highest JSON:API version supported."
       },
       "relationships": {
         "section": {
@@ -922,7 +922,7 @@ layout: null
       "type": "normative-statements",
       "attributes": {
         "level": "MUST",
-        "description": "All member names used in a JSON API document **MUST** be treated as case sensitive by clients and servers"
+        "description": "All member names used in a JSON:API document **MUST** be treated as case sensitive by clients and servers"
       },
       "relationships": {
         "section": {
@@ -1026,7 +1026,7 @@ layout: null
       "type": "normative-statements",
       "attributes": {
         "level": "MAY",
-        "description": "@-Members **MAY** appear anywhere in a JSON API document."
+        "description": "@-Members **MAY** appear anywhere in a JSON:API document."
       },
       "relationships": {
         "section": {
@@ -1039,7 +1039,7 @@ layout: null
       "type": "normative-statements",
       "attributes": {
         "level": "MUST",
-        "description": "JSON API processors **MUST** completely ignore @-Members (i.e. not treat them as JSON API data)."
+        "description": "JSON:API processors **MUST** completely ignore @-Members (i.e. not treat them as JSON:API data)."
       },
       "relationships": {
         "section": {
@@ -1052,7 +1052,7 @@ layout: null
       "type": "normative-statements",
       "attributes": {
         "level": "MUST",
-        "description": "Moreover, the existence of @-Members **MUST** be ignored when interpreting all JSON API definitions and processing instructions given outside of the @-Members subsection."
+        "description": "Moreover, the existence of @-Members **MUST** be ignored when interpreting all JSON:API definitions and processing instructions given outside of the @-Members subsection."
       },
       "relationships": {
         "section": {
@@ -1572,7 +1572,7 @@ layout: null
       "type": "normative-statements",
       "attributes": {
         "level": "MUST",
-        "description": "Concepts of order, as expressed in the naming of pagination links, **MUST** remain consistent with JSON API's sorting rules."
+        "description": "Concepts of order, as expressed in the naming of pagination links, **MUST** remain consistent with JSON:API's sorting rules."
       },
       "relationships": {
         "section": {
@@ -2716,7 +2716,7 @@ layout: null
       "type": "normative-statements",
       "attributes": {
         "level": "MUST",
-        "description": "Error objects **MUST** be returned as an array keyed by `errors` in the top level of a JSON API document."
+        "description": "Error objects **MUST** be returned as an array keyed by `errors` in the top level of a JSON:API document."
       },
       "relationships": {
         "section": {
