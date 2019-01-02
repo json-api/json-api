@@ -79,10 +79,14 @@ To register your profile:
    `PROFILE_NAME` is the name of your profile, dasherized), and put your filled
    out template as the `index.md` file in that directory folder. (See [an example](https://github.com/json-api/json-api/tree/gh-pages/_profiles/ethanresnick/cursor-pagination).)
 
-Once submitted, one of JSON:API's editors will review your profile to check that
-it: 1) follows the template above; 2) complies with JSON:API's [requirements for profiles](/format/1.1/#profiles-authoring);
-and 3) wouldn't cause any problems were it to become widely adopted. If your
-profile meets these three criteria, it will generally be **approved within a week**.
+Once submitted, one of JSON:API's editors will review your profile to check that it: 
+
+1. follows the template above; 
+2. is specified precisely enough to enable interoperable implementations;
+3. complies with the JSON:API spec and its [requirements for profiles](/format/1.1/#profiles-authoring); and
+4. wouldn't cause any problems were it to become widely adopted. 
+
+If your profile meets these criteria, it will generally be **approved within a week**.
 
 In limited cases (e.g., if your profile defines a new, fundamental mechanism for
 doing something "architectural" that other profiles may need to do too), it might

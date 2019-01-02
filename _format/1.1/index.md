@@ -1953,10 +1953,10 @@ parameter receives a document with one or more profiles, it will respond with a
 `415 Unsupported Media Type` error.
 
 After attempting to rule out other possible causes of this error, a client that
-receives a `415 Unsupported Media Type` **SHOULD** remove the profile extensions
-it has applied to the document and retry its request without the `profile` media
-type parameter. If this resolves the error, the client **SHOULD NOT** attempt to
-use profile extensions in subsequent interactions with the same API.
+receives a `415 Unsupported Media Type` **SHOULD** remove the profiles it has 
+applied to the document and retry its request without the `profile` media type 
+parameter. If this resolves the error, the client **SHOULD NOT** attempt to
+apply profiles in subsequent interactions with the same API.
 
 > The most likely other causes of a 415 error are that the server doesn't
 support JSON:API at all or that the client has failed to provide a required
@@ -2203,7 +2203,7 @@ the following rule applies by default:
 In the case of our example [timestamps profile], it does not define its own 
 rules, so the above defaults would apply. 
 
-Under the first of these default rules, the unrecognized value we saw 
+Under the second of these default rules, the unrecognized value we saw 
 above (with the `createdUnixEpoch` key) would be processed as though the 
 `createdUnixEpoch` key simply weren't present, and the application would still 
 be able to use the data in the `created` key. 
@@ -2221,7 +2221,7 @@ profile would need to be ignored:
 }
 ```
 
-Ignoring the profile in this case is required by the second default rule, 
+Ignoring the profile in this case is required by the third default rule, 
 because the value for the `updated` key is not recognized under the profile's
 requirement that the `updated` key hold a string of the form produced by 
 `JSON.stringify`.
@@ -2239,8 +2239,8 @@ JSON API implementations are not allowed to add custom keys in those areas.
 
 Likewise, a profile **MAY** assign a meaning to query parameters or parameter 
 values whose details are left up to each implementation, such as `filter` and 
-all those that parameters that contain a non a-z character. However, profiles 
-**MUST NOT** assign a meaning to query parameters that [are reserved](#query-parameters).
+all parameters that contain a non a-z character. However, profiles **MUST NOT** 
+assign a meaning to query parameters that [are reserved](#query-parameters).
 
 The meaning of an element or query parameter defined by a profile **MUST NOT** 
 vary based on the presence or absence of other profiles.

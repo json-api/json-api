@@ -1,5 +1,5 @@
 {
-  "$schema": "http://json-schema.org/draft-04/schema#",
+  "$schema": "http://json-schema.org/draft-06/schema#",
   "title": "JSON:API Schema",
   "description": "This is a schema for responses in the JSON:API format. For more, see http://jsonapi.org",
   "oneOf": [
@@ -13,7 +13,7 @@
       "$ref": "#/definitions/info"
     }
   ],
-  
+
   "definitions": {
     "success": {
       "type": "object",
@@ -95,7 +95,7 @@
       },
       "additionalProperties": false
     },
-    
+
     "meta": {
       "description": "Non-standard meta-information that can not be represented as an attribute or relationship.",
       "type": "object",
@@ -150,7 +150,6 @@
       },
       "additionalProperties": false
     },
-
     "relationshipLinks": {
       "description": "A resource object **MAY** contain references to other resource objects (\"relationships\"). Relationships may be to-one or to-many. Relationships can be specified by including a member in a resource's links object.",
       "type": "object",
@@ -319,7 +318,7 @@
         }
       }
     },
-    
+
     "jsonapi": {
       "description": "An object describing the server's implementation",
       "type": "object",
@@ -333,7 +332,7 @@
       },
       "additionalProperties": false
     },
-    
+
     "error": {
       "type": "object",
       "properties": {
