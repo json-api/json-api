@@ -1940,13 +1940,16 @@ whose support is required using the `profile` query parameter, as described late
 #### <a href="#profiles-sending" id="profiles-sending" class="headerlink"></a> Sending Profiled Documents
 
 Clients and servers **MUST** include the `profile` media type parameter in
-conjunction with the JSON:API media type in a `Content-Type` header to indicate
-that they have applied one or more profiles to a JSON:API document.
+conjunction with the JSON:API media type in the `Content-Type` header to 
+indicate that they have applied one or more profiles to a JSON:API document.
 
 Likewise, clients and servers applying profiles to a JSON:API document **MUST**
 include a [top-level][top level] [`links` object][links] with a `profile` key,
 and that `profile` key **MUST** include a [link] to the URI of each profile
 that has been applied.
+
+The profiles referenced in the top level `links` object **MUST** be exactly the
+same set of profiles listed in the `Content-Type` header's `profile` parameter.
 
 > Beware: while senders are required to list the same profiles in the 
 > `Content-Type` header and the document's `profile` links, recipients must 
