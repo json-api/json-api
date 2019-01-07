@@ -2005,8 +2005,8 @@ request URI ("parameter x"), the server **MUST NOT** apply a different profile
 that also defines a meaning for parameter x. 
 
 Once the server advertises that a specific profile will be automatically applied
-in certain cases, it **MUST** continue to apply that profile to those same cases 
-in the future.
+at certain URIs, it **MUST** continue to apply that profile on requests to those 
+URIs in the future.
 
 When the server applies a profile to a request on the basis of the request's 
 URI, it **MUST** indicate that it has done so in the response's `Content-Type` 
