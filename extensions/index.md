@@ -83,8 +83,9 @@ Once submitted, one of JSON:API's editors will review your profile to check that
 
 1. follows the template above; 
 2. is specified precisely enough to enable interoperable implementations;
-3. complies with the JSON:API spec and its [requirements for profiles](/format/1.1/#profiles-authoring); and
-4. wouldn't cause any problems were it to become widely adopted. 
+3. complies with the JSON:API spec and its [requirements for profiles](/format/1.1/#profiles-authoring);
+4. follows JSON:API's [recommended naming conventions](https://jsonapi.org/recommendations/#naming); and
+5. wouldn't cause any problems were it to become widely adopted. 
 
 If your profile meets these criteria, it will generally be **approved within a week**.
 
