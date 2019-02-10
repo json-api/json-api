@@ -668,7 +668,7 @@ The following characters **MUST NOT** be used in member names:
 - U+003D EQUALS SIGN, "="
 - U+003E GREATER-THAN SIGN, ">"
 - U+003F QUESTION MARK, "?"
-- U+0040 COMMERCIAL AT, "@"
+- U+0040 COMMERCIAL AT, "@" (except as first character in [@-Members](#document-member-names-at-members))
 - U+005C REVERSE SOLIDUS, "&#x5c;"
 - U+005E CIRCUMFLEX ACCENT, "^"
 - U+0060 GRAVE ACCENT, "&#x60;"
