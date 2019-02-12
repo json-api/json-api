@@ -57,6 +57,7 @@ isomorphic ActiveRecord clone that issues JSON:API requests instead of SQL and i
 * [ts-jsonapi](https://github.com/mohuk/ts-jsonapi) JSON:API (De)Serializer in Typescript
 * [ngx-jsonapi](https://github.com/reyesoft/ngx-jsonapi) A JSON:API fast client library for Angular with storage+memory cache.
 * [@crnk/angular-ngrx](https://www.npmjs.com/package/@crnk/angular-ngrx) Angular helper library for ngrx-json-api and (optionally) crnk. Facilitates the binding of UI components to ngrx-json-api, most notably tables and forms.
+* [Grivet](https://github.com/muellerbbm-vas/grivet) A JSON:API client library written in TypeScript with emphasis on RESTful traversal of resources according to HATEOAS principles.
 
 ### <a href="#client-libraries-ios" id="client-libraries-ios" class="headerlink"></a> iOS
 
