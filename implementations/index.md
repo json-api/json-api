@@ -240,7 +240,6 @@ the moment.
 
 * [JsonApiNet](https://github.com/l8nite/JsonApiNet) lets you quickly deserialize JSON:API documents into C# entities. Supports compound documents, complex type mapping from attributes, attribute mapping, and more. [See the README](https://github.com/l8nite/JsonApiNet/blob/master/README.md) for full details.
 * [NJsonApi](https://github.com/jacek-gorgon/NJsonApi) is a .NET server implementation of the standard. It aims at good extensibility and performance while maintaining developer-friendliness with interchangable convenions and builder-style configuration.
-* [Migrap.AspNet.Mvc.Jsonapi](https://github.com/migrap/Migrap.AspNet.Mvc.Jsonapi) is an ASP.NET 5 (vNext) library that allows for existing code to build JSON:API responses through output formatters.
 * [Saule](https://github.com/joukevandermaas/saule/) is a small JSON:API 1.0 compatible library that integrates well with established Web API conventions. It has complete documentation and near 100% test coverage.
 * [JsonApiDotNetCore](https://github.com/json-api-dotnet/JsonApiDotNetCore) is an ASP.Net Core server implementation targeting .Net Standard. Based on the [JR](https://github.com/cerebris/jsonapi-resources) implementation, it provides all the required controllers and middleware to get your application up and running with as little boilerplate as possible.
 * [Hypermedia.JsonApi.WebApi](https://github.com/cosullivan/Hypermedia/) is a Web API media type formatter for reading and writing JSON:API. It supports an external resource model definition and natively
