@@ -254,11 +254,6 @@ includes related resources.
 * [crnk.io](http://www.crnk.io) is a JSON:API framework for clients and servers. It was started as a fork for Katharsis after the later [lost development momentum](https://www.reddit.com/r/java/comments/6hs0n8/crnkio_10_released_crank_up_rest_development/). It has similar concepts but with active development support. On the server-side it comes, among others,
   with a rich set of integrations (Servlet, JAX-RS, Spring, JPA, Bean Validation, Zipkin and more), bulk updates with JSON Patch,  a meta-model for automation purposes, client stub generation for TypeScript and a module API for third-party contributions.
 * [Elide](http://elide.io) is a web framework supporting JSON:API. Through annotation-based JSON:API endpoint generation, Elide enables you to focus on your data model, security model, and business logic while avoiding unnecessary boilerplate. Moreover, through use of the JSON:API Patch extension, [Elide](http://elide.io) provides full support for database transactions.
-* [katharsis](http://katharsis.io) has comprehensive coverage of standard allowing to create JSON:API compatible resources with dynamic relation based routing. Library consist of several integrations:
-  * katharsis-core - Java based core library for Katharsis allowing to manage RESTful endpoints compliant with JSON:API standard.
-  * katharsis-rs - adapter for Katharsis core module for all compatible JAX-RS based frameworks.
-  * katharsis-spring - adapter for Katharsis core module for Spring and Spring Boot frameworks.
-  * katharsis-servlet - generic servlet/filter adapter for Katharsis core module. This module can be used in traditional servlet or filter based Java web applications, or even non-Servlet-API-based web applications such as Portal/Portlet, Wicket, etc.
 
 ### <a href="#server-libraries-scala" id="server-libraries-scala" class="headerlink"></a> Scala
 * [scala-jsonapi](https://github.com/scala-jsonapi/scala-jsonapi) A Scala library for producing JSON output (and deserializing JSON input) based on JSON:API specification.
