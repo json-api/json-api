@@ -15,7 +15,7 @@ assembled to vet them.
 
 ### <a href="#client-libraries-javascript" id="client-libraries-javascript" class="headerlink"></a> JavaScript
 
-* [ember-data](https://github.com/emberjs/data) is one of the original exemplar implementations. There is now an [offical adapter](https://emberjs.com/api/ember-data/release/classes/DS.JSONAPIAdapter) to support json-api.
+* [ember-data](https://github.com/emberjs/data) is one of the original exemplar implementations. There is now an [official adapter](https://emberjs.com/api/ember-data/release/classes/DS.JSONAPIAdapter) to support json-api.
 * [backbone-jsonapi](https://github.com/guillaumervls/backbone-jsonapi) is a Backbone adapter for JSON:API. Supports fetching Models & Collections from a JSON:API source.
 * [backbone-relational-jsonapi](https://github.com/xbill82/backbone-relational-jsonapi) is a parsing layer for Backbone.Relational. Entities specified in JSON:API are automatically parsed to be injected into Backbone.Relational relations.
 * [orbit.js](https://github.com/orbitjs/orbit.js) is a standalone library for
@@ -57,6 +57,7 @@ isomorphic ActiveRecord clone that issues JSON:API requests instead of SQL and i
 * [ts-jsonapi](https://github.com/mohuk/ts-jsonapi) JSON:API (De)Serializer in Typescript
 * [ngx-jsonapi](https://github.com/reyesoft/ngx-jsonapi) A JSON:API fast client library for Angular with storage+memory cache.
 * [@crnk/angular-ngrx](https://www.npmjs.com/package/@crnk/angular-ngrx) Angular helper library for ngrx-json-api and (optionally) crnk. Facilitates the binding of UI components to ngrx-json-api, most notably tables and forms.
+* [Grivet](https://github.com/muellerbbm-vas/grivet) A JSON:API client library written in TypeScript with emphasis on RESTful traversal of resources according to HATEOAS principles.
 
 ### <a href="#client-libraries-ios" id="client-libraries-ios" class="headerlink"></a> iOS
 
@@ -112,18 +113,18 @@ isomorphic ActiveRecord clone that issues JSON:API requests instead of SQL and i
 ### <a href="#client-libraries-elm" id="client-libraries-elm" class="headerlink"></a> Elm
 
 * [elm-jsonapi](https://github.com/noahzgordon/elm-jsonapi) provides decoders and helper functions for clients receiving JSON:API payloads.
-* [elm-jsonapi-http](https://github.com/noahzgordon/elm-jsonapi-http) wraps `elm-jsonapi` and handles the details of content negotiation with JSON:API-compliant servers, providing a smoother inteface for consumers.
+* [elm-jsonapi-http](https://github.com/noahzgordon/elm-jsonapi-http) wraps `elm-jsonapi` and handles the details of content negotiation with JSON:API-compliant servers, providing a smoother interface for consumers.
 
 ### <a href="#client-libraries-net" id="client-libraries-net" class="headerlink"></a> .NET
 
 * [Hypermedia.JsonApi.Client](https://github.com/cosullivan/Hypermedia/) is a set of extension methods to the HttpClient which allow for reading
 and writing of JSON:API documents.
-* [JsonApiSerializer](https://github.com/codecutout/JsonApiSerializer) is a configurationless JSON:API serialization and deserialization library implemented as a Json.NET `JsonSerializerSetting`. It leverages the existing power and flexiability of Json.NET while providing a sensible default mapping between JSON:API and CLR objects.
+* [JsonApiSerializer](https://github.com/codecutout/JsonApiSerializer) is a configurationless JSON:API serialization and deserialization library implemented as a Json.NET `JsonSerializerSetting`. It leverages the existing power and flexibility of Json.NET while providing a sensible default mapping between JSON:API and CLR objects.
 * [JsonApiFramework.Client](https://github.com/scott-mcdonald/JsonApiFramework) is a *portable* .NET Standard/Core client-side framework where developers define the domain model of the resources of a hypermedia API server either through configuration and/or conventions called a *service model*. With a *service model* developers can use a *document context* that represents a session with a JSON:API compound *document* for reading or writing of various JSON:API abstractions such as resources, resource identifiers, relationships, links, meta information, error objects, and version information all serialized/deserialized as high level CLR objects.
 
 ### <a href="#client-libraries-python" id="client-libraries-python" class="headerlink"></a> Python
 
-* [jsonapi-requests](https://github.com/socialwifi/jsonapi-requests/) Simple and fun high-level JSONAPI client for Python. Contains ORM which makes consuming the API even easier, in a DRY manner. It has a low-level API similiar to requests as well, which gives you all the flexibility that you may need.
+* [jsonapi-requests](https://github.com/socialwifi/jsonapi-requests/) Simple and fun high-level JSONAPI client for Python. Contains ORM which makes consuming the API even easier, in a DRY manner. It has a low-level API similar to requests as well, which gives you all the flexibility that you may need.
 * [jsonapi-client](https://github.com/qvantel/jsonapi-client) Comprehensive yet easy-to-use, pythonic, ORM-like access to JSON:API services
 * [json-api-doc](https://github.com/noplay/json-api-doc) JSON:API parser returning a simple Python dictionary
 
@@ -239,26 +240,20 @@ the moment.
 ### <a href="#server-libraries-net" id="server-libraries-net" class="headerlink"></a> .NET
 
 * [JsonApiNet](https://github.com/l8nite/JsonApiNet) lets you quickly deserialize JSON:API documents into C# entities. Supports compound documents, complex type mapping from attributes, attribute mapping, and more. [See the README](https://github.com/l8nite/JsonApiNet/blob/master/README.md) for full details.
-* [NJsonApi](https://github.com/jacek-gorgon/NJsonApi) is a .NET server implementation of the standard. It aims at good extensibility and performance while maintaining developer-friendliness with interchangable convenions and builder-style configuration.
+* [NJsonApi](https://github.com/jacek-gorgon/NJsonApi) is a .NET server implementation of the standard. It aims at good extensibility and performance while maintaining developer-friendliness with interchangeable conventions and builder-style configuration.
 * [Migrap.AspNetCore.Hateoas](https://github.com/migrap/Migrap.AspNetCore.Hateoas) HATEOAS (Hypermedia as the Engine of Application State) framework for ASP.NET Core. Current implementation(s): Siren, JsonApi.
 * [Saule](https://github.com/joukevandermaas/saule/) is a small JSON:API 1.0 compatible library that integrates well with established Web API conventions. It has complete documentation and near 100% test coverage.
 * [JsonApiDotNetCore](https://github.com/json-api-dotnet/JsonApiDotNetCore) is an ASP.Net Core server implementation targeting .Net Standard. Based on the [JR](https://github.com/cerebris/jsonapi-resources) implementation, it provides all the required controllers and middleware to get your application up and running with as little boilerplate as possible.
 * [Hypermedia.JsonApi.WebApi](https://github.com/cosullivan/Hypermedia/) is a Web API media type formatter for reading and writing JSON:API. It supports an external resource model definition and natively
 includes related resources.
-* [JsonApiSerializer](https://github.com/codecutout/JsonApiSerializer) is a configurationless JSON:API serialization and deserialization library implemented as a Json.NET `JsonSerializerSetting`. It leverages the existing power and flexiability of Json.NET while providing a sensible default mapping between JSON:API and CLR objects.
+* [JsonApiSerializer](https://github.com/codecutout/JsonApiSerializer) is a configurationless JSON:API serialization and deserialization library implemented as a Json.NET `JsonSerializerSetting`. It leverages the existing power and flexibility of Json.NET while providing a sensible default mapping between JSON:API and CLR objects.
 * [JsonApiFramework.Server](https://github.com/scott-mcdonald/JsonApiFramework) is a *portable* .NET Standard/Core server-side framework where developers define the domain model of the resources of a hypermedia API server either through configuration and/or conventions called a *service model*. With a *service model* developers can use a *document context* that represents a session with a JSON:API compound *document* for reading or writing of various JSON:API abstractions such as resources, resource identifiers, relationships, links, meta information, error objects, and version information all serialized/deserialized as high level CLR objects with automatic generation of JSON:API hypermedia.
 
 ### <a href="#server-libraries-java" id="server-libraries-java" class="headerlink"></a> Java
 
-* [katharsis](http://katharsis.io) has comprehensive coverage of standard allowing to create JSON:API compatible resources with dynamic relation based routing. Library consist of several integrations:
-  * katharsis-core - Java based core library for Katharsis allowing to manage RESTful endpoints compliant with JSON:API standard.
-  * katharsis-rs - adapter for Katharsis core module for all compatible JAX-RS based frameworks.
-  * katharsis-spring - adapter for Katharsis core module for Spring and Spring Boot framoworks.
-  * katharsis-servlet - generic servlet/filter adapter for Katharsis core module. This module can be used in traditional servlet or filter based Java web applications, or even non-Servlet-API-based web applications such as Portal/Portlet, Wicket, etc.
+* [crnk.io](http://www.crnk.io) is a JSON:API framework for clients and servers. It was started as a fork for Katharsis after the later [lost development momentum](https://www.reddit.com/r/java/comments/6hs0n8/crnkio_10_released_crank_up_rest_development/). It has similar concepts but with active development support. On the server-side it comes, among others,
+  with a rich set of integrations (Servlet, JAX-RS, Spring, JPA, Bean Validation, Zipkin and more), bulk updates with JSON Patch,  a meta-model for automation purposes, client stub generation for TypeScript and a module API for third-party contributions.
 * [Elide](http://elide.io) is a web framework supporting JSON:API. Through annotation-based JSON:API endpoint generation, Elide enables you to focus on your data model, security model, and business logic while avoiding unnecessary boilerplate. Moreover, through use of the JSON:API Patch extension, [Elide](http://elide.io) provides full support for database transactions.
-* [crnk.io](http://www.crnk.io) is a JSON:API framework for clients and servers. On the server-side it comes, among others,
-  with a rich set of integrations (Servlet, JAX-RS, Spring, JPA, Bean Validation, Zipkin and more), bulk updates with JSON Patch,
-  a meta-model for automation purposes, client stub generation for TypeScript and a module API for third-party contributions.
 
 ### <a href="#server-libraries-scala" id="server-libraries-scala" class="headerlink"></a> Scala
 * [scala-jsonapi](https://github.com/scala-jsonapi/scala-jsonapi) A Scala library for producing JSON output (and deserializing JSON input) based on JSON:API specification.
