@@ -99,7 +99,7 @@ A document **MUST** contain at least one of the following top-level members:
 * `meta`: a [meta object][meta] that contains non-standard
   meta-information.
 
-The members `data` and `errors` **MUST NOT** coexist in the same document.
+The member's `data` and `errors` **MUST NOT** coexist in the same document.
 
 A document **MAY** contain any of these top-level members:
 
@@ -1196,7 +1196,7 @@ partial updates are allowed.
 
 > Note: The `type` member is required in every [resource object][resource objects] throughout requests and
 responses in JSON:API. There are some cases, such as when `POST`ing to an
-endpoint representing heterogenous data, when the `type` could not be inferred
+endpoint representing heterogeneous data, when the `type` could not be inferred
 from the endpoint. However, picking and choosing when it is required would be
 confusing; it would be hard to remember when it was required and when it was
 not. Therefore, to improve consistency and minimize confusion, `type` is
@@ -1619,7 +1619,7 @@ is an empty array or an array of [resource identifier objects][resource identifi
 If a client makes a `PATCH` request to a URL from a to-many
 [relationship link][relationships], the server **MUST** either completely
 replace every member of the relationship, return an appropriate error response
-if some resources can not be found or accessed, or return a `403 Forbidden`
+if some resources cannot be found or accessed, or return a `403 Forbidden`
 response if complete replacement is not allowed by the server.
 
 For example, the following request replaces every tag for an article:
