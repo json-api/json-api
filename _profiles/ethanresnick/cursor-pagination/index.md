@@ -141,7 +141,7 @@ If `page[size]` is provided, it **MUST** be a positive integer.<sup>[1](#fn-1)</
 If this requirement isn't met — e.g. if `page[size]` is negative — the server
 **MUST** respond according to the rules for the [invalid query parameter error].
 
-For each endpoint on which it supports pagintation, a server **MAY** define a
+For each endpoint on which it supports pagination, a server **MAY** define a
 maximum number of results that it will send in response to a paginated request
 to that endpoint. This is called the "max page size". If the server does not
 choose a max page size for a given endpoint, it is implicitly infinity.
