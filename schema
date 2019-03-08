@@ -292,28 +292,28 @@
         "first": {
           "description": "The first page of data",
           "oneOf": [
-            { "$ref": "#/definitions/linkage" },
+            { "$ref": "#/definitions/link" },
             { "type": "null" }
           ]
         },
         "last": {
           "description": "The last page of data",
           "oneOf": [
-            { "$ref": "#/definitions/linkage" },
+            { "$ref": "#/definitions/link" },
             { "type": "null" }
           ]
         },
         "prev": {
           "description": "The previous page of data",
           "oneOf": [
-            { "$ref": "#/definitions/linkage" },
+            { "$ref": "#/definitions/link" },
             { "type": "null" }
           ]
         },
         "next": {
           "description": "The next page of data",
           "oneOf": [
-            { "$ref": "#/definitions/linkage" },
+            { "$ref": "#/definitions/link" },
             { "type": "null" }
           ]
         }
