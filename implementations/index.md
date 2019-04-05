@@ -87,7 +87,7 @@ isomorphic ActiveRecord clone that issues JSON:API requests instead of SQL and i
 ### <a href="#client-libraries-dart" id="client-libraries-dart" class="headerlink"></a> Dart
 
 * [jsonapi_client](https://pub.dartlang.org/packages/jsonapi_client) is a simple JSON:API v1.0 client written in Dart.
-* [json_api_document](https://pub.dartlang.org/packages/json_api_document) is a JSON:API Document model/parser implemented in Dart.
+* [json_api](https://pub.dartlang.org/packages/json_api) is a full-fledged client for Flutter/Web/VM.
 
 ### <a href="#client-libraries-perl" id="client-libraries-perl" class="headerlink"></a> Perl
 
@@ -278,6 +278,10 @@ includes related resources.
 ### <a href="#server-libraries-rust" id="server-libraries-rust" class="headerlink"></a> Rust
 
 * [jsonapi-rust](https://github.com/michiel/jsonapi-rust) A Rust library for serializing, deserializing and working with JSON-API data
+
+### <a href="#server-libraries-dart" id="server-libraries-dart" class="headerlink"></a> Dart
+
+* [json_api_server](https://pub.dartlang.org/packages/json_api_server) is a JSON:API server running on Dart VM.
 
 ## <a href="#examples" id="examples" class="headerlink"></a> Examples
 
