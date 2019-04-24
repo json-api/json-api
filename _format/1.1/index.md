@@ -49,8 +49,7 @@ The `profile` parameter is used to support [profiles].
 
 ### <a href="#content-negotiation-clients" id="content-negotiation-clients" class="headerlink"></a> Client Responsibilities
 
-Clients that include the JSON:API media type in their `Accept` header **MUST**
-specify the media type there at least once without any media type parameters.
+Clients that include the JSON:API media type in their `Accept` header **MAY** include it more than once, but for at least one instance of it, they **MUST** specify it without any media type parameters.
 
 When processing a JSON:API response document, clients **MUST** ignore any
 parameters other than `profile` in the server's `Content-Type` header.
