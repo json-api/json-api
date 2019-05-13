@@ -58,6 +58,7 @@ isomorphic ActiveRecord clone that issues JSON:API requests instead of SQL and i
 * [ngx-jsonapi](https://github.com/reyesoft/ngx-jsonapi) A JSON:API fast client library for Angular with storage+memory cache.
 * [@crnk/angular-ngrx](https://www.npmjs.com/package/@crnk/angular-ngrx) Angular helper library for ngrx-json-api and (optionally) crnk. Facilitates the binding of UI components to ngrx-json-api, most notably tables and forms.
 * [Grivet](https://github.com/muellerbbm-vas/grivet) A JSON:API client library written in TypeScript with emphasis on RESTful traversal of resources according to HATEOAS principles.
+* [DatX](https://github.com/infinum/datx) is an opinionated data store for use with the MobX state management library that adds JSON:API support with [datx-jsonapi](https://github.com/infinum/datx/tree/master/packages/datx-jsonapi) mixin.
 
 ### <a href="#client-libraries-ios" id="client-libraries-ios" class="headerlink"></a> iOS
 
