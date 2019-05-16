@@ -64,6 +64,7 @@ isomorphic ActiveRecord clone that issues JSON:API requests instead of SQL and i
 * [jsonapi-ios](https://github.com/joshdholtz/jsonapi-ios) is a library for loading data from a JSON:API datasource. Parses JSON:API data into models with support for auto-linking of resources and custom model classes.
 * [Spine](https://github.com/wvteijlingen/spine) is a Swift library for working with JSON:API APIs. It supports mapping to custom model classes, fetching, advanced querying, linking and persisting.
 * [Vox](https://github.com/aronbalog/Vox) is a Swift JSON:API client framework with custom model classes support and nice networking interface.
+* [Japx](https://github.com/infinum/Japx) is lightweight JSON:API parser that flattens complex JSON:API structure and turns it into simple JSON and vice versa. It works by transferring Dictionary to Dictionary, so you can use Codable, Unbox, Wrap, ObjectMapper or any other object mapping tool that you prefer. It supports Objective-C as well.
 
 ### <a href="#client-libraries-ruby" id="client-libraries-ruby" class="headerlink"></a> Ruby
 
