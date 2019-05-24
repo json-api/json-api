@@ -50,6 +50,8 @@ isomorphic ActiveRecord clone that issues JSON:API requests instead of SQL and i
 * [@reststate/client](https://client.reststate.org/) - a stateless client providing easy access to standard JSON:API operations for a configured resource.
 * [@reststate/mobx](https://mobx.reststate.org/) - a zero-configuration way to fetch and store JSON:API data in objects implemented with the MobX state management library, for use in React or other apps.
 * [@reststate/vuex](https://vuex.reststate.org/) - a zero-configuration way to fetch and store JSON:API data in Vuex stores.
+* [@hyral/core](https://github.com/SyneticNL/Hyral) - An advanced, documented, easily extendable and lightweight (JSON:)API abstraction library with ORM-like CRUD support, automatic relationships handling and support for multiple (different) backends.
+* [@hyral/vue](https://github.com/SyneticNL/Hyral/tree/master/packages/vue) - Vue(x) integration for [@hyral/core](https://github.com/SyneticNL/Hyral) for Store-module creation and mixins
 
 ### <a href="#client-libraries-typescript" id="client-libraries-typescript" class="headerlink"></a> Typescript
 * [ts-angular-jsonapi](https://github.com/reyesoft/ts-angular-jsonapi) A JSON:API library developed for AngularJS in Typescript
