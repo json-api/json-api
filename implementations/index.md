@@ -196,6 +196,7 @@ and writing of JSON:API documents.
   * [Jbuilder::JsonAPI](https://github.com/vladfaust/jbuilder-json_api) Simple & lightweight extension for Jbuilder
   * [jsonapi-rb](http://jsonapi-rb.org) Ruby library for efficiently building and consuming JSON:API documents - with Rails and Hanami integrations.
   * [fast_jsonapi](https://github.com/Netflix/fast_jsonapi) A lightning fast JSON:API serializer for Ruby Objects.
+  * [jsonapi_parameters](https://github.com/visualitypl/jsonapi_parameters) Rails-way to consume JSON:API input.
 
 * Ruby on Rails
   * [Jsonapi-for-rails](https://github.com/doga/jsonapi_for_rails)
