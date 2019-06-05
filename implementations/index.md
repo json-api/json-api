@@ -87,7 +87,7 @@ isomorphic ActiveRecord clone that issues JSON:API requests instead of SQL and i
 * [enm/json-api-client](https://eosnewmedia.github.io/JSON-API-Client/) is an abstract client-side PHP implementation of the json:api specification which is based on [enm/json-api-common](https://eosnewmedia.github.io/JSON-API-Common/). It allows you to send json:api requests via your own http client implementation or via a buzz or guzzle client.
 * [pz/doctrine-rest](https://github.com/R3VoLuT1OneR/doctrine-rest) library provides basic tools for implementation of JSON:API with Doctrine 2
 * [swisnl/json-api-client](https://github.com/swisnl/json-api-client) Is a package for mapping remote {json:api} resources to Eloquent like models and collections.
-* [bednic/json-api](https://gitlab.com/bednic/json-api) Annotation driven library for creating valid JSON API response document from you objects.
+* [bednic/json-api](https://gitlab.com/bednic/json-api) Annotation driven library for creating valid JSON API response document from your objects.
 
 ### <a href="#client-libraries-dart" id="client-libraries-dart" class="headerlink"></a> Dart
 
