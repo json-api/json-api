@@ -165,7 +165,7 @@ and writing of JSON:API documents.
 * [swisnl/json-api-server](https://github.com/swisnl/json-api-server) is a Laravel package to get a JSON:API up and running in minutes.
 * [hackerboy/json-api](https://github.com/hackerboydotcom/json-api) is a lightweight library that helps you to implement JSONAPI easily
 * [`drupal/jsonapi`](https://www.drupal.org/project/jsonapi) is a Drupal module that exposes all data managed by Drupal (entities) according to the JSON:API specification. [`jsonapi_extras`](https://www.drupal.org/project/jsonapi_extras) is an optional extra module to change resource type names, field names and more. And [`openapi`](https://www.drupal.org/project/openapi) is another optional module, that is able to generate an OpenAPI/Swagger representation of the API provided by the `jsonapi` module with a ReDoc-powered UI.
-
+* [bednic/json-api](https://gitlab.com/bednic/json-api) Annotation driven library for creating valid JSON API response document from your objects.
 
 ### <a href="#server-libraries-node-js" id="server-libraries-node-js" class="headerlink"></a> Node.js
 * [Fortune.js](http://fortune.js.org/) is a library that includes a [comprehensive implementation of JSON:API](https://github.com/fortunejs/fortune-json-api).
