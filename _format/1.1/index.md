@@ -60,7 +60,13 @@ with any media type parameters other than `profile`.
 
 Servers **MUST** respond with a `406 Not Acceptable` status code if a
 request's `Accept` header contains the JSON:API media type and the server is
-unable to respond with an acceptable representation.
+unable to respond with an acceptable representation. The response **MUST** contain
+an [error object] which lists the unsupported profile or profiles as
+its `source` and which has the following URI as (one of) its `type`s:
+
+```
+https://jsonapi.org/errors/profile-not-supported
+```
 
 > Note: These content negotiation requirements exist to allow future versions
 of this specification to add other media type parameters for extension
@@ -1906,32 +1912,38 @@ parameter **MUST** equal a space-separated (U+0020 SPACE, " ") list of profile U
 > (U+0022 QUOTATION MARK, "\"") if it contains more than one URI.
 
 A client **MAY** use the `profile` media type parameter in conjunction with the
-JSON:API media type in an `Accept` header to _request_, but not _require_, that
-the server apply one or more profiles to the response document. When such a
-request is received, a server **SHOULD** attempt to apply the requested profiles
-to its response.
+JSON:API media type in an `Accept` header to request that the server apply one
+or more profiles to the response document. When such a request is received, a
+server **SHOULD** attempt to apply the requested profiles to its response.
 
 For example, in the following request, the client asks that the server apply the
-`http://example.com/last-modified` profile if it is able to.
+`http://example.com/last-modified` profile if it is able to. If the server is
+unable to apply the profile, it may send a response without the profile applied
+because the client also specified the JSON:API media type without the `profile`
+media type parameter.
 
 ```http
 Accept: application/vnd.api+json;profile="http://example.com/last-modified", application/vnd.api+json
 ```
 
-> Note: The second instance of the JSON:API media type in the example above is
-  required under the [client's content negotiation responsibilities](#content-negotiation-clients).
-  It is used to support old servers that don't understand the profile parameter.
+In the following request, the client asks the server to process its request
+using the `http://example.com/boolean-filters` profile. In this case, the client
+does not specify the bare JSON:API media type because it would not like a
+response unless the request was processed using the specified profile.
 
-Servers **MAY** add profiles to a JSON:API document even if the client has not
-requested them. The recipient of a document **MUST** ignore any profiles in that
-document that it does not understand. The only exception to this is profiles
-whose support is required using the `profile` query parameter, as described later.
+```http
+Accept: application/vnd.api+json;profile="http://example.com/boolean-filters"
+```
+
+Servers **MAY** process messages using one or more profiles even if the client has
+not requested them. The recipient of a document to which an unknown profile
+has been applied **MUST** ignore any document members that it does not understand.
 
 #### <a href="#profiles-sending" id="profiles-sending" class="headerlink"></a> Sending Profiled Documents
 
 Clients and servers **MUST** include the `profile` media type parameter in
 conjunction with the JSON:API media type in a `Content-Type` header to indicate
-that they have applied one or more profiles to a JSON:API document.
+that they have applied one or more profiles to a JSON:API message.
 
 Likewise, clients and servers applying profiles to a JSON:API document **MUST**
 include a [top-level][top level] [`links` object][links] with a `profile` key,
@@ -1952,22 +1964,6 @@ apply profiles in subsequent interactions with the same API.
 support JSON:API at all or that the client has failed to provide a required
 profile.
 
-### <a href="#profile-query-parameter" id="profile-query-parameter" class="headerlink"></a> `profile` Query Parameter
-
-A client **MAY** use the `profile` query parameter to _require_ the server to
-apply one or more profiles when processing the request. The value of the `profile`
-query parameter **MUST** equal a URI-encoded whitespace-separated list of profile URIs.
-
-If a server receives a request requiring the application of a profile or
-combination of profiles that it can not apply, it **MUST** respond with a `400
-Bad Request` status code. The response **MUST** contain an [error object] that
-identifies the `profile` query parameter as the `source` and has the following
-URI as (one of) its `type`s:
-
-```
-https://jsonapi.org/errors/profile-not-supported
-```
-
 > Note: When a client lists a profile in the `Accept` header, it's asking the
 > server to compute its response as normal, but then send the response document
 > with some extra information, as described in the requested profile. By
@@ -1975,47 +1971,6 @@ https://jsonapi.org/errors/profile-not-supported
 > it's asking the server to *process the incoming request* according to the
 > rules of the profile. This can fundamentally change the meaning of the 
 > server's response.
-
-#### <a href="#profile-query-parameter-omitting" id="profile-query-parameter" class="headerlink"></a> Omitting the `profile` Query Parameter
-
-Requiring the client to specify the `profile` query parameter would be 
-cumbersome. Accordingly, JSON:API defines a way that server's may infer its 
-value in many cases.
-
-To do so, a server **MAY** define an internal mapping from query parameter names 
-to profile URIs. The profile URI for a query parameter name in this mapping 
-**MUST NOT** change over time.
-
-> Note: the server may choose to map all query parameter names from the same 
-> [family][query parameter family] to one profile URI. Or, it may choose to map
-> only specific query parameter names. 
-
-If a requested URL does not contain the `profile` query parameter and does 
-contain one or more query parameters in the server's internal mapping, the 
-server may act as though the request URL contained a `profile` query parameter 
-whose value was the URI-encoded space-separated list of each unique profile URI 
-found in the server's internal mapping for the query parameters in use on the 
-request.
-
-For example, the server might support a profile that defines a meaning for the
-values of the `page[cursor]` query parameter. Then, it could define its internal 
-param name to profile URI mapping like so:
-
-```json
-{ "page[cursor]": "https://example.com/pagination-profile" }
-```
-
-Accordingly, a request for:
-
-```
-https://example.com/?page[cursor]=xyz
-```
-
-would be interpreted by the server as:
-
-```
-https://example.com/?page[cursor]=xyz&profile=https://example.com/pagination-profile
-```
 
 
 ### <a href="#profile-keywords" id="profile-keywords" class="headerlink"></a> Profile Keywords
@@ -2323,6 +2278,8 @@ An error object **MAY** have the following members:
     exists; if it doesn't, the client **SHOULD** simply ignore the pointer.
   * `parameter`: a string indicating which URI query parameter caused
     the error.
+  * `profiles`: an array of the requested profile URIs that the server was not
+    able to support.
 * `meta`: a [meta object][meta] containing non-standard meta-information about the
   error.
 
