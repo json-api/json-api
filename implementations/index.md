@@ -215,6 +215,11 @@ the moment.
   facilitates a server capable of deep querying and nested writes. Works
   with any ORM or datastore; comes with integration test helpers and
   automatic swagger documentation.
+  * [JSONAPI.rb](https://github.com/stas/jsonapi.rb#usage) A set of pluggable
+    mixins providing support for serialization (using `fast_jsonapi`), error
+    handling, includes, sparse fields, pagination, filtering (using `ransack`)
+    and sorting. Strives to implement as much of the JSONAPI spec as possible.
+    Small codebase (~500 sloc), good documentation and test coverage.
 
 * Sinatra
   * [Sinja](https://github.com/mwpastore/sinja) extends [Sinatra](http://www.sinatrarb.com) and leverages [JSONAPI::Serializers](https://github.com/fotinakis/jsonapi-serializers) to enable rapid development of comprehensive, read-and-write, and JSON:API v1.0-compliant web services using the DAL/ORM of your choice. It includes a simple role-based authorization scheme, support for client-generated IDs, patchless clients, and coalesced find requests, exception handling, and more.
