@@ -67,9 +67,13 @@ its `source` and which has the following URI as (one of) its `type`s:
 https://jsonapi.org/errors/profile-not-supported
 ```
 
-It is **RECOMMENDED** that servers specify the `Vary` header with the `Accept`
-header as one of its header names to ensure that its responses are
-appropriately cached.
+It is **RECOMMENDED** that servers specify the `Vary` header with `Accept`
+as one of its header names. This will ensure that the servers responses are
+appropriately cached and future client/server negotiations will work as
+expected.
+
+> Note: Some HTTP intermediaries (e.g. CDNs) may ignore the `Vary` header unless
+specifically configured to respect it.
 
 > Note: These content negotiation requirements exist to allow future versions
 of this specification to add other media type parameters for extension
