@@ -37,7 +37,7 @@ Clients and servers **MUST** send all JSON:API data using this media type in the
 
 Further, the JSON:API media type **MUST** always be specified with either no
 media type parameters or with only the `profile` parameter. This applies to both
-the `Content-Type` and `Accept` headers.
+the `Content-Type` and `Accept` headers whenever they are present.
 
 > Note: A media type parameter is an extra piece of information that can
 accompany a media type. For example, in the header
@@ -47,9 +47,6 @@ accompany a media type. For example, in the header
 The `profile` parameter is used to support [profiles].
 
 ### <a href="#content-negotiation-clients" id="content-negotiation-clients" class="headerlink"></a> Client Responsibilities
-
-Clients that include the JSON:API media type in their `Accept` header **MUST**
-specify the media type there at least once without any media type parameters.
 
 When processing a JSON:API response document, clients **MUST** ignore any
 parameters other than `profile` in the server's `Content-Type` header.
@@ -61,8 +58,14 @@ a request specifies the header `Content-Type: application/vnd.api+json`
 with any media type parameters other than `profile`.
 
 Servers **MUST** respond with a `406 Not Acceptable` status code if a
-request's `Accept` header contains the JSON:API media type and all instances
-of that media type are modified with media type parameters.
+request's `Accept` header contains the JSON:API media type and the server is
+unable to respond with an acceptable representation. The response **MUST** contain
+an [error object] which lists the unsupported profile or profiles as
+its `source` and which has the following URI as (one of) its `type`s:
+
+```
+https://jsonapi.org/errors/profile-not-supported
+```
 
 > Note: These content negotiation requirements exist to allow future versions
 of this specification to add other media type parameters for extension
@@ -1908,26 +1911,32 @@ parameter **MUST** equal a space-separated (U+0020 SPACE, " ") list of profile U
 > (U+0022 QUOTATION MARK, "\"") if it contains more than one URI.
 
 A client **MAY** use the `profile` media type parameter in conjunction with the
-JSON:API media type in an `Accept` header to _request_, but not _require_, that
-the server apply one or more profiles to the response document. When such a
-request is received, a server **SHOULD** attempt to apply the requested profiles
-to its response.
+JSON:API media type in an `Accept` header to request that the server apply one
+or more profiles to the response document. When such a request is received, a
+server **SHOULD** attempt to apply the requested profiles to its response.
 
 For example, in the following request, the client asks that the server apply the
-`http://example.com/last-modified` profile if it is able to.
+`http://example.com/last-modified` profile if it is able to. If the server is
+unable to apply the profile, it may send a response without the profile applied
+because the client also specified the JSON:API media type without the `profile`
+media type parameter.
 
 ```http
 Accept: application/vnd.api+json;profile="http://example.com/last-modified", application/vnd.api+json
 ```
 
-> Note: The second instance of the JSON:API media type in the example above is
-  required under the [client's content negotiation responsibilities](#content-negotiation-clients).
-  It is used to support old servers that don't understand the profile parameter.
+In the following request, the client asks the server to process its request
+using the `http://example.com/boolean-filters` profile. In this case, the client
+does not specify the bare JSON:API media type because it would not like a
+response unless the request was processed using the specified profile.
 
-Servers **MAY** add profiles to a JSON:API document even if the client has not
-requested them. The recipient of a document **MUST** ignore any profiles in that
-document that it does not understand. The only exception to this is profiles
-whose support is required using the `profile` query parameter, as described later.
+```http
+Accept: application/vnd.api+json;profile="http://example.com/boolean-filters"
+```
+
+Servers **MAY** process messages using one or more profiles even if the client has
+not requested them. The recipient of a document to which an unknown profile
+has been applied **MUST** ignore any document members that it does not understand.
 
 #### <a href="#profiles-sending" id="profiles-sending" class="headerlink"></a> Sending Profiled Documents
 
@@ -2325,6 +2334,8 @@ An error object **MAY** have the following members:
     exists; if it doesn't, the client **SHOULD** simply ignore the pointer.
   * `parameter`: a string indicating which URI query parameter caused
     the error.
+  * `profiles`: an array of the requested profile URIs that the server was not
+    able to support.
 * `meta`: a [meta object][meta] containing non-standard meta-information about the
   error.
 
