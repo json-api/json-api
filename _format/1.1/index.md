@@ -565,15 +565,22 @@ related resource collection:
 #### <a href="#profile-links" id="profile-links" class="headerlink"></a> Profile Links
 
 Like all [links][link], a link in an array of `profile` links can be represented
-with a [link object].
+with a [link object]. In that case, the link object **MAY** contain an `aliases` 
+member listing any [profile aliases].
 
-Here, the `profile` key specifies an array of `profile` links:
+Here, the `profile` key specifies an array of `profile` links, including one
+that includes a [profile alias][profile aliases]:
 
 ```json
 "links": {
   "profile": [
     "http://example.com/profiles/flexible-pagination",
-    "http://example.com/profiles/resource-versioning"
+    {
+      "href": "http://example.com/profiles/resource-versioning",
+      "aliases": {
+        "version": "v"
+      }
+    }
   ]
 }
 ```
@@ -1973,7 +1980,7 @@ profile.
 > server's response.
 
 
-### <a href="#profile-keywords" id="profile-keywords" class="headerlink"></a> Profile Keywords
+### <a href="#profile-keywords-and-aliases" id="profile-keywords-and-aliases" class="headerlink"></a> Profile Keywords and Aliases
 
 A profile **SHOULD** explicitly declare "keywords" for any elements that it
 introduces to the document structure. If a profile does not explicitly declare a
@@ -1981,10 +1988,11 @@ keyword for an element, then the name of the element itself (i.e., its key in
 the document) is considered to be its keyword. All profile keywords **MUST** 
 meet this specification's requirements for [member names].
 
+For the purposes of aliasing, a profile's elements are defined shallowly. 
 In other words, if a profile introduces an object-valued document member, that 
-member is an element, but any keys in it are not themselves elements. Likewise,
-if the profile defines an array-valued element, the keys in nested objects
-within that array are not elements.
+member is an element (and so subject to aliasing), but any keys in it are not 
+themselves elements. Likewise, if the profile defines an array-valued element, 
+the keys in nested objects within that array are not elements.
 
 The following example profile defines a single keyword, `version`:
 
@@ -2032,6 +2040,42 @@ This profile might be applied as follows:
 }
 ```
 
+Documents that apply a particular profile **MAY** represent each keyword with an
+alternatively named member, or "alias". An alias fully assumes any meaning
+specified for a keyword, which no longer retains that meaning. Any aliases
+associated with a profile **MUST** be represented in the profile's corresponding
+`aliases` object within its [link object][links]. The key of each alias **MUST**
+be a keyword from the profile, and the value **MUST** be an alias that applies
+to this particular representation. This aliasing mechanism allows profiles to be
+applied in a way that is both consistent with the rest of the representation and
+does not conflict with other profiles.
+
+For instance, the following document provides an alias for `version`: `v`.
+Interpreters of this representation should treat the key `v` as if it were the
+key `version` described in the profile:
+
+```json
+{
+  "data": {
+    "type": "contacts",
+    "id": "345",
+    "meta": {
+      "v": "2018-04-14-879976658"
+    },
+    "attributes": {
+      "name": "Ethan"
+    }
+  },
+  "links": {
+    "profile": [{
+      "href": "http://example.com/profiles/resource-versioning",
+      "aliases": {
+        "version": "v"
+      }
+    }]
+  }
+}
+```
 
 ### <a href="#profiles-processing" id="profiles-processing" class="headerlink"></a> Processing Profiled Documents/Requests
 
@@ -2195,7 +2239,8 @@ that "The elements... specified by a profile... **MUST NOT** change over time."
 
 > The practical issue with adding a sibling element is that another profile 
 > in use on the document might already define a sibling element of the same 
-> name.
+> name, and existing documents would not have any aliases defined to resolve 
+> this conflict.
 
 However, the timestamps profile could evolve to allow other optional members, 
 such as `deleted`, in the `timestamps` object. This is possible because the 
@@ -2344,7 +2389,7 @@ request as equivalent to one in which the square brackets were percent-encoded.
 [link object]: #document-links-link-object
 [profiles]: #profiles
 [timestamps profile]: #profiles-timestamp-profile
-[profile keywords]: #profile-keywords
+[profile aliases]: #profile-keywords-and-aliases
 [error details]: #errors
 [error object]: #error-objects
 [error objects]: #errror-objects
