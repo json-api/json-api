@@ -68,7 +68,7 @@ https://jsonapi.org/errors/profile-not-supported
 ```
 
 It is **RECOMMENDED** that servers specify the `Vary` header with `Accept`
-as one of its header names. This will ensure that the servers responses are
+as one of its header names. This will ensure that the server's responses are
 appropriately cached and future client/server negotiations will work as
 expected.
 
