@@ -14,12 +14,16 @@ JSON:API is:
 
 ## <a href="#editors" id="editors" class="headerlink"></a> Editors
 
-There are five primary editors of this specification:
+There are three active editors of this specification:
 
-- [Steve Klabnik](http://twitter.com/steveklabnik)
 - [Yehuda Katz](http://twitter.com/wycats)
 - [Dan Gebhardt](http://twitter.com/dgeb)
+- [Gabe Sullice](http://twitter.com/gabesullice)
+
+The following emeritus editors are no longer active:
+
 - [Tyler Kellen](http://twitter.com/tkellen)
+- [Steve Klabnik](http://twitter.com/steveklabnik)
 - [Ethan Resnick](http://twitter.com/ethanresnick)
 
 ## <a href="#roadmap" id="roadmap" class="headerlink"></a> Roadmap
