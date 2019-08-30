@@ -30,6 +30,7 @@ assembled to vet them.
 * [hapi-json-api](https://github.com/wraithgar/hapi-json-api) Plugin for the hapi framework; enforces Accept/Content-type rules and rewrites Boom errors to be spec compliant.
 * [jsonapi-datastore](https://github.com/beauby/jsonapi-datastore) is a lightweight standalone library for reading, serializing, and synchronizing relational JSON:API data.
 * [json-api-store](https://github.com/haydn/json-api-store) A lightweight JavaScript library for using JSON:API in the browser.
+* [jsonapi-instance-store](https://github.com/uesaiso/jsonapi-instance-store) A JSON:API deserializer that constructs instances from ES6 classes, and stores the deserialized instances. Written in TypeScript.
 * [superagent-jsonapify](https://github.com/alex94puchades/superagent-jsonapify) A really lightweight (50 lines) JSON-API client addon for [superagent](https://github.com/visionmedia/superagent), the isomorphic ajax client.
 * [angular-jsonapi](https://github.com/jakubrohleder/angular-jsonapi) An AngularJS JSON:API client
 * [redux-json-api](https://github.com/dixieio/redux-json-api) A library which integrated JSON:APIs with Redux store
