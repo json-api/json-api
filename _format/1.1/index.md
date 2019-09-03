@@ -529,34 +529,22 @@ of this member **MUST** be an object (a "links object").
 <a href="#document-links-link" id="document-links-link"></a>
 Within this object, a link **MUST** be represented as either:
 
-* a string containing the link's URI.
+* a URI-reference [[RFC3986 Section 4.1](https://tools.ietf.org/html/rfc3986#section-4.1)] to the link's target.
 * <a id="document-links-link-object"></a>an object ("link object") which can
   contain the following members:
-  * `href`: a string containing the link's URI.
-  * `params`: a [link parameter object](link-parameter-object).
+  * `href`: a URI-reference to the link's target.
+  * `rel`: an array of link relation types [[RFC8288 Section 2.1](https://tools.ietf.org/html/rfc8288#section-3.3)]
+  * `anchor`: a URI-reference [[RFC3986 Section 4.1](https://tools.ietf.org/html/rfc3986#section-4.1)] to the link's context.
+  * `params`: a [link parameter object][link parameter object] as described
+    below.
   * `meta`: a meta object containing non-standard meta-information about the
     link.
-  * Any link-specific target attributes described below.
 
-A <a id="document-links-link-parameter-object"></a>link parameter object **MUST** be
-represented as an object which can contain the following members:
+By default, the context of a link is the [top-level object][top level], [resource object][resource objects] or
+[relationship object][relationships] in which the link appears.
 
-* `rel`: a string or an array of strings. Each value **MUST** be a valid link
-  relation type as defined in [RFC8288 Section 2.1](https://tools.ietf.org/html/rfc8288#section-3.3) to include both registered
-  and extension relation types. When the `rel` member is not present, it **SHOULD** be
-  interpreted to contain the parent link object's key name.
-* `anchor`: a string containing URI reference as specified in
-  [[RFC8288 Section 3.2]](https://tools.ietf.org/html/rfc8288#section-3.2). When the `anchor` member is not present and the link belongs
-  to a resource object or relationship object, it **MUST** be interpreted to contain
-  the URI of the resource that generated the current response document with the
-  addition of the [URI fragment](fragments) identifying the object of which the link is a
-  member.
-* Any other valid target attribute name as explained in [RFC8288 Section 2.2](https://tools.ietf.org/html/rfc8288#section-3).
-
-A link parameter object **SHOULD NOT** contain a `rev` member.
-
-Link parameter object members with multiple values **MUST** be represented with an
-array.
+If the `rel` member is not present on a link object, it **SHOULD** be interpreted to
+contain the member name of the link object.
 
 Except for the `profile` key in the top-level links object and the `type` 
 key in an [error object]'s links object, each key present in a links object 
@@ -597,6 +585,100 @@ Here, the `profile` key specifies an array of `profile` links:
 
 > Note: Additional link types, similar to `profile` links, may be specified in
 the future.
+
+#### <a href="#document-links-link-relations" id="document-links-link-relations" class="headerlink"></a> Link relation types
+
+The following link relation types **MAY** be used as the value of the `rel` link
+parameter object member:
+
+  * `add`: The link's target points to a resource where a user agent can cause
+    an addition to the link's context.
+  * `update`: The link's target points to a resource where a user agent can cause
+    an update the link's context.
+  * `remove`: The link's target points to a resource where a user agent can cause
+    a removal of all or part of the link's context.
+  * `relate`: The link's target points to a resource where a user agent can cause
+    a direct or indirect relationship to be established with the link's context.
+
+> Note: These link relation types correspond to operations described by the
+JSON:API specification and it is expected that implementations will use them to
+reference resources that will process requests according to [the requirements for
+creating, updating or deleting resources](https://jsonapi.org/format/1.1/#crud). However, this is not a strict
+limitation on their use.
+
+In the example below, a `self` link is a member of the [top-level][top level] links
+object that represents a collection of articles. In this case, the `rel` member
+of the link indicates that the client can add an article to this collection.
+
+```json
+"links": {
+  "self": {
+    "href": "http://example.com/articles",
+    "rel": ["self", "add"]
+  }
+}
+```
+
+In the next example, an `add` link is a member of a `comments` [relationship object][relationships]
+and that relationship object is a member of an `article`'s relationships object.
+In this case, the `rel` member of the link indicates that the client can create
+a new comment at the target URL and that the server will automatically associate
+the new comment with the article's `comments` field.
+
+```json
+"links": {
+  "self": "http://example.com/articles/1/relationships/comments",
+  "related": "http://example.com/articles/1/comments",
+  "add": {
+    "href": "http://example.com/articles/1/comments",
+    "rel": ["add", "relate"]
+  }
+}
+```
+
+In this example, a `self` link is a member of an `article`'s links object. In
+this case, the `rel` member of the link indicates that the client can edit, but
+not delete, the context article (perhaps another request with different
+authentication credentials would receive a link with a `remove` link relation
+type).
+
+```json
+"links": {
+  "self": {
+    "href": "http://example.com/articles/1",
+    "rel": ["self", "update"]
+  }
+}
+```
+
+#### <a href="#document-links-link-parameter-object" id="document-links-link-parameter-object" class="headerlink"></a> Link parameter objects
+
+"Link parameter objects" appear in link objects to represent a link's target
+attributes.
+
+A link parameter object **MAY** contain any of the following members: `hreflang`,
+`media`, `title`, and `type`. The values of these members **MUST** conform to their
+meanings as defined by [RFC8288 Section 3.4.1](https://tools.ietf.org/html/rfc8288#section-3.4.1).
+
+A link parameter object **MAY** contain other members as target attributes. Any
+target attribute that is in common usage in other link serialisations **SHOULD NOT**
+be used in a manner contrary to the commonly understood meaning of those
+attributes.
+
+Any additional member names **MUST** be valid target attribute names as defined by
+[RFC8288 Section 2.2](https://tools.ietf.org/html/rfc8288#section-2.2).
+
+Link parameter object members with multiple values **MUST** be represented with an
+array (i.e. a target attribute with multiple values should be an array of
+values, not a whitespace-separated string).
+
+A link parameter object **SHOULD NOT** contain a `rev` member.
+
+In order to represent a link with reversed semantics, it is **RECOMMENDED** that an
+alternate link relation type be used or, less preferably, that the `anchor`
+and `href` members be interchanged.
+
+> Note: The `rev` link parameter was deprecated by [RFC8288 Section 3.3](https://tools.ietf.org/html/rfc8288#section-3.3)
 
 ### <a href="#document-jsonapi-object" id="document-jsonapi-object" class="headerlink"></a> JSON:API Object
 
@@ -2414,6 +2496,7 @@ request as equivalent to one in which the square brackets were percent-encoded.
 [links]: #document-links
 [link]: #document-links-link
 [link object]: #document-links-link-object
+[link relations]: #document-links-link-relations
 [link parameter object]: #document-links-link-parameter-object
 [fragments]: #document-fragment-syntax
 [profiles]: #profiles
