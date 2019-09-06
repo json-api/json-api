@@ -708,12 +708,6 @@ implements at least version 1.0 of the specification.
 > Note: Because JSON:API is committed to making additive changes only, the
 version string primarily indicates which new features a server may support.
 
-### <a href="#document-fragment-syntax" id="document-fragment-syntax" class="headerlink"></a> URI Fragment Syntax
-
-A JSON:API URI fragment **MUST** be a JSON Pointer [[RFC6901](https://tools.ietf.org/html/rfc6901)] which points to a
-[resource object](resource objects) or [relationships object](relationships) in the response document and it **MUST NOT**
-point to any child members within it.
-
 ### <a href="#document-member-names" id="document-member-names" class="headerlink"></a> Member Names
 
 All member names used in a JSON:API document **MUST** be treated as case sensitive
@@ -2498,7 +2492,6 @@ request as equivalent to one in which the square brackets were percent-encoded.
 [link object]: #document-links-link-object
 [link relations]: #document-links-link-relations
 [link parameter object]: #document-links-link-parameter-object
-[fragments]: #document-fragment-syntax
 [profiles]: #profiles
 [timestamps profile]: #profiles-timestamp-profile
 [profile keywords]: #profile-keywords
