@@ -532,7 +532,7 @@ Within this object, a link **MUST** be represented as either:
 * a URI-reference [[RFC3986 Section 4.1](https://tools.ietf.org/html/rfc3986#section-4.1)] to the link's target.
 * <a id="document-links-link-object"></a>an object ("link object") which can
   contain the following members:
-  * `href`: a URI-reference to the link's target.
+  * `href`: a URI-reference [[RFC3986 Section 4.1](https://tools.ietf.org/html/rfc3986#section-4.1)] to the link's target.
   * `rel`: an array of link relation types [[RFC8288 Section 2.1](https://tools.ietf.org/html/rfc8288#section-3.3)]
   * `anchor`: a URI-reference [[RFC3986 Section 4.1](https://tools.ietf.org/html/rfc3986#section-4.1)] to the link's context.
   * `params`: a [link parameter object][link parameter object] as described
@@ -543,8 +543,10 @@ Within this object, a link **MUST** be represented as either:
 By default, the context of a link is the [top-level object][top level], [resource object][resource objects] or
 [relationship object][relationships] in which the link appears.
 
-If the `rel` member is not present on a link object, it **SHOULD** be interpreted to
-contain the member name of the link object.
+If the `rel` member is not present on a link object, the link's relation
+type **SHOULD** be interpreted as the name of the link object. The `rel` parameter
+can contain multiple link relation types. When this occurs, it establishes
+multiple links that share the same context, target, and target attributes.
 
 Except for the `profile` key in the top-level links object and the `type` 
 key in an [error object]'s links object, each key present in a links object 
@@ -606,9 +608,9 @@ reference resources that will process requests according to [the requirements fo
 creating, updating or deleting resources](https://jsonapi.org/format/1.1/#crud). However, this is not a strict
 limitation on their use.
 
-In the example below, a `self` link is a member of the [top-level][top level] links
-object that represents a collection of articles. In this case, the `rel` member
-of the link indicates that the client can add an article to this collection.
+In the example below, two links are established. A `self` link indicating the
+URL of the request that generated the current collection of articles and an `add`
+link indicating the that the client can add an article to this collection.
 
 ```json
 "links": {
@@ -619,17 +621,17 @@ of the link indicates that the client can add an article to this collection.
 }
 ```
 
-In the next example, an `add` link is a member of a `comments` [relationship object][relationships]
-and that relationship object is a member of an `article`'s relationships object.
-In this case, the `rel` member of the link indicates that the client can create
-a new comment at the target URL and that the server will automatically associate
-the new comment with the article's `comments` field.
+In the next example, a `comment` link is a member of a `comments` [relationship
+object][relationships] and that relationship object is a member of an `article`'s relationships
+object. In this case, the `rel` member establishes two links indicating that
+the client can create a new comment at the target URL and that requests to the
+target `href` can create a relationship to the article's `comments` field.
 
 ```json
 "links": {
   "self": "http://example.com/articles/1/relationships/comments",
   "related": "http://example.com/articles/1/comments",
-  "add": {
+  "comment": {
     "href": "http://example.com/articles/1/comments",
     "rel": ["add", "relate"]
   }
@@ -637,10 +639,10 @@ the new comment with the article's `comments` field.
 ```
 
 In this example, a `self` link is a member of an `article`'s links object. In
-this case, the `rel` member of the link indicates that the client can edit, but
-not delete, the context article (perhaps another request with different
-authentication credentials would receive a link with a `remove` link relation
-type).
+this case, the `rel` member established two links indicating that the client can
+edit, but not delete, the context article (perhaps another request with different
+authentication credentials would receive an additional link with a `remove` link
+relation type).
 
 ```json
 "links": {
@@ -661,11 +663,7 @@ A link parameter object **MAY** contain any of the following members: `hreflang`
 meanings as defined by [RFC8288 Section 3.4.1](https://tools.ietf.org/html/rfc8288#section-3.4.1).
 
 A link parameter object **MAY** contain other members as target attributes. Any
-target attribute that is in common usage in other link serialisations **SHOULD NOT**
-be used in a manner contrary to the commonly understood meaning of those
-attributes.
-
-Any additional member names **MUST** be valid target attribute names as defined by
+additional member names **MUST** be valid target attribute names as defined by
 [RFC8288 Section 2.2](https://tools.ietf.org/html/rfc8288#section-2.2).
 
 Link parameter object members with multiple values **MUST** be represented with an
