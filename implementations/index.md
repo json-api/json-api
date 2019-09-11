@@ -125,6 +125,7 @@ isomorphic ActiveRecord clone that issues JSON:API requests instead of SQL and i
 and writing of JSON:API documents.
 * [JsonApiSerializer](https://github.com/codecutout/JsonApiSerializer) is a configurationless JSON:API serialization and deserialization library implemented as a Json.NET `JsonSerializerSetting`. It leverages the existing power and flexibility of Json.NET while providing a sensible default mapping between JSON:API and CLR objects.
 * [JsonApiFramework.Client](https://github.com/scott-mcdonald/JsonApiFramework) is a *portable* .NET Standard/Core client-side framework where developers define the domain model of the resources of a hypermedia API server either through configuration and/or conventions called a *service model*. With a *service model* developers can use a *document context* that represents a session with a JSON:API compound *document* for reading or writing of various JSON:API abstractions such as resources, resource identifiers, relationships, links, meta information, error objects, and version information all serialized/deserialized as high level CLR objects.
+* [FSharp.JsonApi](https://github.com/cmeeren/FSharp.JsonApi/) is a library that allows you to use F# to easily create and consume flexible, strongly typed web APIs following the JSON:API specification.
 
 ### <a href="#client-libraries-python" id="client-libraries-python" class="headerlink"></a> Python
 
@@ -258,6 +259,7 @@ the moment.
 includes related resources.
 * [JsonApiSerializer](https://github.com/codecutout/JsonApiSerializer) is a configurationless JSON:API serialization and deserialization library implemented as a Json.NET `JsonSerializerSetting`. It leverages the existing power and flexibility of Json.NET while providing a sensible default mapping between JSON:API and CLR objects.
 * [JsonApiFramework.Server](https://github.com/scott-mcdonald/JsonApiFramework) is a *portable* .NET Standard/Core server-side framework where developers define the domain model of the resources of a hypermedia API server either through configuration and/or conventions called a *service model*. With a *service model* developers can use a *document context* that represents a session with a JSON:API compound *document* for reading or writing of various JSON:API abstractions such as resources, resource identifiers, relationships, links, meta information, error objects, and version information all serialized/deserialized as high level CLR objects with automatic generation of JSON:API hypermedia.
+* [FSharp.JsonApi](https://github.com/cmeeren/FSharp.JsonApi/) is a library that allows you to use F# to easily create and consume flexible, strongly typed web APIs following the JSON:API specification.
 
 ### <a href="#server-libraries-java" id="server-libraries-java" class="headerlink"></a> Java
 
