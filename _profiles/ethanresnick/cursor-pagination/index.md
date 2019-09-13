@@ -231,7 +231,7 @@ The response would contain:
 ```
 {
   "links": {
-    "prev": "/example-data?page[before]=abcde&page[size]=3"
+    "prev": "/example-data?page[before]=abcde&page[size]=3",
     "next": "/example-data?page[after]=zzz&page[size]=3"
   },
   "data": [
