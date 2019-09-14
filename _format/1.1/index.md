@@ -1932,13 +1932,21 @@ whose support is required using the `profile` query parameter, as described late
 #### <a href="#profiles-sending" id="profiles-sending" class="headerlink"></a> Sending Profiled Documents
 
 Clients and servers **MUST** include the `profile` media type parameter in
-conjunction with the JSON:API media type in a `Content-Type` header to indicate
-that they have applied one or more profiles to a JSON:API document.
+conjunction with the JSON:API media type in the `Content-Type` header to 
+indicate that they have applied one or more profiles to a JSON:API document.
 
 Likewise, clients and servers applying profiles to a JSON:API document **MUST**
 include a [top-level][top level] [`links` object][links] with a `profile` key,
 and that `profile` key **MUST** include a [link] to the URI of each profile
 that has been applied.
+
+The profiles referenced in the top level `links` object **MUST** be exactly the
+same set of profiles listed in the `Content-Type` header's `profile` parameter.
+
+> Beware: while senders are required to list the same profiles in the 
+> `Content-Type` header and the document's `profile` links, recipients must 
+> properly handle the case that these sets of profiles are different (because 
+> the request is malformed). See ["Identifying a Document's Profiles"](#profiles-processing-identifying-applied-profiles).
 
 When an older JSON:API server that doesn't support the `profile` media type
 parameter receives a document with one or more profiles, it will respond with a
@@ -1950,9 +1958,8 @@ applied to the document and retry its request without the `profile` media type
 parameter. If this resolves the error, the client **SHOULD NOT** attempt to
 apply profiles in subsequent interactions with the same API.
 
-> The most likely other causes of a 415 error are that the server doesn't
-support JSON:API at all or that the client has failed to provide a required
-profile.
+> The most likely other cause of a 415 error is that the server doesn't support 
+> JSON:API at all.
 
 ### <a href="#profile-query-parameter" id="profile-query-parameter" class="headerlink"></a> `profile` Query Parameter
 
@@ -2082,6 +2089,24 @@ This profile might be applied as follows:
 
 ### <a href="#profiles-processing" id="profiles-processing" class="headerlink"></a> Processing Profiled Documents/Requests
 
+#### <a href="#profiles-processing-identifying-applied-profiles" id="profiles-processing-identifying-applied-profiles" class="headerlink"></a> Identifying a Document's Profiles
+Before any processing can begin, the recipient of a profiled document must 
+correctly identify which profiles have been applied to that document. 
+
+To do so, a recipient (client or server) **MUST** look only at the `profile` 
+links in the document's top-level `links` object. 
+
+In other words, recipients **MUST NOT** consider the profile URIs listed in the 
+`Content-Type` header, which may be different than those listed in the document 
+if the sender's message is malformed.
+
+> Note: the set of profiles that apply to a document is conceptually distinct 
+> from, but likely overlaps with, the set of profiles that apply to processing 
+> the request that includes/produces that document. The server identifies this 
+> latter set of profiles through the `profile` query parameter (or its internal 
+> decision to enable certain profiles automatically).
+
+#### <a href="#profiles-processing-value-handling" id="profiles-processing-value-handling" class="headerlink"></a> Handling a Profile's Data
 When a profile is applied to a request and/or document, the value used for each 
 of the profile's document members or query parameters is said to be "a 
 recognized value" if that value, including all parts of it, has a legal, defined
