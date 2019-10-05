@@ -68,6 +68,7 @@ isomorphic ActiveRecord clone that issues JSON:API requests instead of SQL and i
 * [Spine](https://github.com/wvteijlingen/spine) is a Swift library for working with JSON:API APIs. It supports mapping to custom model classes, fetching, advanced querying, linking and persisting.
 * [Vox](https://github.com/aronbalog/Vox) is a Swift JSON:API client framework with custom model classes support and nice networking interface.
 * [Japx](https://github.com/infinum/Japx) is lightweight JSON:API parser that flattens complex JSON:API structure and turns it into simple JSON and vice versa. It works by transferring Dictionary to Dictionary, so you can use Codable, Unbox, Wrap, ObjectMapper or any other object mapping tool that you prefer. It supports Objective-C as well.
+* [mattpolzin / JSONAPI](https://github.com/mattpolzin/JSONAPI) is a Swift Codable library with heavy emphasis on type-safety. It is platform agnostic so it can be used client- and server-side.
 
 ### <a href="#client-libraries-ruby" id="client-libraries-ruby" class="headerlink"></a> Ruby
 
@@ -141,6 +142,7 @@ and writing of JSON:API documents.
 
 ### <a href="#server-libraries-swift" id="server-libraries-swift" class="headerlink"></a> Swift
 * [aonawale / JSONAPISerializer](https://github.com/aonawale/JSONAPISerializer) is a server side swift framework agnostic library that implements JSON:API v1.0.
+* [mattpolzin / JSONAPI](https://github.com/mattpolzin/JSONAPI) is a Swift Codable library with heavy emphasis on type-safety. It is platform agnostic so it can be used client- and server-side.
 
 ### <a href="#server-libraries-php" id="server-libraries-php" class="headerlink"></a> PHP
 
