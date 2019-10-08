@@ -46,7 +46,21 @@ accompany a media type. For example, in the header
 
 The `profile` parameter is used to support [profiles].
 
+> Note: These content negotiation requirements exist to allow future versions
+of this specification to add other media type parameters for extension
+negotiation and versioning.
+
 ### <a href="#content-negotiation-clients" id="content-negotiation-clients" class="headerlink"></a> Client Responsibilities
+
+Clients that include the `profile` parameter at least once in their `Accept`
+header **MUST** specify at it at least once without the `profile` media type
+parameter.
+
+For example:
+
+```http
+Accept: application/vnd.api+json;profile="http://example.com/last-modified", application/vnd.api+json
+```
 
 When processing a JSON:API response document, clients **MUST** ignore any
 parameters other than `profile` in the server's `Content-Type` header.
@@ -57,27 +71,12 @@ Servers **MUST** respond with a `415 Unsupported Media Type` status code if
 a request specifies the header `Content-Type: application/vnd.api+json`
 with any media type parameters other than `profile`.
 
-Servers **MUST** respond with a `406 Not Acceptable` status code if a
-request's `Accept` header contains the JSON:API media type and the server is
-unable to respond with an acceptable representation. The response **MUST** contain
-an [error object] which lists the unsupported profile or profiles as
-its `source` and which has the following URI as (one of) its `type`s:
-
-```
-https://jsonapi.org/errors/profile-not-supported
-```
-
-It is **RECOMMENDED** that servers specify the `Vary` header with `Accept`
-as one of its header names. This will ensure that the server's responses are
-appropriately cached and future client/server negotiations will work as
-expected.
+Servers **SHOULD** specify the `Vary` header with `Accept` as one of its header
+names to ensure that the server's responses can be appropriately cached and
+so that later content negotiations can take place.
 
 > Note: Some HTTP intermediaries (e.g. CDNs) may ignore the `Vary` header unless
 specifically configured to respect it.
-
-> Note: These content negotiation requirements exist to allow future versions
-of this specification to add other media type parameters for extension
-negotiation and versioning.
 
 ## <a href="#document-structure" id="document-structure" class="headerlink"></a> Document Structure
 
@@ -1918,31 +1917,41 @@ parameter **MUST** equal a space-separated (U+0020 SPACE, " ") list of profile U
 > specification requires that its value be surrounded by quotation marks
 > (U+0022 QUOTATION MARK, "\"") if it contains more than one URI.
 
-A client **MAY** use the `profile` media type parameter in conjunction with the
-JSON:API media type in an `Accept` header to request that the server apply one
-or more profiles to the response document. When such a request is received, a
-server **SHOULD** attempt to apply the requested profiles to its response.
+A client **MAY** use the `profile` media type parameter in an `Accept` header
+to request that the server apply one or more profiles to the response document.
+When such a request is received, a server **SHOULD** attempt to apply the
+requested profiles to its response.
 
-For example, in the following request, the client asks that the server apply the
-`http://example.com/last-modified` profile if it is able to. If the server is
-unable to apply the profile, it may send a response without the profile applied
-because the client also specified the JSON:API media type without the `profile`
-media type parameter.
+For example, in the following request, the client asks that the server apply
+the `http://example.com/last-modified` profile and the
+`http://example.com/iso-8601` profile if it is able to.
 
 ```http
-Accept: application/vnd.api+json;profile="http://example.com/last-modified", application/vnd.api+json
+GET /articles/1 HTTP/1.1
+Accept: application/vnd.api+json; profile="http://example.com/last-modified http://example.com/iso-8601"
+...
+
+If the server is unable to apply any of the requested profiles, it may send a
+response without any of the profiles applied:
+
+```
+HTTP/1.1 200 OK
+Content-Type: application/vnd.api+json
 ```
 
-In the following request, the client asks the server to process its request
-using the `http://example.com/boolean-filters` profile. In this case, the client
-does not specify the bare JSON:API media type because it would not like a
-response unless the request was processed using the specified profile.
+Additionally, servers **MAY** respond with only a subset of the requested
+profiles applied.
 
-```http
-Accept: application/vnd.api+json;profile="http://example.com/boolean-filters"
+For example, if the server supports the `http://example.com/iso-8601` profile,
+but not the `http://example.com/last-modified` profile, it may send a
+response with only the supported subset of profiles applied:
+
+```
+HTTP/1.1 200 OK
+Content-Type: application/vnd.api+json; profile="http://example.com/iso-8601"
 ```
 
-Servers **MAY** process messages using one or more profiles even if the client has
+Servers **MAY** respond using one or more profiles even if the client has
 not requested them. The recipient of a document to which an unknown profile
 has been applied **MUST** ignore any document members that it does not understand.
 
@@ -1950,7 +1959,7 @@ has been applied **MUST** ignore any document members that it does not understan
 
 Clients and servers **MUST** include the `profile` media type parameter in
 conjunction with the JSON:API media type in a `Content-Type` header to indicate
-that they have applied one or more profiles to a JSON:API message.
+that they have applied one or more profiles to a JSON:API document.
 
 Likewise, clients and servers applying profiles to a JSON:API document **MUST**
 include a [top-level][top level] [`links` object][links] with a `profile` key,
@@ -1968,17 +1977,7 @@ parameter. If this resolves the error, the client **SHOULD NOT** attempt to
 apply profiles in subsequent interactions with the same API.
 
 > The most likely other causes of a 415 error are that the server doesn't
-support JSON:API at all or that the client has failed to provide a required
-profile.
-
-> Note: When a client lists a profile in the `Accept` header, it's asking the
-> server to compute its response as normal, but then send the response document
-> with some extra information, as described in the requested profile. By
-> contrast, when a client lists a profile in the `profile` *query parameter*,
-> it's asking the server to *process the incoming request* according to the
-> rules of the profile. This can fundamentally change the meaning of the 
-> server's response.
-
+support JSON:API at all.
 
 ### <a href="#profile-keywords" id="profile-keywords" class="headerlink"></a> Profile Keywords
 
