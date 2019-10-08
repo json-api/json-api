@@ -16,7 +16,7 @@ This extension uses the namespace `local`.
 ## <a href="#document-structure" id="document-structure" class="headerlink"></a> Document Structure
 
 A document that supports this extension **MAY** include "local identity" members
-using the `local:id` key in the root of resource objects and resource identity
+using the `local:id` key in the root of resource objects and resource identifier
 objects. The values of these members uniquely identify resources within the
 document.
 
