@@ -242,6 +242,7 @@ the moment.
 * [Flask-REST-JSONAPI](https://github.com/miLibris/flask-rest-jsonapi) Flask extension to create web api according to jsonapi specification with Flask, Marshmallow and data provider of your choice (SQLAlchemy, MongoDB, ...)
 * [Flump](https://github.com/rolepoint/flump) Database agnostic JSON:API builder which depends on Flask and Marshmallow.
 * [SAFRS JSON API Framework](https://github.com/thomaxxl/safrs) Flask-SQLAlchemy jsonapi implementation with auto-generated openapi (fka swagger) interface.
+* [pydantic-jsonapi](https://github.com/DeanWay/pydantic-jsonapi) JSON:api validation with python type hinting using [pydantic](https://pydantic-docs.helpmanual.io/)
 
 ### <a href="#server-libraries-go" id="server-libraries-go" class="headerlink"></a> Go
 
