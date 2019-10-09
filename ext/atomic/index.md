@@ -321,9 +321,9 @@ If a server is able to update the relationship, the server **MUST** return a
 result with no `data` or, if all results are empty, the server **MAY** respond
 with `204 No Content` and no document.
 
-If an update is successful, the server **MUST** return a result with no `data`
-or, if all results are empty, the server **MAY** respond with `204 No Content`
-and no document.
+If a server is unable to update the relationship, an appropriate error response
+**MUST** be returned and a response document **SHOULD** be returned that
+contains a top-level `errors` as [described above](#processing-errors).
 
 #### Updating To-Many Relationships
 
@@ -410,9 +410,9 @@ If a server is able to update the relationship, the server **MUST** return a
 result with no `data` or, if all results are empty, the server **MAY** respond
 with `204 No Content` and no document.
 
-If an update is successful, the server **MUST** return a result with no `data`
-or, if all results are empty, the server **MAY** respond with `204 No Content`
-and no document.
+If a server is unable to update the relationship, an appropriate error response
+**MUST** be returned and a response document **SHOULD** be returned that
+contains a top-level `errors` as [described above](#processing-errors).
 
 ### Processing Multiple Operations
 
