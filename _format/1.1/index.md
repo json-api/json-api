@@ -1904,7 +1904,7 @@ URIs.
 A client **MAY** use the `profile` media type parameter in an `Accept` header
 to request that the server apply one or more profiles to the response document.
 When such a request is received, a server **SHOULD** attempt to apply the
-requested profiles to its response.
+requested profile(s) to its response.
 
 For example, in the following request, the client asks that the server apply
 the `http://example.com/last-modified` profile and the
