@@ -52,16 +52,6 @@ negotiation and versioning.
 
 ### <a href="#content-negotiation-clients" id="content-negotiation-clients" class="headerlink"></a> Client Responsibilities
 
-Clients that include the `profile` parameter at least once in their `Accept`
-header **MUST** specify at it at least once without the `profile` media type
-parameter.
-
-For example:
-
-```http
-Accept: application/vnd.api+json;profile="http://example.com/last-modified", application/vnd.api+json
-```
-
 When processing a JSON:API response document, clients **MUST** ignore any
 parameters other than `profile` in the server's `Content-Type` header.
 
@@ -1911,7 +1901,8 @@ This profile defines the following keywords:
 
 The `profile` media type parameter is used to describe the application of
 one or more profiles to a JSON:API document. The value of the `profile`
-parameter **MUST** equal a space-separated (U+0020 SPACE, " ") list of profile URIs.
+parameter **MUST** equal a space-separated (U+0020 SPACE, " ") list of profile
+URIs.
 
 > Note: When serializing the `profile` media type parameter, the HTTP
 > specification requires that its value be surrounded by quotation marks
@@ -1924,42 +1915,25 @@ requested profiles to its response.
 
 For example, in the following request, the client asks that the server apply
 the `http://example.com/last-modified` profile and the
-`http://example.com/iso-8601` profile if it is able to.
+`http://example.com/timestamps` profile, if it is able to.
 
 ```http
 GET /articles/1 HTTP/1.1
 Accept: application/vnd.api+json; profile="http://example.com/last-modified http://example.com/iso-8601"
 ...
 
-If the server is unable to apply any of the requested profiles, it may send a
-response without any of the profiles applied:
+Servers **MAY** respond with a subset of the requested profiles applied or none
+of the requested profiles applied. Additionally, servers **MAY** respond with
+unrequested profiles applied.
 
-```
-HTTP/1.1 200 OK
-Content-Type: application/vnd.api+json
-```
-
-Additionally, servers **MAY** respond with only a subset of the requested
-profiles applied.
-
-For example, if the server supports the `http://example.com/iso-8601` profile,
-but not the `http://example.com/last-modified` profile, it may send a
-response with only the supported subset of profiles applied:
-
-```
-HTTP/1.1 200 OK
-Content-Type: application/vnd.api+json; profile="http://example.com/iso-8601"
-```
-
-Servers **MAY** respond using one or more profiles even if the client has
-not requested them. The recipient of a document to which an unknown profile
-has been applied **MUST** ignore any document members that it does not understand.
+The recipient of a document to which an unknown profile has been applied
+**MUST** ignore any document members that it does not understand.
 
 #### <a href="#profiles-sending" id="profiles-sending" class="headerlink"></a> Sending Profiled Documents
 
 Clients and servers **MUST** include the `profile` media type parameter in
-conjunction with the JSON:API media type in a `Content-Type` header to indicate
-that they have applied one or more profiles to a JSON:API document.
+conjunction with the JSON:API media type in a `Content-Type` header when they
+have applied one or more profiles to a JSON:API document.
 
 Likewise, clients and servers applying profiles to a JSON:API document **MUST**
 include a [top-level][top level] [`links` object][links] with a `profile` key,
