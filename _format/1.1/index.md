@@ -39,12 +39,12 @@ Further, the JSON:API media type **MUST** always be specified with either no
 media type parameters or with only the `profile` parameter. This applies to both
 the `Content-Type` and `Accept` headers whenever they are present.
 
+The `profile` parameter is used to support [profiles].
+
 > Note: A media type parameter is an extra piece of information that can
 accompany a media type. For example, in the header
 `Content-Type: text/html; charset="utf-8"`, the media type is `text/html` and
 `charset` is a parameter.
-
-The `profile` parameter is used to support [profiles].
 
 > Note: These content negotiation requirements exist to allow future versions
 of this specification to add other media type parameters for extension
@@ -58,15 +58,8 @@ parameters other than `profile` in the server's `Content-Type` header.
 ### <a href="#content-negotiation-servers" id="content-negotiation-servers" class="headerlink"></a> Server Responsibilities
 
 Servers **MUST** respond with a `415 Unsupported Media Type` status code if
-a request specifies the header `Content-Type: application/vnd.api+json`
-with any media type parameters other than `profile`.
-
-Servers **SHOULD** specify the `Vary` header with `Accept` as one of its header
-names to ensure that the server's responses can be appropriately cached and
-so that later content negotiations can take place.
-
-> Note: Some HTTP intermediaries (e.g. CDNs) may ignore the `Vary` header unless
-specifically configured to respect it.
+a request specifies the header `Content-Type: application/vnd.api+json` with
+any media type parameters other than `profile`.
 
 ## <a href="#document-structure" id="document-structure" class="headerlink"></a> Document Structure
 
@@ -1847,8 +1840,8 @@ parameter from this specification, it **MUST** return `400 Bad Request`.
 ## <a href="#profiles" id="profiles" class="headerlink"></a> Profiles
 
 JSON:API supports the use of "profiles" as a way to indicate additional
-semantics that apply to a JSON:API request/document, without altering the
-basic semantics described in this specification.
+semantics that apply to a JSON:API document, without altering the basic
+semantics described in this specification.
 
 A profile is a separate specification defining these additional semantics. 
 
@@ -1919,8 +1912,8 @@ the `http://example.com/last-modified` profile and the
 
 ```http
 GET /articles/1 HTTP/1.1
-Accept: application/vnd.api+json; profile="http://example.com/last-modified http://example.com/iso-8601"
-...
+Accept: application/vnd.api+json; profile="http://example.com/last-modified http://example.com/timestamps"
+```
 
 Servers **MAY** respond with a subset of the requested profiles applied or none
 of the requested profiles applied. Additionally, servers **MAY** respond with
@@ -1953,7 +1946,16 @@ apply profiles in subsequent interactions with the same API.
 > The most likely other causes of a 415 error are that the server doesn't
 support JSON:API at all.
 
-### <a href="#profile-keywords" id="profile-keywords" class="headerlink"></a> Profile Keywords
+Servers that support profiles **SHOULD** specify the `Vary` header with
+`Accept` as one of its header names to ensure that the server's responses can
+be cached without disrupting subsequent content negotiations. This applies to
+responses with and without any profiles applied.
+
+> Note: Some HTTP intermediaries (e.g. CDNs) may ignore the `Vary` header
+> unless specifically configured to respect it.
+
+### <a href="#profile-keywords" id="profile-keywords" class="headerlink"></a>
+Profile Keywords
 
 A profile **SHOULD** explicitly declare "keywords" for any elements that it
 introduces to the document structure. If a profile does not explicitly declare a
