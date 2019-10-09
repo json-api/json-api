@@ -37,19 +37,20 @@ Clients and servers **MUST** send all JSON:API data using this media type in the
 
 Further, the JSON:API media type **MUST** always be specified with either no
 media type parameters or with only the `profile` parameter. This applies to both
-the `Content-Type` and `Accept` headers.
+the `Content-Type` and `Accept` headers whenever they are present.
+
+The `profile` parameter is used to support [profiles].
 
 > Note: A media type parameter is an extra piece of information that can
 accompany a media type. For example, in the header
 `Content-Type: text/html; charset="utf-8"`, the media type is `text/html` and
 `charset` is a parameter.
 
-The `profile` parameter is used to support [profiles].
+> Note: These content negotiation requirements exist to allow future versions
+of this specification to add other media type parameters for extension
+negotiation and versioning.
 
 ### <a href="#content-negotiation-clients" id="content-negotiation-clients" class="headerlink"></a> Client Responsibilities
-
-Clients that include the JSON:API media type in their `Accept` header **MUST**
-specify the media type there at least once without any media type parameters.
 
 When processing a JSON:API response document, clients **MUST** ignore any
 parameters other than `profile` in the server's `Content-Type` header.
@@ -57,16 +58,12 @@ parameters other than `profile` in the server's `Content-Type` header.
 ### <a href="#content-negotiation-servers" id="content-negotiation-servers" class="headerlink"></a> Server Responsibilities
 
 Servers **MUST** respond with a `415 Unsupported Media Type` status code if
-a request specifies the header `Content-Type: application/vnd.api+json`
-with any media type parameters other than `profile`.
+a request specifies the header `Content-Type: application/vnd.api+json` with
+any media type parameters other than `profile`.
 
-Servers **MUST** respond with a `406 Not Acceptable` status code if a
-request's `Accept` header contains the JSON:API media type and all instances
-of that media type are modified with media type parameters.
-
-> Note: These content negotiation requirements exist to allow future versions
-of this specification to add other media type parameters for extension
-negotiation and versioning.
+Servers **MUST** respond with a `406 Not Acceptable` status code if a request's
+`Accept` header contains the JSON:API media type and all instances of that
+media type are modified with a media type parameter other than `profile`.
 
 ## <a href="#document-structure" id="document-structure" class="headerlink"></a> Document Structure
 
@@ -1847,8 +1844,8 @@ parameter from this specification, it **MUST** return `400 Bad Request`.
 ## <a href="#profiles" id="profiles" class="headerlink"></a> Profiles
 
 JSON:API supports the use of "profiles" as a way to indicate additional
-semantics that apply to a JSON:API request/document, without altering the
-basic semantics described in this specification.
+semantics that apply to a JSON:API document, without altering the basic
+semantics described in this specification.
 
 A profile is a separate specification defining these additional semantics. 
 
@@ -1901,39 +1898,39 @@ This profile defines the following keywords:
 
 The `profile` media type parameter is used to describe the application of
 one or more profiles to a JSON:API document. The value of the `profile`
-parameter **MUST** equal a space-separated (U+0020 SPACE, " ") list of profile URIs.
+parameter **MUST** equal a space-separated (U+0020 SPACE, " ") list of profile
+URIs.
 
 > Note: When serializing the `profile` media type parameter, the HTTP
 > specification requires that its value be surrounded by quotation marks
 > (U+0022 QUOTATION MARK, "\"") if it contains more than one URI.
 
-A client **MAY** use the `profile` media type parameter in conjunction with the
-JSON:API media type in an `Accept` header to _request_, but not _require_, that
-the server apply one or more profiles to the response document. When such a
-request is received, a server **SHOULD** attempt to apply the requested profiles
-to its response.
+A client **MAY** use the `profile` media type parameter in an `Accept` header
+to request that the server apply one or more profiles to the response document.
+When such a request is received, a server **SHOULD** attempt to apply the
+requested profile(s) to its response.
 
-For example, in the following request, the client asks that the server apply the
-`http://example.com/last-modified` profile if it is able to.
+For example, in the following request, the client asks that the server apply
+the `http://example.com/last-modified` profile and the
+`http://example.com/timestamps` profile, if it is able to.
 
 ```http
-Accept: application/vnd.api+json;profile="http://example.com/last-modified", application/vnd.api+json
+GET /articles/1 HTTP/1.1
+Accept: application/vnd.api+json; profile="http://example.com/last-modified http://example.com/timestamps"
 ```
 
-> Note: The second instance of the JSON:API media type in the example above is
-  required under the [client's content negotiation responsibilities](#content-negotiation-clients).
-  It is used to support old servers that don't understand the profile parameter.
+Servers **MAY** respond with a subset of the requested profiles applied or none
+of the requested profiles applied. Additionally, servers **MAY** respond with
+unrequested profiles applied.
 
-Servers **MAY** add profiles to a JSON:API document even if the client has not
-requested them. The recipient of a document **MUST** ignore any profiles in that
-document that it does not understand. The only exception to this is profiles
-whose support is required using the `profile` query parameter, as described later.
+The recipient of a document to which an unknown profile has been applied
+**MUST** ignore any document members that it does not understand.
 
 #### <a href="#profiles-sending" id="profiles-sending" class="headerlink"></a> Sending Profiled Documents
 
 Clients and servers **MUST** include the `profile` media type parameter in
-conjunction with the JSON:API media type in a `Content-Type` header to indicate
-that they have applied one or more profiles to a JSON:API document.
+conjunction with the JSON:API media type in a `Content-Type` header when they
+have applied one or more profiles to a JSON:API document.
 
 Likewise, clients and servers applying profiles to a JSON:API document **MUST**
 include a [top-level][top level] [`links` object][links] with a `profile` key,
@@ -1951,74 +1948,15 @@ parameter. If this resolves the error, the client **SHOULD NOT** attempt to
 apply profiles in subsequent interactions with the same API.
 
 > The most likely other causes of a 415 error are that the server doesn't
-support JSON:API at all or that the client has failed to provide a required
-profile.
+support JSON:API at all.
 
-### <a href="#profile-query-parameter" id="profile-query-parameter" class="headerlink"></a> `profile` Query Parameter
+Servers that support profiles **SHOULD** specify the `Vary` header with
+`Accept` as one of its header names to ensure that the server's responses can
+be cached without disrupting subsequent content negotiations. This applies to
+responses with and without any profiles applied.
 
-A client **MAY** use the `profile` query parameter to _require_ the server to
-apply one or more profiles when processing the request. The value of the `profile`
-query parameter **MUST** equal a URI-encoded whitespace-separated list of profile URIs.
-
-If a server receives a request requiring the application of a profile or
-combination of profiles that it can not apply, it **MUST** respond with a `400
-Bad Request` status code. The response **MUST** contain an [error object] that
-identifies the `profile` query parameter as the `source` and has the following
-URI as (one of) its `type`s:
-
-```
-https://jsonapi.org/errors/profile-not-supported
-```
-
-> Note: When a client lists a profile in the `Accept` header, it's asking the
-> server to compute its response as normal, but then send the response document
-> with some extra information, as described in the requested profile. By
-> contrast, when a client lists a profile in the `profile` *query parameter*,
-> it's asking the server to *process the incoming request* according to the
-> rules of the profile. This can fundamentally change the meaning of the 
-> server's response.
-
-#### <a href="#profile-query-parameter-omitting" id="profile-query-parameter" class="headerlink"></a> Omitting the `profile` Query Parameter
-
-Requiring the client to specify the `profile` query parameter would be 
-cumbersome. Accordingly, JSON:API defines a way that server's may infer its 
-value in many cases.
-
-To do so, a server **MAY** define an internal mapping from query parameter names 
-to profile URIs. The profile URI for a query parameter name in this mapping 
-**MUST NOT** change over time.
-
-> Note: the server may choose to map all query parameter names from the same 
-> [family][query parameter family] to one profile URI. Or, it may choose to map
-> only specific query parameter names. 
-
-If a requested URL does not contain the `profile` query parameter and does 
-contain one or more query parameters in the server's internal mapping, the 
-server may act as though the request URL contained a `profile` query parameter 
-whose value was the URI-encoded space-separated list of each unique profile URI 
-found in the server's internal mapping for the query parameters in use on the 
-request.
-
-For example, the server might support a profile that defines a meaning for the
-values of the `page[cursor]` query parameter. Then, it could define its internal 
-param name to profile URI mapping like so:
-
-```json
-{ "page[cursor]": "https://example.com/pagination-profile" }
-```
-
-Accordingly, a request for:
-
-```
-https://example.com/?page[cursor]=xyz
-```
-
-would be interpreted by the server as:
-
-```
-https://example.com/?page[cursor]=xyz&profile=https://example.com/pagination-profile
-```
-
+> Note: Some HTTP intermediaries (e.g. CDNs) may ignore the `Vary` header
+> unless specifically configured to respect it.
 
 ### <a href="#profile-keywords" id="profile-keywords" class="headerlink"></a> Profile Keywords
 
