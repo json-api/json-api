@@ -61,6 +61,10 @@ Servers **MUST** respond with a `415 Unsupported Media Type` status code if
 a request specifies the header `Content-Type: application/vnd.api+json` with
 any media type parameters other than `profile`.
 
+Servers **MUST** respond with a `406 Not Acceptable` status code if a request
+specifies an instance of the JSON:API media type in an `Accept` header with any
+media type parameter other than `profile`.
+
 ## <a href="#document-structure" id="document-structure" class="headerlink"></a> Document Structure
 
 This section describes the structure of a JSON:API document, which is identified
