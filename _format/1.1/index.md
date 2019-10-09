@@ -2260,8 +2260,6 @@ An error object **MAY** have the following members:
     exists; if it doesn't, the client **SHOULD** simply ignore the pointer.
   * `parameter`: a string indicating which URI query parameter caused
     the error.
-  * `profiles`: an array of the requested profile URIs that the server was not
-    able to support.
 * `meta`: a [meta object][meta] containing non-standard meta-information about the
   error.
 
