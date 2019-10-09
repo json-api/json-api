@@ -1954,8 +1954,7 @@ responses with and without any profiles applied.
 > Note: Some HTTP intermediaries (e.g. CDNs) may ignore the `Vary` header
 > unless specifically configured to respect it.
 
-### <a href="#profile-keywords" id="profile-keywords" class="headerlink"></a>
-Profile Keywords
+### <a href="#profile-keywords" id="profile-keywords" class="headerlink"></a> Profile Keywords
 
 A profile **SHOULD** explicitly declare "keywords" for any elements that it
 introduces to the document structure. If a profile does not explicitly declare a
