@@ -535,7 +535,7 @@ Within this object, a link **MUST** be represented as either:
   * `href`: a URI-reference [[RFC3986 Section 4.1](https://tools.ietf.org/html/rfc3986#section-4.1)] to the link's target.
   * `rel`: an array of link relation types [[RFC8288 Section 2.1](https://tools.ietf.org/html/rfc8288#section-3.3)]
   * `anchor`: a URI-reference [[RFC3986 Section 4.1](https://tools.ietf.org/html/rfc3986#section-4.1)] to the link's context.
-  * `params`: a [link parameter object][link parameter object] as described
+  * `params`: a [link parameter object][target attributes] as described
     below.
   * `meta`: a meta object containing non-standard meta-information about the
     link.
@@ -569,6 +569,30 @@ related resource collection:
 }
 ```
 
+#### <a href="#document-links-target-attributes" id="document-links-target-attributes" class="headerlink"></a> Target attributes
+
+A "link parameter object" is used to represent [target
+attributes](https://tools.ietf.org/html/rfc8288#section-2.2) for the [link
+object][link] in which it's defined.
+
+Link parameters **MAY** contain any valid JSON value. However, target
+attributes that have a cardinality greater than one **MUST** be represented as
+an array of values.
+
+> Note: this means that a target attribute with multiple values should be an
+array of values, not a whitespace-separated string as might be used in a
+[`Link` header serialization](https://tools.ietf.org/html/rfc8288#section-3.5).
+
+All member names used in a link parameter object and not defined by this
+specification **MUST** be valid JSON:API [member names][member names] and
+**MUST** be valid target attribute names as defined by [RFC8288 Section 2.2](https://tools.ietf.org/html/rfc8288#section-2.2).
+
+In order to represent a link with reversed semantics, it is **RECOMMENDED** that an
+alternate link relation type be used or, less preferably, that the `anchor`
+and `href` members be interchanged.
+
+> Note: The `rev` link parameter was deprecated by [RFC8288 Section 3.3](https://tools.ietf.org/html/rfc8288#section-3.3)
+
 #### <a href="#profile-links" id="profile-links" class="headerlink"></a> Profile Links
 
 Like all [links][link], a link in an array of `profile` links can be represented
@@ -587,31 +611,6 @@ Here, the `profile` key specifies an array of `profile` links:
 
 > Note: Additional link types, similar to `profile` links, may be specified in
 the future.
-
-#### <a href="#document-links-link-parameter-object" id="document-links-link-parameter-object" class="headerlink"></a> Link parameter objects
-
-"Link parameter objects" appear in link objects to represent a link's target
-attributes.
-
-A link parameter object **MAY** contain any of the following members: `hreflang`,
-`media`, `title`, and `type`. The values of these members **MUST** conform to their
-meanings as defined by [RFC8288 Section 3.4.1](https://tools.ietf.org/html/rfc8288#section-3.4.1).
-
-A link parameter object **MAY** contain other members as target attributes. Any
-additional member names **MUST** be valid target attribute names as defined by
-[RFC8288 Section 2.2](https://tools.ietf.org/html/rfc8288#section-2.2).
-
-Link parameter object members with multiple values **MUST** be represented with an
-array (i.e. a target attribute with multiple values should be an array of
-values, not a whitespace-separated string).
-
-A link parameter object **SHOULD NOT** contain a `rev` member.
-
-In order to represent a link with reversed semantics, it is **RECOMMENDED** that an
-alternate link relation type be used or, less preferably, that the `anchor`
-and `href` members be interchanged.
-
-> Note: The `rev` link parameter was deprecated by [RFC8288 Section 3.3](https://tools.ietf.org/html/rfc8288#section-3.3)
 
 ### <a href="#document-jsonapi-object" id="document-jsonapi-object" class="headerlink"></a> JSON:API Object
 
@@ -2423,7 +2422,7 @@ request as equivalent to one in which the square brackets were percent-encoded.
 [links]: #document-links
 [link]: #document-links-link
 [link object]: #document-links-link-object
-[link parameter object]: #document-links-link-parameter-object
+[target attributes]: #document-links-target-attributes
 [profiles]: #profiles
 [timestamps profile]: #profiles-timestamp-profile
 [profile keywords]: #profile-keywords
