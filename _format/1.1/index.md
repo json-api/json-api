@@ -533,20 +533,21 @@ Within this object, a link **MUST** be represented as either:
 * <a id="document-links-link-object"></a>an object ("link object") which can
   contain the following members:
   * `href`: a URI-reference [[RFC3986 Section 4.1](https://tools.ietf.org/html/rfc3986#section-4.1)] to the link's target.
-  * `rel`: an array of link relation types [[RFC8288 Section 2.1](https://tools.ietf.org/html/rfc8288#section-3.3)]
-  * `anchor`: a URI-reference [[RFC3986 Section 4.1](https://tools.ietf.org/html/rfc3986#section-4.1)] to the link's context.
+  * `rel`: a link relation type or an array of link relation types [[RFC8288 Section 2.1](https://tools.ietf.org/html/rfc8288#section-3.3)].
+    An array of link relationship types establishes multiple links that share
+    the same context, target, and target attributes.
+  * `anchor`: a URI-reference [[RFC3986 Section 4.1](https://tools.ietf.org/html/rfc3986#section-4.1)]
+    to the link's context. By default, the context of a link is the
+    [top-level object][top level], [resource object][resource objects], or
+    [relationship object][relationships] in which the link appears.
   * `params`: a [link parameter object][target attributes] as described
     below.
   * `meta`: a meta object containing non-standard meta-information about the
     link.
 
-By default, the context of a link is the [top-level object][top level], [resource object][resource objects], or
-[relationship object][relationships] in which the link appears.
-
-If the `rel` member is not present on a link object, the link's relation
-type **SHOULD** be interpreted as the name of the link object. The `rel` parameter
-can contain multiple link relation types. When this occurs, it establishes
-multiple links that share the same context, target, and target attributes.
+If a link is represented as a string, or the `rel` member is not present on a
+link object, the link's relation type **SHOULD** be inferred from the name of
+the link object.
 
 Except for the `profile` key in the top-level links object and the `type` 
 key in an [error object]'s links object, each key present in a links object 
@@ -568,6 +569,12 @@ related resource collection:
   }
 }
 ```
+
+In order to represent a link with reversed semantics, it is **RECOMMENDED** that an
+alternate link relation type be used or, less preferably, that the `anchor`
+and `href` members be interchanged.
+
+> Note: The `rev` link parameter was deprecated by [RFC8288 Section 3.3](https://tools.ietf.org/html/rfc8288#section-3.3)
 
 #### <a href="#document-links-target-attributes" id="document-links-target-attributes" class="headerlink"></a> Target attributes
 
