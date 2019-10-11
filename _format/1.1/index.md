@@ -571,11 +571,13 @@ related resource collection:
 
 ##### <a href="#document-links-link-relation-type" id="document-links-link-relation-type" class="headerlink"></a> Link relation type
 
-The value of the `rel` member **MUST** be a string or an array of link relation
-types. Valid link relation types are defined by [RFC8288 Section 2.1](https://tools.ietf.org/html/rfc8288#section-2.1).
+The value of the `rel` member **MUST** be a string or an array of strings that
+represent link relation type(s). Valid link relation types are defined by
+[RFC8288 Section 2.1](https://tools.ietf.org/html/rfc8288#section-2.1).
 
-If a link is represented as a string, or the `rel` member is not given, the
-link's relation type **SHOULD** be inferred from the name of the link object.
+If a link is represented as a string, or the `rel` member is not given on a
+link object, the link's relation type **SHOULD** be inferred from the name of
+the link object.
 
 An array of link relationship types establishes multiple links that share the
 same context, target, and target attributes and a client **MUST** treat these
