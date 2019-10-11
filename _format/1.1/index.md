@@ -540,7 +540,7 @@ Within this object, a link **MUST** be represented as either:
   * `meta`: a meta object containing non-standard meta-information about the
     link.
 
-By default, the context of a link is the [top-level object][top level], [resource object][resource objects] or
+By default, the context of a link is the [top-level object][top level], [resource object][resource objects], or
 [relationship object][relationships] in which the link appears.
 
 If the `rel` member is not present on a link object, the link's relation
