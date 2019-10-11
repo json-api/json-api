@@ -574,7 +574,8 @@ In order to represent a link with reversed semantics, it is **RECOMMENDED** that
 alternate link relation type be used or, less preferably, that the `anchor`
 and `href` members be interchanged.
 
-> Note: The `rev` link parameter was deprecated by [RFC8288 Section 3.3](https://tools.ietf.org/html/rfc8288#section-3.3)
+> Note: Historically, a `rev` link parameter was used for this purpose but has
+> since been deprecated by [RFC8288 Section 3.3](https://tools.ietf.org/html/rfc8288#section-3.3).
 
 #### <a href="#document-links-target-attributes" id="document-links-target-attributes" class="headerlink"></a> Target attributes
 
