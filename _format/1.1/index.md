@@ -588,71 +588,6 @@ Here, the `profile` key specifies an array of `profile` links:
 > Note: Additional link types, similar to `profile` links, may be specified in
 the future.
 
-#### <a href="#document-links-link-relations" id="document-links-link-relations" class="headerlink"></a> Link relation types
-
-The following link relation types **MAY** be used as the value of the `rel` link
-parameter object member:
-
-  * `add`: The link's target points to a resource where a user agent can cause
-    an addition to the link's context.
-  * `update`: The link's target points to a resource where a user agent can cause
-    an update the link's context.
-  * `remove`: The link's target points to a resource where a user agent can cause
-    a removal of all or part of the link's context.
-  * `relate`: The link's target points to a resource where a user agent can cause
-    a direct or indirect relationship to be established with the link's context.
-
-> Note: These link relation types correspond to operations described by the
-JSON:API specification and it is expected that implementations will use them to
-reference resources that will process requests according to [the requirements for
-creating, updating or deleting resources](https://jsonapi.org/format/1.1/#crud). However, this is not a strict
-limitation on their use.
-
-In the example below, two links are established. A `self` link indicating the
-URL of the request that generated the current collection of articles and an `add`
-link indicating the that the client can add an article to this collection.
-
-```json
-"links": {
-  "self": {
-    "href": "http://example.com/articles",
-    "rel": ["self", "add"]
-  }
-}
-```
-
-In the next example, a `comment` link is a member of a `comments` [relationship
-object][relationships] and that relationship object is a member of an `article`'s relationships
-object. In this case, the `rel` member establishes two links indicating that
-the client can create a new comment at the target URL and that requests to the
-target `href` can create a relationship to the article's `comments` field.
-
-```json
-"links": {
-  "self": "http://example.com/articles/1/relationships/comments",
-  "related": "http://example.com/articles/1/comments",
-  "comment": {
-    "href": "http://example.com/articles/1/comments",
-    "rel": ["add", "relate"]
-  }
-}
-```
-
-In this example, a `self` link is a member of an `article`'s links object. In
-this case, the `rel` member established two links indicating that the client can
-edit, but not delete, the context article (perhaps another request with different
-authentication credentials would receive an additional link with a `remove` link
-relation type).
-
-```json
-"links": {
-  "self": {
-    "href": "http://example.com/articles/1",
-    "rel": ["self", "update"]
-  }
-}
-```
-
 #### <a href="#document-links-link-parameter-object" id="document-links-link-parameter-object" class="headerlink"></a> Link parameter objects
 
 "Link parameter objects" appear in link objects to represent a link's target
@@ -2488,7 +2423,6 @@ request as equivalent to one in which the square brackets were percent-encoded.
 [links]: #document-links
 [link]: #document-links-link
 [link object]: #document-links-link-object
-[link relations]: #document-links-link-relations
 [link parameter object]: #document-links-link-parameter-object
 [profiles]: #profiles
 [timestamps profile]: #profiles-timestamp-profile
