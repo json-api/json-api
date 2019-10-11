@@ -578,9 +578,8 @@ and `href` members be interchanged.
 
 #### <a href="#document-links-target-attributes" id="document-links-target-attributes" class="headerlink"></a> Target attributes
 
-A "link parameter object" is used to represent [target
-attributes](https://tools.ietf.org/html/rfc8288#section-2.2) for the [link
-object][link] in which it's defined.
+A "link parameter object" is used to represent the [target attributes](https://tools.ietf.org/html/rfc8288#section-2.2)
+of the [link object][link] in which it's defined.
 
 Link parameters **MAY** contain any valid JSON value. However, target
 attributes that have a cardinality greater than one **MUST** be represented as
@@ -594,11 +593,10 @@ All member names used in a link parameter object and not defined by this
 specification **MUST** be valid JSON:API [member names][member names] and
 **MUST** be valid target attribute names as defined by [RFC8288 Section 2.2](https://tools.ietf.org/html/rfc8288#section-2.2).
 
-In order to represent a link with reversed semantics, it is **RECOMMENDED** that an
-alternate link relation type be used or, less preferably, that the `anchor`
-and `href` members be interchanged.
-
-> Note: The `rev` link parameter was deprecated by [RFC8288 Section 3.3](https://tools.ietf.org/html/rfc8288#section-3.3)
+In addition to members that conform to the requirements above, link parameter
+objects **MAY** contain the members `hreflang`, `media`, `title`, `title`, and
+`type`. Each of these members **MUST** be used in accordance with their
+semantics meanings as defined by [RFC8288 Section 3.4.1](https://tools.ietf.org/html/rfc8288#section-3.4.1).
 
 #### <a href="#profile-links" id="profile-links" class="headerlink"></a> Profile Links
 
