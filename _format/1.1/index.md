@@ -545,6 +545,10 @@ Within this object, a link **MUST** be represented as either:
   * `meta`: a meta object containing non-standard meta-information about the
     link.
 
+Link objects **MAY** also contain the members `hreflang`, `title`, and `type`.
+Each of these members **MUST** be used in accordance with their semantics as
+defined by [RFC8288 Section 3.4.1](https://tools.ietf.org/html/rfc8288#section-3.4.1).
+
 If a link is represented as a string, or the `rel` member is not present on a
 link object, the link's relation type **SHOULD** be inferred from the name of
 the link object.
@@ -577,27 +581,23 @@ and `href` members be interchanged.
 > Note: Historically, a `rev` link parameter was used for this purpose but has
 > since been deprecated by [RFC8288 Section 3.3](https://tools.ietf.org/html/rfc8288#section-3.3).
 
-#### <a href="#document-links-target-attributes" id="document-links-target-attributes" class="headerlink"></a> Target attributes
+#### <a href="#document-links-target-attributes" id="document-links-target-attributes" class="headerlink"></a> Extension target attributes
 
-A "link parameter object" is used to represent the [target attributes](https://tools.ietf.org/html/rfc8288#section-2.2)
-of the [link object][link] in which it's defined.
+A "link parameter object" is used to represent additional [target attributes](https://tools.ietf.org/html/rfc8288#section-2.2)
+of the [link object][link] in which it appears.
 
-Link parameters **MAY** contain any valid JSON value. However, target
+Link parameter objects **MUST** only contain members that have been defined by
+their accompanying link relation type. Member names **SHOULD** be valid JSON:API
+[member names][member names] and **MUST** be valid target attribute names as
+defined by [RFC8288 Section 2.2](https://tools.ietf.org/html/rfc8288#section-2.2).
+
+Link parameters objects **MAY** contain any valid JSON value. However, target
 attributes that have a cardinality greater than one **MUST** be represented as
 an array of values.
 
-> Note: this means that a target attribute with multiple values should be an
-array of values, not a whitespace-separated string as might be used in a
-[`Link` header serialization](https://tools.ietf.org/html/rfc8288#section-3.5).
-
-All member names used in a link parameter object and not defined by this
-specification **MUST** be valid JSON:API [member names][member names] and
-**MUST** be valid target attribute names as defined by [RFC8288 Section 2.2](https://tools.ietf.org/html/rfc8288#section-2.2).
-
-In addition to members that conform to the requirements above, link parameter
-objects **MAY** contain the members `hreflang`, `media`, `title`, `title`, and
-`type`. Each of these members **MUST** be used in accordance with their
-semantics meanings as defined by [RFC8288 Section 3.4.1](https://tools.ietf.org/html/rfc8288#section-3.4.1).
+> Note: This means that a target attribute with multiple string values should
+not be represented as a single concatenated string with its values separated by
+whitespace as might be the case in a [`Link` header serialization](https://tools.ietf.org/html/rfc8288#section-3.5).
 
 #### <a href="#profile-links" id="profile-links" class="headerlink"></a> Profile Links
 
