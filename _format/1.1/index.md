@@ -593,7 +593,7 @@ that an alternate link relation type be used or, less preferably, that the
 
 ##### <a href="#document-links-link-parameters" id="document-links-link-parameters" class="headerlink"></a> Link parameters
 
-The value of the `params` member **MUST** be an object (an “link parameter
+The value of the `params` member **MUST** be an object (a “link parameter
 object”). Members of the link parameter object (“link parameters”) describe
 the [link][link] on which they are defined or its target. These link parameters
 are also known as [target attributes](https://tools.ietf.org/html/rfc8288#section-2.2).
