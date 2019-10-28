@@ -37,6 +37,7 @@ media type received in the `Content-Type` header of response documents.
 
 ### <a href="#content-negotiation-servers" id="content-negotiation-servers" class="headerlink"></a> Server Responsibilities
 
+
 Servers **MUST** send all JSON:API data in response documents with the header
 `Content-Type: application/vnd.api+json` without any media type parameters.
 
