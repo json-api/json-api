@@ -96,9 +96,12 @@ If a document does not contain a top-level `data` key, the `included` member
 
 The top-level [links object][links] **MAY** contain the following members:
 
-* `self`: the [link][links] that generated the current response document.
-* `related`: a [related resource link] when the primary data represents a
+* `urlName`: a [related resource link] when the primary data represents a
   resource relationship.
+  - We found the simplication of specific or explicit naming made it easier for the client to determine which URL to grab.
+  - invoiceUrl
+  - invoicesUrl
+  - invoiceDetailUrl
 * [pagination] links for the primary data.
 
 The document's "primary data" is a representation of the resource or collection
@@ -780,6 +783,7 @@ Content-Type: application/vnd.api+json
 A server **MUST** respond with `404 Not Found` when processing a request to
 fetch a single resource that does not exist, except when the request warrants a
 `200 OK` response with `null` as the primary data (as described above).
+* I hate this statement & rule, but this can be talked about in the http status discussion.
 
 ##### <a href="#fetching-resources-responses-other" id="fetching-resources-responses-other" class="headerlink"></a> Other Responses
 
@@ -1222,6 +1226,7 @@ If a `POST` request did not include a [Client-Generated
 ID](#crud-creating-client-ids) and the requested resource has been created
 successfully, the server **MUST** return a `201 Created` status code.
 
+- We found the location header to be wasteful, most of the time the 'location' is returned via the data object anyway. JSONAPI has too much information, would be nice to remove things that we don't want to use
 The response **SHOULD** include a `Location` header identifying the location
 of the newly created resource.
 
