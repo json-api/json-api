@@ -123,7 +123,7 @@ code of `"add"` as well as a resource object as `data`. The resource object
 For example:
 
 ```json
-POST /bulk HTTP/1.1
+POST /operations HTTP/1.1
 Host: example.org
 Content-Type: application/vnd.api+json;ext="https://jsonapi.org/ext/atomic"
 Accept: application/vnd.api+json;ext="https://jsonapi.org/ext/atomic"
