@@ -151,13 +151,13 @@ it only contains one item or is empty.
 A resource object **MUST** contain at least the following top-level members:
 
 * `id`
-* `type`
 
 Exception: The `id` member is not required when the resource object originates at
 the client and represents a new resource to be created on the server.
 
 In addition, a resource object **MAY** contain any of these top-level members:
 
+* `type`
 * `attributes`: an [attributes object][attributes] representing some of the resource's data.
 * `relationships`: a [relationships object][relationships] describing relationships between
  the resource and other JSON:API resources.
@@ -190,7 +190,7 @@ Here's how an article (i.e. a resource of type "articles") might appear in a doc
 
 #### <a href="#document-resource-object-identification" id="document-resource-object-identification" class="headerlink"></a> Identification
 
-Every [resource object][resource objects] **MUST** contain an `id` member and a `type` member.
+Every [resource object][resource objects] **MUST** contain an `id` member.
 The values of the `id` and `type` members **MUST** be strings.
 
 Within a given API, each resource object's `type` and `id` pair **MUST**
