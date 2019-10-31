@@ -191,7 +191,7 @@ operation's `ref` member. The operation **MUST** include an `op` code of
 For example:
 
 ```json
-POST /bulk HTTP/1.1
+POST /operations HTTP/1.1
 Host: example.org
 Content-Type: application/vnd.api+json;ext="https://jsonapi.org/ext/atomic"
 Accept: application/vnd.api+json;ext="https://jsonapi.org/ext/atomic"
@@ -238,7 +238,7 @@ operation's `ref` member. The operation **MUST** include an `op` code of
 For example:
 
 ```json
-POST /bulk HTTP/1.1
+POST /operations HTTP/1.1
 Host: example.org
 Content-Type: application/vnd.api+json;ext="https://jsonapi.org/ext/atomic"
 Accept: application/vnd.api+json;ext="https://jsonapi.org/ext/atomic"
@@ -273,7 +273,7 @@ include an `op` code of `"update"`.
 For example, the following request assigns a to-one relationship:
 
 ```json
-POST /bulk HTTP/1.1
+POST /operations HTTP/1.1
 Host: example.org
 Content-Type: application/vnd.api+json;ext="https://jsonapi.org/ext/atomic"
 Accept: application/vnd.api+json;ext="https://jsonapi.org/ext/atomic"
@@ -297,7 +297,7 @@ Accept: application/vnd.api+json;ext="https://jsonapi.org/ext/atomic"
 And the following request clears a to-one relationship:
 
 ```json
-POST /bulk HTTP/1.1
+POST /operations HTTP/1.1
 Host: example.org
 Content-Type: application/vnd.api+json;ext="https://jsonapi.org/ext/atomic"
 Accept: application/vnd.api+json;ext="https://jsonapi.org/ext/atomic"
@@ -334,7 +334,7 @@ To add members to a to-many relationship, the operation **MUST** include an
 `op` code of `"add"`. For example:
 
 ```json
-POST /bulk HTTP/1.1
+POST /operations HTTP/1.1
 Host: example.org
 Content-Type: application/vnd.api+json;ext="https://jsonapi.org/ext/atomic"
 Accept: application/vnd.api+json;ext="https://jsonapi.org/ext/atomic"
@@ -358,7 +358,7 @@ To replace all the members of a to-many relationship, the operation **MUST**
 include an `op` code of `"update"`. For example:
 
 ```json
-POST /bulk HTTP/1.1
+POST /operations HTTP/1.1
 Host: example.org
 Content-Type: application/vnd.api+json;ext="https://jsonapi.org/ext/atomic"
 Accept: application/vnd.api+json;ext="https://jsonapi.org/ext/atomic"
@@ -383,7 +383,7 @@ To remove members from a to-many relationship, the operation **MUST** include an
 `op` code of `"remove"`. For example:
 
 ```json
-POST /bulk HTTP/1.1
+POST /operations HTTP/1.1
 Host: example.org
 Content-Type: application/vnd.api+json;ext="https://jsonapi.org/ext/atomic"
 Accept: application/vnd.api+json;ext="https://jsonapi.org/ext/atomic"
@@ -425,7 +425,7 @@ The following example adds two resources and creates a relationship between them
 in a single request:
 
 ```json
-POST /bulk HTTP/1.1
+POST /operations HTTP/1.1
 Host: example.org
 Content-Type: application/vnd.api+json;ext="https://jsonapi.org/ext/atomic"
 Accept: application/vnd.api+json;ext="https://jsonapi.org/ext/atomic"
