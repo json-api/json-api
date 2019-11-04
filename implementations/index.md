@@ -52,6 +52,7 @@ isomorphic ActiveRecord clone that issues JSON:API requests instead of SQL and i
 * [@reststate/vuex](https://vuex.reststate.org/) - a zero-configuration way to fetch and store JSON:API data in Vuex stores.
 * [@hyral/core](https://github.com/SyneticNL/Hyral) - An advanced, documented, easily extendable and lightweight (JSON:)API abstraction library with ORM-like CRUD support, automatic relationships handling and support for multiple (different) backends.
 * [@hyral/vue](https://github.com/SyneticNL/Hyral/tree/master/packages/vue) - Vue(x) integration for [@hyral/core](https://github.com/SyneticNL/Hyral) for Store-module creation and mixins
+* [jsonapi-mergr](https://github.com/wednesday-solutions/jsonapi-mergr) - a framework agnostic library that makes it easier to deal with jsonapi responses. Integrates very well with global state since it returns back an object with data from the API response formatted in an easily accessible form. Works well with React. 
 
 ### <a href="#client-libraries-typescript" id="client-libraries-typescript" class="headerlink"></a> Typescript
 * [ts-angular-jsonapi](https://github.com/reyesoft/ts-angular-jsonapi) A JSON:API library developed for AngularJS in Typescript
