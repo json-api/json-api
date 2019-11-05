@@ -545,13 +545,13 @@ Link objects **MAY** also contain the members `hreflang`, `title`, and `type`.
 Each of these members **MUST** be used in accordance with their semantics as
 defined by [RFC8288 Section 3.4.1](https://tools.ietf.org/html/rfc8288#section-3.4.1).
 
-Except for the `profile` key in the top-level links object and the `type` 
-key in an [error object]'s links object, each key present in a links object 
+Except for the `profile` key in the top-level links object and the `type`
+key in an [error object]'s links object, each key present in a links object
 **MUST** have a single link as its value. The aforementioned `profile` and
 `type` keys, if present, **MUST** hold an array of links.
 
-In the example below, the `self` link is simply a URI string, whereas the 
-`related` link uses the object form to provide meta information about a 
+In the example below, the `self` link is simply a URI string, whereas the
+`related` link uses the object form to provide meta information about a
 related resource collection:
 
 ```json
@@ -1074,8 +1074,8 @@ as well as the `author` of each of those `comments`.
 `comments.author` as a direct relationship with an alternative name such as
 `commentAuthors`. This would allow a client to request
 `/articles/1?include=commentAuthors` instead of
-`/articles/1?include=comments.author`. By exposing the nested relationship with 
-an alternative name, the server can still provide full linkage in compound 
+`/articles/1?include=comments.author`. By exposing the nested relationship with
+an alternative name, the server can still provide full linkage in compound
 documents without including potentially unwanted intermediate resources.
 
 Multiple related resources can be requested in a comma-separated list:
@@ -1119,7 +1119,7 @@ Accept: application/vnd.api+json
 ```
 
 > Note: The above example URI shows unencoded `[` and `]` characters simply for
-readability. In practice, these characters should be percent-encoded. See 
+readability. In practice, these characters should be percent-encoded. See
 "[Square Brackets in Parameter Names](#appendix-query-details-square-brackets)".
 
 > Note: This section applies to any endpoint that responds with resources as
@@ -1209,13 +1209,13 @@ particular link is unavailable.
 Concepts of order, as expressed in the naming of pagination links, **MUST**
 remain consistent with JSON:API's [sorting rules](#fetching-sorting).
 
-The `page` [query parameter family] is reserved for pagination. Servers and 
+The `page` [query parameter family] is reserved for pagination. Servers and
 clients **SHOULD** use these parameters for pagination operations.
 
 > Note: JSON API is agnostic about the pagination strategy used by a server, but
-> the `page` query parameter family can be used regardless of the strategy 
-> employed. For example, a page-based strategy might use query parameters such 
-> as `page[number]` and `page[size]`, while a cursor-based strategy might use 
+> the `page` query parameter family can be used regardless of the strategy
+> employed. For example, a page-based strategy might use query parameters such
+> as `page[number]` and `page[size]`, while a cursor-based strategy might use
 > `page[cursor]`.
 
 > Note: This section applies to any endpoint that responds with a resource
@@ -1223,7 +1223,7 @@ collection as primary data, regardless of the request type.
 
 ### <a href="#fetching-filtering" id="fetching-filtering" class="headerlink"></a> Filtering
 
-The `filter` [query parameter family] is reserved for filtering data. Servers 
+The `filter` [query parameter family] is reserved for filtering data. Servers
 and clients **SHOULD** use these parameters for filtering operations.
 
 > Note: JSON API is agnostic about the strategies supported by a server.
@@ -1847,11 +1847,11 @@ responses, in accordance with
 
 ### <a href="#query-parameters-families" id="query-parameters-families" class="headerlink"></a>  Query Parameter Families
 Although "query parameter" is a common term in everyday web development, it is
-not a well-standardized concept. Therefore, JSON:API provides its own 
+not a well-standardized concept. Therefore, JSON:API provides its own
 [definition of a query parameter](#appendix-query-details).
 
-For the most part, JSON:API's definition coincides with colloquial usage, and its 
-details can be safely ignored. However, one important consequence of this 
+For the most part, JSON:API's definition coincides with colloquial usage, and its
+details can be safely ignored. However, one important consequence of this
 definition is that a URL like the following is considered to have two distinct
 query parameters:
 
@@ -1859,31 +1859,31 @@ query parameters:
 /?page[offset]=0&page[limit]=10
 ```
 
-The two parameters are named `page[offset]` and `page[limit]`; there is no 
+The two parameters are named `page[offset]` and `page[limit]`; there is no
 single `page` parameter.
 
-In practice, however, parameters like `page[offset]` and `page[limit]` are 
-usually defined and processed together, and it's convenient to refer to them 
-collectively. Therefore, JSON:API introduces the concept of a query parameter 
+In practice, however, parameters like `page[offset]` and `page[limit]` are
+usually defined and processed together, and it's convenient to refer to them
+collectively. Therefore, JSON:API introduces the concept of a query parameter
 family.
 
-A "query parameter family" is the set of all query parameters whose name starts 
-with a "base name", followed by zero or more instances of empty square brackets 
-(i.e. `[]`) or square-bracketed legal member names. The family is referred to 
+A "query parameter family" is the set of all query parameters whose name starts
+with a "base name", followed by zero or more instances of empty square brackets
+(i.e. `[]`) or square-bracketed legal member names. The family is referred to
 by its base name.
 
 For example, the `filter` query parameter family includes parameters named:
-`filter`, `filter[x]`, `filter[]`, `filter[x][]`, `filter[][]`, `filter[x][y]`, 
+`filter`, `filter[x]`, `filter[]`, `filter[x][]`, `filter[][]`, `filter[x][y]`,
 etc. However, `filter[_]` is not a valid parameter name in the family, because
 `_` is not a valid [member name][member names].
 
 ### <a href="#query-parameters-custom" id="query-parameters-custom" class="headerlink"></a>   Implementation-Specific Query Parameters
-Implementations **MAY** support custom query parameters. However, the names of 
-these query parameters **MUST** come from a [family][query parameter family] 
-whose base name is a legal [member name][member names] and also contains at least 
+Implementations **MAY** support custom query parameters. However, the names of
+these query parameters **MUST** come from a [family][query parameter family]
+whose base name is a legal [member name][member names] and also contains at least
 one non a-z character (i.e., outside U+0061 to U+007A).
 
-It is **RECOMMENDED** that a capital letter (e.g. camelCasing) be used to 
+It is **RECOMMENDED** that a capital letter (e.g. camelCasing) be used to
 satisfy the above requirement.
 
 If a server encounters a query parameter that does not follow the naming
@@ -1900,14 +1900,14 @@ JSON:API supports the use of "profiles" as a way to indicate additional
 semantics that apply to a JSON:API document, without altering the basic
 semantics described in this specification.
 
-A profile is a separate specification defining these additional semantics. 
+A profile is a separate specification defining these additional semantics.
 
 [RFC 6906](https://tools.ietf.org/html/rfc6906) covers the nature of profile
 identification:
 
 > Profiles are identified by URI... The presence of a specific URI has to be
-  sufficient for a client to assert that a resource representation conforms to 
-  a profile [regardless of any content that may or may not be available at that 
+  sufficient for a client to assert that a resource representation conforms to
+  a profile [regardless of any content that may or may not be available at that
   URI].
 
 However, to aid human understanding, visiting a profile's URI **SHOULD** return
@@ -1930,15 +1930,15 @@ significant timestamps in a consistent way.
 
 ## Document Structure
 
-Every resource object **MAY** include a `timestamps` member in its associated 
-`meta` object. If this member is present, its value **MUST** be an object that 
+Every resource object **MAY** include a `timestamps` member in its associated
+`meta` object. If this member is present, its value **MUST** be an object that
 **MAY** contain any of the following members:
 
 * `created`
 * `updated`
 
-The value of each member **MUST** comply with the variant of ISO 8601 used by 
-JavaScript's `JSON.stringify` method to format Javascript `Date` objects. 
+The value of each member **MUST** comply with the variant of ISO 8601 used by
+JavaScript's `JSON.stringify` method to format Javascript `Date` objects.
 
 ## Keywords
 
@@ -1995,8 +1995,8 @@ parameter receives a document with one or more profiles, it will respond with a
 `415 Unsupported Media Type` error.
 
 After attempting to rule out other possible causes of this error, a client that
-receives a `415 Unsupported Media Type` **SHOULD** remove the profiles it has 
-applied to the document and retry its request without the `profile` media type 
+receives a `415 Unsupported Media Type` **SHOULD** remove the profiles it has
+applied to the document and retry its request without the `profile` media type
 parameter. If this resolves the error, the client **SHOULD NOT** attempt to
 apply profiles in subsequent interactions with the same API.
 
@@ -2016,10 +2016,10 @@ responses with and without any profiles applied.
 A profile **SHOULD** explicitly declare "keywords" for any elements that it
 introduces to the document structure. If a profile does not explicitly declare a
 keyword for an element, then the name of the element itself (i.e., its key in
-the document) is considered to be its keyword. All profile keywords **MUST** 
+the document) is considered to be its keyword. All profile keywords **MUST**
 meet this specification's requirements for [member names].
 
-In other words, if a profile introduces an object-valued document member, that 
+In other words, if a profile introduces an object-valued document member, that
 member is an element, but any keys in it are not themselves elements. Likewise,
 if the profile defines an array-valued element, the keys in nested objects
 within that array are not elements.
@@ -2073,19 +2073,19 @@ This profile might be applied as follows:
 
 ### <a href="#profiles-processing" id="profiles-processing" class="headerlink"></a> Processing Profiled Documents/Requests
 
-When a profile is applied to a request and/or document, the value used for each 
-of the profile's document members or query parameters is said to be "a 
+When a profile is applied to a request and/or document, the value used for each
+of the profile's document members or query parameters is said to be "a
 recognized value" if that value, including all parts of it, has a legal, defined
-meaning *according to the latest revision of the profile that the application is 
+meaning *according to the latest revision of the profile that the application is
 aware of*.
 
-> Note: The set of recognized values is also/more technically known as the 
+> Note: The set of recognized values is also/more technically known as the
 > [defined text set](http://www.w3.org/2001/tag/doc/versioning-compatibility-strategies#terminology).
 
-For example, the hypothetical [timestamps profile] specifies the `timestamps` 
-element, and the meaning for two keys within it -- `created` and `updated`. 
-Therefore, in the following use of the profile, the value for the timestamps 
-element would be a recognized value: 
+For example, the hypothetical [timestamps profile] specifies the `timestamps`
+element, and the meaning for two keys within it -- `created` and `updated`.
+Therefore, in the following use of the profile, the value for the timestamps
+element would be a recognized value:
 
 ```json
 {
@@ -2098,7 +2098,7 @@ element would be a recognized value:
 }
 ```
 
-However, in the following case, the value for `timestamps` is *not* a recognized 
+However, in the following case, the value for `timestamps` is *not* a recognized
 value because one of the keys in it, `createdUnixEpoch`, doesn't have a meaning
 assigned to it in the timestamps profile:
 
@@ -2107,9 +2107,9 @@ assigned to it in the timestamps profile:
     "type": "contacts",
     "id": "345",
     "meta": {
-      "timestamps": { 
-        "createdUnixEpoch": 1535567910201, 
-        "created": "2018-08-29T18:38:17.567Z" 
+      "timestamps": {
+        "createdUnixEpoch": 1535567910201,
+        "created": "2018-08-29T18:38:17.567Z"
       }
     }
     //...
@@ -2117,42 +2117,42 @@ assigned to it in the timestamps profile:
 ```
 
 Likewise, if a profile defines an element and enumerates `true` and `false`
-as legal values with a specific meaning, then a string appearing as that 
+as legal values with a specific meaning, then a string appearing as that
 element's value would be an unrecognized value.
 
 > Note: unrecognized values are not necessarily invalid or erroneous values.
-> For example, the timestamps profile might be revised later to actually define 
+> For example, the timestamps profile might be revised later to actually define
 > a "createdUnixEpoch" key. This key would be unrecognized by all applications
 > that existed at the time it was defined, but not by ones created/deployed later.
 
 Each profile **MAY** define its own rules for how applications should proceed
 when encountering unrecognized values.
 
-If a profile does not define its own rules for handling unrecognized values, 
+If a profile does not define its own rules for handling unrecognized values,
 the following rule applies by default:
 
-  1. If the value of a profile-defined query parameter is unrecognized, the 
-     server **MUST** fail the request and respond with a `400 Bad Request` and 
+  1. If the value of a profile-defined query parameter is unrecognized, the
+     server **MUST** fail the request and respond with a `400 Bad Request` and
      an [error object][error objects] indicating the problematic parameter.
-     
-  2. Otherwise, if the unrecognized value is a JSON object in the 
-     request/response document, and the only thing that makes it unrecognized 
+
+  2. Otherwise, if the unrecognized value is a JSON object in the
+     request/response document, and the only thing that makes it unrecognized
      is that it contains one or more keys that have no meaning assigned to them
      (in the latest revision of the profile that the application is aware of),
-     then the application **MUST** simply ignore those unknown keys and 
+     then the application **MUST** simply ignore those unknown keys and
      continue processing the profile.
 
   3. In all other cases, the application **MUST** assume that the profile has
      been applied erroneously and **MUST** totally ignore the profile (i.e.,
      process the request as if the profile were not there).
 
-In the case of our example [timestamps profile], it does not define its own 
-rules, so the above defaults would apply. 
+In the case of our example [timestamps profile], it does not define its own
+rules, so the above defaults would apply.
 
-Under the second of these default rules, the unrecognized value we saw 
-above (with the `createdUnixEpoch` key) would be processed as though the 
-`createdUnixEpoch` key simply weren't present, and the application would still 
-be able to use the data in the `created` key. 
+Under the second of these default rules, the unrecognized value we saw
+above (with the `createdUnixEpoch` key) would be processed as though the
+`createdUnixEpoch` key simply weren't present, and the application would still
+be able to use the data in the `created` key.
 
 However, if the user instead provided the following value, the whole timestamps
 profile would need to be ignored:
@@ -2160,38 +2160,38 @@ profile would need to be ignored:
 ```json
 {
   //...
-  "timestamps": { 
-    "updated": "Wed Aug 29 2018 15:00:05 GMT-0400", 
-    "created": "2018-08-29T18:38:17.567Z" 
+  "timestamps": {
+    "updated": "Wed Aug 29 2018 15:00:05 GMT-0400",
+    "created": "2018-08-29T18:38:17.567Z"
   }
 }
 ```
 
-Ignoring the profile in this case is required by the third default rule, 
+Ignoring the profile in this case is required by the third default rule,
 because the value for the `updated` key is not recognized under the profile's
-requirement that the `updated` key hold a string of the form produced by 
+requirement that the `updated` key hold a string of the form produced by
 `JSON.stringify`.
 
 ### <a href="#profiles-authoring" id="profiles-authoring" class="headerlink"></a> Authoring Profiles
 
 A profile **MAY** assign meaning to elements of the document structure whose use
 is left up to each implementation, such as resource fields or members of `meta`
-objects. A profile **MUST NOT** define/assign a meaning to document members 
-in areas of the document reserved for future use by the JSON:API specification. 
+objects. A profile **MUST NOT** define/assign a meaning to document members
+in areas of the document reserved for future use by the JSON:API specification.
 
-For example, it would be illegal for a profile to define a new key in a 
-document's [top-level][top level] object, or in a [links object][links], as 
+For example, it would be illegal for a profile to define a new key in a
+document's [top-level][top level] object, or in a [links object][links], as
 JSON API implementations are not allowed to add custom keys in those areas.
 
-Likewise, a profile **MAY** assign a meaning to query parameters or parameter 
-values whose details are left up to each implementation, such as `filter` and 
-all parameters that contain a non a-z character. However, profiles **MUST NOT** 
+Likewise, a profile **MAY** assign a meaning to query parameters or parameter
+values whose details are left up to each implementation, such as `filter` and
+all parameters that contain a non a-z character. However, profiles **MUST NOT**
 assign a meaning to query parameters that [are reserved](#query-parameters).
 
-The meaning of an element or query parameter defined by a profile **MUST NOT** 
+The meaning of an element or query parameter defined by a profile **MUST NOT**
 vary based on the presence or absence of other profiles.
 
-The scope of a profile **MUST** be clearly delineated. The elements and query 
+The scope of a profile **MUST** be clearly delineated. The elements and query
 parameters specified by a profile, and their meanings, **MUST NOT** change over
 time or else the profile **MUST** be considered a new profile with a new URI.
 
@@ -2203,70 +2203,70 @@ time or else the profile **MUST** be considered a new profile with a new URI.
 
 Finally, a profile **MUST NOT**:
 
-1. assume that, if it is supported, then other specific profiles will be 
+1. assume that, if it is supported, then other specific profiles will be
 supported as well.
 
 2. define fixed endpoints, HTTP headers, or header values.
 
-3. alter the JSON structure of any concept defined in this specification, 
+3. alter the JSON structure of any concept defined in this specification,
 including to allow a superset of JSON structures.
 
 
-> If you create your own profile, you are **strongly encouraged to [register](/extensions/#profile-creation) 
+> If you create your own profile, you are **strongly encouraged to [register](/extensions/#profile-creation)
 > it** with the JSON API [profile registry](/extensions/), so that others can
 > find and reuse it.
 
 #### <a href="#profiles-updating" id="profiles-updating" class="headerlink"></a> Revising a Profile
 
-Profiles **MAY** be revised over time, e.g., to add new capabilities. However, 
-any such changes **MUST** be [backwards and forwards compatible](http://www.w3.org/2001/tag/doc/versioning-compatibility-strategies#terminology) 
+Profiles **MAY** be revised over time, e.g., to add new capabilities. However,
+any such changes **MUST** be [backwards and forwards compatible](http://www.w3.org/2001/tag/doc/versioning-compatibility-strategies#terminology)
 ("compatible evolution"), in order to not break existing users of the profile.
 
 For example, the hypothetical [timestamps profile] *could not* introduce a new,
-required `deleted` member within the `timestamps` object, as that would be 
-incompatible with existing deployments of the profile, which would not include 
+required `deleted` member within the `timestamps` object, as that would be
+incompatible with existing deployments of the profile, which would not include
 this new member.
 
-The timestamps profile also *could not* evolve to define a new element as a 
-sibling of the `timestamps` key, as that would be incompatible with the rule 
+The timestamps profile also *could not* evolve to define a new element as a
+sibling of the `timestamps` key, as that would be incompatible with the rule
 that "The elements... specified by a profile... **MUST NOT** change over time."
 
-> The practical issue with adding a sibling element is that another profile 
-> in use on the document might already define a sibling element of the same 
+> The practical issue with adding a sibling element is that another profile
+> in use on the document might already define a sibling element of the same
 > name.
 
-However, the timestamps profile could evolve to allow other optional members, 
-such as `deleted`, in the `timestamps` object. This is possible because the 
+However, the timestamps profile could evolve to allow other optional members,
+such as `deleted`, in the `timestamps` object. This is possible because the
 `timestamps` object is already a reserved element of the profile, and the profile
 is subject to the default rule that new (previously unrecognized) keys will
 simply be ignored by existing applications.
 
 ##### <a href="#profiles-design-for-evolution" id="profiles-design-for-evolution" class="headerlink"></a> Designing Profiles to Evolve Over Time
 
-Fundamentally, for a profile to be able to change in a compatible way over time, 
-it must define -- from the beginning -- a rule describing how an application 
-that is only familiar with the original version of the profile should process 
+Fundamentally, for a profile to be able to change in a compatible way over time,
+it must define -- from the beginning -- a rule describing how an application
+that is only familiar with the original version of the profile should process
 documents/requests that use features from an updated version of the profile.
 
-One major approach is to simply have applications ignore (at least some types of) 
-unrecognized data. This allows the profile to define new, optional features; 
-old applications will continue to work, but simply won't process/"see" these new 
+One major approach is to simply have applications ignore (at least some types of)
+unrecognized data. This allows the profile to define new, optional features;
+old applications will continue to work, but simply won't process/"see" these new
 capabilities.
 
 This is essentially the strategy that JSON:API itself uses when it says that:
 
-> Client and server implementations **MUST** ignore members not recognized by 
+> Client and server implementations **MUST** ignore members not recognized by
 > this specification.
 
-Other protocols use analogous strategies. E.g., in HTTP, unknown headers are 
+Other protocols use analogous strategies. E.g., in HTTP, unknown headers are
 simply ignored; they don't crash the processing of the request/response.
 
-As a profile author, you may define your own rules for how applications should 
-process uses of the profile that contain unrecognized data, or you may simply 
+As a profile author, you may define your own rules for how applications should
+process uses of the profile that contain unrecognized data, or you may simply
 allow the default rules described in the ["Processing Profiled Documents/Requests"](#profiles-processing)
 to take effect.
 
-If you choose to use the default rules, you **SHOULD** reserve an object-valued 
+If you choose to use the default rules, you **SHOULD** reserve an object-valued
 element anywhere you expect to potentially add new features over time.
 
 ## <a href="#errors" id="errors" class="headerlink"></a> Errors
@@ -2296,8 +2296,8 @@ An error object **MAY** have the following members:
   * `about`: a [link][link] that leads to further details about this
     particular occurrence of the problem. When derefenced, this URI **SHOULD**
     return a human-readable description of the error.
-  * `type`: an array of [links][link] that identify the type of error 
-    that this particular error is an instance of. This URI **SHOULD** be 
+  * `type`: an array of [links][link] that identify the type of error
+    that this particular error is an instance of. This URI **SHOULD** be
     dereferencable to a human-readable explanation of the general error.
 * `status`: the HTTP status code applicable to this problem, expressed as a
   string value.
@@ -2322,26 +2322,26 @@ An error object **MAY** have the following members:
 ## <a href="#appendix" id="appendix" class="headerlink"></a> Appendix
 ### <a href="#appendix-query-details" id="appendix-query-details" class="headerlink"></a> Query Parameters Details
 #### <a href="#appendix-query-details-parsing" id="appendix-query-details-parsing" class="headerlink"></a> Parsing/Serialization
-A query parameter is a name–value pair extracted from, or serialized into, a 
-URI's query string. 
+A query parameter is a name–value pair extracted from, or serialized into, a
+URI's query string.
 
-To extract the query parameters from a URI, an implementation **MUST** run the 
-URI's query string, excluding the leading question mark, through the 
+To extract the query parameters from a URI, an implementation **MUST** run the
+URI's query string, excluding the leading question mark, through the
 [`application/x-www-form-urlencoded` parsing algorithm](https://url.spec.whatwg.org/#urlencoded-parsing),
-with one exception: JSON:API allows the specification that defines a query 
-parameter's usage to provide its own rules for parsing the parameter's value 
-from the `value` bytes identified in steps 3.2 and and 3.3 of the `application/x-www-form-urlencoded` 
+with one exception: JSON:API allows the specification that defines a query
+parameter's usage to provide its own rules for parsing the parameter's value
+from the `value` bytes identified in steps 3.2 and and 3.3 of the `application/x-www-form-urlencoded`
 parsing algorithm. The resulting value might not be a string.
 
 > Note: In general, the query string parsing built in to servers and browsers
 > will match the process specified above, so most implementations do not need
 > to worry about this.
-> 
+>
 > The `application/x-www-form-urlencoded` format is referenced because it is
-> the basis for the `a=b&c=d` style that almost all query strings use today. 
-> 
-> However, `application/x-www-form-urlencoded` parsing contains the bizarre 
-> historical artifact that `+` characters must be treated as spaces, and it 
+> the basis for the `a=b&c=d` style that almost all query strings use today.
+>
+> However, `application/x-www-form-urlencoded` parsing contains the bizarre
+> historical artifact that `+` characters must be treated as spaces, and it
 > requires that all values be percent-decoded during parsing, which makes it
 > impossible to use [RFC 3986 delimiter characters](https://tools.ietf.org/html/rfc3986#section-2.2)
 > as delimiters. These issues motivate the exception that JSON:API defines above.
@@ -2349,19 +2349,19 @@ parsing algorithm. The resulting value might not be a string.
 Similarly, to serialize a query parameter into a URI, an implementation **MUST**
 use the [the `application/x-www-form-urlencoded` serializer](https://url.spec.whatwg.org/#concept-urlencoded-serializer),
 with the corresponding exception that a parameter's value — but not its name —
-may be serialized differently than that algorithm requires, provided the 
+may be serialized differently than that algorithm requires, provided the
 serialization does not interfere with the ability to parse back the resulting URI.
 
 #### <a href="#appendix-query-details-square-brackets" id="appendix-query-details-square-brackets" class="headerlink"></a> Square Brackets in Parameter Names
-With [query parameter families][query parameter family], JSON:API allows for 
-query parameters whose names contain square brackets (i.e., U+005B "[" and 
+With [query parameter families][query parameter family], JSON:API allows for
+query parameters whose names contain square brackets (i.e., U+005B "[" and
 U+005D "]").
 
-According to the query parameter serialization rules above, a compliant 
-implementation will percent-encode these square brackets. However, some URI 
-producers — namely browsers — do not always encode them. Servers **SHOULD** 
-accept requests in which these square brackets are left unencoded in a query 
-parameter's name. If a server does accept these requests, it **MUST** treat the 
+According to the query parameter serialization rules above, a compliant
+implementation will percent-encode these square brackets. However, some URI
+producers — namely browsers — do not always encode them. Servers **SHOULD**
+accept requests in which these square brackets are left unencoded in a query
+parameter's name. If a server does accept these requests, it **MUST** treat the
 request as equivalent to one in which the square brackets were percent-encoded.
 
 [top level]: #document-top-level
