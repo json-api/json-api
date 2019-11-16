@@ -249,6 +249,7 @@ the moment.
 * [jsonapi](https://github.com/google/jsonapi) serializes and deserializes jsonapi formatted payloads using struct tags to annotate the structs that you already have in your Golang project. [Godoc](http://godoc.org/github.com/google/jsonapi)
 * [go-json-spec-handler](https://github.com/derekdowling/go-json-spec-handler) drop-in library for handling requests and sending responses in an existing API.
 * [jsh-api](https://github.com/derekdowling/go-json-spec-handler/tree/master/jsh-api) deals with the dirty work of building JSON:API resource endpoints. Built on top of [jsh](https://github.com/derekdowling/go-json-spec-handler)
+* [mfcochauxlaberge/jsonapi](https://github.com/mfcochauxlaberge/jsonapi) offers a feature complete implementation of the specification for marshaling and unmarshaling URLS and documents. It also has many other utilities useful for building a real API service.
 
 ### <a href="#server-libraries-net" id="server-libraries-net" class="headerlink"></a> .NET
 
