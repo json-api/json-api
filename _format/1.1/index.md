@@ -54,23 +54,25 @@ negotiation and versioning.
 
 ### <a href="#content-negotiation-clients" id="content-negotiation-clients" class="headerlink"></a> Client Responsibilities
 
-Clients that include the JSON:API media type in their `Accept` header **MUST**
-specify the media type there at least once without the `profile` media type
-parameter.
-
 When processing a JSON:API response document, clients **MUST** ignore any
 parameters other than `ext` and `profile` parameters in the server's
 `Content-Type` header.
 
 ### <a href="#content-negotiation-servers" id="content-negotiation-servers" class="headerlink"></a> Server Responsibilities
 
-Servers **MUST** respond with a `415 Unsupported Media Type` status code if
-a request specifies the header `Content-Type: application/vnd.api+json` with
-any media type parameters other than `ext` or `profile`.
+If a request specifies the `Content-Type` header with the JSON:API media type,
+servers **MUST** respond with a `415 Unsupported Media Type` status code if that
+media type contains any media type parameters other than `ext` or `profile`.
 
-Servers **MUST** respond with a `406 Not Acceptable` status code if a request's
-`Accept` header does not contain an instance of the JSON:API media
-type that the server is able to process.
+If a request's `Accept` header contains an instance of the JSON:API media type,
+servers **MUST** respond with a `406 Not Acceptable` status code if all
+instances of that media type are modified with a media type parameter other
+than `ext` or `profile`.
+
+If a request's `Accept` header contains an instance of the JSON:API media type,
+servers **MUST** respond with a `406 Not Acceptable` status code if every
+instance of that media type is modified by the `ext` parameter and each
+contains at least one unsupported extension URI.
 
 ## <a href="#document-structure" id="document-structure" class="headerlink"></a> Document Structure
 
