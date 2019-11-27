@@ -92,6 +92,7 @@ isomorphic ActiveRecord clone that issues JSON:API requests instead of SQL and i
 ### <a href="#client-libraries-dart" id="client-libraries-dart" class="headerlink"></a> Dart
 
 * [jsonapi_client](https://pub.dev/packages/jsonapi_client) is a simple JSON:API v1.0 client written in Dart.
+* [rest_data](https://pub.dev/packages/rest_data) is a REST API client based on `ember-data` concepts which includes a JSON:API adapter.
 * [json_api](https://pub.dev/packages/json_api) is a full-fledged client for Flutter/Web/VM.
 
 ### <a href="#client-libraries-perl" id="client-libraries-perl" class="headerlink"></a> Perl
