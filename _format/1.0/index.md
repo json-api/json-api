@@ -1560,7 +1560,7 @@ is an empty array or an array of [resource identifier objects][resource identifi
 If a client makes a `PATCH` request to a URL from a to-many
 [relationship link][relationships], the server **MUST** either completely
 replace every member of the relationship, return an appropriate error response
-if some resources cannot be found or accessed, or return a `403 Forbidden`
+if some resources can not be found or accessed, or return a `403 Forbidden`
 response if complete replacement is not allowed by the server.
 
 For example, the following request replaces every tag for an article:
