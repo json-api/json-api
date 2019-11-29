@@ -99,7 +99,7 @@ A document **MUST** contain at least one of the following top-level members:
 * `meta`: a [meta object][meta] that contains non-standard
   meta-information.
 
-The member's `data` and `errors` **MUST NOT** coexist in the same document.
+The members `data` and `errors` **MUST NOT** coexist in the same document.
 
 A document **MAY** contain any of these top-level members:
 
