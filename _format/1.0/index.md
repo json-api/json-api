@@ -1138,7 +1138,7 @@ partial updates are allowed.
 
 > Note: The `type` member is required in every [resource object][resource objects] throughout requests and
 responses in JSON:API. There are some cases, such as when `POST`ing to an
-endpoint representing heterogenous data, when the `type` could not be inferred
+endpoint representing heterogeneous data, when the `type` could not be inferred
 from the endpoint. However, picking and choosing when it is required would be
 confusing; it would be hard to remember when it was required and when it was
 not. Therefore, to improve consistency and minimize confusion, `type` is
