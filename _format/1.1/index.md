@@ -114,6 +114,8 @@ The top-level [links object][links] **MAY** contain the following members:
   resource relationship.
 * `profile`: an array of [links][link], each specifying a [profile][profiles]
   in use in the document.
+* `describedby`: a [link] to a description document (e.g. OpenAPI or JSON
+  Schema) for the current document.
 * [pagination] links for the primary data.
 
 The document's "primary data" is a representation of the resource or collection
@@ -538,6 +540,8 @@ Within this object, a link **MUST** be represented as either:
     [relationship object][relationships] in which the link appears.
   * `params`: a [link parameter object][link parameters] describing additional
     information about the link or its target.
+  * `describedby`: a [link] to a description document (e.g. OpenAPI or JSON
+    Schema) for the link target.
   * `meta`: a meta object containing non-standard meta-information about the
     link.
 
@@ -552,13 +556,15 @@ key in an [error object]'s links object, each key present in a links object
 
 In the example below, the `self` link is simply a URI string, whereas the
 `related` link uses the object form to provide meta information about a
-related resource collection:
+related resource collection as well as a schema that serves as a description
+document for that collection:
 
 ```json
 "links": {
-  "self": "http://example.com/articles/1",
+  "self": "http://example.com/articles/1/relationships/comments",
   "related": {
     "href": "http://example.com/articles/1/comments",
+    "describedby": "http://example.com/schemas/article-comments",
     "meta": {
       "count": 10
     }
