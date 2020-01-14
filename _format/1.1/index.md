@@ -1916,6 +1916,17 @@ and it **MAY** define new object members as described below.
 An extension **MUST NOT** lessen or remove any processing rules, restrictions or
 object member requirements defined in this specification or other extensions.
 
+### <a href="#extension-members" id="extension-members" class="headerlink"></a> Extending Document Structure
+
+An extension **MAY** define new members within the document structure defined by
+this specification. The name of every new member introduced by an extension
+**MUST** be prefixed with an extension namespace followed by a colon (`:`). The
+namespace **MUST** be identical for every member introduced by a particular
+extension.
+
+Namespaces guarantee that extensions will never conflict with the current or
+future versions of this specification.
+
 ## <a href="#profiles" id="profiles" class="headerlink"></a> Profiles
 
 JSON:API supports the use of "profiles" as a way to indicate additional
