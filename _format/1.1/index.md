@@ -1927,6 +1927,19 @@ extension.
 Namespaces guarantee that extensions will never conflict with the current or
 future versions of this specification.
 
+In the following example, an extension requiring that each request document
+contains a unique request ID has been applied. It uses the namespace `request`
+and adds a top-level object member named `request:id`: 
+
+```
+{
+  "request:id": "some-long-uuid",
+  "data": {
+    "type": "comments",
+  }
+}
+```
+
 ## <a href="#profiles" id="profiles" class="headerlink"></a> Profiles
 
 JSON:API supports the use of "profiles" as a way to indicate additional
