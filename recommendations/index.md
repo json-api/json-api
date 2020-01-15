@@ -254,11 +254,40 @@ Retry-After: 1
   }
 }
 ```
-
 When job process is done, the request **SHOULD** return a status `303 See other` with a link in `Location` header.
 
 ```http
 HTTP/1.1 303 See other
 Content-Type: application/vnd.api+json
 Location: https://example.com/photos/4577
+```
+
+## <a href="#authoring-profiles" id="authoring-profiles" class="headerlink"></a> Authoring Profiles
+Profiles are a mechanism that can be used by the sender of a document to make promises about its content, without adding to or altering the basic semantics of the JSON:API specification. For example, a profile may indicate that all resource objects will have a `timestamps` attribute field and that the members of the `timestamps` object will be formatted using the ISO 8601 date time format.
+
+A profile is an independent specification of those promises. The following example illustrates how the aforementioned profile might be authored:
+
+<a id="profiles-timestamp-profile"></a>
+```text
+# Timestamps profile
+
+## Introduction
+
+This page specifies a profile for the `application/vnd.api+json` media type,
+as described in the [JSON:API specification](http://jsonapi.org/format/).
+
+This profile allows every resource in a JSON:API document to represent
+significant timestamps in a consistent way.
+
+## Document Structure
+
+Every resource object **MUST** include a `timestamps` member in its associated
+`attributes` object. If this member is present, its value **MUST** be an object that
+**MAY** contain at least one of the following members:
+
+* `created`
+* `updated`
+
+The value of each member **MUST** comply with the variant of ISO 8601 used by
+JavaScript's `JSON.stringify` method to format Javascript `Date` objects.
 ```
