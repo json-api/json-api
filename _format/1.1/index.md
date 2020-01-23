@@ -55,15 +55,15 @@ negotiation and versioning.
 When processing a JSON:API response document, clients **MUST** ignore any
 parameters other than `profile` in the server's `Content-Type` header.
 
-> Note: Older JSON:API servers that don't support the `profile` media
-type parameter will respond with a `415 Unsupported Media Type` client error
-status if the `profile` media type parameter is present.
-
 ### <a href="#content-negotiation-servers" id="content-negotiation-servers" class="headerlink"></a> Server Responsibilities
 
 Servers **MUST** respond with a `415 Unsupported Media Type` status code if
 a request specifies the header `Content-Type: application/vnd.api+json` with
 any media type parameters other than `profile`.
+
+> Note: Older JSON:API servers that do not support the `profile` media
+  type parameter will respond with a `415 Unsupported Media Type` client error
+  status if the `profile` media type parameter is present.
 
 Servers **MUST** respond with a `406 Not Acceptable` status code if a request's
 `Accept` header contains the JSON:API media type and all instances of that
