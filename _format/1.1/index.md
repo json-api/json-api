@@ -55,6 +55,10 @@ negotiation and versioning.
 When processing a JSON:API response document, clients **MUST** ignore any
 parameters other than `profile` in the server's `Content-Type` header.
 
+> Note: Older JSON:API servers that don't support the `profile` media
+type parameter will respond with a `415 Unsupported Media Type` client error
+status if the `profile` media type parameter is present.
+
 ### <a href="#content-negotiation-servers" id="content-negotiation-servers" class="headerlink"></a> Server Responsibilities
 
 Servers **MUST** respond with a `415 Unsupported Media Type` status code if
@@ -1962,7 +1966,6 @@ Likewise, clients and servers applying profiles to a JSON:API document **MUST**
 include a [top-level][top level] [`links` object][links] with a `profile` key,
 and that `profile` key **MUST** include a [link] to the URI of each profile
 that has been applied.
-
 
 ## <a href="#errors" id="errors" class="headerlink"></a> Errors
 
