@@ -1945,9 +1945,6 @@ Servers **MAY** respond with a subset of the requested profiles applied or none
 of the requested profiles applied. Additionally, servers **MAY** respond with
 unrequested profiles applied.
 
-The recipient of a document to which an unknown profile has been applied
-**MUST** ignore any document members that it does not understand.
-
 #### <a href="#profiles-sending" id="profiles-sending" class="headerlink"></a> Sending Profiled Documents
 
 Clients and servers **MUST** include the `profile` media type parameter in
@@ -1958,17 +1955,6 @@ Likewise, clients and servers applying profiles to a JSON:API document **MUST**
 include a [top-level][top level] [`links` object][links] with a `profile` key,
 and that `profile` key **MUST** include a [link] to the URI of each profile
 that has been applied.
-
-> When an older JSON:API server that doesn't support the `profile` media type
-> parameter receives a document with one or more profiles, it will respond with
-> a `415 Unsupported Media Type` error. The most likely other causes of a 415
-> error are that the server doesn't support JSON:API at all.
-
-After attempting to rule out other possible causes of this error, a client that
-receives a `415 Unsupported Media Type` **SHOULD** remove the profiles it has
-applied to the document and retry its request without the `profile` media type
-parameter. If this resolves the error, the client **SHOULD NOT** attempt to
-apply profiles in subsequent interactions with the same API.
 
 Servers that support profiles **SHOULD** specify the `Vary` header with
 `Accept` as one of its header names to ensure that the server's responses can
