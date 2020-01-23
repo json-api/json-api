@@ -1927,6 +1927,9 @@ identification:
   a profile [regardless of any content that may or may not be available at that
   URI].
 
+However, to aid human understanding, visiting a profile's URI **SHOULD** return
+documentation of the profile.
+
 ### <a href="#profile-media-type-parameter" id="profile-media-type-parameter" class="headerlink"></a> `profile` Media Type Parameter
 
 The `profile` media type parameter is used to describe the application of
