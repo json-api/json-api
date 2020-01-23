@@ -65,6 +65,13 @@ Servers **MUST** respond with a `406 Not Acceptable` status code if a request's
 `Accept` header contains the JSON:API media type and all instances of that
 media type are modified with a media type parameter other than `profile`.
 
+Servers that support profiles **SHOULD** specify the `Vary` header with
+`Accept` as one of its values. This applies to responses with and without any
+profiles applied.
+
+> Note: Some HTTP intermediaries (e.g. CDNs) may ignore the `Vary` header
+unless specifically configured to respect it.
+
 ## <a href="#document-structure" id="document-structure" class="headerlink"></a> Document Structure
 
 This section describes the structure of a JSON:API document, which is identified
@@ -1956,13 +1963,6 @@ include a [top-level][top level] [`links` object][links] with a `profile` key,
 and that `profile` key **MUST** include a [link] to the URI of each profile
 that has been applied.
 
-Servers that support profiles **SHOULD** specify the `Vary` header with
-`Accept` as one of its header names to ensure that the server's responses can
-be cached without disrupting subsequent content negotiations. This applies to
-responses with and without any profiles applied.
-
-> Note: Some HTTP intermediaries (e.g. CDNs) may ignore the `Vary` header
-> unless specifically configured to respect it.
 
 ## <a href="#errors" id="errors" class="headerlink"></a> Errors
 
