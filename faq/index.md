@@ -54,7 +54,7 @@ For instance, a client might request `HEAD /articles`, and the response could
 contain the header `Allow: GET,POST`, indicating that the client can GET the
 collection and also POST to it to create new resources.
 
-JSON:API is still working on a way to for resources to advertise and detail
+JSON:API is still working on a way for resources to advertise and detail
 non-standard actions they support. Feel free to
 [join that discussion](https://github.com/json-api/json-api/issues/745)!
 
