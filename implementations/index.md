@@ -320,8 +320,9 @@ includes related resources.
 * [json-patch](https://github.com/guillec/json-patch) implementation of JSON Patch (rfc6902)
 * [hana](https://github.com/tenderlove/hana) implementation of the JSON Patch and JSON pointer spec
 
-### <a href="#relted-tools-node-js" id="relted-tools-node-js" class="headerlink"></a> Node.js
+### <a href="#related-tools-javascript" id="related-tools-javascript" class="headerlink"></a> JavaScript
 
+* [json-api-merge](https://www.npmjs.com/package/json-api-merge) JSON:API specific redundant duplication algorithm for merging included resources into original data
 * [json-patch](https://www.npmjs.org/package/json-patch) implementation of JSON Patch (rfc6902)
 
 ### <a href="#server-python" id="server-python" class="headerlink"></a> Python
