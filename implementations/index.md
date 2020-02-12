@@ -80,6 +80,7 @@ isomorphic ActiveRecord clone that issues JSON:API requests instead of SQL and i
 * [SimpleJSONAPIClient](https://github.com/amcaplan/simple_jsonapi_client) gives you lower-level control for API operations, while your models and their relationships maintain a neat, ActiveRecord-inspired interface.
 * [jsonapi-simple_client](https://github.com/InspireNL/jsonapi-simple_client) a client to interact with a Server API that implements the JSON:API spec.
 * [jsonapi-record](https://github.com/InspireNL/jsonapi-record) a client framework for interacting JSON:API Spec compliant APIs in Ruby.
+* [Graphiti](https://www.graphiti.dev/guides/) a ruby library for RESTful Resources based on JSON:API. Works with vanilla Ruby, Sinatra and Rails.
 
 ### <a href="#client-libraries-php" id="client-libraries-php" class="headerlink"></a> PHP
 
@@ -134,6 +135,7 @@ and writing of JSON:API documents.
 * [jsonapi-requests](https://github.com/socialwifi/jsonapi-requests/) Simple and fun high-level JSONAPI client for Python. Contains ORM which makes consuming the API even easier, in a DRY manner. It has a low-level API similar to requests as well, which gives you all the flexibility that you may need.
 * [jsonapi-client](https://github.com/qvantel/jsonapi-client) Comprehensive yet easy-to-use, pythonic, ORM-like access to JSON:API services
 * [json-api-doc](https://github.com/noplay/json-api-doc) JSON:API parser returning a simple Python dictionary
+* [json-api-smart](https://github.com/NilssonPL/json-api-smart) JSON:API with an ORM interface
 
 ### <a href="#client-libraries-elixir" id="client-libraries-elixir" class="headerlink"></a> Elixir
 
@@ -318,8 +320,9 @@ includes related resources.
 * [json-patch](https://github.com/guillec/json-patch) implementation of JSON Patch (rfc6902)
 * [hana](https://github.com/tenderlove/hana) implementation of the JSON Patch and JSON pointer spec
 
-### <a href="#relted-tools-node-js" id="relted-tools-node-js" class="headerlink"></a> Node.js
+### <a href="#related-tools-javascript" id="related-tools-javascript" class="headerlink"></a> JavaScript
 
+* [json-api-merge](https://www.npmjs.com/package/json-api-merge) JSON:API specific redundant duplication algorithm for merging included resources into original data
 * [json-patch](https://www.npmjs.org/package/json-patch) implementation of JSON Patch (rfc6902)
 
 ### <a href="#server-python" id="server-python" class="headerlink"></a> Python

@@ -36,10 +36,12 @@ Clients and servers **MUST** send all JSON:API data using this media type in the
 `Content-Type` header.
 
 Further, the JSON:API media type **MUST** always be specified with either no
-media type parameters or with only the `profile` parameter. This applies to both
-the `Content-Type` and `Accept` headers whenever they are present.
+media type parameters, the `ext` parameter, the `profile` parameter or both the
+`ext` and `profile` parameters. This applies to both the `Content-Type` and
+`Accept` headers.
 
-The `profile` parameter is used to support [profiles].
+The `ext` parameter is used to support [extensions] and the `profile` parameter
+is used to support [profiles].
 
 > Note: A media type parameter is an extra piece of information that can
 accompany a media type. For example, in the header
@@ -53,21 +55,25 @@ negotiation and versioning.
 ### <a href="#content-negotiation-clients" id="content-negotiation-clients" class="headerlink"></a> Client Responsibilities
 
 When processing a JSON:API response document, clients **MUST** ignore any
-parameters other than `profile` in the server's `Content-Type` header.
+parameters other than `ext` and `profile` parameters in the server's
+`Content-Type` header.
 
 ### <a href="#content-negotiation-servers" id="content-negotiation-servers" class="headerlink"></a> Server Responsibilities
 
-Servers **MUST** respond with a `415 Unsupported Media Type` status code if
-a request specifies the header `Content-Type: application/vnd.api+json` with
-any media type parameters other than `profile`.
+If a request specifies the `Content-Type` header with the JSON:API media type,
+servers **MUST** respond with a `415 Unsupported Media Type` status code if that
+media type contains any media type parameters other than `ext` or `profile`.
 
-> Note: Older JSON:API servers that do not support the `profile` media
-  type parameter will respond with a `415 Unsupported Media Type` client error
-  status if the `profile` media type parameter is present.
-
-Servers **MUST** respond with a `406 Not Acceptable` status code if a request's
-`Accept` header contains the JSON:API media type and all instances of that
-media type are modified with a media type parameter other than `profile`.
+> Note: Older JSON:API servers that do not support the `ext` or `profile` media
+  type parameters will respond with a `415 Unsupported Media Type` client error
+  status if the `ext` or `profile` media type parameter is present.
+  
+If a request's `Accept` header contains an instance of the JSON:API media type,
+servers **MUST** respond with a `406 Not Acceptable` status code if all
+instances of that media type are modified with a media type parameter other
+than `ext` or `profile`. If every instance of that media type is modified by the
+`ext` parameter and each contains at least one unsupported extension URI, the
+server **MUST** also respond with a `406 Not Acceptable`.
 
 Servers that support profiles **SHOULD** specify the `Vary` header with
 `Accept` as one of its values. This applies to responses with and without any
@@ -1911,6 +1917,43 @@ parameter from this specification, it **MUST** return `400 Bad Request`.
 > \[a-z\], JSON:API is reserving the ability to standardize additional query
 > parameters later without conflicting with existing implementations.
 
+## <a href="#extensions" id="extensions" class="headerlink"></a> Extensions
+
+JSON:API supports the use of "extensions" as a way to indicate additional
+semantics that extend the basic semantics described in this specification.
+
+An extension is a separate specification defining these extended semantics.
+
+An exenstion **MAY** impose additional processing rules or further restrictions
+and it **MAY** define new object members as described below.
+
+An extension **MUST NOT** lessen or remove any processing rules, restrictions or
+object member requirements defined in this specification or other extensions.
+
+### <a href="#extension-members" id="extension-members" class="headerlink"></a> Extending Document Structure
+
+An extension **MAY** define new members within the document structure defined by
+this specification. The name of every new member introduced by an extension
+**MUST** be prefixed with an extension namespace followed by a colon (`:`). The
+namespace **MUST** be identical for every member introduced by a particular
+extension.
+
+Namespaces guarantee that extensions will never conflict with the current or
+future versions of this specification.
+
+In the following example, an extension requiring that each request document
+contains a unique request ID has been applied. It uses the namespace `request`
+and adds a top-level object member named `request:id`: 
+
+```
+{
+  "request:id": "some-long-uuid",
+  "data": {
+    "type": "comments",
+  }
+}
+```
+
 ## <a href="#profiles" id="profiles" class="headerlink"></a> Profiles
 
 JSON:API supports the use of "profiles" as a way to indicate additional
@@ -2081,6 +2124,7 @@ request as equivalent to one in which the square brackets were percent-encoded.
 [link object]: #document-links-link-object
 [link relation type]: #document-links-link-relation-type
 [link parameters]: #document-links-link-parameters
+[extensions]: #extensions
 [profiles]: #profiles
 [error details]: #errors
 [error object]: #error-objects
