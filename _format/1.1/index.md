@@ -64,15 +64,23 @@ If a request specifies the `Content-Type` header with the JSON:API media type,
 servers **MUST** respond with a `415 Unsupported Media Type` status code if that
 media type contains any media type parameters other than `ext` or `profile`.
 
+> Note: Older JSON:API servers that do not support the `ext` or `profile` media
+  type parameters will respond with a `415 Unsupported Media Type` client error
+  status if the `ext` or `profile` media type parameter is present.
+  
 If a request's `Accept` header contains an instance of the JSON:API media type,
 servers **MUST** respond with a `406 Not Acceptable` status code if all
 instances of that media type are modified with a media type parameter other
-than `ext` or `profile`.
+than `ext` or `profile`. If every instance of that media type is modified by the
+`ext` parameter and each contains at least one unsupported extension URI, the
+server **MUST** also respond with a `406 Not Acceptable`.
 
-If a request's `Accept` header contains an instance of the JSON:API media type,
-servers **MUST** respond with a `406 Not Acceptable` status code if every
-instance of that media type is modified by the `ext` parameter and each
-contains at least one unsupported extension URI.
+Servers that support profiles **SHOULD** specify the `Vary` header with
+`Accept` as one of its values. This applies to responses with and without any
+profiles applied.
+
+> Note: Some HTTP intermediaries (e.g. CDNs) may ignore the `Vary` header
+unless specifically configured to respect it.
 
 ## <a href="#document-structure" id="document-structure" class="headerlink"></a> Document Structure
 
@@ -1965,40 +1973,6 @@ identification:
 However, to aid human understanding, visiting a profile's URI **SHOULD** return
 documentation of the profile.
 
-The following example profile reserves a `timestamps` member in the `meta`
-object of every resource object:
-
-<a id="profiles-timestamp-profile"></a>
-```text
-# Timestamps profile
-
-## Introduction
-
-This page specifies a profile for the `application/vnd.api+json` media type,
-as described in the [JSON:API specification](http://jsonapi.org/format/).
-
-This profile allows every resource in a JSON:API document to represent
-significant timestamps in a consistent way.
-
-## Document Structure
-
-Every resource object **MAY** include a `timestamps` member in its associated
-`meta` object. If this member is present, its value **MUST** be an object that
-**MAY** contain any of the following members:
-
-* `created`
-* `updated`
-
-The value of each member **MUST** comply with the variant of ISO 8601 used by
-JavaScript's `JSON.stringify` method to format Javascript `Date` objects.
-
-## Keywords
-
-This profile defines the following keywords:
-
-* `timestamps`
-```
-
 ### <a href="#profile-media-type-parameter" id="profile-media-type-parameter" class="headerlink"></a> `profile` Media Type Parameter
 
 The `profile` media type parameter is used to describe the application of
@@ -2028,9 +2002,6 @@ Servers **MAY** respond with a subset of the requested profiles applied or none
 of the requested profiles applied. Additionally, servers **MAY** respond with
 unrequested profiles applied.
 
-The recipient of a document to which an unknown profile has been applied
-**MUST** ignore any document members that it does not understand.
-
 #### <a href="#profiles-sending" id="profiles-sending" class="headerlink"></a> Sending Profiled Documents
 
 Clients and servers **MUST** include the `profile` media type parameter in
@@ -2041,285 +2012,6 @@ Likewise, clients and servers applying profiles to a JSON:API document **MUST**
 include a [top-level][top level] [`links` object][links] with a `profile` key,
 and that `profile` key **MUST** include a [link] to the URI of each profile
 that has been applied.
-
-When an older JSON:API server that doesn't support the `profile` media type
-parameter receives a document with one or more profiles, it will respond with a
-`415 Unsupported Media Type` error.
-
-After attempting to rule out other possible causes of this error, a client that
-receives a `415 Unsupported Media Type` **SHOULD** remove the profiles it has
-applied to the document and retry its request without the `profile` media type
-parameter. If this resolves the error, the client **SHOULD NOT** attempt to
-apply profiles in subsequent interactions with the same API.
-
-> The most likely other causes of a 415 error are that the server doesn't
-support JSON:API at all.
-
-Servers that support profiles **SHOULD** specify the `Vary` header with
-`Accept` as one of its header names to ensure that the server's responses can
-be cached without disrupting subsequent content negotiations. This applies to
-responses with and without any profiles applied.
-
-> Note: Some HTTP intermediaries (e.g. CDNs) may ignore the `Vary` header
-> unless specifically configured to respect it.
-
-### <a href="#profile-keywords" id="profile-keywords" class="headerlink"></a> Profile Keywords
-
-A profile **SHOULD** explicitly declare "keywords" for any elements that it
-introduces to the document structure. If a profile does not explicitly declare a
-keyword for an element, then the name of the element itself (i.e., its key in
-the document) is considered to be its keyword. All profile keywords **MUST**
-meet this specification's requirements for [member names].
-
-In other words, if a profile introduces an object-valued document member, that
-member is an element, but any keys in it are not themselves elements. Likewise,
-if the profile defines an array-valued element, the keys in nested objects
-within that array are not elements.
-
-The following example profile defines a single keyword, `version`:
-
-```text
-# Resource versioning profile
-
-## Introduction
-
-This page specifies a profile for the `application/vnd.api+json` media type,
-as described in the [JSON:API specification](http://jsonapi.org/format/).
-
-This profile ensures that every resource represented in a JSON:API document
-includes a version.
-
-## Document Structure
-
-Every resource **MUST** include a `meta` object containing a `version` member.
-The value of this member **MUST** be a string that represents a unique version
-for that resource.
-
-## Keywords
-
-This profile defines the following keywords:
-
-* `version`
-```
-
-This profile might be applied as follows:
-
-```json
-{
-  "data": {
-    "type": "contacts",
-    "id": "345",
-    "meta": {
-      "version": "2018-04-14-879976658"
-    },
-    "attributes": {
-      "name": "Ethan"
-    }
-  },
-  "links": {
-    "profile": ["http://example.com/profiles/resource-versioning"]
-  }
-}
-```
-
-
-### <a href="#profiles-processing" id="profiles-processing" class="headerlink"></a> Processing Profiled Documents/Requests
-
-When a profile is applied to a request and/or document, the value used for each
-of the profile's document members or query parameters is said to be "a
-recognized value" if that value, including all parts of it, has a legal, defined
-meaning *according to the latest revision of the profile that the application is
-aware of*.
-
-> Note: The set of recognized values is also/more technically known as the
-> [defined text set](http://www.w3.org/2001/tag/doc/versioning-compatibility-strategies#terminology).
-
-For example, the hypothetical [timestamps profile] specifies the `timestamps`
-element, and the meaning for two keys within it -- `created` and `updated`.
-Therefore, in the following use of the profile, the value for the timestamps
-element would be a recognized value:
-
-```json
-{
-  "type": "contacts",
-  "id": "345",
-  "meta": {
-    "timestamps": { "created": "2018-08-29T18:38:17.567Z" }
-  }
-  //...
-}
-```
-
-However, in the following case, the value for `timestamps` is *not* a recognized
-value because one of the keys in it, `createdUnixEpoch`, doesn't have a meaning
-assigned to it in the timestamps profile:
-
-```json
-{
-    "type": "contacts",
-    "id": "345",
-    "meta": {
-      "timestamps": {
-        "createdUnixEpoch": 1535567910201,
-        "created": "2018-08-29T18:38:17.567Z"
-      }
-    }
-    //...
-  }
-```
-
-Likewise, if a profile defines an element and enumerates `true` and `false`
-as legal values with a specific meaning, then a string appearing as that
-element's value would be an unrecognized value.
-
-> Note: unrecognized values are not necessarily invalid or erroneous values.
-> For example, the timestamps profile might be revised later to actually define
-> a "createdUnixEpoch" key. This key would be unrecognized by all applications
-> that existed at the time it was defined, but not by ones created/deployed later.
-
-Each profile **MAY** define its own rules for how applications should proceed
-when encountering unrecognized values.
-
-If a profile does not define its own rules for handling unrecognized values,
-the following rule applies by default:
-
-  1. If the value of a profile-defined query parameter is unrecognized, the
-     server **MUST** fail the request and respond with a `400 Bad Request` and
-     an [error object][error objects] indicating the problematic parameter.
-
-  2. Otherwise, if the unrecognized value is a JSON object in the
-     request/response document, and the only thing that makes it unrecognized
-     is that it contains one or more keys that have no meaning assigned to them
-     (in the latest revision of the profile that the application is aware of),
-     then the application **MUST** simply ignore those unknown keys and
-     continue processing the profile.
-
-  3. In all other cases, the application **MUST** assume that the profile has
-     been applied erroneously and **MUST** totally ignore the profile (i.e.,
-     process the request as if the profile were not there).
-
-In the case of our example [timestamps profile], it does not define its own
-rules, so the above defaults would apply.
-
-Under the second of these default rules, the unrecognized value we saw
-above (with the `createdUnixEpoch` key) would be processed as though the
-`createdUnixEpoch` key simply weren't present, and the application would still
-be able to use the data in the `created` key.
-
-However, if the user instead provided the following value, the whole timestamps
-profile would need to be ignored:
-
-```json
-{
-  //...
-  "timestamps": {
-    "updated": "Wed Aug 29 2018 15:00:05 GMT-0400",
-    "created": "2018-08-29T18:38:17.567Z"
-  }
-}
-```
-
-Ignoring the profile in this case is required by the third default rule,
-because the value for the `updated` key is not recognized under the profile's
-requirement that the `updated` key hold a string of the form produced by
-`JSON.stringify`.
-
-### <a href="#profiles-authoring" id="profiles-authoring" class="headerlink"></a> Authoring Profiles
-
-A profile **MAY** assign meaning to elements of the document structure whose use
-is left up to each implementation, such as resource fields or members of `meta`
-objects. A profile **MUST NOT** define/assign a meaning to document members
-in areas of the document reserved for future use by the JSON:API specification.
-
-For example, it would be illegal for a profile to define a new key in a
-document's [top-level][top level] object, or in a [links object][links], as
-JSON API implementations are not allowed to add custom keys in those areas.
-
-Likewise, a profile **MAY** assign a meaning to query parameters or parameter
-values whose details are left up to each implementation, such as `filter` and
-all parameters that contain a non a-z character. However, profiles **MUST NOT**
-assign a meaning to query parameters that [are reserved](#query-parameters).
-
-The meaning of an element or query parameter defined by a profile **MUST NOT**
-vary based on the presence or absence of other profiles.
-
-The scope of a profile **MUST** be clearly delineated. The elements and query
-parameters specified by a profile, and their meanings, **MUST NOT** change over
-time or else the profile **MUST** be considered a new profile with a new URI.
-
-> Note: When a profile changes its URI, a huge amount of interoperability is lost.
-> Users that reference the new URI will not have their messages understood by
-> implementations still aware only of the old URI, and vice-versa. Accordingly,
-> it's important to design your profile so that it can evolve without its URI
-> needing to change. See ["Revising a Profile"](#profiles-updating) for details.
-
-Finally, a profile **MUST NOT**:
-
-1. assume that, if it is supported, then other specific profiles will be
-supported as well.
-
-2. define fixed endpoints, HTTP headers, or header values.
-
-3. alter the JSON structure of any concept defined in this specification,
-including to allow a superset of JSON structures.
-
-
-> If you create your own profile, you are **strongly encouraged to [register](/extensions/#profile-creation)
-> it** with the JSON API [profile registry](/extensions/), so that others can
-> find and reuse it.
-
-#### <a href="#profiles-updating" id="profiles-updating" class="headerlink"></a> Revising a Profile
-
-Profiles **MAY** be revised over time, e.g., to add new capabilities. However,
-any such changes **MUST** be [backwards and forwards compatible](http://www.w3.org/2001/tag/doc/versioning-compatibility-strategies#terminology)
-("compatible evolution"), in order to not break existing users of the profile.
-
-For example, the hypothetical [timestamps profile] *could not* introduce a new,
-required `deleted` member within the `timestamps` object, as that would be
-incompatible with existing deployments of the profile, which would not include
-this new member.
-
-The timestamps profile also *could not* evolve to define a new element as a
-sibling of the `timestamps` key, as that would be incompatible with the rule
-that "The elements... specified by a profile... **MUST NOT** change over time."
-
-> The practical issue with adding a sibling element is that another profile
-> in use on the document might already define a sibling element of the same
-> name.
-
-However, the timestamps profile could evolve to allow other optional members,
-such as `deleted`, in the `timestamps` object. This is possible because the
-`timestamps` object is already a reserved element of the profile, and the profile
-is subject to the default rule that new (previously unrecognized) keys will
-simply be ignored by existing applications.
-
-##### <a href="#profiles-design-for-evolution" id="profiles-design-for-evolution" class="headerlink"></a> Designing Profiles to Evolve Over Time
-
-Fundamentally, for a profile to be able to change in a compatible way over time,
-it must define -- from the beginning -- a rule describing how an application
-that is only familiar with the original version of the profile should process
-documents/requests that use features from an updated version of the profile.
-
-One major approach is to simply have applications ignore (at least some types of)
-unrecognized data. This allows the profile to define new, optional features;
-old applications will continue to work, but simply won't process/"see" these new
-capabilities.
-
-This is essentially the strategy that JSON:API itself uses when it says that:
-
-> Client and server implementations **MUST** ignore members not recognized by
-> this specification.
-
-Other protocols use analogous strategies. E.g., in HTTP, unknown headers are
-simply ignored; they don't crash the processing of the request/response.
-
-As a profile author, you may define your own rules for how applications should
-process uses of the profile that contain unrecognized data, or you may simply
-allow the default rules described in the ["Processing Profiled Documents/Requests"](#profiles-processing)
-to take effect.
-
-If you choose to use the default rules, you **SHOULD** reserve an object-valued
-element anywhere you expect to potentially add new features over time.
 
 ## <a href="#errors" id="errors" class="headerlink"></a> Errors
 
@@ -2434,8 +2126,6 @@ request as equivalent to one in which the square brackets were percent-encoded.
 [link parameters]: #document-links-link-parameters
 [extensions]: #extensions
 [profiles]: #profiles
-[timestamps profile]: #profiles-timestamp-profile
-[profile keywords]: #profile-keywords
 [error details]: #errors
 [error object]: #error-objects
 [error objects]: #errror-objects
