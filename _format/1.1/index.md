@@ -61,8 +61,12 @@ parameters other than `ext` and `profile` parameters in the server's
 ### <a href="#content-negotiation-servers" id="content-negotiation-servers" class="headerlink"></a> Server Responsibilities
 
 If a request specifies the `Content-Type` header with the JSON:API media type,
-servers **MUST** respond with a `415 Unsupported Media Type` status code if that
-media type contains any media type parameters other than `ext` or `profile`.
+servers **MUST** respond with a `415 Unsupported Media Type` status code if
+that media type contains any media type parameters other than `ext` or
+`profile`. If a request specifies the `Content-Type` header with an instance of
+the JSON:API media type modified by the `ext` media type parameter and that
+parameter contains an unsupported extension URI, the server **MUST** respond
+with a `415 Unsupported Media Type` status code.
 
 > Note: Older JSON:API servers that do not support the `ext` or `profile` media
   type parameters will respond with a `415 Unsupported Media Type` client error
