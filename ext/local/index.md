@@ -74,7 +74,7 @@ request:
 ```json
 HTTP/1.1 201 Created
 Location: http://example.com/people/550e8400-e29b-41d4-a716-446655440000
-Content-Type: application/vnd.api+json;ext="https://jsonapi.org/ext/local"
+Content-Type: application/vnd.api+json
 
 {
   "data": {
