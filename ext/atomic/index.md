@@ -221,9 +221,10 @@ those specified by the request (for example, updating the `updatedAt` attribute
 or a computed `sha`), then the server **MUST** return a result that includes a
 representation of the updated resource as `data`.
 
-If a server accepts an update and doesn’t update any attributes besides those
-provided, the server **MUST** return a result with no `data` or, if all results
-are empty, the server **MAY** respond with `204 No Content` and no document.
+If a server accepts an update and doesn’t update any fields besides those
+provided, the server **MUST** return a result that includes either no `data` or
+a representation of the resource as `data` or, if all results are empty, the
+server **MAY** respond with `204 No Content` and no document.
 
 If a server is unable to update the resource, an appropriate error response
 **MUST** be returned and a response document **SHOULD** be returned that
