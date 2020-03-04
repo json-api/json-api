@@ -24,9 +24,10 @@ members allowed by the base specification with the exception of `data` and
 In addition, such a document **MAY** include either of the following members,
 but not both:
 
-- `atomic:operations` - an array of [operation objects](#operation-objects).
+- `atomic:operations` - an array of one or more [operation
+  objects](#operation-objects).
 
-- `atomic:results` - an array of [result objects](#result-objects).
+- `atomic:results` - an array of one or more [result objects](#result-objects).
 
 If either `atomic:operations` or `atomic:results` is present, the `errors`
 member **MUST NOT** be included in the same document.
