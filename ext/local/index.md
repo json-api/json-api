@@ -38,7 +38,7 @@ itself in a relationship:
 ```json
 POST /people HTTP/1.1
 Content-Type: application/vnd.api+json;ext="https://jsonapi.org/ext/local"
-Accept: application/vnd.api+json;ext="https://jsonapi.org/ext/local"
+Accept: application/vnd.api+json
 
 {
   "data": {
