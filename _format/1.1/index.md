@@ -1574,13 +1574,13 @@ response document **MUST** include a representation of the updated
 resource(s) as if a `GET` request was made to the request URL.
 
 A server **MUST** return a `200 OK` status code if an update is successful,
-the client's current attributes remain up to date, and the server responds
-only with top-level [meta] data. In this case the server **MUST NOT**
-include a representation of the updated resource(s).
+the client's current fields remain up to date, and the server responds only
+with top-level [meta] data. In this case the server **MUST NOT** include a
+representation of the updated resource(s).
 
 ##### <a href="#crud-updating-responses-204" id="crud-updating-responses-204" class="headerlink"></a> 204 No Content
 
-If an update is successful and the server doesn't update any attributes besides
+If an update is successful and the server doesn't update any fields besides
 those provided, the server **MUST** return either a `200 OK` status code and
 response document (as described above) or a `204 No Content` status code with no
 response document.
