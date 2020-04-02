@@ -191,8 +191,10 @@ A resource object **MUST** contain at least the following top-level members:
 * `id`
 * `type`
 
-Exception: The `id` member is not required when the resource object originates at
-the client and represents a new resource to be created on the server.
+Exception: The `id` member is not required when the resource object originates
+at the client and represents a new resource to be created on the server. In that
+case, a client **MAY** include a `lid` member to uniquely identify the resource
+by `type` _locally_ within the document.
 
 In addition, a resource object **MAY** contain any of these top-level members:
 
@@ -228,8 +230,16 @@ Here's how an article (i.e. a resource of type "articles") might appear in a doc
 
 #### <a href="#document-resource-object-identification" id="document-resource-object-identification" class="headerlink"></a> Identification
 
-Every [resource object][resource objects] **MUST** contain an `id` member and a `type` member.
-The values of the `id` and `type` members **MUST** be strings.
+As noted above, every [resource object][resource objects] **MUST** contain a
+`type` member. Every resource object **MUST** also contain an `id` member,
+except when the resource object originates at the client and represents a new
+resource to be created on the server. If `id` is omitted due to this exception,
+a `lid` member **MAY** be included to uniquely identify the resource by `type`
+_locally_ within the document. The value of the `lid` member **MUST** be
+identical for every representation of the resource in the document, including
+[resource identifier objects][resource identifier object].
+
+The values of the `id`, `type`, and `lid` members **MUST** be strings.
 
 Within a given API, each resource object's `type` and `id` pair **MUST**
 identify a single, unique resource. (The set of URIs controlled by a server,
@@ -400,7 +410,12 @@ response that includes the resource as the primary data.
 A "resource identifier object" is an object that identifies an individual
 resource.
 
-A "resource identifier object" **MUST** contain `type` and `id` members.
+A "resource identifier object" **MUST** contain a `type` member. It **MUST**
+also contain an `id` member, except when it represents a new resource to be
+created on the server. In this case, a `lid` member **MUST** be included that
+identifies the new resource.
+
+The values of the `id`, `type`, and `lid` members **MUST** be strings.
 
 A "resource identifier object" **MAY** also include a `meta` member, whose value is a [meta] object that
 contains non-standard meta-information.
@@ -509,6 +524,10 @@ each `type` and `id` pair.
 > Note: In a single document, you can think of the `type` and `id` as a
 composite key that uniquely references [resource objects] in another part of
 the document.
+
+> Note: For resources that do not contain an `id` member but do contain a `lid`,
+the `lid` is sufficient to establish resource identity and thus linkage between
+resource objects and resource identifier objects throughout the document.
 
 > Note: This approach ensures that a single canonical [resource object][resource objects] is
 returned with each response, even when the same resource is referenced
