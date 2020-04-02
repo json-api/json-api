@@ -234,11 +234,11 @@ As noted above, every [resource object][resource objects] **MUST** contain a
 `type` member. Every resource object **MUST** also contain an `id` member,
 except when the resource object originates at the client and represents a new
 resource to be created on the server. If `id` is omitted due to this exception,
-a `lid` member **MAY** be included that uniquely identifies the resource
-_locally_ within the document. The value of the `lid` member **MUST** be
+a `lid` member **MAY** be included that uniquely identifies the resource by
+`type` _locally_ within the document. The value of the `lid` member **MUST** be
 identical for every representation of the resource in the document, including
 other resource objects and [resource identifier objects][resource identifier
-object]. The values of `lid` members **MUST** be unique across resource types.
+object].
 
 The values of the `id`, `type`, and `lid` members **MUST** be strings.
 
@@ -411,11 +411,10 @@ response that includes the resource as the primary data.
 A "resource identifier object" is an object that identifies an individual
 resource.
 
-A "resource identifier object" **MUST** contain `type` and `id` members, except
-when it represents a new resource to be created on the server. In this case, a
-`lid` member **MUST** be included and `type` **MAY** be included. As discussed
-above, the value of the `lid` member **MUST** be identical for every
-representation of the resource in the document.
+A "resource identifier object" **MUST** contain a `type` member. It **MUST**
+also contain an `id` member, except when it represents a new resource to be
+created on the server. In this case, a `lid` member **MUST** be included that
+identifies the new resource.
 
 The values of the `id`, `type`, and `lid` members **MUST** be strings.
 
