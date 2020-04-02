@@ -71,7 +71,7 @@ with a `415 Unsupported Media Type` status code.
 > Note: Older JSON:API servers that do not support the `ext` or `profile` media
   type parameters will respond with a `415 Unsupported Media Type` client error
   status if the `ext` or `profile` media type parameter is present.
-  
+
 If a request's `Accept` header contains an instance of the JSON:API media type,
 servers **MUST** respond with a `406 Not Acceptable` status code if all
 instances of that media type are modified with a media type parameter other
@@ -1947,7 +1947,7 @@ future versions of this specification.
 
 In the following example, an extension requiring that each request document
 contains a unique request ID has been applied. It uses the namespace `request`
-and adds a top-level object member named `request:id`: 
+and adds a top-level object member named `request:id`:
 
 ```
 {
