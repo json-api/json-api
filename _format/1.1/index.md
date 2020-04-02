@@ -237,8 +237,7 @@ resource to be created on the server. If `id` is omitted due to this exception,
 a `lid` member **MAY** be included that uniquely identifies the resource by
 `type` _locally_ within the document. The value of the `lid` member **MUST** be
 identical for every representation of the resource in the document, including
-other resource objects and [resource identifier objects][resource identifier
-object].
+[resource identifier objects][resource identifier object].
 
 The values of the `id`, `type`, and `lid` members **MUST** be strings.
 
