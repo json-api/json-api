@@ -193,8 +193,8 @@ A resource object **MUST** contain at least the following top-level members:
 
 Exception: The `id` member is not required when the resource object originates
 at the client and represents a new resource to be created on the server. In that
-case, a client **MAY** include a `lid` member to uniquely identify each resource
-within the document.
+case, a client **MAY** include a `lid` member to uniquely identify the resource
+by `type` _locally_ within the document.
 
 In addition, a resource object **MAY** contain any of these top-level members:
 
@@ -234,8 +234,8 @@ As noted above, every [resource object][resource objects] **MUST** contain a
 `type` member. Every resource object **MUST** also contain an `id` member,
 except when the resource object originates at the client and represents a new
 resource to be created on the server. If `id` is omitted due to this exception,
-a `lid` member **MAY** be included that uniquely identifies the resource by
-`type` _locally_ within the document. The value of the `lid` member **MUST** be
+a `lid` member **MAY** be included to uniquely identify the resource by `type`
+_locally_ within the document. The value of the `lid` member **MUST** be
 identical for every representation of the resource in the document, including
 [resource identifier objects][resource identifier object].
 
