@@ -29,7 +29,6 @@ assembled to vet them.
 * [Ember JSON API Resources](https://github.com/pixelhandler/ember-jsonapi-resources) is an [Ember CLI](http://www.ember-cli.com) Addon for a lightweight solution for data persistence in an [Ember.js](http://emberjs.com) application.
 * [hapi-json-api](https://github.com/wraithgar/hapi-json-api) Plugin for the hapi framework; enforces Accept/Content-type rules and rewrites Boom errors to be spec compliant.
 * [jsonapi-datastore](https://github.com/beauby/jsonapi-datastore) is a lightweight standalone library for reading, serializing, and synchronizing relational JSON:API data.
-* [json-api-store](https://github.com/haydn/json-api-store) A lightweight JavaScript library for using JSON:API in the browser.
 * [superagent-jsonapify](https://github.com/alex94puchades/superagent-jsonapify) A really lightweight (50 lines) JSON-API client addon for [superagent](https://github.com/visionmedia/superagent), the isomorphic ajax client.
 * [angular-jsonapi](https://github.com/jakubrohleder/angular-jsonapi) An AngularJS JSON:API client
 * [redux-json-api](https://github.com/dixieio/redux-json-api) A library which integrated JSON:APIs with Redux store
