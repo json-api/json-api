@@ -1,21 +1,21 @@
 //= require_tree .
 
-$(document).ready(function() {
+$(document).ready(function () {
     // Add links within headings from user-provided profiles markup for
     // easy jumping and so outline generation works.
-    $('h2, h3, h4, h5', document.querySelector('#profile-spec-container')).each(function() {
-      var $this = $(this);
+    $('h2, h3, h4, h5', document.querySelector('#profile-spec-container')).each(function () {
+        var $this = $(this);
 
-      if($this.find("a.headerlink").length === 0 && $this.attr('id')) {
-          $this.prepend('<a class="headerlink" href="#' + $this.attr('id') + '"></a>');
-      }
+        if ($this.find("a.headerlink").length === 0 && $this.attr('id')) {
+            $this.prepend('<a class="headerlink" href="#' + $this.attr('id') + '"></a>');
+        }
     });
 
 
     // Build navigation list
     var documentOutlineElement = $("#document-outline");
 
-    if(documentOutlineElement.length) {
+    if (documentOutlineElement.length) {
         var articleOutline = createOutlineFromElement($('.content').eq(0));
         var navList = createArticleNavigationFromOutline(articleOutline);
         documentOutlineElement.append(navList);
@@ -27,7 +27,7 @@ $(document).ready(function() {
 });
 
 function fixElement($sidebar, $footer, offset) {
-    if($sidebar.length == 0) return;
+    if ($sidebar.length == 0) return;
 
     var $window = $(window);
     var $nav = $sidebar.find('nav');
@@ -37,7 +37,7 @@ function fixElement($sidebar, $footer, offset) {
     var windowHeight, headingHeight, footerOffsetTop, navListHidden;
 
     // function to set heights + css values that need to be recomputed on resize.
-    var computeAndAdjustHeights = function() {
+    var computeAndAdjustHeights = function () {
         navListHidden = !$list.is(':visible');
         windowHeight = $window.height();
         headingHeight = $sidebar.find('.sidebar-top').outerHeight(true);
@@ -46,7 +46,7 @@ function fixElement($sidebar, $footer, offset) {
         $list.css({height: 'calc(100% - ' + headingHeight + 'px)'});
     }
 
-    var scrollHandler = function(event) {
+    var scrollHandler = function (event) {
         var scrollPosition = $window.scrollTop();
         var footerPxOnScreen = Math.max(0, (scrollPosition + windowHeight) - footerOffsetTop);
 
@@ -63,7 +63,10 @@ function fixElement($sidebar, $footer, offset) {
     }
 
     computeAndAdjustHeights();
-    $window.resize(function() { computeAndAdjustHeights(); scrollHandler(); });
+    $window.resize(function () {
+        computeAndAdjustHeights();
+        scrollHandler();
+    });
     $window.scroll(scrollHandler);
 }
 
@@ -85,21 +88,21 @@ function fixElement($sidebar, $footer, offset) {
 function createOutlineFromElement(element) {
     var outline = [];
 
-    $('h2', element).each(function() {
+    $('h2', element).each(function () {
         var item = {
             title: $(this).not('a').text(),
             href: $(this).find('a').attr('href') || "#",
             children: []
         };
 
-        $(this).nextUntil('h2', 'h3').each(function() {
+        $(this).nextUntil('h2', 'h3').each(function () {
             var childItem = {
                 title: $(this).not('a').text(),
                 href: $(this).find('a').attr('href') || "#",
                 children: []
             };
 
-            $(this).nextUntil('h3', 'h4').each(function() {
+            $(this).nextUntil('h3', 'h4').each(function () {
                 childItem.children.push({
                     title: $(this).not('a').text(),
                     href: $(this).find('a').attr('href') || "#",
@@ -124,16 +127,32 @@ function createOutlineFromElement(element) {
  */
 function createArticleNavigationFromOutline(outline) {
     var ol = document.createElement('ol');
-    ol.class = "nav"
+    ol.class = "nav";
 
-    outline.forEach(function(item) {
+    const activeNavigationItemClass = "nav-active";
+
+    outline.forEach(function (item) {
         var a = document.createElement('a');
         a.href = item.href;
+
+        a.addEventListener("click", ev => {
+
+            //Remove activeNavigationItemClass from already selected items
+            const elementsArray = document.getElementsByClassName(activeNavigationItemClass);
+
+            for (let element of elementsArray) {
+                element.classList.remove(activeNavigationItemClass)
+            }
+
+            // Add activeNavigationItemClass to the currently selected item
+            a.classList.add(activeNavigationItemClass)
+        });
+
         a.appendChild(document.createTextNode(item.title));
 
         var li = document.createElement('li');
         li.appendChild(a);
-        if(item.children.length > 0) {
+        if (item.children.length > 0) {
             li.appendChild(createArticleNavigationFromOutline(item.children));
         }
 
@@ -144,7 +163,7 @@ function createArticleNavigationFromOutline(outline) {
 }
 
 function activateVersionPicker() {
-    $('select.version-picker').change(function() {
+    $('select.version-picker').change(function () {
         window.location.href = $(this).find(':selected').val();
     });
 }
