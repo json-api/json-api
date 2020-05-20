@@ -250,6 +250,7 @@ the moment.
 * [Flump](https://github.com/rolepoint/flump) Database agnostic JSON:API builder which depends on Flask and Marshmallow.
 * [SAFRS JSON API Framework](https://github.com/thomaxxl/safrs) Flask-SQLAlchemy jsonapi implementation with auto-generated openapi (fka swagger) interface.
 * [pydantic-jsonapi](https://github.com/DeanWay/pydantic-jsonapi) JSON:api validation with python type hinting using [pydantic](https://pydantic-docs.helpmanual.io/)
+* [Flask-Restless-NG](https://github.com/mrevutskyi/flask-restless-ng) Builds JSON:API from SQLAlchemy models using Flask
 
 ### <a href="#server-libraries-go" id="server-libraries-go" class="headerlink"></a> Go
 
