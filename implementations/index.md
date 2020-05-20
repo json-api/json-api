@@ -53,6 +53,7 @@ isomorphic ActiveRecord clone that issues JSON:API requests instead of SQL and i
 * [@hyral/vue](https://github.com/SyneticNL/Hyral/tree/master/packages/vue) - Vue(x) integration for [@hyral/core](https://github.com/SyneticNL/Hyral) for Store-module creation and mixins
 * [jsonapi-redux-data](https://github.com/wednesday-solutions/jsonapi-redux-data) - a library that makes integration of jsonapi with react + redux effortless and easy. 
 * [jsonapi-fractal](https://github.com/andersondanilo/jsonapi-fractal) JSON:API Serializer inspired by Fractal (PHP)
+* [ts-japi](https://github.com/jun-sheaf/ts-japi) - A newly-designed (zero-dependency, highly-modular, javascript-friendly, recursible)-framework agnostic library for serializing data to the JSON:API specification. Serializes the entire specification.
 
 ### <a href="#client-libraries-typescript" id="client-libraries-typescript" class="headerlink"></a> Typescript
 * [ts-angular-jsonapi](https://github.com/reyesoft/ts-angular-jsonapi) A JSON:API library developed for AngularJS in Typescript
@@ -63,6 +64,7 @@ isomorphic ActiveRecord clone that issues JSON:API requests instead of SQL and i
 * [Grivet](https://github.com/muellerbbm-vas/grivet) A JSON:API client library written in TypeScript with emphasis on RESTful traversal of resources according to HATEOAS principles.
 * [DatX](https://github.com/infinum/datx) is an opinionated data store for use with the MobX state management library that adds JSON:API support with [datx-jsonapi](https://github.com/infinum/datx/tree/master/packages/datx-jsonapi) mixin.
 * [jsonapi-fractal](https://github.com/andersondanilo/jsonapi-fractal) JSON:API Serializer inspired by Fractal (PHP)
+* [ts-japi](https://github.com/jun-sheaf/ts-japi) A newly-designed (zero-dependency, highly-modular, typescript, recursible)-framework agnostic library for serializing data to the JSON:API specification. Serializes the entire specification.
 
 ### <a href="#client-libraries-ios" id="client-libraries-ios" class="headerlink"></a> iOS
 
