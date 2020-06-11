@@ -201,9 +201,17 @@
       "description": "Members of the attributes object (\"attributes\") represent information about the resource object in which it's defined.",
       "type": "object",
       "patternProperties": {
-        "^(?!relationships$|links$|id$|type$)\\w[-\\w_]*$": {
+        "^[a-zA-Z0-9](?:[-\\w]*[a-zA-Z0-9])?$": {
           "description": "Attributes may contain any valid JSON value."
         }
+      },
+      "not": {
+        "anyOf": [
+          {"required": ["relationships"]},
+          {"required": ["links"]},
+          {"required": ["id"]},
+          {"required": ["type"]}
+        ]
       },
       "additionalProperties": false
     },
@@ -212,7 +220,7 @@
       "description": "Members of the relationships object (\"relationships\") represent references from the resource object in which it's defined to other resource objects.",
       "type": "object",
       "patternProperties": {
-        "^(?!id$|type$)\\w[-\\w_]*$": {
+        "^[a-zA-Z0-9](?:[-\\w]*[a-zA-Z0-9])?$": {
           "properties": {
             "links": {
               "$ref": "#/definitions/relationshipLinks"
@@ -237,6 +245,12 @@
             {"required": ["meta"]},
             {"required": ["links"]}
           ],
+          "not": {
+            "anyOf": [
+              {"required": ["id"]},
+              {"required": ["type"]}
+            ]
+          },
           "additionalProperties": false
         }
       },
@@ -380,3 +394,4 @@
     }
   }
 }
+
