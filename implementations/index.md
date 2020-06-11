@@ -82,7 +82,6 @@ isomorphic ActiveRecord clone that issues JSON:API requests instead of SQL and i
 * [SimpleJSONAPIClient](https://github.com/amcaplan/simple_jsonapi_client) gives you lower-level control for API operations, while your models and their relationships maintain a neat, ActiveRecord-inspired interface.
 * [jsonapi-simple_client](https://github.com/InspireNL/jsonapi-simple_client) a client to interact with a Server API that implements the JSON:API spec.
 * [jsonapi-record](https://github.com/InspireNL/jsonapi-record) a client framework for interacting JSON:API Spec compliant APIs in Ruby.
-* [Graphiti](https://www.graphiti.dev/guides/) a ruby library for RESTful Resources based on JSON:API. Works with vanilla Ruby, Sinatra and Rails.
 
 ### <a href="#client-libraries-php" id="client-libraries-php" class="headerlink"></a> PHP
 
@@ -230,6 +229,7 @@ the moment.
     handling, includes, sparse fields, pagination, filtering (using `ransack`)
     and sorting. Strives to implement as much of the JSONAPI spec as possible.
     Small codebase (~500 sloc), good documentation and test coverage.
+  * [Graphiti](https://www.graphiti.dev/guides/) a ruby library for RESTful Resources based on JSON:API. Works with vanilla Ruby, Sinatra and Rails.
 
 * Sinatra
   * [Sinja](https://github.com/mwpastore/sinja) extends [Sinatra](http://www.sinatrarb.com) and leverages [JSONAPI::Serializers](https://github.com/fotinakis/jsonapi-serializers) to enable rapid development of comprehensive, read-and-write, and JSON:API v1.0-compliant web services using the DAL/ORM of your choice. It includes a simple role-based authorization scheme, support for client-generated IDs, patchless clients, and coalesced find requests, exception handling, and more.
