@@ -7,7 +7,7 @@ status: wd
 
 JSON:API is a specification for how a client should request that resources be
 fetched or modified, and how a server should respond to those requests. JSON:API
-can also be easily extended with [profiles].
+can also be easily extended with [profiles] and [extensions].
 
 JSON:API is designed to minimize both the number of requests and the amount of
 data transmitted between clients and servers. This efficiency is achieved
@@ -35,9 +35,8 @@ The JSON:API media type is [`application/vnd.api+json`](http://www.iana.org/assi
 Clients and servers **MUST** send all JSON:API data using this media type in the
 `Content-Type` header.
 
-Further, the JSON:API media type **MUST** always be specified with either no
-media type parameters, the `ext` parameter, the `profile` parameter or both the
-`ext` and `profile` parameters. This applies to both the `Content-Type` and
+Further, the JSON:API media type **MUST NOT** be specified with any parameters
+other than `ext` and `profile`. This applies to both the `Content-Type` and
 `Accept` headers.
 
 The `ext` parameter is used to support [extensions] and the `profile` parameter
@@ -49,8 +48,7 @@ accompany a media type. For example, in the header
 `charset` is a parameter.
 
 > Note: These content negotiation requirements exist to allow future versions
-of this specification to add other media type parameters for extension
-negotiation and versioning.
+of this specification to add additional media type parameters.
 
 ### <a href="#content-negotiation-clients" id="content-negotiation-clients" class="headerlink"></a> Client Responsibilities
 
@@ -63,14 +61,16 @@ parameters other than `ext` and `profile` parameters in the server's
 If a request specifies the `Content-Type` header with the JSON:API media type,
 servers **MUST** respond with a `415 Unsupported Media Type` status code if
 that media type contains any media type parameters other than `ext` or
-`profile`. If a request specifies the `Content-Type` header with an instance of
+`profile`.
+
+If a request specifies the `Content-Type` header with an instance of
 the JSON:API media type modified by the `ext` media type parameter and that
 parameter contains an unsupported extension URI, the server **MUST** respond
 with a `415 Unsupported Media Type` status code.
 
-> Note: Older JSON:API servers that do not support the `ext` or `profile` media
-  type parameters will respond with a `415 Unsupported Media Type` client error
-  status if the `ext` or `profile` media type parameter is present.
+> Note: JSON:API servers that do not support version 1.1 of this specification
+  will respond with a `415 Unsupported Media Type` client error if the `ext` or
+  `profile` media type parameter is present.
 
 If a request's `Accept` header contains an instance of the JSON:API media type,
 servers **MUST** respond with a `406 Not Acceptable` status code if all
@@ -79,9 +79,9 @@ than `ext` or `profile`. If every instance of that media type is modified by the
 `ext` parameter and each contains at least one unsupported extension URI, the
 server **MUST** also respond with a `406 Not Acceptable`.
 
-Servers that support profiles **SHOULD** specify the `Vary` header with
-`Accept` as one of its values. This applies to responses with and without any
-profiles applied.
+Servers that support the `ext` or `profile` media type parameters **SHOULD**
+specify the `Vary` header with `Accept` as one of its values. This applies to
+responses with and without any [profiles] or [extensions] applied.
 
 > Note: Some HTTP intermediaries (e.g. CDNs) may ignore the `Vary` header
 unless specifically configured to respect it.
@@ -89,9 +89,8 @@ unless specifically configured to respect it.
 ## <a href="#document-structure" id="document-structure" class="headerlink"></a> Document Structure
 
 This section describes the structure of a JSON:API document, which is identified
-by the media type [`application/vnd.api+json`](http://www.iana.org/assignments/media-types/application/vnd.api+json).
-JSON:API documents are defined in JavaScript Object Notation (JSON)
-[[RFC8259](http://tools.ietf.org/html/rfc8259)].
+by the [JSON:API media type](#content-negotiation-all). JSON:API documents are
+defined in JavaScript Object Notation (JSON) [[RFC8259](http://tools.ietf.org/html/rfc8259)].
 
 Although the same media type is used for both request and response documents,
 certain aspects are only applicable to one or the other. These differences are
