@@ -51,7 +51,7 @@ isomorphic ActiveRecord clone that issues JSON:API requests instead of SQL and i
 * [@reststate/vuex](https://vuex.reststate.codingitwrong.com/) - a zero-configuration way to fetch and store JSON:API data in Vuex stores.
 * [@hyral/core](https://github.com/SyneticNL/Hyral) - An advanced, documented, easily extendable and lightweight (JSON:)API abstraction library with ORM-like CRUD support, automatic relationships handling and support for multiple (different) backends.
 * [@hyral/vue](https://github.com/SyneticNL/Hyral/tree/master/packages/vue) - Vue(x) integration for [@hyral/core](https://github.com/SyneticNL/Hyral) for Store-module creation and mixins
-* [jsonapi-redux-data](https://github.com/wednesday-solutions/jsonapi-redux-data) - a library that makes integration of jsonapi with react + redux effortless and easy. 
+* [jsonapi-redux-data](https://github.com/wednesday-solutions/jsonapi-redux-data) - a library that makes integration of jsonapi with react + redux effortless and easy.
 * [jsonapi-fractal](https://github.com/andersondanilo/jsonapi-fractal) JSON:API Serializer inspired by Fractal (PHP)
 
 ### <a href="#client-libraries-typescript" id="client-libraries-typescript" class="headerlink"></a> Typescript
@@ -258,6 +258,7 @@ the moment.
 * [go-json-spec-handler](https://github.com/derekdowling/go-json-spec-handler) drop-in library for handling requests and sending responses in an existing API.
 * [jsh-api](https://github.com/derekdowling/go-json-spec-handler/tree/master/jsh-api) deals with the dirty work of building JSON:API resource endpoints. Built on top of [jsh](https://github.com/derekdowling/go-json-spec-handler)
 * [mfcochauxlaberge/jsonapi](https://github.com/mfcochauxlaberge/jsonapi) offers a large set of tools to build a JSON:API compliant service.
+* [pieoneers/jsonapi-go](https://github.com/pieoneers/jsonapi-go) lightweight JSON API implementation in Go. Make your client and server applications JSON API-enabled in hours not months.
 
 ### <a href="#server-libraries-net" id="server-libraries-net" class="headerlink"></a> .NET
 
