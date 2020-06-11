@@ -106,7 +106,7 @@ changes.
 ### <a href="#document-top-level" id="document-top-level" class="headerlink"></a> Top Level
 
 A JSON object **MUST** be at the root of every JSON:API request and response
-containing data. This object defines a document's "top level".
+document containing data. This object defines a document's "top level".
 
 A document **MUST** contain at least one of the following top-level members:
 
@@ -277,9 +277,8 @@ attribute values. However, any object that constitutes or is contained in an
 attribute **MUST NOT** contain a `relationships` or `links` member, as those
 members are reserved by this specification for future use.
 
-Although has-one foreign keys (e.g. `author_id`) are often stored internally
-alongside other information to be represented in a resource object, these keys
-**SHOULD NOT** appear as attributes.
+Keys that reference related resources (e.g. `author_id`) **SHOULD NOT** appear
+as attributes. Instead, [relationships] **SHOULD** be used.
 
 > Note: See [fields] and [member names] for more restrictions on this container.
 
@@ -421,9 +420,8 @@ contains non-standard meta-information.
 
 ### <a href="#document-compound-documents" id="document-compound-documents" class="headerlink"></a> Compound Documents
 
-To reduce the number of HTTP requests, servers **MAY** allow responses that
-include related resources along with the requested primary resources. Such
-responses are called "compound documents".
+Servers **MAY** allow responses that include related resources along with the
+requested primary resources. Such responses are called "compound documents".
 
 In a compound document, all included resources **MUST** be represented as an
 array of [resource objects] in a top-level `included` member.
@@ -1946,7 +1944,7 @@ semantics that extend the basic semantics described in this specification.
 
 An extension is a separate specification defining these extended semantics.
 
-An exenstion **MAY** impose additional processing rules or further restrictions
+An extension **MAY** impose additional processing rules or further restrictions
 and it **MAY** define new object members as described below.
 
 An extension **MUST NOT** lessen or remove any processing rules, restrictions or
