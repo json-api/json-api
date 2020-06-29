@@ -35,16 +35,8 @@
         "meta": {
           "$ref": "#/definitions/meta"
         },
-        "links": {
-          "description": "Link members related to the primary data.",
-          "allOf": [
-            {
-              "$ref": "#/definitions/links"
-            },
-            {
-              "$ref": "#/definitions/pagination"
-            }
-          ]
+        "links": { 
+          "$ref": "#/definitions/linksWithPagination" 
         },
         "jsonapi": {
           "$ref": "#/definitions/jsonapi"
@@ -299,38 +291,39 @@
       },
       "additionalProperties": false
     },
-    "pagination": {
+    "linksWithPagination": {
       "type": "object",
       "properties": {
         "first": {
           "description": "The first page of data",
           "oneOf": [
-            { "type": "string", "format": "uri-reference" },
+            { "$ref": "#/definitions/link" },
             { "type": "null" }
           ]
         },
         "last": {
           "description": "The last page of data",
           "oneOf": [
-            { "type": "string", "format": "uri-reference" },
+            { "$ref": "#/definitions/link" },
             { "type": "null" }
           ]
         },
         "prev": {
           "description": "The previous page of data",
           "oneOf": [
-            { "type": "string", "format": "uri-reference" },
+            { "$ref": "#/definitions/link" },
             { "type": "null" }
           ]
         },
         "next": {
           "description": "The next page of data",
           "oneOf": [
-            { "type": "string", "format": "uri-reference" },
+            { "$ref": "#/definitions/link" },
             { "type": "null" }
           ]
         }
-      }
+      },
+      "additionalProperties": { "$ref": "#/definitions/link" }
     },
 
     "jsonapi": {
