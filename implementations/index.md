@@ -105,6 +105,7 @@ isomorphic ActiveRecord clone that issues JSON:API requests instead of SQL and i
 
 ### <a href="#client-libraries-java" id="client-libraries-java" class="headerlink"></a> Java
 
+* [JSON:API for Spring HATEOAS](https://github.com/toedter/spring-hateoas-jsonapi) provides serialization/deserialization of the Spring HATEOAS representation models. The project also provides a builder to easily create relationships, included resource objects, pagination, and more.
 * [jsonapi-converter](https://github.com/jasminb/jsonapi-converter) is a Java JSON:API v1.0 client. Besides providing means for serialisation/deserialisation, client comes with Retrofit plugin.
 * [crnk.io](http://www.crnk.io) is a JSON:API framework for clients and servers. On the client-side it targets
   both Java and Android development. As for the backend side a rich set of modules helps with the integration of various
