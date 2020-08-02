@@ -328,7 +328,7 @@ includes related resources.
 * [jsonapi-validator](https://jsonapi-validator.herokuapp.com) is a playground service for quick prototyping and validating JSON responses with jsonapi.org specification.
 * [corroborate](http://corroborate.arenpatel.com/) JSON:API request/response payload validator. It warns when there is a specification violation and also informs when a recommendation has not been followed.
 * [JSON API Playground](http://jsonapiplayground.reyesoft.com/) Fake online JSON:API server for testing and prototyping. It's great for tutorials, faking a server, sharing code examples, etc.
-
+* [Hosted JSON API](https://www.jsonapi.co/) Ready API's with 24 / 7 availability to test your code for free. [https://www.jsonapi.co/](https://www.jsonapi.co/). Use it for Frontend, Microservice or App development. GET, POST, PUT, PATCH, DELETE, covered it all. HTTP status codes. Faker data which covers all the possible use cases and API's designed to cover most commonly used functionalities.
 ### <a href="#related-tools-ruby" id="related-tools-ruby" class="headerlink"></a> Ruby
 
 * [json-patch](https://github.com/guillec/json-patch) implementation of JSON Patch (rfc6902)
