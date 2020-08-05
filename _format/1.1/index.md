@@ -7,7 +7,7 @@ status: wd
 
 JSON:API is a specification for how a client should request that resources be
 fetched or modified, and how a server should respond to those requests. JSON:API
-can also be easily extended with [extensions] and [profiles].
+can be easily extended with [extensions] and [profiles].
 
 JSON:API is designed to minimize both the number of requests and the amount of
 data transmitted between clients and servers. This efficiency is achieved
