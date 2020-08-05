@@ -38,7 +38,7 @@ document are to be interpreted as described in
 [[RFC8174](https://tools.ietf.org/html/rfc8174)]
 when, and only when, they appear in all capitals, as shown here.
 
-## The JSON:API Media Type
+## <a href="#jsonapi-media-type" id="jsonapi-media-type" class="headerlink"></a> The JSON:API Media Type
 
 The JSON:API media type is
 [`application/vnd.api+json`](http://www.iana.org/assignments/media-types/application/vnd.api+json).
