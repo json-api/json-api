@@ -63,7 +63,7 @@ implementation semantics.
 
 ### <a href="#profiles" id="profiles" class="headerlink"></a> Profiles
 
-Profiles offer a means to share a particular usage of the specification among
+Profiles provide a means to share a particular usage of the specification among
 implementations.
 
 Profiles can specify [implementation semantics](#semantics), but cannot alter,
