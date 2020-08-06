@@ -2212,6 +2212,7 @@ accept requests in which these square brackets are left unencoded in a query
 parameter's name. If a server does accept these requests, it **MUST** treat the
 request as equivalent to one in which the square brackets were percent-encoded.
 
+[semantics]: #semantics
 [top level]: #document-top-level
 [resource objects]: #document-resource-objects
 [attributes]: #document-resource-object-attributes
