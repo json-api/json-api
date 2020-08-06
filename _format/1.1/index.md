@@ -142,9 +142,17 @@ The rules for profile usage are dictated by [RFC
 A profile **MAY** define document members, query parameters, and processing
 rules that are reserved for implementors.
 
-A server implementation that supports profile-defined query parameters **MUST
-NOT** support more than one profile per unique URL (including the entire query
-string).
+A profile **MUST NOT** define any query parameters.
+
+A profile **MUST NOT** alter or remove processing rules that have been defined
+by this specification or by an [extension][extensions]. However, a profile
+**MAY** define processing rules for query parameters whose processing rules
+have been reserved for implementors to define at their discretion.
+
+For example, a profile could define rules for interpreting [the `filter` query
+parameter](#fetching-filtering), but it could not specify that relationship
+names in [the `include` query parameter](#fetching-includes) are
+space-separated instead of dot-separated.
 
 Unlike extensions, profiles do not need to define a namespace for document
 members and query parameters because profiles cannot define specification
