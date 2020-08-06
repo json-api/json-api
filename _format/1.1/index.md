@@ -822,26 +822,6 @@ values.
 not be represented as a single concatenated string with its values separated by
 whitespace as might be the case in a [`Link` header serialization](https://tools.ietf.org/html/rfc8288#section-3.5).
 
-#### <a href="#extension-and-profile-links" id="extension-and-profile-links" class="headerlink"></a> Extension and Profile Links
-
-Top-level links **MAY** contain the `ext` and `profile` members. The values of
-these members **MUST** be an array of [links][link]. Like all links, each can be
-represented with a string or a [link object].
-
-Here is an example that includes links to both an extension and profiles:
-
-```json
-"links": {
-  "ext": [
-    "https://jsonapi.org/ext/atomic"
-  ],
-  "profile": [
-    "http://example.com/profiles/flexible-pagination",
-    "http://example.com/profiles/resource-versioning"
-  ]
-}
-```
-
 ### <a href="#document-jsonapi-object" id="document-jsonapi-object" class="headerlink"></a> JSON:API Object
 
 A JSON:API document **MAY** include information about its implementation
@@ -853,13 +833,22 @@ The jsonapi object **MAY** contain any of the following members:
 * `version` - whose value is a string indicating the highest JSON:API version
   supported.
 * `meta` - a [meta] object that contains non-standard meta-information.
+* `ext` - an array of URIs for all applied [extensions].
+* `profile` - an array of URIs for all applied [profiles].
 
 A simple example appears below:
 
 ```json
 {
   "jsonapi": {
-    "version": "1.1"
+    "version": "1.1",
+    "ext": [
+      "https://jsonapi.org/ext/atomic"
+    ],
+    "profile": [
+      "http://example.com/profiles/flexible-pagination",
+      "http://example.com/profiles/resource-versioning"
+    ]
   }
 }
 ```
