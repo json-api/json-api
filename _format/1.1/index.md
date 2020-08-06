@@ -139,8 +139,8 @@ versioning. This member might appear as follows:
 The rules for profile usage are dictated by [RFC
 6906](https://tools.ietf.org/html/rfc6906).
 
-A profile **MAY** define document members, query parameters, and processing
-rules that are reserved for implementors.
+A profile **MAY** define document members and processing rules that are reserved
+for implementors.
 
 A profile **MUST NOT** define any query parameters.
 
