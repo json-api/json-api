@@ -183,9 +183,6 @@ Content-Type: application/vnd.api+json; profile="https://example.com/resource-ti
 // ...
 ```
 
-Other profiles could specify rules for interpreting query parameters that are
-reserved for implementors, such as `filter` or `page`.
-
 ## <a href="#content-negotiation" id="content-negotiation" class="headerlink"></a> Content Negotiation
 
 ### <a href="#content-negotiation-all" id="content-negotiation-all" class="headerlink"></a> Universal Responsibilities
