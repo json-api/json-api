@@ -153,10 +153,10 @@ specification. However, it is possible for profiles to conflict with other
 profiles. Therefore, it is the responsibility of implementors to ensure that
 they do not support conflicting profiles.
 
-In the following example, a profile has specified timestamp attributes that are
-required in each resource object. It has also specified that the value of these
-attributes be represented as ISO-8601 compliant date times. These attributes
-might appear as follows:
+In the following example, a profile has specified that all timestamps use the
+[RFC 3339](https://tools.ietf.org/html/rfc3339) format and that all resource
+objects contain `created` and `modified` attributes. With such a profile
+applied, a response might appear as follows:
 
 ```json
 // ...
