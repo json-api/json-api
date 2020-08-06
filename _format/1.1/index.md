@@ -155,11 +155,11 @@ names in [the `include` query parameter](#fetching-includes) are
 space-separated instead of dot-separated.
 
 Unlike extensions, profiles do not need to define a namespace for document
-members and query parameters because profiles cannot define specification
-semantics and thus cannot conflict with current or future versions of this
-specification. However, it is possible for profiles to conflict with other
-profiles. Therefore, it is the responsibility of implementors to ensure that
-they do not support conflicting profiles.
+members because profiles cannot define specification semantics and thus cannot
+conflict with current or future versions of this specification. However, it is
+possible for profiles to conflict with other profiles. Therefore, it is the
+responsibility of implementors to ensure that they do not support conflicting
+profiles.
 
 In the following example, a profile has specified that all timestamps use the
 [RFC 3339](https://tools.ietf.org/html/rfc3339) format and that all resource
