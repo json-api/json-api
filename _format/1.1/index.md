@@ -149,9 +149,9 @@ string).
 Unlike extensions, profiles do not need to define a namespace for document
 members and query parameters because profiles cannot define specification
 semantics and thus cannot conflict with current or future versions of this
-specification. Although it is possible for profiles to conflict with other
-profiles, it is the responsibility of implementors to ensure that all applied
-profiles are compatible.
+specification. However, it is possible for profiles to conflict with other
+profiles. Therefore, it is the responsibility of implementors to ensure that
+they do not support conflicting profiles.
 
 In the following example, a profile has specified timestamp attributes that are
 required in each resource object. It has also specified that the value of these
