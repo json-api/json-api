@@ -237,9 +237,6 @@ than `ext` or `profile`. If every instance of that media type is modified by the
 `ext` parameter and each contains at least one unsupported extension URI, the
 server **MUST** also respond with a `406 Not Acceptable`.
 
-If the `ext` parameter contains at least one unsupported extension URI, the
-server **MUST** also respond with a `406 Not Acceptable`.
-
 If the `profile` parameter is received, a server **SHOULD** attempt to apply any
 requested profile(s) to its response. A server **MUST** ignore any profiles
 that it does not recognize.
