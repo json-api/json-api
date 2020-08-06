@@ -159,6 +159,9 @@ objects contain `created` and `modified` attributes. With such a profile
 applied, a response might appear as follows:
 
 ```json
+HTTP/1.1 200 OK
+Content-Type: application/vnd.api+json; profile="https://example.com/resource-timestamps"
+
 // ...
 {
   "type": "articles",
