@@ -148,7 +148,7 @@ string).
 
 Unlike extensions, profiles do not need to define a namespace for document
 members and query parameters because profiles cannot define specification
-semantics and thus cannot conflict with the current or future versions of this
+semantics and thus cannot conflict with current or future versions of this
 specification. Although it is possible for profiles to conflict with other
 profiles, it is the responsibility of implementors to ensure that all applied
 profiles are compatible.
