@@ -75,7 +75,7 @@ The JSON:API media type **MUST NOT** be specified with any media type parameters
 other than `ext` and `profile`.
 
 Extensions and profiles are each uniquely identified by a
-[URI](https://tools.ietf.org/html/rfc3986). Visiting an extension's or profile's
+[URI](https://tools.ietf.org/html/rfc3986). Visiting an extension's or a profile's
 URI **SHOULD** return documentation that describes its usage.
 
 The `ext` parameter is used to support [extensions] and the `profile` parameter
