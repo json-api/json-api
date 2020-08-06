@@ -179,7 +179,7 @@ reserved for implementors, such as `filter` or `page`.
 
 ### <a href="#content-negotiation-all" id="content-negotiation-all" class="headerlink"></a> Universal Responsibilities
 
-Clients and servers **MUST** send all JSON:API data using the JSON:API media
+Clients and servers **MUST** send all JSON:API payloads using the JSON:API media
 type in the `Content-Type` header.
 
 > Note: These content negotiation requirements exist to allow future versions
