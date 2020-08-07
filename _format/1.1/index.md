@@ -2083,7 +2083,7 @@ family.
 
 A "query parameter family" is the set of all query parameters whose name starts
 with a "base name", followed by zero or more instances of empty square brackets
-(i.e. `[]`) or square-bracketed legal member names. The family is referred to
+(i.e. `[]`) or square-bracketed legal [member names]. The family is referred to
 by its base name.
 
 For example, the `filter` query parameter family includes parameters named:
