@@ -1007,7 +1007,8 @@ an endpoint **MUST NOT** include additional [fields] in resource objects of
 that type in its response.
 
 If a client does not specify the set of [fields] for a given resource type,
-the server **MAY** send all fields, a subset of fields, or no fields for that resource type.
+the server **MAY** send all fields, a subset of fields, or no fields for that
+resource type.
 
 ```http
 GET /articles?include=author&fields[articles]=title,body&fields[people]=name HTTP/1.1
