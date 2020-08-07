@@ -163,9 +163,10 @@ responsibility of implementors to ensure that they do not support conflicting
 profiles.
 
 In the following example, a profile has defined a `timestamps`
-[attribute][attributes] as an object that must contain both a `created` and
-`modified` member and that they must use the [RFC 3339](https://tools.ietf.org/html/rfc3339)
-format. With such a profile applied, a response might appear as follows:
+[attribute][attributes]. According to the profile, the attribute must be an
+object containing a `created` member and a `modified` member and these members'
+values must use the [RFC 3339](https://tools.ietf.org/html/rfc3339) format.
+With such a profile applied, a response might appear as follows:
 
 ```json
 HTTP/1.1 200 OK
