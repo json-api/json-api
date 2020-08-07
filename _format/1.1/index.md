@@ -832,9 +832,9 @@ The jsonapi object **MAY** contain any of the following members:
 
 * `version` - whose value is a string indicating the highest JSON:API version
   supported.
-* `meta` - a [meta] object that contains non-standard meta-information.
 * `ext` - an array of URIs for all applied [extensions].
 * `profile` - an array of URIs for all applied [profiles].
+* `meta` - a [meta] object that contains non-standard meta-information.
 
 A simple example appears below:
 
