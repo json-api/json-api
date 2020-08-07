@@ -162,10 +162,10 @@ possible for profiles to conflict with other profiles. Therefore, it is the
 responsibility of implementors to ensure that they do not support conflicting
 profiles.
 
-In the following example, a profile has specified that all timestamps use the
-[RFC 3339](https://tools.ietf.org/html/rfc3339) format and that all resource
-objects contain `created` and `modified` attributes. With such a profile
-applied, a response might appear as follows:
+In the following example, a profile has defined a `timestamps`
+[attribute][attributes] as an object that must contain both a `created` and
+`modified` member and that they must use the [RFC 3339](https://tools.ietf.org/html/rfc3339)
+format. With such a profile applied, a response might appear as follows:
 
 ```json
 HTTP/1.1 200 OK
@@ -177,8 +177,10 @@ Content-Type: application/vnd.api+json; profile="https://example.com/resource-ti
   "id": "1",
   "attributes": {
     "title": "Rails is Omakase",
-    "created": "2020-07-21T12:09:00Z",
-    "modified": "2020-07-30T10:19:01Z"
+    "timestamps": {
+      "created": "2020-07-21T12:09:00Z",
+      "modified": "2020-07-30T10:19:01Z"
+    }
   }
 }
 // ...
