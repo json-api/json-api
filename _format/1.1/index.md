@@ -2091,6 +2091,13 @@ For example, the `filter` query parameter family includes parameters named:
 etc. However, `filter[_]` is not a valid parameter name in the family, because
 `_` is not a valid [member name][member names].
 
+### <a href="#extension-query-parameters" id="extension-query-parameters" class="headerlink"></a> Extension-Specific Query Parameters
+
+The base name of every query parameter introduced by an extension **MUST** be
+prefixed with the extension's namespace followed by a colon (`:`). The
+remainder of the base name **MUST** contain only the characters \[a-z\] (U+0061
+to U+007A, "a-z").
+
 ### <a href="#query-parameters-custom" id="query-parameters-custom" class="headerlink"></a> Implementation-Specific Query Parameters
 
 Implementations **MAY** support custom query parameters. However, the names of
@@ -2108,12 +2115,6 @@ parameter from this specification, it **MUST** return `400 Bad Request`.
 > Note: By forbidding the use of query parameters that contain only the characters
 > \[a-z\], JSON:API is reserving the ability to standardize additional query
 > parameters later without conflicting with existing implementations.
-
-### <a href="#extension-query-parameters" id="extension-query-parameters" class="headerlink"></a> Extension-Specific Query Parameters
-
-Extensions **MAY** define custom query parameters. The name of every new query
-parameter introduced by an extension **MUST** be prefixed with the extension's
-namespace followed by a colon (`:`).
 
 ## <a href="#errors" id="errors" class="headerlink"></a> Errors
 
