@@ -861,8 +861,9 @@ version string primarily indicates which new features a server may support.
 
 ### <a href="#document-member-names" id="document-member-names" class="headerlink"></a> Member Names
 
-All member names used in a JSON:API document **MUST** be treated as case sensitive
-by clients and servers, and they **MUST** meet all of the following conditions:
+Implementation and profile defined member names used in a JSON:API document
+**MUST** be treated as case sensitive by clients and servers, and they **MUST**
+meet all of the following conditions:
 
 - Member names **MUST** contain at least one character.
 - Member names **MUST** contain only the allowed characters listed below.
@@ -890,7 +891,8 @@ first or last character:
 
 #### <a href="#document-member-names-reserved-characters" id="document-member-names-reserved-characters" class="headerlink"></a> Reserved Characters
 
-The following characters **MUST NOT** be used in member names:
+The following characters **MUST NOT** be used in implementation and
+[profile][profiles] defined member names:
 
 - U+002B PLUS SIGN, "+" _(has overloaded meaning in URL query strings)_
 - U+002C COMMA, "," _(used as a separator between relationship paths)_
@@ -948,7 +950,9 @@ to convey to JSON-LD clients that they contain JSON-LD data.
 #### <a href="#extension-members" id="extension-members" class="headerlink"></a> Extension Members
 
 The name of every new member introduced by an extension **MUST** be prefixed
-with the [extension's namespace] followed by a colon (`:`).
+with the [extension's namespace] followed by a colon (`:`). The remainder of
+the name **MUST** adhere to the rules for implementation defined [member
+names].
 
 ## <a href="#fetching" id="fetching" class="headerlink"></a> Fetching Data
 
