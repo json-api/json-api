@@ -190,9 +190,6 @@ Content-Type: application/vnd.api+json; profile="https://example.com/resource-ti
 Clients and servers **MUST** send all JSON:API payloads using the JSON:API media
 type in the `Content-Type` header.
 
-> Note: These content negotiation requirements exist to allow future versions
-of this specification to add additional media type parameters.
-
 Clients and servers **MUST** specify the `ext` media type parameter in the
 `Content-Type` header when they have applied one or more extensions to a
 JSON:API document.
