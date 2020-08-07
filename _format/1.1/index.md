@@ -72,16 +72,14 @@ add to, or remove specification semantics.
 ### <a href="#media-type-parameter-rules" id="media-type-parameter-rules" class="headerlink"></a> Rules for Media Type Parameters
 
 The JSON:API media type **MUST NOT** be specified with any media type parameters
-other than `ext` and `profile`.
+other than `ext` and `profile`. The `ext` parameter is used to support
+[extensions] and the `profile` parameter is used to support [profiles].
 
 Extensions and profiles are each uniquely identified by a
-[URI](https://tools.ietf.org/html/rfc3986). Visiting an extension's or a profile's
-URI **SHOULD** return documentation that describes its usage.
-
-The `ext` parameter is used to support [extensions] and the `profile` parameter
-is used to support [profiles]. The values of the `ext` and `profile` parameters
-**MUST** equal a space-separated (U+0020 SPACE, " ") list of extension or
-profile URIs, respectively.
+[URI](https://tools.ietf.org/html/rfc3986). Visiting an extension's or a
+profile's URI **SHOULD** return documentation that describes its usage. The
+values of the `ext` and `profile` parameters **MUST** equal a space-separated
+(U+0020 SPACE, " ") list of extension or profile URIs, respectively.
 
 > Note: When serializing the `ext` or `profile` media type parameters, the HTTP
 > specification requires that parameter values be surrounded by quotation marks
@@ -96,16 +94,16 @@ An extension **MUST NOT** lessen or remove any processing rules, restrictions or
 object member requirements defined in this specification or other extensions.
 
 An extension **MAY** define new members within the document structure defined by
-this specification. The rules for extension members are covered
+this specification. The rules for extension member names are covered
 [below](#extension-members).
 
 An extension **MAY** define new query parameters. The rules for extension-defined
 query parameters are covered [below](#extension-query-parameters).
 
-If an extension defines new query parameters or document members, the extension
-**MUST** define a namespace to guarantee that extensions will never conflict
-with the current or future versions of this specification. A namespace **MUST**
-meet all of the following conditions:
+When an extension defines new query parameters or document members, the
+extension **MUST** define a namespace to guarantee that extensions will never
+conflict with current or future versions of this specification. A namespace
+**MUST** meet all of the following conditions:
 
 - A namespace **MUST** contain at least one character.
 - A namespace **MUST** contain only these characters:
@@ -114,7 +112,7 @@ meet all of the following conditions:
   - U+0030 to U+0039, "0-9"
 
 An extension **MUST NOT** define more than one namespace. The namespace used for
-all query parameters and documents members **MUST** be the same for any given
+all query parameters and document members **MUST** be the same for any given
 extension.
 
 In the following example, an extension with the namespace `version` has
@@ -122,6 +120,9 @@ specified a resource object member `version:id` to support per-resource
 versioning. This member might appear as follows:
 
 ```json
+HTTP/1.1 200 OK
+Content-Type: application/vnd.api+json; ext="https://jsonapi.org/ext/version"
+
 // ...
 {
   "type": "articles",
