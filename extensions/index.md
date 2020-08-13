@@ -5,122 +5,61 @@ show_sidebar: true
 redirect_from: /profiles
 ---
 
-> Note: This page describes features from [version 1.1](/format/1.1/) of the JSON:API spec, and links to profiles that use those new features. Version 1.1 is in development, so there is a chance that the spec and/or these profiles could change before v1.1 is released.
+> Note: This page describes features from [an upcoming version of the of the
+> JSON:API specification](/format/1.1/) and is subject to change without
+> notice.
 
-JSON:API can be extended with profiles. These profiles enable an API to
-provide clients with information or functionality beyond that described
-in the base JSON:API specification.
+The JSON:API specification provides a way to define new functionality not
+provided by the base specification using [extensions]. Additionally, it
+provides a means to share a particular usage of the specification among
+implementations using [profiles].
 
-Anyone can author a profile, and a single profile can be reused by multiple APIs.
-Popular profiles may be implemented by off-the-shelf tools so that developers
-can seamlessly take advantage of the features these profiles provide.
+Generally speaking, extensions provide a means to standardize a functionality
+that is not so widely needed that it should be part of the base specification
+but is general enough that it would benefit the community to have a standard.
+Typically, that functionality is also too difficult and/or unconventional to
+implement using only the parts of the specification that are reserved for
+implementations (e.g. implementations can add their own members to
+[`attributes`][attributes] objects, but can't add new members to a resource
+identifier).
 
-## <a href="#existing-profiles" id="existing-profiles" class="headerlink"></a> Existing Profiles
+Profiles, on the other hand, are a way to standardize common usages of the base
+specification that _are_ simple to implement using only the parts of the
+specification that are reserved for implementations (e.g. a common way to
+handle [pagination]).
 
-{% for category in site.profile_categories %}
-  <h3 id="#profiles-category-{{ category | slugify }}">
-    {{ category }}
-  </h3>
-  <dl class="profiles-list">
-    {% for profile in site.profiles %}
-      {% if profile.categories contains category %}
-        <dt><a href="{% include profile_url.md page=profile %}">{{ profile.name }}</a></dt>
-        <dd>{{ profile.short_description }}</dd>
-      {% endif %}
-    {% endfor %}
-  </dl>
-{% endfor %}
+One major difference between extensions and profiles are that an extension must
+be agreed upon and understood by both the client and the server, while a
+profile can be safely ignored if either the client or the server does not
+recognize it.
 
-## <a href="#profile-creation" id="profile-creation" class="headerlink"></a> Creating a New Profile
+Some useful extensions and profiles are listed below. However, an extension or
+profile does not need to appear below to be valid. Anyone can author and host
+an extension or profile document using their own domain for its URI.
 
-### <a href="#profile-creation-before" id="profile-creation-before" class="headerlink"></a> Before Creating a Profile
+In order to keep the promise of JSON:API as an anti-bikeshedding tool,
+implementors are **strongly** encouraged to reuse, improve, and collaborate on
+common extensions and profiles instead of creating new extensions and profiles
+because of trivial or aesthetic differences.
 
-Please **check whether an existing profile fits your needs or could be amended
-to fit your needs** before developing a new one.
+## <a href="#extensions" id="extensions" class="headerlink"></a> Extensions
 
-- If a suitable profile already exists, consider using it. Having fewer, more
-widely-deployed profiles makes it easier to create shared tooling.
+There are no extensions at this time.
 
-- If there's an existing profile that could be amended to fit your needs,
-consider asking the profile's author if they would be willing to modify it as
-needed. Contact them through the information in their profile's registration
-and give them some time to reply.
+- [Extension Example](https://example.com/ext/foo)
+  - URI: `https://example.com/ext/foo`
+  - Namespace: `foo`
+  - Description: Lorem dolor sit amet.
 
-### <a href="#profile-creation" id="profile-creation" class="headerlink"></a> Authoring Your Profile
+## <a href="#extensions" id="extensions" class="headerlink"></a> Profiles
 
-To author your profile, [download and fill out the template](/profile_template.md).
+There are no profiles at this time.
 
-### <a href="#profile-register" id="profile-register" class="headerlink"></a> Register & Use Your Profile
+- [Profile Example](https://example.com/profile/foo)
+  - URI: `https://example.com/profile/foo`
+  - Description: Lorem dolor sit amet.
 
-Once you've authored your profile, submit it to the JSON:API profile registry.
-By registering your profile:
-
-1. it will be listed above for others to find and reuse.
-
-2. it will be given an official url on jsonapi.org. This will be the URL you and
-   others use to apply/identify the profile.
-
-3. one of the JSON:API's editors will review your submission to check that it
-   follows the [requirements for profiles](/format/1.1/#profiles-authoring).
-   These requirements can be a bit tricky, so getting an expert review ensures
-   that your profile is legal for use with JSON:API.
-
-To register your profile:
-
-1. Choose a namespace, which is a name that uniquely identifies you or your
-   organization. (All profiles authored by the same person or organization are
-   registered under the same namespace, to prevent naming conflicts.) This
-   namespace should be your Github username, or the name of a Github organization
-   to which you belong. In unusual circumstances, you can request to use a
-   different name as the namespace in your PR (see below).
-
-2. Create a PR to [the json-api repository](https://github.com/json-api/json-api).
-   In the PR, make a directory at `_profiles/{NAMESPACE}/{PROFILE_NAME}` (where
-   `PROFILE_NAME` is the name of your profile, dasherized), and put your filled
-   out template as the `index.md` file in that directory folder. (See [an example](https://github.com/json-api/json-api/tree/gh-pages/_profiles/ethanresnick/cursor-pagination).)
-
-Once submitted, one of JSON:API's editors will review your profile to check that it: 
-
-1. follows the template above; 
-2. is specified precisely enough to enable interoperable implementations;
-3. complies with the JSON:API spec and its [requirements for profiles](/format/1.1/#profiles-authoring);
-4. follows JSON:API's [recommended naming conventions](https://jsonapi.org/recommendations/#naming); and
-5. wouldn't cause any problems were it to become widely adopted. 
-
-If your profile meets these criteria, it will generally be **approved within a week**.
-
-In limited cases (e.g., if your profile defines a new, fundamental mechanism for
-doing something "architectural" that other profiles may need to do too), it might
-take longer for the reviewer to adequately check that the profile wouldn't have
-problematic ramifications if it became widely adopted.
-
-As part of this review, the editors or the community might also give design
-feedback on your submission. You can take as much time as you'd like to act on/
-respond to this feedback, and the editors will wait for you to say that your
-submission is finalized before merging your PR. You are encouraged, but not
-required, to act on any design feedback.
-
-If you do change your submission after it's been reviewed, it will be re-reviewed
-to make sure it still complies with the requirements for approval given above.
-
-JSON:API's editors may occasionally reassign responsibility for a registered
-profile. The most common reason for this will be to enable changes to be made
-to profiles where the author of the registration has died, moved out of contact 
-or is otherwise unable to make changes that are important to the community.
-
-Even though profile registration is strongly encouraged, it is not mandatory.
-If you choose not to register your profile, you can create your own URL, on
-a domain you control, and use that to identify your profile. You should
-self-host the filled out template at this URL.
-
-## <a href="#prior-extensions" id="prior-extensions" class="headerlink"></a> Prior Extensions
-
-JSON:API previously offered experimental support for a different extension
-negotiation system than the one now in the specification, and it provided a
-number of extensions for use with that old negotiation system. However, this
-system was always experimental and has now been deprecated.
-
-New APIs should not use the old system or any extensions designed for it.
-APIs that already use these old extensions should direct clients to an
-[earlier version of this page](https://github.com/json-api/json-api/blob/9c7a03dbc37f80f6ca81b16d444c960e96dd7a57/extensions/index.md)
-as documentation.
+[extensions]: /format/1.1/#extensions
+[profiles]: /format/1.1/#profiles
+[attributes]: /format/1.1/#document-resource-object-attributes
+[pagination]: /format/1.1/#fetching-pagination
