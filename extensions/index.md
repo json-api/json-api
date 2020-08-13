@@ -43,7 +43,7 @@ common extensions and profiles instead of creating new extensions and profiles
 because of trivial or aesthetic differences.
 
 The extensions and profiles listed on this page have been reviewed by the
-JSON:API specification editors and are considered:
+JSON:API specification [editors] and are considered:
 
   - Compatible with the base specification
   - Able to evolve without backward incompatibilities
@@ -73,3 +73,4 @@ There are no profiles at this time.
 [profiles]: /format/1.1/#profiles
 [attributes]: /format/1.1/#document-resource-object-attributes
 [pagination]: /format/1.1/#fetching-pagination
+[editors]: /about/#editors
