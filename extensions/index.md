@@ -42,6 +42,16 @@ implementors are **strongly** encouraged to reuse, improve, and collaborate on
 common extensions and profiles instead of creating new extensions and profiles
 because of trivial or aesthetic differences.
 
+The extensions and profiles listed on this page have been reviewed by the
+JSON:API specification editors and are considered:
+
+  - Compatible with the base specification
+  - Able to evolve without backward incompatibilities
+  - Broadly useful
+
+Not every extension or profile can or should appear on this page. This listing
+is maintained on a best-effort basis.
+
 ## <a href="#extensions" id="extensions" class="headerlink"></a> Extensions
 
 There are no extensions at this time.
