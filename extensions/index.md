@@ -1,6 +1,6 @@
 ---
 layout: page
-title: Extensions
+title: Extensions and Profiles
 show_sidebar: true
 redirect_from: /profiles
 ---
