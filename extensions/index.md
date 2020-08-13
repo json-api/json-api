@@ -28,7 +28,7 @@ specification that _are_ simple to implement using only the parts of the
 specification that are reserved for implementations (e.g. a common way to
 handle [pagination]).
 
-One major difference between extensions and profiles are that an extension must
+One major difference between extensions and profiles is that an extension must
 be agreed upon and understood by both the client and the server, while a
 profile can be safely ignored if either the client or the server does not
 recognize it.
