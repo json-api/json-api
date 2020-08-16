@@ -83,7 +83,7 @@ values of the `ext` and `profile` parameters **MUST** equal a space-separated
 
 > Note: When serializing the `ext` or `profile` media type parameters, the HTTP
 > specification requires that parameter values be surrounded by quotation marks
-> (U+0022 QUOTATION MARK, "\"") if the value contains more than one URI.
+> (U+0022 QUOTATION MARK, "\"").
 
 #### <a href="#extension-rules" id="extension-rules" class="headerlink"></a> Rules for Extensions
 
