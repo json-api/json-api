@@ -218,7 +218,10 @@ to request that the server apply one or more profiles to the response document.
 > Note: A client is allowed to send more than one acceptable media type in the
 `Accept` header, including multiple instances of the JSON:API media type. This
 allows clients to request different combinations of the `ext` and `profile`
-media type parameters.
+media type parameters. If some combinations are preferred over others, this has
+to be indicated with quality values (`q=` after the media type parameters), per
+[RFC 7231 Section 5.3.2](https://tools.ietf.org/html/rfc7231#section-5.3.2);
+without quality values, all entries in `Accept` are equally preferable.
 
 ### <a href="#content-negotiation-servers" id="content-negotiation-servers" class="headerlink"></a> Server Responsibilities
 
