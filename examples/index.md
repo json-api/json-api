@@ -327,7 +327,7 @@ Content-Type: application/vnd.api+json
 ```
 
 Notice that this response includes not only the `errors` top-level member,
-but the `jsonapi` top-level member. Error responses may not contain the
+but the `jsonapi` top-level member. Error responses cannot contain the
 top-level `data` member, but can include all the other top-level members
 JSON:API defines.
 
