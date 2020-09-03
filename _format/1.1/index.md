@@ -955,9 +955,9 @@ to convey to JSON-LD clients that they contain JSON-LD data.
 #### <a href="#extension-members" id="extension-members" class="headerlink"></a> Extension Members
 
 The name of every new member introduced by an extension **MUST** be prefixed
-with the [extension's namespace] followed by a colon (`:`). The remainder of
-the name **MUST** adhere to the rules for implementation defined [member
-names].
+with the [extension's namespace](#extension-rules) followed by a colon (`:`).
+The remainder of the name **MUST** adhere to the rules for implementation
+defined [member names].
 
 ## <a href="#fetching" id="fetching" class="headerlink"></a> Fetching Data
 
