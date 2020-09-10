@@ -60,6 +60,9 @@ both, to specify the target of the operation:
   4.1](https://tools.ietf.org/html/rfc3986#section-4.1)] that identifies the
   target of the operation.
 
+Some specific types of operations require inclusion of `ref` or `href`, as
+described below.
+
 An operation object **MAY** also contain any of the following members:
 
 - `data`: the operation's "primary data".
@@ -118,9 +121,10 @@ The following sections describe how to process specific operations.
 #### Creating Resources
 
 An operation that creates a resource **MAY** target a resource collection
-through the operation's `ref` member. The operation **MUST** include an `op`
-code of `"add"` as well as a resource object as `data`. The resource object
-**MUST** contain at least a `type` member.
+through the operation's `href` member.
+
+The operation **MUST** include an `op` code of `"add"` as well as a resource
+object as `data`. The resource object **MUST** contain at least a `type` member.
 
 For example:
 
@@ -146,6 +150,8 @@ Accept: application/vnd.api+json;ext="https://jsonapi.org/ext/atomic"
 
 Note that `href` is used in this example to target a resource collection,
 `blogPosts` in this case, that is distinct from the `type` of the resource.
+The usage of `href` is entirely optional for this extension, but could be
+required by an individual implementation.
 
 ##### Responses
 
@@ -186,9 +192,10 @@ contains a top-level `errors` as [described above](#processing-errors).
 
 #### Updating Resources
 
-An operation that updates a resource **MUST** target that resource through the
-operation's `ref` member. The operation **MUST** include an `op` code of
-`"update"`.
+An operation that updates a resource **MAY** target that resource through the
+operation's `ref` or `href` members, but not both.
+
+The operation **MUST** include an `op` code of `"update"`.
 
 For example:
 
@@ -201,10 +208,6 @@ Accept: application/vnd.api+json;ext="https://jsonapi.org/ext/atomic"
 {
   "atomic:operations": [{
     "op": "update",
-    "ref": {
-      "type": "articles",
-      "id": "13"
-    },
     "data": {
       "type": "articles",
       "id": "13",
@@ -235,8 +238,9 @@ contains a top-level `errors` as [described above](#processing-errors).
 #### Deleting Resources
 
 An operation that deletes a resource **MUST** target that resource through the
-operation's `ref` member. The operation **MUST** include an `op` code of
-`"remove"`.
+operation's `ref` or `href` members, but not both.
+
+The operation **MUST** include an `op` code of `"remove"`.
 
 For example:
 
@@ -270,8 +274,9 @@ contains a top-level `errors` as [described above](#processing-errors).
 #### Updating To-One Relationships
 
 An operation that updates a resource's to-one relationship **MUST** target that
-relationship through the operation's `ref` member. The operation **MUST**
-include an `op` code of `"update"`.
+relationship through the operation's `ref` or `href` members, but not both.
+
+The operation **MUST** include an `op` code of `"update"`.
 
 For example, the following request assigns a to-one relationship:
 
@@ -331,7 +336,7 @@ contains a top-level `errors` as [described above](#processing-errors).
 #### Updating To-Many Relationships
 
 An operation that updates a resource's to-many relationship **MUST** target that
-relationship through the operation's `ref` member.
+relationship through the operation's `ref` or `href` members, but not both.
 
 To add members to a to-many relationship, the operation **MUST** include an
 `op` code of `"add"`. For example:
