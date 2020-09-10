@@ -114,6 +114,17 @@ more [error objects](/format/#error-objects) **SHOULD** be returned, each with
 a `source` member that contains a `pointer` to the source of the problem in the
 request document.
 
+If a requested operation is malformed or incomplete, then a server **MUST**
+respond with a `400 Bad Request` and **SHOULD** include a document with a
+top-level `errors` member that contains an error object. The error object
+**SHOULD** include a `source` member with a `pointer` to the invalid operation.
+
+If an operation is properly formed, but can not be processed by a server, the
+server **MUST** respond with a `400 Bad Request` or a more appropriate error
+response (e.g. `409 Conflict` or `422 Unprocessable Entity`) and **SHOULD**
+include a document with a top-level `errors` member that contains one or more
+error objects that provide further details.
+
 ### <a href="#specific-operations" id="specific-operations" class="headerlink"></a> Processing Specific Operations
 
 The following sections describe how to process specific operations.
