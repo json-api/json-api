@@ -49,11 +49,12 @@ both, to specify the target of the operation:
 - `ref`: an object that **MAY** contain any of the following combinations of
   members:
 
-  - `type` and `id`: to target an individual resource.
-  - `type`, `id`, and `relationship`: to target an individual resource's relationship.
+  - `type` and `id` (or `lid`): to target an individual resource.
+  - `type`, `id` (or `lid`), and `relationship`: to target an individual
+    resource's relationship.
 
-  Note that `local:id` **MAY** be used instead of `id` when used together with
-  the local identity extension.
+  Note that `lid` **MAY** be used instead of `id` to target resource objects
+  which have been assigned a `lid` in a prior operation object.
 
 - `href`: a string that contains a URI-reference [[RFC3986 Section
   4.1](https://tools.ietf.org/html/rfc3986#section-4.1)] that identifies the
@@ -507,6 +508,6 @@ Content-Type: application/vnd.api+json;ext="https://jsonapi.org/ext/atomic"
 > Note that this operations request could also have been structured to add the
 > author, then add the article, then add the relationship between them.
 
-> Also note that the local identities extension is particularly useful for
-> requests that involve multiple operations. Local identities can be used to
-> associate resources that have not yet been assigned IDs.
+> Also note that local identities, i.e. `lid` members, are particularly useful
+> for requests that involve multiple operations. Local identities can be used to
+> associate resources that have not yet been assigned an `id`.
