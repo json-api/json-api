@@ -50,15 +50,17 @@ An operation object **MUST** contain the following member:
 An operation object **MAY** contain either of the following members, but not
 both, to specify the target of the operation:
 
-- `ref`: an object that **MAY** contain any of the following combinations of
+- `ref`: an object that **MUST** contain one of the following combinations of
   members:
 
-  - `type` and `id` (or `lid`): to target an individual resource.
-  - `type`, `id` (or `lid`), and `relationship`: to target an individual
-    resource's relationship.
-
-  Note that `lid` **MAY** be used instead of `id` to target resource objects
-  which have been assigned a `lid` in a prior operation object.
+  - `type` and `id`: to target an individual resource.
+  - `type` and `lid`: to target an individual resource that has been assigned a
+     local identity (`lid`) in a prior operation object.
+  - `type`, `id`, and `relationship`: to target the relationship of an
+     individual resource.
+  - `type`, `lid`, and `relationship`: to target the relationship of an
+     individual resource that has been assigned a local identity (`lid`) in a
+     prior operation object.
 
 - `href`: a string that contains a URI-reference [[RFC3986 Section
   4.1](https://tools.ietf.org/html/rfc3986#section-4.1)] that identifies the
