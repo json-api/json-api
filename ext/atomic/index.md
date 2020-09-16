@@ -41,7 +41,7 @@ member **MUST NOT** be included in the same document.
 An operation object **MUST** contain the following member:
 
 - `op`: an operation code, expressed as a string, that indicates the type of
-  operation to perform. Valid values include:
+  operation to perform. The value **MUST** be one of the following:
 
   - `"add"`: creates a new resource or relationship
   - `"update"`: updates a resource or relationship
