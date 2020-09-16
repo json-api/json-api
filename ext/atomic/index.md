@@ -8,6 +8,10 @@ Clients can send an array of operations in a single request. This extension
 guarantees that those operations will be processed in order and will either
 completely succeed or fail together.
 
+## <a href="#uri" id="uri" class="headerlink"></a> URI
+
+This extension has the URI `https://jsonapi.org/ext/atomic`.
+
 ## <a href="#namespace" id="namespace" class="headerlink"></a> Namespace
 
 This extension uses the namespace `atomic`.
