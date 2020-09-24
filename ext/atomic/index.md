@@ -1,4 +1,7 @@
-# Atomic Operations Extension
+---
+layout: page
+title: Atomic Operations
+---
 
 This extension provides a means to perform multiple "operations" in a linear and
 atomic manner. Operations are a serialized form of the mutations allowed in the
