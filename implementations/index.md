@@ -315,6 +315,10 @@ includes related resources.
 
 * [json_api_server](https://pub.dartlang.org/packages/json_api_server) is a JSON:API server running on Dart VM.
 
+### <a href="#server-libraries-crystal" id="server-libraries-crystal" class="headerlink"></a> Crystal
+
+* [jsonapi-serializer-cr](https://github.com/andersondanilo/jsonapi-serializer-cr) is a JSON:API Serializer for Crystal Lang.
+
 ## <a href="#examples" id="examples" class="headerlink"></a> Examples
 
 * [Endpoints provides a fully working example API](http://github.com/endpoints/example/)
