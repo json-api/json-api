@@ -793,8 +793,7 @@ A link object **MAY** also contain any of the following members:
   Schema) for the link target.
 * `title`: a string which serves as a label for the destination of a link
   such that it can be used as a human-readable identifier (e.g., a menu
-  entry) in the language indicated by the `Content-Language` header field (if
-  present).
+  entry).
 * `type`: a string indicating the media type of the link's target.
 * `hreflang`: a string or an array of strings indicating the language(s) of the
   link's target. An array of strings indicates that multiple languages of the
