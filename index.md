@@ -125,6 +125,10 @@ You can [browse existing profiles](/extensions/#existing-profiles) or
 
 ## <a href="#update-history" id="update-history" class="headerlink"></a> Update history
 
+- 2020-10-01: 1.1 Release candidate 3 released.
+  - Refined links objects. The link object `params` member was removed to
+    better align with other JSON link serializations. The `anchor` target
+    attribute was also removed. It may be restored in a future minor release.
 - 2020-08-20: 1.1 Release candidate 2 released. 
   - [Extensions](https://jsonapi.org/format/1.1/#extensions) were added and the
     scope of [profiles](https://jsonapi.org/format/1.1/#profiles) were reduced
