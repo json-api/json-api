@@ -54,12 +54,11 @@ is maintained on a best-effort basis.
 
 ## <a href="#extensions" id="extensions" class="headerlink"></a> Extensions
 
-There are no extensions at this time.
-
-- [Extension Example](https://example.com/ext/foo)
-  - URI: `https://example.com/ext/foo`
-  - Namespace: `foo`
-  - Description: Lorem dolor sit amet.
+- [Atomic Operations](/ext/atomic)
+  - URI: `https://jsonapi.org/ext/atomic`
+  - Namespace: `atomic`
+  - Description: This extension provides a means to perform multiple
+    “operations” in a linear and atomic manner.
 
 ## <a href="#extensions" id="extensions" class="headerlink"></a> Profiles
 
