@@ -746,38 +746,19 @@ of this member **MUST** be an object (a "links object").
 <a href="#document-links-link" id="document-links-link"></a>
 Within this object, a link **MUST** be represented as either:
 
-* a URI-reference [[RFC3986 Section 4.1](https://tools.ietf.org/html/rfc3986#section-4.1)] to the link's target.
-* <a id="document-links-link-object"></a>an object ("link object") which **MAY**
-  contain the following members:
-  * `href`: a URI-reference [[RFC3986 Section 4.1](https://tools.ietf.org/html/rfc3986#section-4.1)] to the link's target.
-  * `rel`: a [link relation type][link relation type] defining the semantics of
-    the link.
-  * `anchor`: a URI-reference [[RFC3986 Section 4.1](https://tools.ietf.org/html/rfc3986#section-4.1)]
-    to the link's context. By default, the context of a link is the
-    [top-level object][top level], [resource object][resource objects], or
-    [relationship object][relationships] in which the link appears.
-  * `describedby`: a [link] to a description document (e.g. OpenAPI or JSON
-    Schema) for the link target.
-  * `title`: a string which serves as a label for the destination of a link
-    such that it can be used as a human-readable identifier (e.g., a menu
-    entry) in the language indicated by the `Content-Language` header field (if
-    present).
-  * `type`: a string a which serves as a hint indicating the media type of the
-    target resource.
-  * `hreflang`: a string or an array of strings which serve as a hint
-    indicating the language of target resource. An array of strings indicates
-    that multiple languages of the target resource are available. Each string
-    **MUST** be a valid language tag
-    [[RFC5646](https://tools.ietf.org/html/rfc5646)].
-  * `meta`: a meta object containing non-standard meta-information about the
-    link.
+* a string whose value is a URI-reference [[RFC3986 Section 4.1](https://tools.ietf.org/html/rfc3986#section-4.1)]
+  pointing to the link's target.
+* a [link object]
 
-> Note: the `type` and `hreflang` members are only hints; the target resource
-> is not guaranteed to be available in the indicated media type or language
-> when the link is actually followed.
+A link's relation type **SHOULD** be inferred from the name of the link unless a
+`rel` member is present on the [link object].
 
-In the example below, the `self` link is simply a URI string, whereas the
-`related` link uses the object form to provide meta information about a
+A link's context is the [top-level object][top level], [resource
+object][resource objects], or [relationship object][relationships] in which its
+parent links object appears.
+
+In the example below, the `self` link is a string, whereas the `related` link
+is a [link object]. The link object provides additional information about a
 related resource collection as well as a schema that serves as a description
 document for that collection:
 
@@ -786,6 +767,7 @@ document for that collection:
   "self": "http://example.com/articles/1/relationships/comments",
   "related": {
     "href": "http://example.com/articles/1/comments",
+    "title": "Comments",
     "describedby": "http://example.com/schemas/article-comments",
     "meta": {
       "count": 10
@@ -794,21 +776,36 @@ document for that collection:
 }
 ```
 
-##### <a href="#document-links-link-relation-type" id="document-links-link-relation-type" class="headerlink"></a> Link relation type
+#### <a id="document-links-link-object"></a> Link objects
 
-The value of the `rel` member **MUST** be a string that represents a link relation
-type. Valid link relation types are defined by
-[RFC8288 Section 2.1](https://tools.ietf.org/html/rfc8288#section-2.1).
+A "link object" is an object that represents a [web link](https://tools.ietf.org/html/rfc8288).
 
-If a `rel` member is not given on a link object, the link's relation type
-**SHOULD** be inferred from the name of the link object.
+A link object **MUST** contain the following member:
 
-In order to represent a link with reversed semantics, it is **RECOMMENDED**
-that an alternate link relation type be used or, less preferably, that the
-`anchor` and `href` members be interchanged.
+* `href`: a string whose value is a URI-reference [[RFC3986 Section 4.1](https://tools.ietf.org/html/rfc3986#section-4.1)]
+  pointing to the link's target.
 
-> Note: Historically, a `rev` link parameter was used for this purpose but has
-> since been deprecated by [RFC8288 Section 3.3](https://tools.ietf.org/html/rfc8288#section-3.3).
+A link object **MAY** also contain any of the following members:
+
+* `rel`: a string indicating the link's relation type. The string **MUST** be a
+  [valid link relation type](https://tools.ietf.org/html/rfc8288#section-2.1).
+* `describedby`: a [link] to a description document (e.g. OpenAPI or JSON
+  Schema) for the link target.
+* `title`: a string which serves as a label for the destination of a link
+  such that it can be used as a human-readable identifier (e.g., a menu
+  entry) in the language indicated by the `Content-Language` header field (if
+  present).
+* `type`: a string indicating the media type of the link's target.
+* `hreflang`: a string or an array of strings indicating the language(s) of the
+  link's target. An array of strings indicates that multiple languages of the
+  link's target are available. Each string **MUST** be a valid language tag
+  [[RFC5646](https://tools.ietf.org/html/rfc5646)].
+* `meta`: a meta object containing non-standard meta-information about the
+  link.
+
+> Note: the `type` and `hreflang` members are only hints; the target resource
+> is not guaranteed to be available in the indicated media type or language
+> when the link is actually followed.
 
 ### <a href="#document-jsonapi-object" id="document-jsonapi-object" class="headerlink"></a> JSON:API Object
 
