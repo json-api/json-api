@@ -796,8 +796,8 @@ A link object **MAY** also contain any of the following members:
   entry).
 * `type`: a string indicating the media type of the link's target.
 * `hreflang`: a string or an array of strings indicating the language(s) of the
-  link's target. An array of strings indicates that multiple languages of the
-  link's target are available. Each string **MUST** be a valid language tag
+  link's target. An array of strings indicates that the link's target is
+  available in multiple languages. Each string **MUST** be a valid language tag
   [[RFC5646](https://tools.ietf.org/html/rfc5646)].
 * `meta`: a meta object containing non-standard meta-information about the
   link.
