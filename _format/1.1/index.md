@@ -750,8 +750,8 @@ Within this object, a link **MUST** be represented as either:
   pointing to the link's target.
 * a [link object]
 
-A link's relation type **SHOULD** be inferred from the name of the link unless a
-`rel` member is present on the [link object].
+A link's relation type **SHOULD** be inferred from the name of the link unless the
+link is a [link object] and the link object has a `rel` member.
 
 A link's context is the [top-level object][top level], [resource
 object][resource objects], or [relationship object][relationships] in which its
