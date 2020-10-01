@@ -757,10 +757,10 @@ A link's context is the [top-level object][top level], [resource
 object][resource objects], or [relationship object][relationships] in which its
 parent links object appears.
 
-In the example below, the `self` link is a string, whereas the `related` link
-is a [link object]. The link object provides additional information about a
-related resource collection as well as a schema that serves as a description
-document for that collection:
+In the example below, the `self` link is a string whereas the `related` link
+is a [link object]. A `related` link object provides additional information
+about the target related resource collection as well as a schema that serves as
+a description document for that collection:
 
 ```json
 "links": {
