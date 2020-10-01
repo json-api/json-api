@@ -746,37 +746,28 @@ of this member **MUST** be an object (a "links object").
 <a href="#document-links-link" id="document-links-link"></a>
 Within this object, a link **MUST** be represented as either:
 
-* a URI-reference [[RFC3986 Section 4.1](https://tools.ietf.org/html/rfc3986#section-4.1)] to the link's target.
-* <a id="document-links-link-object"></a>an object ("link object") which can
-  contain the following members:
-  * `href`: a URI-reference [[RFC3986 Section 4.1](https://tools.ietf.org/html/rfc3986#section-4.1)] to the link's target.
-  * `rel`: a [link relation type][link relation type] defining the semantics of
-    the link.
-  * `anchor`: a URI-reference [[RFC3986 Section 4.1](https://tools.ietf.org/html/rfc3986#section-4.1)]
-    to the link's context. By default, the context of a link is the
-    [top-level object][top level], [resource object][resource objects], or
-    [relationship object][relationships] in which the link appears.
-  * `params`: a [link parameter object][link parameters] describing additional
-    information about the link or its target.
-  * `describedby`: a [link] to a description document (e.g. OpenAPI or JSON
-    Schema) for the link target.
-  * `meta`: a meta object containing non-standard meta-information about the
-    link.
+* a string whose value is a URI-reference [[RFC3986 Section 4.1](https://tools.ietf.org/html/rfc3986#section-4.1)]
+  pointing to the link's target.
+* a [link object].
 
-Link objects **MAY** also contain the members `hreflang`, `title`, and `type`.
-Each of these members **MUST** be used in accordance with their semantics as
-defined by [RFC8288 Section 3.4.1](https://tools.ietf.org/html/rfc8288#section-3.4.1).
+A link's relation type **SHOULD** be inferred from the name of the link unless the
+link is a [link object] and the link object has a `rel` member.
 
-In the example below, the `self` link is simply a URI string, whereas the
-`related` link uses the object form to provide meta information about a
-related resource collection as well as a schema that serves as a description
-document for that collection:
+A link's context is the [top-level object][top level], [resource
+object][resource objects], or [relationship object][relationships] in which it
+appears.
+
+In the example below, the `self` link is a string whereas the `related` link is
+a [link object]. The `related` link object provides additional information
+about the targeted related resource collection as well as a schema that serves
+as a description document for that collection:
 
 ```json
 "links": {
   "self": "http://example.com/articles/1/relationships/comments",
   "related": {
     "href": "http://example.com/articles/1/comments",
+    "title": "Comments",
     "describedby": "http://example.com/schemas/article-comments",
     "meta": {
       "count": 10
@@ -785,47 +776,35 @@ document for that collection:
 }
 ```
 
-##### <a href="#document-links-link-relation-type" id="document-links-link-relation-type" class="headerlink"></a> Link relation type
+#### <a id="document-links-link-object"></a> Link objects
 
-The value of the `rel` member **MUST** be a string or an array of strings that
-represent link relation type(s). Valid link relation types are defined by
-[RFC8288 Section 2.1](https://tools.ietf.org/html/rfc8288#section-2.1).
+A "link object" is an object that represents a [web link](https://tools.ietf.org/html/rfc8288).
 
-If a link is represented as a string, or the `rel` member is not given on a
-link object, the link's relation type **SHOULD** be inferred from the name of
-the link object.
+A link object **MUST** contain the following member:
 
-An array of link relationship types establishes multiple links that share the
-same context, target, and target attributes and a client **MUST** treat these
-links as separate, distinct links. A client **MUST NOT** infer additional
-semantics for the link based on a composition of link relation types alone.
+* `href`: a string whose value is a URI-reference [[RFC3986 Section 4.1](https://tools.ietf.org/html/rfc3986#section-4.1)]
+  pointing to the link's target.
 
-In order to represent a link with reversed semantics, it is **RECOMMENDED**
-that an alternate link relation type be used or, less preferably, that the
-`anchor` and `href` members be interchanged.
+A link object **MAY** also contain any of the following members:
 
-> Note: Historically, a `rev` link parameter was used for this purpose but has
-> since been deprecated by [RFC8288 Section 3.3](https://tools.ietf.org/html/rfc8288#section-3.3).
+* `rel`: a string indicating the link's relation type. The string **MUST** be a
+  [valid link relation type](https://tools.ietf.org/html/rfc8288#section-2.1).
+* `describedby`: a [link] to a description document (e.g. OpenAPI or JSON
+  Schema) for the link target.
+* `title`: a string which serves as a label for the destination of a link
+  such that it can be used as a human-readable identifier (e.g., a menu
+  entry).
+* `type`: a string indicating the media type of the link's target.
+* `hreflang`: a string or an array of strings indicating the language(s) of the
+  link's target. An array of strings indicates that the link's target is
+  available in multiple languages. Each string **MUST** be a valid language tag
+  [[RFC5646](https://tools.ietf.org/html/rfc5646)].
+* `meta`: a meta object containing non-standard meta-information about the
+  link.
 
-##### <a href="#document-links-link-parameters" id="document-links-link-parameters" class="headerlink"></a> Link parameters
-
-The value of the `params` member **MUST** be an object (a “link parameter
-object”). Members of the link parameter object (“link parameters”) describe
-the [link][link] on which they are defined or its target. These link parameters
-are also known as [target attributes](https://tools.ietf.org/html/rfc8288#section-2.2).
-
-Link parameter names **MUST** be defined by their accompanying link relation
-type. Additionally, parameter names **SHOULD** be valid JSON:API
-[member names][member names] and **MUST** be valid target attribute names as defined
-by [RFC8288 Section 2.2](https://tools.ietf.org/html/rfc8288#section-2.2).
-
-Link parameters **MAY** contain any valid JSON value. However, parameters that
-have a cardinality greater than one **MUST** be represented as an array of
-values.
-
-> Note: This means that a target attribute with multiple string values should
-not be represented as a single concatenated string with its values separated by
-whitespace as might be the case in a [`Link` header serialization](https://tools.ietf.org/html/rfc8288#section-3.5).
+> Note: the `type` and `hreflang` members are only hints; the target resource
+> is not guaranteed to be available in the indicated media type or language
+> when the link is actually followed.
 
 ### <a href="#document-jsonapi-object" id="document-jsonapi-object" class="headerlink"></a> JSON:API Object
 
@@ -2237,7 +2216,6 @@ request as equivalent to one in which the square brackets were percent-encoded.
 [link]: #document-links-link
 [link object]: #document-links-link-object
 [link relation type]: #document-links-link-relation-type
-[link parameters]: #document-links-link-parameters
 [extensions]: #extensions
 [profiles]: #profiles
 [error details]: #errors
