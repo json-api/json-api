@@ -754,8 +754,8 @@ A link's relation type **SHOULD** be inferred from the name of the link unless t
 link is a [link object] and the link object has a `rel` member.
 
 A link's context is the [top-level object][top level], [resource
-object][resource objects], or [relationship object][relationships] in which its
-parent links object appears.
+object][resource objects], or [relationship object][relationships] in which it
+appears.
 
 In the example below, the `self` link is a string whereas the `related` link is
 a [link object]. The `related` link object provides additional information
