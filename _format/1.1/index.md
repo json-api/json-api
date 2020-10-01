@@ -768,7 +768,7 @@ Within this object, a link **MUST** be represented as either:
     indicating the language of target resource. An array of strings indicates
     that multiple languages of the target resource are available. Each string
     **MUST** be a valid language tag
-    [[RFC5646](https://tools.ietf.org/html/rfc5646)]
+    [[RFC5646](https://tools.ietf.org/html/rfc5646)].
   * `meta`: a meta object containing non-standard meta-information about the
     link.
 
