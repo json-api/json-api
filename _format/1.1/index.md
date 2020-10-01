@@ -747,7 +747,7 @@ of this member **MUST** be an object (a "links object").
 Within this object, a link **MUST** be represented as either:
 
 * a URI-reference [[RFC3986 Section 4.1](https://tools.ietf.org/html/rfc3986#section-4.1)] to the link's target.
-* <a id="document-links-link-object"></a>an object ("link object") which can
+* <a id="document-links-link-object"></a>an object ("link object") which **MAY**
   contain the following members:
   * `href`: a URI-reference [[RFC3986 Section 4.1](https://tools.ietf.org/html/rfc3986#section-4.1)] to the link's target.
   * `rel`: a [link relation type][link relation type] defining the semantics of
@@ -758,12 +758,23 @@ Within this object, a link **MUST** be represented as either:
     [relationship object][relationships] in which the link appears.
   * `describedby`: a [link] to a description document (e.g. OpenAPI or JSON
     Schema) for the link target.
+  * `title`: a string which serves as a label for the destination of a link
+    such that it can be used as a human-readable identifier (e.g., a menu
+    entry) in the language indicated by the `Content-Language` header field (if
+    present).
+  * `type`: a string a which serves as a hint indicating the media type of the
+    target resource.
+  * `hreflang`: a string or an array of strings which serve as a hint
+    indicating the language of target resource. An array of strings indicates
+    that multiple languages of the target resource are available. Each string
+    **MUST** be a valid language tag
+    [[RFC5646](https://tools.ietf.org/html/rfc5646)]
   * `meta`: a meta object containing non-standard meta-information about the
     link.
 
-Link objects **MAY** also contain the members `hreflang`, `title`, and `type`.
-Each of these members **MUST** be used in accordance with their semantics as
-defined by [RFC8288 Section 3.4.1](https://tools.ietf.org/html/rfc8288#section-3.4.1).
+> Note: the `type` and `hreflang` members are only hints; the target resource
+> is not guaranteed to be available in the indicated media type or language
+> when the link is actually followed.
 
 In the example below, the `self` link is simply a URI string, whereas the
 `related` link uses the object form to provide meta information about a
