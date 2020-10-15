@@ -54,6 +54,8 @@ isomorphic ActiveRecord clone that issues JSON:API requests instead of SQL and i
 * [jsonapi-redux-data](https://github.com/wednesday-solutions/jsonapi-redux-data) - a library that makes integration of jsonapi with react + redux effortless and easy.
 * [jsonapi-fractal](https://github.com/andersondanilo/jsonapi-fractal) JSON:API Serializer inspired by Fractal (PHP)
 * [ts-japi](https://github.com/jun-sheaf/ts-japi) - A zero-dependency, highly-modular, js/ts-friendly, recursible, framework-agnostic library for serializing data to the JSON:API specification. Serializes the entire specification.
+* [mobx-async-store](https://github.com/artemis-ag/mobx-async-store) - A Mobx-based store for async data fetching and state management for the JSON:API specification.
+* [spraypaint](https://github.com/graphiti-api/spraypaint.js) - JS Client for Graphiti similar to ActiveRecord. Written in Typescript but works in plain old ES5 as well. This library is isomorphic - use it from the browser, or from the server with NodeJS.
 
 ### <a href="#client-libraries-typescript" id="client-libraries-typescript" class="headerlink"></a> Typescript
 * [ts-angular-jsonapi](https://github.com/reyesoft/ts-angular-jsonapi) A JSON:API library developed for AngularJS in Typescript
