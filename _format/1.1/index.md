@@ -2125,10 +2125,12 @@ Error objects provide additional information about problems encountered while
 performing an operation. Error objects **MUST** be returned as an array
 keyed by `errors` in the top level of a JSON:API document.
 
-An error object **MAY** have the following members:
+An error object **MAY** have the following members, and **MUST** contain at
+least one of:
 
 * `id`: a unique identifier for this particular occurrence of the problem.
-* `links`: a [links object][links] containing the following members:
+* `links`: a [links object][links] that **MAY** contain the following members,
+  and that **MUST** contain at least one of:
   * `about`: a [link][link] that leads to further details about this
     particular occurrence of the problem. When derefenced, this URI **SHOULD**
     return a human-readable description of the error.
@@ -2136,7 +2138,7 @@ An error object **MAY** have the following members:
     particular error is an instance of. This URI **SHOULD** be dereferencable to
     a human-readable explanation of the general error.
 * `status`: the HTTP status code applicable to this problem, expressed as a
-  string value.
+  string value.  This **SHOULD** be provided.
 * `code`: an application-specific error code, expressed as a string value.
 * `title`: a short, human-readable summary of the problem that **SHOULD NOT**
   change from occurrence to occurrence of the problem, except for purposes of
