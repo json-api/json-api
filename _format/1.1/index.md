@@ -2129,8 +2129,7 @@ An error object **MAY** have the following members, and **MUST** contain at
 least one of:
 
 * `id`: a unique identifier for this particular occurrence of the problem.
-* `links`: a [links object][links] that **MAY** contain the following members,
-  and that **MUST** contain at least one of:
+* `links`: a [links object][links] that **MAY** contain the following members:
   * `about`: a [link][link] that leads to further details about this
     particular occurrence of the problem. When derefenced, this URI **SHOULD**
     return a human-readable description of the error.
