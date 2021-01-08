@@ -266,7 +266,7 @@ the moment.
 * [pieoneers/jsonapi-go](https://github.com/pieoneers/jsonapi-go) lightweight JSON API implementation in Go. Make your client and server applications JSON API-enabled in hours not months.
 
 ### <a href="#server-libraries-net" id="server-libraries-net" class="headerlink"></a> .NET
-
+* [JsonApiDotNetCore](https://github.com/json-api-dotnet/JsonApiDotNetCore) is a framework for building JSON:API compliant REST APIs using .NET Core and Entity Framework Core.
 * [JsonApiNet](https://github.com/l8nite/JsonApiNet) lets you quickly deserialize JSON:API documents into C# entities. Supports compound documents, complex type mapping from attributes, attribute mapping, and more. [See the README](https://github.com/l8nite/JsonApiNet/blob/master/README.md) for full details.
 * [NJsonApi](https://github.com/jacek-gorgon/NJsonApi) is a .NET server implementation of the standard. It aims at good extensibility and performance while maintaining developer-friendliness with interchangeable conventions and builder-style configuration.
 * [Migrap.AspNetCore.Hateoas](https://github.com/dcomartin/Migrap.AspNetCore.Hateoas) HATEOAS (Hypermedia as the Engine of Application State) framework for ASP.NET Core. Current implementation(s): Siren, JsonApi.
