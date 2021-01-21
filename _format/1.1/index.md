@@ -2145,8 +2145,8 @@ least one of:
   localization.
 * `detail`: a human-readable explanation specific to this occurrence of the
   problem. Like `title`, this field's value can be localized.
-* `source`: an object containing references to the source of the error,
-  optionally including any of the following members:
+* `source`: an object containing references to the primary source of the error.
+  It **SHOULD** include one of the following members or be omitted:
   * `pointer`: a JSON Pointer [[RFC6901](https://tools.ietf.org/html/rfc6901)]
     to the value in the request document that caused the error [e.g. `"/data"`
     for a primary data object, or `"/data/attributes/title"` for a specific
@@ -2154,6 +2154,8 @@ least one of:
     exists; if it doesn't, the client **SHOULD** simply ignore the pointer.
   * `parameter`: a string indicating which URI query parameter caused
     the error.
+  * `header`: a string indicating the name of a single request header which
+    caused the error.
 * `meta`: a [meta object][meta] containing non-standard meta-information about the
   error.
 
