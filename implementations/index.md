@@ -89,7 +89,6 @@ isomorphic ActiveRecord clone that issues JSON:API requests instead of SQL and i
 * [Art4 / json-api-client](https://github.com/Art4/json-api-client) is a library for validating and handling the response body in a simple OOP way.
 * [woohoolabs / yang](https://github.com/woohoolabs/yang) is a PSR-7 compatible library that is able to build and send requests, and handle responses.
 * [enm/json-api-client](https://eosnewmedia.github.io/JSON-API-Client/) is an abstract client-side PHP implementation of the json:api specification which is based on [enm/json-api-common](https://eosnewmedia.github.io/JSON-API-Common/). It allows you to send json:api requests via your own http client implementation or via a buzz or guzzle client.
-* [pz/doctrine-rest](https://github.com/R3VoLuT1OneR/doctrine-rest) library provides basic tools for implementation of JSON:API with Doctrine 2
 * [swisnl/json-api-client](https://github.com/swisnl/json-api-client) Is a package for mapping remote {json:api} resources to Eloquent like models and collections.
 
 ### <a href="#client-libraries-dart" id="client-libraries-dart" class="headerlink"></a> Dart
@@ -175,6 +174,8 @@ and writing of JSON:API documents.
 * [hackerboy/json-api](https://github.com/hackerboydotcom/json-api) is a lightweight library that helps you to implement JSONAPI easily
 * [drupal](https://www.drupal.org/project/drupal) The Drupal CMS supports exposing all data it manages (entities) according to the JSON:API specification. [jsonapi_extras](https://www.drupal.org/project/jsonapi_extras) is an optional extra module to change resource type names, field names and more.
 * [bednic/json-api](https://gitlab.com/bednic/json-api) Annotation driven library for creating valid JSON API response document from your objects.
+* [pz/doctrine-rest](https://github.com/R3VoLuT1OneR/doctrine-rest) library provides basic tools for implementation of JSON:API with Doctrine 2
+* [pz/jsonapi-resource](https://github.com/R3VoLuT1OneR/jsonapi-resource) Serialize PHP class object into JSON:API resource object using PHP 8.0 Attributes.
 
 ### <a href="#server-libraries-node-js" id="server-libraries-node-js" class="headerlink"></a> Node.js
 * [Fortune.js](http://fortune.js.org/) is a library that includes a [comprehensive implementation of JSON:API](https://github.com/fortunejs/fortune-json-api).
