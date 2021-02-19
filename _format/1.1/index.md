@@ -1985,8 +1985,7 @@ updated relationship(s).
 
 A server **MUST** return a `200 OK` status code if an update is successful,
 the client's current data remain up to date, and the server responds
-only with top-level [meta] data. In this case the server **MUST NOT**
-include a representation of the updated relationship(s).
+only with top-level [meta] data.
 
 ##### <a href="#crud-updating-relationship-responses-403" id="crud-updating-relationship-responses-403" class="headerlink"></a> 403 Forbidden
 
