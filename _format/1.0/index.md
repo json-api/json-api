@@ -377,19 +377,17 @@ In a compound document, all included resources **MUST** be represented as an
 array of [resource objects] in a top-level `included` member.
 
 Compound documents require "full linkage", meaning that every included
-resource **MUST** be identified by at least one [resource identifier object] in
-the same document, representing resource linkage contained within an
-*accessible* resource object. A resource object is *accessible* if it is either
-primary data or it is identified by at least one [resource identifier object] in
-the same document, representing resource linkage contained within an
-*accessible* resource object.
+resource **MUST** be identified by at least one [resource identifier object]
+in the same document. These resource identifier objects could either be
+primary data or represent resource linkage contained within primary or
+included resources.
 
 The only exception to the full linkage requirement is when relationship fields
 that would otherwise contain linkage data are excluded via [sparse fieldsets](#fetching-sparse-fieldsets).
 
-> Note: Full linkage ensures that included resources are related (directly or
-indirectly) to the primary data (which could be [resource objects] or [resource identifier
-objects][resource identifier object]).
+> Note: Full linkage ensures that included resources are related to either
+the primary data (which could be [resource objects] or [resource identifier
+objects][resource identifier object]) or to each other.
 
 A complete example document with multiple included relationships:
 

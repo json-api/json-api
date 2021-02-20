@@ -609,16 +609,19 @@ array of [resource objects] in a top-level `included` member.
 
 Compound documents require "full linkage", meaning that every included
 resource **MUST** be identified by at least one [resource identifier object]
-in the same document. These resource identifier objects could either be
-primary data or represent resource linkage contained within primary or
-included resources.
+in the same document. This resource identifier object could either be
+primary data or represent resource linkage contained within an accessible
+resource. A resource is accessible if it is included in the same document
+as primary data or if it is identified by a resource identifier object
+in primary data or represents resource linkage contained within an accessible
+resource.
 
 The only exception to the full linkage requirement is when relationship fields
 that would otherwise contain linkage data are excluded via [sparse fieldsets](#fetching-sparse-fieldsets).
 
-> Note: Full linkage ensures that included resources are related to either
-the primary data (which could be [resource objects] or [resource identifier
-objects][resource identifier object]) or to each other.
+> Note: Full linkage ensures that included resources are related (directly
+or indirectly) to the primary data (which could be [resource objects] or
+[resource identifier objects][resource identifier object]).
 
 A complete example document with multiple included relationships:
 
