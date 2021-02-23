@@ -152,7 +152,7 @@ and writing of JSON:API documents.
 
 ### <a href="#server-libraries-php" id="server-libraries-php" class="headerlink"></a> PHP
 
-* [tobscure / json-api](https://github.com/tobscure/json-api)
+* [tobyz / json-api-server](https://github.com/tobyzerner/json-api-server) is a framework-agnostic declarative JSON:API server implementation.
 * [neomerx / json-api](https://github.com/neomerx/json-api) is a framework agnostic library that fully implements JSON:API v1.0.
 * [limoncello-php / app](https://github.com/limoncello-php/app) is a JSON:API v1.0 quick start server application for [neomerx / json-api](https://github.com/neomerx/json-api).
 * [lode / jsonapi](https://github.com/lode/jsonapi) is a human-friendly library to implement JSON:API v1.1 without needing to know the specification.
