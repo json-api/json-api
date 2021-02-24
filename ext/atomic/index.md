@@ -446,7 +446,7 @@ contains a top-level `errors` as [described above](#processing-errors).
 
 The above examples all perform a single operation that aligns with an equivalent
 singular request from the base spec. Yet, the primary value of this extension is
-that unlocks the ability to perform more than one action linearally and
+that unlocks the ability to perform more than one action linearly and
 atomically.
 
 The following example adds two resources and creates a relationship between them
