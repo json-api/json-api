@@ -1,19 +1,17 @@
 {
-  "$schema": "http://json-schema.org/draft-06/schema#",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://jsonapi.org/schemas/spec/v1.0/draft",
+  "$comment": "The $id URI should be modified before releasing. This URI does not need to be network addressable. It is an ID only.",
   "title": "JSON:API Schema",
-  "description": "This is a schema for responses in the JSON:API format. For more, see http://jsonapi.org",
+  "description": "A JSON Schema downloaded from jsonapi.org/schema on 2020-02-22 - modified to align with the specification. Additionaly, this schema only validates RESPONSES from a request. Validating request payloads requires slightly different constraints.",
   "oneOf": [
     {
       "$ref": "#/definitions/success"
     },
     {
       "$ref": "#/definitions/failure"
-    },
-    {
-      "$ref": "#/definitions/info"
     }
   ],
-
   "definitions": {
     "success": {
       "type": "object",
@@ -37,14 +35,7 @@
         },
         "links": {
           "description": "Link members related to the primary data.",
-          "allOf": [
-            {
-              "$ref": "#/definitions/links"
-            },
-            {
-              "$ref": "#/definitions/pagination"
-            }
-          ]
+          "$ref": "#/definitions/links"
         },
         "jsonapi": {
           "$ref": "#/definitions/jsonapi"
@@ -77,25 +68,6 @@
       },
       "additionalProperties": false
     },
-    "info": {
-      "type": "object",
-      "required": [
-        "meta"
-      ],
-      "properties": {
-        "meta": {
-          "$ref": "#/definitions/meta"
-        },
-        "links": {
-          "$ref": "#/definitions/links"
-        },
-        "jsonapi": {
-          "$ref": "#/definitions/jsonapi"
-        }
-      },
-      "additionalProperties": false
-    },
-
     "meta": {
       "description": "Non-standard meta-information that can not be represented as an attribute or relationship.",
       "type": "object",
@@ -142,7 +114,7 @@
           "$ref": "#/definitions/relationships"
         },
         "links": {
-          "$ref": "#/definitions/links"
+          "$ref": "#/definitions/relationshipLinks"
         },
         "meta": {
           "$ref": "#/definitions/meta"
@@ -160,15 +132,33 @@
         },
         "related": {
           "$ref": "#/definitions/link"
+        },
+        "pagination": {
+          "$ref": "#/definitions/pagination"
         }
       },
-      "additionalProperties": true
-    },
-    "links": {
-      "type": "object",
       "additionalProperties": {
         "$ref": "#/definitions/link"
       }
+    },
+    "links": {
+      "type": "object",
+      "allOf": [
+        {
+          "properties": {
+            "first": true,
+            "last": true,
+            "next": true,
+            "prev": true
+          },
+          "additionalProperties": {
+            "$ref": "#/definitions/link"
+          }
+        },
+        {
+          "$ref": "#/definitions/pagination"
+        }
+      ]
     },
     "link": {
       "description": "A link **MUST** be represented as either: a string containing the link's URL or a link object.",
@@ -176,7 +166,9 @@
         {
           "description": "A string containing the link's URL.",
           "type": "string",
-          "format": "uri-reference"
+          "format": "uri",
+          "$comment": "URI regex as per https://tools.ietf.org/html/rfc3986#appendix-B",
+          "pattern": "^(([^:/?#]+):)?(//([^/?#]*))?([^?#]*)(\\?([^#]*))?(#(.*))?"
         },
         {
           "type": "object",
@@ -187,7 +179,9 @@
             "href": {
               "description": "A string containing the link's URL.",
               "type": "string",
-              "format": "uri-reference"
+              "format": "uri",
+              "$comment": "URI regex as per https://tools.ietf.org/html/rfc3986#appendix-B",
+              "pattern": "^(([^:/?#]+):)?(//([^/?#]*))?([^?#]*)(\\?([^#]*))?(#(.*))?"
             },
             "meta": {
               "$ref": "#/definitions/meta"
@@ -196,7 +190,6 @@
         }
       ]
     },
-
     "attributes": {
       "description": "Members of the attributes object (\"attributes\") represent information about the resource object in which it's defined.",
       "type": "object",
@@ -206,16 +199,22 @@
         }
       },
       "not": {
+        "$comment": "This is what the specification requires, but it seems bad. https://github.com/json-api/json-api/issues/1553",
         "anyOf": [
-          {"required": ["relationships"]},
-          {"required": ["links"]},
-          {"required": ["id"]},
-          {"required": ["type"]}
+          {
+            "required": [
+              "relationships"
+            ]
+          },
+          {
+            "required": [
+              "links"
+            ]
+          }
         ]
       },
       "additionalProperties": false
     },
-
     "relationships": {
       "description": "Members of the relationships object (\"relationships\") represent references from the resource object in which it's defined to other resource objects.",
       "type": "object",
@@ -241,16 +240,22 @@
             }
           },
           "anyOf": [
-            {"required": ["data"]},
-            {"required": ["meta"]},
-            {"required": ["links"]}
+            {
+              "required": [
+                "data"
+              ]
+            },
+            {
+              "required": [
+                "meta"
+              ]
+            },
+            {
+              "required": [
+                "links"
+              ]
+            }
           ],
-          "not": {
-            "anyOf": [
-              {"required": ["id"]},
-              {"required": ["type"]}
-            ]
-          },
           "additionalProperties": false
         }
       },
@@ -305,34 +310,49 @@
         "first": {
           "description": "The first page of data",
           "oneOf": [
-            { "$ref": "#/definitions/link" },
-            { "type": "null" }
+            {
+              "$ref": "#/definitions/link"
+            },
+            {
+              "type": "null"
+            }
           ]
         },
         "last": {
           "description": "The last page of data",
           "oneOf": [
-            { "$ref": "#/definitions/link" },
-            { "type": "null" }
+            {
+              "$ref": "#/definitions/link"
+            },
+            {
+              "type": "null"
+            }
           ]
         },
         "prev": {
           "description": "The previous page of data",
           "oneOf": [
-            { "$ref": "#/definitions/link" },
-            { "type": "null" }
+            {
+              "$ref": "#/definitions/link"
+            },
+            {
+              "type": "null"
+            }
           ]
         },
         "next": {
           "description": "The next page of data",
           "oneOf": [
-            { "$ref": "#/definitions/link" },
-            { "type": "null" }
+            {
+              "$ref": "#/definitions/link"
+            },
+            {
+              "type": "null"
+            }
           ]
         }
       }
     },
-
     "jsonapi": {
       "description": "An object describing the server's implementation",
       "type": "object",
@@ -346,13 +366,13 @@
       },
       "additionalProperties": false
     },
-
     "error": {
       "type": "object",
       "properties": {
         "id": {
           "description": "A unique identifier for this particular occurrence of the problem.",
-          "type": "string"
+          "type": "string",
+          "$comment": "The spec doesn't specify that this MUST be a string, so this could be changed to additionally allow numbers"
         },
         "links": {
           "$ref": "#/definitions/links"
@@ -378,7 +398,8 @@
           "properties": {
             "pointer": {
               "description": "A JSON Pointer [RFC6901] to the associated entity in the request document [e.g. \"/data\" for a primary data object, or \"/data/attributes/title\" for a specific attribute].",
-              "type": "string"
+              "type": "string",
+              "pattern": "^(?:\\/(?:[^~/]|~0|~1)*)*$"
             },
             "parameter": {
               "description": "A string indicating which query parameter caused the error.",
@@ -394,4 +415,3 @@
     }
   }
 }
-
