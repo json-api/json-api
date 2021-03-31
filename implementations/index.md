@@ -72,6 +72,7 @@ isomorphic ActiveRecord clone that issues JSON:API requests instead of SQL and i
 * [Vox](https://github.com/aronbalog/Vox) is a Swift JSON:API client framework with custom model classes support and nice networking interface.
 * [Japx](https://github.com/infinum/Japx) is lightweight JSON:API parser that flattens complex JSON:API structure and turns it into simple JSON and vice versa. It works by transferring Dictionary to Dictionary, so you can use Codable, Unbox, Wrap, ObjectMapper or any other object mapping tool that you prefer. It supports Objective-C as well.
 * [mattpolzin / JSONAPI](https://github.com/mattpolzin/JSONAPI) is a Swift Codable library with heavy emphasis on type-safety. It is platform agnostic so it can be used client- and server-side.
+* [IzzyParser](https://github.com/undabot/izzyparser-ios) is a lightweight library for serializing and deserializing JSON:API objects.
 
 ### <a href="#client-libraries-ruby" id="client-libraries-ruby" class="headerlink"></a> Ruby
 
