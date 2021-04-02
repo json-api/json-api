@@ -287,6 +287,7 @@ includes related resources.
 * [Elide](http://elide.io) is a web framework supporting JSON:API. Through annotation-based JSON:API endpoint generation, Elide enables you to focus on your data model, security model, and business logic while avoiding unnecessary boilerplate. Moreover, through use of the JSON:API Patch extension, [Elide](http://elide.io) provides full support for database transactions.
 * [JSON:API for Spring HATEOAS](https://github.com/toedter/spring-hateoas-jsonapi) provides serialization/deserialization of the Spring HATEOAS representation models. The project also provides a builder to easily create relationships, included resource objects, pagination, and more.
 * [jsonapi-rvp](https://github.com/xlate/jsonapi-rvp) utilizes the platform capabilities available in the Jakarta EE environment (formerly Java EE) to expose JPA entities via JSON:API. Features include query and entity validation (using Bean Validators), pagination, use of surrogate keys as record identifiers, support for LEFT outer join conditions, and a simple JavaScript client.
+* [JSON:API object converter](https://github.com/MieskeB/json-api-spring-boot) converts normal Java objects to JSON:API standard with the use of annotations in the viewmodels (dtos).
 
 ### <a href="#server-libraries-scala" id="server-libraries-scala" class="headerlink"></a> Scala
 * [scala-jsonapi](https://github.com/scala-jsonapi/scala-jsonapi) A Scala library for producing JSON output (and deserializing JSON input) based on JSON:API specification.
