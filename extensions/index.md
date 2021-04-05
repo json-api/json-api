@@ -60,7 +60,7 @@ is maintained on a best-effort basis.
   - Description: This extension provides a means to perform multiple
     “operations” in a linear and atomic manner.
 
-## <a href="#extensions" id="extensions" class="headerlink"></a> Profiles
+## <a href="#profiles" id="profiles" class="headerlink"></a> Profiles
 
 There are no profiles at this time.
 
