@@ -607,18 +607,14 @@ requested primary resources. Such responses are called "compound documents".
 In a compound document, all included resources **MUST** be represented as an
 array of [resource objects] in a top-level `included` member.
 
-Compound documents require "full linkage", meaning that every included
-resource **MUST** be identified by at least one [resource identifier object]
-in the same document. These resource identifier objects could either be
-primary data or represent resource linkage contained within primary or
-included resources.
+Every included resource object **MUST** be identified via a chain of
+relationships originating in a document's primary data. This means that
+compound documents require "full linkage" and that no resource object can be
+included without a direct or indirect relationship to the document's primary
+data.
 
 The only exception to the full linkage requirement is when relationship fields
 that would otherwise contain linkage data are excluded via [sparse fieldsets](#fetching-sparse-fieldsets).
-
-> Note: Full linkage ensures that included resources are related to either
-the primary data (which could be [resource objects] or [resource identifier
-objects][resource identifier object]) or to each other.
 
 A complete example document with multiple included relationships:
 
