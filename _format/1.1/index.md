@@ -1513,6 +1513,70 @@ Accept: application/vnd.api+json
 A server **MUST** return `403 Forbidden` in response to an unsupported request
 to create a resource with a client-generated ID.
 
+#### <a href="#crud-sideposting" id="crud-sideposting" class="headerlink"></a> Sideposting
+
+A server **MAY** accept a request to create related resources along with the primary
+resource, which is referred to as *sideposting*. Related resources **MUST**
+be placed within the `included` section, and have a `temp-id` member the value of
+which is an arbitrary string.
+Linkage with sideposted resources **MUST** be expressed via *temporary resource
+identifier objects*, that is [resource identifier objects][resource identifier object]
+where the `id` member is replaced with a `temp-id` member. A temporary resource
+identifier object **MUST** identify an individual resource within a request document.
+
+In case a sideposted resource refers to the primary resource, the primary resource
+**MUST** have a `temp-id` member, and linkage **MUST** be expressed using a
+temporary resource identifier object.
+
+The document **MUST** still respect the full linkage requirement.
+
+For instance, a new article might be created along with two tags with the following 
+request:
+
+```http
+POST /articles HTTP/1.1
+Content-Type: application/vnd.api+json
+Accept: application/vnd.api+json
+
+{
+  "data": {
+    "type": "articles",
+    "attributes": {
+      "title": "Sideposting with json:api"
+    },
+    "relationships": {
+      "tags": {
+        "data": [{ "type": "tags", "id": "9" },
+                 { "type": "tags", "temp-id": "1" },
+                 { "type": "tags", "temp-id": "2" }]
+      }
+    }
+  },
+  "included": [
+    {
+      "type": "tags",
+      "temp-id": "1",
+      "attributes": {
+        "label": "JSON"
+      }
+    },
+    {
+      "type": "tags",
+      "temp-id": "2",
+      "attributes": {
+        "label": "REST"
+      }
+    }
+  ]
+}
+```
+
+A server **MUST** handle sideposting requests transactionally, and either create all
+requested resources or none.
+
+A server **MUST** return `403 Forbidden` in response to an unsupported request to
+create a resource with sideposting.
+
 #### <a href="#crud-creating-responses" id="crud-creating-responses" class="headerlink"></a> Responses
 
 ##### <a href="#crud-creating-responses-201" id="crud-creating-responses-201" class="headerlink"></a> 201 Created
@@ -1549,6 +1613,54 @@ Content-Type: application/vnd.api+json
       "self": "http://example.com/photos/550e8400-e29b-41d4-a716-446655440000"
     }
   }
+}
+```
+
+If a `POST` request *did* include some [Sideposted resources](#sideposting), the server
+**MAY** default to including the created related resources within the `included`
+member.
+
+If a sideposted resource is present in the response document, then it **MUST**
+have a `temp-id` member that identifies the corresponding resource from the request
+document.
+
+```http
+HTTP/1.1 201 Created
+Content-Type: application/vnd.api+json
+
+{
+  "data": {
+    "type": "articles",
+    "id": "123",
+    "attributes": {
+      "title": "Sideposting with json:api"
+    },
+    "relationships": {
+      "tags": {
+        "data": [{ "type": "tags", "id": "9" },
+                 { "type": "tags", "id": "14" },
+                 { "type": "tags", "id": "42" }]
+      }
+    }
+  },
+  "included": [
+    {
+      "type": "tags",
+      "id": "14",
+      "temp-id": "1",
+      "attributes": {
+        "label": "JSON"
+      }
+    },
+    {
+      "type": "tags",
+      "id": "42",
+      "temp-id": "2",
+      "attributes": {
+        "label": "REST"
+      }
+    }
+  ]
 }
 ```
 
