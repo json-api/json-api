@@ -4,6 +4,8 @@ title: "Recommendations"
 show_sidebar: true
 ---
 
+asdo ihasdohiasdo 
+
 This section contains recommendations for JSON:API implementations. These
 recommendations are intended to establish a level of consistency in areas that
 are beyond the scope of the base JSON:API specification.

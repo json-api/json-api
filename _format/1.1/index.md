@@ -14,7 +14,7 @@ data transmitted between clients and servers. This efficiency is achieved
 without compromising readability, flexibility, or discoverability.
 
 JSON:API requires use of the JSON:API media type
-([`application/vnd.api+json`](http://www.iana.org/assignments/media-types/application/vnd.api+json))
+([`application/json`](http://www.iana.org/assignments/media-types/application/json))
 for exchanging data.
 
 ## <a href="#semantics" id="semantics" class="headerlink"></a> Semantics
@@ -41,151 +41,7 @@ when, and only when, they appear in all capitals, as shown here.
 ## <a href="#jsonapi-media-type" id="jsonapi-media-type" class="headerlink"></a> The JSON:API Media Type
 
 The JSON:API media type is
-[`application/vnd.api+json`](http://www.iana.org/assignments/media-types/application/vnd.api+json).
-
-### <a href="#media-type-parameters" id="media-type-parameters" class="headerlink"></a> Media Type Parameters
-
-The JSON:API specification supports two media type parameters: `ext` and
-`profile`, which are used to specify [extensions] and [profiles], respectively.
-
-> Note: A media type parameter is an extra piece of information that can
-accompany a media type. For example, in the header
-`Content-Type: text/html; charset="utf-8"`, the media type is `text/html` and
-`charset` is a parameter.
-
-### <a href="#extensions" id="extensions" class="headerlink"></a> Extensions
-
-Extensions provide a means to "extend" the base specification by defining
-additional [specification semantics](#semantics).
-
-Extensions cannot alter or remove specification semantics, nor can they specify
-implementation semantics.
-
-### <a href="#profiles" id="profiles" class="headerlink"></a> Profiles
-
-Profiles provide a means to share a particular usage of the specification among
-implementations.
-
-Profiles can specify [implementation semantics](#semantics), but cannot alter,
-add to, or remove specification semantics.
-
-### <a href="#media-type-parameter-rules" id="media-type-parameter-rules" class="headerlink"></a> Rules for Media Type Parameters
-
-The JSON:API media type **MUST NOT** be specified with any media type parameters
-other than `ext` and `profile`. The `ext` parameter is used to support
-[extensions] and the `profile` parameter is used to support [profiles].
-
-Extensions and profiles are each uniquely identified by a
-[URI](https://tools.ietf.org/html/rfc3986). Visiting an extension's or a
-profile's URI **SHOULD** return documentation that describes its usage. The
-values of the `ext` and `profile` parameters **MUST** equal a space-separated
-(U+0020 SPACE, " ") list of extension or profile URIs, respectively.
-
-> Note: When serializing the `ext` or `profile` media type parameters, the HTTP
-> specification requires that parameter values be surrounded by quotation marks
-> (U+0022 QUOTATION MARK, "\"").
-
-#### <a href="#extension-rules" id="extension-rules" class="headerlink"></a> Rules for Extensions
-
-An extension **MAY** impose additional processing rules or further restrictions
-and it **MAY** define new object members as described below.
-
-An extension **MUST NOT** lessen or remove any processing rules, restrictions or
-object member requirements defined in this specification or other extensions.
-
-An extension **MAY** define new members within the document structure defined by
-this specification. The rules for extension member names are covered
-[below](#extension-members).
-
-An extension **MAY** define new query parameters. The rules for extension-defined
-query parameters are covered [below](#extension-query-parameters).
-
-When an extension defines new query parameters or document members, the
-extension **MUST** define a namespace to guarantee that extensions will never
-conflict with current or future versions of this specification. A namespace
-**MUST** meet all of the following conditions:
-
-- A namespace **MUST** contain at least one character.
-- A namespace **MUST** contain only these characters:
-  - U+0061 to U+007A, "a-z"
-  - U+0041 to U+005A, "A-Z"
-  - U+0030 to U+0039, "0-9"
-
-An extension **MUST NOT** define more than one namespace. The namespace used for
-all query parameters and document members **MUST** be the same for any given
-extension.
-
-In the following example, an extension with the namespace `version` has
-specified a resource object member `version:id` to support per-resource
-versioning. This member might appear as follows:
-
-```json
-HTTP/1.1 200 OK
-Content-Type: application/vnd.api+json; ext="https://jsonapi.org/ext/version"
-
-// ...
-{
-  "type": "articles",
-  "id": "1",
-  "version:id": "42",
-  "attributes": {
-    "title": "Rails is Omakase"
-  }
-}
-// ...
-```
-
-#### <a href="#profile-rules" id="profile-rules" class="headerlink"></a> Rules for Profiles
-
-The rules for profile usage are dictated by [RFC
-6906](https://tools.ietf.org/html/rfc6906).
-
-A profile **MAY** define document members and processing rules that are reserved
-for implementors.
-
-A profile **MUST NOT** define any query parameters.
-
-A profile **MUST NOT** alter or remove processing rules that have been defined
-by this specification or by an [extension][extensions]. However, a profile
-**MAY** define processing rules for query parameters whose processing rules
-have been reserved for implementors to define at their discretion.
-
-For example, a profile could define rules for interpreting [the `filter` query
-parameter](#fetching-filtering), but it could not specify that relationship
-names in [the `include` query parameter](#fetching-includes) are
-space-separated instead of dot-separated.
-
-Unlike extensions, profiles do not need to define a namespace for document
-members because profiles cannot define specification semantics and thus cannot
-conflict with current or future versions of this specification. However, it is
-possible for profiles to conflict with other profiles. Therefore, it is the
-responsibility of implementors to ensure that they do not support conflicting
-profiles.
-
-In the following example, a profile has defined a `timestamps`
-[attribute][attributes]. According to the profile, the attribute must be an
-object containing a `created` member and a `modified` member and these members'
-values must use the [RFC 3339](https://tools.ietf.org/html/rfc3339) format.
-With such a profile applied, a response might appear as follows:
-
-```json
-HTTP/1.1 200 OK
-Content-Type: application/vnd.api+json; profile="https://example.com/resource-timestamps"
-
-// ...
-{
-  "type": "articles",
-  "id": "1",
-  "attributes": {
-    "title": "Rails is Omakase",
-    "timestamps": {
-      "created": "2020-07-21T12:09:00Z",
-      "modified": "2020-07-30T10:19:01Z"
-    }
-  }
-}
-// ...
-```
+[`application/json`](http://www.iana.org/assignments/media-types/application/json).
 
 ## <a href="#content-negotiation" id="content-negotiation" class="headerlink"></a> Content Negotiation
 
@@ -299,24 +155,10 @@ The members `data` and `errors` **MUST NOT** coexist in the same document.
 
 A document **MAY** contain any of these top-level members:
 
-* `jsonapi`: an object describing the server's implementation
 * `links`: a [links object][links] related to the primary data.
-* `included`: an array of [resource objects] that are related to the primary
-  data and/or each other ("included resources").
-
-If a document does not contain a top-level `data` key, the `included` member
-**MUST NOT** be present either.
 
 The top-level [links object][links] **MAY** contain the following members:
 
-* `self`: the [link][links] that generated the current response document. If a
-  document has extensions or profiles applied to it, this link **SHOULD** be
-  represented by a [link object] with the `type` target attribute specifying the
-  JSON:API media type with all applicable parameters.
-* `related`: a [related resource link] when the primary data represents a
-  resource relationship.
-* `describedby`: a [link] to a description document (e.g. OpenAPI or JSON
-  Schema) for the current document.
 * [pagination] links for the primary data.
 
 The document's "primary data" is a representation of the resource or collection
@@ -369,222 +211,31 @@ it only contains one item or is empty.
 A resource object **MUST** contain at least the following top-level members:
 
 * `id`
-* `type`
 
 Exception: The `id` member is not required when the resource object originates
-at the client and represents a new resource to be created on the server. In that
-case, a client **MAY** include a `lid` member to uniquely identify the resource
-by `type` _locally_ within the document.
-
-In addition, a resource object **MAY** contain any of these top-level members:
-
-* `attributes`: an [attributes object][attributes] representing some of the resource's data.
-* `relationships`: a [relationships object][relationships] describing relationships between
- the resource and other JSON:API resources.
-* `links`: a [links object][links] containing links related to the resource.
-* `meta`: a [meta object][meta] containing non-standard meta-information about a
-  resource that can not be represented as an attribute or relationship.
+at the client and represents a new resource to be created on the server.
 
 Here's how an article (i.e. a resource of type "articles") might appear in a document:
 
 ```json
 // ...
 {
-  "type": "articles",
   "id": "1",
-  "attributes": {
-    "title": "Rails is Omakase"
-  },
-  "relationships": {
-    "author": {
-      "links": {
-        "self": "/articles/1/relationships/author",
-        "related": "/articles/1/author"
-      },
-      "data": { "type": "people", "id": "9" }
-    }
+  "title": "Rails is Omakase",
+  "author": {
+    "id": "9"
   }
 }
 // ...
 ```
-
-#### <a href="#document-resource-object-identification" id="document-resource-object-identification" class="headerlink"></a> Identification
-
-As noted above, every [resource object][resource objects] **MUST** contain a
-`type` member. Every resource object **MUST** also contain an `id` member,
-except when the resource object originates at the client and represents a new
-resource to be created on the server. If `id` is omitted due to this exception,
-a `lid` member **MAY** be included to uniquely identify the resource by `type`
-_locally_ within the document. The value of the `lid` member **MUST** be
-identical for every representation of the resource in the document, including
-[resource identifier objects][resource identifier object].
-
-The values of the `id`, `type`, and `lid` members **MUST** be strings.
-
-Within a given API, each resource object's `type` and `id` pair **MUST**
-identify a single, unique resource. (The set of URIs controlled by a server,
-or multiple servers acting as one, constitute an API.)
-
-The `type` member is used to describe [resource objects] that share common
-attributes and relationships.
-
-The values of `type` members **MUST** adhere to the same constraints as
-[member names].
-
-> Note: This spec is agnostic about inflection rules, so the value of `type`
-can be either plural or singular. However, the same value should be used
-consistently throughout an implementation.
-
-#### <a href="#document-resource-object-fields" id="document-resource-object-fields" class="headerlink"></a> Fields
-
-A resource object's [attributes] and its [relationships] are collectively called
-its "[fields]".
-
-Fields for a [resource object][resource objects] **MUST** share a common namespace with each
-other and with `type` and `id`. In other words, a resource can not have an
-attribute and relationship with the same name, nor can it have an attribute
-or relationship named `type` or `id`.
 
 ##### <a href="#document-resource-object-attributes" id="document-resource-object-attributes" class="headerlink"></a> Attributes
 
-The value of the `attributes` key **MUST** be an object (an "attributes
-object"). Members of the attributes object ("attributes") represent information
-about the [resource object][resource objects] in which it's defined.
-
-Attributes may contain any valid JSON value.
-
-Complex data structures involving JSON objects and arrays are allowed as
-attribute values. However, any object that constitutes or is contained in an
-attribute **MUST NOT** contain a `relationships` or `links` member, as those
-members are reserved by this specification for future use.
-
-Keys that reference related resources (e.g. `author_id`) **SHOULD NOT** appear
-as attributes. Instead, [relationships] **SHOULD** be used.
-
-> Note: See [fields] and [member names] for more restrictions on this container.
+TO DO
 
 ##### <a href="#document-resource-object-relationships" id="document-resource-object-relationships" class="headerlink"></a> Relationships
 
-The value of the `relationships` key **MUST** be an object (a "relationships
-object"). Members of the relationships object ("relationships") represent
-references from the [resource object][resource objects] in which it's defined to other resource
-objects.
-
-Relationships may be to-one or to-many.
-
-<a id="document-resource-object-relationships-relationship-object"></a>
-A "relationship object" **MUST** contain at least one of the following:
-
-* `links`: a [links object][links] containing at least one of the following:
-  * `self`: a link for the relationship itself (a "relationship link"). This
-    link allows the client to directly manipulate the relationship. For example,
-    removing an `author` through an `article`'s relationship URL would disconnect
-    the person from the `article` without deleting the `people` resource itself.
-    When fetched successfully, this link returns the [linkage][resource linkage]
-    for the related resources as its primary data.
-    (See [Fetching Relationships](#fetching-relationships).)
-  * `related`: a [related resource link]
-* `data`: [resource linkage]
-* `meta`: a [meta object][meta] that contains non-standard meta-information about the
-  relationship.
-
-A relationship object that represents a to-many relationship **MAY** also contain
-[pagination] links under the `links` member, as described below. Any
-[pagination] links in a relationship object **MUST** paginate the relationship
-data, not the related resources.
-
-> Note: See [fields] and [member names] for more restrictions on this container.
-
-##### <a href="#document-resource-object-related-resource-links" id="document-resource-object-related-resource-links" class="headerlink"></a> Related Resource Links
-
-A "related resource link" provides access to [resource objects][resource objects] [linked][links]
-in a [relationship][relationships]. When fetched, the related resource object(s)
-are returned as the response's primary data.
-
-For example, an `article`'s `comments` [relationship][relationships] could
-specify a [link][links] that returns a collection of comment [resource objects]
-when retrieved through a `GET` request.
-
-If present, a related resource link **MUST** reference a valid URL, even if the
-relationship isn't currently associated with any target resources. Additionally,
-a related resource link **MUST NOT** change because its relationship's content
-changes.
-
-##### <a href="#document-resource-object-linkage" id="document-resource-object-linkage" class="headerlink"></a> Resource Linkage
-
-Resource linkage in a [compound document] allows a client to link together all
-of the included [resource objects] without having to `GET` any URLs via [links].
-
-Resource linkage **MUST** be represented as one of the following:
-
-* `null` for empty to-one relationships.
-* an empty array (`[]`) for empty to-many relationships.
-* a single [resource identifier object] for non-empty to-one relationships.
-* an array of [resource identifier objects][resource identifier object] for non-empty to-many relationships.
-
-> Note: The spec does not impart meaning to order of resource identifier
-objects in linkage arrays of to-many relationships, although implementations
-may do that. Arrays of resource identifier objects may represent ordered
-or unordered relationships, and both types can be mixed in one response
-object.
-
-For example, the following article is associated with an `author`:
-
-```json
-// ...
-{
-  "type": "articles",
-  "id": "1",
-  "attributes": {
-    "title": "Rails is Omakase"
-  },
-  "relationships": {
-    "author": {
-      "links": {
-        "self": "http://example.com/articles/1/relationships/author",
-        "related": "http://example.com/articles/1/author"
-      },
-      "data": { "type": "people", "id": "9" }
-    }
-  },
-  "links": {
-    "self": "http://example.com/articles/1"
-  }
-}
-// ...
-```
-
-The `author` relationship includes a link for the relationship itself (which
-allows the client to change the related author directly), a related resource
-link to fetch the resource objects, and linkage information.
-
-#### <a href="#document-resource-object-links" id="document-resource-object-links" class="headerlink"></a> Resource Links
-
-The optional `links` member within each [resource object][resource objects] contains [links]
-related to the resource.
-
-If present, this links object **MAY** contain a `self` [link][links] that
-identifies the resource represented by the resource object.
-
-```json
-// ...
-{
-  "type": "articles",
-  "id": "1",
-  "attributes": {
-    "title": "Rails is Omakase"
-  },
-  "links": {
-    "self": "http://example.com/articles/1"
-  }
-}
-// ...
-```
-
-A server **MUST** respond to a `GET` request to the specified URL with a
-response that includes the resource as the primary data.
-
-### <a href="#document-resource-identifier-objects" id="document-resource-identifier-objects" class="headerlink"></a> Resource Identifier Objects
+TO DO
 
 A "resource identifier object" is an object that identifies an individual
 resource.
@@ -598,250 +249,6 @@ The values of the `id`, `type`, and `lid` members **MUST** be strings.
 
 A "resource identifier object" **MAY** also include a `meta` member, whose value is a [meta] object that
 contains non-standard meta-information.
-
-### <a href="#document-compound-documents" id="document-compound-documents" class="headerlink"></a> Compound Documents
-
-Servers **MAY** allow responses that include related resources along with the
-requested primary resources. Such responses are called "compound documents".
-
-In a compound document, all included resources **MUST** be represented as an
-array of [resource objects] in a top-level `included` member.
-
-Compound documents require "full linkage", meaning that every included
-resource **MUST** be identified by at least one [resource identifier object]
-in the same document. These resource identifier objects could either be
-primary data or represent resource linkage contained within primary or
-included resources.
-
-The only exception to the full linkage requirement is when relationship fields
-that would otherwise contain linkage data are excluded via [sparse fieldsets](#fetching-sparse-fieldsets).
-
-> Note: Full linkage ensures that included resources are related to either
-the primary data (which could be [resource objects] or [resource identifier
-objects][resource identifier object]) or to each other.
-
-A complete example document with multiple included relationships:
-
-```json
-{
-  "data": [{
-    "type": "articles",
-    "id": "1",
-    "attributes": {
-      "title": "JSON:API paints my bikeshed!"
-    },
-    "links": {
-      "self": "http://example.com/articles/1"
-    },
-    "relationships": {
-      "author": {
-        "links": {
-          "self": "http://example.com/articles/1/relationships/author",
-          "related": "http://example.com/articles/1/author"
-        },
-        "data": { "type": "people", "id": "9" }
-      },
-      "comments": {
-        "links": {
-          "self": "http://example.com/articles/1/relationships/comments",
-          "related": "http://example.com/articles/1/comments"
-        },
-        "data": [
-          { "type": "comments", "id": "5" },
-          { "type": "comments", "id": "12" }
-        ]
-      }
-    }
-  }],
-  "included": [{
-    "type": "people",
-    "id": "9",
-    "attributes": {
-      "firstName": "Dan",
-      "lastName": "Gebhardt",
-      "twitter": "dgeb"
-    },
-    "links": {
-      "self": "http://example.com/people/9"
-    }
-  }, {
-    "type": "comments",
-    "id": "5",
-    "attributes": {
-      "body": "First!"
-    },
-    "relationships": {
-      "author": {
-        "data": { "type": "people", "id": "2" }
-      }
-    },
-    "links": {
-      "self": "http://example.com/comments/5"
-    }
-  }, {
-    "type": "comments",
-    "id": "12",
-    "attributes": {
-      "body": "I like XML better"
-    },
-    "relationships": {
-      "author": {
-        "data": { "type": "people", "id": "9" }
-      }
-    },
-    "links": {
-      "self": "http://example.com/comments/12"
-    }
-  }]
-}
-```
-
-A [compound document] **MUST NOT** include more than one [resource object][resource objects] for
-each `type` and `id` pair.
-
-> Note: In a single document, you can think of the `type` and `id` as a
-composite key that uniquely references [resource objects] in another part of
-the document.
-
-> Note: For resources that do not contain an `id` member but do contain a `lid`,
-the `lid` is sufficient to establish resource identity and thus linkage between
-resource objects and resource identifier objects throughout the document.
-
-> Note: This approach ensures that a single canonical [resource object][resource objects] is
-returned with each response, even when the same resource is referenced
-multiple times.
-
-### <a href="#document-meta" id="document-meta" class="headerlink"></a> Meta Information
-
-Where specified, a `meta` member can be used to include non-standard
-meta-information. The value of each `meta` member **MUST** be an object (a
-"meta object").
-
-Any members **MAY** be specified within `meta` objects.
-
-For example:
-
-```json
-{
-  "meta": {
-    "copyright": "Copyright 2015 Example Corp.",
-    "authors": [
-      "Yehuda Katz",
-      "Steve Klabnik",
-      "Dan Gebhardt",
-      "Tyler Kellen"
-    ]
-  },
-  "data": {
-    // ...
-  }
-}
-```
-
-### <a href="#document-links" id="document-links" class="headerlink"></a> Links
-
-Where specified, a `links` member can be used to represent links. The value
-of this member **MUST** be an object (a "links object").
-
-<a href="#document-links-link" id="document-links-link"></a>
-Within this object, a link **MUST** be represented as either:
-
-* a string whose value is a URI-reference [[RFC3986 Section 4.1](https://tools.ietf.org/html/rfc3986#section-4.1)]
-  pointing to the link's target.
-* a [link object].
-
-A link's relation type **SHOULD** be inferred from the name of the link unless the
-link is a [link object] and the link object has a `rel` member.
-
-A link's context is the [top-level object][top level], [resource
-object][resource objects], or [relationship object][relationships] in which it
-appears.
-
-In the example below, the `self` link is a string whereas the `related` link is
-a [link object]. The `related` link object provides additional information
-about the targeted related resource collection as well as a schema that serves
-as a description document for that collection:
-
-```json
-"links": {
-  "self": "http://example.com/articles/1/relationships/comments",
-  "related": {
-    "href": "http://example.com/articles/1/comments",
-    "title": "Comments",
-    "describedby": "http://example.com/schemas/article-comments",
-    "meta": {
-      "count": 10
-    }
-  }
-}
-```
-
-#### <a id="document-links-link-object"></a> Link objects
-
-A "link object" is an object that represents a [web link](https://tools.ietf.org/html/rfc8288).
-
-A link object **MUST** contain the following member:
-
-* `href`: a string whose value is a URI-reference [[RFC3986 Section 4.1](https://tools.ietf.org/html/rfc3986#section-4.1)]
-  pointing to the link's target.
-
-A link object **MAY** also contain any of the following members:
-
-* `rel`: a string indicating the link's relation type. The string **MUST** be a
-  [valid link relation type](https://tools.ietf.org/html/rfc8288#section-2.1).
-* `describedby`: a [link] to a description document (e.g. OpenAPI or JSON
-  Schema) for the link target.
-* `title`: a string which serves as a label for the destination of a link
-  such that it can be used as a human-readable identifier (e.g., a menu
-  entry).
-* `type`: a string indicating the media type of the link's target.
-* `hreflang`: a string or an array of strings indicating the language(s) of the
-  link's target. An array of strings indicates that the link's target is
-  available in multiple languages. Each string **MUST** be a valid language tag
-  [[RFC5646](https://tools.ietf.org/html/rfc5646)].
-* `meta`: a meta object containing non-standard meta-information about the
-  link.
-
-> Note: the `type` and `hreflang` members are only hints; the target resource
-> is not guaranteed to be available in the indicated media type or language
-> when the link is actually followed.
-
-### <a href="#document-jsonapi-object" id="document-jsonapi-object" class="headerlink"></a> JSON:API Object
-
-A JSON:API document **MAY** include information about its implementation
-under a top level `jsonapi` member. If present, the value of the `jsonapi`
-member **MUST** be an object (a "jsonapi object").
-
-The jsonapi object **MAY** contain any of the following members:
-
-* `version` - whose value is a string indicating the highest JSON:API version
-  supported.
-* `ext` - an array of URIs for all applied [extensions].
-* `profile` - an array of URIs for all applied [profiles].
-* `meta` - a [meta] object that contains non-standard meta-information.
-
-A simple example appears below:
-
-```json
-{
-  "jsonapi": {
-    "version": "1.1",
-    "ext": [
-      "https://jsonapi.org/ext/atomic"
-    ],
-    "profile": [
-      "http://example.com/profiles/flexible-pagination",
-      "http://example.com/profiles/resource-versioning"
-    ]
-  }
-}
-```
-
-If the `version` member is not present, clients should assume the server
-implements at least version 1.0 of the specification.
-
-> Note: Because JSON:API is committed to making additive changes only, the
-version string primarily indicates which new features a server may support.
 
 ### <a href="#document-member-names" id="document-member-names" class="headerlink"></a> Member Names
 
@@ -862,81 +269,12 @@ member names use only non-reserved, URL safe characters specified in [RFC 3986](
 The following "globally allowed characters" **MAY** be used anywhere in a member name:
 
 - U+0061 to U+007A, "a-z"
-- U+0041 to U+005A, "A-Z"
 - U+0030 to U+0039, "0-9"
-- U+0080 and above (non-ASCII Unicode characters; _not recommended, not URL safe_)
 
 Additionally, the following characters are allowed in member names, except as the
 first or last character:
 
-- U+002D HYPHEN-MINUS, "-"
-- U+005F LOW LINE, "_"
-- U+0020 SPACE, " " _(not recommended, not URL safe)_
-
-#### <a href="#document-member-names-reserved-characters" id="document-member-names-reserved-characters" class="headerlink"></a> Reserved Characters
-
-The following characters **MUST NOT** be used in implementation and
-[profile][profiles] defined member names:
-
-- U+002B PLUS SIGN, "+" _(has overloaded meaning in URL query strings)_
-- U+002C COMMA, "," _(used as a separator between relationship paths)_
-- U+002E PERIOD, "." _(used as a separator within relationship paths)_
-- U+005B LEFT SQUARE BRACKET, "[" _(used in sparse fieldsets)_
-- U+005D RIGHT SQUARE BRACKET, "]" _(used in sparse fieldsets)_
-- U+0021 EXCLAMATION MARK, "!"
-- U+0022 QUOTATION MARK, '"'
-- U+0023 NUMBER SIGN, "#"
-- U+0024 DOLLAR SIGN, "$"
-- U+0025 PERCENT SIGN, "%"
-- U+0026 AMPERSAND, "&"
-- U+0027 APOSTROPHE, "'"
-- U+0028 LEFT PARENTHESIS, "("
-- U+0029 RIGHT PARENTHESIS, ")"
-- U+002A ASTERISK, "&#x2a;"
-- U+002F SOLIDUS, "/"
-- U+003A COLON, ":"
-- U+003B SEMICOLON, ";"
-- U+003C LESS-THAN SIGN, "<"
-- U+003D EQUALS SIGN, "="
-- U+003E GREATER-THAN SIGN, ">"
-- U+003F QUESTION MARK, "?"
-- U+0040 COMMERCIAL AT, "@" (except as first character in [@-Members](#document-member-names-at-members))
-- U+005C REVERSE SOLIDUS, "&#x5c;"
-- U+005E CIRCUMFLEX ACCENT, "^"
-- U+0060 GRAVE ACCENT, "&#x60;"
-- U+007B LEFT CURLY BRACKET, "{"
-- U+007C VERTICAL LINE, "&#x7c;"
-- U+007D RIGHT CURLY BRACKET, "}"
-- U+007E TILDE, "~"
-- U+007F DELETE
-- U+0000 to U+001F (C0 Controls)
-
-#### <a href="#document-member-names-at-members" id="document-member-names-at-members" class="headerlink"></a> @-Members
-
-Member names **MAY** also begin with an at sign (U+0040 COMMERCIAL AT, "@").
-Members named this way are called "@-Members". @-Members **MAY** appear
-anywhere in a JSON:API document.
-
-However, JSON:API processors **MUST** completely ignore @-Members (i.e. not
-treat them as JSON:API data).
-
-Moreover, the existence of @-Members **MUST** be ignored when interpreting all
-JSON:API definitions and processing instructions given outside of this
-subsection. For example, an [attribute][attributes] is defined above as any
-member of the attributes object. However, because @-Members must be ignored
-when interpreting that definition, an @-Member that occurs in an attributes
-object is not an attribute.
-
-> Note: Among other things, "@" members can be used to add JSON-LD data to a
-JSON:API document. Such documents should be served with [an extra header](http://www.w3.org/TR/json-ld/#interpreting-json-as-json-ld)
-to convey to JSON-LD clients that they contain JSON-LD data.
-
-#### <a href="#extension-members" id="extension-members" class="headerlink"></a> Extension Members
-
-The name of every new member introduced by an extension **MUST** be prefixed
-with the [extension's namespace](#extension-rules) followed by a colon (`:`).
-The remainder of the name **MUST** adhere to the rules for implementation
-defined [member names].
+- U+005F UNDERLINE, "_"
 
 ## <a href="#fetching" id="fetching" class="headerlink"></a> Fetching Data
 
@@ -947,36 +285,32 @@ Responses can be further refined with the optional features described below.
 
 ### <a href="#fetching-resources" id="fetching-resources" class="headerlink"></a> Fetching Resources
 
-A server **MUST** support fetching resource data for every URL provided as:
-
-* a `self` link as part of the top-level links object
-* a `self` link as part of a resource-level links object
-* a `related` link as part of a relationship-level links object
-
 For example, the following request fetches a collection of articles:
 
 ```http
 GET /articles HTTP/1.1
-Accept: application/vnd.api+json
+Accept: application/json
 ```
 
 The following request fetches an article:
 
 ```http
 GET /articles/1 HTTP/1.1
-Accept: application/vnd.api+json
+Accept: application/json
 ```
 
 And the following request fetches an article's author:
 
 ```http
 GET /articles/1/author HTTP/1.1
-Accept: application/vnd.api+json
+Accept: application/json
 ```
 
 #### <a href="#fetching-resources-responses" id="fetching-resources-responses" class="headerlink"></a> Responses
 
 ##### <a href="#fetching-resources-responses-200" id="fetching-resources-responses-200" class="headerlink"></a> 200 OK
+
+TO DO: remodelar exemplo
 
 A server **MUST** respond to a successful request to fetch an individual
 resource or resource collection with a `200 OK` response.
@@ -989,7 +323,7 @@ For example, a `GET` request to a collection of articles could return:
 
 ```http
 HTTP/1.1 200 OK
-Content-Type: application/vnd.api+json
+Content-Type: application/json
 
 {
   "links": {
@@ -1015,7 +349,7 @@ A similar response representing an empty collection would be:
 
 ```http
 HTTP/1.1 200 OK
-Content-Type: application/vnd.api+json
+Content-Type: application/json
 
 {
   "links": {
@@ -1041,7 +375,7 @@ For example, a `GET` request to an individual article could return:
 
 ```http
 HTTP/1.1 200 OK
-Content-Type: application/vnd.api+json
+Content-Type: application/json
 
 {
   "links": {
@@ -1069,7 +403,7 @@ resource would return:
 
 ```http
 HTTP/1.1 200 OK
-Content-Type: application/vnd.api+json
+Content-Type: application/json
 
 {
   "links": {
@@ -1097,43 +431,37 @@ responses, in accordance with
 
 ### <a href="#fetching-relationships" id="fetching-relationships" class="headerlink"></a> Fetching Relationships
 
-A server **MUST** support fetching relationship data for every relationship URL
-provided as a `self` link as part of a relationship's `links` object.
+TO DO: criar warning sobre hífen em entidades na URI.
 
 For example, the following request fetches data about an article's comments:
 
 ```http
 GET /articles/1/relationships/comments HTTP/1.1
-Accept: application/vnd.api+json
+Accept: application/json
 ```
 
 And the following request fetches data about an article's author:
 
 ```http
 GET /articles/1/relationships/author HTTP/1.1
-Accept: application/vnd.api+json
+Accept: application/json
 ```
 
 #### <a href="#fetching-relationships-responses" id="fetching-relationships-responses" class="headerlink"></a> Responses
 
 ##### <a href="#fetching-relationships-responses-200" id="fetching-relationships-responses-200" class="headerlink"></a> 200 OK
 
+TO DO: remodelar exemplo
+
 A server **MUST** respond to a successful request to fetch a relationship
 with a `200 OK` response.
-
-The primary data in the response document **MUST** match the appropriate
-value for [resource linkage], as described above for
-[relationship objects][relationships].
-
-The top-level [links object][links] **MAY** contain `self` and `related` links,
-as described above for [relationship objects][relationships].
 
 For example, a `GET` request to a URL from a to-one relationship link could
 return:
 
 ```http
 HTTP/1.1 200 OK
-Content-Type: application/vnd.api+json
+Content-Type: application/json
 
 {
   "links": {
@@ -1152,7 +480,7 @@ return:
 
 ```http
 HTTP/1.1 200 OK
-Content-Type: application/vnd.api+json
+Content-Type: application/json
 
 {
   "links": {
@@ -1167,7 +495,7 @@ A `GET` request to a URL from a to-many relationship link could return:
 
 ```http
 HTTP/1.1 200 OK
-Content-Type: application/vnd.api+json
+Content-Type: application/json
 
 {
   "links": {
@@ -1186,7 +514,7 @@ return:
 
 ```http
 HTTP/1.1 200 OK
-Content-Type: application/vnd.api+json
+Content-Type: application/json
 
 {
   "links": {
@@ -1219,117 +547,6 @@ A server **MUST** prepare responses, and a client **MUST** interpret
 responses, in accordance with
 [`HTTP semantics`](http://tools.ietf.org/html/rfc7231).
 
-### <a href="#fetching-includes" id="fetching-includes" class="headerlink"></a> Inclusion of Related Resources
-
-An endpoint **MAY** return resources related to the primary data by default.
-
-An endpoint **MAY** also support an `include` query parameter to allow the
-client to customize which related resources should be returned.
-
-If an endpoint does not support the `include` parameter, it **MUST** respond
-with `400 Bad Request` to any requests that include it.
-
-If an endpoint supports the `include` parameter and a client supplies it:
-
- - The server's response **MUST** be a [compound document] with an `included` key — even if that `included` key holds an empty array (because the requested relationships are empty).
- - The server **MUST NOT** include unrequested [resource objects] in the `included`
-section of the [compound document].
-
-The value of the `include` parameter **MUST** be a comma-separated (U+002C
-COMMA, ",") list of relationship paths. A relationship path is a dot-separated
-(U+002E FULL-STOP, ".") list of [relationship][relationships] names. An empty
-value indicates that no related resources should be returned.
-
-If a server is unable to identify a relationship path or does not support
-inclusion of resources from a path, it **MUST** respond with 400 Bad Request.
-
-> Note: For example, a relationship path could be `comments.author`, where
-`comments` is a relationship listed under a `articles` [resource object][resource objects], and
-`author` is a relationship listed under a `comments` [resource object][resource objects].
-
-For instance, comments could be requested with an article:
-
-```http
-GET /articles/1?include=comments HTTP/1.1
-Accept: application/vnd.api+json
-```
-
-In order to request resources related to other resources, a dot-separated path
-for each relationship name can be specified:
-
-```http
-GET /articles/1?include=comments.author HTTP/1.1
-Accept: application/vnd.api+json
-```
-
-> Note: Because [compound documents][compound document] require full linkage
-(except when relationship linkage is excluded by sparse fieldsets), intermediate
-resources in a multi-part path must be returned along with the leaf nodes. For
-example, a response to a request for `comments.author` should include `comments`
-as well as the `author` of each of those `comments`.
-
-> Note: A server may choose to expose a deeply nested relationship such as
-`comments.author` as a direct relationship with an alternative name such as
-`commentAuthors`. This would allow a client to request
-`/articles/1?include=commentAuthors` instead of
-`/articles/1?include=comments.author`. By exposing the nested relationship with
-an alternative name, the server can still provide full linkage in compound
-documents without including potentially unwanted intermediate resources.
-
-Multiple related resources can be requested in a comma-separated list:
-
-```http
-GET /articles/1?include=author,comments.author HTTP/1.1
-Accept: application/vnd.api+json
-```
-
-Furthermore, related resources can be requested from a relationship endpoint:
-
-```http
-GET /articles/1/relationships/comments?include=comments.author HTTP/1.1
-Accept: application/vnd.api+json
-```
-
-In this case, the primary data would be a collection of
-[resource identifier objects][resource identifier object] that represent linkage to comments for an article,
-while the full comments and comment authors would be returned as included data.
-
-> Note: This section applies to any endpoint that responds with primary
-data, regardless of the request type. For instance, a server could support
-the inclusion of related resources along with a `POST` request to create a
-resource or relationship.
-
-### <a href="#fetching-sparse-fieldsets" id="fetching-sparse-fieldsets" class="headerlink"></a> Sparse Fieldsets
-
-A client **MAY** request that an endpoint return only specific [fields] in the
-response on a per-type basis by including a `fields[TYPE]` query parameter.
-
-The value of any `fields[TYPE]` parameter **MUST** be a comma-separated (U+002C
-COMMA, ",") list that refers to the name(s) of the fields to be returned.
-An empty value indicates that no fields should be returned.
-
-If a client requests a restricted set of [fields] for a given resource type,
-an endpoint **MUST NOT** include additional [fields] in resource objects of
-that type in its response.
-
-If a client does not specify the set of [fields] for a given resource type, the
-server **MAY** send all fields, a subset of fields, or no fields for that
-resource type.
-
-```http
-GET /articles?include=author&fields[articles]=title,body&fields[people]=name HTTP/1.1
-Accept: application/vnd.api+json
-```
-
-> Note: The above example URI shows unencoded `[` and `]` characters simply for
-readability. In practice, these characters should be percent-encoded. See
-"[Square Brackets in Parameter Names](#appendix-query-details-square-brackets)".
-
-> Note: This section applies to any endpoint that responds with resources as
-primary or included data, regardless of the request type. For instance, a
-server could support sparse fieldsets along with a `POST` request to create
-a resource.
-
 ### <a href="#fetching-sorting" id="fetching-sorting" class="headerlink"></a> Sorting
 
 A server **MAY** choose to support requests to sort resource collections
@@ -1349,7 +566,7 @@ query parameter. The value for `sort` **MUST** represent sort fields.
 
 ```http
 GET /people?sort=age HTTP/1.1
-Accept: application/vnd.api+json
+Accept: application/json
 ```
 
 An endpoint **MAY** support multiple sort fields by allowing comma-separated
@@ -1358,7 +575,7 @@ order specified.
 
 ```http
 GET /people?sort=age,name HTTP/1.1
-Accept: application/vnd.api+json
+Accept: application/json
 ```
 
 The sort order for each sort field **MUST** be ascending unless it is prefixed
@@ -1366,7 +583,7 @@ with a minus (U+002D HYPHEN-MINUS, "-"), in which case it **MUST** be descending
 
 ```http
 GET /articles?sort=-created,title HTTP/1.1
-Accept: application/vnd.api+json
+Accept: application/json
 ```
 
 The above example should return the newest articles first. Any articles
@@ -1384,6 +601,8 @@ request parameter `sort` is not specified.
 
 > Note: This section applies to any endpoint that responds with a resource
 collection as primary data, regardless of the request type.
+
+TO DO: Paramos aqui
 
 ### <a href="#fetching-pagination" id="fetching-pagination" class="headerlink"></a> Pagination
 
@@ -1457,8 +676,8 @@ For instance, a new photo might be created with the following request:
 
 ```http
 POST /photos HTTP/1.1
-Content-Type: application/vnd.api+json
-Accept: application/vnd.api+json
+Content-Type: application/json
+Accept: application/json
 
 {
   "data": {
@@ -1499,8 +718,8 @@ For example:
 
 ```http
 POST /photos HTTP/1.1
-Content-Type: application/vnd.api+json
-Accept: application/vnd.api+json
+Content-Type: application/json
+Accept: application/json
 
 {
   "data": {
@@ -1539,7 +758,7 @@ member **MUST** match the value of the `Location` header.
 ```http
 HTTP/1.1 201 Created
 Location: http://example.com/photos/550e8400-e29b-41d4-a716-446655440000
-Content-Type: application/vnd.api+json
+Content-Type: application/json
 
 {
   "data": {
@@ -1622,8 +841,8 @@ For example:
 
 ```http
 PATCH /articles/1 HTTP/1.1
-Content-Type: application/vnd.api+json
-Accept: application/vnd.api+json
+Content-Type: application/json
+Accept: application/json
 
 {
   "data": {
@@ -1651,8 +870,8 @@ update only the `title` and `text` attributes of an article:
 
 ```http
 PATCH /articles/1 HTTP/1.1
-Content-Type: application/vnd.api+json
-Accept: application/vnd.api+json
+Content-Type: application/json
+Accept: application/json
 
 {
   "data": {
@@ -1684,8 +903,8 @@ For instance, the following `PATCH` request will update the `author` relationshi
 
 ```http
 PATCH /articles/1 HTTP/1.1
-Content-Type: application/vnd.api+json
-Accept: application/vnd.api+json
+Content-Type: application/json
+Accept: application/json
 
 {
   "data": {
@@ -1705,8 +924,8 @@ the `tags` for an article:
 
 ```http
 PATCH /articles/1 HTTP/1.1
-Content-Type: application/vnd.api+json
-Accept: application/vnd.api+json
+Content-Type: application/json
+Accept: application/json
 
 {
   "data": {
@@ -1830,8 +1049,8 @@ For example, the following request updates the author of an article:
 
 ```http
 PATCH /articles/1/relationships/author HTTP/1.1
-Content-Type: application/vnd.api+json
-Accept: application/vnd.api+json
+Content-Type: application/json
+Accept: application/json
 
 {
   "data": { "type": "people", "id": "12" }
@@ -1842,8 +1061,8 @@ And the following request clears the author of the same article:
 
 ```http
 PATCH /articles/1/relationships/author HTTP/1.1
-Content-Type: application/vnd.api+json
-Accept: application/vnd.api+json
+Content-Type: application/json
+Accept: application/json
 
 {
   "data": null
@@ -1871,8 +1090,8 @@ For example, the following request replaces every tag for an article:
 
 ```http
 PATCH /articles/1/relationships/tags HTTP/1.1
-Content-Type: application/vnd.api+json
-Accept: application/vnd.api+json
+Content-Type: application/json
+Accept: application/json
 
 {
   "data": [
@@ -1886,8 +1105,8 @@ And the following request clears every tag for an article:
 
 ```http
 PATCH /articles/1/relationships/tags HTTP/1.1
-Content-Type: application/vnd.api+json
-Accept: application/vnd.api+json
+Content-Type: application/json
+Accept: application/json
 
 {
   "data": []
@@ -1915,8 +1134,8 @@ comments for the article with ID `1`:
 
 ```http
 POST /articles/1/relationships/comments HTTP/1.1
-Content-Type: application/vnd.api+json
-Accept: application/vnd.api+json
+Content-Type: application/json
+Accept: application/json
 
 {
   "data": [
@@ -1941,8 +1160,8 @@ from the list of comments for the article with ID `1`:
 
 ```http
 DELETE /articles/1/relationships/comments HTTP/1.1
-Content-Type: application/vnd.api+json
-Accept: application/vnd.api+json
+Content-Type: application/json
+Accept: application/json
 
 {
   "data": [
@@ -2010,7 +1229,7 @@ resource's URL:
 
 ```http
 DELETE /photos/1 HTTP/1.1
-Accept: application/vnd.api+json
+Accept: application/json
 ```
 
 #### <a href="#crud-deleting-responses" id="crud-deleting-responses" class="headerlink"></a> Responses

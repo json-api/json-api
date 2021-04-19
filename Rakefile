@@ -2,7 +2,7 @@ require 'redcard/1.9'
 
 def preview(browser=false)
   pids = [
-    Process.spawn("bundle exec jekyll serve"),
+    Process.spawn("bundle exec jekyll serve --host 0.0.0.0"),
     Process.spawn("bundle exec scss --compass --watch stylesheets/")
   ]
 
