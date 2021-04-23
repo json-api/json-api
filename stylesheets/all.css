@@ -384,6 +384,9 @@ footer {
     .document-outline a:hover {
       color: #5a5a5a; }
 
+a.nav-active {
+  font-weight: bold; }
+
 .document-outline > ol > li {
   padding: 0 0 5px 0; }
 
@@ -421,9 +424,5 @@ pre.highlight {
 
 .profile-page h1 + section h2 {
   margin-top: 1em; }
-
-.profile-page .editor + .editor {
-  margin-top: 1em;
-}
 
 /*# sourceMappingURL=all.css.map */
