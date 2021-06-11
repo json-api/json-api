@@ -94,6 +94,10 @@ isomorphic ActiveRecord clone that issues JSON:API requests instead of SQL and i
 * [enm/json-api-client](https://eosnewmedia.github.io/JSON-API-Client/) is an abstract client-side PHP implementation of the json:api specification which is based on [enm/json-api-common](https://eosnewmedia.github.io/JSON-API-Common/). It allows you to send json:api requests via your own http client implementation or via a buzz or guzzle client.
 * [swisnl/json-api-client](https://github.com/swisnl/json-api-client) Is a package for mapping remote {json:api} resources to Eloquent like models and collections.
 
+### <a href="#client-libraries-python" id="client-libraries-python" class="headerlink"></a> Python
+
+* [python-jsonapi-datastore](https://github.com/Tim-Erwin/python-jsonapi-datastore) is a lightweight standalone library for reading, serializing, and synchronizing relational JSON API data.
+
 ### <a href="#client-libraries-dart" id="client-libraries-dart" class="headerlink"></a> Dart
 
 * [json_api](https://pub.dev/packages/json_api) is a full-fledged client for Flutter/Web/VM.
