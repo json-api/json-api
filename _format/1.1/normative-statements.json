@@ -857,7 +857,7 @@ layout: null
       "type": "normative-statements",
       "attributes": {
         "level": "MUST",
-        "description": "Each member of a links object is a \"link\". A link **MUST** be represented as either:\\n\\n- a string containing the link's URL.\\n- an object (\"link object\") which can contain the following members:\\n  - `href`: a string containing the link's URL.\\n  - `meta`: a meta object containing non-standard meta-information about the link."
+        "description": "Each member of a links object is a \"link\". A link **MUST** be represented as either:\\n\\n- a string containing the link's URL.\\n- an object (\"link object\") which can contain the following members:\\n  - `href`: a string containing the link's URL.\\n  - `allow`: a list of allowed HTTP methods like `[\"GET\", \"PATCH\", \"DELETE\"]` if access to the resource is restricted.  - `meta`: a meta object containing non-standard meta-information about the link."
       },
       "relationships": {
         "section": {
