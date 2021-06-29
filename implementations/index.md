@@ -246,7 +246,6 @@ the moment.
 * [Hyp](https://github.com/kalasjocke/hyp) is a library for creating json-api responses.
 * [SQLAlchemy-JSONAPI](https://github.com/coltonprovias/sqlalchemy-jsonapi) provides JSON:API serialization for SQLAlchemy models.
 * [django-rest-framework-json-api](https://github.com/django-json-api/django-rest-framework-json-api) provides JSON:API parsing and rendering for the Django REST Framework
-* [jsonapi](https://github.com/pavlov99/jsonapi) is a Django module with JSON:API implementation.
 * [jsoongia](https://github.com/digia/jsoongia) is a framework agnostic JSON:API implementation.
 * [ripozo](https://github.com/vertical-knowledge/ripozo/) provides a framework for serving JSON:API content (among other Hypermedia formats) in Flask, Django and more.
 * [marshmallow-jsonapi](https://github.com/marshmallow-code/marshmallow-jsonapi) provides JSON:API data formatting for any Python web framework.
