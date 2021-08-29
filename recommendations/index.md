@@ -11,7 +11,7 @@ are beyond the scope of the base JSON:API specification.
 ## <a href="#naming" id="naming" class="headerlink"></a> Naming
 
 The specification places certain [hard restrictions](http://jsonapi.org/format/#document-member-names) 
-on how members (i.e., keys) in a JSON:API document may named. To further 
+on how members (i.e., keys) in a JSON:API document may be named. To further 
 standardize member names, which is especially important when mixing profiles
 authored by different parties, the following rules are also recommended:
 
