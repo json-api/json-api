@@ -12,13 +12,6 @@ Gemfile.lock
 # Ignore the build directory
 /public
 
-# Ignore IntelliJ's config
-*.iml
-/.idea
-
-# Ignore Ruby vendor
-/vendor
-
 # Ignore Sass' cache
 /.sass-cache
 

@@ -44,7 +44,6 @@ exclude:
   - .gitignore
   - ./public
   - ./stylesheets/*.scss
-  - vendor
 
 port: 9876
 
