@@ -181,7 +181,6 @@ and writing of JSON:API documents.
 * [pz/jsonapi-resource](https://github.com/R3VoLuT1OneR/jsonapi-resource) Serialize PHP class object into JSON:API resource object using PHP 8.0 Attributes.
 
 ### <a href="#server-libraries-node-js" id="server-libraries-node-js" class="headerlink"></a> Node.js
-* [Kurier](https://github.com/kurierjs/kurier) is a TypeScript framework to create APIs following the [1.1 Spec of JSON:API](https://jsonapi.org/format/1.1/) + the [Operations proposal spec](https://github.com/json-api/json-api/blob/999e6df77b28549d6c37b163b73c8e9102400020/_format/1.1/index.md#operations).
 * [Fortune.js](http://fortune.js.org/) is a library that includes a [comprehensive implementation of JSON:API](https://github.com/fortunejs/fortune-json-api).
 * [json-api](https://www.npmjs.org/package/json-api) turns an Express + Mongoose app into a JSON-API server.
 * [endpoints](https://github.com/endpoints) is an implementation of JSON:API using [Bookshelf](http://bookshelfjs.org).
@@ -206,6 +205,7 @@ and writing of JSON:API documents.
 * [DenaliJS](http://denalijs.org) A layered-conventions framework for building ambitious APIs. Includes a powerful addon system, best-in-class developer experience, and extensive documentation.
 * [jsonapi-fractal](https://github.com/andersondanilo/jsonapi-fractal) JSON:API Serializer inspired by Fractal (PHP)
 * [ts-japi](https://github.com/jun-sheaf/ts-japi) - A zero-dependency, highly-modular, js/ts-friendly, recursible, framework-agnostic library for serializing data to the JSON:API specification. Serializes the entire specification.
+* [Kurier](https://github.com/kurierjs/kurier) is a TypeScript framework to create APIs following the [1.1 Spec of JSON:API](https://jsonapi.org/format/1.1/) + the [Operations proposal spec](https://github.com/json-api/json-api/blob/999e6df77b28549d6c37b163b73c8e9102400020/_format/1.1/index.md#operations).
 
 ### <a href="#server-libraries-ruby" id="server-libraries-ruby" class="headerlink"></a> Ruby
 
