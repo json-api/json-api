@@ -2,7 +2,7 @@
 <html>
   <head>
     {% include global_head_assets.html %}
-    <title>JSON API &mdash; {{ page.title|strip }}</title>
+    <title>JSON API &mdash; {{ page.title | strip | markdownify | strip_html }}</title>
   </head>
 
   <body>
@@ -11,12 +11,12 @@
       {% if page.show_sidebar %}
         <div class="sidebar">
           <nav class="document-outline" id="document-outline">
-            <h1 class="sidebar-top">{{ page.title }}</h1>
+            <h1 class="sidebar-top">{{ page.title | markdownify }}</h1>
           </nav>
         </div>
       {% endif %}
-      <main class="content">
-        <h1>{{ page.title }}</h1>
+      <main class="content error-page-content">
+        <h1>{{ page.title | markdownify }}</h1>
         <section>
           {{ content }}
         </section>
