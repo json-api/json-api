@@ -4,34 +4,35 @@
     {% include global_head_assets.html %}
 
     {% comment %}
-      Below, we're either dealing with a generic page or a page from the
-      specification collection. For generic pages, we get a title just by
-      reading page.title but, for specification pages, we build their title
-      dynamically to take into account the page's version number and its
-      relationship to the latest version.
+    Below, we're either dealing with a generic page or a page from the
+    specification collection. For generic pages, we get a title just by
+    reading page.title but, for specification pages, we build their title
+    dynamically to take into account the page's version number and its
+    relationship to the latest version.
     {% endcomment %}
 
     {% if page.is_spec_page %}
-      {% capture page_title %}
-        {% include title_for_version.md is_latest_version=page.is_latest_version version=page.version %}
-      {% endcapture %}
+    {% assign class_spec='class="spec_page"' %}
+    {% capture page_title %}
+    {% include title_for_version.md is_latest_version=page.is_latest_version version=page.version %}
+    {% endcapture %}
     {% else %}
-      {% assign page_title = page.title %}
+    {% assign page_title = page.title %}
     {% endif %}
     <title>JSON:API &mdash; {{ page_title|strip }}</title>
   </head>
 
-  <body>
-    {% include site_navigation.html %}
-    {% if page.show_masthead %}
-      <header>
-        <div class="content">
-          <h1 id="json-api">JSON:API</h1>
-          <h2>A specification for building APIs in JSON</h2>
-          <div class="quicklinks">
-            {% for link in site.quicklinks %}
-              <a href="{{link.url}}" title="{{link.title}}">{{link.title}}</a>
-            {% endfor %}
+  <body {{ class_spec }}>
+  {% include site_navigation.html %}
+  {% if page.show_masthead %}
+  <header>
+    <div class="content">
+      <h1 id="json-api">JSON:API</h1>
+      <h2>A specification for building APIs in JSON</h2>
+      <div class="quicklinks">
+        {% for link in site.quicklinks %}
+        <a href="{{link.url}}" title="{{link.title}}">{{link.title}}</a>
+        {% endfor %}
           </div>
           {% if site.announcement %}
           <div class="announcement">
