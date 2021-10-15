@@ -62,7 +62,7 @@ non-standard actions they support. Feel free to
 
 Using PUT to partially update a resource (i.e. to change only some of its state)
 is not allowed by the
-[HTTP specification](https://tools.ietf.org/html/rfc7231#section-4.3.4).
+[HTTP specification](https://datatracker.ietf.org/doc/html/rfc7231#section-4.3.4).
 Instead, PUT is supposed to completely replace the state of a resource:
 
 > “The PUT method requests that the state of the target resource be **created
@@ -70,7 +70,7 @@ Instead, PUT is supposed to completely replace the state of a resource:
   of a given representation would suggest that a subsequent GET on that same
   target resource will result in an equivalent representation being sent…”
 
-The correct method for partial updates, therefore, is [PATCH](http://tools.ietf.org/html/rfc5789),
+The correct method for partial updates, therefore, is [PATCH](https://datatracker.ietf.org/doc/html/rfc5789).
 which is what JSON:API uses. And because PATCH can also be used compliantly for
 full resource replacement, JSON:API hasn't needed to define any behavior for
 PUT so far. However, it may define PUT semantics in the future.
