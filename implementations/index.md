@@ -112,7 +112,7 @@ isomorphic ActiveRecord clone that issues JSON:API requests instead of SQL and i
 * [crnk.io](http://www.crnk.io) is a JSON:API framework for clients and servers. On the client-side it targets
   both Java and Android development. As for the backend side a rich set of modules helps with the integration of various
   Java frameworks.
-
+ * [jsonapi](https://github.com/MarkoMilos/jsonapi) Library for streamlined use of JSON:API using Kotlin and Java built on top of Moshi from Square. It is built with a powerful api and supports JVM (Java/Kotlin) and Android. Supporting deserialization and serialization it is meant to be used on both client and server side.
 
 ### <a href="#client-libraries-android" id="client-libraries-android" class="headerlink"></a> Android
 * [faogustavo/JSONApi](https://github.com/faogustavo/JSONApi) library for deserializing automatic. It can be integrated with retrofit. It has some ideas from Morpheus and jsonapi-converter but has some aditionals.
