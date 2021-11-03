@@ -35,31 +35,9 @@ The following emeritus editors are no longer active:
 
 ## <a href="#history" id="history" class="headerlink"></a> History
 
-JSON:API was originally drafted by [Yehuda Katz](http://twitter.com/wycats)
+JSON:API was originally drafted by [Yehuda Katz](https://twitter.com/wycats)
 in May 2013. This first draft was extracted from the JSON transport
-implicitly defined by [Ember](http://emberjs.com/) Data's REST adapter.
-
-In general, Ember Data's goal is to eliminate the need for ad-hoc code
-per application to communicate with servers that communicate in a
-well-defined way.
-
-Some servers, like Firebase, Parse and CouchDB already define strict
-communication protocols for clients, and were good fits for Ember Data.
-In contrast, servers written in Rails, Node, and Django tend to be
-written in a "REST-style" but lack the precision necessary for drop-in
-client code.
-
-The REST Adapter in Ember Data implicitly defined a protocol that
-custom servers could implement to get a drop-in client for all of their
-resources. [ActiveModel::Serializers][1] is a proof-of-concept library
-for Rails that implemented the serialization format expected by Ember
-Data.
-
-[1]: https://github.com/rails-api/active_model_serializers
-
-Record creation, update, and deletion was defined implicitly by the
-Ember Data library and was close to conventions already in wide use by
-Rails, Django and Node developers.
+implicitly defined by [Ember](https://emberjs.com/) Data's REST adapter.
 
 The goals of the media type are to balance:
 
@@ -71,3 +49,24 @@ The goals of the media type are to balance:
 * Ease of implementation on the client side
 
 This specification reached a stable version 1.0 on May 29, 2015.
+
+Today there are implementations in a range of languages and frameworks,
+both server-side and client-side. But the idea for JSON API was born out of 
+the Ember project, to eliminate the need for ad-hoc code per application to 
+communicate with servers that communicate in a well-defined way.
+
+Some servers, like Firebase, Parse and CouchDB already define strict
+communication protocols for clients, and were good fits for Ember Data.
+In contrast, servers written in Rails, Node, and Django tend to be
+written in a "REST-style" but lack the precision necessary for drop-in
+client code.
+
+The REST Adapter in Ember Data implicitly defined a protocol that
+custom servers could implement to get a drop-in client for all of their
+resources. [Blueprinter][1] is a proof-of-concept library for Rails that 
+implement the serialization format defined by JSON API.
+
+[1]: https://github.com/procore/blueprinter
+
+
+
