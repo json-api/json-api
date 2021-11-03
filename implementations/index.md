@@ -220,6 +220,7 @@ and writing of JSON:API documents.
   * [jsonapi-rb](http://jsonapi-rb.org) Ruby library for efficiently building and consuming JSON:API documents - with Rails and Hanami integrations.
   * [fast_jsonapi](https://github.com/Netflix/fast_jsonapi) A lightning fast JSON:API serializer for Ruby Objects.
   * [jsonapi_parameters](https://github.com/visualitypl/jsonapi_parameters) Rails-way to consume JSON:API input.
+  * [blueprinter](https://github.com/procore/blueprinter) is a mature JSON:API serialization framework
 
 * Ruby on Rails
   * [Jsonapi-for-rails](https://github.com/doga/jsonapi_for_rails)
