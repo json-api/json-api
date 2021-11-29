@@ -57,6 +57,7 @@ isomorphic ActiveRecord clone that issues JSON:API requests instead of SQL and i
 
 ### <a href="#client-libraries-typescript" id="client-libraries-typescript" class="headerlink"></a> Typescript
 * [ts-angular-jsonapi](https://github.com/reyesoft/ts-angular-jsonapi) A JSON:API library developed for AngularJS in Typescript
+* [nestjs-json-api](https://github.com/ringcentral/nestjs-json-api) Tools to implement JSON API, such as, end point, query params, body params, validation and transformation response.
 * [ngrx-json-api](https://github.com/abdulhaq-e/ngrx-json-api) A JSON:API client for Angular 2 ngrx toolset
 * [ts-jsonapi](https://github.com/mohuk/ts-jsonapi) JSON:API (De)Serializer in Typescript
 * [ngx-jsonapi](https://github.com/reyesoft/ngx-jsonapi) A JSON:API fast client library for Angular with storage+memory cache.
