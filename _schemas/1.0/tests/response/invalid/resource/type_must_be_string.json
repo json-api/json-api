@@ -1,0 +1,9 @@
+{
+    "data": {
+        "type": 400,
+        "id": "1",
+        "attributes": {
+            "something": "wrong"
+        }
+    }
+}

@@ -1,0 +1,22 @@
+{
+    "data": {
+        "type": "article",
+        "id": "1",
+        "attributes": {
+            "title": "Rails is Omakase"
+        },
+        "relationships": {
+            "author": {
+                "links": {
+                    "self": "http://example.com/articles/1/relationships/author",
+                    "related": "http://example.com/articles/1/author",
+                    "wrong": "http://www.example.com/not/allowed"
+                },
+                "data": {
+                    "type": "people",
+                    "id": "9"
+                }
+            }
+        }
+    }
+}

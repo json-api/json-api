@@ -1,0 +1,17 @@
+{
+    "data": {
+        "type": "article",
+        "id": "1",
+        "attributes": {
+            "title": "Rails is Omakase"
+        },
+        "relationships": {
+            "id": {
+                "data": {
+                    "type": "people",
+                    "id": "9"
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,10 @@
+{
+    "links": {
+        "self": {
+            "href": 400
+        }
+    },
+    "meta": {
+        "something": "is wrong"
+    }
+}

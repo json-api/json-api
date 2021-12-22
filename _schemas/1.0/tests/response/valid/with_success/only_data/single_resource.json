@@ -1,0 +1,9 @@
+{
+    "data": {
+        "type": "article",
+        "id": "1",
+        "attributes": {
+            "something": true
+        }
+    }
+}

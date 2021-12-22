@@ -1,0 +1,10 @@
+{
+    "data": {
+        "type": "article",
+        "id": "2",
+        "attributes": {
+            "type": "bad",
+            "something": "wrong"
+        }
+    }
+}

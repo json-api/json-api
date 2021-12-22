@@ -1,0 +1,8 @@
+{
+    "meta": {
+        "something": "wrong"
+    },
+    "jsonapi": {
+        "version": 1
+    }
+}

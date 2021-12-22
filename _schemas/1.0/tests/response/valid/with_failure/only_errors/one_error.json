@@ -1,0 +1,16 @@
+{
+    "errors": [
+        {
+            "id": "1",
+            "links": {
+                "about": "http://www.example.com/errors/1"
+            },
+            "status": "400",
+            "code": "0x002",
+            "title": "human-readable summary of the problem",
+            "source": {
+                "pointer": "/data/id"
+            }
+        }
+    ]
+}

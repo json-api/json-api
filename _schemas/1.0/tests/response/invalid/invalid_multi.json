@@ -1,0 +1,15 @@
+{
+    "data": {
+        "type": "article",
+        "id": "1",
+        "links": {
+            "self": {
+                "not": "valid"
+            }
+        }
+    },
+    "jsonapi": {
+        "version": "1.0",
+        "oups": "error"
+    }
+}
