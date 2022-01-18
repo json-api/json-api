@@ -1,0 +1,16 @@
+{
+    "errors": [
+        {
+            "id": "0",
+            "status": "400",
+            "code": "4",
+            "title": "Oh no!",
+            "detail": "something",
+            "source": {
+                "header": {
+                    "wrong": "not a string"
+                }
+            }
+        }
+    ]
+}
