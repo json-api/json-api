@@ -41,10 +41,11 @@
     "attributes": {
       "description": "Members of the attributes object (\"attributes\") represent information about the resource object in which it's defined.",
       "type": "object",
+      "propertyNames": {
+        "$ref": "#/definitions/memberName"
+      },
       "patternProperties": {
-        "^[a-zA-Z0-9]{1}(?:[-\\w]*[a-zA-Z0-9])?$": {
-          "description": "Attributes may contain any valid JSON value."
-        }
+        "": true
       },
       "not": {
         "$comment": "This is what the specification requires, but it seems bad. https://github.com/json-api/json-api/issues/1553",
@@ -173,6 +174,20 @@
       },
       "additionalProperties": false
     },
+    "linkObject": {
+      "type": "object",
+      "required": [
+        "href"
+      ],
+      "properties": {
+        "href": {
+          "$ref": "#/definitions/linkUrl"
+        },
+        "meta": {
+          "$ref": "#/definitions/meta"
+        }
+      }
+    },
     "linkUrl": {
       "description": "A string containing the link's URL.",
       "type": "string",
@@ -187,18 +202,7 @@
           "$ref": "#/definitions/linkUrl"
         },
         {
-          "type": "object",
-          "required": [
-            "href"
-          ],
-          "properties": {
-            "href": {
-              "$ref": "#/definitions/linkUrl"
-            },
-            "meta": {
-              "$ref": "#/definitions/meta"
-            }
-          }
+          "$ref": "#/definitions/linkObject"
         }
       ]
     },
@@ -216,13 +220,19 @@
     "links": {
       "type": "object"
     },
+    "memberName": {
+      "description": "Member name may contain any valid JSON value.",
+      "type": "string",
+      "pattern": "^[a-zA-Z0-9]{1}(?:[-\\w]*[a-zA-Z0-9])?$"
+    },
     "meta": {
       "description": "Non-standard meta-information that can not be represented as an attribute or relationship.",
       "type": "object",
+      "propertyNames": {
+        "$ref": "#/definitions/memberName"
+      },
       "patternProperties": {
-        "^[a-zA-Z0-9]{1}(?:[-\\w]*[a-zA-Z0-9])?$": {
-          "description": "Member name may contain any valid JSON value."
-        }
+        "": true
       },
       "additionalProperties": false
     },
@@ -359,8 +369,11 @@
     "relationships": {
       "description": "Members of the relationships object (\"relationships\") represent references from the resource object in which it's defined to other resource objects.",
       "type": "object",
+      "propertyNames": {
+        "$ref": "#/definitions/memberName"
+      },
       "patternProperties": {
-        "^[a-zA-Z0-9]{1}(?:[-\\w]*[a-zA-Z0-9])?$": {
+        "": {
           "$ref": "#/definitions/relationship"
         }
       },
