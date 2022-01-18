@@ -1,0 +1,19 @@
+{
+    "links": {
+        "self": {
+            "href": "http://example.com",
+            "rel": ["bad"],
+            "title": {
+                "attr": "wrong"
+            },
+            "type": 0,
+            "hreflang": ["bad"],
+            "describedby": {
+                "attr": "wrong"
+            }
+        }
+    },
+    "meta": {
+        "something": "is wrong"
+    }
+}

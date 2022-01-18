@@ -1,0 +1,140 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://jsonapi.org/schemas/spec/v1.1/draft/Creation/Resource",
+  "$comment": "The $id URI should be modified before releasing. This URI does not need to be network addressable. It is an ID only.",
+  "title": "JSON:API Schema for POST request",
+  "description": "This schema only validates a request for POSTing a new resource.",
+  "required": [
+    "data"
+  ],
+  "properties": {
+    "data": {
+      "$ref": "#/definitions/resource"
+    },
+    "included": {
+      "$ref": "https://jsonapi.org/schemas/spec/v1.1/draft#/definitions/included"
+    },
+    "jsonapi": {
+      "$ref": "https://jsonapi.org/schemas/spec/v1.1/draft#/definitions/jsonapi"
+    },
+    "links": {
+      "description": "Link members related to the primary data.",
+      "$ref": "https://jsonapi.org/schemas/spec/v1.1/draft#/definitions/topLevelLinks"
+    },
+    "meta": {
+      "$ref": "https://jsonapi.org/schemas/spec/v1.1/draft#/definitions/meta"
+    }
+  },
+  "dependencies": {
+    "included": ["data"]
+  },
+  "additionalProperties": false,
+  "definitions": {
+    "relationship": {
+      "type": "object",
+      "properties": {
+        "links": {
+          "$ref": "#/definitions/relationshipLinks"
+        },
+        "data": {
+          "$ref": "#/definitions/linkage"
+        },
+        "meta": {
+          "$ref": "#/definitions/meta"
+        }
+      },
+      "required": [
+        "data"
+      ],
+      "additionalProperties": false
+    },
+    "relationships": {
+      "description": "Members of the relationships object (\"relationships\") represent references from the resource object in which it's defined to other resource objects.",
+      "type": "object",
+      "patternProperties": {
+        "^[a-zA-Z0-9]{1}(?:[-\\w]*[a-zA-Z0-9])?$": {
+          "$ref": "#/definitions/relationship"
+        }
+      },
+      "not": {
+        "anyOf": [
+          {
+            "required": [
+              "type"
+            ]
+          },
+          {
+            "required": [
+              "id"
+            ]
+          }
+        ]
+      },
+      "additionalProperties": false
+    },
+    "resource": {
+      "description": "\"Resource objects\" appear in a JSON:API document to represent resources.",
+      "$comment": "The id member is not required when the resource object originates at the client and represents a new resource to be created on the server.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/resourceIdentification"
+        }
+      ],
+      "properties": {
+        "id": true,
+        "type": true,
+        "lid": true,
+        "attributes": {
+          "$ref": "https://jsonapi.org/schemas/spec/v1.1/draft#/definitions/attributes"
+        },
+        "links": {
+          "$ref": "https://jsonapi.org/schemas/spec/v1.1/draft#/definitions/resourceLinks"
+        },
+        "meta": {
+          "$ref": "https://jsonapi.org/schemas/spec/v1.1/draft#/definitions/meta"
+        },
+        "relationships": {
+          "$ref": "#/definitions/relationships"
+        }
+      },
+      "additionalProperties": false
+    },
+    "resourceIdentification": {
+      "type": "object",
+      "required": [
+        "type"
+      ],
+      "properties": {
+        "type": {
+          "type": "string",
+          "pattern": "^[a-zA-Z0-9]{1}(?:[-\\w]*[a-zA-Z0-9])?$"
+        },
+        "id": {
+          "type": "string"
+        },
+        "lid": {
+          "type": "string"
+        }
+      }
+    },
+    "resourceIdentifier": {
+      "description": "The \"type\" and \"id\" to non-empty members.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/resourceIdentification"
+        }
+      ],
+      "properties": {
+        "id": true,
+        "type": true,
+        "lid": true,
+        "meta": {
+          "$ref": "https://jsonapi.org/schemas/spec/v1.1/draft#/definitions/meta"
+        }
+      },
+      "additionalProperties": false
+    }
+  }
+}

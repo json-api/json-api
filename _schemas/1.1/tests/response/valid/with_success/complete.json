@@ -1,0 +1,101 @@
+{
+    "links": {
+        "self": {
+            "href": "http://example.com/articles"
+        },
+        "first": "http://example.com/articles?page%5Bnumber%5D=1&page%5Bsize%5D=25",
+        "last": {
+            "href": "http://example.com/articles?page%5Bnumber%5D=1&page%5Bsize%5D=25",
+            "rel": "pagination-last",
+            "title": "Last page of pagination",
+            "type": "pagination",
+            "hreflang": "en",
+            "describedby": "http://example.com/describedby"
+        },
+        "next": null,
+        "prev": null,
+        "describedby": "http://example.com/describedby"
+    },
+    "data": [
+        {
+            "type": "article",
+            "id": "1",
+            "attributes": {
+                "title": "Rails is Omakase"
+            },
+            "relationships": {
+                "author": {
+                    "links": {
+                        "self": "http://example.com/articles/1/relationships/author",
+                        "related": "http://example.com/articles/1/author"
+                    },
+                    "data": {
+                        "type": "people",
+                        "id": "9"
+                    },
+                    "meta": {
+                        "nothing": "else"
+                    }
+                }
+            },
+            "links": {
+                "self": "http://example.com/articles/1"
+            },
+            "meta": {
+                "resource": "is valid"
+            }
+        },
+        {
+            "type": "article",
+            "id": "2",
+            "attributes": {
+                "title": "second"
+            },
+            "relationships": {
+                "author": {
+                    "links": {
+                        "self": "http://example.com/articles/2/relationships/author",
+                        "related": "http://example.com/articles/2/author"
+                    },
+                    "data": {
+                        "type": "people",
+                        "id": "9"
+                    },
+                    "meta": {
+                        "nothing": "else"
+                    }
+                }
+            },
+            "links": {
+                "self": "http://example.com/articles/2"
+            },
+            "meta": {
+                "resource": "is valid"
+            }
+        }
+    ],
+    "meta": {
+        "something": "ok"
+    },
+    "jsonapi": {
+        "version": "1.0",
+        "meta": {
+            "anything": "right"
+        },
+        "ext": [
+            "http://example.com/ext-1"
+        ],
+        "profile": [
+            "http://example.com/profile-1"
+        ]
+    },
+    "included": [
+        {
+            "type": "people",
+            "id": "9",
+            "attributes": {
+                "name": "John Doe"
+            }
+        }
+    ]
+}
