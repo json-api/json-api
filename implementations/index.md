@@ -57,7 +57,6 @@ isomorphic ActiveRecord clone that issues JSON:API requests instead of SQL and i
 
 ### <a href="#client-libraries-typescript" id="client-libraries-typescript" class="headerlink"></a> Typescript
 * [ts-angular-jsonapi](https://github.com/reyesoft/ts-angular-jsonapi) A JSON:API library developed for AngularJS in Typescript
-* [nestjs-json-api](https://github.com/ringcentral/nestjs-json-api) Module for NestJS and TypeORM. Module to implement JSON API, such as, end point, query params, body params, validation and transformation response.
 * [ngrx-json-api](https://github.com/abdulhaq-e/ngrx-json-api) A JSON:API client for Angular 2 ngrx toolset
 * [ts-jsonapi](https://github.com/mohuk/ts-jsonapi) JSON:API (De)Serializer in Typescript
 * [ngx-jsonapi](https://github.com/reyesoft/ngx-jsonapi) A JSON:API fast client library for Angular with storage+memory cache.
@@ -186,6 +185,7 @@ and writing of JSON:API documents.
 ### <a href="#server-libraries-node-js" id="server-libraries-node-js" class="headerlink"></a> Node.js
 * [Fortune.js](http://fortune.js.org/) is a library that includes a [comprehensive implementation of JSON:API](https://github.com/fortunejs/fortune-json-api).
 * [json-api](https://www.npmjs.org/package/json-api) turns an Express + Mongoose app into a JSON-API server.
+* [nestjs-json-api](https://github.com/ringcentral/nestjs-json-api) A module for NestJS and TypeORM to implement JSON API supporting features such as, end point, query params, body params, validation and transformation response.
 * [endpoints](https://github.com/endpoints) is an implementation of JSON:API using [Bookshelf](http://bookshelfjs.org).
 * [YAYSON](https://github.com/confetti/yayson) is an isomorphic library for serializing and reading JSON:API data. Simply use it with plain objects or extend it to fit your ORM (currently it has an adapter for [Sequelize](http://sequelizejs.com)).
 * [jsonapi-serializer](https://github.com/SeyZ/jsonapi-serializer) is a Node.js framework agnostic library for serializing your data to JSON:API.
