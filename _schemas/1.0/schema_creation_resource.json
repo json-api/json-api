@@ -11,74 +11,22 @@
     "data": {
       "$ref": "#/definitions/resource"
     },
-    "included": {
-      "$ref": "https://jsonapi.org/schemas/spec/v1.0/draft#/definitions/included"
-    },
     "jsonapi": {
       "$ref": "https://jsonapi.org/schemas/spec/v1.0/draft#/definitions/jsonapi"
-    },
-    "links": {
-      "description": "Link members related to the primary data.",
-      "$ref": "https://jsonapi.org/schemas/spec/v1.0/draft#/definitions/topLevelLinks"
     },
     "meta": {
       "$ref": "https://jsonapi.org/schemas/spec/v1.0/draft#/definitions/meta"
     }
   },
-  "dependencies": {
-    "included": ["data"]
-  },
   "additionalProperties": false,
   "definitions": {
-    "relationship": {
-      "type": "object",
-      "properties": {
-        "links": {
-          "$ref": "#/definitions/relationshipLinks"
-        },
-        "data": {
-          "$ref": "#/definitions/linkage"
-        },
-        "meta": {
-          "$ref": "#/definitions/meta"
-        }
-      },
-      "required": [
-        "data"
-      ],
-      "additionalProperties": false
-    },
-    "relationships": {
-      "description": "Members of the relationships object (\"relationships\") represent references from the resource object in which it's defined to other resource objects.",
-      "type": "object",
-      "patternProperties": {
-        "^[a-zA-Z0-9]{1}(?:[-\\w]*[a-zA-Z0-9])?$": {
-          "$ref": "#/definitions/relationship"
-        }
-      },
-      "not": {
-        "anyOf": [
-          {
-            "required": [
-              "type"
-            ]
-          },
-          {
-            "required": [
-              "id"
-            ]
-          }
-        ]
-      },
-      "additionalProperties": false
-    },
     "resource": {
       "description": "\"Resource objects\" appear in a JSON:API document to represent resources.",
       "$comment": "The id member is not required when the resource object originates at the client and represents a new resource to be created on the server.",
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/resourceIdentification"
+          "$ref": "https://jsonapi.org/schemas/spec/v1.0/draft#/definitions/resourceIdentificationNew"
         }
       ],
       "properties": {
@@ -87,32 +35,14 @@
         "attributes": {
           "$ref": "https://jsonapi.org/schemas/spec/v1.0/draft#/definitions/attributes"
         },
-        "links": {
-          "$ref": "https://jsonapi.org/schemas/spec/v1.0/draft#/definitions/resourceLinks"
-        },
         "meta": {
           "$ref": "https://jsonapi.org/schemas/spec/v1.0/draft#/definitions/meta"
         },
         "relationships": {
-          "$ref": "#/definitions/relationships"
+          "$ref": "https://jsonapi.org/schemas/spec/v1.0/draft#/definitions/relationshipsFrompRequest"
         }
       },
       "additionalProperties": false
-    },
-    "resourceIdentification": {
-      "type": "object",
-      "required": [
-        "type"
-      ],
-      "properties": {
-        "type": {
-          "type": "string",
-          "pattern": "^[a-zA-Z0-9]{1}(?:[-\\w]*[a-zA-Z0-9])?$"
-        },
-        "id": {
-          "type": "string"
-        }
-      }
     }
   }
 }
