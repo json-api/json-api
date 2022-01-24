@@ -321,6 +321,21 @@
       ],
       "additionalProperties": false
     },
+    "relationshipFromRequest": {
+      "type": "object",
+      "properties": {
+        "data": {
+          "$ref": "#/definitions/linkage"
+        },
+        "meta": {
+          "$ref": "#/definitions/meta"
+        }
+      },
+      "required": [
+        "data"
+      ],
+      "additionalProperties": false
+    },
     "relationshipLinks": {
       "description": "A resource object **MAY** contain references to other resource objects (\"relationships\"). Relationships may be to-one or to-many. Relationships can be specified by including a member in a resource's links object.",
       "allOf": [
@@ -377,6 +392,32 @@
           "$ref": "#/definitions/relationship"
         }
       },
+      "allOf": [
+        {
+          "$ref": "#/definitions/relationshipsForbidenMemberName"
+        }
+      ],
+      "additionalProperties": false
+    },
+    "relationshipsFrompRequest": {
+      "description": "Members of the relationships object (\"relationships\") represent references from the resource object in which it's defined to other resource objects.",
+      "type": "object",
+      "propertyNames": {
+        "$ref": "#/definitions/memberName"
+      },
+      "patternProperties": {
+        "": {
+          "$ref": "#/definitions/relationshipFromRequest"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/relationshipsForbidenMemberName"
+        }
+      ],
+      "additionalProperties": false
+    },
+    "relationshipsForbidenMemberName": {
       "not": {
         "anyOf": [
           {
@@ -390,8 +431,7 @@
             ]
           }
         ]
-      },
-      "additionalProperties": false
+      }
     },
     "resource": {
       "description": "\"Resource objects\" appear in a JSON:API document to represent resources.",
@@ -429,10 +469,22 @@
       "uniqueItems": true
     },
     "resourceIdentification": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/resourceIdentificationNew"
+        },
+        {
+          "required": [
+            "type",
+            "id"
+          ]
+        }
+      ]
+    },
+    "resourceIdentificationNew": {
       "type": "object",
       "required": [
-        "type",
-        "id"
+        "type"
       ],
       "properties": {
         "type": {

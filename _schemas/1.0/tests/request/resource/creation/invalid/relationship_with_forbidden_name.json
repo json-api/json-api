@@ -1,0 +1,16 @@
+{
+    "data": {
+        "type": "article",
+        "attributes": {
+            "title": "PHP is so crazy !"
+        },
+        "relationships": {
+            "type": {
+                "data": {
+                    "type": "status",
+                    "id": "140"
+                }
+            }
+        }
+    }
+}

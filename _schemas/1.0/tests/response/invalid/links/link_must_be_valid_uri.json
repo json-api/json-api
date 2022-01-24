@@ -1,0 +1,8 @@
+{
+    "links": {
+        "self": "wrong"
+    },
+    "meta": {
+        "something": "is wrong"
+    }
+}
