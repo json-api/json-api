@@ -319,6 +319,12 @@ The top-level [links object][links] **MAY** contain the following members:
   Schema) for the current document.
 * [pagination] links for the primary data.
 
+> Note: The `self` link should contain the query parameters provided by the client
+> to generate the current response document. This includes but is not limited to
+> query parameters used for [inclusion of related resources][fetching resources],
+> [sparse fieldsets][fetching sparse fieldsets], [sorting][fetching sorting],
+> [pagination][fetching pagination] and [filtering][fetching filtering].
+
 The document's "primary data" is a representation of the resource or collection
 of resources targeted by a request.
 
