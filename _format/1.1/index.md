@@ -825,6 +825,10 @@ The jsonapi object **MAY** contain any of the following members:
 * `profile` - an array of URIs for all applied [profiles].
 * `meta` - a [meta] object that contains non-standard meta-information.
 
+Clients and servers **MUST** ignore a `ext` or `profile` member if its value
+conflicts with `ext` or `profile` media type parameter in the `Content-Type`
+header.
+
 A simple example appears below:
 
 ```json
