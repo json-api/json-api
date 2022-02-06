@@ -475,11 +475,14 @@ as attributes. Instead, [relationships] **SHOULD** be used.
 ##### <a href="#document-resource-object-relationships" id="document-resource-object-relationships" class="headerlink"></a> Relationships
 
 The value of the `relationships` key **MUST** be an object (a "relationships
-object"). Members of the relationships object ("relationships") represent
-references from the [resource object][resource objects] in which it's defined to other resource
-objects.
+object"). Each member of the relationships object ("relationships") represents
+a "relationship", i.e., a reference from the [resource object][resource objects]
+in which they are defined to other resource objects.
 
 Relationships may be to-one or to-many.
+
+A relationship's name is given by its key. The value at that key **MUST** be an
+object ("relationship object").
 
 <a id="document-resource-object-relationships-relationship-object"></a>
 A "relationship object" **MUST** contain at least one of the following:
