@@ -176,9 +176,6 @@
     },
     "linkObject": {
       "type": "object",
-      "required": [
-        "href"
-      ],
       "properties": {
         "href": {
           "$ref": "#/definitions/linkUrl"

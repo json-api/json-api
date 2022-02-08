@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "$id": "https://jsonapi.org/schemas/spec/v1.0/draft/Update/Relationship",
+  "$id": "https://jsonapi.org/schemas/spec/v1.0/draft/update/relationship",
   "$comment": "The $id URI should be modified before releasing. This URI does not need to be network addressable. It is an ID only.",
   "title": "JSON:API Schema for POST request",
   "description": "This schema only validates a request for PATCHing a resource's relationship.",
