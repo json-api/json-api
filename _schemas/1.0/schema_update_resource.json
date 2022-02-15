@@ -39,7 +39,7 @@
           "$ref": "https://jsonapi.org/schemas/spec/v1.0/draft#/definitions/meta"
         },
         "relationships": {
-          "$ref": "https://jsonapi.org/schemas/spec/v1.0/draft#/definitions/relationshipsFrompRequest"
+          "$ref": "https://jsonapi.org/schemas/spec/v1.0/draft#/definitions/relationshipsFromRequest"
         }
       },
       "additionalProperties": false

@@ -4,9 +4,9 @@
   "$comment": "The $id URI should be modified before releasing. This URI does not need to be network addressable. It is an ID only.",
   "title": "JSON:API Schema",
   "description": "This schema only validates RESPONSES from a request. Validating request payloads requires slightly different constraints.",
-  "anyOf": [
+  "allOf": [
     {
-      "required": ["meta"]
+      "$ref": "#/definitions/requiredTopLevelMembers"
     },
     {
       "$ref": "#/definitions/oneOfDataOrErrors"
@@ -234,14 +234,15 @@
       "additionalProperties": false
     },
     "oneOfDataOrErrors": {
-      "oneOf": [
-        {
-          "required": ["data"]
-        },
-        {
-          "required": ["errors"]
+      "dependencies": {
+        "data": {
+          "not": {
+            "required": [
+              "errors"
+            ]
+          }
         }
-      ]
+      }
     },
     "pagination": {
       "type": "object",
@@ -396,7 +397,7 @@
       ],
       "additionalProperties": false
     },
-    "relationshipsFrompRequest": {
+    "relationshipsFromRequest": {
       "description": "Members of the relationships object (\"relationships\") represent references from the resource object in which it's defined to other resource objects.",
       "type": "object",
       "propertyNames": {
@@ -429,6 +430,25 @@
           }
         ]
       }
+    },
+    "requiredTopLevelMembers": {
+      "anyOf": [
+        {
+          "required": [
+            "meta"
+          ]
+        },
+        {
+          "required": [
+            "data"
+          ]
+        },
+        {
+          "required": [
+            "errors"
+          ]
+        }
+      ]
     },
     "resource": {
       "description": "\"Resource objects\" appear in a JSON:API document to represent resources.",
