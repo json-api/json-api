@@ -1,11 +1,15 @@
 {
-  "$schema": "http://json-schema.org/draft-07/schema#",
-  "$id": "https://jsonapi.org/schemas/spec/v1.1/draft/Update/Resource",
-  "$comment": "The $id URI should be modified before releasing. This URI does not need to be network addressable. It is an ID only.",
+  "$schema": "http://json-schema.org/draft/2020-12/schema",
+  "$id": "https://jsonapi.org/schemas/spec/v1.1/draft/update/resource",
   "title": "JSON:API Schema for POST request",
   "description": "This schema only validates a request for PATCHing a resource.",
   "required": [
     "data"
+  ],
+  "anyOf": [
+    {
+      "$ref": "https://jsonapi.org/schemas/spec/v1.1/draft#/definitions/atMemberName"
+    }
   ],
   "properties": {
     "data": {
@@ -18,11 +22,10 @@
       "$ref": "https://jsonapi.org/schemas/spec/v1.1/draft#/definitions/meta"
     }
   },
-  "additionalProperties": false,
+  "unevaluatedProperties": false,
   "definitions": {
     "resource": {
       "description": "\"Resource objects\" appear in a JSON:API document to represent resources.",
-      "$comment": "The id member is not required when the resource object originates at the client and represents a new resource to be created on the server.",
       "type": "object",
       "allOf": [
         {
@@ -30,8 +33,6 @@
         }
       ],
       "properties": {
-        "id": true,
-        "type": true,
         "attributes": {
           "$ref": "https://jsonapi.org/schemas/spec/v1.1/draft#/definitions/attributes"
         },
@@ -39,10 +40,10 @@
           "$ref": "https://jsonapi.org/schemas/spec/v1.1/draft#/definitions/meta"
         },
         "relationships": {
-          "$ref": "https://jsonapi.org/schemas/spec/v1.1/draft#/definitions/relationshipsFrompRequest"
+          "$ref": "https://jsonapi.org/schemas/spec/v1.1/draft#/definitions/relationshipsFromRequest"
         }
       },
-      "additionalProperties": false
+      "unevaluatedProperties": false
     }
   }
 }

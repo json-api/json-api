@@ -1,11 +1,15 @@
 {
-  "$schema": "http://json-schema.org/draft-07/schema#",
-  "$id": "https://jsonapi.org/schemas/spec/v1.1/draft/Update/Relationship",
-  "$comment": "The $id URI should be modified before releasing. This URI does not need to be network addressable. It is an ID only.",
+  "$schema": "http://json-schema.org/draft/2020-12/schema",
+  "$id": "https://jsonapi.org/schemas/spec/v1.1/draft/update/relationship",
   "title": "JSON:API Schema for POST request",
   "description": "This schema only validates a request for PATCHing a resource's relationship.",
   "required": [
     "data"
+  ],
+  "anyOf": [
+    {
+      "$ref": "https://jsonapi.org/schemas/spec/v1.1/draft#/definitions/atMemberName"
+    }
   ],
   "properties": {
     "data": {
@@ -18,5 +22,5 @@
       "$ref": "https://jsonapi.org/schemas/spec/v1.1/draft#/definitions/meta"
     }
   },
-  "additionalProperties": false
+  "unevaluatedProperties": false
 }
