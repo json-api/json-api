@@ -1,6 +1,6 @@
 {
-    "errors": {
-        "status": "400",
-        "title": "Oh no!"
-    }
+  "errors": {
+    "status": "400",
+    "title": "Oh no!"
+  }
 }

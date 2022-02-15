@@ -1,12 +1,12 @@
 {
-    "data": {
-        "type": "article",
-        "id": "1",
-        "attributes": {
-            "something": true
-        }
-    },
-    "meta": {
-        "anything": "valid"
+  "data": {
+    "type": "article",
+    "id": "1",
+    "attributes": {
+      "something": true
     }
+  },
+  "meta": {
+    "anything": "valid"
+  }
 }

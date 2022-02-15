@@ -1,8 +1,8 @@
 {
-    "links": {
-        "wrong": "http://www.example.com"
-    },
-    "meta": {
-        "something": "is wrong"
-    }
+  "links": {
+    "wrong": "http://www.example.com"
+  },
+  "meta": {
+    "something": "is wrong"
+  }
 }

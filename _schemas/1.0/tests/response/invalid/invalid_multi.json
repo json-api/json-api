@@ -1,10 +1,10 @@
 {
-    "data": {
-        "type": "article",
-        "id": 1
-    },
-    "jsonapi": {
-        "version": "1.0",
-        "oups": "error"
-    }
+  "data": {
+    "type": "article",
+    "id": 1
+  },
+  "jsonapi": {
+    "version": "1.0",
+    "oups": "error"
+  }
 }

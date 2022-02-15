@@ -1,9 +1,16 @@
 {
-    "data": {
-        "type": "article",
-        "id": "1",
-        "attributes": {
-            "something": true
+  "data": {
+    "type": "article",
+    "id": "1",
+    "attributes": {
+      "something": true
+    },
+    "relationships": {
+      "toMany": {
+        "links": {
+          "self": "http://example.com/something/to-many"
         }
+      }
     }
+  }
 }

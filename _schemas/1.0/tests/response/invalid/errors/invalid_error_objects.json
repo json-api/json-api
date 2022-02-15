@@ -1,127 +1,127 @@
 {
-    "errors": [
-        "wrong",
-        {
-            "id": 0,
-            "status": "400",
-            "code": "4",
-            "title": "Oh no!",
-            "detail": "something",
-            "source": {
-                "pointer": "/data"
-            }
-        },
-        {
-            "id": "0",
-            "status": 400,
-            "code": "4",
-            "title": "Oh no!",
-            "detail": "something",
-            "source": {
-                "pointer": "/data"
-            }
-        },
-        {
-            "id": "0",
-            "status": "400",
-            "code": 4,
-            "title": "Oh no!",
-            "detail": "something",
-            "source": {
-                "pointer": "/data"
-            }
-        },
-        {
-            "id": "0",
-            "status": "400",
-            "code": "4",
-            "title": {
-                "wrong": "Oh no!"
-            },
-            "detail": "something",
-            "source": {
-                "pointer": "/data"
-            }
-        },
-        {
-            "id": "0",
-            "status": "400",
-            "code": "4",
-            "title": "Oh no!",
-            "detail": {
-                "wrong": "That's too bad..."
-            },
-            "source": {
-                "pointer": "/data"
-            }
-        },
-        {
-            "id": "0",
-            "status": "400",
-            "code": "4",
-            "title": "Oh no!",
-            "detail": "something",
-            "source": {
-                "pointer": {
-                    "wrong": "not a string"
-                }
-            }
-        },
-        {
-            "id": "0",
-            "status": "400",
-            "code": "4",
-            "title": "Oh no!",
-            "detail": "something",
-            "source": {
-                "pointer": "bad pattern"
-            }
-        },
-        {
-            "id": "0",
-            "status": "400",
-            "code": "4",
-            "title": "Oh no!",
-            "detail": "something",
-            "source": {
-                "parameter": {
-                    "wrong": "not a string"
-                }
-            }
-        },
-        {
-            "id": "0",
-            "status": "400",
-            "code": "4",
-            "title": "Oh no!",
-            "detail": "something",
-            "wrong": "not allowed"
-        },
-        {
-            "id": "0",
-            "status": "400",
-            "code": "4",
-            "title": "Oh no!",
-            "detail": "something",
-            "links": {
-                "wrong": "http://www.example.com/not/allowed"
-            }
-        },
-        {
-            "id": "0",
-            "status": "400",
-            "code": "4",
-            "title": "Oh no!",
-            "detail": "something",
-            "source": "not an object"
-        },
-        {
-            "id": "0",
-            "status": "400",
-            "code": "4",
-            "title": "Oh no!",
-            "detail": "something",
-            "meta": "not an object"
+  "errors": [
+    "wrong",
+    {
+      "id": 0,
+      "status": "400",
+      "code": "4",
+      "title": "Oh no!",
+      "detail": "something",
+      "source": {
+        "pointer": "/data"
+      }
+    },
+    {
+      "id": "0",
+      "status": 400,
+      "code": "4",
+      "title": "Oh no!",
+      "detail": "something",
+      "source": {
+        "pointer": "/data"
+      }
+    },
+    {
+      "id": "0",
+      "status": "400",
+      "code": 4,
+      "title": "Oh no!",
+      "detail": "something",
+      "source": {
+        "pointer": "/data"
+      }
+    },
+    {
+      "id": "0",
+      "status": "400",
+      "code": "4",
+      "title": {
+        "wrong": "Oh no!"
+      },
+      "detail": "something",
+      "source": {
+        "pointer": "/data"
+      }
+    },
+    {
+      "id": "0",
+      "status": "400",
+      "code": "4",
+      "title": "Oh no!",
+      "detail": {
+        "wrong": "That's too bad..."
+      },
+      "source": {
+        "pointer": "/data"
+      }
+    },
+    {
+      "id": "0",
+      "status": "400",
+      "code": "4",
+      "title": "Oh no!",
+      "detail": "something",
+      "source": {
+        "pointer": {
+          "wrong": "not a string"
         }
-    ]
+      }
+    },
+    {
+      "id": "0",
+      "status": "400",
+      "code": "4",
+      "title": "Oh no!",
+      "detail": "something",
+      "source": {
+        "pointer": "bad pattern"
+      }
+    },
+    {
+      "id": "0",
+      "status": "400",
+      "code": "4",
+      "title": "Oh no!",
+      "detail": "something",
+      "source": {
+        "parameter": {
+          "wrong": "not a string"
+        }
+      }
+    },
+    {
+      "id": "0",
+      "status": "400",
+      "code": "4",
+      "title": "Oh no!",
+      "detail": "something",
+      "wrong": "not allowed"
+    },
+    {
+      "id": "0",
+      "status": "400",
+      "code": "4",
+      "title": "Oh no!",
+      "detail": "something",
+      "links": {
+        "wrong": "http://www.example.com/not/allowed"
+      }
+    },
+    {
+      "id": "0",
+      "status": "400",
+      "code": "4",
+      "title": "Oh no!",
+      "detail": "something",
+      "source": "not an object"
+    },
+    {
+      "id": "0",
+      "status": "400",
+      "code": "4",
+      "title": "Oh no!",
+      "detail": "something",
+      "meta": "not an object"
+    }
+  ]
 }

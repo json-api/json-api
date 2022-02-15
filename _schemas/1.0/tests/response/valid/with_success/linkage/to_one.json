@@ -1,20 +1,20 @@
 {
-    "data": {
-        "type": "article",
-        "id": "1",
-        "attributes": {
-            "title": "Rails is Omakase"
-        },
-        "relationships": {
-            "comments": {
-                "data": {
-                    "type": "people",
-                    "id": "9",
-                    "meta": {
-                        "something": "ok"
-                    }
-                }
-            }
+  "data": {
+    "type": "article",
+    "id": "1",
+    "attributes": {
+      "title": "Rails is Omakase"
+    },
+    "relationships": {
+      "comments": {
+        "data": {
+          "type": "people",
+          "id": "9",
+          "meta": {
+            "something": "ok"
+          }
         }
+      }
     }
+  }
 }

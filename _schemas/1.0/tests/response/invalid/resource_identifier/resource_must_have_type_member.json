@@ -1,8 +1,8 @@
 {
-    "data": {
-        "id": "3",
-        "meta": {
-            "something": "bad"
-        }
+  "data": {
+    "id": "3",
+    "meta": {
+      "something": "bad"
     }
+  }
 }

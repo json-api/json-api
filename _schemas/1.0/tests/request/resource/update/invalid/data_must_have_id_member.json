@@ -1,8 +1,8 @@
 {
-    "data": {
-        "type": "article",
-        "attributes": {
-            "title": "PHP is so crazy !"
-        }
+  "data": {
+    "type": "article",
+    "attributes": {
+      "title": "PHP is so crazy !"
     }
+  }
 }

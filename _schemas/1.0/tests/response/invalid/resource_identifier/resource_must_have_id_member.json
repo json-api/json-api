@@ -1,8 +1,8 @@
 {
-    "data": {
-        "type": "article",
-        "meta": {
-            "something": "wrong"
-        }
+  "data": {
+    "type": "article",
+    "meta": {
+      "something": "wrong"
     }
+  }
 }

@@ -1,37 +1,40 @@
 {
-    "links": {
-        "self": "http://example.com/articles/1"
+  "links": {
+    "self": "http://example.com/articles/1"
+  },
+  "data": {
+    "type": "articles",
+    "id": "1",
+    "attributes": {
+      "title": "JSON:API paints my bikeshed!"
     },
-    "data": {
-        "type": "articles",
-        "id": "1",
-        "attributes": {
-            "title": "JSON:API paints my bikeshed!"
-        },
-        "relationships": {
-            "author": {
-                "data": { "type": "people", "id": "9" }
-            }
+    "relationships": {
+      "author": {
+        "data": {
+          "type": "people",
+          "id": "9"
         }
+      }
+    }
+  },
+  "included": [
+    {
+      "type": "people",
+      "id": "9",
+      "attributes": {
+        "firstName": "Dan",
+        "lastName": "Gebhardt",
+        "twitter": "dgeb"
+      }
     },
-    "included": [
-        {
-            "type": "people",
-            "id": "9",
-            "attributes": {
-                "firstName": "Dan",
-                "lastName": "Gebhardt",
-                "twitter": "dgeb"
-            }
-        },
-        {
-            "type": "people",
-            "id": "9",
-            "attributes": {
-                "firstName": "Dan",
-                "lastName": "Gebhardt",
-                "twitter": "dgeb"
-            }
-        }
-    ]
+    {
+      "type": "people",
+      "id": "9",
+      "attributes": {
+        "firstName": "Dan",
+        "lastName": "Gebhardt",
+        "twitter": "dgeb"
+      }
+    }
+  ]
 }

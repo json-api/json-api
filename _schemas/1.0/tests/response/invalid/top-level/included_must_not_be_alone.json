@@ -1,14 +1,14 @@
 {
-    "meta": {
-        "this-one": "is ok"
-    },
-    "included": [
-        {
-            "type": "article",
-            "id": "1",
-            "attributes": {
-                "somthing": "to know"
-            }
-        }
-    ]
+  "meta": {
+    "this-one": "is ok"
+  },
+  "included": [
+    {
+      "type": "article",
+      "id": "1",
+      "attributes": {
+        "somthing": "to know"
+      }
+    }
+  ]
 }

@@ -1,10 +1,10 @@
 {
-    "data": {
-        "type": "article",
-        "id": "1",
-        "attributes": {
-            "title": "Rails is Omakase"
-        },
-        "relationships": "very bad"
-    }
+  "data": {
+    "type": "article",
+    "id": "1",
+    "attributes": {
+      "title": "Rails is Omakase"
+    },
+    "relationships": "very bad"
+  }
 }

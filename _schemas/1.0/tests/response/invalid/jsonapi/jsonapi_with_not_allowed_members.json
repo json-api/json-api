@@ -1,9 +1,9 @@
 {
-    "meta": {
-        "something": "wrong"
-    },
-    "jsonapi": {
-        "version": "1.0",
-        "oups": "error"
-    }
+  "meta": {
+    "something": "wrong"
+  },
+  "jsonapi": {
+    "version": "1.0",
+    "oups": "error"
+  }
 }

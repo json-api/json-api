@@ -1,8 +1,8 @@
 {
-    "meta": {
-        "something": "wrong"
-    },
-    "jsonapi": {
-        "version": 1
-    }
+  "meta": {
+    "something": "wrong"
+  },
+  "jsonapi": {
+    "version": 1
+  }
 }

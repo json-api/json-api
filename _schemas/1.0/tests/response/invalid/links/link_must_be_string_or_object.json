@@ -1,8 +1,8 @@
 {
-    "links": {
-        "self": 400
-    },
-    "meta": {
-        "something": "is wrong"
-    }
+  "links": {
+    "self": 400
+  },
+  "meta": {
+    "something": "is wrong"
+  }
 }

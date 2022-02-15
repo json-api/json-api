@@ -1,10 +1,10 @@
 {
-    "data":{
-        "type": "article",
-        "id": "1",
-        "attributes": {
-            "something": "wrong"
-        },
-        "bad": "property"
-    }
+  "data": {
+    "type": "article",
+    "id": "1",
+    "attributes": {
+      "something": "wrong"
+    },
+    "bad": "property"
+  }
 }

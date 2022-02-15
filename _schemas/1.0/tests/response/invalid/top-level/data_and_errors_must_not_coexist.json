@@ -1,12 +1,12 @@
 {
-    "data": {
-        "type": "article",
-        "id": "1"
-    },
-    "errors": [
-        {
-            "status": "400",
-            "title": "Oh no!"
-        }
-    ]
+  "data": {
+    "type": "article",
+    "id": "1"
+  },
+  "errors": [
+    {
+      "status": "400",
+      "title": "Oh no!"
+    }
+  ]
 }

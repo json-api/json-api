@@ -1,8 +1,8 @@
 {
-    "jsonapi": {
-        "version": "1.0"
-    },
-    "links": {
-        "self": "http://www.example.com"
-    }
+  "jsonapi": {
+    "version": "1.0"
+  },
+  "links": {
+    "self": "http://www.example.com"
+  }
 }

@@ -1,9 +1,9 @@
 {
-    "data": {
-        "type": "article",
-        "id": 2,
-        "attributes": {
-            "something": "wrong"
-        }
+  "data": {
+    "type": "article",
+    "id": 2,
+    "attributes": {
+      "something": "wrong"
     }
+  }
 }

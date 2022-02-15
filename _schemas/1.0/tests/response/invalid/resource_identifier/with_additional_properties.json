@@ -1,7 +1,7 @@
 {
-    "data":{
-        "type": "article",
-        "id": "1",
-        "bad": "property"
-    }
+  "data": {
+    "type": "article",
+    "id": "1",
+    "bad": "property"
+  }
 }

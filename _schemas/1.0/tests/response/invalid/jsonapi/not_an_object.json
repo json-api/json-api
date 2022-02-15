@@ -1,15 +1,15 @@
 {
-    "meta": {
-        "something": "wrong"
+  "meta": {
+    "something": "wrong"
+  },
+  "jsonapi": [
+    {
+      "version": "1.0"
     },
-    "jsonapi": [
-        {
-            "version": "1.0"
-        },
-        {
-            "meta": {
-                "key+": "wrong"
-            }
-        }
-    ]
+    {
+      "meta": {
+        "key+": "wrong"
+      }
+    }
+  ]
 }
