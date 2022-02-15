@@ -1,0 +1,12 @@
+{
+  "@member": "ok",
+  "data": {
+    "@member": "ok",
+    "type": "article",
+    "lid": "local_id",
+    "attributes": {
+      "@member": "ok",
+      "title": "PHP is so crazy !"
+    }
+  }
+}

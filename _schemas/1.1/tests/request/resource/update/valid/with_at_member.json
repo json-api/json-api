@@ -1,0 +1,35 @@
+{
+  "@member": "ok",
+  "data": {
+    "@member": "ok",
+    "type": "article",
+    "id": "2",
+    "attributes": {
+      "@member": "ok",
+      "title": "PHP is so crazy !"
+    },
+    "relationships": {
+      "@member": "ok",
+      "toOne": {
+        "@member": "ok",
+        "data": {
+          "@member": "ok",
+          "type": "status",
+          "id": "140"
+        }
+      },
+      "toMany": {
+        "data": [
+          {
+            "type": "tag",
+            "id": "15"
+          },
+          {
+            "type": "tag",
+            "id": "32"
+          }
+        ]
+      }
+    }
+  }
+}
