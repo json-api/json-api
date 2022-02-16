@@ -65,7 +65,7 @@ isomorphic ActiveRecord clone that issues JSON:API requests instead of SQL and i
 * [DatX](https://github.com/infinum/datx) is an opinionated data store for use with the MobX state management library that adds JSON:API support with [datx-jsonapi](https://github.com/infinum/datx/tree/master/packages/datx-jsonapi) mixin.
 * [jsonapi-fractal](https://github.com/andersondanilo/jsonapi-fractal) JSON:API Serializer inspired by Fractal (PHP)
 * [ts-japi](https://github.com/jun-sheaf/ts-japi) - A zero-dependency, highly-modular, js/ts-friendly, recursible, framework-agnostic library for serializing data to the JSON:API specification. Serializes the entire specification.
-* [drupal-jsonapi-params](https://github.com/d34dman/drupal-jsonapi-params) A library for building query parameters when connecting with Drupal CMS's JSON:API. 
+* [drupal-jsonapi-params](https://github.com/d34dman/drupal-jsonapi-params) A library for building query parameters when connecting with Drupal CMS's JSON:API.
 
 ### <a href="#client-libraries-ios" id="client-libraries-ios" class="headerlink"></a> iOS
 
@@ -334,6 +334,7 @@ includes related resources.
 
 ### <a href="#related-tools-playground" id="related-tools-playground" class="headerlink"></a> Playground
 
+* [jsonapi-browser](https://github.com/masterT/jsonapi-browser) Browser for web API implementing JSON:API v1.0. - [demo](https://mastert.github.io/jsonapi-browser)
 * [json-api-document-viewer](https://tadast.github.io/json-api-document-viewer) the flat json:api structure is a good way to express complex relationships between objects. However the same flatness makes it difficult for humans to "parse" these relationships. This tool visualises object relationships by visually nesting them.
 * [jsonapi-validator](https://jsonapi-validator.herokuapp.com) is a playground service for quick prototyping and validating JSON responses with jsonapi.org specification.
 * [corroborate](http://corroborate.arenpatel.com/) JSON:API request/response payload validator. It warns when there is a specification violation and also informs when a recommendation has not been followed.
