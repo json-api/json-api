@@ -623,7 +623,8 @@ included without a direct or indirect relationship to the document's primary
 data.
 
 The only exception to the full linkage requirement is when relationship fields
-that would otherwise contain linkage data are excluded via [sparse fieldsets](#fetching-sparse-fieldsets).
+that would otherwise contain linkage data are excluded due to
+[sparse fieldsets](#fetching-sparse-fieldsets) requested by the client.
 
 A complete example document with multiple included relationships:
 
