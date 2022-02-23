@@ -241,7 +241,7 @@ with a `415 Unsupported Media Type` status code.
   `profile` media type parameter is present.
 
 If a request's `Accept` header contains an instance of the JSON:API media type,
-servers **MUST** ignore instances of that media type are modified with a media
+servers **MUST** ignore instances of that media type which are modified with a media
 type parameter other than `ext` or `profile`. If all instances of that media
 type are modified with a media type parameter other than `ext` or `profile`,
 servers **MUST** respond with a `406 Not Acceptable` status code. If every
