@@ -197,7 +197,7 @@ Content-Type: application/vnd.api+json
       "status": "422",
       "source": { "pointer": "/data/attributes/firstName" },
       "title":  "Invalid Attribute",
-      "detail": "First name must contain at least three characters."
+      "detail": "First name must contain at least two characters."
     }
   ]
 }
@@ -263,7 +263,7 @@ Content-Type: application/vnd.api+json
     {
       "source": { "pointer": "/data/attributes/firstName" },
       "title": "Invalid Attribute",
-      "detail": "First name must contain at least three characters."
+      "detail": "First name must contain at least two characters."
     },
     {
       "source": { "pointer": "/data/attributes/firstName" },
@@ -309,7 +309,7 @@ Content-Type: application/vnd.api+json
       "code":   "123",
       "source": { "pointer": "/data/attributes/firstName" },
       "title":  "Value is too short",
-      "detail": "First name must contain at least three characters."
+      "detail": "First name must contain at least two characters."
     },
     {
       "code":   "225",
