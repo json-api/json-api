@@ -1787,7 +1787,7 @@ update a resource if that update would violate other server-enforced
 constraints (such as a uniqueness constraint on a property other than `id`).
 
 A server **MUST** return `409 Conflict` when processing a `PATCH` request in
-which the resource object's `type` and `id` do not match the server's endpoint.
+which the resource object's `type` or `id` do not match the server's endpoint.
 
 A server **SHOULD** include error details and provide enough information to
 recognize the source of the conflict.
