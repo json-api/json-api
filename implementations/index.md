@@ -92,6 +92,7 @@ isomorphic ActiveRecord clone that issues JSON:API requests instead of SQL and i
 * [Art4 / json-api-client](https://github.com/Art4/json-api-client) is a library for validating and handling the response body in a simple OOP way.
 * [woohoolabs / yang](https://github.com/woohoolabs/yang) is a PSR-7 compatible library that is able to build and send requests, and handle responses.
 * [enm/json-api-client](https://eosnewmedia.github.io/JSON-API-Client/) is an abstract client-side PHP implementation of the json:api specification which is based on [enm/json-api-common](https://eosnewmedia.github.io/JSON-API-Common/). It allows you to send json:api requests via your own http client implementation or via a buzz or guzzle client.
+* [floor9design-ltd/json-api-formatter](https://github.com/floor9design-ltd/json-api-formatter) An open source library designed to be used for generating and interacting with (making and receiving) JSON API requests. 100% unit tested and actively maintained by the author. Easy to use with frameworks such as Laravel/Symfony. 
 * [swisnl/json-api-client](https://github.com/swisnl/json-api-client) Is a package for mapping remote {json:api} resources to Eloquent like models and collections.
 
 ### <a href="#client-libraries-dart" id="client-libraries-dart" class="headerlink"></a> Dart
