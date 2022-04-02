@@ -2105,7 +2105,7 @@ It is **RECOMMENDED** that a capital letter (e.g. camelCasing) be used to
 satisfy the above requirement.
 
 If a server encounters a query parameter that does not follow the naming
-conventions above, and the server does not know how to process it as a query
+conventions above, or the server does not know how to process it as a query
 parameter from this specification, it **MUST** return `400 Bad Request`.
 
 > Note: By forbidding the use of query parameters that contain only the characters
