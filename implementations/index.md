@@ -65,7 +65,7 @@ isomorphic ActiveRecord clone that issues JSON:API requests instead of SQL and i
 * [DatX](https://github.com/infinum/datx) is an opinionated data store for use with the MobX state management library that adds JSON:API support with [datx-jsonapi](https://github.com/infinum/datx/tree/master/packages/datx-jsonapi) mixin.
 * [jsonapi-fractal](https://github.com/andersondanilo/jsonapi-fractal) JSON:API Serializer inspired by Fractal (PHP)
 * [ts-japi](https://github.com/jun-sheaf/ts-japi) - A zero-dependency, highly-modular, js/ts-friendly, recursible, framework-agnostic library for serializing data to the JSON:API specification. Serializes the entire specification.
-* [drupal-jsonapi-params](https://github.com/d34dman/drupal-jsonapi-params) A library for building query parameters when connecting with Drupal CMS's JSON:API. 
+* [drupal-jsonapi-params](https://github.com/d34dman/drupal-jsonapi-params) A library for building query parameters when connecting with Drupal CMS's JSON:API.
 
 ### <a href="#client-libraries-ios" id="client-libraries-ios" class="headerlink"></a> iOS
 
@@ -167,7 +167,7 @@ and writing of JSON:API documents.
 * [nilportugues / laravel5-jsonapi-transformer](https://github.com/nilportugues/laravel5-jsonapi-transformer) Laravel 5 JSON:API Transformer Package outputting valid API responses in JSON and JSON:API formats.
 * [tuyakhov / yii2-json-api](https://github.com/tuyakhov/yii2-json-api) Implementation of JSON:API specification for the Yii framework.
 * [json-api-php/json-api](https://github.com/json-api-php/json-api) An attempt to translate the JSON:API specification into a set of high quality unit/functional tests and implement it in PHP 7 strictly following TDD and SOLID OOP principles.
-* [cloudcreativity/laravel-json-api](https://github.com/cloudcreativity/laravel-json-api) JSON:API (jsonapi.org) package for Laravel applications. This project extends cloudcreativity/json-api, adding in framework-specific features.
+* [laravel-json-api/laravel](https://github.com/laravel-json-api/laravel) Laravel implementation of the JSON:API specification, with full feature support and extensive documentation.
 * [FriendsOfCake/crud-json-api](https://github.com/FriendsOfCake/crud-json-api) CakePHP Crud Listener for building maintainable JSON:API compliant APIs.
 * [thephpleague/fractal](http://fractal.thephpleague.com/) A partial implementation of the JSON:API spec allowing for an easy drop in JSON rendering solution.
 * [oligus/jad](https://github.com/oligus/jad) A library that turns doctrine entities into json:api resource, or collection of resources, automagically.
