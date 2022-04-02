@@ -239,7 +239,7 @@ Requests for still-pending jobs **SHOULD** return a status `200 OK`, as the serv
 ```http
 HTTP/1.1 200 OK
 Content-Type: application/vnd.api+json
-Retry-After: 1
+Retry-After: 10
 
 {
   "data": {
