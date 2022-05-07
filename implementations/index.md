@@ -119,6 +119,7 @@ isomorphic ActiveRecord clone that issues JSON:API requests instead of SQL and i
 * [moshi-jsonapi](https://github.com/kamikat/moshi-jsonapi) serialize/deserialize JSON:API v1.0 using fantistic Moshi API! With friendly Java interface and easy integration with Retrofit.
 * [Morpheus](https://github.com/xamoom/Morpheus) library for deserializing your resources with automatic mapping for relationships. Uses gson to map objects in attributes.
 * [Izzy JSONAPI parser](https://github.com/undabot/izzy-json-api-android) library for deserializing and serializing resources with support both for Gson and Jackson parsers. It also has simple Retrofit integration.
+* [JsonApiX](https://github.com/infinum/kotlin-jsonapix) annotation processor library for serializing and deserializing Kotlin classes. It's easy to use - setup only requires annotating classes. Retrofit integration is included.
 
 ### <a href="#client-libraries-r" id="client-libraries-r" class="headerlink"></a> R
 
