@@ -392,7 +392,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/relationshipsForbidenMemberName"
+          "$ref": "#/definitions/relationshipsForbiddenMemberName"
         }
       ],
       "additionalProperties": false
@@ -410,12 +410,12 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/relationshipsForbidenMemberName"
+          "$ref": "#/definitions/relationshipsForbiddenMemberName"
         }
       ],
       "additionalProperties": false
     },
-    "relationshipsForbidenMemberName": {
+    "relationshipsForbiddenMemberName": {
       "not": {
         "anyOf": [
           {
