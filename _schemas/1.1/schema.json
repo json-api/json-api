@@ -516,7 +516,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/relationshipsForbidenMemberName"
+          "$ref": "#/definitions/relationshipsForbiddenMemberName"
         }
       ],
       "anyOf": [
@@ -536,7 +536,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/relationshipsForbidenMemberName"
+          "$ref": "#/definitions/relationshipsForbiddenMemberName"
         }
       ],
       "anyOf": [
@@ -551,7 +551,7 @@
       },
       "unevaluatedProperties": false
     },
-    "relationshipsForbidenMemberName": {
+    "relationshipsForbiddenMemberName": {
       "not": {
         "anyOf": [
           {
