@@ -831,6 +831,10 @@ The jsonapi object **MAY** contain any of the following members:
 * `profile` - an array of URIs for all applied [profiles].
 * `meta` - a [meta] object that contains non-standard meta-information.
 
+Clients and servers **MUST NOT** use an `ext` or `profile` member for content
+negotiation. Content negotiation **MUST** only happen based on media type
+parameters in `Content-Type` header.
+
 A simple example appears below:
 
 ```json
