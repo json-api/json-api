@@ -758,8 +758,9 @@ of this member **MUST** be an object (a "links object").
 Within this object, a link **MUST** be represented as either:
 
 * a string whose value is a URI-reference [[RFC3986 Section 4.1](https://tools.ietf.org/html/rfc3986#section-4.1)]
-  pointing to the link's target.
-* a [link object].
+  pointing to the link's target,
+* a [link object] or
+* `null` if the link does not exist.
 
 A link's relation type **SHOULD** be inferred from the name of the link unless the
 link is a [link object] and the link object has a `rel` member.
