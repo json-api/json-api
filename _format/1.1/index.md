@@ -933,6 +933,10 @@ Member names **MAY** also begin with an at sign (U+0040 COMMERCIAL AT, "@").
 Members named this way are called "@-Members". @-Members **MAY** appear
 anywhere in a JSON:API document.
 
+> Note: Among other things, "@" members can be used to add JSON-LD data to a
+JSON:API document. Such documents should be served with [an extra header](http://www.w3.org/TR/json-ld/#interpreting-json-as-json-ld)
+to convey to JSON-LD clients that they contain JSON-LD data.
+
 However, JSON:API processors **MUST** completely ignore @-Members (i.e. not
 treat them as JSON:API data).
 
@@ -943,9 +947,10 @@ member of the attributes object. However, because @-Members must be ignored
 when interpreting that definition, an @-Member that occurs in an attributes
 object is not an attribute.
 
-> Note: Among other things, "@" members can be used to add JSON-LD data to a
-JSON:API document. Such documents should be served with [an extra header](http://www.w3.org/TR/json-ld/#interpreting-json-as-json-ld)
-to convey to JSON-LD clients that they contain JSON-LD data.
+> Note: JSON:API specification is agnostic about the value of an attribute.
+> It is up to the implementation how to handle complex data structures
+> including objects used as attribute values. A server **MAY** or **MAY NOT**
+> ignore key starting with at sign in object used as attribute values.
 
 #### <a href="#extension-members" id="extension-members" class="headerlink"></a> Extension Members
 
