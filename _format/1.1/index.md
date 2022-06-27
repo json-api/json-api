@@ -1751,7 +1751,7 @@ does not want to allow deletion of records the client has not seen.
 
 If a server accepts an update but also changes the targeted resource(s) in ways
 other than those specified by the request (for example, updating the
-`updated-at` attribute or a computed `sha`), it **MUST** return a `200 OK`
+`updatedAt` attribute or a computed `sha`), it **MUST** return a `200 OK`
 response and a document that contains the updated resource(s) as primary data.
 
 A server **MAY** return a `200 OK` response with a document that contains no
