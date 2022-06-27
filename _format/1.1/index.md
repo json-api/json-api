@@ -927,17 +927,15 @@ The following characters **MUST NOT** be used in implementation and
 
 Member names **MAY** also begin with an at sign (U+0040 COMMERCIAL AT, "@").
 Members named this way are called "@-Members". @-Members **MAY** appear
-anywhere in a JSON:API document.
+anywhere in a document.
 
-However, JSON:API processors **MUST** completely ignore @-Members (i.e. not
-treat them as JSON:API data).
-
-Moreover, the existence of @-Members **MUST** be ignored when interpreting all
-JSON:API definitions and processing instructions given outside of this
-subsection. For example, an [attribute][attributes] is defined above as any
-member of the attributes object. However, because @-Members must be ignored
-when interpreting that definition, an @-Member that occurs in an attributes
-object is not an attribute.
+This specification provides no guidance on the meaning or usage of @-Members,
+which are considered to be [implementation semantics](#semantics). @-Members
+**MUST** be ignored when interpreting this specification's definitions and
+processing instructions given outside of this subsection. For example, an
+[attribute][attributes] is defined above as any member of the attributes object.
+However, because @-Members must be ignored when interpreting that definition, an
+@-Member that occurs in an attributes object is not an attribute.
 
 > Note: Among other things, "@" members can be used to add JSON-LD data to a
 JSON:API document. Such documents should be served with [an extra header](http://www.w3.org/TR/json-ld/#interpreting-json-as-json-ld)
