@@ -1584,10 +1584,10 @@ server **MUST** return a `202 Accepted` status code.
 ##### <a href="#crud-creating-responses-204" id="crud-creating-responses-204" class="headerlink"></a> 204 No Content
 
 If the requested resource has been created successfully and the server does not
-change the resource in any way (for example, if the resource includes a
-[Client-Generated ID](#crud-creating-client-ids)), the server **MUST** return
-either a `201 Created` status code and response document (as described above) or
-a `204 No Content` status code with no response document.
+change the resource in any way (for example, by assigning an `id` or `createdAt`
+attribute), the server **MUST** return either a `201 Created` status code and
+response document (as described above) or a `204 No Content` status code with no
+response document.
 
 ##### <a href="#crud-creating-responses-403" id="crud-creating-responses-403" class="headerlink"></a> 403 Forbidden
 
