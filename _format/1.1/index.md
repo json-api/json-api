@@ -1568,9 +1568,12 @@ Content-Type: application/vnd.api+json
 
 A server **MAY** return a `201 Created` response with a document that contains
 no primary data if the requested resource has been created successfully and the
-server does not change the resource in any way (for example, if the resource
-includes a [Client-Generated ID](#crud-creating-client-ids)). Other top-level
-members, such as [meta], could be included in the response document.
+server does not change the resource in any way (for example, by assigning an
+`id` or `createdAt` attribute). Other top-level members, such as [meta], could
+be included in the response document.
+
+> Note: Only servers that accept [Client-Generated
+IDs](#crud-creating-client-ids) can avoid assigning an `id` to a new resource.
 
 ##### <a href="#crud-creating-responses-202" id="crud-creating-responses-202" class="headerlink"></a> 202 Accepted
 
