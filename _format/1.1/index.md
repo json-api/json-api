@@ -1974,16 +1974,15 @@ server, and we are defining its semantics for JSON:API.
 
 ##### <a href="#crud-updating-relationship-responses-200" id="crud-updating-relationship-responses-200" class="headerlink"></a> 200 OK
 
-If a server accepts an update but also changes the targeted relationship(s)
-in other ways than those specified by the request, it **MUST** return a `200
-OK` response and a document that includes the updated relationship(s) in its
+If a server accepts an update but also changes the targeted relationship in
+other ways than those specified by the request, it **MUST** return a `200 OK`
+response and a document that includes the updated relationship data as its
 primary data.
 
 A server **MAY** return a `200 OK` response with a document that contains no
 primary data if an update is successful and the server does not change the
-targeted relationship(s) in ways other than those specified by the request.
-Other top-level members, such as [meta], could be included in the response
-document.
+targeted relationship in ways other than those specified by the request. Other
+top-level members, such as [meta], could be included in the response document.
 
 ##### <a href="#crud-updating-relationship-responses-202" id="crud-updating-relationship-responses-202" class="headerlink"></a> 202 Accepted
 
@@ -1994,7 +1993,7 @@ server **MUST** return a `202 Accepted` status code.
 ##### <a href="#crud-updating-relationship-responses-204" id="crud-updating-relationship-responses-204" class="headerlink"></a> 204 No Content
 
 If an update is successful and the server doesn't change the targeted
-relationships(s) in ways other than those specified by the request, the server
+relationship in ways other than those specified by the request, the server
 **MUST** return either a `200 OK` status code and response document (as
 described above) or a `204 No Content` status code with no response document.
 
