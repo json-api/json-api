@@ -1531,16 +1531,14 @@ to create a resource with a client-generated ID.
 
 ##### <a href="#crud-creating-responses-201" id="crud-creating-responses-201" class="headerlink"></a> 201 Created
 
-If a `POST` request did not include a [Client-Generated
-ID](#crud-creating-client-ids) and the requested resource has been created
-successfully, the server **MUST** return a `201 Created` status code.
+If the requested resource has been created successfully and the server changes
+the resource in any way (for example, by assigning an `id`), the server **MUST**
+return a `201 Created` response and a document that contains the resource as
+primary data.
 
 The response **SHOULD** include a `Location` header identifying the location
 of the newly created resource, in order to comply with [RFC
 7231](http://tools.ietf.org/html/rfc7231#section-6.3.2).
-
-The response **MUST** also include a document that contains the primary
-resource created.
 
 If the [resource object][resource objects] returned by the response contains a `self` key in its
 `links` member and a `Location` header is provided, the value of the `self`
@@ -1566,6 +1564,15 @@ Content-Type: application/vnd.api+json
 }
 ```
 
+A server **MAY** return a `201 Created` response with a document that contains
+no primary data if the requested resource has been created successfully and the
+server does not change the resource in any way (for example, by assigning an
+`id` or `createdAt` attribute). Other top-level members, such as [meta], could
+be included in the response document.
+
+> Note: Only servers that accept [Client-Generated
+IDs](#crud-creating-client-ids) can avoid assigning an `id` to a new resource.
+
 ##### <a href="#crud-creating-responses-202" id="crud-creating-responses-202" class="headerlink"></a> 202 Accepted
 
 If a request to create a resource has been accepted for processing, but the
@@ -1574,15 +1581,11 @@ server **MUST** return a `202 Accepted` status code.
 
 ##### <a href="#crud-creating-responses-204" id="crud-creating-responses-204" class="headerlink"></a> 204 No Content
 
-If a `POST` request *did* include a [Client-Generated
-ID](#crud-creating-client-ids) and the requested resource has been created
-successfully, the server **MUST** return either a `201 Created` status code
-and response document (as described above) or a `204 No Content` status code
-with no response document.
-
-> Note: If a `204` response is received the client should consider the resource
-object sent in the request to be accepted by the server, as if the server
-had returned it back in a `201` response.
+If the requested resource has been created successfully and the server does not
+change the resource in any way (for example, by assigning an `id` or `createdAt`
+attribute), the server **MUST** return either a `201 Created` status code and
+response document (as described above) or a `204 No Content` status code with no
+response document.
 
 ##### <a href="#crud-creating-responses-403" id="crud-creating-responses-403" class="headerlink"></a> 403 Forbidden
 
@@ -1745,31 +1748,30 @@ does not want to allow deletion of records the client has not seen.
 
 #### <a href="#crud-updating-responses" id="crud-updating-responses" class="headerlink"></a> Responses
 
+##### <a href="#crud-updating-responses-200" id="crud-updating-responses-200" class="headerlink"></a> 200 OK
+
+If a server accepts an update but also changes the targeted resource(s) in ways
+other than those specified by the request (for example, updating the
+`updatedAt` attribute or a computed `sha`), it **MUST** return a `200 OK`
+response and a document that contains the updated resource(s) as primary data.
+
+A server **MAY** return a `200 OK` response with a document that contains no
+primary data if an update is successful and the server does not change the
+targeted resource(s) in ways other than those specified by the request. Other
+top-level members, such as [meta], could be included in the response document.
+
 ##### <a href="#crud-updating-responses-202" id="crud-updating-responses-202" class="headerlink"></a> 202 Accepted
 
 If an update request has been accepted for processing, but the processing
 has not been completed by the time the server responds, the server **MUST**
 return a `202 Accepted` status code.
 
-##### <a href="#crud-updating-responses-200" id="crud-updating-responses-200" class="headerlink"></a> 200 OK
-
-If a server accepts an update but also changes the resource(s) in ways other
-than those specified by the request (for example, updating the `updated-at`
-attribute or a computed `sha`), it **MUST** return a `200 OK` response. The
-response document **MUST** include a representation of the updated
-resource(s) as if a `GET` request was made to the request URL.
-
-A server **MUST** return a `200 OK` status code if an update is successful,
-the client's current fields remain up to date, and the server responds only
-with top-level [meta] data. In this case the server **MUST NOT** include a
-representation of the updated resource(s).
-
 ##### <a href="#crud-updating-responses-204" id="crud-updating-responses-204" class="headerlink"></a> 204 No Content
 
-If an update is successful and the server doesn't update any fields besides
-those provided, the server **MUST** return either a `200 OK` status code and
-response document (as described above) or a `204 No Content` status code with no
-response document.
+If an update is successful and the server doesn't change the targeted
+resource(s) in ways other than those specified by the request, the server
+**MUST** return either a `200 OK` status code and response document (as
+described above) or a `204 No Content` status code with no response document.
 
 ##### <a href="#crud-updating-relationship-responses-403" id="crud-updating-relationship-responses-403" class="headerlink"></a> 403 Forbidden
 
@@ -1968,6 +1970,18 @@ server, and we are defining its semantics for JSON:API.
 
 #### <a href="#crud-updating-relationship-responses" id="crud-updating-relationship-responses" class="headerlink"></a> Responses
 
+##### <a href="#crud-updating-relationship-responses-200" id="crud-updating-relationship-responses-200" class="headerlink"></a> 200 OK
+
+If a server accepts an update but also changes the targeted relationship in
+other ways than those specified by the request, it **MUST** return a `200 OK`
+response and a document that includes the updated relationship data as its
+primary data.
+
+A server **MAY** return a `200 OK` response with a document that contains no
+primary data if an update is successful and the server does not change the
+targeted relationship in ways other than those specified by the request. Other
+top-level members, such as [meta], could be included in the response document.
+
 ##### <a href="#crud-updating-relationship-responses-202" id="crud-updating-relationship-responses-202" class="headerlink"></a> 202 Accepted
 
 If a relationship update request has been accepted for processing, but the
@@ -1976,27 +1990,16 @@ server **MUST** return a `202 Accepted` status code.
 
 ##### <a href="#crud-updating-relationship-responses-204" id="crud-updating-relationship-responses-204" class="headerlink"></a> 204 No Content
 
-A server **MUST** return a `204 No Content` status code if an update is
-successful and the representation of the resource in the request matches the
-result.
+If an update is successful and the server doesn't change the targeted
+relationship in ways other than those specified by the request, the server
+**MUST** return either a `200 OK` status code and response document (as
+described above) or a `204 No Content` status code with no response document.
 
 > Note: This is the appropriate response to a `POST` request sent to a URL
 from a to-many [relationship link][relationships] when that relationship already
 exists. It is also the appropriate response to a `DELETE` request sent to a URL
 from a to-many [relationship link][relationships] when that relationship does
 not exist.
-
-##### <a href="#crud-updating-relationship-responses-200" id="crud-updating-relationship-responses-200" class="headerlink"></a> 200 OK
-
-If a server accepts an update but also changes the targeted relationship(s)
-in other ways than those specified by the request, it **MUST** return a `200
-OK` response. The response document **MUST** include a representation of the
-updated relationship(s).
-
-A server **MUST** return a `200 OK` status code if an update is successful,
-the client's current data remain up to date, and the server responds
-only with top-level [meta] data. In this case the server **MUST NOT**
-include a representation of the updated relationship(s).
 
 ##### <a href="#crud-updating-relationship-responses-403" id="crud-updating-relationship-responses-403" class="headerlink"></a> 403 Forbidden
 
@@ -2025,6 +2028,12 @@ Accept: application/vnd.api+json
 
 #### <a href="#crud-deleting-responses" id="crud-deleting-responses" class="headerlink"></a> Responses
 
+##### <a href="#crud-deleting-responses-200" id="crud-deleting-responses-200" class="headerlink"></a> 200 OK
+
+A server **MAY** return a `200 OK` response with a document that contains no
+primary data if a deletion request is successful. Other top-level members, such
+as [meta], could be included in the response document.
+
 ##### <a href="#crud-deleting-responses-202" id="crud-deleting-responses-202" class="headerlink"></a> 202 Accepted
 
 If a deletion request has been accepted for processing, but the processing has
@@ -2033,13 +2042,9 @@ return a `202 Accepted` status code.
 
 ##### <a href="#crud-deleting-responses-204" id="crud-deleting-responses-204" class="headerlink"></a> 204 No Content
 
-A server **MUST** return a `204 No Content` status code if a deletion
-request is successful and no content is returned.
-
-##### <a href="#crud-deleting-responses-200" id="crud-deleting-responses-200" class="headerlink"></a> 200 OK
-
-A server **MUST** return a `200 OK` status code if a deletion request is
-successful and the server responds with only top-level [meta] data.
+If a deletion request is successful, the server **MUST** return either a `200
+OK` status code and response document (as described above) or a `204 No Content`
+status code with no response document.
 
 ##### <a href="#crud-deleting-responses-404" id="crud-deleting-responses-404" class="headerlink"></a> 404 NOT FOUND
 
