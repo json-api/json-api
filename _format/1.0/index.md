@@ -579,7 +579,7 @@ by clients and servers, and they **MUST** meet all of the following conditions:
   as defined below.
 
 To enable an easy mapping of member names to URLs, it is **RECOMMENDED** that
-member names use only non-reserved, URL safe characters specified in [RFC 3986](http://tools.ietf.org/html/rfc3986#page-13).
+member names use only non-reserved, URL safe characters specified in [RFC 3986](https://datatracker.ietf.org/doc/html/rfc3986#section-2.3).
 
 #### <a href="#document-member-names-allowed-characters" id="document-member-names-allowed-characters" class="headerlink"></a> Allowed Characters
 
