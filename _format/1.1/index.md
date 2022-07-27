@@ -292,16 +292,17 @@ document containing data. This object defines a document's "top level".
 
 A document **MUST** contain at least one of the following top-level members:
 
-* `data`: the document's "primary data"
-* `errors`: an array of [error objects](#errors)
+* `data`: the document's "primary data".
+* `errors`: an array of [error objects](#errors).
 * `meta`: a [meta object][meta] that contains non-standard
   meta-information.
+* a member defined by an applied [extension](#extensions).
 
 The members `data` and `errors` **MUST NOT** coexist in the same document.
 
 A document **MAY** contain any of these top-level members:
 
-* `jsonapi`: an object describing the server's implementation
+* `jsonapi`: an object describing the server's implementation.
 * `links`: a [links object][links] related to the primary data.
 * `included`: an array of [resource objects] that are related to the primary
   data and/or each other ("included resources").
