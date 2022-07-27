@@ -296,7 +296,7 @@ A document **MUST** contain at least one of the following top-level members:
 * `errors`: an array of [error objects](#errors).
 * `meta`: a [meta object][meta] that contains non-standard
   meta-information.
-* a member defined by an applied extension.
+* a member defined by an applied [extension](#extensions).
 
 The members `data` and `errors` **MUST NOT** coexist in the same document.
 
