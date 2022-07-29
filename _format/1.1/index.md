@@ -498,6 +498,7 @@ A "relationship object" **MUST** contain at least one of the following:
 * `data`: [resource linkage]
 * `meta`: a [meta object][meta] that contains non-standard meta-information about the
   relationship.
+* a member defined by an applied [extension](#extensions).
 
 A relationship object that represents a to-many relationship **MAY** also contain
 [pagination] links under the `links` member, as described below. Any
