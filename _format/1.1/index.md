@@ -1752,14 +1752,14 @@ does not want to allow deletion of records the client has not seen.
 
 ##### <a href="#crud-updating-responses-200" id="crud-updating-responses-200" class="headerlink"></a> 200 OK
 
-If a server accepts an update but also changes the targeted resource(s) in ways
+If a server accepts an update but also changes the targeted resource in ways
 other than those specified by the request (for example, updating the
 `updatedAt` attribute or a computed `sha`), it **MUST** return a `200 OK`
-response and a document that contains the updated resource(s) as primary data.
+response and a document that contains the updated resource as primary data.
 
 A server **MAY** return a `200 OK` response with a document that contains no
 primary data if an update is successful and the server does not change the
-targeted resource(s) in ways other than those specified by the request. Other
+targeted resource in ways other than those specified by the request. Other
 top-level members, such as [meta], could be included in the response document.
 
 ##### <a href="#crud-updating-responses-202" id="crud-updating-responses-202" class="headerlink"></a> 202 Accepted
@@ -1771,7 +1771,7 @@ return a `202 Accepted` status code.
 ##### <a href="#crud-updating-responses-204" id="crud-updating-responses-204" class="headerlink"></a> 204 No Content
 
 If an update is successful and the server doesn't change the targeted
-resource(s) in ways other than those specified by the request, the server
+resource in ways other than those specified by the request, the server
 **MUST** return either a `200 OK` status code and response document (as
 described above) or a `204 No Content` status code with no response document.
 
