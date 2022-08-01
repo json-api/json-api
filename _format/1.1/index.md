@@ -895,8 +895,8 @@ The following characters **MUST NOT** be used in implementation and
 - U+002B PLUS SIGN, "+" _(has overloaded meaning in URL query strings)_
 - U+002C COMMA, "," _(used as a separator between relationship paths)_
 - U+002E PERIOD, "." _(used as a separator within relationship paths)_
-- U+005B LEFT SQUARE BRACKET, "[" _(used in sparse fieldsets)_
-- U+005D RIGHT SQUARE BRACKET, "]" _(used in sparse fieldsets)_
+- U+005B LEFT SQUARE BRACKET, "[" _(used in query parameter families)_
+- U+005D RIGHT SQUARE BRACKET, "]" _(used in query parameter families)_
 - U+0021 EXCLAMATION MARK, "!"
 - U+0022 QUOTATION MARK, '"'
 - U+0023 NUMBER SIGN, "#"
