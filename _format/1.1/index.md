@@ -1831,8 +1831,8 @@ relationship is deleted (as a garbage collection measure).
 
 #### <a href="#crud-updating-to-one-relationships" id="crud-updating-to-one-relationships" class="headerlink"></a> Updating To-One Relationships
 
-A server **MUST** respond to `PATCH` requests to a URL from a to-one
-[relationship link][relationships] as described below.
+A to-one relationship can be updated by sending a `PATCH` request to a URL
+from a to-one [relationship link][relationships].
 
 The `PATCH` request **MUST** include a top-level member named `data` containing
 one of:
@@ -1869,8 +1869,8 @@ a successful response.
 
 #### <a href="#crud-updating-to-many-relationships" id="crud-updating-to-many-relationships" class="headerlink"></a> Updating To-Many Relationships
 
-A server **MUST** respond to `PATCH`, `POST`, and `DELETE` requests to a
-URL from a to-many [relationship link][relationships] as described below.
+A to-many relationship can be updated by sending a `PATCH`, `POST`, or
+`DELETE` request to a URL from a to-many [relationship link][relationships].
 
 For all request types, the body **MUST** contain a `data` member whose value
 is an empty array or an array of [resource identifier objects][resource identifier object].
