@@ -2020,7 +2020,7 @@ responses, in accordance with
 
 ### <a href="#crud-deleting" id="crud-deleting" class="headerlink"></a> Deleting Resources
 
-An individual resource can be *deleted* by making a `DELETE` request to the
+A resource can be *deleted* by seding a `DELETE` request to the
 resource's URL:
 
 ```http
