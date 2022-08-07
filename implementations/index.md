@@ -15,6 +15,7 @@ assembled to vet them.
 
 ### <a href="#client-libraries-javascript" id="client-libraries-javascript" class="headerlink"></a> JavaScript
 
+* [jsonapi-metal-client](https://github.com/masterT/jsonapi-metal-client) Bare metal TypeScript and JavaScript client for web API implementing JSON:API v1.0
 * [ember-data](https://github.com/emberjs/data) is one of the original exemplar implementations. There is now an [official adapter](https://emberjs.com/api/ember-data/release/classes/DS.JSONAPIAdapter) to support json-api.
 * [backbone-jsonapi](https://github.com/guillaumervls/backbone-jsonapi) is a Backbone adapter for JSON:API. Supports fetching Models & Collections from a JSON:API source.
 * [backbone-relational-jsonapi](https://github.com/xbill82/backbone-relational-jsonapi) is a parsing layer for Backbone.Relational. Entities specified in JSON:API are automatically parsed to be injected into Backbone.Relational relations.
@@ -56,6 +57,8 @@ isomorphic ActiveRecord clone that issues JSON:API requests instead of SQL and i
 * [json-api-models](https://github.com/tobyzerner/json-api-models) - A lightweight layer for working with JSON:API data.
 
 ### <a href="#client-libraries-typescript" id="client-libraries-typescript" class="headerlink"></a> Typescript
+
+* [jsonapi-metal-client](https://github.com/masterT/jsonapi-metal-client) Bare metal TypeScript and JavaScript client for web API implementing JSON:API v1.0
 * [ts-angular-jsonapi](https://github.com/reyesoft/ts-angular-jsonapi) A JSON:API library developed for AngularJS in Typescript
 * [ngrx-json-api](https://github.com/abdulhaq-e/ngrx-json-api) A JSON:API client for Angular 2 ngrx toolset
 * [ts-jsonapi](https://github.com/mohuk/ts-jsonapi) JSON:API (De)Serializer in Typescript
