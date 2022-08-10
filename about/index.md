@@ -39,7 +39,7 @@ JSON:API was originally drafted by [Yehuda Katz](https://twitter.com/wycats)
 in May 2013. This first draft was extracted from the JSON transport
 implicitly defined by [Ember](https://emberjs.com/) Data's REST adapter.
 
-The goals of the media type are to balance:
+The goals of the JSON:API specification are to balance:
 
 * A generic media type that can work across a broad set of use cases,
   including the generally used relationship types
