@@ -3,7 +3,17 @@
     "type": "test+1",
     "id": "1",
     "attributes": {
-      "something": "wrong"
+      "title": "JSON:API, a specification for building APIs in JSON"
     }
+  },
+  "meta": {
+    "errors-present-in-document": [
+      {
+        "detail": "The values of type members **MUST** contain only allowed characters.",
+        "source": {
+          "pointer": "/data/type"
+        }
+      }
+    ]
   }
 }

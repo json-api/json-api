@@ -3,10 +3,20 @@
     "type": "article",
     "id": "1",
     "attributes": {
-      "title": "Rails is Omakase"
+      "title": "JSON:API, a specification for building APIs in JSON"
     },
     "relationships": {
       "author": {}
     }
+  },
+  "meta": {
+    "errors-present-in-document": [
+      {
+        "detail": "A \"relationship object\" **MUST** contain at least one of the following: links, data, meta.",
+        "source": {
+          "pointer": "/data/relationships/author"
+        }
+      }
+    ]
   }
 }

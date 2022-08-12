@@ -1,14 +1,9 @@
 {
   "data": {
     "type": "article",
-    "id": "1",
+    "id": "c0f10761-a507-4a9f-920a-9d967bcec335",
     "attributes": {
       "title": "JSON:API, a specification for building APIs in JSON"
-    },
-    "relationships": {
-      "author": {
-        "data": null
-      }
     }
   }
 }

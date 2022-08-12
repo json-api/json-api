@@ -2,7 +2,17 @@
   "data": {
     "id": "3",
     "attributes": {
-      "something": "bad"
+      "title": "JSON:API, a specification for building APIs in JSON"
     }
+  },
+  "meta": {
+    "errors-present-in-document": [
+      {
+        "detail": "A resource object **MUST** contain at least the following top-level members: id, type.",
+        "source": {
+          "pointer": "/data"
+        }
+      }
+    ]
   }
 }

@@ -1,6 +1,13 @@
 {
+  "something": "wrong",
   "meta": {
-    "this-one": "is ok"
-  },
-  "something": "wrong"
+    "errors-present-in-document": [
+      {
+        "detail": "Unless otherwise noted, objects defined by this specification **MUST NOT** contain any additional members (here, \"something\").",
+        "source": {
+          "pointer": "/"
+        }
+      }
+    ]
+  }
 }

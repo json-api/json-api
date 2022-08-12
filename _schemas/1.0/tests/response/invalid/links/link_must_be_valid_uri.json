@@ -3,6 +3,13 @@
     "self": "wrong"
   },
   "meta": {
-    "something": "is wrong"
+    "errors-present-in-document": [
+      {
+        "detail": "If represented as a string, a link **MUST** be a string containing a valid URI.",
+        "source": {
+          "pointer": "/links/self"
+        }
+      }
+    ]
   }
 }

@@ -1,14 +1,14 @@
 {
   "errors": [
-    "wrong",
+    "wrong : An error object **MUST** be an object.",
     {
       "id": 0,
       "status": "400",
       "code": "4",
       "title": "Oh no!",
-      "detail": "something",
+      "detail": "The id member **MUST** be a string.",
       "source": {
-        "pointer": "/data"
+        "pointer": "/id"
       }
     },
     {
@@ -16,9 +16,9 @@
       "status": 400,
       "code": "4",
       "title": "Oh no!",
-      "detail": "something",
+      "detail": "The status member **MUST** be a string.",
       "source": {
-        "pointer": "/data"
+        "pointer": "/status"
       }
     },
     {
@@ -26,9 +26,9 @@
       "status": "400",
       "code": 4,
       "title": "Oh no!",
-      "detail": "something",
+      "detail": "The code member **MUST** be a string.",
       "source": {
-        "pointer": "/data"
+        "pointer": "/code"
       }
     },
     {
@@ -38,9 +38,9 @@
       "title": {
         "wrong": "Oh no!"
       },
-      "detail": "something",
+      "detail": "The title member **MUST** be a string.",
       "source": {
-        "pointer": "/data"
+        "pointer": "/title"
       }
     },
     {
@@ -49,10 +49,10 @@
       "code": "4",
       "title": "Oh no!",
       "detail": {
-        "wrong": "That's too bad..."
+        "wrong": "The detail member **MUST** be a string."
       },
       "source": {
-        "pointer": "/data"
+        "pointer": "/details"
       }
     },
     {
@@ -60,10 +60,10 @@
       "status": "400",
       "code": "4",
       "title": "Oh no!",
-      "detail": "something",
+      "detail": "The pointer member **MUST** be a string.",
       "source": {
         "pointer": {
-          "wrong": "not a string"
+          "wrong": "/source/pointer"
         }
       }
     },
@@ -72,9 +72,9 @@
       "status": "400",
       "code": "4",
       "title": "Oh no!",
-      "detail": "something",
+      "detail": "The pointer member **MUST** be a valid JSON Pointer [RFC6901].",
       "source": {
-        "pointer": "bad pattern"
+        "pointer": "bad pattern for /source/pointer"
       }
     },
     {
@@ -82,8 +82,9 @@
       "status": "400",
       "code": "4",
       "title": "Oh no!",
-      "detail": "something",
+      "detail": "The parameter member **MUST** be a string.",
       "source": {
+        "pointer": "/source/parameter",
         "parameter": {
           "wrong": "not a string"
         }
@@ -94,7 +95,10 @@
       "status": "400",
       "code": "4",
       "title": "Oh no!",
-      "detail": "something",
+      "detail": "Unless otherwise noted, objects defined by this specification **MUST NOT** contain any additional members (here, \"wrong\").",
+      "source": {
+        "pointer": "/wrong"
+      },
       "wrong": "not allowed"
     },
     {
@@ -102,7 +106,10 @@
       "status": "400",
       "code": "4",
       "title": "Oh no!",
-      "detail": "something",
+      "detail": "Unless otherwise noted, objects defined by this specification **MUST NOT** contain any additional members (here, \"wrong\").",
+      "source": {
+        "pointer": "/links/wrong"
+      },
       "links": {
         "wrong": "http://www.example.com/not/allowed"
       }
@@ -112,7 +119,7 @@
       "status": "400",
       "code": "4",
       "title": "Oh no!",
-      "detail": "something",
+      "detail": "The source member **MUST** be an object.",
       "source": "not an object"
     },
     {
@@ -120,7 +127,10 @@
       "status": "400",
       "code": "4",
       "title": "Oh no!",
-      "detail": "something",
+      "detail": "The value of each meta member **MUST** be an object (a \"meta object\").",
+      "source": {
+        "pointer": "/meta"
+      },
       "meta": "not an object"
     }
   ]

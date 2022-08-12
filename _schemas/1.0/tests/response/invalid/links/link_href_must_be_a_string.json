@@ -5,6 +5,13 @@
     }
   },
   "meta": {
-    "something": "is wrong"
+    "errors-present-in-document": [
+      {
+        "detail": "The href member **MUST** be a string containing the link’s URL.",
+        "source": {
+          "pointer": "/links/self/href"
+        }
+      }
+    ]
   }
 }

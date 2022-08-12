@@ -1,3 +1,13 @@
 {
-  "data": "not valid"
+  "data": "not valid",
+  "meta": {
+    "errors-present-in-document": [
+      {
+        "detail": "Primary data **MUST** be either: 1) a single resource object, a single resource identifier object, or null, for requests that target single resource 2) an array of resource objects, an array of resource identifier objects, or an empty array ([]), for requests that target resource collections",
+        "source": {
+          "pointer": "/data"
+        }
+      }
+    ]
+  }
 }

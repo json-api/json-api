@@ -3,7 +3,7 @@
     "type": "article",
     "id": "1",
     "attributes": {
-      "title": "Rails is Omakase"
+      "title": "JSON:API, a specification for building APIs in JSON"
     },
     "relationships": {
       "notValid+": {
@@ -13,5 +13,15 @@
         }
       }
     }
+  },
+  "meta": {
+    "errors-present-in-document": [
+      {
+        "detail": "Member names **MUST** contain only allowed characters.",
+        "source": {
+          "pointer": "/data/relationships"
+        }
+      }
+    ]
   }
 }

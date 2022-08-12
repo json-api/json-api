@@ -6,7 +6,7 @@
     "type": "articles",
     "id": "1",
     "attributes": {
-      "title": "JSON:API paints my bikeshed!"
+      "title": "JSON:API, a specification for building APIs in JSON"
     },
     "relationships": {
       "author": {
@@ -36,5 +36,15 @@
         "twitter": "dgeb"
       }
     }
-  ]
+  ],
+  "meta": {
+    "errors-present-in-document": [
+      {
+        "detail": "A compound document **MUST NOT** include more than one resource object for each \"type\" and \"id\" pair.",
+        "source": {
+          "pointer": "/included"
+        }
+      }
+    ]
+  }
 }

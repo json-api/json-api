@@ -3,12 +3,22 @@
     "type": "article",
     "id": "1",
     "attributes": {
-      "title": "Rails is Omakase"
+      "title": "JSON:API, a specification for building APIs in JSON"
     },
     "relationships": {
       "author": {
         "data": "too bad"
       }
     }
+  },
+  "meta": {
+    "errors-present-in-document": [
+      {
+        "detail": "Resource linkage **MUST** be represented as one of the following: null for empty to-one relationships, an empty array ([]) for empty to-many relationships, a single resource identifier object for non-empty to-one relationships, an array of resource identifier objects for non-empty to-many relationships.",
+        "source": {
+          "pointer": "/data/relationships/author/data"
+        }
+      }
+    ]
   }
 }

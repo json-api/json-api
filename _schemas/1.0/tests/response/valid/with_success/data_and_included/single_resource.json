@@ -6,7 +6,7 @@
     "type": "articles",
     "id": "1",
     "attributes": {
-      "title": "JSON:API paints my bikeshed!"
+      "title": "JSON:API, a specification for building APIs in JSON"
     },
     "relationships": {
       "author": {
@@ -75,7 +75,7 @@
       "type": "comments",
       "id": "12",
       "attributes": {
-        "body": "I like XML better"
+        "body": "Second"
       },
       "relationships": {
         "author": {

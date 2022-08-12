@@ -2,5 +2,15 @@
   "data": {
     "type": "",
     "id": "1"
+  },
+  "meta": {
+    "errors-present-in-document": [
+      {
+        "detail": "The values of type members **MUST** contain only allowed characters.",
+        "source": {
+          "pointer": "/data/type"
+        }
+      }
+    ]
   }
 }

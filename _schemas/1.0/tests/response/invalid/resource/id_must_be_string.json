@@ -3,7 +3,17 @@
     "type": "article",
     "id": 2,
     "attributes": {
-      "something": "wrong"
+      "title": "JSON:API, a specification for building APIs in JSON"
     }
+  },
+  "meta": {
+    "errors-present-in-document": [
+      {
+        "detail": "A resource's id member **MUST** be a string.",
+        "source": {
+          "pointer": "/data/id"
+        }
+      }
+    ]
   }
 }

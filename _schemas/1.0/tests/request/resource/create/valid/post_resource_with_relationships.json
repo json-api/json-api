@@ -5,22 +5,24 @@
       "title": "JSON:API, a specification for building APIs in JSON"
     },
     "relationships": {
-      "type": {
+      "toOne": {
         "data": {
           "type": "status",
           "id": "140"
         }
+      },
+      "toMany": {
+        "data": [
+          {
+            "type": "tag",
+            "id": "15"
+          },
+          {
+            "type": "tag",
+            "id": "32"
+          }
+        ]
       }
     }
-  },
-  "meta": {
-    "errors-present-in-document": [
-      {
-        "detail": "A relationship **CAN NOT** be named type or id.",
-        "source": {
-          "pointer": "/data/relationships"
-        }
-      }
-    ]
   }
 }

@@ -1,5 +1,15 @@
 {
   "data": [
     "not valid"
-  ]
+  ],
+  "meta": {
+    "errors-present-in-document": [
+      {
+        "detail": "A resource **MUST** be an object.",
+        "source": {
+          "pointer": "/data/0"
+        }
+      }
+    ]
+  }
 }

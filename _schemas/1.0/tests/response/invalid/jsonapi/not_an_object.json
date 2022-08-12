@@ -1,7 +1,4 @@
 {
-  "meta": {
-    "something": "wrong"
-  },
   "jsonapi": [
     {
       "version": "1.0"
@@ -11,5 +8,15 @@
         "key+": "wrong"
       }
     }
-  ]
+  ],
+  "meta": {
+    "errors-present-in-document": [
+      {
+        "detail": "If present, the value of the jsonapi member **MUST** be an object (a \"jsonapi object\").",
+        "source": {
+          "pointer": "/jsonapi"
+        }
+      }
+    ]
+  }
 }

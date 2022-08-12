@@ -3,7 +3,7 @@
     "type": "article",
     "id": "1",
     "attributes": {
-      "something": true
+      "title": "JSON:API, a specification for building APIs in JSON"
     }
   },
   "meta": {

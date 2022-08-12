@@ -3,5 +3,15 @@
     "type": "article",
     "id": "1",
     "bad": "property"
+  },
+  "meta": {
+    "errors-present-in-document": [
+      {
+        "detail": "Unless otherwise noted, objects defined by this specification **MUST NOT** contain any additional members (here, \"bad\").",
+        "source": {
+          "pointer": "/data"
+        }
+      }
+    ]
   }
 }

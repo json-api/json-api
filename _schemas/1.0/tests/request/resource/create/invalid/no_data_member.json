@@ -1,5 +1,12 @@
 {
   "meta": {
-    "somthing": "wrong"
+    "errors-present-in-document": [
+      {
+        "detail": "The request **MUST** include a top-level member named \"data\".",
+        "source": {
+          "pointer": "/"
+        }
+      }
+    ]
   }
 }

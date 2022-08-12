@@ -13,8 +13,8 @@
       "type": "article",
       "id": "1",
       "attributes": {
-        "title": "Rails is Omakase"
-      },
+        "title": "JSON:API, a specification for building APIs in JSON"
+    },
       "relationships": {
         "author": {
           "links": {

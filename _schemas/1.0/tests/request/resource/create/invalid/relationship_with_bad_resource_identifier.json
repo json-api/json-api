@@ -2,7 +2,7 @@
   "data": {
     "type": "article",
     "attributes": {
-      "title": "PHP is so crazy !"
+      "title": "JSON:API, a specification for building APIs in JSON"
     },
     "relationships": {
       "toOne": {
@@ -11,5 +11,15 @@
         }
       }
     }
+  },
+  "meta": {
+    "errors-present-in-document": [
+      {
+        "detail": "A resource object **MUST** contain at least the following top-level members: id, type.",
+        "source": {
+          "pointer": "/data/relationships/toOne/data"
+        }
+      }
+    ]
   }
 }

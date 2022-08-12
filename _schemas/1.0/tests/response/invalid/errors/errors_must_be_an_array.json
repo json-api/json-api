@@ -2,5 +2,15 @@
   "errors": {
     "status": "400",
     "title": "Oh no!"
+  },
+  "meta": {
+    "errors-present-in-document": [
+      {
+        "detail": "The top-level errors member **MUST** be an array of error objects.",
+        "source": {
+          "pointer": "/errors"
+        }
+      }
+    ]
   }
 }

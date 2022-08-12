@@ -6,5 +6,15 @@
       "type": "bad",
       "something": "wrong"
     }
+  },
+  "meta": {
+    "errors-present-in-document": [
+      {
+        "detail": "A resource **CAN NOT** have an attribute named type or id.",
+        "source": {
+          "pointer": "/data/attributes"
+        }
+      }
+    ]
   }
 }

@@ -1,8 +1,15 @@
 {
-  "meta": {
-    "something": "wrong"
-  },
   "jsonapi": {
     "version": 1
+  },
+  "meta": {
+    "errors-present-in-document": [
+      {
+        "detail": "If present, the value of the version member **MUST** be a string.",
+        "source": {
+          "pointer": "/jsonapi/version"
+        }
+      }
+    ]
   }
 }

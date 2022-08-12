@@ -6,7 +6,7 @@
     "type": "articles",
     "id": "1",
     "attributes": {
-      "title": "JSON:API paints my bikeshed!"
+      "title": "JSON:API, a specification for building APIs in JSON"
     },
     "relationships": {
       "author": {
@@ -25,5 +25,15 @@
       "lastName": "Gebhardt",
       "twitter": "dgeb"
     }
+  },
+  "meta": {
+    "errors-present-in-document": [
+      {
+        "detail": "The top-level included member **MUST** be an array of resource objects.",
+        "source": {
+          "pointer": "/included"
+        }
+      }
+    ]
   }
 }

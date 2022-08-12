@@ -3,7 +3,17 @@
     "type": 400,
     "id": "1",
     "attributes": {
-      "something": "wrong"
+      "title": "JSON:API, a specification for building APIs in JSON"
     }
+  },
+  "meta": {
+    "errors-present-in-document": [
+      {
+        "detail": "A resource's type member **MUST** be a string.",
+        "source": {
+          "pointer": "/data/type"
+        }
+      }
+    ]
   }
 }

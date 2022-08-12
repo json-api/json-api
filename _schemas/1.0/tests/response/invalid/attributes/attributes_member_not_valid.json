@@ -6,5 +6,15 @@
       "key+": "bad",
       "something": "wrong"
     }
+  },
+  "meta": {
+    "errors-present-in-document": [
+      {
+        "detail": "Member names **MUST** contain only allowed characters.",
+        "source": {
+          "pointer": "/data/attributes"
+        }
+      }
+    ]
   }
 }

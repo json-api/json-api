@@ -1,5 +1,15 @@
 {
   "errors": [
     "wrong"
-  ]
+  ],
+  "meta": {
+    "errors-present-in-document": [
+      {
+        "detail": "An error object **MUST** be an object.",
+        "source": {
+          "pointer": "/errors/0"
+        }
+      }
+    ]
+  }
 }

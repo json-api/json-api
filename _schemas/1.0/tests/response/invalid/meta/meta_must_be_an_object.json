@@ -1,3 +1,14 @@
 {
-  "meta": "not valid"
+  "meta": [
+    {
+      "errors-present-in-document": [
+        {
+          "detail": "The value of each meta member **MUST** be an object (a \"meta object\").",
+          "source": {
+            "pointer": "/meta"
+          }
+        }
+      ]
+    }
+  ]
 }
