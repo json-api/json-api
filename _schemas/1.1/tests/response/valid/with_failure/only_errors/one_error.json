@@ -1,26 +1,26 @@
 {
-    "errors": [
-        {
-            "id": "1",
-            "links": {
-                "about": "http://www.example.com/errors/1",
-                "type": "http://www.example.com/errors/type"
-            },
-            "status": "400",
-            "code": "0x002",
-            "title": "human-readable summary of the problem",
-            "source": {
-                "pointer": "/data/id"
-            }
-        },
-        {
-            "id": "1",
-            "status": "400",
-            "code": "0x006",
-            "title": "human-readable summary of the problem",
-            "source": {
-                "header": "wrong-header"
-            }
-        }
-    ]
+  "errors": [
+    {
+      "id": "1",
+      "links": {
+        "about": "http://www.example.com/errors/1",
+        "type": "http://www.example.com/errors/type"
+      },
+      "status": "400",
+      "code": "0x002",
+      "title": "human-readable summary of the problem",
+      "source": {
+        "pointer": "/data/id"
+      }
+    },
+    {
+      "id": "1",
+      "status": "400",
+      "code": "0x006",
+      "title": "human-readable summary of the problem",
+      "source": {
+        "header": "wrong-header"
+      }
+    }
+  ]
 }

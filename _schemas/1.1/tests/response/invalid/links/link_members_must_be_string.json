@@ -1,19 +1,62 @@
 {
-    "links": {
-        "self": {
-            "href": "http://example.com",
-            "rel": ["bad"],
-            "title": {
-                "attr": "wrong"
-            },
-            "type": 0,
-            "hreflang": ["bad"],
-            "describedby": {
-                "attr": "wrong"
-            }
-        }
-    },
-    "meta": {
-        "something": "is wrong"
+  "links": {
+    "self": {
+      "href": "http://example.com",
+      "rel": ["bad"],
+      "title": {
+        "attr": "wrong"
+      },
+      "type": 0,
+      "hreflang": ["bad"],
+      "describedby": {
+        "attr": "wrong"
+      }
     }
+  },
+  "meta": {
+    "errors-present-in-document": [
+      {
+        "detail": "The rel member **MUST** be a string indicating the link’s relation type.",
+        "source": {
+          "pointer": "/links/self/rel"
+        }
+      },
+      {
+        "detail": "The title member **MUST** be a string which serves as a label for the destination of a link such that it can be used as a human-readable identifier (e.g., a menu entry).",
+        "source": {
+          "pointer": "/links/self/title"
+        }
+      },
+      {
+        "detail": "The type member **MUST** be a string indicating the media type of the link’s target.",
+        "source": {
+          "pointer": "/links/self/type"
+        }
+      },
+      {
+        "detail": "The hreflang member **MUST** be a string or an array of strings indicating the language(s) of the link’s target.",
+        "source": {
+          "pointer": "/links/self/hreflang"
+        }
+      },
+      {
+        "detail": "A link **MUST** be represented as either: a string containing the link's URL or a link object.",
+        "source": {
+          "pointer": "/links/self/describedby"
+        }
+      },
+      {
+        "detail": "The describedby member **MUST** be a string.",
+        "source": {
+          "pointer": "/links/self/describedby"
+        }
+      },
+      {
+        "detail": "A link object **MUST** contain a href member.",
+        "source": {
+          "pointer": "/links/self/describedby"
+        }
+      }
+    ]
+  }
 }

@@ -3,7 +3,17 @@
     "type": "article",
     "lid": 6,
     "attributes": {
-      "title": "PHP is so crazy !"
+      "title": "JSON:API, a specification for building APIs in JSON"
     }
+  },
+  "meta": {
+    "errors-present-in-document": [
+      {
+        "detail": "A resource's lid member **MUST** be a string.",
+        "source": {
+          "pointer": "/data/lid"
+        }
+      }
+    ]
   }
 }
