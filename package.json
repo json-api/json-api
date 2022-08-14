@@ -1,0 +1,7 @@
+{
+  "dependencies": {
+    "ajv": "^8.11.0",
+    "ajv-formats": "^2.1.1",
+    "readdirp": "^3.6.0"
+  }
+}

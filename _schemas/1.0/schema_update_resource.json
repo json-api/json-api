@@ -4,6 +4,7 @@
   "$comment": "The $id URI should be modified before releasing. This URI does not need to be network addressable. It is an ID only.",
   "title": "JSON:API Schema for POST request",
   "description": "This schema only validates a request for PATCHing a resource.",
+  "type": "object",
   "required": [
     "data"
   ],

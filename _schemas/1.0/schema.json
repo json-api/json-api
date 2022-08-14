@@ -12,6 +12,7 @@
       "$ref": "#/definitions/oneOfDataOrErrors"
     }
   ],
+  "type": "object",
   "properties": {
     "data": {
       "$ref": "#/definitions/data"
@@ -133,6 +134,7 @@
     },
     "errorLinks": {
       "description": "The error links object **MAY** contain the following members: about.",
+      "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/links"
@@ -234,6 +236,7 @@
       "additionalProperties": false
     },
     "oneOfDataOrErrors": {
+      "type": "object",
       "dependencies": {
         "data": {
           "not": {
@@ -336,6 +339,7 @@
     },
     "relationshipLinks": {
       "description": "A resource object **MAY** contain references to other resource objects (\"relationships\"). Relationships may be to-one or to-many. Relationships can be specified by including a member in a resource's links object.",
+      "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/links"
@@ -419,11 +423,13 @@
       "not": {
         "anyOf": [
           {
+            "type": "object",
             "required": [
               "type"
             ]
           },
           {
+            "type": "object",
             "required": [
               "id"
             ]
@@ -434,16 +440,19 @@
     "requiredTopLevelMembers": {
       "anyOf": [
         {
+          "type": "object",
           "required": [
             "meta"
           ]
         },
         {
+          "type": "object",
           "required": [
             "data"
           ]
         },
         {
+          "type": "object",
           "required": [
             "errors"
           ]
@@ -491,6 +500,7 @@
           "$ref": "#/definitions/resourceIdentificationNew"
         },
         {
+          "type": "object",
           "required": [
             "type",
             "id"
@@ -532,6 +542,7 @@
     },
     "resourceLinks": {
       "description": "The top-level links object **MAY** contain the following members: self, related, pagination links.",
+      "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/links"
@@ -547,6 +558,7 @@
     },
     "topLevelLinks": {
       "description": "The top-level links object **MAY** contain the following members: self, related, pagination links.",
+      "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/links"
