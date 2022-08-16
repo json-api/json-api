@@ -2,6 +2,7 @@
   "dependencies": {
     "ajv": "^8.11.0",
     "ajv-formats": "^2.1.1",
+    "compare-versions": "^4.1.3",
     "readdirp": "^3.6.0"
   }
 }

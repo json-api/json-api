@@ -4,9 +4,13 @@ const Ajv2020 = require("ajv/dist/2020");
 const addFormats = require("ajv-formats");
 const readdirp = require("readdirp");
 const npath = require("path");
+const compareVersions = require('compare-versions');
 
 // Define root dir
 const rootDir = "./_schemas";
+
+// Define object that will record the full path of all files tested
+const files = {};
 
 // Check for arguments
 const verbose = process.argv.indexOf('-v') > -1;
@@ -30,18 +34,21 @@ const verbose = process.argv.indexOf('-v') > -1;
       // ... add schemas
       await addSchemas(ajv, version);
 
+      // ... prepare record object
+      files[version] = new Array();
+
       // ... test all files
-      const { ok, ko } = await doTest(ajv, version);
+      const { ok, ko } = await handleTests(ajv, version);
 
       // ... log the results
       if (ko.length != 0) {
         console.log("Errors : %d / %d", ko.length, ko.length + ok.length);
 
         if (verbose) {
-          console.log(ko.map(item => item.version + " : " + item.relativePath).join("\n"));
+          console.log(ko.map(item => "error : " + item.version + " : " + item.fullPath).join("\n"));
         }
         // console.log(JSON.stringify(ko, undefined, 2));
-        
+
         process.exit(2);
       } else {
         console.log("Success : %d tests done", ok.length);
@@ -77,12 +84,17 @@ const ajvFactory = function (version) {
 const addSchemas = async function (ajv, version) {
   for await (const entry of readdirp(`${rootDir}/${version}/`, { depth: 0, fileFilter: "*.json" })) {
     const { path, fullPath } = entry;
+
+    // Load schema file
     const schema = require(fullPath);
+
+    // Build the schema key to be used
     const t = path.split(".").shift().split("_");
     t.shift();
     const t2 = t.join("_");
     const key = t2 === "" ? "response" : "request_" + t2;
 
+    // Add schema to the Ajv validator instance
     ajv.addSchema(schema, key);
 
     if (verbose) {
@@ -97,41 +109,96 @@ const addSchemas = async function (ajv, version) {
  * @param {String} version - The version of the JSON:API spec that will be validated
  * @return {{ok: String[], ko: String[]}} - The results of the tests.
  */
-const doTest = async function (ajv, version) {
-  // ... define some constants
+const handleTests = async function (ajv, version) {
+  // Define some constants
   const ok = new Array();
   const ko = new Array();
 
-  for await (const entry of readdirp(`${rootDir}/${version}/tests/`, { fileFilter: "*.json" })) {
-    const { path, fullPath } = entry;
-    const data = require(fullPath);
-
-    const re = new RegExp('(.*)\\' + npath.sep + '(in)?valid\\' + npath.sep);
-    const matches = path.match(re);
-    const valid_data = typeof matches[2] === "undefined";
-
-    const t = matches[1].split(npath.sep);
-    const key = [
-      t.shift(),
-      ...t.reverse()
-    ];
-
-    // Generate validating function
-    const validate = ajv.getSchema(key.join('_'));
-    const valid = validate(data);
-
-    if ((valid && valid_data) || (!valid && !valid_data)) {
-      ok.push(path);
-    } else {
-      ko.push({
-        version: "1.0",
-        relativePath: path,
-        errors: validate.errors
-      });
-      // console.log(validate.errors);
+  // Build a list of test files from previous versions
+  const tmpFiles = new Array();
+  for (const v in files) {
+    if (compareVersions(version, v) === 1) {
+      tmpFiles.push(...files[v]);
     }
   }
 
+  // Validate each file of previous versions
+  tmpFiles.forEach(item => {
+    const result = doTest(ajv, version, item.relativePath, item.fullPath);
+
+    // Handle validation result
+    if (result.ok) {
+      ok.push(result);
+    } else {
+      ko.push(result);
+    }
+  });
+
+  // Iterate through version-specifiques test files
+  for await (const entry of readdirp(`${rootDir}/${version}/tests/`, { fileFilter: "*.json" })) {
+    const { path, fullPath } = entry;
+
+    // Validate test file
+    const result = doTest(ajv, version, path, fullPath);
+
+    // Handle validation result
+    if (result.ok) {
+      ok.push(result);
+    } else {
+      ko.push(result);
+    }
+
+    // Record file path
+    files[version].push({
+      relativePath: path,
+      fullPath: fullPath
+    });
+  }
+
   return { ok, ko };
+};
+
+/**
+ * validate a test file for the given version of the JSON:API spec.
+ * @param {Ajv|Ajv2020} ajv - An instance of Ajv validator
+ * @param {String} version - The version of the JSON:API spec that will be validated
+ * @param {String} relativePath - The relative path of the file to validate.
+ * @param {String} fullPath - The absolute path of the file to validate.
+ * @return {{version: String, relativePath: String, fullPath: String, ok : Boolean, errors: Object}} - The result of the validation.
+ */
+const doTest = function (ajv, version, relativePath, fullPath) {
+  if (verbose) {
+    console.log("testing : %s : %s", version, fullPath);
+  }
+
+  // Load file
+  const data = require(fullPath);
+
+  // Build the schema key to be used
+  const re = new RegExp('(.*)\\' + npath.sep + '(in)?valid\\' + npath.sep);
+  const matches = relativePath.match(re);
+  const valid_data = typeof matches[2] === "undefined";
+
+  const t = matches[1].split(npath.sep);
+  const key = [
+    t.shift(),
+    ...t.reverse()
+  ];
+
+  // Generate validating function
+  const validate = ajv.getSchema(key.join('_'));
+
+  // Validate file
+  const valid = validate(data);
+  const ok = (valid && valid_data) || (!valid && !valid_data);
+
+  // Return result of validation
+  return {
+    version: version,
+    relativePath: relativePath,
+    fullPath: fullPath,
+    ok: ok,
+    errors: !ok ? validate.errors : undefined
+  };
 };
 
