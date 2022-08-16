@@ -17,3 +17,14 @@ place. Ideas for new extensions and questions about how to correctly implement
 or consume an API that adheres to the JSON:API specification belong here.
 
 [about]: http://jsonapi.org/about
+
+## JSON Schema
+If you would like to update the JSON schemas, you must first install the node.js dependencies :
+```
+npm install
+```
+Then you can run the schema validator by running the following command :
+```
+node ./_schemas/scripts/validator.js
+```
+This script accepts only one option (```-v```) that allows more verbose output.
