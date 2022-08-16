@@ -1,5 +1,5 @@
 {
-  "$schema": "http://json-schema.org/draft/2020-12/schema",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://jsonapi.org/schemas/spec/v1.1/draft",
   "title": "JSON:API Schema v1.1",
   "description": "This schema only validates RESPONSES from a request.",
@@ -16,6 +16,7 @@
       "$ref": "#/definitions/atMemberName"
     }
   ],
+  "type": "object",
   "properties": {
     "data": {
       "$ref": "#/definitions/data"
@@ -46,12 +47,14 @@
   "definitions": {
     "atMemberName": {
       "description": "@member name may contain any valid JSON value.",
+      "type": "object",
       "patternProperties": {
         "^@[a-zA-Z0-9]{1}(?:[-\\w]*[a-zA-Z0-9])?$": true
       }
     },
     "memberName": {
       "description": "Member name may contain any valid JSON value.",
+      "type": "object",
       "patternProperties": {
         "^[a-zA-Z0-9]{1}(?:[-\\w]*[a-zA-Z0-9])?$": true
       }
@@ -183,6 +186,7 @@
     },
     "errorLinks": {
       "description": "The error links object **MAY** contain the following members: about.",
+      "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/links"
@@ -345,6 +349,7 @@
       "unevaluatedProperties": false
     },
     "oneOfDataOrErrors": {
+      "type": "object",
       "dependentSchemas": {
         "data": {
           "not": {
@@ -467,6 +472,7 @@
     },
     "relationshipLinks": {
       "description": "A resource object **MAY** contain references to other resource objects (\"relationships\"). Relationships may be to-one or to-many. Relationships can be specified by including a member in a resource's links object.",
+      "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/links"
@@ -555,11 +561,13 @@
       "not": {
         "anyOf": [
           {
+            "type": "object",
             "required": [
               "type"
             ]
           },
           {
+            "type": "object",
             "required": [
               "id"
             ]
@@ -570,16 +578,19 @@
     "requiredTopLevelMembers": {
       "anyOf": [
         {
+          "type": "object",
           "required": [
             "meta"
           ]
         },
         {
+          "type": "object",
           "required": [
             "data"
           ]
         },
         {
+          "type": "object",
           "required": [
             "errors"
           ]
@@ -625,6 +636,7 @@
           "$ref": "#/definitions/resourceIdentificationNew"
         },
         {
+          "type": "object",
           "required": [
             "type",
             "id"
@@ -632,6 +644,7 @@
         },
         {
           "not": {
+            "type": "object",
             "required": [
               "lid"
             ]
@@ -699,6 +712,7 @@
     },
     "resourceLinks": {
       "description": "The top-level links object **MAY** contain the following members: self, related, pagination links.",
+      "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/links"
@@ -719,6 +733,7 @@
     },
     "topLevelLinks": {
       "description": "The top-level links object **MAY** contain the following members: self, related, pagination links.",
+      "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/links"

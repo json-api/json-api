@@ -1,8 +1,9 @@
 {
-  "$schema": "http://json-schema.org/draft/2020-12/schema",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://jsonapi.org/schemas/spec/v1.1/draft/create/resource",
   "title": "JSON:API Schema for POST request",
   "description": "This schema only validates a request for POSTing a new resource.",
+  "type": "object",
   "required": [
     "data"
   ],
