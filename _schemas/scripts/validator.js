@@ -4,7 +4,7 @@ const Ajv2020 = require("ajv/dist/2020");
 const addFormats = require("ajv-formats");
 const readdirp = require("readdirp");
 const npath = require("path");
-const compareVersions = require('compare-versions');
+const compareVersions = require("compare-versions");
 
 // Define root dir
 const rootDir = "./_schemas";
@@ -13,7 +13,7 @@ const rootDir = "./_schemas";
 const files = {};
 
 // Check for arguments
-const verbose = process.argv.indexOf('-v') > -1;
+const verbose = process.argv.indexOf("-v") > -1;
 
 // Main function
 (async function () {
@@ -175,7 +175,7 @@ const doTest = function (ajv, version, relativePath, fullPath) {
   const data = require(fullPath);
 
   // Build the schema key to be used
-  const re = new RegExp('(.*)\\' + npath.sep + '(in)?valid\\' + npath.sep);
+  const re = new RegExp("(.*)\\" + npath.sep + "(in)?valid\\" + npath.sep);
   const matches = relativePath.match(re);
   const valid_data = typeof matches[2] === "undefined";
 
@@ -186,7 +186,7 @@ const doTest = function (ajv, version, relativePath, fullPath) {
   ];
 
   // Generate validating function
-  const validate = ajv.getSchema(key.join('_'));
+  const validate = ajv.getSchema(key.join("_"));
 
   // Validate file
   const valid = validate(data);
