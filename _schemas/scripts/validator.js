@@ -17,6 +17,9 @@ const verbose = process.argv.indexOf("-v") > -1;
 
 // Main function
 (async function () {
+  // Define the exit code
+  let exitCode = 0;
+
   try {
     // List all the available versions of the spec
     for await (const entry of readdirp(rootDir, { depth: 0, entryType: "directories" })) {
@@ -26,7 +29,9 @@ const verbose = process.argv.indexOf("-v") > -1;
       }
 
       // For this version, ...
-      console.log("Version : %s", version);
+      console.log("");
+      console.log("JSON:API spec version : %s", version);
+      console.log("");
 
       // ... create ajv instance
       const ajv = ajvFactory(version);
@@ -41,23 +46,26 @@ const verbose = process.argv.indexOf("-v") > -1;
       const { ok, ko } = await handleTests(ajv, version);
 
       // ... log the results
+      console.log("Tests done : %d, success : %d, errors : %d", ko.length + ok.length, ok.length, ko.length);
       if (ko.length != 0) {
-        console.log("Errors : %d / %d", ko.length, ko.length + ok.length);
-
-        if (verbose) {
-          console.log(ko.map(item => "error : " + item.version + " : " + item.fullPath).join("\n"));
-        }
+        ko.forEach(item => {
+          console.log("");
+          console.log(item.relativePath + " should be " + (item.shouldBeValid ? "valid" : "invalid") + " but is not.");
+          console.log("  spec version : " + item.version);
+          console.log("  absolute path : " + item.fullPath);
+          console.log("  errors : ");
+          console.log(item.errors.map(err => "    " + err.instancePath + " : " + err.message).join("\n"));
+        });
         // console.log(JSON.stringify(ko, undefined, 2));
 
-        process.exit(2);
-      } else {
-        console.log("Success : %d tests done", ok.length);
+        exitCode = 1;
       }
-
     }
   } catch (err) {
     console.log(err);
+    exitCode = 2;
   }
+  process.exit(exitCode);
 })()
 
 /**
@@ -100,6 +108,9 @@ const addSchemas = async function (ajv, version) {
     if (verbose) {
       console.log("Add schema : %s => %s", key, fullPath);
     }
+  }
+  if (verbose) {
+    console.log("");
   }
 };
 
@@ -155,6 +166,10 @@ const handleTests = async function (ajv, version) {
     });
   }
 
+  if (verbose) {
+    console.log("");
+  }
+
   return { ok, ko };
 };
 
@@ -197,6 +212,7 @@ const doTest = function (ajv, version, relativePath, fullPath) {
     version: version,
     relativePath: relativePath,
     fullPath: fullPath,
+    shouldBeValid: valid_data,
     ok: ok,
     errors: !ok ? validate.errors : undefined
   };
