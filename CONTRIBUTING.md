@@ -20,11 +20,15 @@ or consume an API that adheres to the JSON:API specification belong here.
 
 ## JSON Schema
 If you would like to update the JSON schemas, you must first install the node.js dependencies :
-```
+
+`
 npm install
-```
+`
+
 Then you can run the schema validator by running the following command :
-```
+
+`
 node ./_schemas/scripts/validator.js
-```
-This script accepts only one option (```-v```) that allows more verbose output.
+`
+
+This script accepts only one option (`-v`) that allows more verbose output.
