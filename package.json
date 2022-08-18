@@ -6,6 +6,6 @@
     "readdirp": "^3.6.0"
   },
   "scripts": {
-    "test-schema": "node -e _schemas/scripts/validator.js"
+    "test-schema": "node -i _schemas/scripts/validator.js"
   }
 }
