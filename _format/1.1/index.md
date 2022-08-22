@@ -495,6 +495,7 @@ A "relationship object" **MUST** contain at least one of the following:
     for the related resources as its primary data.
     (See [Fetching Relationships](#fetching-relationships).)
   * `related`: a [related resource link]
+  * a member defined by an applied [extension](#extensions).
 * `data`: [resource linkage]
 * `meta`: a [meta object][meta] that contains non-standard meta-information about the
   relationship.
