@@ -7,25 +7,25 @@ title: About
 
 JSON:API is:
 
-  * [@jsonapi](http://twitter.com/jsonapi) on
-[Twitter](http://twitter.com)
+  * [@jsonapi](https://twitter.com/jsonapi) on
+[Twitter](https://twitter.com)
   * _#jsonapi_ channel on [Freenode IRC](http://freenode.net)
-  * [jsonapi discussion forum](http://discuss.jsonapi.org)
+  * [jsonapi discussion forum](https://discuss.jsonapi.org)
 
 ## <a href="#editors" id="editors" class="headerlink"></a> Editors
 
 There are four active editors of this specification:
 
-- [Yehuda Katz](http://twitter.com/wycats)
-- [Dan Gebhardt](http://twitter.com/dgeb)
-- [Gabe Sullice](http://twitter.com/gabesullice)
+- [Yehuda Katz](https://twitter.com/wycats)
+- [Dan Gebhardt](https://twitter.com/dgeb)
+- [Gabe Sullice](https://twitter.com/gabesullice)
 - [Jeldrik Hanschke](https://twitter.com/jelhan1)
 
 The following emeritus editors are no longer active:
 
-- [Tyler Kellen](http://twitter.com/tkellen)
-- [Steve Klabnik](http://twitter.com/steveklabnik)
-- [Ethan Resnick](http://twitter.com/ethanresnick)
+- [Tyler Kellen](https://twitter.com/tkellen)
+- [Steve Klabnik](https://twitter.com/steveklabnik)
+- [Ethan Resnick](https://twitter.com/ethanresnick)
 
 ## <a href="#roadmap" id="roadmap" class="headerlink"></a> Roadmap
 
@@ -36,9 +36,9 @@ The following emeritus editors are no longer active:
 
 ## <a href="#history" id="history" class="headerlink"></a> History
 
-JSON:API was originally drafted by [Yehuda Katz](http://twitter.com/wycats)
+JSON:API was originally drafted by [Yehuda Katz](https://twitter.com/wycats)
 in May 2013. This first draft was extracted from the JSON transport
-implicitly defined by [Ember](http://emberjs.com/) Data's REST adapter.
+implicitly defined by [Ember](https://emberjs.com/) Data's REST adapter.
 
 In general, Ember Data's goal is to eliminate the need for ad-hoc code
 per application to communicate with servers that communicate in a
