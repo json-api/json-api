@@ -3,6 +3,12 @@ version: 1.1
 status: rc
 ---
 
+> **ATTENTION:** As of August 22, 2022, this release candidate is considered
+> feature complete. It will be released as the next official version of the
+> JSON:API specification on **September 30, 2022** unless any significant
+> changes are required. Please review and try out this release candidate prior
+> to its finalization.
+
 ## <a href="#introduction" id="introduction" class="headerlink"></a> Introduction
 
 JSON:API is a specification for how a client should request that resources be
