@@ -14,11 +14,12 @@ JSON:API is:
 
 ## <a href="#editors" id="editors" class="headerlink"></a> Editors
 
-There are three active editors of this specification:
+There are four active editors of this specification:
 
 - [Yehuda Katz](http://twitter.com/wycats)
 - [Dan Gebhardt](http://twitter.com/dgeb)
 - [Gabe Sullice](http://twitter.com/gabesullice)
+- [Jeldrik Hanschke](https://twitter.com/jelhan1)
 
 The following emeritus editors are no longer active:
 
