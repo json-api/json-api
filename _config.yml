@@ -89,7 +89,11 @@ defaults:
 
 latest_version: 1.0
 excerpt_separator: ""
-announcement: ""
+announcement: |
+  **[JSON:API v1.1 RC4](/format/1.1/) has been published! 🎉**
+
+  Please review and try out this upcoming version of the spec before its planned
+  release date of **September 30, 2022**.
 
 navigation:
 - title: JSON API
