@@ -62,11 +62,11 @@ is maintained on a best-effort basis.
 
 ## <a href="#profiles" id="profiles" class="headerlink"></a> Profiles
 
-There are no profiles at this time.
-
-- [Profile Example](https://example.com/profile/foo)
-  - URI: `https://example.com/profile/foo`
-  - Description: Lorem dolor sit amet.
+- [Cursor Pagination](/profiles/ethanresnick/cursor-pagination)
+  - URI: `https://jsonapi.org/profiles/ethanresnick/cursor-pagination`
+  - Description: Cursor-based pagination (aka keyset pagination) is a
+    common pagination strategy that avoids many of the pitfalls of
+    "offset–limit" pagination.
 
 [extensions]: /format/1.1/#extensions
 [profiles]: /format/1.1/#profiles
