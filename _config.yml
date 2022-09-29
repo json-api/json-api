@@ -87,13 +87,10 @@ defaults:
       is_spec_page: false
       show_sidebar: true
 
-latest_version: 1.0
+latest_version: 1.1
 excerpt_separator: ""
 announcement: |
-  **[JSON:API v1.1 RC4](/format/1.1/) has been published! 🎉**
-
-  Please review and try out this upcoming version of the spec before its planned
-  release date of **September 30, 2022**.
+  **[JSON:API v1.1](/format/) was finalized September 30, 2022! 🎉**
 
 navigation:
 - title: JSON API
