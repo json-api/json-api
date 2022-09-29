@@ -123,45 +123,15 @@ base JSON:API specification. These extensions are called profiles.
 You can [browse existing profiles](/extensions/#existing-profiles) or
 [create a new one](/extensions/#profile-creation).
 
-## <a href="#update-history" id="update-history" class="headerlink"></a> Update history
+## <a href="#milestones" id="milestones" class="headerlink"></a> Milestones
 
-- 2022-09-30: Expected final release of 1.1.
-- 2022-08-22: 1.1 Release candidate 4 released.
-  - Formalized the definition of specification and implementation
-    [semantics](https://jsonapi.org/format/1.1/#semantics).
-  - Refined the definitions of
-    [extensions](https://jsonapi.org/format/1.1/#extensions) and
-    [profiles](https://jsonapi.org/format/1.1/#profiles).
-  - Clarified details regarding expected and allowed responses, query
-    parameters, and more.
-- 2020-10-01: 1.1 Release candidate 3 released.
-  - Refined links objects. The link object `params` member was removed to
-    better align with other JSON link serializations. The `anchor` target
-    attribute was also removed. It may be restored in a future minor release.
-- 2020-08-20: 1.1 Release candidate 2 released.
-  - [Extensions](https://jsonapi.org/format/1.1/#extensions) were added and the
-    scope of [profiles](https://jsonapi.org/format/1.1/#profiles) were reduced
-    since their introduction in RC1.
-  - [Links](https://github.com/json-api/json-api/pull/1348) can be represented
-    as [RFC 8288](https://tools.ietf.org/html/rfc8288)-style web links.
-  - A new [`describedby`](https://github.com/json-api/json-api/pull/1447) [links member](https://jsonapi.org/format/1.1/#document-top-level)
-    was added so that implementors can incorporate description documents (e.g.
-    [OpenAPI](https://www.openapis.org/) or [JSON Schema](https://json-schema.org/specification.html))
-    directly into their APIs.
-  - [Local IDs](https://jsonapi.org/format/1.1/#document-resource-object-identification)
-    were [introduced](https://github.com/json-api/json-api/pull/1244) so that a
-    client can create a relationship to a resource yet-to-be created by the
-    same request.
-- 2018-12-01: 1.1 Release candidate 1 released.
-  - New features include: [profiles](https://jsonapi.org/format/1.1/#profiles), ["@-Members"](https://jsonapi.org/format/1.1/#document-member-names-at-members), and [error object `type` links](https://jsonapi.org/format/1.1/#error-objects).
-  - There are editorial clarifications around: [query parameters](https://jsonapi.org/format/1.1/#query-parameters) (their parsing/serialization, and reserved parameter names), the appropriate status code for [specific](https://github.com/json-api/json-api/pull/1036) [responses](https://github.com/json-api/json-api/pull/1029), and the [presence of the `included` key](https://github.com/json-api/json-api/pull/1236) even when its value is an empty array.
-  - JSON:API switched to [recommending camelCased names](https://jsonapi.org/recommendations/#naming).
+Major milestones for this specification include:
+
+- 2022-09-30: 1.1 final released.
 - 2015-05-29: 1.0 final released.
-- 2015-05-21: 1.0 Release candidate 4 released.
-- 2015-03-16: 1.0 Release candidate 3 released.
-- 2015-02-18: 1.0 Release candidate 2 released.
-- 2014-07-05: 1.0 Release candidate 1 released.
 - 2013-07-21: Media type registration completed with the IANA.
 - 2013-05-03: Initial release of the draft.
+
+A more thorough history is available [here](/about/#update-history).
 
 You can subscribe to an RSS feed of individual changes [here](https://github.com/json-api/json-api/commits.atom).
