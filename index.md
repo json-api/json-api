@@ -5,14 +5,13 @@ show_masthead: true
 ---
 
 If you've ever argued with your team about the way your JSON responses
-should be formatted, JSON:API can be your anti-[bikeshedding](http://bikeshed.org) tool.
+should be formatted, JSON:API can help you stop the
+[bikeshedding](http://bikeshed.org) and focus on what matters:
+**your application**.
 
-By following shared conventions, you can increase productivity,
-take advantage of generalized tooling, and focus on what
-matters: your application.
-
-Clients built around JSON:API are able to take
-advantage of its features around efficiently caching responses,
+By following shared conventions, you can increase productivity, take advantage
+of generalized tooling and best practices. Clients built around JSON:API are
+able to take advantage of its features around efficiently caching responses,
 sometimes eliminating network requests entirely.
 
 Here's an example response from a blog that implements JSON:API:
