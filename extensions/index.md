@@ -5,10 +5,6 @@ show_sidebar: true
 redirect_from: /profiles
 ---
 
-> Note: This page describes features from [an upcoming version of the of the
-> JSON:API specification](/format/1.1/) and is subject to change without
-> notice.
-
 The JSON:API specification provides a way to define new functionality not
 provided by the base specification using [extensions]. Additionally, it
 provides a means to share a particular usage of the specification among
@@ -68,8 +64,8 @@ is maintained on a best-effort basis.
     common pagination strategy that avoids many of the pitfalls of
     "offset–limit" pagination.
 
-[extensions]: /format/1.1/#extensions
-[profiles]: /format/1.1/#profiles
-[attributes]: /format/1.1/#document-resource-object-attributes
-[pagination]: /format/1.1/#fetching-pagination
+[extensions]: /format/#extensions
+[profiles]: /format/#profiles
+[attributes]: /format/#document-resource-object-attributes
+[pagination]: /format/#fetching-pagination
 [editors]: /about/#editors
