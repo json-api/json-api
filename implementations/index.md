@@ -211,7 +211,7 @@ and writing of JSON:API documents.
 * [jsonapi-fractal](https://github.com/andersondanilo/jsonapi-fractal) JSON:API Serializer inspired by Fractal (PHP)
 * [ts-japi](https://github.com/jun-sheaf/ts-japi) - A zero-dependency, highly-modular, js/ts-friendly, recursible, framework-agnostic library for serializing data to the JSON:API specification. Serializes the entire specification.
 * [Kurier](https://github.com/kurierjs/kurier) is a TypeScript framework to create APIs following the [1.1 Spec of JSON:API](https://jsonapi.org/format/1.1/) + the [Operations proposal spec](https://github.com/json-api/json-api/blob/999e6df77b28549d6c37b163b73c8e9102400020/_format/1.1/index.md#operations).
-* [nestjs-json-api](https://github.com/ringcentral/nestjs-json-api) A module for NestJS and TypeORM to implement JSON API supporting features such as, end point, query params, body params, validation and transformation response.
+* [nestjs-json-api](https://github.com/klerick/nestjs-json-api) A module for NestJS and TypeORM to implement JSON API supporting features such as, end point, query params, body params, validation and transformation response.
 
 ### <a href="#server-libraries-ruby" id="server-libraries-ruby" class="headerlink"></a> Ruby
 
