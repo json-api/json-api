@@ -1,8 +1,8 @@
-name: Node.js CI
+name: Schema validation tests
 
 on:
   push:
-    branches: [ gh-pages ]
+    branches: [ gh-pages, schema-1.0 ]
   pull_request:
     branches: [ gh-pages ]
 
