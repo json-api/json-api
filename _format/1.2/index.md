@@ -508,6 +508,25 @@ data, not the related resources.
 
 > Note: See [fields] and [member names] for more restrictions on this container.
 
+A to-many relationship **SHOULD NOT** reference the same resource object more than
+once.
+
+> Note: This recommendation does _not_ prevent parallel relationships:
+> 
+> 1. A resource object may reference another resource object on different
+> relationships. For example, an `article` resource may reference the same `user`
+> resource both on its `author` and `editors` relationship.
+> 2. A resource object may reference another resource object more than once
+> on the same relationship through an intermediate resource object. For example,
+> a `team` resource may reference the same `user` resource more than once on its
+> `members` relationship _through_ a `teamMember` resource. The `teamMember`
+> resource could present additional information as fields such as `startDate`,
+> `endDate`, and `invitedBy`.
+> 
+> Only multiple references to the same resource on a single relationship _without_
+> an intermediate resource are discouraged as it often leads to presenting additional
+> information about that relationship as [meta-information](meta).
+
 ##### <a href="#document-resource-object-related-resource-links" id="document-resource-object-related-resource-links" class="headerlink"></a> Related Resource Links
 
 A "related resource link" provides access to [resource objects][resource objects] [linked][links]
