@@ -514,11 +514,11 @@ once.
 > Note: This recommendation does _not_ prevent parallel relationships:
 > 
 > 1. A resource object may reference another resource object on different
-> relationships. For example, an `article` resource may reference the same `user`
+> relationships. For example, an `article` resource may reference the same `people`
 > resource both on its `author` and `editors` relationship.
 > 2. A resource object may reference another resource object more than once
 > on the same relationship through an intermediate resource object. For example,
-> a `team` resource may reference the same `user` resource more than once on its
+> a `team` resource may reference the same `people` resource more than once on its
 > `members` relationship _through_ a `teamMember` resource. The `teamMember`
 > resource could present additional information as fields such as `startDate`,
 > `endDate`, and `invitedBy`.
