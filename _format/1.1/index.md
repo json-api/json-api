@@ -908,7 +908,7 @@ The following characters **MUST NOT** be used in implementation and
 - U+0029 RIGHT PARENTHESIS, ")"
 - U+002A ASTERISK, "&#x2a;"
 - U+002F SOLIDUS, "/"
-- U+003A COLON, ":"
+- U+003A COLON, ":" (except after the namespace in [Extension members](#extension-members))
 - U+003B SEMICOLON, ";"
 - U+003C LESS-THAN SIGN, "<"
 - U+003D EQUALS SIGN, "="
