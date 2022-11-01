@@ -503,8 +503,7 @@
       "type": "array",
       "items": {
         "$ref": "#/definitions/resourceIdentifier"
-      },
-      "uniqueItems": true
+      }
     },
     "relationshipToOne": {
       "description": "References to other resource objects in a to-one (\"relationship\"). Relationships can be specified by including a member in a resource's links object.",
