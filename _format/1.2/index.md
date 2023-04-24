@@ -2091,7 +2091,7 @@ family.
 
 A "query parameter family" is the set of all query parameters whose name starts
 with a "base name", followed by zero or more instances of empty square brackets
-(i.e. `[]`), square-bracketed legal [member names] or square-bracketed
+(i.e. `[]`), square-bracketed legal [member names], or square-bracketed
 dot-separated lists of legal member names. The family is referred to
 by its base name.
 
@@ -2101,9 +2101,9 @@ For example, the `filter` query parameter family includes parameters named:
 family, because `_` is not a valid [member name][member names].
 
 > Note: Dot separated lists of legal member names are intended to be used for
-> relationship paths. E.g. this allows filtering strategies using relationship
-> paths as defined for [sorting][fetching sorting] in query parameters such as
-> `GET /posts?sort=author.name&filter[author.status]=active`.
+> relationship paths. For example, this allows filtering strategies using
+> relationship paths as defined for [sorting][fetching sorting] in query parameters
+> such as `GET /posts?sort=author.name&filter[author.status]=active`.
 
 ### <a href="#extension-query-parameters" id="extension-query-parameters" class="headerlink"></a> Extension-Specific Query Parameters
 
