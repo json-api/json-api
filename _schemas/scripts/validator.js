@@ -1,10 +1,9 @@
 // Import the modules
-const Ajv = require("ajv");
 const Ajv2020 = require("ajv/dist/2020");
 const addFormats = require("ajv-formats");
 const readdirp = require("readdirp");
 const npath = require("path");
-const compareVersions = require("compare-versions");
+const { compareVersions } = require("compare-versions");
 
 /**
  * Retrieve the value of the given option.
@@ -74,7 +73,7 @@ const options = {
       console.log("");
 
       // ... create ajv instance
-      const ajv = ajvFactory(version);
+      const ajv = ajvFactory();
 
       // ... add schemas to ajv instance
       await addSchemas(ajv, version);
@@ -110,12 +109,11 @@ const options = {
 
 /**
  * Generate new instance of Ajv validator.
- * @param {String} version - The version of the JSON:API spec that will be validated
- * @returns {Ajv|Ajv2020} - An in stance of Ajv validator
+ * @returns {Ajv2020} - An instance of Ajv validator
  */
-const ajvFactory = function (version) {
+const ajvFactory = function () {
   // ... create ajv instance
-  const ajv = (version === "1.0") ? new Ajv() : new Ajv2020();
+  const ajv = new Ajv2020();
 
   // ...add formats to ajv validator
   addFormats(ajv);
@@ -125,7 +123,7 @@ const ajvFactory = function (version) {
 
 /**
  * Load all version-related schemas and register them with the instance of the Ajv validator.
- * @param {Ajv|Ajv2020} ajv - An instance of Ajv validator
+ * @param {Ajv2020} ajv - An instance of Ajv validator
  * @param {String} version - The version of the JSON:API spec that will be validated
  * @return {void}
  */
@@ -156,7 +154,7 @@ const addSchemas = async function (ajv, version) {
 
 /**
  * Check all the test files for the given version of the JSON:API spec.
- * @param {Ajv|Ajv2020} ajv - An instance of Ajv validator
+ * @param {Ajv2020} ajv - An instance of Ajv validator
  * @param {String} version - The version of the JSON:API spec that will be validated
  * @return {{ok: String[], ko: String[]}} - The results of the tests.
  */
@@ -178,7 +176,7 @@ const handleTests = async function (ajv, version) {
 
 /**
  * Check all the test files for the given version of the JSON:API spec.
- * @param {Ajv|Ajv2020} ajv - An instance of Ajv validator
+ * @param {Ajv2020} ajv - An instance of Ajv validator
  * @param {String} version - The version of the JSON:API spec that will be validated
  * @param {{ok: String[], ko: String[]}} results - The results of the tests.
  * @return {void}
@@ -206,7 +204,7 @@ const runAllTests = async function (ajv, version, results) {
 
 /**
  * Run a single test for the given version of the JSON:API spec and the test file that was passed in the options.
- * @param {Ajv|Ajv2020} ajv - An instance of Ajv validator
+ * @param {Ajv2020} ajv - An instance of Ajv validator
  * @param {String} version - The version of the JSON:API spec that will be validated
  * @param {{ok: String[], ko: String[]}} results - The result of the test.
  * @return {void}
@@ -231,7 +229,7 @@ const runSingleTest = async function (ajv, version, results) {
 
 /**
  * Check a single test files for the given version of the JSON:API spec.
- * @param {Ajv|Ajv2020} ajv - An instance of Ajv validator
+ * @param {Ajv2020} ajv - An instance of Ajv validator
  * @param {String} version - The version of the JSON:API spec that will be validated
  * @param {String} relativePath - The relative path of the test file that will be validated
  * @param {String} fullPath - The absolute path of the test file that will be validated
@@ -275,7 +273,7 @@ const readTestDir = async function (version, callback) {
 
 /**
  * validate a test file for the given version of the JSON:API spec.
- * @param {Ajv|Ajv2020} ajv - An instance of Ajv validator
+ * @param {Ajv2020} ajv - An instance of Ajv validator
  * @param {String} version - The version of the JSON:API spec that will be validated
  * @param {String} relativePath - The relative path of the file to validate.
  * @param {String} fullPath - The absolute path of the file to validate.
