@@ -211,17 +211,17 @@ The request **SHOULD** return a status `202 Accepted` with a link in the `Conten
 ```http
 HTTP/1.1 202 Accepted
 Content-Type: application/vnd.api+json
-Content-Location: https://example.com/photos/queue-jobs/5234
+Content-Location: https://example.com/photos/jobs/5234
 
 {
   "data": {
-    "type": "queue-jobs",
+    "type": "jobs",
     "id": "5234",
     "attributes": {
       "status": "Pending request, waiting other process"
     },
     "links": {
-      "self": "/photos/queue-jobs/5234"
+      "self": "/photos/jobs/5234"
     }
   }
 }
@@ -230,7 +230,7 @@ Content-Location: https://example.com/photos/queue-jobs/5234
 To check the status of the job process, a client can send a request to the location given earlier.
 
 ```http
-GET /photos/queue-jobs/5234 HTTP/1.1
+GET /photos/jobs/5234 HTTP/1.1
 Accept: application/vnd.api+json
 ```
 
@@ -243,13 +243,13 @@ Retry-After: 10
 
 {
   "data": {
-    "type": "queue-jobs",
+    "type": "jobs",
     "id": "5234",
     "attributes": {
       "status": "Pending request, waiting other process"
     },
     "links": {
-      "self": "/photos/queue-jobs/5234"
+      "self": "/photos/jobs/5234"
     }
   }
 }
