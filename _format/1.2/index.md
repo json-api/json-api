@@ -143,7 +143,7 @@ The rules for profile usage are dictated by [RFC
 A profile **MAY** define document members and processing rules that are reserved
 for implementors.
 
-A profile **MUST NOT** define any query parameters.
+A profile **MUST NOT** define any query parameters except [implementation-specific query parameters](#query-parameters-custom).
 
 A profile **MUST NOT** alter or remove processing rules that have been defined
 by this specification or by an [extension][extensions]. However, a profile
