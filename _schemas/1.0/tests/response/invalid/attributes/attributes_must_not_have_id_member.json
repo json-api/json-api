@@ -1,0 +1,20 @@
+{
+  "data": {
+    "type": "article",
+    "id": "1",
+    "attributes": {
+      "id": "bad",
+      "something": "wrong"
+    }
+  },
+  "meta": {
+    "errors-present-in-document": [
+      {
+        "detail": "A resource **CAN NOT** have an attribute named type or id.",
+        "source": {
+          "pointer": "/data/attributes"
+        }
+      }
+    ]
+  }
+}

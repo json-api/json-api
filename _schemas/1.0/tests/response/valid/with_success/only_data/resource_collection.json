@@ -1,0 +1,28 @@
+{
+  "data": [
+    {
+      "type": "article",
+      "id": "1",
+      "attributes": {
+        "something": true,
+        "title": "first article"
+      }
+    },
+    {
+      "type": "article",
+      "id": "2",
+      "attributes": {
+        "something": true,
+        "title": "second article"
+      }
+    },
+    {
+      "type": "article",
+      "id": "3",
+      "attributes": {
+        "something": false,
+        "title": "third article"
+      }
+    }
+  ]
+}

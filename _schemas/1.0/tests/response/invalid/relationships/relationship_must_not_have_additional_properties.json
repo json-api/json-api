@@ -1,0 +1,28 @@
+{
+  "data": {
+    "type": "article",
+    "id": "1",
+    "attributes": {
+      "title": "JSON:API, a specification for building APIs in JSON"
+    },
+    "relationships": {
+      "author": {
+        "data": {
+          "type": "people",
+          "id": "9"
+        },
+        "wrong": "not allowed"
+      }
+    }
+  },
+  "meta": {
+    "errors-present-in-document": [
+      {
+        "detail": "Unless otherwise noted, objects defined by this specification **MUST NOT** contain any additional members (here, \"wrong\").",
+        "source": {
+          "pointer": "/data/relationships/author"
+        }
+      }
+    ]
+  }
+}

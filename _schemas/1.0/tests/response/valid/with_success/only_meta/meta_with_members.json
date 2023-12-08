@@ -1,0 +1,9 @@
+{
+  "meta": {
+    "anything": "valid",
+    "count": 3,
+    "object": {
+      "attr": "value"
+    }
+  }
+}

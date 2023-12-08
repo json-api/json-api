@@ -1,0 +1,28 @@
+{
+  "data": {
+    "type": "article",
+    "id": "1",
+    "attributes": {
+      "title": "JSON:API, a specification for building APIs in JSON"
+    },
+    "relationships": {
+      "author": {
+        "links": "not valid",
+        "data": {
+          "type": "people",
+          "id": "9"
+        }
+      }
+    }
+  },
+  "meta": {
+    "errors-present-in-document": [
+      {
+        "detail": "The value of each links member **MUST** be an object (a \"links object\").",
+        "source": {
+          "pointer": "/data/relationships/author/links"
+        }
+      }
+    ]
+  }
+}

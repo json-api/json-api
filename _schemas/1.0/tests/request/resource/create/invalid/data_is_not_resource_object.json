@@ -1,0 +1,22 @@
+{
+  "data": [
+    {
+      "type": "article",
+      "id": "1"
+    },
+    {
+      "type": "article",
+      "id": "2"
+    }
+  ],
+  "meta": {
+    "errors-present-in-document": [
+      {
+        "detail": "Primary data **MUST** be a single resource object.",
+        "source": {
+          "pointer": "/data"
+        }
+      }
+    ]
+  }
+}

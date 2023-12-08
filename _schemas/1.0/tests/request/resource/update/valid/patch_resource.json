@@ -1,0 +1,9 @@
+{
+  "data": {
+    "type": "article",
+    "id": "2",
+    "attributes": {
+      "title": "JSON:API, a specification for building APIs in JSON"
+    }
+  }
+}

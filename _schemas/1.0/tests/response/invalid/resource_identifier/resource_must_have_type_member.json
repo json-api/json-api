@@ -1,0 +1,18 @@
+{
+  "data": {
+    "id": "3",
+    "meta": {
+      "something": "bad"
+    }
+  },
+  "meta": {
+    "errors-present-in-document": [
+      {
+        "detail": "A resource object **MUST** contain at least the following top-level members: id, type.",
+        "source": {
+          "pointer": "/data"
+        }
+      }
+    ]
+  }
+}

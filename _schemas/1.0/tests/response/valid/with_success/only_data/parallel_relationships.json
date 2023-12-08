@@ -1,0 +1,33 @@
+{
+  "data": {
+    "type": "article",
+    "id": "1",
+    "attributes": {
+      "title": "JSON:API, a specification for building APIs in JSON"
+    },
+    "relationships": {
+      "author": {
+        "data": [
+          {
+            "type": "people",
+            "id": "9"
+          },
+          {
+            "type": "people",
+            "id": "9"
+          }
+        ]
+      }
+    }
+  },
+  "meta": {
+    "errors-present-in-document": [
+      {
+        "detail": "A document **MUST NOT** include more than one resource object for each \"type\" and \"id\" pair.",
+        "source": {
+          "pointer": "/data/relationships/author/data"
+        }
+      }
+    ]
+  }
+}

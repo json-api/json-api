@@ -1,0 +1,16 @@
+{
+  "data": {
+    "type": 400,
+    "id": "1"
+  },
+  "meta": {
+    "errors-present-in-document": [
+      {
+        "detail": "A resource's type member **MUST** be a string.",
+        "source": {
+          "pointer": "/data/type"
+        }
+      }
+    ]
+  }
+}

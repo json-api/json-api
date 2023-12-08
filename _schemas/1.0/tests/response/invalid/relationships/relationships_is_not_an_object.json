@@ -1,0 +1,20 @@
+{
+  "data": {
+    "type": "article",
+    "id": "1",
+    "attributes": {
+      "title": "JSON:API, a specification for building APIs in JSON"
+    },
+    "relationships": "very bad"
+  },
+  "meta": {
+    "errors-present-in-document": [
+      {
+        "detail": "The value of the relationships key **MUST** be an object (a \"relationships object\").",
+        "source": {
+          "pointer": "/data/relationships"
+        }
+      }
+    ]
+  }
+}

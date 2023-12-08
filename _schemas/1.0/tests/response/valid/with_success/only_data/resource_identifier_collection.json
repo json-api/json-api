@@ -1,0 +1,16 @@
+{
+  "data": [
+    {
+      "type": "article",
+      "id": "1"
+    },
+    {
+      "type": "article",
+      "id": "2"
+    },
+    {
+      "type": "article",
+      "id": "3"
+    }
+  ]
+}

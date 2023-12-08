@@ -1,0 +1,26 @@
+{
+  "data": {
+    "type": "article",
+    "attributes": {
+      "title": "JSON:API, a specification for building APIs in JSON"
+    },
+    "relationships": {
+      "not-allowed+": {
+        "data": {
+          "type": "status",
+          "id": "140"
+        }
+      }
+    }
+  },
+  "meta": {
+    "errors-present-in-document": [
+      {
+        "detail": "Member names **MUST** contain only allowed characters.",
+        "source": {
+          "pointer": "/data/relationships"
+        }
+      }
+    ]
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "data": {
+    "type": "article",
+    "attributes": {
+      "title": "JSON:API, a specification for building APIs in JSON"
+    },
+    "relationships": {
+      "toOne": {
+        "data": {
+          "type": "wrong"
+        }
+      }
+    }
+  },
+  "meta": {
+    "errors-present-in-document": [
+      {
+        "detail": "A resource object **MUST** contain at least the following top-level members: id, type.",
+        "source": {
+          "pointer": "/data/relationships/toOne/data"
+        }
+      }
+    ]
+  }
+}

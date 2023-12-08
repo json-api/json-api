@@ -1,0 +1,13 @@
+{
+  "links": "not valid",
+  "meta": {
+    "errors-present-in-document": [
+      {
+        "detail": "The value of each links member **MUST** be an object (a \"links object\").",
+        "source": {
+          "pointer": "/links"
+        }
+      }
+    ]
+  }
+}

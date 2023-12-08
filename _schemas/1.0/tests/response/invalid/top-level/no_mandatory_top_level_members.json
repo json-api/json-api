@@ -1,0 +1,18 @@
+{
+  "jsonapi": {
+    "version": "1.0",
+    "meta": {
+      "errors-present-in-document": [
+        {
+          "detail": "A document **MUST** contain at least one of the following top-level members: data, errors or meta.",
+          "source": {
+            "pointer": "/"
+          }
+        }
+      ]
+    }
+  },
+  "links": {
+    "self": "http://www.example.com"
+  }
+}
