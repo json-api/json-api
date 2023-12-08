@@ -750,8 +750,12 @@ For example:
 
 ### <a href="#document-links" id="document-links" class="headerlink"></a> Links
 
-Where specified, a `links` member can be used to represent links. The value
-of this member **MUST** be an object (a "links object").
+Where specified, a `links` member can be used to represent links to related JSON:API
+documents. The value of this member **MUST** be an object (a "links object").
+
+> Note: The `links` member is intended to reference related JSON:API documents only.
+> Other links can be included as resource attributes, `meta` information or using
+> members defined by an applied extension.
 
 <a href="#document-links-link" id="document-links-link"></a>
 Within this object, a link **MUST** be represented as either:
