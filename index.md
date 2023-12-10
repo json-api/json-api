@@ -26,6 +26,7 @@ Here's an example response from a blog that implements JSON:API:
   "data": [{
     "type": "articles",
     "id": "1",
+    "revision": "1234567890",
     "attributes": {
       "title": "JSON:API paints my bikeshed!"
     },
@@ -55,6 +56,7 @@ Here's an example response from a blog that implements JSON:API:
   "included": [{
     "type": "people",
     "id": "9",
+    "revision": "9999999999",
     "attributes": {
       "firstName": "Dan",
       "lastName": "Gebhardt",
@@ -66,6 +68,7 @@ Here's an example response from a blog that implements JSON:API:
   }, {
     "type": "comments",
     "id": "5",
+    "revision": "5555555555",
     "attributes": {
       "body": "First!"
     },
@@ -80,6 +83,7 @@ Here's an example response from a blog that implements JSON:API:
   }, {
     "type": "comments",
     "id": "12",
+    "revision": "1212121212",
     "attributes": {
       "body": "I like XML better"
     },
