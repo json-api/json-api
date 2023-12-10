@@ -1,0 +1,9 @@
+{
+  "data": {
+    "type": "article",
+    "lid": "local_id",
+    "attributes": {
+      "title": "JSON:API, a specification for building APIs in JSON"
+    }
+  }
+}

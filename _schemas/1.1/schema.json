@@ -1,0 +1,767 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://jsonapi.org/schemas/spec/v1.1/draft",
+  "title": "JSON:API Schema v1.1",
+  "description": "This schema only validates RESPONSES from a request.",
+  "allOf": [
+    {
+      "$ref": "#/definitions/requiredTopLevelMembers"
+    },
+    {
+      "$ref": "#/definitions/oneOfDataOrErrors"
+    }
+  ],
+  "anyOf": [
+    {
+      "$ref": "#/definitions/atMemberName"
+    }
+  ],
+  "type": "object",
+  "properties": {
+    "data": {
+      "$ref": "#/definitions/data"
+    },
+    "errors": {
+      "$ref": "#/definitions/errors"
+    },
+    "included": {
+      "$ref": "#/definitions/included"
+    },
+    "jsonapi": {
+      "$ref": "#/definitions/jsonapi"
+    },
+    "links": {
+      "description": "Link members related to the primary data.",
+      "$ref": "#/definitions/topLevelLinks"
+    },
+    "meta": {
+      "$ref": "#/definitions/meta"
+    }
+  },
+  "dependencies": {
+    "included": [
+      "data"
+    ]
+  },
+  "unevaluatedProperties": false,
+  "definitions": {
+    "atMemberName": {
+      "description": "@member name may contain any valid JSON value.",
+      "type": "object",
+      "patternProperties": {
+        "^@[a-zA-Z0-9]{1}(?:[-\\w]*[a-zA-Z0-9])?$": true
+      }
+    },
+    "memberName": {
+      "description": "Member name may contain any valid JSON value.",
+      "type": "object",
+      "patternProperties": {
+        "^[a-zA-Z0-9]{1}(?:[-\\w]*[a-zA-Z0-9])?$": true
+      }
+    },
+    "attributes": {
+      "description": "Members of the attributes object (\"attributes\") represent information about the resource object in which it's defined.",
+      "type": "object",
+      "anyOf": [
+        {
+          "$ref": "#/definitions/memberName"
+        },
+        {
+          "$ref": "#/definitions/atMemberName"
+        }
+      ],
+      "not": {
+        "$comment": "This is what the specification requires, but it seems bad. https://github.com/json-api/json-api/issues/1553",
+        "anyOf": [
+          {
+            "required": [
+              "type"
+            ]
+          },
+          {
+            "required": [
+              "id"
+            ]
+          }
+        ]
+      },
+      "unevaluatedProperties": false
+    },
+    "data": {
+      "description": "The document's \"primary data\" is a representation of the resource or collection of resources targeted by a request.",
+      "oneOf": [
+        {
+          "$ref": "#/definitions/resource"
+        },
+        {
+          "description": "An array of resource objects, an array of resource identifier objects, or an empty array ([]), for requests that target resource collections.",
+          "$ref": "#/definitions/resourceCollection"
+        },
+        {
+          "description": "null if the request is one that might correspond to a single resource, but doesn't currently.",
+          "type": "null"
+        }
+      ]
+    },
+    "empty": {
+      "description": "Describes an empty to-one relationship.",
+      "type": "null"
+    },
+    "error": {
+      "type": "object",
+      "anyOf": [
+        {
+          "required": [
+            "id"
+          ]
+        },
+        {
+          "required": [
+            "links"
+          ]
+        },
+        {
+          "required": [
+            "status"
+          ]
+        },
+        {
+          "required": [
+            "code"
+          ]
+        },
+        {
+          "required": [
+            "title"
+          ]
+        },
+        {
+          "required": [
+            "detail"
+          ]
+        },
+        {
+          "required": [
+            "source"
+          ]
+        },
+        {
+          "required": [
+            "meta"
+          ]
+        }
+      ],
+      "properties": {
+        "id": {
+          "description": "A unique identifier for this particular occurrence of the problem.",
+          "type": "string"
+        },
+        "links": {
+          "$ref": "#/definitions/errorLinks"
+        },
+        "status": {
+          "description": "The HTTP status code applicable to this problem, expressed as a string value.",
+          "type": "string"
+        },
+        "code": {
+          "description": "An application-specific error code, expressed as a string value.",
+          "type": "string"
+        },
+        "title": {
+          "description": "A short, human-readable summary of the problem. It **SHOULD NOT** change from occurrence to occurrence of the problem, except for purposes of localization.",
+          "type": "string"
+        },
+        "detail": {
+          "description": "A human-readable explanation specific to this occurrence of the problem.",
+          "type": "string"
+        },
+        "source": {
+          "$ref": "#/definitions/errorSource"
+        },
+        "meta": {
+          "$ref": "#/definitions/meta"
+        }
+      },
+      "unevaluatedProperties": false
+    },
+    "errorLinks": {
+      "description": "The error links object **MAY** contain the following members: about.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/links"
+        }
+      ],
+      "anyOf": [
+        {
+          "$ref": "#/definitions/atMemberName"
+        }
+      ],
+      "properties": {
+        "about": {
+          "description": "A link that leads to further details about this particular occurrence of the problem.",
+          "$ref": "#/definitions/link"
+        },
+        "type": {
+          "description": "A link that identifies the type of error that this particular error is an instance of.",
+          "$ref": "#/definitions/link"
+        }
+      },
+      "unevaluatedProperties": false
+    },
+    "errorSource": {
+      "type": "object",
+      "properties": {
+        "pointer": {
+          "description": "A JSON Pointer [RFC6901] to the associated entity in the request document [e.g. \"/data\" for a primary data object, or \"/data/attributes/title\" for a specific attribute].",
+          "type": "string",
+          "pattern": "^(?:\\/(?:[^~/]|~0|~1)*)*$"
+        },
+        "parameter": {
+          "description": "A string indicating which query parameter caused the error.",
+          "type": "string"
+        },
+        "header": {
+          "description": "A string indicating the name of a single request header which caused the error.",
+          "type": "string"
+        }
+      }
+    },
+    "errors": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/error"
+      },
+      "uniqueItems": true
+    },
+    "included": {
+      "description": "To reduce the number of HTTP requests, servers **MAY** allow responses that include related resources along with the requested primary resources. Such responses are called \"compound documents\".",
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/resource"
+      },
+      "uniqueItems": true
+    },
+    "jsonapi": {
+      "description": "An object describing the server's implementation",
+      "type": "object",
+      "anyOf": [
+        {
+          "$ref": "#/definitions/atMemberName"
+        }
+      ],
+      "properties": {
+        "version": {
+          "type": "string"
+        },
+        "meta": {
+          "$ref": "#/definitions/meta"
+        },
+        "ext": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/linkUrl"
+          },
+          "uniqueItems": true
+        },
+        "profile": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/linkUrl"
+          },
+          "uniqueItems": true
+        }
+      },
+      "unevaluatedProperties": false
+    },
+    "linkObject": {
+      "type": "object",
+      "required": [
+        "href"
+      ],
+      "properties": {
+        "href": {
+          "$ref": "#/definitions/linkUrl"
+        },
+        "meta": {
+          "$ref": "#/definitions/meta"
+        },
+        "rel": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        },
+        "hreflang": {
+          "type": "string"
+        },
+        "describedby": {
+          "$ref": "#/definitions/link"
+        }
+      }
+    },
+    "linkUrl": {
+      "description": "A string containing the link's URL.",
+      "type": "string",
+      "format": "uri",
+      "$comment": "URI regex as per https://tools.ietf.org/html/rfc3986#appendix-B",
+      "pattern": "^(([^:/?#]+):)?(//([^/?#]*))?([^?#]*)(\\?([^#]*))?(#(.*))?"
+    },
+    "link": {
+      "description": "A link **MUST** be represented as either: a string containing the link's URL or a link object.",
+      "oneOf": [
+        {
+          "$ref": "#/definitions/linkUrl"
+        },
+        {
+          "$ref": "#/definitions/linkObject"
+        }
+      ]
+    },
+    "linkage": {
+      "description": "Resource linkage in a compound document allows a client to link together all of the included resource objects without having to GET any URLs via links.",
+      "oneOf": [
+        {
+          "$ref": "#/definitions/relationshipToOne"
+        },
+        {
+          "$ref": "#/definitions/relationshipToMany"
+        }
+      ]
+    },
+    "links": {
+      "type": "object"
+    },
+    "meta": {
+      "description": "Non-standard meta-information that can not be represented as an attribute or relationship.",
+      "type": "object",
+      "anyOf": [
+        {
+          "$ref": "#/definitions/memberName"
+        },
+        {
+          "$ref": "#/definitions/atMemberName"
+        }
+      ],
+      "unevaluatedProperties": false
+    },
+    "oneOfDataOrErrors": {
+      "type": "object",
+      "dependentSchemas": {
+        "data": {
+          "not": {
+            "required": [
+              "errors"
+            ]
+          }
+        }
+      }
+    },
+    "pagination": {
+      "type": "object",
+      "properties": {
+        "first": {
+          "description": "The first page of data",
+          "oneOf": [
+            {
+              "$ref": "#/definitions/link"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "last": {
+          "description": "The last page of data",
+          "oneOf": [
+            {
+              "$ref": "#/definitions/link"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "prev": {
+          "description": "The previous page of data",
+          "oneOf": [
+            {
+              "$ref": "#/definitions/link"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "next": {
+          "description": "The next page of data",
+          "oneOf": [
+            {
+              "$ref": "#/definitions/link"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      }
+    },
+    "relationship": {
+      "type": "object",
+      "properties": {
+        "links": {
+          "$ref": "#/definitions/relationshipLinks"
+        },
+        "data": {
+          "$ref": "#/definitions/linkage"
+        },
+        "meta": {
+          "$ref": "#/definitions/meta"
+        }
+      },
+      "allOf": [
+        {
+          "anyOf": [
+            {
+              "required": [
+                "data"
+              ]
+            },
+            {
+              "required": [
+                "meta"
+              ]
+            },
+            {
+              "required": [
+                "links"
+              ]
+            }
+          ]
+        }
+      ],
+      "anyOf": [
+        {
+          "$ref": "#/definitions/atMemberName"
+        }
+      ],
+      "unevaluatedProperties": false
+    },
+    "relationshipFromRequest": {
+      "type": "object",
+      "properties": {
+        "data": {
+          "$ref": "#/definitions/linkage"
+        },
+        "meta": {
+          "$ref": "#/definitions/meta"
+        }
+      },
+      "required": [
+        "data"
+      ],
+      "anyOf": [
+        {
+          "$ref": "#/definitions/atMemberName"
+        }
+      ],
+      "unevaluatedProperties": false
+    },
+    "relationshipLinks": {
+      "description": "A resource object **MAY** contain references to other resource objects (\"relationships\"). Relationships may be to-one or to-many. Relationships can be specified by including a member in a resource's links object.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/links"
+        }
+      ],
+      "anyOf": [
+        {
+          "description": "Pagination links for the relationship data.",
+          "$ref": "#/definitions/pagination"
+        },
+        {
+          "$ref": "#/definitions/atMemberName"
+        }
+      ],
+      "properties": {
+        "self": {
+          "description": "A `self` member, whose value is a URL for the relationship itself (a \"relationship URL\"). This URL allows the client to directly manipulate the relationship. For example, it would allow a client to remove an `author` from an `article` without deleting the people resource itself.",
+          "$ref": "#/definitions/link"
+        },
+        "related": {
+          "$ref": "#/definitions/link"
+        }
+      },
+      "unevaluatedProperties": false
+    },
+    "relationshipToMany": {
+      "description": "An array of objects each containing \"type\" and \"id\" members for to-many relationships.",
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/resourceIdentifier"
+      }
+    },
+    "relationshipToOne": {
+      "description": "References to other resource objects in a to-one (\"relationship\"). Relationships can be specified by including a member in a resource's links object.",
+      "oneOf": [
+        {
+          "$ref": "#/definitions/empty"
+        },
+        {
+          "$ref": "#/definitions/resourceIdentifier"
+        }
+      ]
+    },
+    "relationships": {
+      "description": "Members of the relationships object (\"relationships\") represent references from the resource object in which it's defined to other resource objects.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/relationshipsForbiddenMemberName"
+        }
+      ],
+      "anyOf": [
+        {
+          "$ref": "#/definitions/atMemberName"
+        }
+      ],
+      "patternProperties": {
+        "^[a-zA-Z0-9]{1}(?:[-\\w]*[a-zA-Z0-9])?$": {
+          "$ref": "#/definitions/relationship"
+        }
+      },
+      "unevaluatedProperties": false
+    },
+    "relationshipsFromRequest": {
+      "description": "Members of the relationships object (\"relationships\") represent references from the resource object in which it's defined to other resource objects.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/relationshipsForbiddenMemberName"
+        }
+      ],
+      "anyOf": [
+        {
+          "$ref": "#/definitions/atMemberName"
+        }
+      ],
+      "patternProperties": {
+        "^[a-zA-Z0-9]{1}(?:[-\\w]*[a-zA-Z0-9])?$": {
+          "$ref": "#/definitions/relationshipFromRequest"
+        }
+      },
+      "unevaluatedProperties": false
+    },
+    "relationshipsForbiddenMemberName": {
+      "not": {
+        "anyOf": [
+          {
+            "type": "object",
+            "required": [
+              "type"
+            ]
+          },
+          {
+            "type": "object",
+            "required": [
+              "id"
+            ]
+          }
+        ]
+      }
+    },
+    "requiredTopLevelMembers": {
+      "anyOf": [
+        {
+          "type": "object",
+          "required": [
+            "meta"
+          ]
+        },
+        {
+          "type": "object",
+          "required": [
+            "data"
+          ]
+        },
+        {
+          "type": "object",
+          "required": [
+            "errors"
+          ]
+        }
+      ]
+    },
+    "resource": {
+      "description": "\"Resource objects\" appear in a JSON:API document to represent resources.",
+      "$comment": "The id member is not required when the resource object originates at the client and represents a new resource to be created on the server.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/resourceIdentification"
+        }
+      ],
+      "properties": {
+        "attributes": {
+          "$ref": "#/definitions/attributes"
+        },
+        "links": {
+          "$ref": "#/definitions/resourceLinks"
+        },
+        "meta": {
+          "$ref": "#/definitions/meta"
+        },
+        "relationships": {
+          "$ref": "#/definitions/relationships"
+        }
+      },
+      "unevaluatedProperties": false
+    },
+    "resourceCollection": {
+      "description": "An array of resource objects.",
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/resource"
+      },
+      "uniqueItems": true
+    },
+    "resourceIdentification": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/resourceIdentificationNew"
+        },
+        {
+          "type": "object",
+          "required": [
+            "type",
+            "id"
+          ]
+        },
+        {
+          "not": {
+            "type": "object",
+            "required": [
+              "lid"
+            ]
+          }
+        }
+      ]
+    },
+    "resourceIdentificationNew": {
+      "$comment": "The id member is not required when the resource object originates at the client and represents a new resource to be created on the server.",
+      "type": "object",
+      "required": [
+        "type"
+      ],
+      "properties": {
+        "type": {
+          "type": "string",
+          "pattern": "^[a-zA-Z0-9]{1}(?:[-\\w]*[a-zA-Z0-9])?$"
+        },
+        "id": {
+          "type": "string"
+        },
+        "lid": {
+          "type": "string"
+        }
+      },
+      "anyOf": [
+        {
+          "$ref": "#/definitions/atMemberName"
+        }
+      ]
+    },
+    "resourceIdentifier": {
+      "description": "A \"resource identifier object\" is an object that identifies an individual resource.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/resourceIdentificationNew"
+        },
+        {
+          "required": [
+            "type"
+          ]
+        },
+        {
+          "oneOf": [
+            {
+              "required": [
+                "id"
+              ]
+            },
+            {
+              "required": [
+                "lid"
+              ]
+            }
+          ]
+        }
+      ],
+      "properties": {
+        "meta": {
+          "$ref": "#/definitions/meta"
+        }
+      },
+      "unevaluatedProperties": false
+    },
+    "resourceLinks": {
+      "description": "The top-level links object **MAY** contain the following members: self, related, pagination links.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/links"
+        }
+      ],
+      "anyOf": [
+        {
+          "$ref": "#/definitions/atMemberName"
+        }
+      ],
+      "properties": {
+        "self": {
+          "description": "",
+          "$ref": "#/definitions/link"
+        }
+      },
+      "unevaluatedProperties": false
+    },
+    "topLevelLinks": {
+      "description": "The top-level links object **MAY** contain the following members: self, related, pagination links.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/links"
+        }
+      ],
+      "anyOf": [
+        {
+          "description": "Pagination links for the primary data.",
+          "$ref": "#/definitions/pagination"
+        },
+        {
+          "$ref": "#/definitions/atMemberName"
+        }
+      ],
+      "properties": {
+        "self": {
+          "description": "The link that generated the current response document.",
+          "$ref": "#/definitions/link"
+        },
+        "related": {
+          "description": "A related resource link when the primary data represents a resource relationship.",
+          "$ref": "#/definitions/link"
+        },
+        "describedby": {
+          "description": "A link to a description document (e.g. OpenAPI or JSON Schema) for the current document.",
+          "$ref": "#/definitions/link"
+        }
+      },
+      "unevaluatedProperties": false
+    }
+  }
+}
