@@ -263,12 +263,13 @@ the moment.
 * [Flask-REST-JSONAPI](https://github.com/miLibris/flask-rest-jsonapi) Flask extension to create web api according to jsonapi specification with Flask, Marshmallow and data provider of your choice (SQLAlchemy, MongoDB, ...)
 * [Flump](https://github.com/rolepoint/flump) Database agnostic JSON:API builder which depends on Flask and Marshmallow.
 * [SAFRS JSON API Framework](https://github.com/thomaxxl/safrs) Flask-SQLAlchemy jsonapi implementation with auto-generated openapi (fka swagger) interface.
-* [pydantic-jsonapi](https://github.com/DeanWay/pydantic-jsonapi) JSON:api validation with python type hinting using [pydantic](https://pydantic-docs.helpmanual.io/)
-* [Flask-Restless-NG](https://github.com/mrevutskyi/flask-restless-ng) Builds JSON:API from SQLAlchemy models using Flask
-* [starlette-jsonapi](https://github.com/vladmunteanu/starlette-jsonapi) Microframework on top of Starlette and marshmallow-jsonapi with support for asynchronous ORMs
+* [pydantic-jsonapi](https://github.com/DeanWay/pydantic-jsonapi) JSON:api validation with python type hinting using [pydantic](https://pydantic-docs.helpmanual.io/).
+* [Flask-Restless-NG](https://github.com/mrevutskyi/flask-restless-ng) Builds JSON:API from SQLAlchemy models using Flask.
+* [starlette-jsonapi](https://github.com/vladmunteanu/starlette-jsonapi) Microframework on top of Starlette and marshmallow-jsonapi with support for asynchronous ORMs.
 * [kt.jsonapi](https://pypi.org/project/kt.jsonapi/) JSON:API response generation using the Zope Component Architecture.
 * [Flask-COMBO-JSONAPI](https://github.com/AdCombo/flask-combo-jsonapi) JSON:API flask extension for building REST APIs.
-* [FastAPI-JSONAPI](https://github.com/mts-ai/FastAPI-JSONAPI) FastAPI-JSONAPI is a FastAPI extension for building REST APIs
+* [FastAPI-JSONAPI](https://github.com/mts-ai/FastAPI-JSONAPI) FastAPI-JSONAPI is a FastAPI extension for building REST APIs.
+* [jsonapi-pydantic](https://github.com/impocode/jsonapi-pydantic) provides a suite of Pydantic models matching the JSON:API specification.
 
 ### <a href="#server-libraries-go" id="server-libraries-go" class="headerlink"></a> Go
 
