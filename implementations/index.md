@@ -359,7 +359,7 @@ includes related resources.
 
 * [json-api-merge](https://www.npmjs.com/package/json-api-merge) JSON:API specific redundant duplication algorithm for merging included resources into original data
 * [json-patch](https://www.npmjs.org/package/json-patch) implementation of JSON Patch (rfc6902)
-* [hatchify](https://github.com/bitovi/hatchify) Schema driven JSON:API for Node HTTP servers, with accompanying schema-driven React Web UI
+* [hatchify](https://github.com/bitovi/hatchify) Schema-driven JSON:API for Node HTTP servers, with accompanying schema-driven React Web UI
 
 ### <a href="#server-python" id="server-python" class="headerlink"></a> Python
 
