@@ -303,7 +303,7 @@ HTTP/1.1 422 Unprocessable Entity
 Content-Type: application/vnd.api+json
 
 {
-  "jsonapi": { "version": "1.0" },
+  "jsonapi": { "version": "1.1" },
   "errors": [
     {
       "code":   "123",
