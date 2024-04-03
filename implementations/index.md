@@ -264,6 +264,7 @@ the moment.
 * [Flump](https://github.com/rolepoint/flump) Database agnostic JSON:API builder which depends on Flask and Marshmallow.
 * [SAFRS JSON API Framework](https://github.com/thomaxxl/safrs) Flask-SQLAlchemy jsonapi implementation with auto-generated openapi (fka swagger) interface.
 * [pydantic-jsonapi](https://github.com/DeanWay/pydantic-jsonapi) JSON:api validation with python type hinting using [pydantic](https://pydantic-docs.helpmanual.io/)
+* [pydanja](https://github.com/Centurix/pydanja) JSON:API implementation for [pydantic](https://pydantic-docs.helpmanual.io/) and [FastAPI](https://fastapi.tiangolo.com/) using generic types, complete with helpers for simplifying OpenAPI docs
 * [Flask-Restless-NG](https://github.com/mrevutskyi/flask-restless-ng) Builds JSON:API from SQLAlchemy models using Flask
 * [starlette-jsonapi](https://github.com/vladmunteanu/starlette-jsonapi) Microframework on top of Starlette and marshmallow-jsonapi with support for asynchronous ORMs
 * [kt.jsonapi](https://pypi.org/project/kt.jsonapi/) JSON:API response generation using the Zope Component Architecture.
