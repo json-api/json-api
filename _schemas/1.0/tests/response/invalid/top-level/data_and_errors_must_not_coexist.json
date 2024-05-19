@@ -1,0 +1,22 @@
+{
+  "data": {
+    "type": "article",
+    "id": "1"
+  },
+  "errors": [
+    {
+      "status": "400",
+      "title": "Oh no!"
+    }
+  ],
+  "meta": {
+    "errors-present-in-document": [
+      {
+        "detail": "The members data and errors **MUST NOT** coexist in the same document.",
+        "source": {
+          "pointer": "/"
+        }
+      }
+    ]
+  }
+}

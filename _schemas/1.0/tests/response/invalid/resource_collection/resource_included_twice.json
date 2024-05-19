@@ -1,0 +1,32 @@
+{
+  "data": [
+    {
+      "type": "people",
+      "id": "9",
+      "attributes": {
+        "firstName": "Dan",
+        "lastName": "Gebhardt",
+        "twitter": "dgeb"
+      }
+    },
+    {
+      "type": "people",
+      "id": "9",
+      "attributes": {
+        "firstName": "Dan",
+        "lastName": "Gebhardt",
+        "twitter": "dgeb"
+      }
+    }
+  ],
+  "meta": {
+    "errors-present-in-document": [
+      {
+        "detail": "A document **MUST NOT** include more than one resource object for each \"type\" and \"id\" pair.",
+        "source": {
+          "pointer": "/data"
+        }
+      }
+    ]
+  }
+}

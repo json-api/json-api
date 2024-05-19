@@ -1,0 +1,34 @@
+{
+  "data": {
+    "type": "article",
+    "id": "1",
+    "attributes": {
+      "title": "JSON:API, a specification for building APIs in JSON"
+    },
+    "relationships": {
+      "comments": {
+        "links": {
+          "self": "http://example.com/articles/1/relationships/comments",
+          "related": "http://example.com/articles/1/comments",
+          "first": "http://example.com/articles/1/comments?page%5Bnumber%5D=1&page%5Bsize%5D=25",
+          "last": "http://example.com/articles/1/comments?page%5Bnumber%5D=1&page%5Bsize%5D=25",
+          "prev": null,
+          "next": null
+        },
+        "data": [
+          {
+            "type": "comment",
+            "id": "12"
+          },
+          {
+            "type": "comment",
+            "id": "15",
+            "meta": {
+              "something": "ok"
+            }
+          }
+        ]
+      }
+    }
+  }
+}

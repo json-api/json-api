@@ -1,0 +1,16 @@
+{
+  "jsonapi": {
+    "version": "1.0",
+    "oups": "error"
+  },
+  "meta": {
+    "errors-present-in-document": [
+      {
+        "detail": "Unless otherwise noted, objects defined by this specification **MUST NOT** contain any additional members (here, \"oups\").",
+        "source": {
+          "pointer": "/jsonapi"
+        }
+      }
+    ]
+  }
+}

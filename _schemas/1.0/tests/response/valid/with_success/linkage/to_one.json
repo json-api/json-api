@@ -1,0 +1,20 @@
+{
+  "data": {
+    "type": "article",
+    "id": "1",
+    "attributes": {
+      "title": "JSON:API, a specification for building APIs in JSON"
+    },
+    "relationships": {
+      "comments": {
+        "data": {
+          "type": "people",
+          "id": "9",
+          "meta": {
+            "something": "ok"
+          }
+        }
+      }
+    }
+  }
+}

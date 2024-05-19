@@ -1,0 +1,11 @@
+{
+  "devDependencies": {
+    "ajv": "^8.12.0",
+    "ajv-formats": "^2.1.1",
+    "compare-versions": "^6.1.0",
+    "readdirp": "^3.6.0"
+  },
+  "scripts": {
+    "test-schema": "node -i _schemas/scripts/validator.js"
+  }
+}

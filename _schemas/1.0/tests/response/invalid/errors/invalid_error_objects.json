@@ -1,0 +1,137 @@
+{
+  "errors": [
+    "wrong : An error object **MUST** be an object.",
+    {
+      "id": 0,
+      "status": "400",
+      "code": "4",
+      "title": "Oh no!",
+      "detail": "The id member **MUST** be a string.",
+      "source": {
+        "pointer": "/id"
+      }
+    },
+    {
+      "id": "0",
+      "status": 400,
+      "code": "4",
+      "title": "Oh no!",
+      "detail": "The status member **MUST** be a string.",
+      "source": {
+        "pointer": "/status"
+      }
+    },
+    {
+      "id": "0",
+      "status": "400",
+      "code": 4,
+      "title": "Oh no!",
+      "detail": "The code member **MUST** be a string.",
+      "source": {
+        "pointer": "/code"
+      }
+    },
+    {
+      "id": "0",
+      "status": "400",
+      "code": "4",
+      "title": {
+        "wrong": "Oh no!"
+      },
+      "detail": "The title member **MUST** be a string.",
+      "source": {
+        "pointer": "/title"
+      }
+    },
+    {
+      "id": "0",
+      "status": "400",
+      "code": "4",
+      "title": "Oh no!",
+      "detail": {
+        "wrong": "The detail member **MUST** be a string."
+      },
+      "source": {
+        "pointer": "/details"
+      }
+    },
+    {
+      "id": "0",
+      "status": "400",
+      "code": "4",
+      "title": "Oh no!",
+      "detail": "The pointer member **MUST** be a string.",
+      "source": {
+        "pointer": {
+          "wrong": "/source/pointer"
+        }
+      }
+    },
+    {
+      "id": "0",
+      "status": "400",
+      "code": "4",
+      "title": "Oh no!",
+      "detail": "The pointer member **MUST** be a valid JSON Pointer [RFC6901].",
+      "source": {
+        "pointer": "bad pattern for /source/pointer"
+      }
+    },
+    {
+      "id": "0",
+      "status": "400",
+      "code": "4",
+      "title": "Oh no!",
+      "detail": "The parameter member **MUST** be a string.",
+      "source": {
+        "pointer": "/source/parameter",
+        "parameter": {
+          "wrong": "not a string"
+        }
+      }
+    },
+    {
+      "id": "0",
+      "status": "400",
+      "code": "4",
+      "title": "Oh no!",
+      "detail": "Unless otherwise noted, objects defined by this specification **MUST NOT** contain any additional members (here, \"wrong\").",
+      "source": {
+        "pointer": "/wrong"
+      },
+      "wrong": "not allowed"
+    },
+    {
+      "id": "0",
+      "status": "400",
+      "code": "4",
+      "title": "Oh no!",
+      "detail": "Unless otherwise noted, objects defined by this specification **MUST NOT** contain any additional members (here, \"wrong\").",
+      "source": {
+        "pointer": "/links/wrong"
+      },
+      "links": {
+        "wrong": "http://www.example.com/not/allowed"
+      }
+    },
+    {
+      "id": "0",
+      "status": "400",
+      "code": "4",
+      "title": "Oh no!",
+      "detail": "The source member **MUST** be an object.",
+      "source": "not an object"
+    },
+    {
+      "id": "0",
+      "status": "400",
+      "code": "4",
+      "title": "Oh no!",
+      "detail": "The value of each meta member **MUST** be an object (a \"meta object\").",
+      "source": {
+        "pointer": "/meta"
+      },
+      "meta": "not an object"
+    }
+  ]
+}
