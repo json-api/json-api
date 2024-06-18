@@ -76,6 +76,7 @@ isomorphic ActiveRecord clone that issues JSON:API requests instead of SQL and i
 * [Japx](https://github.com/infinum/Japx) is lightweight JSON:API parser that flattens complex JSON:API structure and turns it into simple JSON and vice versa. It works by transferring Dictionary to Dictionary, so you can use Codable, Unbox, Wrap, ObjectMapper or any other object mapping tool that you prefer. It supports Objective-C as well.
 * [mattpolzin / JSONAPI](https://github.com/mattpolzin/JSONAPI) is a Swift Codable library with heavy emphasis on type-safety. It is platform agnostic so it can be used client- and server-side.
 * [IzzyParser](https://github.com/undabot/izzyparser-ios) is a lightweight library for serializing and deserializing JSON:API objects.
+* [Datadog/swift-jsonapi](https://github.com/Datadog/swift-jsonapi) is a Swift library that provides macros to simplify the encoding and decoding of JSON:API responses.
 
 ### <a href="#client-libraries-ruby" id="client-libraries-ruby" class="headerlink"></a> Ruby
 
@@ -156,6 +157,7 @@ and writing of JSON:API documents.
 ### <a href="#server-libraries-swift" id="server-libraries-swift" class="headerlink"></a> Swift
 * [aonawale / JSONAPISerializer](https://github.com/aonawale/JSONAPISerializer) is a server side swift framework agnostic library that implements JSON:API v1.0.
 * [mattpolzin / JSONAPI](https://github.com/mattpolzin/JSONAPI) is a Swift Codable library with heavy emphasis on type-safety. It is platform agnostic so it can be used client- and server-side.
+* [Datadog/swift-jsonapi](https://github.com/Datadog/swift-jsonapi) is a Swift library that provides macros to simplify the encoding and decoding of JSON:API responses.
 
 ### <a href="#server-libraries-php" id="server-libraries-php" class="headerlink"></a> PHP
 
