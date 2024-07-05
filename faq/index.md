@@ -6,7 +6,7 @@ show_sidebar: true
 
 ## <a href="#what-is-the-meaning-of-json-apis-version" id="what-is-the-meaning-of-json-apis-version" class="headerlink"></a> What is the meaning of JSON:API's version?
 
-Now that JSON:API has reached a stable version 1.0, it will always be
+Following JSON:API's first stable version (1.0), it will always be
 backwards compatible using a _never remove, only add_ strategy.
 
 A version is maintained in order to:
@@ -81,14 +81,18 @@ don’t can be easily [worked around](/recommendations/#patchless-clients).
 
 ## <a href="#is-there-a-json-schema-describing-json-api" id="is-there-a-json-schema-describing-json-api" class="headerlink"></a> Is there a JSON Schema describing JSON:API?
 
-Yes, you can find the JSON Schema definition at
-[http://jsonapi.org/schema](http://jsonapi.org/schema). This schema is as
-restrictive as possible, but has flexibility to be extended within your
-documentation. Validation will not yield false negatives, but could yield false
-positives for the sake of flexibility.
+Yes, you can find the response JSON Schema definition for version 1.0 at
+[/schema](http://jsonapi.org/schema). (An update for version 1.1 is
+[under development](https://github.com/json-api/json-api/issues/1672).) This
+schema is as restrictive as possible, but has flexibility to be extended within
+your documentation. Validation will not yield false negatives, but could yield
+false positives for the sake of flexibility.
+
+[Additional schemas](/schemas/1.0/) are provided for requests creating and
+updating resources or updating relationships.
 
 You can find more information about the JSON Schema format at
-[http://json-schema.org](http://json-schema.org).
+[https://json-schema.org](https://json-schema.org).
 
 ## <a href="#resource-collections-returned-as-arrays" id="resource-collections-returned-as-arrays" class="headerlink"></a> Why are resource collections returned as arrays instead of sets keyed by ID?
 
