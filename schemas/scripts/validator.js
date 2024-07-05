@@ -24,7 +24,7 @@ const getArgValue = function (name, defaultValue) {
 };
 
 // Define root dir
-const rootDir = "./_schemas";
+const rootDir = "./schemas";
 
 // Define object that will record the full path of all files tested
 const files = {};
@@ -214,7 +214,7 @@ const runSingleTest = async function (ajv, version, results) {
   const baseDir = __dirname.replaceAll(/[\/\\]/g, npath.sep).split(npath.sep);
   baseDir.pop();
   const filePath = options.requiredFile.replaceAll(/[\/\\]/g, npath.sep).split(npath.sep);
-  if (filePath[0] === "_schemas") {
+  if (filePath[0] === "schemas") {
     filePath.shift();
   }
   const fullPath = [...baseDir, ...filePath].join(npath.sep);

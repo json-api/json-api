@@ -1,0 +1,10 @@
+{
+  "$id": "https://jsonapi.org/schema",
+  "$comment": "JSON:API JSON Schema. This meta-schema references versioned JSON Schemas. JSON:API versions are always backwards-compatible.",
+  "oneOf": [
+    {
+      "$ref": "https://jsonapi.org/schemas/1.0/schema.json",
+      "$comment": "JSON:API 1.0 response schema."
+    }
+  ]
+}

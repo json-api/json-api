@@ -28,7 +28,7 @@ npm install
 Then you can run the schema validator by running one of the following commands :
 
 `
-node ./_schemas/scripts/validator.js
+node ./schemas/scripts/validator.js
 `
 
 or
@@ -40,5 +40,5 @@ npm run test-schema
 This script validates all test files against all available versions of the specification.
 Some options can be used :
 - `--verbose` : allows more verbose output.
-- `-f relative-path` : the relative path of the only file to test. For example : `npm run test-schema -- -f _schemas/1.0/response/valid/with_success/complete.json`
+- `-f relative-path` : the relative path of the only file to test. For example : `npm run test-schema -- -f schemas/1.0/response/valid/with_success/complete.json`
 - `-v version` : the version of the specification to use to test the files. For example : `npm run test-schema -- -v 1.0`
