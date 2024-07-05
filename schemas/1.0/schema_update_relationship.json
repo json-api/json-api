@@ -9,13 +9,13 @@
   ],
   "properties": {
     "data": {
-      "$ref": "https://jsonapi.org/schemas/spec/v1.0/draft#/definitions/linkage"
+      "$ref": "https://jsonapi.org/schemas/1.0/schema.json#/definitions/linkage"
     },
     "jsonapi": {
-      "$ref": "https://jsonapi.org/schemas/spec/v1.0/draft#/definitions/jsonapi"
+      "$ref": "https://jsonapi.org/schemas/1.0/schema.json#/definitions/jsonapi"
     },
     "meta": {
-      "$ref": "https://jsonapi.org/schemas/spec/v1.0/draft#/definitions/meta"
+      "$ref": "https://jsonapi.org/schemas/1.0/schema.json#/definitions/meta"
     }
   },
   "additionalProperties": false

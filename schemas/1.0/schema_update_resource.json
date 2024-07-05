@@ -12,10 +12,10 @@
       "$ref": "#/definitions/resource"
     },
     "jsonapi": {
-      "$ref": "https://jsonapi.org/schemas/spec/v1.0/draft#/definitions/jsonapi"
+      "$ref": "https://jsonapi.org/schemas/1.0/schema.json#/definitions/jsonapi"
     },
     "meta": {
-      "$ref": "https://jsonapi.org/schemas/spec/v1.0/draft#/definitions/meta"
+      "$ref": "https://jsonapi.org/schemas/1.0/schema.json#/definitions/meta"
     }
   },
   "additionalProperties": false,
@@ -26,20 +26,20 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "https://jsonapi.org/schemas/spec/v1.0/draft#/definitions/resourceIdentification"
+          "$ref": "https://jsonapi.org/schemas/1.0/schema.json#/definitions/resourceIdentification"
         }
       ],
       "properties": {
         "id": true,
         "type": true,
         "attributes": {
-          "$ref": "https://jsonapi.org/schemas/spec/v1.0/draft#/definitions/attributes"
+          "$ref": "https://jsonapi.org/schemas/1.0/schema.json#/definitions/attributes"
         },
         "meta": {
-          "$ref": "https://jsonapi.org/schemas/spec/v1.0/draft#/definitions/meta"
+          "$ref": "https://jsonapi.org/schemas/1.0/schema.json#/definitions/meta"
         },
         "relationships": {
-          "$ref": "https://jsonapi.org/schemas/spec/v1.0/draft#/definitions/relationshipsFromRequest"
+          "$ref": "https://jsonapi.org/schemas/1.0/schema.json#/definitions/relationshipsFromRequest"
         }
       },
       "additionalProperties": false
