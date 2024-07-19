@@ -33,8 +33,10 @@
       "$ref": "#/definitions/meta"
     }
   },
-  "dependencies": {
-    "included": ["data"]
+  "dependentSchemas": {
+    "included": {
+      "$ref": "#/definitions/includedOnlyIfContainsData"
+    }
   },
   "additionalProperties": false,
   "definitions": {
@@ -48,21 +50,16 @@
         "": true
       },
       "not": {
-        "$comment": "This is what the specification requires, but it seems bad. https://github.com/json-api/json-api/issues/1553",
-        "anyOf": [
+        "$comment": "This is what the specification requires, but is removed in v1.1. https://github.com/json-api/json-api/issues/1553",
+        "not": {
+          "$ref": "#/definitions/relationshipsForbiddenMemberName"
+        },
+        "allOf": [
           {
-            "required": [
-              "type"
-            ]
-          },
-          {
-            "required": [
-              "id"
-            ]
+            "additionalProperties": true
           }
         ]
-      },
-      "additionalProperties": false
+      }
     },
     "data": {
       "description": "The document's \"primary data\" is a representation of the resource or collection of resources targeted by a request.",
@@ -239,12 +236,31 @@
       "dependencies": {
         "data": {
           "not": {
+            "properties": {
+              "errors": true
+            },
             "required": [
               "errors"
             ]
           }
         }
       }
+    },
+    "includedOnlyIfContainsData": {
+      "type": "object",
+      "additionalProperties": true,
+      "properties": {
+        "data": {
+          "$ref": "#/definitions/data"
+        },
+        "included": {
+          "$ref": "#/definitions/included"
+        }
+      },
+      "required": [
+        "data",
+        "included"
+      ]
     },
     "pagination": {
       "type": "object",
@@ -310,12 +326,27 @@
       },
       "anyOf": [
         {
+          "properties":  {
+            "data": {
+              "$ref": "#/definitions/linkage"
+            }
+          },
           "required": ["data"]
         },
         {
+          "properties":  {
+            "meta": {
+              "$ref": "#/definitions/meta"
+            }
+          },
           "required": ["meta"]
         },
         {
+          "properties":  {
+            "links": {
+              "$ref": "#/definitions/relationshipLinks"
+            }
+          },
           "required": ["links"]
         }
       ],
@@ -422,11 +453,19 @@
         "anyOf": [
           {
             "type": "object",
+            "additionalProperties": true,
+            "properties": {
+              "type": true
+            },
             "required": [
               "type"
             ]
           },
           {
+            "additionalProperties": true,
+            "properties": {
+              "id": true
+            },
             "type": "object",
             "required": [
               "id"
@@ -439,18 +478,33 @@
       "anyOf": [
         {
           "type": "object",
+          "properties": {
+            "meta": {
+              "$ref": "#/definitions/meta"
+            }
+          },
           "required": [
             "meta"
           ]
         },
         {
           "type": "object",
+          "properties": {
+            "data": {
+              "$ref": "#/definitions/data"
+            }
+          },
           "required": [
             "data"
           ]
         },
         {
           "type": "object",
+          "properties": {
+            "errors": {
+              "$ref": "#/definitions/errors"
+            }
+          },
           "required": [
             "errors"
           ]

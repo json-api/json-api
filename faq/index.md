@@ -82,11 +82,8 @@ don’t can be easily [worked around](/recommendations/#patchless-clients).
 ## <a href="#is-there-a-json-schema-describing-json-api" id="is-there-a-json-schema-describing-json-api" class="headerlink"></a> Is there a JSON Schema describing JSON:API?
 
 Yes, you can find the response JSON Schema definition for version 1.0 at
-[/schema](http://jsonapi.org/schema). (An update for version 1.1 is
-[under development](https://github.com/json-api/json-api/issues/1672).) This
-schema is as restrictive as possible, but has flexibility to be extended within
-your documentation. Validation will not yield false negatives, but could yield
-false positives for the sake of flexibility.
+[`https://jsonapi.org/schema`](http://jsonapi.org/schema). (An update for
+version 1.1 is [under development](https://github.com/json-api/json-api/issues/1672).)
 
 [Additional schemas](/schemas/1.0/) are provided for requests creating and
 updating resources or updating relationships.

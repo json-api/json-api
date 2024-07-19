@@ -113,7 +113,7 @@ const options = {
  */
 const ajvFactory = function () {
   // ... create ajv instance
-  const ajv = new Ajv2020();
+  const ajv = new Ajv2020({strict: true});
 
   // ...add formats to ajv validator
   addFormats(ajv);
