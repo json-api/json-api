@@ -6,9 +6,6 @@
   "allOf": [
     {
       "$ref": "#/definitions/requiredTopLevelMembers"
-    },
-    {
-      "$ref": "#/definitions/oneOfDataOrErrors"
     }
   ],
   "type": "object",
@@ -36,6 +33,9 @@
   "dependentSchemas": {
     "included": {
       "$ref": "#/definitions/includedOnlyIfContainsData"
+    },
+    "data": {
+      "$ref": "#/definitions/oneOfDataOrErrors"
     }
   },
   "additionalProperties": false,
@@ -232,18 +232,14 @@
       "additionalProperties": false
     },
     "oneOfDataOrErrors": {
-      "type": "object",
-      "dependencies": {
-        "data": {
-          "not": {
-            "properties": {
-              "errors": true
-            },
-            "required": [
-              "errors"
-            ]
-          }
-        }
+      "not": {
+        "type": "object",
+        "properties": {
+          "errors": true
+        },
+        "required": [
+          "errors"
+        ]
       }
     },
     "includedOnlyIfContainsData": {
