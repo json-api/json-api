@@ -303,7 +303,7 @@ The members `data` and `errors` **MUST NOT** coexist in the same document.
 A document **MAY** contain any of these top-level members:
 
 * `jsonapi`: an object describing the server's implementation.
-* `links`: a [links object][links] related to the primary data.
+* `links`: a [links object][links] related to the document as a whole.
 * `included`: an array of [resource objects] that are related to the primary
   data and/or each other ("included resources").
 
