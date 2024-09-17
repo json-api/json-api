@@ -16,7 +16,6 @@ assembled to vet them.
 ### <a href="#client-libraries-javascript" id="client-libraries-javascript" class="headerlink"></a> JavaScript
 
 * [ember-data](https://github.com/emberjs/data) is one of the original exemplar implementations. There is now an [official adapter](https://emberjs.com/api/ember-data/release/classes/DS.JSONAPIAdapter) to support json-api.
-* [backbone-jsonapi](https://github.com/guillaumervls/backbone-jsonapi) is a Backbone adapter for JSON:API. Supports fetching Models & Collections from a JSON:API source.
 * [backbone-relational-jsonapi](https://github.com/xbill82/backbone-relational-jsonapi) is a parsing layer for Backbone.Relational. Entities specified in JSON:API are automatically parsed to be injected into Backbone.Relational relations.
 * [orbit.js](https://github.com/orbitjs/orbit.js) is a standalone library for
   coordinating access to data sources and keeping their contents synchronized.
@@ -42,8 +41,8 @@ assembled to vet them.
 * [Sarala JSON API data formatter](https://github.com/milroyfraser/sarala-json-api-data-formatter) is a simple and fluent framework agnostic javascript library to transform standard JSON:API responses to simple JSON objects and vice versa.
 * [Sarala](https://github.com/milroyfraser/sarala) is a javascript package which gives you a [Laravel Eloquent](https://laravel.com/docs/5.6/eloquent) like syntax to perform CRUD operations against an JSON:API built according to [JSON:API specification](http://jsonapi.org/format/).
 * [jsonapi-client](https://github.com/itsfadnis/jsonapi-client) A convenient module to consume a jsonapi service
-* [JSORM](https://jsonapi-suite.github.io/jsonapi_suite/js/home) is an
-isomorphic ActiveRecord clone that issues JSON:API requests instead of SQL and is part of the larger [JSONAPI Suite](https://jsonapi-suite.github.io/jsonapi_suite).
+* [JSORM](https://github.com/jsonapi-suite/jsorm) is an
+isomorphic ActiveRecord clone that issues JSON:API requests instead of SQL and is part of the larger [JSONAPI Suite](https://github.com/jsonapi-suite/).
 * [jsonapi-vuex](https://github.com/mrichar1/jsonapi-vuex) A module for interacting with a jsonapi service using a Vuex store, restructuring/normalizing records to make life easier.
 * [heather-js](https://github.com/bitex-la/heather-js) A library for parsing JSONAPI into objects from ES6 classes.
 * [@hyral/core](https://github.com/SyneticNL/Hyral) - An advanced, documented, easily extendable and lightweight (JSON:)API abstraction library with ORM-like CRUD support, automatic relationships handling and support for multiple (different) backends.
@@ -86,8 +85,6 @@ isomorphic ActiveRecord clone that issues JSON:API requests instead of SQL and i
 * [Munson](https://github.com/coryodaniel/munson) is a ruby JSONAPI client that can act as an ORM or integrate with your models via fine-grained agnosticism. Easy to configure and customize. Includes a chainable/customizable query builder, attributes API and dirty tracking.
 * [json-api-vanilla](https://github.com/trainline/json-api-vanilla) a reference-aware ruby library for JSONAPI deserialization that doesn't require setting up classes.
 * [SimpleJSONAPIClient](https://github.com/amcaplan/simple_jsonapi_client) gives you lower-level control for API operations, while your models and their relationships maintain a neat, ActiveRecord-inspired interface.
-* [jsonapi-simple_client](https://github.com/InspireNL/jsonapi-simple_client) a client to interact with a Server API that implements the JSON:API spec.
-* [jsonapi-record](https://github.com/InspireNL/jsonapi-record) a client framework for interacting JSON:API Spec compliant APIs in Ruby.
 * [jsonapi-unwrapper](https://github.com/Sonberg/jsonapi-unwrapper) a simple and lightweight library to deserialize JSON:API payloads.
 
 ### <a href="#client-libraries-php" id="client-libraries-php" class="headerlink"></a> PHP
@@ -149,10 +146,6 @@ and writing of JSON:API documents.
 * [json-api-doc](https://github.com/noplay/json-api-doc) JSON:API parser returning a simple Python dictionary
 * [json-api-smart](https://github.com/NilssonPL/json-api-smart) JSON:API with an ORM interface
 
-### <a href="#client-libraries-elixir" id="client-libraries-elixir" class="headerlink"></a> Elixir
-
-* [JsonApiClient](https://github.com/Decisiv/json_api_client) JSON:API Client Library For Elixir
-
 ## <a href="#server-libraries" id="server-libraries" class="headerlink"></a> Server libraries
 
 ### <a href="#server-libraries-swift" id="server-libraries-swift" class="headerlink"></a> Swift
@@ -209,7 +202,6 @@ and writing of JSON:API documents.
 * [json-api-ify](https://github.com/kutlerskaggs/json-api-ify) serialize the **** out of your data. json:api v1.0 complaint.
 * [bookshelf-jsonapi-params](https://github.com/scoutforpets/bookshelf-jsonapi-params) automatically apply JSON:API filtering, pagination, sparse fieldsets, includes, and sorting to your Bookshelf.js queries.
 * [Lux](https://github.com/postlight/lux) is a MVC style Node.js framework for building lightning fast JSON:APIs.
-* [transformalizer](https://github.com/GaiamTV/transformalizer) a bare bones node module for transforming raw data into JSON:API compliant payloads that makes no assumption regarding the shape of your data and sdks used, supports the full v1.0 specification, and supports dynamic transformations, links, and meta at all levels of a document.
 * [jsonapi-mock](https://github.com/Thomas-X/jsonapi-mock) A [json-server](https://github.com/typicode/json-server) inspired jsonapi mock server. Setup a jsonapi mock server in almost no time, uses lowdb.
 * [DenaliJS](http://denalijs.org) A layered-conventions framework for building ambitious APIs. Includes a powerful addon system, best-in-class developer experience, and extensive documentation.
 * [jsonapi-fractal](https://github.com/andersondanilo/jsonapi-fractal) JSON:API Serializer inspired by Fractal (PHP)
@@ -238,7 +230,7 @@ the moment.
   * [JSONAPI::Resources](https://github.com/cerebris/jsonapi-resources) provides a complete framework for developing a JSON:API server. It is designed to work with Rails, and provides routes, controllers, and serializers.
   * [JSONAPI::Utils](https://github.com/b2beauty/jsonapi-utils) works on top of [JSONAPI::Resources](https://github.com/cerebris/jsonapi-resources) taking advantage of its resource-driven style and bringing a Rails way to build modern APIs with no or less learning curve.
   * [Caprese](https://github.com/nicklandgrebe/caprese) An opinionated Rails library for creating JSON:API servers that lets you focus on customizing the behavior of your endpoints rather than the dirty work of setting them up. Leverages the power of [ActiveModel::Serializer](https://github.com/rails-api/active_model_serializers).
-  * [JSONAPI Suite](https://jsonapi-suite.github.io/jsonapi_suite)
+  * [JSONAPI Suite](https://github.com/jsonapi-suite)
   facilitates a server capable of deep querying and nested writes. Works
   with any ORM or datastore; comes with integration test helpers and
   automatic swagger documentation.
@@ -349,9 +341,7 @@ includes related resources.
 ### <a href="#related-tools-playground" id="related-tools-playground" class="headerlink"></a> Playground
 
 * [json-api-document-viewer](https://tadast.github.io/json-api-document-viewer) the flat json:api structure is a good way to express complex relationships between objects. However the same flatness makes it difficult for humans to "parse" these relationships. This tool visualises object relationships by visually nesting them.
-* [jsonapi-validator](https://jsonapi-validator.herokuapp.com) is a playground service for quick prototyping and validating JSON responses with jsonapi.org specification.
 * [corroborate](http://corroborate.arenpatel.com/) JSON:API request/response payload validator. It warns when there is a specification violation and also informs when a recommendation has not been followed.
-* [JSON API Playground](http://jsonapiplayground.reyesoft.com/) Fake online JSON:API server for testing and prototyping. It's great for tutorials, faking a server, sharing code examples, etc.
 
 ### <a href="#related-tools-ruby" id="related-tools-ruby" class="headerlink"></a> Ruby
 
