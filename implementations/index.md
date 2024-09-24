@@ -265,6 +265,7 @@ the moment.
 * [kt.jsonapi](https://pypi.org/project/kt.jsonapi/) JSON:API response generation using the Zope Component Architecture.
 * [Flask-COMBO-JSONAPI](https://github.com/AdCombo/flask-combo-jsonapi) JSON:API flask extension for building REST APIs.
 * [FastAPI-JSONAPI](https://github.com/mts-ai/FastAPI-JSONAPI) FastAPI-JSONAPI is a FastAPI extension for building REST APIs
+* [jsonapi-pydantic](https://github.com/impocode/jsonapi-pydantic) provides a suite of Pydantic models matching the JSON:API specification.
 
 ### <a href="#server-libraries-go" id="server-libraries-go" class="headerlink"></a> Go
 
