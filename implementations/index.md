@@ -15,6 +15,7 @@ assembled to vet them.
 
 ### <a href="#client-libraries-javascript" id="client-libraries-javascript" class="headerlink"></a> JavaScript
 
+* [@clipboard-health/json-api](https://www.npmjs.com/package/@clipboard-health/json-api) provides framework-agnostic mappers to and from JSON:API query strings with TypeScript types.
 * [ember-data](https://github.com/emberjs/data) is one of the original exemplar implementations. There is now an [official adapter](https://emberjs.com/api/ember-data/release/classes/DS.JSONAPIAdapter) to support json-api.
 * [backbone-relational-jsonapi](https://github.com/xbill82/backbone-relational-jsonapi) is a parsing layer for Backbone.Relational. Entities specified in JSON:API are automatically parsed to be injected into Backbone.Relational relations.
 * [orbit.js](https://github.com/orbitjs/orbit.js) is a standalone library for
@@ -56,6 +57,7 @@ isomorphic ActiveRecord clone that issues JSON:API requests instead of SQL and i
 * [fetchja](https://github.com/caiotarifa/fetchja) - A super simple, modern, and lightweight library for dealing with JSON:API (Kitsu-like, but using Fetch API instead of Axios).
 
 ### <a href="#client-libraries-typescript" id="client-libraries-typescript" class="headerlink"></a> Typescript
+* [@clipboard-health/json-api](https://www.npmjs.com/package/@clipboard-health/json-api) provides framework-agnostic mappers to and from JSON:API query strings with TypeScript types.
 * [ts-angular-jsonapi](https://github.com/reyesoft/ts-angular-jsonapi) A JSON:API library developed for AngularJS in Typescript
 * [ngrx-json-api](https://github.com/abdulhaq-e/ngrx-json-api) A JSON:API client for Angular 2 ngrx toolset
 * [ts-jsonapi](https://github.com/mohuk/ts-jsonapi) JSON:API (De)Serializer in Typescript
@@ -183,6 +185,7 @@ and writing of JSON:API documents.
 * [API Platform](https://api-platform.com) is an API-first Framework supporting JSON:API. 
 
 ### <a href="#server-libraries-node-js" id="server-libraries-node-js" class="headerlink"></a> Node.js
+* [@clipboard-health/json-api](https://www.npmjs.com/package/@clipboard-health/json-api) provides framework-agnostic mappers to and from JSON:API query strings with TypeScript types.
 * [Fortune.js](http://fortune.js.org/) is a library that includes a [comprehensive implementation of JSON:API](https://github.com/fortunejs/fortune-json-api).
 * [json-api](https://www.npmjs.org/package/json-api) turns an Express + Mongoose app into a JSON-API server.
 * [endpoints](https://github.com/endpoints) is an implementation of JSON:API using [Bookshelf](http://bookshelfjs.org).
