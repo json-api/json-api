@@ -24,7 +24,7 @@ const getArgValue = function (name, defaultValue) {
 };
 
 // Define root dir
-const rootDir = "./_schemas";
+const rootDir = "./schemas";
 
 // Define object that will record the full path of all files tested
 const files = {};
@@ -113,7 +113,7 @@ const options = {
  */
 const ajvFactory = function () {
   // ... create ajv instance
-  const ajv = new Ajv2020();
+  const ajv = new Ajv2020({strict: true});
 
   // ...add formats to ajv validator
   addFormats(ajv);
@@ -214,7 +214,7 @@ const runSingleTest = async function (ajv, version, results) {
   const baseDir = __dirname.replaceAll(/[\/\\]/g, npath.sep).split(npath.sep);
   baseDir.pop();
   const filePath = options.requiredFile.replaceAll(/[\/\\]/g, npath.sep).split(npath.sep);
-  if (filePath[0] === "_schemas") {
+  if (filePath[0] === "schemas") {
     filePath.shift();
   }
   const fullPath = [...baseDir, ...filePath].join(npath.sep);

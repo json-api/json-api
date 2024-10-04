@@ -1,7 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://jsonapi.org/schemas/spec/v1.0/draft/update/resource",
-  "$comment": "The $id URI should be modified before releasing. This URI does not need to be network addressable. It is an ID only.",
+  "$id": "https://jsonapi.org/schemas/1.0/schema_update_resource.json",
   "title": "JSON:API Schema for POST request",
   "description": "This schema only validates a request for PATCHing a resource.",
   "type": "object",
@@ -10,37 +9,37 @@
   ],
   "properties": {
     "data": {
-      "$ref": "#/definitions/resource"
+      "$ref": "#/$defs/resource"
     },
     "jsonapi": {
-      "$ref": "https://jsonapi.org/schemas/spec/v1.0/draft#/definitions/jsonapi"
+      "$ref": "https://jsonapi.org/schemas/1.0/schema.json#/$defs/jsonapi"
     },
     "meta": {
-      "$ref": "https://jsonapi.org/schemas/spec/v1.0/draft#/definitions/meta"
+      "$ref": "https://jsonapi.org/schemas/1.0/schema.json#/$defs/meta"
     }
   },
   "additionalProperties": false,
-  "definitions": {
+  "$defs": {
     "resource": {
       "description": "\"Resource objects\" appear in a JSON:API document to represent resources.",
       "$comment": "The id member is not required when the resource object originates at the client and represents a new resource to be created on the server.",
       "type": "object",
       "allOf": [
         {
-          "$ref": "https://jsonapi.org/schemas/spec/v1.0/draft#/definitions/resourceIdentification"
+          "$ref": "https://jsonapi.org/schemas/1.0/schema.json#/$defs/resourceIdentification"
         }
       ],
       "properties": {
         "id": true,
         "type": true,
         "attributes": {
-          "$ref": "https://jsonapi.org/schemas/spec/v1.0/draft#/definitions/attributes"
+          "$ref": "https://jsonapi.org/schemas/1.0/schema.json#/$defs/attributes"
         },
         "meta": {
-          "$ref": "https://jsonapi.org/schemas/spec/v1.0/draft#/definitions/meta"
+          "$ref": "https://jsonapi.org/schemas/1.0/schema.json#/$defs/meta"
         },
         "relationships": {
-          "$ref": "https://jsonapi.org/schemas/spec/v1.0/draft#/definitions/relationshipsFromRequest"
+          "$ref": "https://jsonapi.org/schemas/1.0/schema.json#/$defs/relationshipsFromRequest"
         }
       },
       "additionalProperties": false
