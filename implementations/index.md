@@ -335,6 +335,7 @@ includes related resources.
 
 * [Endpoints provides a fully working example API](http://github.com/endpoints/example/)
 * [Sinja provides a fully-working example API](https://github.com/mwpastore/sinja/tree/master/demo-app)
+* [Hatchify provides a full-working example API and client](https://stackblitz.com/edit/bitovi-hatchify-t7amou?embed=1&file=backend%2Findex.ts)
 
 ## <a href="#related-tools" id="related-tools" class="headerlink"></a> Related Tools
 
@@ -352,6 +353,7 @@ includes related resources.
 
 * [json-api-merge](https://www.npmjs.com/package/json-api-merge) JSON:API specific redundant duplication algorithm for merging included resources into original data
 * [json-patch](https://www.npmjs.org/package/json-patch) implementation of JSON Patch (rfc6902)
+* [hatchify](https://github.com/bitovi/hatchify) Schema-driven JSON:API for Node HTTP servers, with accompanying schema-driven React Web UI
 
 ### <a href="#server-python" id="server-python" class="headerlink"></a> Python
 
