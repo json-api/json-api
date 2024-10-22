@@ -50,7 +50,7 @@ The JSON:API specification supports two media type parameters: `ext` and
 
 > Note: A media type parameter is an extra piece of information that can
 accompany a media type. For example, in the header
-`Content-Type: text/html; charset="utf-8"`, the media type is `text/html` and
+`Content-Type: text/html;charset="utf-8"`, the media type is `text/html` and
 `charset` is a parameter.
 
 ### <a href="#extensions" id="extensions" class="headerlink"></a> Extensions
@@ -121,7 +121,7 @@ versioning. This member might appear as follows:
 
 ```json
 HTTP/1.1 200 OK
-Content-Type: application/vnd.api+json; ext="https://jsonapi.org/ext/version"
+Content-Type: application/vnd.api+json;ext="https://jsonapi.org/ext/version"
 
 // ...
 {
@@ -170,7 +170,7 @@ With such a profile applied, a response might appear as follows:
 
 ```json
 HTTP/1.1 200 OK
-Content-Type: application/vnd.api+json; profile="https://example.com/resource-timestamps"
+Content-Type: application/vnd.api+json;profile="https://example.com/resource-timestamps"
 
 // ...
 {
