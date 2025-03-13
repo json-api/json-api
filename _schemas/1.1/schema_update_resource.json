@@ -1,0 +1,50 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://jsonapi.org/schemas/spec/v1.1/draft/update/resource",
+  "title": "JSON:API Schema for POST request",
+  "description": "This schema only validates a request for PATCHing a resource.",
+  "type": "object",
+  "required": [
+    "data"
+  ],
+  "anyOf": [
+    {
+      "$ref": "https://jsonapi.org/schemas/spec/v1.1/draft#/definitions/atMemberName"
+    }
+  ],
+  "properties": {
+    "data": {
+      "$ref": "#/definitions/resource"
+    },
+    "jsonapi": {
+      "$ref": "https://jsonapi.org/schemas/spec/v1.1/draft#/definitions/jsonapi"
+    },
+    "meta": {
+      "$ref": "https://jsonapi.org/schemas/spec/v1.1/draft#/definitions/meta"
+    }
+  },
+  "unevaluatedProperties": false,
+  "definitions": {
+    "resource": {
+      "description": "\"Resource objects\" appear in a JSON:API document to represent resources.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "https://jsonapi.org/schemas/spec/v1.1/draft#/definitions/resourceIdentification"
+        }
+      ],
+      "properties": {
+        "attributes": {
+          "$ref": "https://jsonapi.org/schemas/spec/v1.1/draft#/definitions/attributes"
+        },
+        "meta": {
+          "$ref": "https://jsonapi.org/schemas/spec/v1.1/draft#/definitions/meta"
+        },
+        "relationships": {
+          "$ref": "https://jsonapi.org/schemas/spec/v1.1/draft#/definitions/relationshipsFromRequest"
+        }
+      },
+      "unevaluatedProperties": false
+    }
+  }
+}

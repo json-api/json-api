@@ -1,0 +1,16 @@
+{
+  "jsonapi": {
+    "version": "1.0",
+    "ext": "error"
+  },
+  "meta": {
+    "errors-present-in-document": [
+      {
+        "detail": "If present, the value of the ext member **MUST** be an array of URIs for all applied extensions.",
+        "source": {
+          "pointer": "/jsonapi/ext"
+        }
+      }
+    ]
+  }
+}
