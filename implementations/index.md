@@ -109,10 +109,7 @@ isomorphic ActiveRecord clone that issues JSON:API requests instead of SQL and i
 ### <a href="#client-libraries-java" id="client-libraries-java" class="headerlink"></a> Java
 
 * [jsonapi-converter](https://github.com/jasminb/jsonapi-converter) is a Java JSON:API v1.0 client. Besides providing means for serialisation/deserialisation, client comes with Retrofit plugin.
-* [crnk.io](http://www.crnk.io) is a JSON:API framework for clients and servers. On the client-side it targets
-  both Java and Android development. As for the backend side a rich set of modules helps with the integration of various
-  Java frameworks.
- * [jsonapi](https://github.com/MarkoMilos/jsonapi) Library for streamlined use of JSON:API using Kotlin and Java built on top of Moshi from Square. It is built with a powerful api and supports JVM (Java/Kotlin) and Android. Supporting deserialization and serialization it is meant to be used on both client and server side.
+* [jsonapi](https://github.com/MarkoMilos/jsonapi) Library for streamlined use of JSON:API using Kotlin and Java built on top of Moshi from Square. It is built with a powerful api and supports JVM (Java/Kotlin) and Android. Supporting deserialization and serialization it is meant to be used on both client and server side.
 
 ### <a href="#client-libraries-android" id="client-libraries-android" class="headerlink"></a> Android
 * [faogustavo/JSONApi](https://github.com/faogustavo/JSONApi) library for deserializing automatic. It can be integrated with retrofit. It has some ideas from Morpheus and jsonapi-converter but has some aditionals.
@@ -291,8 +288,6 @@ includes related resources.
 
 ### <a href="#server-libraries-java" id="server-libraries-java" class="headerlink"></a> Java
 
-* [crnk.io](http://www.crnk.io) is a JSON:API framework for clients and servers. It was started as a fork for Katharsis after the later [lost development momentum](https://www.reddit.com/r/java/comments/6hs0n8/crnkio_10_released_crank_up_rest_development/). It has similar concepts but with active development support. On the server-side it comes, among others,
-  with a rich set of integrations (Servlet, JAX-RS, Spring, JPA, Bean Validation, Zipkin and more), bulk updates with JSON Patch,  a meta-model for automation purposes, client stub generation for TypeScript and a module API for third-party contributions.
 * [Elide](http://elide.io) is a web framework supporting JSON:API. Through annotation-based JSON:API endpoint generation, Elide enables you to focus on your data model, security model, and business logic while avoiding unnecessary boilerplate. Moreover, through use of the JSON:API Patch extension, [Elide](http://elide.io) provides full support for database transactions.
 * [JSON:API for Spring HATEOAS](https://github.com/toedter/spring-hateoas-jsonapi) provides serialization/deserialization of the Spring HATEOAS representation models. The project also provides a builder to easily create relationships, included resource objects, pagination, and more.
 * [jsonapi-rvp](https://github.com/xlate/jsonapi-rvp) utilizes the platform capabilities available in the Jakarta EE environment (formerly Java EE) to expose JPA entities via JSON:API. Features include query and entity validation (using Bean Validators), pagination, use of surrogate keys as record identifiers, support for LEFT outer join conditions, and a simple JavaScript client.
