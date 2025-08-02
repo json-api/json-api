@@ -1,0 +1,6 @@
+name: SQLAlchemy-JSONAPI
+category: Server Libraries
+language: Python
+repo: https://github.com/coltonprovias/sqlalchemy-jsonapi
+purl: ''
+description: provides JSON:API serialization for SQLAlchemy models.

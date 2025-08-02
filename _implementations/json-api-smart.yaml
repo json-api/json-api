@@ -1,0 +1,6 @@
+name: json-api-smart
+category: Client Libraries
+language: Python
+repo: https://github.com/NilssonPL/json-api-smart
+purl: ''
+description: JSON:API with an ORM interface

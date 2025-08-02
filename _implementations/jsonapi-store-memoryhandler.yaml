@@ -1,0 +1,7 @@
+name: jsonapi-store-memoryhandler
+category: Server Libraries
+language: Node.js
+repo: >-
+  https://github.com/holidayextras/jsonapi-server/blob/master/documentation/resources.md
+purl: ''
+description: An in-memory data store for rapid prototyping.

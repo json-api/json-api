@@ -1,0 +1,6 @@
+name: Fortune.js
+category: Server Libraries
+language: Node.js
+repo: http://fortune.js.org/
+purl: ''
+description: is a library that includes a comprehensive implementation of JSON:API.

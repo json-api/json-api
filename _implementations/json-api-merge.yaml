@@ -1,0 +1,8 @@
+name: json-api-merge
+category: Related Tools
+language: JavaScript
+repo: https://www.npmjs.com/package/json-api-merge
+purl: ''
+description: >-
+  JSON:API specific redundant duplication algorithm for merging included
+  resources into original data

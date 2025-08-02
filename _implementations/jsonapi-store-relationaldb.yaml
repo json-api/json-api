@@ -1,0 +1,6 @@
+name: jsonapi-store-relationaldb
+category: Server Libraries
+language: Node.js
+repo: https://github.com/holidayextras/jsonapi-store-relationaldb
+purl: ''
+description: A relational database handler for jsonapi-server.

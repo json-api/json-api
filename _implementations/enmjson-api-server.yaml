@@ -1,0 +1,8 @@
+name: enm/json-api-server
+category: Server Libraries
+language: PHP
+repo: https://eosnewmedia.github.io/JSON-API-Server/
+purl: ''
+description: >-
+  is an abstract server-side PHP (>= 7.2) implementation of the json:api
+  specification

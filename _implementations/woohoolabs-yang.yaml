@@ -1,0 +1,6 @@
+name: woohoolabs / yang
+category: Client Libraries
+language: PHP
+repo: https://github.com/woohoolabs/yang
+purl: ''
+description: is a PSR-7 compatible library that is able to build and send requests

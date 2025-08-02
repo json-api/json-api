@@ -1,0 +1,6 @@
+name: marshmallow-jsonapi
+category: Server Libraries
+language: Python
+repo: https://github.com/marshmallow-code/marshmallow-jsonapi
+purl: ''
+description: provides JSON:API data formatting for any Python web framework.

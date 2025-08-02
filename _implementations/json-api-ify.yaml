@@ -1,0 +1,6 @@
+name: json-api-ify
+category: Server Libraries
+language: Node.js
+repo: https://github.com/kutlerskaggs/json-api-ify
+purl: ''
+description: serialize the out of your data. json:api v1.0 complaint.

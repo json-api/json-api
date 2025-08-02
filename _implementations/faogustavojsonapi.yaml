@@ -1,0 +1,8 @@
+name: faogustavo/JSONApi
+category: Client Libraries
+language: Android
+repo: https://github.com/faogustavo/JSONApi
+purl: ''
+description: >-
+  library for deserializing automatic. It can be integrated with retrofit. It
+  has some ideas from Morpheus and jsonapi-converter but has some aditionals.

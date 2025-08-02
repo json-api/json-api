@@ -1,0 +1,10 @@
+name: orbit.js
+category: Client Libraries
+language: Javascript
+repo: https://github.com/orbitjs/orbit.js
+purl: ''
+description: >-
+  orbit.js is a standalone library forcoordinating access to data sources and
+  keeping their contents synchronized.Orbit’s Common Library includes
+  JSONAPISource for accessing JSON:API servers. Orbit can be usedindependently
+  or with Ember.js through the ember-orbit integration library.

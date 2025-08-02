@@ -1,0 +1,9 @@
+name: floor9design-ltd/json-api-formatter
+category: Client Libraries
+language: PHP
+repo: https://github.com/floor9design-ltd/json-api-formatter
+purl: ''
+description: >-
+  An open source library designed to be used for generating and interacting with
+  (making and receiving) JSON API requests. 100% unit tested and actively
+  maintained by the author. Easy to use with frameworks such as Laravel/Symfony.

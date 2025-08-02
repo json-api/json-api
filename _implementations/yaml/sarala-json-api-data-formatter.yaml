@@ -1,0 +1,8 @@
+name: Sarala JSON API data formatter
+category: Client Libraries
+language: Javascript
+repo: https://github.com/milroyfraser/sarala-json-api-data-formatter
+purl: ''
+description: >-
+  is a simple and fluent framework agnostic javascript library to transform
+  standard JSON:API responses to simple JSON objects and vice versa.

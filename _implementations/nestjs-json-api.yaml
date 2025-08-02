@@ -1,0 +1,8 @@
+name: nestjs-json-api
+category: Server Libraries
+language: Node.js
+repo: https://github.com/klerick/nestjs-json-api
+purl: ''
+description: >-
+  A module for NestJS and TypeORM to implement JSON API supporting features such
+  as

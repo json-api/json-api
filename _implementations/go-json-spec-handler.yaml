@@ -1,0 +1,8 @@
+name: go-json-spec-handler
+category: Server Libraries
+language: Go
+repo: https://github.com/derekdowling/go-json-spec-handler
+purl: ''
+description: >-
+  drop-in library for handling requests and sending responses in an existing
+  API.

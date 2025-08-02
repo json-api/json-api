@@ -1,0 +1,8 @@
+name: jsh-api
+category: Server Libraries
+language: Go
+repo: https://github.com/derekdowling/go-json-spec-handler/tree/master/jsh-api
+purl: ''
+description: >-
+  deals with the dirty work of building JSON:API resource endpoints. Built on
+  top of jsh

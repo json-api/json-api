@@ -1,0 +1,6 @@
+name: jsona
+category: Client Libraries
+language: Javascript
+repo: https://github.com/olosegres/jsona
+purl: ''
+description: Data formatter that creates customizable

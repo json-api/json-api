@@ -1,0 +1,6 @@
+name: jsonapi-serializer-cr
+category: Server Libraries
+language: Crystal
+repo: https://github.com/andersondanilo/jsonapi-serializer-cr
+purl: ''
+description: is a JSON:API Serializer for Crystal Lang.

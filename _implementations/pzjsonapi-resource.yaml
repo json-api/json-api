@@ -1,0 +1,8 @@
+name: pz/jsonapi-resource
+category: Server Libraries
+language: PHP
+repo: https://github.com/R3VoLuT1OneR/jsonapi-resource
+purl: ''
+description: >-
+  Serialize PHP class object into JSON:API resource object using PHP 8.0
+  Attributes.

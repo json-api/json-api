@@ -1,0 +1,6 @@
+name: rjsonapi
+category: Client Libraries
+language: R
+repo: https://github.com/sckott/rjsonapi
+purl: ''
+description: is an R client to consume JSONAPI’s.

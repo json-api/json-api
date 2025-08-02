@@ -1,0 +1,8 @@
+name: Ember JSON API Resources
+category: Client Libraries
+language: Javascript
+repo: https://github.com/pixelhandler/ember-jsonapi-resources
+purl: ''
+description: >-
+  Ember JSON API Resources is an Ember CLI Addon for a lightweight solution for
+  data persistence in an Ember.js application.

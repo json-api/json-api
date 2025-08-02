@@ -1,0 +1,6 @@
+name: FastAPI-JSONAPI
+category: Server Libraries
+language: Python
+repo: https://github.com/mts-ai/FastAPI-JSONAPI
+purl: ''
+description: FastAPI-JSONAPI is a FastAPI extension for building REST APIs

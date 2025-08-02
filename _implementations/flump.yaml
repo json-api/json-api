@@ -1,0 +1,6 @@
+name: Flump
+category: Server Libraries
+language: Python
+repo: https://github.com/rolepoint/flump
+purl: ''
+description: Database agnostic JSON:API builder which depends on Flask and Marshmallow.

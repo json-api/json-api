@@ -1,0 +1,8 @@
+name: Graphiti
+category: Server Libraries
+language: Ruby (Ruby on Rails)
+repo: https://www.graphiti.dev/guides/
+purl: ''
+description: >-
+  a ruby library for RESTful Resources based on JSON:API. Works with vanilla
+  Ruby

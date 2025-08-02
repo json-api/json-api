@@ -1,0 +1,8 @@
+name: api2go
+category: Server Libraries
+language: Go
+repo: https://github.com/manyminds/api2go
+purl: ''
+description: >-
+  is a full-fledged library to make it simple to provide a JSON:API with your
+  Golang project.

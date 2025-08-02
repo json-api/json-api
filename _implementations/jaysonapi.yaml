@@ -1,0 +1,9 @@
+name: jaysonapi
+category: Server Libraries
+language: Node.js
+repo: https://github.com/digia/jaysonapi
+purl: ''
+description: >-
+  jaysonapi is a framework agnostic JSON:API v1.0.0 serializer. jaysonapi
+  provides more of a functional approach to serializing your data. Define a
+  serializer with a type and schema

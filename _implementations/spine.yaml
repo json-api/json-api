@@ -1,0 +1,8 @@
+name: Spine
+category: Client Libraries
+language: iOS
+repo: https://github.com/wvteijlingen/spine
+purl: ''
+description: >-
+  is a Swift library for working with JSON:API APIs. It supports mapping to
+  custom model classes

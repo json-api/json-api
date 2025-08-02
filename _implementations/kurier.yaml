@@ -1,0 +1,8 @@
+name: Kurier
+category: Server Libraries
+language: Node.js
+repo: https://github.com/kurierjs/kurier
+purl: ''
+description: >-
+  is a TypeScript framework to create APIs following the 1.1 Spec of JSON:API +
+  the Operations proposal spec.

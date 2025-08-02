@@ -1,0 +1,6 @@
+name: jsonapi_client
+category: Client Libraries
+language: Dart
+repo: https://pub.dev/packages/jsonapi_client
+purl: ''
+description: is a simple JSON:API v1.0 client written in Dart.

@@ -1,0 +1,9 @@
+name: Caprese
+category: Server Libraries
+language: Ruby (Ruby on Rails)
+repo: https://github.com/nicklandgrebe/caprese
+purl: ''
+description: >-
+  An opinionated Rails library for creating JSON:API servers that lets you focus
+  on customizing the behavior of your endpoints rather than the dirty work of
+  setting them up. Leverages the power of ActiveModel::Serializer.

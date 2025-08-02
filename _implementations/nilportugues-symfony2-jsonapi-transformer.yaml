@@ -1,0 +1,8 @@
+name: nilportugues / symfony2-jsonapi-transformer
+category: Server Libraries
+language: PHP
+repo: https://github.com/nilportugues/symfony2-jsonapi-transformer
+purl: ''
+description: >-
+  Symfony 2 JSON:API Transformer Bundle outputting valid API responses in JSON
+  and JSON:API formats.

@@ -1,0 +1,8 @@
+name: enm/json-api-server-bundle
+category: Server Libraries
+language: PHP
+repo: https://eosnewmedia.github.io/JSON-API-Server-Bundle/
+purl: ''
+description: >-
+  is a symfony bundle which integrates enm/json-api-server into your symfony
+  application (symfony version ^4.0).

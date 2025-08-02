@@ -1,0 +1,6 @@
+name: jsonapi-serializer
+category: Server Libraries
+language: Node.js
+repo: https://github.com/SeyZ/jsonapi-serializer
+purl: ''
+description: is a Node.js framework agnostic library for serializing your data to JSON:API.

@@ -1,0 +1,8 @@
+name: json-api
+category: Server Libraries
+language: Haskell
+repo: https://github.com/toddmohney/json-api
+purl: ''
+description: >-
+  functions and datatypes for representing user-defined resources in accordance
+  with the JSON-API specification.

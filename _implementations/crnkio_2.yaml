@@ -1,0 +1,9 @@
+name: crnk.io
+category: Server Libraries
+language: Java
+repo: http://www.crnk.io
+purl: ''
+description: >-
+  is a JSON:API framework for clients and servers. It was started as a fork for
+  Katharsis after the later lost development momentum. It has similar concepts
+  but with active development support. On the server-side it comes

@@ -1,0 +1,9 @@
+name: JSONAPI Suite
+category: Server Libraries
+language: Ruby (Ruby on Rails)
+repo: https://github.com/jsonapi-suite
+purl: ''
+description: >-
+  facilitates a server capable of deep querying and nested writes. Workswith any
+  ORM or datastore; comes with integration test helpers andautomatic swagger
+  documentation.

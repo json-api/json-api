@@ -1,0 +1,6 @@
+name: Yaks
+category: Server Libraries
+language: Ruby (Plain)
+repo: https://github.com/plexus/yaks
+purl: ''
+description: Library for building hypermedia APIs

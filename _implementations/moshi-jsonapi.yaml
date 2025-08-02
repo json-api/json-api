@@ -1,0 +1,8 @@
+name: moshi-jsonapi
+category: Client Libraries
+language: Android
+repo: https://github.com/kamikat/moshi-jsonapi
+purl: ''
+description: >-
+  serialize/deserialize JSON:API v1.0 using fantistic Moshi API! With friendly
+  Java interface and easy integration with Retrofit.

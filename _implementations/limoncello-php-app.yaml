@@ -1,0 +1,6 @@
+name: limoncello-php / app
+category: Server Libraries
+language: PHP
+repo: https://github.com/limoncello-php/app
+purl: ''
+description: is a JSON:API v1.0 quick start server application for neomerx / json-api.

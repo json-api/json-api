@@ -1,0 +1,8 @@
+name: JSON:API for Spring HATEOAS
+category: Server Libraries
+language: Java
+repo: https://github.com/toedter/spring-hateoas-jsonapi
+purl: ''
+description: >-
+  provides serialization/deserialization of the Spring HATEOAS representation
+  models. The project also provides a builder to easily create relationships

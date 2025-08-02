@@ -1,0 +1,8 @@
+name: Jsonapi-for-rails
+category: Server Libraries
+language: Ruby (Ruby on Rails)
+repo: https://github.com/doga/jsonapi_for_rails
+purl: ''
+description: >-
+  empowers your JSONAPI compliant Rails APIs. Implement your APIs with very
+  little coding.

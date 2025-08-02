@@ -1,0 +1,6 @@
+name: PONAPI::Client
+category: Client Libraries
+language: Perl
+repo: https://metacpan.org/pod/PONAPI::Client
+purl: ''
+description: is a simple/extensible JSON:API v1.0 client.

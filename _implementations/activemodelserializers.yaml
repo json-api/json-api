@@ -1,0 +1,6 @@
+name: ActiveModel::Serializers
+category: Server Libraries
+language: Ruby (Ruby on Rails)
+repo: https://github.com/rails-api/active_model_serializers
+purl: ''
+description: is one of the original exemplar implementations

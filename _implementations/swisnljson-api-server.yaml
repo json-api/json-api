@@ -1,0 +1,6 @@
+name: swisnl/json-api-server
+category: Server Libraries
+language: PHP
+repo: https://github.com/swisnl/json-api-server
+purl: ''
+description: is a Laravel package to get a JSON:API up and running in minutes.

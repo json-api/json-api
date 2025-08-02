@@ -1,0 +1,8 @@
+name: Hypermedia.JsonApi.Client
+category: Client Libraries
+language: .NET
+repo: https://github.com/cosullivan/Hypermedia/
+purl: ''
+description: >-
+  is a set of extension methods to the HttpClient which allow for readingand
+  writing of JSON:API documents.

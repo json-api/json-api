@@ -1,0 +1,6 @@
+name: '@hyral/vue'
+category: Client Libraries
+language: Javascript
+repo: https://github.com/SyneticNL/Hyral/tree/master/packages/vue
+purl: ''
+description: '- Vue(x) integration for @hyral/core for Store-module creation and mixins'

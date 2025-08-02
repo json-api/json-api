@@ -1,0 +1,6 @@
+name: hackerboy/json-api
+category: Server Libraries
+language: PHP
+repo: https://github.com/hackerboydotcom/json-api
+purl: ''
+description: is a lightweight library that helps you to implement JSONAPI easily

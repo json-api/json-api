@@ -1,0 +1,6 @@
+name: Flask-Restless-NG
+category: Server Libraries
+language: Python
+repo: https://github.com/mrevutskyi/flask-restless-ng
+purl: ''
+description: Builds JSON:API from SQLAlchemy models using Flask

@@ -1,0 +1,6 @@
+name: tuyakhov / yii2-json-api
+category: Server Libraries
+language: PHP
+repo: https://github.com/tuyakhov/yii2-json-api
+purl: ''
+description: Implementation of JSON:API specification for the Yii framework.

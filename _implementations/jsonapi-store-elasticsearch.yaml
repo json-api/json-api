@@ -1,0 +1,6 @@
+name: jsonapi-store-elasticsearch
+category: Server Libraries
+language: Node.js
+repo: https://github.com/holidayextras/jsonapi-store-elasticsearch
+purl: ''
+description: An elasticsearch handler for jsonapi-server.

@@ -1,0 +1,6 @@
+name: ts-japi
+category: Server Libraries
+language: Node.js
+repo: https://github.com/jun-sheaf/ts-japi
+purl: ''
+description: '- A zero-dependency'
