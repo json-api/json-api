@@ -1,0 +1,8 @@
+name: jsonapi-rb
+category: Server Libraries
+language: Ruby (Plain)
+repo: http://jsonapi-rb.org
+purl: ''
+description: >-
+  Ruby library for efficiently building and consuming JSON:API documents - with
+  Rails and Hanami integrations.

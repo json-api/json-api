@@ -1,0 +1,6 @@
+name: pz/doctrine-rest
+category: Server Libraries
+language: PHP
+repo: https://github.com/R3VoLuT1OneR/doctrine-rest
+purl: ''
+description: library provides basic tools for implementation of JSON:API with Doctrine 2

@@ -1,0 +1,10 @@
+name: jsonapi
+category: Client Libraries
+language: Java
+repo: https://github.com/MarkoMilos/jsonapi
+purl: ''
+description: >-
+  Library for streamlined use of JSON:API using Kotlin and Java built on top of
+  Moshi from Square. It is built with a powerful api and supports JVM
+  (Java/Kotlin) and Android. Supporting deserialization and serialization it is
+  meant to be used on both client and server side.

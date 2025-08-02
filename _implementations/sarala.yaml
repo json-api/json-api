@@ -1,0 +1,9 @@
+name: Sarala
+category: Client Libraries
+language: Javascript
+repo: https://github.com/milroyfraser/sarala
+purl: ''
+description: >-
+  is a javascript package which gives you a Laravel Eloquent like syntax to
+  perform CRUD operations against an JSON:API built according to JSON:API
+  specification.

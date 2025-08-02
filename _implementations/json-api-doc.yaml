@@ -1,0 +1,6 @@
+name: json-api-doc
+category: Client Libraries
+language: Python
+repo: https://github.com/noplay/json-api-doc
+purl: ''
+description: JSON:API parser returning a simple Python dictionary

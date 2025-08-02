@@ -1,0 +1,6 @@
+name: Jbuilder::JsonAPI
+category: Server Libraries
+language: Ruby (Plain)
+repo: https://github.com/vladfaust/jbuilder-json_api
+purl: ''
+description: Simple & lightweight extension for Jbuilder

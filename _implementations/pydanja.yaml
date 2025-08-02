@@ -1,0 +1,6 @@
+name: pydanja
+category: Server Libraries
+language: Python
+repo: https://github.com/Centurix/pydanja
+purl: ''
+description: JSON:API implementation for pydantic and FastAPI using generic types

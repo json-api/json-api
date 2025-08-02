@@ -1,0 +1,6 @@
+name: pyramid-jsonapi
+category: Server Libraries
+language: Python
+repo: https://github.com/colinhiggs/pyramid-jsonapi
+purl: ''
+description: Auto-build a JSON:API from sqlalchemy models using the pyramid framework.

@@ -1,0 +1,6 @@
+name: ngrx-json-api
+category: Client Libraries
+language: Typescript
+repo: https://github.com/abdulhaq-e/ngrx-json-api
+purl: ''
+description: A JSON:API client for Angular 2 ngrx toolset

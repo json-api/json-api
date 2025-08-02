@@ -1,0 +1,6 @@
+name: json-api
+category: Server Libraries
+language: Node.js
+repo: https://www.npmjs.org/package/json-api
+purl: ''
+description: turns an Express + Mongoose app into a JSON-API server.

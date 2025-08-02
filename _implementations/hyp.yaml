@@ -1,0 +1,6 @@
+name: Hyp
+category: Server Libraries
+language: Python
+repo: https://github.com/kalasjocke/hyp
+purl: ''
+description: is a library for creating json-api responses.

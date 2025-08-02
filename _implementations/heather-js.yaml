@@ -1,0 +1,6 @@
+name: heather-js
+category: Client Libraries
+language: Javascript
+repo: https://github.com/bitex-la/heather-js
+purl: ''
+description: A library for parsing JSONAPI into objects from ES6 classes.

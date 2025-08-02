@@ -1,0 +1,8 @@
+name: scala-jsonapi
+category: Server Libraries
+language: Scala
+repo: https://github.com/scala-jsonapi/scala-jsonapi
+purl: ''
+description: >-
+  A Scala library for producing JSON output (and deserializing JSON input) based
+  on JSON:API specification.

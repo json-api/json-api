@@ -1,0 +1,6 @@
+name: json-patch
+category: Related Tools
+language: JavaScript
+repo: https://www.npmjs.org/package/json-patch
+purl: ''
+description: implementation of JSON Patch (rfc6902)

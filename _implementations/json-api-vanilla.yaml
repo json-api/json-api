@@ -1,0 +1,8 @@
+name: json-api-vanilla
+category: Client Libraries
+language: Ruby (Plain)
+repo: https://github.com/trainline/json-api-vanilla
+purl: ''
+description: >-
+  a reference-aware ruby library for JSONAPI deserialization that doesn’t
+  require setting up classes.

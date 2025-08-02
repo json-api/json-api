@@ -1,0 +1,6 @@
+name: jsonapi-rust
+category: Server Libraries
+language: Rust
+repo: https://github.com/michiel/jsonapi-rust
+purl: ''
+description: A Rust library for serializing

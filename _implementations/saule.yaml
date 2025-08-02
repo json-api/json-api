@@ -1,0 +1,9 @@
+name: Saule
+category: Server Libraries
+language: .NET
+repo: https://github.com/joukevandermaas/saule/
+purl: ''
+description: >-
+  is a small JSON:API 1.0 compatible library that integrates well with
+  established Web API conventions. It has complete documentation and near 100%
+  test coverage.

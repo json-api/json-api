@@ -1,0 +1,8 @@
+name: elm-jsonapi
+category: Client Libraries
+language: Elm
+repo: https://github.com/noahzgordon/elm-jsonapi
+purl: ''
+description: >-
+  provides decoders and helper functions for clients receiving JSON:API
+  payloads.

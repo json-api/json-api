@@ -1,0 +1,9 @@
+name: JsonApiDotNetCore
+category: Server Libraries
+language: .NET
+repo: https://github.com/json-api-dotnet/JsonApiDotNetCore
+purl: ''
+description: >-
+  is a framework for building json:api compliant REST APIs using .NET Core and
+  Entity Framework Core. It eliminates as much boilerplate as possible by
+  offering out-of-the-box features such as sorting

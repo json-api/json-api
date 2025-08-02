@@ -1,0 +1,9 @@
+name: enm/json-api-client
+category: Client Libraries
+language: PHP
+repo: https://eosnewmedia.github.io/JSON-API-Client/
+purl: ''
+description: >-
+  is an abstract client-side PHP implementation of the json:api specification
+  which is based on enm/json-api-common. It allows you to send json:api requests
+  via your own http client implementation or via a buzz or guzzle client.

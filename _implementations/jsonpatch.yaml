@@ -1,0 +1,6 @@
+name: jsonpatch
+category: Related Tools
+language: Python
+repo: https://python-json-patch.readthedocs.org
+purl: ''
+description: implementation of JSON Patch (rfc6902)

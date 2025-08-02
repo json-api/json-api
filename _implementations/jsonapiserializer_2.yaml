@@ -1,0 +1,10 @@
+name: JsonApiSerializer
+category: Server Libraries
+language: .NET
+repo: https://github.com/codecutout/JsonApiSerializer
+purl: ''
+description: >-
+  is a configurationless JSON:API serialization and deserialization library
+  implemented as a Json.NET JsonSerializerSetting. It leverages the existing
+  power and flexibility of Json.NET while providing a sensible default mapping
+  between JSON:API and CLR objects.

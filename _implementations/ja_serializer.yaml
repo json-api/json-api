@@ -1,0 +1,8 @@
+name: ja_serializer
+category: Server Libraries
+language: Elixir
+repo: https://github.com/AgilionApps/ja_serializer
+purl: ''
+description: >-
+  is a behaviour and DSL to emit conforming JSON. Suitable for use in a Phoenix
+  view or in a Plug stack.

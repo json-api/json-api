@@ -1,0 +1,6 @@
+name: ngx-jsonapi
+category: Client Libraries
+language: Typescript
+repo: https://github.com/reyesoft/ngx-jsonapi
+purl: ''
+description: A JSON:API fast client library for Angular with storage+memory cache.

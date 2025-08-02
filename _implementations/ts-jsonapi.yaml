@@ -1,0 +1,6 @@
+name: ts-jsonapi
+category: Client Libraries
+language: Typescript
+repo: https://github.com/mohuk/ts-jsonapi
+purl: ''
+description: JSON:API (De)Serializer in Typescript

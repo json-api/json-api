@@ -1,0 +1,6 @@
+name: JSONAPI::Serializers
+category: Server Libraries
+language: Ruby (Plain)
+repo: https://github.com/fotinakis/jsonapi-serializers
+purl: ''
+description: provides a pure Ruby

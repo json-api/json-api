@@ -1,0 +1,8 @@
+name: JSONAPI.rb
+category: Server Libraries
+language: Ruby (Ruby on Rails)
+repo: https://github.com/stas/jsonapi.rb#usage
+purl: ''
+description: >-
+  A set of pluggablemixins providing support for serialization (using
+  fast_jsonapi)

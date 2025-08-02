@@ -1,0 +1,8 @@
+name: elm-jsonapi-http
+category: Client Libraries
+language: Elm
+repo: https://github.com/noahzgordon/elm-jsonapi-http
+purl: ''
+description: >-
+  wraps elm-jsonapi and handles the details of content negotiation with
+  JSON:API-compliant servers

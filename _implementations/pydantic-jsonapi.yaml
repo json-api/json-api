@@ -1,0 +1,6 @@
+name: pydantic-jsonapi
+category: Server Libraries
+language: Python
+repo: https://github.com/DeanWay/pydantic-jsonapi
+purl: ''
+description: JSON:api validation with python type hinting using pydantic

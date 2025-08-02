@@ -1,0 +1,9 @@
+name: spraypaint
+category: Client Libraries
+language: Javascript
+repo: https://github.com/graphiti-api/spraypaint.js
+purl: ''
+description: >-
+  - JS Client for Graphiti similar to ActiveRecord. Written in Typescript but
+  works in plain old ES5 as well. This library is isomorphic - use it from the
+  browser

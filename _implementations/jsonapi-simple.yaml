@@ -1,0 +1,8 @@
+name: jsonapi-simple
+category: Server Libraries
+language: Java
+repo: https://github.com/devslm/jsonapi-simple
+purl: ''
+description: >-
+  is a simple implementation of the JSON:API specification (only required output
+  fields). This library implements only top-level fields: data

@@ -1,0 +1,8 @@
+name: neoapi
+category: Server Libraries
+language: Python
+repo: https://pypi.python.org/pypi/neoapi/
+purl: ''
+description: >-
+  serializes JSON:API–compliant responses from neomodel StructuredNodes for
+  Neo4j data

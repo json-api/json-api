@@ -1,0 +1,6 @@
+name: jsonapi-unwrapper
+category: Client Libraries
+language: Ruby (Plain)
+repo: https://github.com/Sonberg/jsonapi-unwrapper
+purl: ''
+description: a simple and lightweight library to deserialize JSON:API payloads.

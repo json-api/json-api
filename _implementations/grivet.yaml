@@ -1,0 +1,8 @@
+name: Grivet
+category: Client Libraries
+language: Typescript
+repo: https://github.com/muellerbbm-vas/grivet
+purl: ''
+description: >-
+  A JSON:API client library written in TypeScript with emphasis on RESTful
+  traversal of resources according to HATEOAS principles.

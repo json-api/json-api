@@ -1,0 +1,6 @@
+name: FSharp.JsonApi
+category: Server Libraries
+language: .NET
+repo: https://github.com/cmeeren/FSharp.JsonApi/
+purl: ''
+description: is a library that allows you to use F# to easily create and consume flexible

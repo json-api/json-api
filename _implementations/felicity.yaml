@@ -1,0 +1,6 @@
+name: Felicity
+category: Server Libraries
+language: .NET
+repo: https://github.com/cmeeren/Felicity/
+purl: ''
+description: is a boilerplate-free JSON:API framework for your functional F# domain model

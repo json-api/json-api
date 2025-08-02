@@ -1,0 +1,8 @@
+name: Datadog/swift-jsonapi
+category: Client Libraries
+language: iOS
+repo: https://github.com/Datadog/swift-jsonapi
+purl: ''
+description: >-
+  is a Swift library that provides macros to simplify the encoding and decoding
+  of JSON:API responses.

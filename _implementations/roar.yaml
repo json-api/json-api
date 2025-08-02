@@ -1,0 +1,6 @@
+name: Roar
+category: Server Libraries
+language: Ruby (Plain)
+repo: https://github.com/apotonick/roar
+purl: ''
+description: Renders and parses representations of Ruby objects

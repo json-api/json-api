@@ -1,0 +1,6 @@
+name: jsonapi-client
+category: Client Libraries
+language: Python
+repo: https://github.com/qvantel/jsonapi-client
+purl: ''
+description: Comprehensive yet easy-to-use

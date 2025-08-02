@@ -1,0 +1,6 @@
+name: django-rest-framework-json-api
+category: Server Libraries
+language: Python
+repo: https://github.com/django-json-api/django-rest-framework-json-api
+purl: ''
+description: provides JSON:API parsing and rendering for the Django REST Framework

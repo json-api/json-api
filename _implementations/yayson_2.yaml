@@ -1,0 +1,9 @@
+name: YAYSON
+category: Server Libraries
+language: Node.js
+repo: https://github.com/confetti/yayson
+purl: ''
+description: >-
+  is an isomorphic library for serializing and reading JSON:API data. Simply use
+  it with plain objects or extend it to fit your ORM (currently it has an
+  adapter for Sequelize).

@@ -1,0 +1,9 @@
+name: drupal
+category: Server Libraries
+language: PHP
+repo: https://www.drupal.org/project/drupal
+purl: ''
+description: >-
+  The Drupal CMS supports exposing all data it manages (entities) according to
+  the JSON:API specification. jsonapi_extras is an optional extra module to
+  change resource type names

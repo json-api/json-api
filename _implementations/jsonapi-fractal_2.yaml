@@ -1,0 +1,6 @@
+name: jsonapi-fractal
+category: Client Libraries
+language: Typescript
+repo: https://github.com/andersondanilo/jsonapi-fractal
+purl: ''
+description: JSON:API Serializer inspired by Fractal (PHP)

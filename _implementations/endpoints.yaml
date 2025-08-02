@@ -1,0 +1,6 @@
+name: endpoints
+category: Server Libraries
+language: Node.js
+repo: https://github.com/endpoints
+purl: ''
+description: is an implementation of JSON:API using Bookshelf.

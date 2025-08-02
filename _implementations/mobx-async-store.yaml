@@ -1,0 +1,8 @@
+name: mobx-async-store
+category: Client Libraries
+language: Javascript
+repo: https://github.com/artemis-ag/mobx-async-store
+purl: ''
+description: >-
+  - A Mobx-based store for async data fetching and state management for the
+  JSON:API specification.

@@ -1,0 +1,8 @@
+name: JSONAPI::Realizer
+category: Server Libraries
+language: Ruby (Plain)
+repo: https://github.com/krainboltgreene/jsonapi-realizer
+purl: ''
+description: >-
+  provides a pure Ruby pattern for turning JSON:API requests into models (has
+  active record support and rails instructions)

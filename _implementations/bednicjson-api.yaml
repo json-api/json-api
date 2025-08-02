@@ -1,0 +1,8 @@
+name: bednic/json-api
+category: Server Libraries
+language: PHP
+repo: https://gitlab.com/bednic/json-api
+purl: ''
+description: >-
+  Annotation driven library for creating valid JSON API response document from
+  your objects.

@@ -1,0 +1,10 @@
+name: json-api-document-viewer
+category: Related Tools
+language: Playground
+repo: https://tadast.github.io/json-api-document-viewer
+purl: ''
+description: >-
+  the flat json:api structure is a good way to express complex relationships
+  between objects. However the same flatness makes it difficult for humans to
+  “parse” these relationships. This tool visualises object relationships by
+  visually nesting them.
