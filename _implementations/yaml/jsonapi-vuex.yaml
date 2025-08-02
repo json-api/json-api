@@ -1,6 +1,0 @@
-name: jsonapi-vuex
-category: Client Libraries
-language: Javascript
-repo: https://github.com/mrichar1/jsonapi-vuex
-purl: ''
-description: A module for interacting with a jsonapi service using a Vuex store

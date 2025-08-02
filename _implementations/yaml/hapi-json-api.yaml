@@ -1,8 +1,0 @@
-name: hapi-json-api
-category: Client Libraries
-language: Javascript
-repo: https://github.com/wraithgar/hapi-json-api
-purl: ''
-description: >-
-  Plugin for the hapi framework; enforces Accept/Content-type rules and rewrites
-  Boom errors to be spec compliant.

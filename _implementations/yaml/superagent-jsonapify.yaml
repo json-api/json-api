@@ -1,6 +1,0 @@
-name: superagent-jsonapify
-category: Client Libraries
-language: Javascript
-repo: https://github.com/alex94puchades/superagent-jsonapify
-purl: ''
-description: A really lightweight (50 lines) JSON-API client addon for superagent

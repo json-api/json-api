@@ -1,6 +1,0 @@
-name: jsonapi-datastore
-category: Client Libraries
-language: Javascript
-repo: https://github.com/beauby/jsonapi-datastore
-purl: ''
-description: jsonapi-datastore is a lightweight standalone library for reading

@@ -1,8 +1,0 @@
-name: YAYSON
-category: Client Libraries
-language: Javascript
-repo: https://github.com/confetti/yayson
-purl: ''
-description: >-
-  YAYSON is an isomorphic library for serializing and reading JSON:API data.
-  Extend it to fit your models or just use it with plain objects.

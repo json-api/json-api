@@ -1,6 +1,0 @@
-name: redux-json-api
-category: Client Libraries
-language: Javascript
-repo: https://github.com/dixieio/redux-json-api
-purl: ''
-description: A library which integrated JSON:APIs with Redux store

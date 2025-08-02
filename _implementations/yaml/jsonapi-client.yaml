@@ -1,6 +1,0 @@
-name: jsonapi-client
-category: Client Libraries
-language: Javascript
-repo: https://github.com/itsfadnis/jsonapi-client
-purl: ''
-description: A convenient module to consume a jsonapi service

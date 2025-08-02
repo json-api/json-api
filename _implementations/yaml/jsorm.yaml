@@ -1,8 +1,0 @@
-name: JSORM
-category: Client Libraries
-language: Javascript
-repo: https://github.com/jsonapi-suite/jsorm
-purl: ''
-description: >-
-  is anisomorphic ActiveRecord clone that issues JSON:API requests instead of
-  SQL and is part of the larger JSONAPI Suite.
