@@ -323,6 +323,7 @@ includes related resources.
 ### <a href="#server-libraries-rust" id="server-libraries-rust" class="headerlink"></a> Rust
 
 * [jsonapi-rust](https://github.com/michiel/jsonapi-rust) A Rust library for serializing, deserializing and working with JSON-API data
+* [rjapi](https://github.com/mohdbk/rjapi) A framework-agnostic, type-safe JSON:API 1.1 implementation for Rust.
 
 ### <a href="#server-libraries-dart" id="server-libraries-dart" class="headerlink"></a> Dart
 
