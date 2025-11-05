@@ -67,6 +67,7 @@ isomorphic ActiveRecord clone that issues JSON:API requests instead of SQL and i
 * [ts-japi](https://github.com/jun-sheaf/ts-japi) - A zero-dependency, highly-modular, js/ts-friendly, recursible, framework-agnostic library for serializing data to the JSON:API specification. Serializes the entire specification.
 * [drupal-jsonapi-params](https://github.com/d34dman/drupal-jsonapi-params) A library for building query parameters when connecting with Drupal CMS's JSON:API.
 * [EntityStore.TS](https://github.com/dipscope/EntityStore.TS) - ORM like abstraction layer for TypeScript which includes extensible [provider](https://github.com/dipscope/JsonApiEntityProvider.TS) for accessing JSON:API servers.
+* [@bjornharrtell/json-api](https://github.com/bjornharrtell/json-api) - A JSON:API client with serialize, deserialize, atomic ext and transport layer capababilities against plain TypeScript interface model types
 
 ### <a href="#client-libraries-ios" id="client-libraries-ios" class="headerlink"></a> iOS
 
