@@ -56,6 +56,7 @@ isomorphic ActiveRecord clone that issues JSON:API requests instead of SQL and i
 * [fetchja](https://github.com/caiotarifa/fetchja) - A super simple, modern, and lightweight library for dealing with JSON:API (Kitsu-like, but using Fetch API instead of Axios).
 
 ### <a href="#client-libraries-typescript" id="client-libraries-typescript" class="headerlink"></a> Typescript
+* [@haddowg/json-api-client](https://github.com/haddowg/json-api-ts) is a typed TypeScript client generated from an API's OpenAPI 3.1 document, with TanStack Query bindings (via [@haddowg/json-api-codegen](https://www.npmjs.com/package/@haddowg/json-api-codegen) and [@haddowg/json-api-query](https://www.npmjs.com/package/@haddowg/json-api-query)).
 * [ts-angular-jsonapi](https://github.com/reyesoft/ts-angular-jsonapi) A JSON:API library developed for AngularJS in Typescript
 * [ngrx-json-api](https://github.com/abdulhaq-e/ngrx-json-api) A JSON:API client for Angular 2 ngrx toolset
 * [ts-jsonapi](https://github.com/mohuk/ts-jsonapi) JSON:API (De)Serializer in Typescript
@@ -155,6 +156,9 @@ and writing of JSON:API documents.
 
 ### <a href="#server-libraries-php" id="server-libraries-php" class="headerlink"></a> PHP
 
+* [haddowg / json-api](https://github.com/haddowg/json-api) is a framework-agnostic server library for PHP 8.3+ that fully implements JSON:API v1.1, including the Atomic Operations extension and profiles. PSR-7/PSR-15; derived from [woohoolabs / yin](https://github.com/woohoolabs/yin).
+* [haddowg / json-api-laravel](https://github.com/haddowg/json-api-laravel) integrates [haddowg / json-api](https://github.com/haddowg/json-api) with Laravel 12/13, adding idiomatic routing, validation, and an Eloquent data layer.
+* [haddowg / json-api-symfony](https://github.com/haddowg/json-api-symfony) integrates [haddowg / json-api](https://github.com/haddowg/json-api) with Symfony 6.4/7/8 as a bundle, adding routing, validation, and a Doctrine data layer.
 * [tobyz / json-api-server](https://github.com/tobyzerner/json-api-server) is a framework-agnostic declarative JSON:API server implementation.
 * [neomerx / json-api](https://github.com/neomerx/json-api) is a framework agnostic library that fully implements JSON:API v1.0.
 * [limoncello-php / app](https://github.com/limoncello-php/app) is a JSON:API v1.0 quick start server application for [neomerx / json-api](https://github.com/neomerx/json-api).
