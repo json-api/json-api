@@ -1,0 +1,26 @@
+{
+  "errors": [
+    {
+      "id": "0",
+      "status": "400",
+      "code": "4",
+      "title": "Oh no!",
+      "detail": "something",
+      "source": {
+        "header": {
+          "wrong": "not a string"
+        }
+      }
+    }
+  ],
+  "meta": {
+    "errors-present-in-document": [
+      {
+        "detail": "The header member **MUST** be a string.",
+        "source": {
+          "pointer": "/errors/0/source/header"
+        }
+      }
+    ]
+  }
+}
