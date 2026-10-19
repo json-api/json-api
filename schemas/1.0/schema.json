@@ -1,79 +1,75 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://jsonapi.org/schemas/spec/v1.0/draft",
-  "$comment": "The $id URI should be modified before releasing. This URI does not need to be network addressable. It is an ID only.",
+  "$id": "https://jsonapi.org/schemas/1.0/schema.json",
   "title": "JSON:API Schema",
   "description": "This schema only validates RESPONSES from a request. Validating request payloads requires slightly different constraints.",
   "allOf": [
     {
-      "$ref": "#/definitions/requiredTopLevelMembers"
-    },
-    {
-      "$ref": "#/definitions/oneOfDataOrErrors"
+      "$ref": "#/$defs/requiredTopLevelMembers"
     }
   ],
   "type": "object",
   "properties": {
     "data": {
-      "$ref": "#/definitions/data"
+      "$ref": "#/$defs/data"
     },
     "errors": {
-      "$ref": "#/definitions/errors"
+      "$ref": "#/$defs/errors"
     },
     "included": {
-      "$ref": "#/definitions/included"
+      "$ref": "#/$defs/included"
     },
     "jsonapi": {
-      "$ref": "#/definitions/jsonapi"
+      "$ref": "#/$defs/jsonapi"
     },
     "links": {
       "description": "Link members related to the primary data.",
-      "$ref": "#/definitions/topLevelLinks"
+      "$ref": "#/$defs/topLevelLinks"
     },
     "meta": {
-      "$ref": "#/definitions/meta"
+      "$ref": "#/$defs/meta"
     }
   },
-  "dependencies": {
-    "included": ["data"]
+  "dependentSchemas": {
+    "included": {
+      "$ref": "#/$defs/includedOnlyIfContainsData"
+    },
+    "data": {
+      "$ref": "#/$defs/oneOfDataOrErrors"
+    }
   },
   "additionalProperties": false,
-  "definitions": {
+  "$defs": {
     "attributes": {
       "description": "Members of the attributes object (\"attributes\") represent information about the resource object in which it's defined.",
       "type": "object",
       "propertyNames": {
-        "$ref": "#/definitions/memberName"
+        "$ref": "#/$defs/memberName"
       },
       "patternProperties": {
         "": true
       },
       "not": {
-        "$comment": "This is what the specification requires, but it seems bad. https://github.com/json-api/json-api/issues/1553",
-        "anyOf": [
+        "$comment": "This is what the specification requires, but is removed in v1.1. https://github.com/json-api/json-api/issues/1553",
+        "not": {
+          "$ref": "#/$defs/relationshipsForbiddenMemberName"
+        },
+        "allOf": [
           {
-            "required": [
-              "type"
-            ]
-          },
-          {
-            "required": [
-              "id"
-            ]
+            "additionalProperties": true
           }
         ]
-      },
-      "additionalProperties": false
+      }
     },
     "data": {
       "description": "The document's \"primary data\" is a representation of the resource or collection of resources targeted by a request.",
       "oneOf": [
         {
-          "$ref": "#/definitions/resource"
+          "$ref": "#/$defs/resource"
         },
         {
           "description": "An array of resource objects, an array of resource identifier objects, or an empty array ([]), for requests that target resource collections.",
-          "$ref": "#/definitions/resourceCollection"
+          "$ref": "#/$defs/resourceCollection"
         },
         {
           "description": "null if the request is one that might correspond to a single resource, but doesn't currently.",
@@ -94,7 +90,7 @@
           "$comment": "The spec doesn't specify that this MUST be a string, so this could be changed to additionally allow numbers"
         },
         "links": {
-          "$ref": "#/definitions/errorLinks"
+          "$ref": "#/$defs/errorLinks"
         },
         "status": {
           "description": "The HTTP status code applicable to this problem, expressed as a string value.",
@@ -127,7 +123,7 @@
           }
         },
         "meta": {
-          "$ref": "#/definitions/meta"
+          "$ref": "#/$defs/meta"
         }
       },
       "additionalProperties": false
@@ -137,13 +133,13 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/links"
+          "$ref": "#/$defs/links"
         }
       ],
       "properties": {
         "about": {
           "description": "A link that leads to further details about this particular occurrence of the problem.",
-          "$ref": "#/definitions/link"
+          "$ref": "#/$defs/link"
         }
       },
       "additionalProperties": false
@@ -151,7 +147,7 @@
     "errors": {
       "type": "array",
       "items": {
-        "$ref": "#/definitions/error"
+        "$ref": "#/$defs/error"
       },
       "uniqueItems": true
     },
@@ -159,7 +155,7 @@
       "description": "To reduce the number of HTTP requests, servers **MAY** allow responses that include related resources along with the requested primary resources. Such responses are called \"compound documents\".",
       "type": "array",
       "items": {
-        "$ref": "#/definitions/resource"
+        "$ref": "#/$defs/resource"
       },
       "uniqueItems": true
     },
@@ -171,7 +167,7 @@
           "type": "string"
         },
         "meta": {
-          "$ref": "#/definitions/meta"
+          "$ref": "#/$defs/meta"
         }
       },
       "additionalProperties": false
@@ -180,10 +176,10 @@
       "type": "object",
       "properties": {
         "href": {
-          "$ref": "#/definitions/linkUrl"
+          "$ref": "#/$defs/linkUrl"
         },
         "meta": {
-          "$ref": "#/definitions/meta"
+          "$ref": "#/$defs/meta"
         }
       }
     },
@@ -198,10 +194,10 @@
       "description": "A link **MUST** be represented as either: a string containing the link's URL or a link object.",
       "oneOf": [
         {
-          "$ref": "#/definitions/linkUrl"
+          "$ref": "#/$defs/linkUrl"
         },
         {
-          "$ref": "#/definitions/linkObject"
+          "$ref": "#/$defs/linkObject"
         }
       ]
     },
@@ -209,10 +205,10 @@
       "description": "Resource linkage in a compound document allows a client to link together all of the included resource objects without having to GET any URLs via links.",
       "oneOf": [
         {
-          "$ref": "#/definitions/relationshipToOne"
+          "$ref": "#/$defs/relationshipToOne"
         },
         {
-          "$ref": "#/definitions/relationshipToMany"
+          "$ref": "#/$defs/relationshipToMany"
         }
       ]
     },
@@ -228,7 +224,7 @@
       "description": "Non-standard meta-information that can not be represented as an attribute or relationship.",
       "type": "object",
       "propertyNames": {
-        "$ref": "#/definitions/memberName"
+        "$ref": "#/$defs/memberName"
       },
       "patternProperties": {
         "": true
@@ -236,16 +232,31 @@
       "additionalProperties": false
     },
     "oneOfDataOrErrors": {
-      "type": "object",
-      "dependencies": {
-        "data": {
-          "not": {
-            "required": [
-              "errors"
-            ]
-          }
-        }
+      "not": {
+        "type": "object",
+        "properties": {
+          "errors": true
+        },
+        "required": [
+          "errors"
+        ]
       }
+    },
+    "includedOnlyIfContainsData": {
+      "type": "object",
+      "additionalProperties": true,
+      "properties": {
+        "data": {
+          "$ref": "#/$defs/data"
+        },
+        "included": {
+          "$ref": "#/$defs/included"
+        }
+      },
+      "required": [
+        "data",
+        "included"
+      ]
     },
     "pagination": {
       "type": "object",
@@ -254,7 +265,7 @@
           "description": "The first page of data",
           "oneOf": [
             {
-              "$ref": "#/definitions/link"
+              "$ref": "#/$defs/link"
             },
             {
               "type": "null"
@@ -265,7 +276,7 @@
           "description": "The last page of data",
           "oneOf": [
             {
-              "$ref": "#/definitions/link"
+              "$ref": "#/$defs/link"
             },
             {
               "type": "null"
@@ -276,7 +287,7 @@
           "description": "The previous page of data",
           "oneOf": [
             {
-              "$ref": "#/definitions/link"
+              "$ref": "#/$defs/link"
             },
             {
               "type": "null"
@@ -287,7 +298,7 @@
           "description": "The next page of data",
           "oneOf": [
             {
-              "$ref": "#/definitions/link"
+              "$ref": "#/$defs/link"
             },
             {
               "type": "null"
@@ -300,23 +311,38 @@
       "type": "object",
       "properties": {
         "links": {
-          "$ref": "#/definitions/relationshipLinks"
+          "$ref": "#/$defs/relationshipLinks"
         },
         "data": {
-          "$ref": "#/definitions/linkage"
+          "$ref": "#/$defs/linkage"
         },
         "meta": {
-          "$ref": "#/definitions/meta"
+          "$ref": "#/$defs/meta"
         }
       },
       "anyOf": [
         {
+          "properties":  {
+            "data": {
+              "$ref": "#/$defs/linkage"
+            }
+          },
           "required": ["data"]
         },
         {
+          "properties":  {
+            "meta": {
+              "$ref": "#/$defs/meta"
+            }
+          },
           "required": ["meta"]
         },
         {
+          "properties":  {
+            "links": {
+              "$ref": "#/$defs/relationshipLinks"
+            }
+          },
           "required": ["links"]
         }
       ],
@@ -326,10 +352,10 @@
       "type": "object",
       "properties": {
         "data": {
-          "$ref": "#/definitions/linkage"
+          "$ref": "#/$defs/linkage"
         },
         "meta": {
-          "$ref": "#/definitions/meta"
+          "$ref": "#/$defs/meta"
         }
       },
       "required": [
@@ -342,20 +368,20 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/links"
+          "$ref": "#/$defs/links"
         },
         {
           "description": "Pagination links",
-          "$ref": "#/definitions/pagination"
+          "$ref": "#/$defs/pagination"
         }
       ],
       "properties": {
         "self": {
           "description": "A `self` member, whose value is a URL for the relationship itself (a \"relationship URL\"). This URL allows the client to directly manipulate the relationship. For example, it would allow a client to remove an `author` from an `article` without deleting the people resource itself.",
-          "$ref": "#/definitions/link"
+          "$ref": "#/$defs/link"
         },
         "related": {
-          "$ref": "#/definitions/link"
+          "$ref": "#/$defs/link"
         },
         "first": true,
         "last": true,
@@ -368,17 +394,17 @@
       "description": "An array of objects each containing \"type\" and \"id\" members for to-many relationships.",
       "type": "array",
       "items": {
-        "$ref": "#/definitions/resourceIdentifier"
+        "$ref": "#/$defs/resourceIdentifier"
       }
     },
     "relationshipToOne": {
       "description": "References to other resource objects in a to-one (\"relationship\"). Relationships can be specified by including a member in a resource's links object.",
       "oneOf": [
         {
-          "$ref": "#/definitions/empty"
+          "$ref": "#/$defs/empty"
         },
         {
-          "$ref": "#/definitions/resourceIdentifier"
+          "$ref": "#/$defs/resourceIdentifier"
         }
       ]
     },
@@ -386,16 +412,16 @@
       "description": "Members of the relationships object (\"relationships\") represent references from the resource object in which it's defined to other resource objects.",
       "type": "object",
       "propertyNames": {
-        "$ref": "#/definitions/memberName"
+        "$ref": "#/$defs/memberName"
       },
       "patternProperties": {
         "": {
-          "$ref": "#/definitions/relationship"
+          "$ref": "#/$defs/relationship"
         }
       },
       "allOf": [
         {
-          "$ref": "#/definitions/relationshipsForbiddenMemberName"
+          "$ref": "#/$defs/relationshipsForbiddenMemberName"
         }
       ],
       "additionalProperties": false
@@ -404,16 +430,16 @@
       "description": "Members of the relationships object (\"relationships\") represent references from the resource object in which it's defined to other resource objects.",
       "type": "object",
       "propertyNames": {
-        "$ref": "#/definitions/memberName"
+        "$ref": "#/$defs/memberName"
       },
       "patternProperties": {
         "": {
-          "$ref": "#/definitions/relationshipFromRequest"
+          "$ref": "#/$defs/relationshipFromRequest"
         }
       },
       "allOf": [
         {
-          "$ref": "#/definitions/relationshipsForbiddenMemberName"
+          "$ref": "#/$defs/relationshipsForbiddenMemberName"
         }
       ],
       "additionalProperties": false
@@ -423,11 +449,19 @@
         "anyOf": [
           {
             "type": "object",
+            "additionalProperties": true,
+            "properties": {
+              "type": true
+            },
             "required": [
               "type"
             ]
           },
           {
+            "additionalProperties": true,
+            "properties": {
+              "id": true
+            },
             "type": "object",
             "required": [
               "id"
@@ -440,18 +474,33 @@
       "anyOf": [
         {
           "type": "object",
+          "properties": {
+            "meta": {
+              "$ref": "#/$defs/meta"
+            }
+          },
           "required": [
             "meta"
           ]
         },
         {
           "type": "object",
+          "properties": {
+            "data": {
+              "$ref": "#/$defs/data"
+            }
+          },
           "required": [
             "data"
           ]
         },
         {
           "type": "object",
+          "properties": {
+            "errors": {
+              "$ref": "#/$defs/errors"
+            }
+          },
           "required": [
             "errors"
           ]
@@ -464,23 +513,23 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/resourceIdentification"
+          "$ref": "#/$defs/resourceIdentification"
         }
       ],
       "properties": {
         "id": true,
         "type": true,
         "attributes": {
-          "$ref": "#/definitions/attributes"
+          "$ref": "#/$defs/attributes"
         },
         "links": {
-          "$ref": "#/definitions/resourceLinks"
+          "$ref": "#/$defs/resourceLinks"
         },
         "meta": {
-          "$ref": "#/definitions/meta"
+          "$ref": "#/$defs/meta"
         },
         "relationships": {
-          "$ref": "#/definitions/relationships"
+          "$ref": "#/$defs/relationships"
         }
       },
       "additionalProperties": false
@@ -489,14 +538,14 @@
       "description": "An array of resource objects.",
       "type": "array",
       "items": {
-        "$ref": "#/definitions/resource"
+        "$ref": "#/$defs/resource"
       },
       "uniqueItems": true
     },
     "resourceIdentification": {
       "allOf": [
         {
-          "$ref": "#/definitions/resourceIdentificationNew"
+          "$ref": "#/$defs/resourceIdentificationNew"
         },
         {
           "type": "object",
@@ -527,14 +576,14 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/resourceIdentification"
+          "$ref": "#/$defs/resourceIdentification"
         }
       ],
       "properties": {
         "id": true,
         "type": true,
         "meta": {
-          "$ref": "#/definitions/meta"
+          "$ref": "#/$defs/meta"
         }
       },
       "additionalProperties": false
@@ -544,13 +593,13 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/links"
+          "$ref": "#/$defs/links"
         }
       ],
       "properties": {
         "self": {
           "description": "",
-          "$ref": "#/definitions/link"
+          "$ref": "#/$defs/link"
         }
       },
       "additionalProperties": false
@@ -560,21 +609,21 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/links"
+          "$ref": "#/$defs/links"
         },
         {
           "description": "Pagination links for the primary data.",
-          "$ref": "#/definitions/pagination"
+          "$ref": "#/$defs/pagination"
         }
       ],
       "properties": {
         "self": {
           "description": "The link that generated the current response document.",
-          "$ref": "#/definitions/link"
+          "$ref": "#/$defs/link"
         },
         "related": {
           "description": "A related resource link when the primary data represents a resource relationship.",
-          "$ref": "#/definitions/link"
+          "$ref": "#/$defs/link"
         },
         "first": true,
         "last": true,
