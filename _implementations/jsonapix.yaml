@@ -1,0 +1,9 @@
+name: JsonApiX
+category: Client Libraries
+language: Android
+repo: https://github.com/infinum/kotlin-jsonapix
+purl: ''
+description: >-
+  annotation processor library for serializing and deserializing Kotlin classes.
+  It’s easy to use - setup only requires annotating classes. Retrofit
+  integration is included.

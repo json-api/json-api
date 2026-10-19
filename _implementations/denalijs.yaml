@@ -1,0 +1,8 @@
+name: DenaliJS
+category: Server Libraries
+language: Node.js
+repo: http://denalijs.org
+purl: ''
+description: >-
+  A layered-conventions framework for building ambitious APIs. Includes a
+  powerful addon system

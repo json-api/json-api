@@ -1,0 +1,6 @@
+name: loopback-component-jsonapi
+category: Server Libraries
+language: Node.js
+repo: https://github.com/digitalsadhu/loopback-component-jsonapi
+purl: ''
+description: JSON:API support for loopback highly-extensible

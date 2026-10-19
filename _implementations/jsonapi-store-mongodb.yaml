@@ -1,0 +1,6 @@
+name: jsonapi-store-mongodb
+category: Server Libraries
+language: Node.js
+repo: https://github.com/holidayextras/jsonapi-store-mongodb
+purl: ''
+description: A mongodb handler for jsonapi-server.

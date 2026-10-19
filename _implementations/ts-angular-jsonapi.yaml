@@ -1,0 +1,6 @@
+name: ts-angular-jsonapi
+category: Client Libraries
+language: Typescript
+repo: https://github.com/reyesoft/ts-angular-jsonapi
+purl: ''
+description: A JSON:API library developed for AngularJS in Typescript

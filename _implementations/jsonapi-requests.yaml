@@ -1,0 +1,8 @@
+name: jsonapi-requests
+category: Client Libraries
+language: Python
+repo: https://github.com/socialwifi/jsonapi-requests/
+purl: ''
+description: >-
+  Simple and fun high-level JSONAPI client for Python. Contains ORM which makes
+  consuming the API even easier

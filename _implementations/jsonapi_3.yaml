@@ -1,0 +1,9 @@
+name: jsonapi
+category: Server Libraries
+language: Elixir
+repo: https://github.com/jeregrine/jsonapi
+purl: ''
+description: >-
+  is a serializer and query parser built with plain old functions. Can parse and
+  validate a JSONAPI compliant query and serialize Ecto Models or Elixir Structs
+  into conforming JSON. Suitable for use in a Phoenix view

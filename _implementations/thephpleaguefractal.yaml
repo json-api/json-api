@@ -1,0 +1,8 @@
+name: thephpleague/fractal
+category: Server Libraries
+language: PHP
+repo: http://fractal.thephpleague.com/
+purl: ''
+description: >-
+  A partial implementation of the JSON:API spec allowing for an easy drop in
+  JSON rendering solution.

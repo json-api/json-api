@@ -1,0 +1,8 @@
+name: ripozo
+category: Server Libraries
+language: Python
+repo: https://github.com/vertical-knowledge/ripozo/
+purl: ''
+description: >-
+  provides a framework for serving JSON:API content (among other Hypermedia
+  formats) in Flask

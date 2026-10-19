@@ -1,0 +1,6 @@
+name: laravel-json-api/laravel
+category: Server Libraries
+language: PHP
+repo: https://github.com/laravel-json-api/laravel
+purl: ''
+description: Laravel implementation of the JSON:API specification

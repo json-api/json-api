@@ -1,0 +1,8 @@
+name: jagql
+category: Server Libraries
+language: Node.js
+repo: https://jagql.github.io
+purl: ''
+description: >-
+  A resource driven framework to set up a {json:api} + GraphQL endpoint in
+  record time.

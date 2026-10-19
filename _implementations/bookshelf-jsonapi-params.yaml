@@ -1,0 +1,6 @@
+name: bookshelf-jsonapi-params
+category: Server Libraries
+language: Node.js
+repo: https://github.com/scoutforpets/bookshelf-jsonapi-params
+purl: ''
+description: automatically apply JSON:API filtering

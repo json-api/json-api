@@ -1,0 +1,8 @@
+name: jsonapi-converter
+category: Client Libraries
+language: Java
+repo: https://github.com/jasminb/jsonapi-converter
+purl: ''
+description: >-
+  is a Java JSON:API v1.0 client. Besides providing means for
+  serialisation/deserialisation

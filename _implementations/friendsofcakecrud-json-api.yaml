@@ -1,0 +1,6 @@
+name: FriendsOfCake/crud-json-api
+category: Server Libraries
+language: PHP
+repo: https://github.com/FriendsOfCake/crud-json-api
+purl: ''
+description: CakePHP Crud Listener for building maintainable JSON:API compliant APIs.

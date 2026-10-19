@@ -1,0 +1,10 @@
+name: xamoom-janus
+category: Server Libraries
+language: Python
+repo: https://github.com/xamoom/xamoom-janus
+purl: ''
+description: >-
+  is a Python module to easily and fast extend Python web frameworks like Flask
+  or BottlyPy with json:api functionality. Also offers a flexible mechanism for
+  data mapping and hooks to intercept and extend its functionality according to
+  your projects needs.

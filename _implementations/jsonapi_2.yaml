@@ -1,0 +1,8 @@
+name: jsonapi
+category: Server Libraries
+language: Go
+repo: https://github.com/google/jsonapi
+purl: ''
+description: >-
+  serializes and deserializes jsonapi formatted payloads using struct tags to
+  annotate the structs that you already have in your Golang project. Godoc

@@ -1,0 +1,8 @@
+name: JSON:API object converter
+category: Server Libraries
+language: Java
+repo: https://github.com/MieskeB/json-api-spring-boot
+purl: ''
+description: >-
+  converts normal Java objects to JSON:API standard with the use of annotations
+  in the viewmodels (dtos).

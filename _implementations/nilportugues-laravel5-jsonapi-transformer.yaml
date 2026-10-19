@@ -1,0 +1,8 @@
+name: nilportugues / laravel5-jsonapi-transformer
+category: Server Libraries
+language: PHP
+repo: https://github.com/nilportugues/laravel5-jsonapi-transformer
+purl: ''
+description: >-
+  Laravel 5 JSON:API Transformer Package outputting valid API responses in JSON
+  and JSON:API formats.

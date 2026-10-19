@@ -1,0 +1,6 @@
+name: jsonapi-server
+category: Server Libraries
+language: Node.js
+repo: https://github.com/holidayextras/jsonapi-server
+purl: ''
+description: A feature-rich config-driven json:api framework.

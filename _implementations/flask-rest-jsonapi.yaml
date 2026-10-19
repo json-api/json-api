@@ -1,0 +1,8 @@
+name: Flask-REST-JSONAPI
+category: Server Libraries
+language: Python
+repo: https://github.com/miLibris/flask-rest-jsonapi
+purl: ''
+description: >-
+  Flask extension to create web api according to jsonapi specification with
+  Flask

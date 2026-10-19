@@ -1,0 +1,8 @@
+name: Art4 / json-api-client
+category: Client Libraries
+language: PHP
+repo: https://github.com/Art4/json-api-client
+purl: ''
+description: >-
+  is a library for validating and handling the response body in a simple OOP
+  way.

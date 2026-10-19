@@ -1,0 +1,8 @@
+name: Vox
+category: Client Libraries
+language: iOS
+repo: https://github.com/aronbalog/Vox
+purl: ''
+description: >-
+  is a Swift JSON:API client framework with custom model classes support and
+  nice networking interface.

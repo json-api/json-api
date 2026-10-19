@@ -1,0 +1,8 @@
+name: JSON-API-GLib
+category: Server Libraries
+language: Vala
+repo: https://github.com/major-lab/json-api-glib
+purl: ''
+description: >-
+  provides GObjects that can be serialized to and unserialized from payloads
+  with JSON-GLib.

@@ -1,0 +1,8 @@
+name: JSONAPI::Resources
+category: Server Libraries
+language: Ruby (Ruby on Rails)
+repo: https://github.com/cerebris/jsonapi-resources
+purl: ''
+description: >-
+  provides a complete framework for developing a JSON:API server. It is designed
+  to work with Rails

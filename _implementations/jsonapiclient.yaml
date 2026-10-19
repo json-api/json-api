@@ -1,0 +1,8 @@
+name: JsonApiClient
+category: Client Libraries
+language: Ruby (Plain)
+repo: https://github.com/chingor13/json_api_client
+purl: ''
+description: >-
+  attempts to give you a query building framework that is easy to understand
+  (similar to ActiveRecord scopes).

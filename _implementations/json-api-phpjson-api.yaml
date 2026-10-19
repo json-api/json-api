@@ -1,0 +1,9 @@
+name: json-api-php/json-api
+category: Server Libraries
+language: PHP
+repo: https://github.com/json-api-php/json-api
+purl: ''
+description: >-
+  An attempt to translate the JSON:API specification into a set of high quality
+  unit/functional tests and implement it in PHP 7 strictly following TDD and
+  SOLID OOP principles.

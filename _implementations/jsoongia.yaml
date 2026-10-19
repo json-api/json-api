@@ -1,0 +1,6 @@
+name: jsoongia
+category: Server Libraries
+language: Python
+repo: https://github.com/digia/jsoongia
+purl: ''
+description: is a framework agnostic JSON:API implementation.

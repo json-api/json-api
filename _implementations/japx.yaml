@@ -1,0 +1,9 @@
+name: Japx
+category: Client Libraries
+language: iOS
+repo: https://github.com/infinum/Japx
+purl: ''
+description: >-
+  is lightweight JSON:API parser that flattens complex JSON:API structure and
+  turns it into simple JSON and vice versa. It works by transferring Dictionary
+  to Dictionary

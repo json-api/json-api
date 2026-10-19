@@ -1,0 +1,6 @@
+name: paknahad/jsonapi-bundle
+category: Server Libraries
+language: PHP
+repo: https://github.com/paknahad/jsonapi-bundle
+purl: ''
+description: is a Symfony bundle. It is the fastest way to generate API.

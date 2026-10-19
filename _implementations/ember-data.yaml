@@ -1,0 +1,8 @@
+name: ember-data
+category: Client Libraries
+language: Javascript
+repo: https://github.com/emberjs/data
+purl: ''
+description: >-
+  ember-data is one of the original exemplar implementations. There is now an
+  official adapter to support json-api.

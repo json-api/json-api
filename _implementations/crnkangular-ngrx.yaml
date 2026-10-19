@@ -1,0 +1,8 @@
+name: '@crnk/angular-ngrx'
+category: Client Libraries
+language: Typescript
+repo: https://www.npmjs.com/package/@crnk/angular-ngrx
+purl: ''
+description: >-
+  Angular helper library for ngrx-json-api and (optionally) crnk. Facilitates
+  the binding of UI components to ngrx-json-api

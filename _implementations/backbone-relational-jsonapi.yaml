@@ -1,0 +1,9 @@
+name: backbone-relational-jsonapi
+category: Client Libraries
+language: Javascript
+repo: https://github.com/xbill82/backbone-relational-jsonapi
+purl: ''
+description: >-
+  backbone-relational-jsonapi is a parsing layer for Backbone.Relational.
+  Entities specified in JSON:API are automatically parsed to be injected into
+  Backbone.Relational relations.

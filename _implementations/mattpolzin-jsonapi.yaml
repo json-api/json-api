@@ -1,0 +1,8 @@
+name: mattpolzin / JSONAPI
+category: Client Libraries
+language: iOS
+repo: https://github.com/mattpolzin/JSONAPI
+purl: ''
+description: >-
+  is a Swift Codable library with heavy emphasis on type-safety. It is platform
+  agnostic so it can be used client- and server-side.

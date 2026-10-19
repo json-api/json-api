@@ -1,0 +1,8 @@
+name: DatX
+category: Client Libraries
+language: Typescript
+repo: https://github.com/infinum/datx
+purl: ''
+description: >-
+  is an opinionated data store for use with the MobX state management library
+  that adds JSON:API support with datx-jsonapi mixin.

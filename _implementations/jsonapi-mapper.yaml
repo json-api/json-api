@@ -1,0 +1,6 @@
+name: jsonapi-mapper
+category: Server Libraries
+language: Node.js
+repo: https://github.com/scoutforpets/jsonapi-mapper
+purl: ''
+description: JSON:API-Compliant Serialization for your Node ORM.

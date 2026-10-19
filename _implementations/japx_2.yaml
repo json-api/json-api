@@ -1,0 +1,8 @@
+name: japx
+category: Client Libraries
+language: Dart
+repo: https://pub.dev/packages/japx
+purl: ''
+description: >-
+  is a lightweight JSON:API parser that flattens complex JSON:API structure and
+  turns it into simple JSON and vice versa

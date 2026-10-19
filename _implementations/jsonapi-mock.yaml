@@ -1,0 +1,8 @@
+name: jsonapi-mock
+category: Server Libraries
+language: Node.js
+repo: https://github.com/Thomas-X/jsonapi-mock
+purl: ''
+description: >-
+  A json-server inspired jsonapi mock server. Setup a jsonapi mock server in
+  almost no time

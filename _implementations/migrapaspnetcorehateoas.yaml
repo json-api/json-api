@@ -1,0 +1,8 @@
+name: Migrap.AspNetCore.Hateoas
+category: Server Libraries
+language: .NET
+repo: https://github.com/dcomartin/Migrap.AspNetCore.Hateoas
+purl: ''
+description: >-
+  HATEOAS (Hypermedia as the Engine of Application State) framework for ASP.NET
+  Core. Current implementation(s): Siren

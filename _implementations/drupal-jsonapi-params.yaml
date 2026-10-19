@@ -1,0 +1,8 @@
+name: drupal-jsonapi-params
+category: Client Libraries
+language: Typescript
+repo: https://github.com/d34dman/drupal-jsonapi-params
+purl: ''
+description: >-
+  A library for building query parameters when connecting with Drupal CMS’s
+  JSON:API.

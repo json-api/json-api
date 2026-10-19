@@ -1,0 +1,6 @@
+name: Flask-COMBO-JSONAPI
+category: Server Libraries
+language: Python
+repo: https://github.com/AdCombo/flask-combo-jsonapi
+purl: ''
+description: JSON:API flask extension for building REST APIs.

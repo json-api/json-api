@@ -1,0 +1,6 @@
+name: Lux
+category: Server Libraries
+language: Node.js
+repo: https://github.com/postlight/lux
+purl: ''
+description: is a MVC style Node.js framework for building lightning fast JSON:APIs.

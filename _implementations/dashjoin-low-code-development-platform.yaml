@@ -1,0 +1,6 @@
+name: Dashjoin Low Code Development Platform
+category: Server Libraries
+language: Java
+repo: https://github.com/dashjoin/platform
+purl: ''
+description: connects to relational

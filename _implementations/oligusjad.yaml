@@ -1,0 +1,6 @@
+name: oligus/jad
+category: Server Libraries
+language: PHP
+repo: https://github.com/oligus/jad
+purl: ''
+description: A library that turns doctrine entities into json:api resource

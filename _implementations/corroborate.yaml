@@ -1,0 +1,9 @@
+name: corroborate
+category: Related Tools
+language: Playground
+repo: http://corroborate.arenpatel.com/
+purl: ''
+description: >-
+  JSON:API request/response payload validator. It warns when there is a
+  specification violation and also informs when a recommendation has not been
+  followed.

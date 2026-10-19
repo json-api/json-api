@@ -1,0 +1,8 @@
+name: aonawale / JSONAPISerializer
+category: Server Libraries
+language: Swift
+repo: https://github.com/aonawale/JSONAPISerializer
+purl: ''
+description: >-
+  is a server side swift framework agnostic library that implements JSON:API
+  v1.0.

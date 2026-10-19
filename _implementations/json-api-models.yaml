@@ -1,0 +1,6 @@
+name: json-api-models
+category: Client Libraries
+language: Javascript
+repo: https://github.com/tobyzerner/json-api-models
+purl: ''
+description: '- A lightweight layer for working with JSON:API data.'

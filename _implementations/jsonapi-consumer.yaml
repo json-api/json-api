@@ -1,0 +1,6 @@
+name: jsonapi-consumer
+category: Client Libraries
+language: Ruby (Plain)
+repo: https://github.com/jsmestad/jsonapi-consumer
+purl: ''
+description: a ruby library for consuming JSONAPI payloads.

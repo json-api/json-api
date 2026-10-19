@@ -1,0 +1,8 @@
+name: jsonapi-redux-data
+category: Client Libraries
+language: Javascript
+repo: https://github.com/wednesday-solutions/jsonapi-redux-data
+purl: ''
+description: >-
+  - a library that makes integration of jsonapi with react + redux effortless
+  and easy.

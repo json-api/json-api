@@ -1,0 +1,8 @@
+name: Izzy JSONAPI parser
+category: Client Libraries
+language: Android
+repo: https://github.com/undabot/izzy-json-api-android
+purl: ''
+description: >-
+  library for deserializing and serializing resources with support both for Gson
+  and Jackson parsers. It also has simple Retrofit integration.

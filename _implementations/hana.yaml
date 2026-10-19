@@ -1,0 +1,6 @@
+name: hana
+category: Related Tools
+language: Ruby
+repo: https://github.com/tenderlove/hana
+purl: ''
+description: implementation of the JSON Patch and JSON pointer spec

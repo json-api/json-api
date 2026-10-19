@@ -1,0 +1,8 @@
+name: Sinja
+category: Server Libraries
+language: Ruby (Sinatra)
+repo: https://github.com/mwpastore/sinja
+purl: ''
+description: >-
+  extends Sinatra and leverages JSONAPI::Serializers to enable rapid development
+  of comprehensive

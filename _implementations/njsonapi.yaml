@@ -1,0 +1,9 @@
+name: NJsonApi
+category: Server Libraries
+language: .NET
+repo: https://github.com/jacek-gorgon/NJsonApi
+purl: ''
+description: >-
+  is a .NET server implementation of the standard. It aims at good extensibility
+  and performance while maintaining developer-friendliness with interchangeable
+  conventions and builder-style configuration.

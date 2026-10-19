@@ -1,0 +1,6 @@
+name: jagql/store-sequelize
+category: Server Libraries
+language: Node.js
+repo: https://npmjs.com/@jagql/store-sequelize
+purl: ''
+description: persist jagql resources to Postgres/MySQL/MSSQL/SQLite

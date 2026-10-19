@@ -1,0 +1,6 @@
+name: tobyz / json-api-server
+category: Server Libraries
+language: PHP
+repo: https://github.com/tobyzerner/json-api-server
+purl: ''
+description: is a framework-agnostic declarative JSON:API server implementation.

@@ -1,0 +1,9 @@
+name: Hypermedia.JsonApi.WebApi
+category: Server Libraries
+language: .NET
+repo: https://github.com/cosullivan/Hypermedia/
+purl: ''
+description: >-
+  is a Web API media type formatter for reading and writing JSON:API. It
+  supports an external resource model definition and nativelyincludes related
+  resources.

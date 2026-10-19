@@ -1,0 +1,9 @@
+name: jsonapi-ios
+category: Client Libraries
+language: iOS
+repo: https://github.com/joshdholtz/jsonapi-ios
+purl: ''
+description: >-
+  is a library for loading data from a JSON:API datasource. Parses JSON:API data
+  into models with support for auto-linking of resources and custom model
+  classes.

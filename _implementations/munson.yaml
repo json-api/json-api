@@ -1,0 +1,9 @@
+name: Munson
+category: Client Libraries
+language: Ruby (Plain)
+repo: https://github.com/coryodaniel/munson
+purl: ''
+description: >-
+  is a ruby JSONAPI client that can act as an ORM or integrate with your models
+  via fine-grained agnosticism. Easy to configure and customize. Includes a
+  chainable/customizable query builder

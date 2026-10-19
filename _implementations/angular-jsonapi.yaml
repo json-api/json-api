@@ -1,0 +1,6 @@
+name: angular-jsonapi
+category: Client Libraries
+language: Javascript
+repo: https://github.com/jakubrohleder/angular-jsonapi
+purl: ''
+description: An AngularJS JSON:API client

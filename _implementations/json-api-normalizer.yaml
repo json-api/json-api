@@ -1,0 +1,8 @@
+name: json-api-normalizer
+category: Client Libraries
+language: Javascript
+repo: https://github.com/yury-dymov/json-api-normalizer
+purl: ''
+description: >-
+  Normalizes JSON:API documents for state management solutions like Redux and
+  Mobx

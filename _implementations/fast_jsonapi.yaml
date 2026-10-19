@@ -1,0 +1,6 @@
+name: fast_jsonapi
+category: Server Libraries
+language: Ruby (Plain)
+repo: https://github.com/Netflix/fast_jsonapi
+purl: ''
+description: A lightning fast JSON:API serializer for Ruby Objects.

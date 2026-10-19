@@ -1,0 +1,8 @@
+name: pieoneers/jsonapi-go
+category: Server Libraries
+language: Go
+repo: https://github.com/pieoneers/jsonapi-go
+purl: ''
+description: >-
+  lightweight JSON API implementation in Go. Make your client and server
+  applications JSON API-enabled in hours not months.

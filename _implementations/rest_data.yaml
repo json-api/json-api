@@ -1,0 +1,8 @@
+name: rest_data
+category: Client Libraries
+language: Dart
+repo: https://pub.dev/packages/rest_data
+purl: ''
+description: >-
+  is a REST API client based on ember-data concepts which includes a JSON:API
+  adapter.

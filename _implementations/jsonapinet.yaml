@@ -1,0 +1,8 @@
+name: JsonApiNet
+category: Server Libraries
+language: .NET
+repo: https://github.com/l8nite/JsonApiNet
+purl: ''
+description: >-
+  lets you quickly deserialize JSON:API documents into C# entities. Supports
+  compound documents

@@ -1,0 +1,6 @@
+name: json_api_server
+category: Server Libraries
+language: Dart
+repo: https://pub.dartlang.org/packages/json_api_server
+purl: ''
+description: is a JSON:API server running on Dart VM.

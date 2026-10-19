@@ -1,0 +1,9 @@
+name: JSONAPI::Utils
+category: Server Libraries
+language: Ruby (Ruby on Rails)
+repo: https://github.com/b2beauty/jsonapi-utils
+purl: ''
+description: >-
+  works on top of JSONAPI::Resources taking advantage of its resource-driven
+  style and bringing a Rails way to build modern APIs with no or less learning
+  curve.

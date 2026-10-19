@@ -1,0 +1,6 @@
+name: mfcochauxlaberge/jsonapi
+category: Server Libraries
+language: Go
+repo: https://github.com/mfcochauxlaberge/jsonapi
+purl: ''
+description: offers a large set of tools to build a JSON:API compliant service.

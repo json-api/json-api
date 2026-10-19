@@ -1,0 +1,8 @@
+name: EntityStore.TS
+category: Client Libraries
+language: Typescript
+repo: https://github.com/dipscope/EntityStore.TS
+purl: ''
+description: >-
+  - ORM like abstraction layer for TypeScript which includes extensible provider
+  for accessing JSON:API servers.

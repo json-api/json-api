@@ -1,0 +1,9 @@
+name: crnk.io
+category: Client Libraries
+language: Java
+repo: http://www.crnk.io
+purl: ''
+description: >-
+  is a JSON:API framework for clients and servers. On the client-side it
+  targetsboth Java and Android development. As for the backend side a rich set
+  of modules helps with the integration of variousJava frameworks.

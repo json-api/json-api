@@ -1,0 +1,8 @@
+name: lode / jsonapi
+category: Server Libraries
+language: PHP
+repo: https://github.com/lode/jsonapi
+purl: ''
+description: >-
+  is a human-friendly library to implement JSON:API v1.1 without needing to know
+  the specification.

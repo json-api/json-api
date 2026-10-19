@@ -1,0 +1,8 @@
+name: jsonapi-consumer
+category: Client Libraries
+language: .NET
+repo: https://github.com/OKTAYKIR/jsonapi-consumer/
+purl: ''
+description: >-
+  is a simple client-side .NET Standard wrapper framework for consuming JSON:API
+  based APIs.

@@ -1,0 +1,8 @@
+name: swisnl/json-api-client
+category: Client Libraries
+language: PHP
+repo: https://github.com/swisnl/json-api-client
+purl: ''
+description: >-
+  Is a package for mapping remote {json:api} resources to Eloquent like models
+  and collections.

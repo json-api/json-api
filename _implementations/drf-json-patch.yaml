@@ -1,0 +1,6 @@
+name: drf-json-patch
+category: Related Tools
+language: Python
+repo: https://drf-json-patch.readthedocs.org
+purl: ''
+description: integrates jsonpatch with Django REST Framework

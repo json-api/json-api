@@ -1,0 +1,6 @@
+name: SimpleJSONAPIClient
+category: Client Libraries
+language: Ruby (Plain)
+repo: https://github.com/amcaplan/simple_jsonapi_client
+purl: ''
+description: gives you lower-level control for API operations

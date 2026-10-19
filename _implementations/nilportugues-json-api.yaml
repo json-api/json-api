@@ -1,0 +1,8 @@
+name: nilportugues / json-api
+category: Server Libraries
+language: PHP
+repo: https://github.com/nilportugues/json-api
+purl: ''
+description: >-
+  Serializer transformers outputting valid API responses in JSON and JSON:API
+  formats.

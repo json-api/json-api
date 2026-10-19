@@ -1,0 +1,8 @@
+name: binarcode/laravel-restify
+category: Server Libraries
+language: PHP
+repo: https://github.com/binarcode/laravel-restify
+purl: ''
+description: >-
+  The fastest way to make a powerful JSON:API compatible Rest API with Laravel
+  Reference Docs.

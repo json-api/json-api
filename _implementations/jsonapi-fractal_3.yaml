@@ -1,0 +1,6 @@
+name: jsonapi-fractal
+category: Server Libraries
+language: Node.js
+repo: https://github.com/andersondanilo/jsonapi-fractal
+purl: ''
+description: JSON:API Serializer inspired by Fractal (PHP)

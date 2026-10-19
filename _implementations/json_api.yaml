@@ -1,0 +1,6 @@
+name: json_api
+category: Client Libraries
+language: Dart
+repo: https://pub.dev/packages/json_api
+purl: ''
+description: is a full-fledged client for Flutter/Web/VM.

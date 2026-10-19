@@ -1,0 +1,6 @@
+name: kt.jsonapi
+category: Server Libraries
+language: Python
+repo: https://pypi.org/project/kt.jsonapi/
+purl: ''
+description: JSON:API response generation using the Zope Component Architecture.

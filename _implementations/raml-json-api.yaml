@@ -1,0 +1,6 @@
+name: raml-json-api
+category: Server Libraries
+language: PHP
+repo: https://github.com/RJAPI/raml-json-api
+purl: ''
+description: RAML based JSON:API code generator for Laravel. Generates controllers

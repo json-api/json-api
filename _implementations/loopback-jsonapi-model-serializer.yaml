@@ -1,0 +1,6 @@
+name: loopback-jsonapi-model-serializer
+category: Server Libraries
+language: Node.js
+repo: https://www.npmjs.com/package/loopback-jsonapi-model-serializer
+purl: ''
+description: JSON:API serializer for loopback models.

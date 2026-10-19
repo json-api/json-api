@@ -1,0 +1,8 @@
+name: SAFRS JSON API Framework
+category: Server Libraries
+language: Python
+repo: https://github.com/thomaxxl/safrs
+purl: ''
+description: >-
+  Flask-SQLAlchemy jsonapi implementation with auto-generated openapi (fka
+  swagger) interface.

@@ -1,0 +1,6 @@
+name: jsonapi_parameters
+category: Server Libraries
+language: Ruby (Plain)
+repo: https://github.com/visualitypl/jsonapi_parameters
+purl: ''
+description: Rails-way to consume JSON:API input.

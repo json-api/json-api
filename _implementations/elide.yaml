@@ -1,0 +1,8 @@
+name: Elide
+category: Server Libraries
+language: Java
+repo: http://elide.io
+purl: ''
+description: >-
+  is a web framework supporting JSON:API. Through annotation-based JSON:API
+  endpoint generation

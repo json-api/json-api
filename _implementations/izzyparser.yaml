@@ -1,0 +1,6 @@
+name: IzzyParser
+category: Client Libraries
+language: iOS
+repo: https://github.com/undabot/izzyparser-ios
+purl: ''
+description: is a lightweight library for serializing and deserializing JSON:API objects.

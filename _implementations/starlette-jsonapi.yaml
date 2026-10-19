@@ -1,0 +1,8 @@
+name: starlette-jsonapi
+category: Server Libraries
+language: Python
+repo: https://github.com/vladmunteanu/starlette-jsonapi
+purl: ''
+description: >-
+  Microframework on top of Starlette and marshmallow-jsonapi with support for
+  asynchronous ORMs
