@@ -121,6 +121,10 @@ isomorphic ActiveRecord clone that issues JSON:API requests instead of SQL and i
 * [Izzy JSONAPI parser](https://github.com/undabot/izzy-json-api-android) library for deserializing and serializing resources with support both for Gson and Jackson parsers. It also has simple Retrofit integration.
 * [JsonApiX](https://github.com/infinum/kotlin-jsonapix) annotation processor library for serializing and deserializing Kotlin classes. It's easy to use - setup only requires annotating classes. Retrofit integration is included.
 
+### <a href="#client-libraries-kotlin" id="client-libraries-kotlin" class="headerlink"></a> Kotlin
+
+* [eygraber/jsonapi-kotlin](https://github.com/eygraber/jsonapi-kotlin) is a Kotlin Multiplatform kotlinx.serialization library for working with JSON:API
+
 ### <a href="#client-libraries-r" id="client-libraries-r" class="headerlink"></a> R
 
 * [rjsonapi](https://github.com/sckott/rjsonapi) is an R client to consume JSONAPI's.
