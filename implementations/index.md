@@ -274,6 +274,7 @@ the moment.
 * [jsh-api](https://github.com/derekdowling/go-json-spec-handler/tree/master/jsh-api) deals with the dirty work of building JSON:API resource endpoints. Built on top of [jsh](https://github.com/derekdowling/go-json-spec-handler)
 * [mfcochauxlaberge/jsonapi](https://github.com/mfcochauxlaberge/jsonapi) offers a large set of tools to build a JSON:API compliant service.
 * [pieoneers/jsonapi-go](https://github.com/pieoneers/jsonapi-go) lightweight JSON API implementation in Go. Make your client and server applications JSON API-enabled in hours not months.
+* [max-waters/jsonapi](https://github.com/max-waters/jsonapi) marshals and unmarshals JSON:API formatted JSON. The mapping is defined with struct tags, and can be overridden by implementing custom marshalling and unmarshaling functions.
 
 ### <a href="#server-libraries-net" id="server-libraries-net" class="headerlink"></a> .NET
 
