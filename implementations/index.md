@@ -138,6 +138,7 @@ and writing of JSON:API documents.
 * [JsonApiFramework.Client](https://github.com/scott-mcdonald/JsonApiFramework) is a *portable* .NET Standard/Core client-side framework where developers define the domain model of the resources of a hypermedia API server either through configuration and/or conventions called a *service model*. With a *service model* developers can use a *document context* that represents a session with a JSON:API compound *document* for reading or writing of various JSON:API abstractions such as resources, resource identifiers, relationships, links, meta information, error objects, and version information all serialized/deserialized as high level CLR objects.
 * [FSharp.JsonApi](https://github.com/cmeeren/FSharp.JsonApi/) is a library that allows you to use F# to easily create and consume flexible, strongly typed web APIs following the JSON:API specification.
 * [jsonapi-consumer](https://github.com/OKTAYKIR/jsonapi-consumer/) is a simple client-side .NET Standard wrapper framework for consuming JSON:API based APIs.
+* [JsonApiClient](https://github.com/twcrews/jsonapi-client) is a modern, lightweight (de)serialization package for JSON:API, using `System.Text.Json` internally, with built-in support for generic types.
 
 ### <a href="#client-libraries-python" id="client-libraries-python" class="headerlink"></a> Python
 
@@ -288,6 +289,7 @@ includes related resources.
 * [JsonApiFramework.Server](https://github.com/scott-mcdonald/JsonApiFramework) is a *portable* .NET Standard/Core server-side framework where developers define the domain model of the resources of a hypermedia API server either through configuration and/or conventions called a *service model*. With a *service model* developers can use a *document context* that represents a session with a JSON:API compound *document* for reading or writing of various JSON:API abstractions such as resources, resource identifiers, relationships, links, meta information, error objects, and version information all serialized/deserialized as high level CLR objects with automatic generation of JSON:API hypermedia.
 * [FSharp.JsonApi](https://github.com/cmeeren/FSharp.JsonApi/) is a library that allows you to use F# to easily create and consume flexible, strongly typed web APIs following the JSON:API specification.
 * [Felicity](https://github.com/cmeeren/Felicity/) is a boilerplate-free JSON:API framework for your functional F# domain model, optimized for developer happiness
+* [JsonApiClient](https://github.com/twcrews/jsonapi-client) is a modern, lightweight (de)serialization package for JSON:API, using `System.Text.Json` internally, with built-in support for generic types.
 
 ### <a href="#server-libraries-java" id="server-libraries-java" class="headerlink"></a> Java
 
