@@ -344,6 +344,7 @@ includes related resources.
 
 * [json-api-document-viewer](https://tadast.github.io/json-api-document-viewer) the flat json:api structure is a good way to express complex relationships between objects. However the same flatness makes it difficult for humans to "parse" these relationships. This tool visualises object relationships by visually nesting them.
 * [corroborate](http://corroborate.arenpatel.com/) JSON:API request/response payload validator. It warns when there is a specification violation and also informs when a recommendation has not been followed.
+* [JSON:API Lens](https://nayanbhut.github.io/jsonapi-lens/viewer/) a browser-based JSON:API viewer and validator. It follows relationships and included resources recursively (with cycle detection), checks documents against the JSON:API 1.1 structural rules, exports the fully-resolved plain JSON, and draws an interactive relationship graph. Everything runs client-side, and plain JSON that is not JSON:API is shown as a generic tree.
 
 ### <a href="#related-tools-ruby" id="related-tools-ruby" class="headerlink"></a> Ruby
 
