@@ -77,7 +77,7 @@ PUT so far. However, it may define PUT semantics in the future.
 
 In the past, many APIs used PUT for partial updates because PATCH wasn’t yet
 well-supported. However, almost all clients now support PATCH, and those that
-don’t can be easily [worked around](/recommendations/#patchless-clients).
+don’t, can be easily [worked around](/recommendations/#patchless-clients).
 
 ## <a href="#is-there-a-json-schema-describing-json-api" id="is-there-a-json-schema-describing-json-api" class="headerlink"></a> Is there a JSON Schema describing JSON:API?
 
